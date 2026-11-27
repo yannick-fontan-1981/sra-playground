@@ -1,0 +1,97 @@
+{
+  "schema": "sic.panel-priority-counterexample.v1",
+  "sourceLocal": "ca1d84e46b9dd978202724c614fff5727ca727e5",
+  "sourceRemote": "403a8ffa234d6f0ecc22d44e0aae78ab50718d6d",
+  "tree": "8fa95edd6b1244ce9f127b1b3239ef5d42231485",
+  "verdict": {
+    "levels": 4,
+    "target": 6,
+    "actions": 402,
+    "authority": 402,
+    "acquiredRecords": 402,
+    "reason": "level_action_budget",
+    "recoveries": {
+      "reset": 0,
+      "undo": 0
+    }
+  },
+  "firstCommandDifference": {
+    "global": 364,
+    "level": 5,
+    "levelCommand": 177,
+    "candidate": [
+      1,
+      null,
+      0,
+      null,
+      1,
+      4,
+      "P07",
+      "sic_public_input_exploration",
+      "Follow the measured terrain to test a panel control from a matching marker",
+      3
+    ],
+    "baseline": [
+      6,
+      {
+        "x": 52,
+        "y": 14
+      },
+      36,
+      [
+        14,
+        46,
+        29,
+        53
+      ],
+      1,
+      4,
+      "P02",
+      "sic_remote_support_route",
+      "Advance the measured phase from a stable footing",
+      10
+    ],
+    "matchingCommandPrefix": 363
+  },
+  "firstFourPrefixesMatch": true,
+  "cause": "An acquired panel approach was offered in the pressure-priority group before a still-bound remote-support mechanism. Its first move was contradicted and displaced the established route.",
+  "correction": "Keep the panel entry after specialist groups and before independent exploration. Append the guarded subquestion to the final existing specialist group; keep the sixteen-group runtime limit unchanged.",
+  "files": [
+    {
+      "file": "results.jsonl.gz",
+      "bytes": 5828,
+      "sha256": "9f6f83b51114df00499eb3700ae43342f39e0ac76ab2b6d10c3351c0a6e97d9c",
+      "rawBytes": 63757,
+      "rawSha256": "c52a1f8c9af448cc94183b007cbe8a5e0c218e6b240b6a67a3a2422c3690f400"
+    },
+    {
+      "file": "run-manifest.json.gz",
+      "bytes": 1144,
+      "sha256": "87f0c3c8cac5fc73cfaaf7dbb7edb605648b48f9491e859a7e7d9f1a9107bbb2",
+      "rawBytes": 2129,
+      "rawSha256": "1bb2aed7acbadd70c4419b2e7202315ecf5c9a6fc0ce1a9f42a9d885fc467443"
+    },
+    {
+      "file": "run-end.json.gz",
+      "bytes": 947,
+      "sha256": "fef3731b449acb43d884a78396a8ee9f773f9a761fd008cb0c704f9b581e0739",
+      "rawBytes": 1650,
+      "rawSha256": "f8461e5cddd0616bc63db2d69dcdcb5cd3a97cacea4ff264d400cb81ebc946d1"
+    },
+    {
+      "file": "runner.log.gz",
+      "bytes": 215,
+      "sha256": "1ca827f793dbd0b707d4a93545e5585adff4d2d2f17b78f1e8bd116e44875c3b",
+      "rawBytes": 784,
+      "rawSha256": "2dba3ad48997422de4d28eb8a48b06a3a78717a5004531e753cb0bfbd152a52c"
+    },
+    {
+      "file": "baseline-specialist-at-first-difference.json.gz",
+      "bytes": 17072,
+      "sha256": "57253f7c5e6a2a4e295a1676dcef2a05864cf37a8949aeca5429d956ab139631",
+      "rawBytes": 147354,
+      "rawSha256": "37d00fc6b3bc62784c90231ddfbd8ebe0c87a6a5bdc1aed0abe05e24b1b4bb13"
+    }
+  ],
+  "qualification": "Rejected candidate. No new victory, merge or publication is claimed. The unchanged-budget strict run reached the L5 action cap; L6 was not reached."
+}

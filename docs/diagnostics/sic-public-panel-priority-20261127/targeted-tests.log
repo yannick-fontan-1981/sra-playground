@@ -1,0 +1,38 @@
+✔ an optional diagram extraction preserves prior evidence when its component budget is exhausted (655.579261ms)
+✔ a measured tile displacement gives untried directions a turn after a blocked contact (4.170858ms)
+✔ a separated panel gets a turn between movement probes despite unrelated changes in the status strip (30.594443ms)
+✔ a panel probe keeps its identity when only a different component inside its bounds changes (38.988027ms)
+✔ public exploration shares tested panel commands across families and only revisits states with a new test (51.507049ms)
+✔ a witnessed transport can be replayed to reach an untried placement despite an earlier click on the same board (11.317812ms)
+✔ a panel comparison projects a guarded route using measured commands and an untested matching marker (4.261324ms)
+✔ support access compares new fixed ground and retains uncertainty about untested footprints (1.385118ms)
+✔ a partially occluded cursor is tracked only after a visible departure and arrival (0.515908ms)
+✔ contact discovery follows measured floor beyond the background component boundary (0.536699ms)
+✔ leaving an occupied marker retains its revealed footprint for a guarded return (0.665052ms)
+✔ a repeated animation localizes a response even when the field returns to its original pixels (0.335066ms)
+✔ a phased route applies an observed terrain return only while the occupied footprint stays supported (1.155762ms)
+✔ alignment uses the centre of a matching support pair and declines an ambiguous pair (0.673736ms)
+✔ transport is acquired when the aligned tool and both support pieces translate together (1.359259ms)
+✔ SIC prioritizes a marked edit and checks that it changed the collection (130.12426ms)
+✔ SIC probes repeated interior markers while requiring independent visible arrangements (4.783081ms)
+✔ stationary clicks and a stationary non-point command give a smaller repeated target a turn (33.825273ms)
+✔ motion measurement reports unique component translations and rejects ambiguous destination masks (0.643189ms)
+✔ component motion stays ambiguous when parts entering the same footprint disagree (0.276486ms)
+✔ SIC tests a direction after a click changes a piece and binds the observed translation to that click (4.489398ms)
+✔ native panel interaction reuses foreign measured controls before independent probes (351.250312ms)
+✔ native panel interaction reuses foreign measured controls before independent probes after changing shapes, pigments, placement and commands (432.6557ms)
+✔ native acquired panel priority refuses missing_actor (181.030212ms)
+✔ native acquired panel priority refuses ambiguous_actor (142.475119ms)
+✔ native acquired panel priority refuses missing_control (142.302579ms)
+✔ a contradictory panel movement seals only the executed prefix and preserves the other public facts (162.739044ms)
+✔ a foreign, future or previous-epoch panel proof cannot establish current priority (194.301919ms)
+✔ an unmeasured direction at a landing remains an ordinary experiment without acquired panel priority (177.054636ms)
+✔ two retained pushes check the moving subject, displaced part and stationary peer before continuation (11.9296ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3189.904967

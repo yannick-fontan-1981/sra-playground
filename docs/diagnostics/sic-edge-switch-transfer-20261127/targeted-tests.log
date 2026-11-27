@@ -1,0 +1,16 @@
+✔ a newly observed edge attachment control is usable before its first score (250.269212ms)
+✔ a newly observed edge attachment control is usable before its first score with reflected pieces, another pitch, palette and directional commands (145.463064ms)
+✔ native edge-control transfer refuses absent_receipt while retaining the earlier controls (112.545957ms)
+✔ native edge-control transfer refuses ambiguous_panel while retaining the earlier controls (154.846321ms)
+✔ native edge-control transfer refuses contradictory_direction while retaining the earlier controls (150.484322ms)
+✔ native edge-control transfer refuses missing_command while retaining the earlier controls (173.949848ms)
+✔ the actual new release receipt permits the first lost proposal and cannot cross sessions or epochs (52.923465ms)
+✔ attaching pieces requires both the panel change and the fixed piece marks (21.715172ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2344.972493

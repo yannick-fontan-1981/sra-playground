@@ -1,0 +1,78 @@
+{
+  "schema": "sic.public-panel-priority-diagnostic.v1",
+  "source": "0dc7f2eeccdcf29f27564d279750cc5fb1c10e1e",
+  "fromLevel": 1,
+  "firstFiveCommands": [
+    22,
+    44,
+    45,
+    76,
+    185
+  ],
+  "diagnosticCommands": 404,
+  "commandPrefixMatchesBaseline": true,
+  "firstLoss": {
+    "level": 6,
+    "levelCommand": 20,
+    "totalCommand": 392,
+    "actualOwner": "sic_test_observed_compositions",
+    "availableRole": "sic_public_input_exploration",
+    "availableStrategy": "approach_marker",
+    "knownPrefixCommands": 5,
+    "actualEffectEstablishedAtLevelCommand": 19,
+    "earlyOffer": null
+  },
+  "followupContactLoss": {
+    "levelCommand": 30,
+    "availableRole": "compare_on_marker",
+    "actualOwner": "sic_test_observed_compositions"
+  },
+  "files": [
+    {
+      "path": "boundary-public.json.gz",
+      "bytes": 372056,
+      "sha256": "4402c7abf1865928e1fb2bf7d352c985a48a37a038651e5fd647d14fc3090f53",
+      "rawBytes": 14251923,
+      "rawSha256": "b6f50e3c61dec9a2976a9c04f3421fd124c8612268bce8e008c07f96f6eef053",
+      "projection": {
+        "originalRawBytes": 46548992,
+        "originalRawSha256": "384ef22873b8aea085c4bb1e4d110e36d2b8ef7af311c69d1623c33a9bc810ad",
+        "preserved": "All commands, plans, public frames before/after, budgets, level hashes and final trace",
+        "omitted": "Repeated derived family snapshots and geometric entity decompositions; full first failing board is archived separately"
+      }
+    },
+    {
+      "path": "first-board.json.gz",
+      "bytes": 24776,
+      "sha256": "a539112375d3f3e33c7ef65212b8c3b0a95049eb93d7c94671e98b424bf6b450",
+      "rawBytes": 244398,
+      "rawSha256": "24a31273f6277ac881a403911794483ac4fba4cfade92c01fd712bb2982d91e4"
+    },
+    {
+      "path": "prior-role-rejected.json.gz",
+      "bytes": 592,
+      "sha256": "8dfc2eac6cdff0ade913caa4ccdb6a7849592bf88ff902f483a60f5a7e40df33",
+      "rawBytes": 1829,
+      "rawSha256": "01b7c1a596ac07e06543ca1624193a56a2b98b2f3011534e9768ac69e120a01f"
+    },
+    {
+      "path": "first-panel-decisions.json.gz",
+      "bytes": 536351,
+      "sha256": "b124d8568492516441d488b0ea1b84846b8448381fc3d213ec335fe80865749c",
+      "rawBytes": 4714350,
+      "rawSha256": "9cc7fd19e0d43001d6aa6b381c4108ee49e78f1dbcf63138d61288092b5e5c98"
+    },
+    {
+      "path": "first-panel-analysis.json.gz",
+      "bytes": 4123,
+      "sha256": "06b34f4132e8876427af5582e2358eb691fab91ada30c99f3ee39a7a8c9f5095",
+      "rawBytes": 110493,
+      "rawSha256": "b71b9de59b33cb9bb1131338e972b3ababfdeaa9d46bfb414257d59c23601c74"
+    }
+  ],
+  "limits": [
+    "Read-only public-capture diagnostic, not a timed qualification.",
+    "The old aligned support role is incompatible with the new public interface; no broadening of that recognizer.",
+    "Offline proposal analysis uses the real landing program and observed command domain; it does not reconstruct the directional-motion callback."
+  ]
+}
