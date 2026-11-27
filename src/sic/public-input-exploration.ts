@@ -68,6 +68,7 @@ import { planPanelBridge, type PanelBridgeTarget } from './panel-bridge-planning
 export const publicInputExplorationId = 'sic_public_input_exploration';
 export const projectedPublicEffectsGroup = 'test_projected_public_effect';
 export const observedPressureRecoveryGroup = 'continue_observed_pressure_recovery';
+export const continueObservedPanelGroup = 'continue_observed_panel_interaction';
 export const publicInputStrategies = {
   P05: 'Test a direction on the visibly changed piece',
   P07: 'Follow an observed return to an untested control',
@@ -227,7 +228,7 @@ type Proposal = NativeProposal & { walkingSeries?:BoundWalkingStep[]; source: st
   entryPlan?: EntryProposal;
   slotPlan?: { layout: VisibleSlotLayout; move: NonNullable<ReturnType<typeof chooseVisibleSlotMove>> };
   clickedControl?: ClickedControl; collectionTrial?: CollectionTrial; workspaceTrial?: NativeBox; needId: string;
-  panel?: Pick<VisibleCommandPanel, 'area' | 'panel'>; panelTest?: string;
+  panel?: Pick<VisibleCommandPanel, 'area' | 'panel'>; panelTest?: string; panelContinuation?: true;
   panelApproach?: PanelApproach; panelComparison?: PanelMarkerTrial; panelContact?: PanelContactApproach;
   revealedControl?: RevealedControl; retestedControl?: AnimatedPanelControl; terrainStep?: PanelTerrainStep;
   mechanismMove?: { motion: PanelMechanismMotion; trial: string };
@@ -878,10 +879,39 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
+    async proposeInSubquestion(_group, entry, observation, rows, inputs, remaining, execution): Promise<Proposal | null> {
+      return entry === continueObservedPanelGroup
+        ? family.proposeInGroup(entry, observation, rows, inputs, remaining, execution) : null;
+    },
     async proposeInGroup(group, observation, rows, inputs, remaining, execution): Promise<Proposal | null> {
       if (group === projectedPublicEffectsGroup) {
         const proposal = await family.propose(observation, rows, inputs, remaining, execution, true);
         return proposal?.fallbackProjection || proposal?.entryPlan || proposal?.jointPlan ? proposal : null;
+      }
+      if (group === continueObservedPanelGroup) {
+        // A foreign family may have measured the directions and the panel effect.
+        // Keep that acquired interaction ahead of independent probes only while
+        // its current interface, actor and actual evidence remain bound.
+        const walker = state.epoch === observation.level_epoch ? state.panelWalker : undefined;
+        const panel = walker && state.panelEffects?.length ? visibleCommandPanel(rows) : null;
+        if (panel && walker && state.lastPanelContext === explorationKey(observation, rows, panel)
+          && panelActor(walker, rows, panel.area)) {
+          const scope = observation.observation_ref.split(':epoch:')[0]!;
+          const currentEvidence = (ref: string) => {
+            const match = /^(.*):epoch:(\d+):revision:(\d+):frame:[0-9a-f]+$/.exec(ref);
+            return !!match && match[1] === scope && Number(match[2]) === observation.level_epoch
+              && Number(match[3]) <= observation.revision;
+          };
+          const controls = Object.values(walker.controls);
+          if (controls.length >= 2 && controls.every(control => currentEvidence(control.evidence))
+            && state.panelEffects!.some(effect => currentEvidence(effect.evidence)
+              && panel.buttons.some(button => button.color === effect.ink && sameBox(button.bbox, effect.box)))) {
+            const proposed = await family.propose(observation, rows, inputs, remaining, execution);
+            if (proposed?.panelContinuation && Array.isArray(proposed.route_refs) && proposed.route_refs.length > 1
+              && proposed.route_refs.every(ref => typeof ref === 'string' && currentEvidence(ref))) return proposed;
+          }
+        }
+        return null;
       }
       if (group !== observedPressureRecoveryGroup) return family.propose(observation, rows, inputs, remaining, execution);
       const carry = proposeFieldCarry(observation, rows, inputs, remaining);
@@ -1320,6 +1350,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         ...(selectedExperiment ? { contactExperiment: selectedExperiment } : {}),
         ...(selectedCoverage?.pullRoute ? { pullRoute: selectedCoverage.pullRoute } : {}),
         ...(panelBounds ? { panel: panelBounds } : {}), ...(panelTest ? { panelTest: testKey(frontier.action) } : {}),
+        ...(contextualCommand && (walk || comparison || revealedControl || mechanism || programming || terrainStep)
+          ? { panelContinuation: true as const } : {}),
         ...(clickedControl && probe ? { clickedControl } : {}), ...(box && !offer.marker ? { selectedBox: box } : {}),
         ...(collectionTrial ? { collectionTrial } : {}),
         ...(workspaceTrial ? { workspaceTrial: workspaceTrial.workspace } : {}),

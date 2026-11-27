@@ -1,0 +1,349 @@
+{
+  "scope": "Synthetic transfer fixture only; production guard intentionally refuses two matching components.",
+  "firstRefusal": {
+    "n": 41,
+    "action": "ACTION5",
+    "index": 0,
+    "step": {
+      "expect": {
+        "actor": [
+          48,
+          32
+        ],
+        "bank": 1,
+        "banks": [
+          1,
+          0,
+          1
+        ],
+        "held": 2
+      },
+      "input": "ACTION5",
+      "role": "take"
+    },
+    "actor": [
+      48,
+      32
+    ],
+    "held": 2,
+    "outcome": {
+      "kind": "actual_outcome",
+      "family": "sic_carry_to_frame",
+      "index": 0,
+      "matched": false,
+      "seal_prefix": true,
+      "reason": "check_ferry_return_for_a_contradiction",
+      "observation_ref": "passenger-fixture-diagnostic:epoch:1:revision:42:frame:3225adce84b2fbd2",
+      "sic_plan": "sic-plan:passenger-fixture-diagnostic:epoch:1:revision:41:frame:049bc1f2644ceea4"
+    }
+  },
+  "ambiguousComponents": [
+    {
+      "id": "component:0ca025eb963dea51:0",
+      "signature": "0ca025eb963dea519f3819b9718846f452019becc5b094e9d9a3824d28ac0b12",
+      "position": [
+        47,
+        22
+      ],
+      "bbox": [
+        47,
+        22,
+        57,
+        22
+      ],
+      "area": 11,
+      "scale": 1,
+      "mask": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          6,
+          0
+        ],
+        [
+          7,
+          0
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          9,
+          0
+        ],
+        [
+          10,
+          0
+        ]
+      ],
+      "palette_value": 6,
+      "rectangular": true,
+      "identity_ambiguous": false,
+      "identity_scope": "monochrome_component_not_physical_object"
+    },
+    {
+      "id": "component:6752dc16cb6df114:0",
+      "signature": "6752dc16cb6df11424ec2ca0797fa668b31546983645655c5fba9c944d428a13",
+      "position": [
+        46,
+        23
+      ],
+      "bbox": [
+        46,
+        23,
+        46,
+        28
+      ],
+      "area": 6,
+      "scale": 1,
+      "mask": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ]
+      ],
+      "palette_value": 6,
+      "rectangular": true,
+      "identity_ambiguous": false,
+      "identity_scope": "monochrome_component_not_physical_object"
+    },
+    {
+      "id": "component:eace508b0e80f3f3:0",
+      "signature": "eace508b0e80f3f3aae77e4f26d3b8f5fe1f1c4c88c67d09b691ba2e72b62003",
+      "position": [
+        58,
+        23
+      ],
+      "bbox": [
+        58,
+        23,
+        58,
+        33
+      ],
+      "area": 11,
+      "scale": 1,
+      "mask": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          0,
+          10
+        ]
+      ],
+      "palette_value": 6,
+      "rectangular": true,
+      "identity_ambiguous": false,
+      "identity_scope": "monochrome_component_not_physical_object"
+    },
+    {
+      "id": "component:880d1e18a748de47:0",
+      "signature": "880d1e18a748de47dca812fdca0b527b7a711f68fe0503543d6572cd8dd3ed82",
+      "position": [
+        52,
+        26
+      ],
+      "bbox": [
+        52,
+        26,
+        54,
+        30
+      ],
+      "area": 15,
+      "scale": 1,
+      "mask": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ]
+      ],
+      "palette_value": 6,
+      "rectangular": true,
+      "identity_ambiguous": false,
+      "identity_scope": "monochrome_component_not_physical_object"
+    },
+    {
+      "id": "component:50d28f7e6b51500d:0",
+      "signature": "50d28f7e6b51500d73a4afb75e5a7815e78f3682fcbff428e05a8c83dfd266c9",
+      "position": [
+        52,
+        34
+      ],
+      "bbox": [
+        52,
+        34,
+        57,
+        34
+      ],
+      "area": 6,
+      "scale": 1,
+      "mask": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          5,
+          0
+        ]
+      ],
+      "palette_value": 6,
+      "rectangular": true,
+      "identity_ambiguous": false,
+      "identity_scope": "monochrome_component_not_physical_object"
+    }
+  ],
+  "fixtureChange": "Default receiver half-width 6 to 7: isolated right edge moves outside the pickup comparison radius. No production guard changed."
+}
