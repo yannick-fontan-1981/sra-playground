@@ -5,6 +5,12 @@ import { isHydratedNativeJson } from './v6-native-state-graph.ts';
 // A cached subtree has passed the full property/type check and cannot change.
 // Store its height so insertion deeper in another object cannot bypass limits.
 const retained = new WeakMap<object, number>();
+const retainedCopies = new WeakSet<object>();
+
+/** Closed plain data created here, excluding frozen inputs supplied by callers. */
+export function isRetainedNativeCopy(value: object): boolean {
+  return retainedCopies.has(value);
+}
 
 function propertyIndex(name: string): number | null {
   const index = Number(name);
@@ -140,6 +146,7 @@ export function retainNativeJson<T>(value: T, previous?: T): T {
       const reuse = unchanged && (!shared || Object.getPrototypeOf(input) === Object.getPrototypeOf(prior));
       const result = reuse ? prior! : shared ? input
         : Object.freeze(items ?? Object.fromEntries(entries));
+      if (!reuse && !shared) retainedCopies.add(result);
       retained.set(result, height);
       return { value: result, height, shared };
     } finally { ancestors.delete(input); }

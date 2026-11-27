@@ -5,6 +5,7 @@ import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeP
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { checkExampleWorkflow, matchExampleModule, matchExampleOperations, matchExampleWorkflow } from './legend-recolor-card.ts';
+import { observedPressureRecoveryGroup } from './public-input-exploration.ts';
 
 export const legendRecolorId = 'sic_legend_recolor';
 export const matchExampleId = 'sic_match_visible_example';
@@ -24,7 +25,8 @@ type Region = { bbox: NativeBox; cells: NativePoint[]; value: number };
 type Body = Region & { target: number; partial_topology: boolean; relation_kind: 'shell' | 'surround' | 'pocket';
   pocket_count: number | null; example?: NativeBox };
 type Scene = { field: NativeBox; legend: NativeBox; wells: Region[]; bodies: Body[]; reduced_examples?: true };
-type State = { epoch: number; scene: Scene; active: number | null; count: number; stopped: boolean; evidence: string[] };
+type State = { epoch: number; scene: Scene; active: number | null; count: number; stopped: boolean; evidence: string[];
+  selectionRef?: string };
 type Proposal = NativeProposal & { local: State; body: Body; selecting: boolean; needId: string };
 const samePoint = (a: NativePoint, b: NativePoint) => a[0] === b[0] && a[1] === b[1];
 const at = (rows: NativeRows, [x, y]: NativePoint) => rows[y]?.[x];
@@ -46,6 +48,14 @@ function activePigment(rows: NativeRows, wells: Region[]) {
   return active.length === 1 ? active[0]!.value : null;
 }
 
+function preservesPigmentContext(scene: Scene, first: NativeRows, second: NativeRows) {
+  const [left, top, right, bottom] = scene.legend;
+  for (let y = top; y <= bottom; y++) for (let x = left; x <= right; x++) {
+    if (first[y]?.[x] !== second[y]?.[x]) return false;
+  }
+  return scene.wells.every(well => well.cells.every(point => at(second, point) === well.value));
+}
+
 export function createSicLegendRecolor(family = legendRecolorId): NativeFamily<Proposal> {
   const declarative = family === matchExampleId;
   let state: State | null = null;
@@ -59,6 +69,12 @@ export function createSicLegendRecolor(family = legendRecolorId): NativeFamily<P
       const module = await matchExampleModule();
       choose = await registry.registerProgram(matchExampleWorkflow, matchExampleOperations, module);
       verify = await registry.registerProgram(checkExampleWorkflow, matchExampleOperations, module);
+    },
+    async proposeInGroup(group, observation, ...args) {
+      if (group !== observedPressureRecoveryGroup) return this.propose(observation, ...args);
+      if (state?.epoch !== observation.level_epoch || state.selectionRef !== observation.observation_ref) return null;
+      const proposal = await this.propose(observation, ...args);
+      return proposal && !proposal.selecting ? proposal : null;
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
@@ -146,11 +162,13 @@ export function createSicLegendRecolor(family = legendRecolorId): NativeFamily<P
     },
     record(before, after, _command, first, second, proposal) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local, body } = proposal;
+      const { local, body, selecting } = proposal;
       const matched = lastVerified?.ref === after.observation_ref ? lastVerified.matched : returned(proposal, first, second);
       lastVerified = undefined;
       state = { ...local, active: body.target, count: local.count + 1, stopped: !matched,
         evidence: [...local.evidence.slice(-4), after.observation_ref] };
+      if (matched && selecting && preservesPigmentContext(local.scene, first, second)) state.selectionRef = after.observation_ref;
+      else delete state.selectionRef;
       return { events: [] };
     },
     state: () => ({ state }),

@@ -40,6 +40,13 @@ Aucun lot ne doit attendre une publication d'un autre lot uniquement pour sauveg
 
 Les commits doivent rester petits et cohérents, avec des pushes réguliers.
 
+### Grandes campagnes strictes SIC
+
+- Toujours lancer la campagne complète sur GitHub Actions. Constituer des lots équilibrés à partir des durées historiques et les répartir sur des runners indépendants. Dans chaque lot, exécuter les jeux en série.
+- Figer un SHA unique et vérifier le catalogue et les plafonds d’origine avant le lancement. Chaque jeu commence au niveau 1, conserve son parcours chronologique et utilise un seul worker.
+- Conserver les résultats et les empreintes de chaque lot, puis vérifier la couverture complète et agréger les verdicts sur ce SHA. Les contrôles locaux complémentaires ont leur propre bilan.
+- Rapporter le temps mural jusqu’au dernier contrôle, le pic de lots simultanés et la durée cumulée des rejeux. La campagne de référence de 107 jeux a utilisé 24 lots, avec un pic observé de 20.
+
 ## Actions continues de SIC
 
 Lorsqu’un plan contient plusieurs gestes déjà justifiés, exposer son préfixe au moteur natif. Une décision engage au plus 16 commandes, dans le budget restant. Entre les commandes, vérifier uniquement les prémisses et le retour observé. En cas de contradiction, de changement de niveau ou de limite, clore la série. Réconcilier une seule fois les gestes réellement exécutés, dans l’ordre, puis rendre la main au raisonnement. Une expérience dont la suite dépend d’une découverte peut rester unitaire.
