@@ -1,0 +1,17 @@
+# LOGI · mesurer quels affichages répondent ensemble
+
+## Référence et préenregistrement de la ligne 15
+
+La branche `refactor/sic-logi-ligne-15` part du gel `d0e7527ca8033bd805a6d7a8bb021eff62e87021`. Deux sessions neuves de LOGI, sur `8ce7ee3563fa1d5eca1639c6ad03975cfc962460` (inventaire historique) puis sur le gel, retrouvent le tuple `information_goal / coupled_displays / experiment` dès le premier tour. Le moteur choisit lui-même `ACTION6(49,50)` et le jeu rend un changement local et distant. Les réglages sont ceux du lanceur d’inventaire, graine 0, niveau 1, pack natif par défaut, plafond de session 16 et 600 actions par niveau. [Matrice](sic-v8-composition-des-98-strategies.md?plain=1#L55) · [Témoin](sic-v8-strategies-observees.md?plain=1#L41) · [Campagne](../../tests/helpers/sic-qualification.ts#L175)
+
+La fixture conserve les observations publiques initiales et les deux premiers retours sur LOGI et REWI, produits par le moteur historique. Chaque partie a été initialisée séparément avec le même identifiant déterministe de capture. Le test peut attribuer une autre session au rejeu pour vérifier la portée d’un nouveau besoin. Le moteur ne reçoit que l’observation publique courante. SHA-256 de la fixture compressée `9f2a049421405a35829214a44950ceb9a30e08c126ae052e32e53de459949158`. [Fixture](../../tests/fixtures/sic-information-displays-public.json.gz)
+
+| Référence ou variation fixée avant extraction | Choix ou retour attendu |
+|---|---|
+| LOGI réel, tour 1. Contrôles [3, 3, 3], récepteurs [11, 11, 3]. | Un seul plan d’information admissible. Le clic sur le contrôle 2, (49, 50), donne [3, 3, 14] et [3, 11, 11]. La mesure valide `coupled_switch` et contredit `inert_decoration` et `local_switch`. Le contrôle de pas natif demeure sans prédiction vérifiée. |
+| Variation construite sur la même observation initiale. Déplacer uniquement la valeur minoritaire des lampes de droite à gauche, de [11, 11, 3] à [3, 11, 11]. Conserver la géométrie, les commandes disponibles, le budget et les trois contrôles. | À froid, le producteur doit préférer le contrôle 0, `ACTION6(5,50)`. La source de l’offre, le besoin d’information et les trois prédictions restent du même type. |
+| Même commande autorisée du premier tour. Conserver le changement local du contrôle 2, remettre seulement les lampes à leurs valeurs initiales dans le retour. | Le résultat devient `local_only`. La prédiction `local_switch` devient la seule compatible pour cet essai. |
+| LOGI réel, tour 2. Un parent est engagé après le premier retour mesuré. | Le reçu contient deux offres admissibles. Le clic retenu (5, 50) sert le parent engagé. Le passage au niveau suivant laisse les trois hypothèses de cet essai inconnues. |
+| REWI réel, nouveau contexte de mesure. Six contrôles et cinq récepteurs. | Le premier clic (34, 61) laisse les valeurs stables. La mesure `unchanged` valide la prédiction inerte, écarte ce contrôle et le prochain clic est (28, 61). |
+
+La qualification demande de distinguer les commandes examinées au sein du producteur, les offres réellement présentées à l’élection et celles que le planificateur essaie. Il faut contrôler les observations citées par le besoin et le retour, la commande libérée et l’effet de chaque intervention à l’entrée native. La concurrence constatée au deuxième tour doit être attribuée à ses vrais producteurs. La ligne 16 garde son critère et son verdict propres.
