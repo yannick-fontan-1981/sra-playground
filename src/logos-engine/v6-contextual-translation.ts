@@ -10,6 +10,26 @@ import { geometricComponents } from './v6-native-observer.ts';
 import { pythonEqual as same } from './v6-operations.ts';
 import type { NativePoint } from './v6-native-types.ts';
 
+export interface TranslationReplicationOffer {
+  readonly evidence: [current: string, before: string, after: string];
+  readonly expected_motion: Readonly<Record<string, NativePoint>>;
+}
+
+/** A single trial of this command displaced a still-visible role from a different origin. */
+export function offerTranslationReplication(trials: readonly (readonly [Snapshot, Snapshot])[], current: Snapshot): TranslationReplicationOffer | null {
+  if (trials.length !== 1) return null;
+  const [before, after] = trials[0]!;
+  if (before.epoch !== current.epoch || after.epoch !== current.epoch || !registered(before, after) || !registered(after, current)) return null;
+  const expected: Record<string, NativePoint> = {};
+  for (const [signature, position] of Object.entries(current.roles)) {
+    const motion = relativeMotion(before, after, signature);
+    if (!motion || (motion[0] === 0 && motion[1] === 0)) continue;
+    const origin = before.roles[signature]!;
+    if (position[0] !== origin[0] || position[1] !== origin[1]) expected[signature] = motion;
+  }
+  return Object.keys(expected).length ? { evidence: [current.ref, before.ref, after.ref], expected_motion: expected } : null;
+}
+
 export interface ContextualTranslationExposure {
   readonly evidence: readonly [string, string, string];
   readonly observed_delta: NativePoint;

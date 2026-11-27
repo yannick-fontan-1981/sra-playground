@@ -23,7 +23,7 @@ import { orderControlTrials } from '../sic/control-effect-trigger.ts';
 import type { ReasoningMode } from '../sic/reasoning-mode.ts';
 import type { OpeningCuriosityMode } from '../sic/opening-curiosity.ts';
 import { motionOffers } from './v6-motion-contrast.ts';
-import { contextualTranslationExposures } from './v6-contextual-translation.ts';
+import { contextualTranslationExposures, offerTranslationReplication } from './v6-contextual-translation.ts';
 import { ObservedInputDomain } from './v6-native-observer.ts';
 import { recalledDirections, targetMethodAtBoundary } from './v6-target-method.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
@@ -384,14 +384,10 @@ export class NativeCallerCoordinator {
       } else if (experiment === 'sample_unused_control') {
         if (pairs.length) continue;
       } else if (experiment === 'replicate_translation') {
-        if (pairs.length !== 1) continue;
-        const [before, after] = pairs[0]!;
-        if (!registered(before, after) || !registered(after, current)) continue;
-        const changed = Object.keys(current.roles).filter(signature => Object.hasOwn(after.roles, signature) && Object.hasOwn(before.roles, signature)
-          && !same(relativeMotion(before, after, signature), [0, 0]) && !same(current.roles[signature]!.slice(0, 2), before.roles[signature]!.slice(0, 2)));
-        if (!changed.length) continue;
-        evidence.push(before.ref, after.ref);
-        expectedMotion = Object.fromEntries(changed.map(signature => [signature, [...relativeMotion(before, after, signature)!]]));
+        const offer = offerTranslationReplication(pairs, current);
+        if (!offer) continue;
+        evidence = offer.evidence;
+        expectedMotion = offer.expected_motion;
       } else throw new TypeError('Unknown control experiment');
       const acquisition: R = { action_ref: command, experiment, evidence, pair_ref: facts.pair_ref,
         observation_ref: current.ref, objective: policy.objective };
