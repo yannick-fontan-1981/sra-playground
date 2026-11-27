@@ -8,6 +8,9 @@ import type { V6AgentResult, V6PublicObservation, V6Ticket } from '../src/runtim
 import { createSicVerifyOrderedFeedback, verifyOrderedFeedbackId } from '../src/sic/feedback-trial.ts';
 import { observedMechanicsGroup } from '../src/sic/strategy-agenda.ts';
 import { standalonePlanningGroups } from '../src/sic/standalone-families.ts';
+import { planningGroupsWithExperiments } from '../src/sic/experiment-selection-groups.ts';
+import { observedPressureRecoveryGroup } from '../src/sic/public-input-exploration.ts';
+import { preparedEffectsId } from '../src/sic/test-prepared-effects.ts';
 
 type Transfer = 'compatible' | 'ambiguous' | 'changed_shape' | 'missing_submission';
 
@@ -68,7 +71,8 @@ async function start(variant: boolean, transfer: Transfer = 'compatible') {
     return result;
   };
   const fallback: NativeFamily = {
-    id: 'unrelated_public_experiment',
+    id: preparedEffectsId,
+    proposeInSubquestion(_group, _entry, ...args) { return this.propose(...args); },
     propose(observation) {
       if (!observation.levels_completed) return null;
       const action = { action_ref: observation.available_action_refs.find(ref => /^ACTION[1-5]$/.test(ref))!, data: {} };
@@ -80,10 +84,15 @@ async function start(variant: boolean, transfer: Transfer = 'compatible') {
     after: () => ({ matched: null, seal_prefix: true, reason: 'unrelated_experiment_return' }),
     record: () => ({ events: [] }), state: () => ({}), restore() {},
   };
-  const runtime = new NativeV6Runtime({ families: [family, fallback], sourceDigest: 'ordered-feedback-transfer', maxPointOccurrences: 100,
-    groups: [{ id: observedMechanicsGroup, families: [family.id] },
-      { id: 'intervening_experiment', families: [fallback.id] },
-      { id: 'interpret_examples_and_collections', families: [family.id] }] });
+  // Retain the production order and subquestion entries for these two owners.
+  // In particular, a witnessed preview is offered inside the first group,
+  // before the later general reuse group is reached.
+  const groups = planningGroupsWithExperiments(standalonePlanningGroups).map(group => {
+    const entries = group.families.flatMap((id, index) => [family.id, fallback.id].includes(id)
+      ? [{ id, entry: group.entryPoints?.[index] ?? null }] : []);
+    return { ...group, families: entries.map(entry => entry.id), entryPoints: entries.map(entry => entry.entry) };
+  }).filter(group => group.families.length);
+  const runtime = new NativeV6Runtime({ families: [family, fallback], sourceDigest: 'ordered-feedback-transfer', maxPointOccurrences: 100, groups });
   const service = new V6AgentService(() => runtime), sessionId = 'feedback-transfer-' + variant + '-' + transfer;
   let sequence = 0, result = await service.handle({ type: 'init', sessionId, sequence,
     observation: room.packet(0), budgets: { targetLevels: 2, levelActionCaps: [24, 24] } });
@@ -108,10 +117,10 @@ for (const variant of [false, true]) test('native ordered entry reuses its first
     assert.equal(proof.submit, run.room.submit);
     assert.equal(proof.completed, 1);
     assert.ok(proof.proof.length >= 4, 'The method was acquired from actual L1 entries and official submission');
-    assert.ok(run.calls.filter(call => call.completed === 0 && call.group === observedMechanicsGroup).every(call => !call.proposed),
+    assert.ok(run.calls.filter(call => call.completed === 0 && [observedMechanicsGroup, observedPressureRecoveryGroup].includes(call.group)).every(call => !call.proposed),
       'No unlearned entry gets priority in the reuse group');
     assert.equal(run.result.snapshot.proposal?.kind, verifyOrderedFeedbackId);
-    assert.equal(run.calls.at(-1)?.group, observedMechanicsGroup);
+    assert.equal(run.calls.at(-1)?.group, observedPressureRecoveryGroup);
     assert.equal(run.calls.at(-1)?.proposed, true);
     assert.equal(run.result.ticket?.actionRef, 'ACTION6');
     assert.equal(run.result.ticket?.level, 2);
@@ -123,7 +132,7 @@ for (const variant of [false, true]) test('native ordered entry reuses its first
     await run.next();
     const current = (run.runtime as any).observation;
     assert.equal(initialFeedbackLayout(current), null, 'The first partial entry can no longer be recognized as an empty interface');
-    assert.equal(run.calls.at(-1)?.group, observedMechanicsGroup,
+    assert.equal(run.calls.at(-1)?.group, observedPressureRecoveryGroup,
       'The current witnessed layout keeps ownership after its first entry');
     while (run.room.completed < 2) { assert.ok(run.tickets.length < 16); await run.next(); }
     const transferred = run.tickets.filter(ticket => ticket.level === 2);
@@ -139,8 +148,8 @@ for (const variant of [false, true]) test('native ordered entry reuses its first
 for (const transfer of ['ambiguous', 'changed_shape', 'missing_submission'] as const) test('native reuse declines ' + transfer + ' without erasing its previous proof', async () => {
   const run = await start(false, transfer);
   try {
-    assert.equal(run.result.snapshot.proposal?.kind, 'unrelated_public_experiment');
-    assert.equal(run.calls.find(call => call.completed === 1 && call.group === observedMechanicsGroup)?.proposed, false);
+    assert.equal(run.result.snapshot.proposal?.kind, preparedEffectsId);
+    assert.equal(run.calls.find(call => call.completed === 1 && call.group === observedPressureRecoveryGroup)?.proposed, false);
     assert.equal(run.family.state().retained.submit, run.room.submit);
     assert.ok(run.family.state().retained.proof.length >= 4);
   } finally { run.runtime.close('test_complete'); }
@@ -155,11 +164,13 @@ test('a contradictory first transferred entry closes the ticket and blocks only 
     assert.ok(returned.snapshot.trace.some((event: any) => event.kind === 'actual_outcome' && event.matched === false));
     assert.ok(run.family.state().state.blocked.some((key: string) => key.includes(first.actionRef)));
     assert.deepEqual(run.family.state().retained, proof, 'Independent earlier successful entry/submission remains documented');
-    assert.equal(run.result.snapshot.proposal?.kind, 'unrelated_public_experiment', 'No blind retry is released from the contradicted state');
+    assert.equal(run.result.snapshot.proposal?.kind, preparedEffectsId, 'No blind retry is released from the contradicted state');
   } finally { run.runtime.close('test_complete'); }
 });
 
 test('production admits the ordered-entry owner through reuse before its ordinary interpretation group', () => {
   const groups = standalonePlanningGroups.filter(group => (group.families as readonly string[]).includes(verifyOrderedFeedbackId));
-  assert.deepEqual(groups.map(group => group.id), [observedMechanicsGroup, 'interpret_examples_and_collections']);
+  assert.deepEqual(groups.map(group => group.id), [observedPressureRecoveryGroup, observedMechanicsGroup, 'interpret_examples_and_collections']);
+  const pressure = planningGroupsWithExperiments(standalonePlanningGroups).find(group => group.id === observedPressureRecoveryGroup)!;
+  assert.ok(pressure.families.indexOf(verifyOrderedFeedbackId) < pressure.families.indexOf(preparedEffectsId));
 });

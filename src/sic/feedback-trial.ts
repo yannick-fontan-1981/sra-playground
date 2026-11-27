@@ -6,6 +6,7 @@ import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgram
 import { chooseFromFeedback, feedbackChoiceFacts, feedbackChoiceModule } from './feedback-choice-card.ts';
 import { sicNeedId } from './need-identity.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
+import { observedPressureRecoveryGroup } from './public-input-exploration.ts';
 
 export const feedbackTrialId = 'sic_feedback_trial';
 export const verifyOrderedFeedbackId = 'sic_verify_ordered_feedback';
@@ -54,7 +55,7 @@ export function createSicVerifyOrderedFeedback(): NativeFamily<Proposal> {
       decide = await registry.registerProgram(chooseFromFeedback, {}, await feedbackChoiceModule());
     },
     async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
-      if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      if (group !== observedMechanicsGroup && group !== observedPressureRecoveryGroup) return this.propose(observation, rows, inputs, remaining, execution);
       if (!retained?.proof.length || !observation.available_action_refs.includes(retained.submit)) return null;
       const prior = state?.layout.epoch === observation.level_epoch ? state : null;
       const layout = prior?.layout ?? initialFeedbackLayout(observation);
