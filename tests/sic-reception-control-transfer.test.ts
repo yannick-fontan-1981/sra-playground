@@ -2,6 +2,11 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { gunzipSync } from 'node:zlib';
+import type { NativeFamily } from '../src/logos-engine/v6-native-types.ts';
+import { observedPressureRecoveryGroup } from '../src/sic/public-input-exploration.ts';
+import { preparedEffectsId } from '../src/sic/test-prepared-effects.ts';
+import { planningGroupsWithExperiments } from '../src/sic/experiment-selection-groups.ts';
+import { standalonePlanningGroups } from '../src/sic/standalone-families.ts';
 import { NativeV6Runtime } from '../src/logos-engine/v6-native-runtime.ts';
 import { measureReceptionService, receptionServiceCarriers } from '../src/logos-engine/v6-reception-service-observation.ts';
 import { createSicReceptionAccess } from '../src/sic/reception-access.ts';
@@ -72,7 +77,34 @@ function receptionRoom(variant: boolean, uncertain?: 'ambiguous' | 'missing' | '
 
 async function acquiredReception(variant = false, uncertain?: 'ambiguous' | 'missing' | 'different-support', arrivalTransfer = false) {
   const room = receptionRoom(variant, uncertain, arrivalTransfer), family = createSicReceptionAccess();
-  const service = new V6AgentService(() => new NativeV6Runtime({ families: [family], sourceDigest: 'reception-controls', maxPointOccurrences: 250 }));
+  const calls: { group: string; completed: number; proposed: boolean }[] = [];
+  const proposeInGroup = family.proposeInGroup!.bind(family);
+  family.proposeInGroup = async (group, observation, ...rest) => {
+    const proposal = await proposeInGroup(group, observation, ...rest);
+    calls.push({ group, completed: observation.levels_completed, proposed: proposal !== null });
+    return proposal;
+  };
+  const fallback: NativeFamily = {
+    id: preparedEffectsId,
+    proposeInSubquestion(_group, _entry, ...args) { return this.propose(...args); },
+    propose(observation) {
+      if (!observation.levels_completed) return null;
+      const action = { action_ref: observation.available_action_refs[0]!, data: {} };
+      return { status: 'proposed', kind: this.id, actions: [action], steps: [{ action }],
+        binding: { observation_ref: observation.observation_ref } };
+    },
+    before: (proposal, index, _packet, observation) => ({ admitted: index === 0 && proposal.binding?.observation_ref === observation.observation_ref,
+      reason: 'unrelated_experiment_bound' }),
+    after: () => ({ matched: null, seal_prefix: true, reason: 'unrelated_experiment_return' }),
+    record: () => ({ events: [] }), state: () => ({}), restore() {},
+  };
+  const groups = planningGroupsWithExperiments(standalonePlanningGroups).map(group => {
+    const entries = group.families.flatMap((id, index) => [family.id, fallback.id].includes(id)
+      ? [{ id, entry: group.entryPoints?.[index] ?? null }] : []);
+    return { ...group, families: entries.map(entry => entry.id), entryPoints: entries.map(entry => entry.entry) };
+  }).filter(group => group.families.length);
+  const service = new V6AgentService(() => new NativeV6Runtime({ families: [family, fallback], groups,
+    sourceDigest: 'reception-controls', maxPointOccurrences: 250 }));
   const sessionId = 'reception-' + variant + '-' + uncertain;
   let sequence = 0, result = await service.handle({ type: 'init', sessionId, sequence,
     observation: toV6PublicObservation(room.packet()), budgets: { targetLevels: room.targetLevels, levelActionCaps: Array(room.targetLevels).fill(80) } });
@@ -86,7 +118,7 @@ async function acquiredReception(variant = false, uncertain?: 'ambiguous' | 'mis
     return result;
   }
   while (room.level === 1) { assert.ok(issued.length < 70); await next(); }
-  return { room, family, issued, next, get result() { return result; } };
+  return { room, family, issued, next, calls, get result() { return result; } };
 }
 
 for (const variant of [false, true]) test('native reception reuses its measured control role immediately after a win' + (variant ? ' with new glyphs, palette, positions and controls' : ''), async () => {
@@ -94,6 +126,8 @@ for (const variant of [false, true]) test('native reception reuses its measured 
   assert.ok(memory && Object.keys(memory.controls).length >= 2);
   const proposal = run.result.snapshot.proposal;
   assert.equal(proposal?.kind, run.family.id);
+  assert.equal(run.calls.at(-1)?.group, observedPressureRecoveryGroup);
+  assert.ok(run.calls.filter(call => call.completed === 0 && call.group === observedPressureRecoveryGroup).every(call => !call.proposed));
   assert.equal(proposal?.sicSituationCard?.strategy, 'P07');
   assert.deepEqual(proposal?.local.controls, memory.controls);
   assert.ok(proposal?.sicSituationCard?.evidence.some((ref: string) => memory.evidence.includes(ref)));
@@ -146,3 +180,40 @@ test('an unrelated official completion cannot advance a reception that was still
   assert.deepEqual(run.family.state().remembered, prior);
   assert.notEqual(run.result.snapshot.proposal?.sicSituationCard?.strategy, 'P07');
 });
+
+const restoredCrossing = JSON.parse(gunzipSync(readFileSync(new URL('./fixtures/sic-reception-activation-public.json.gz', import.meta.url))).toString());
+
+test('the first public restored-start decision keeps the failed crossing and its compatible reception ahead of previews', async () => {
+  const family = createSicReceptionAccess();
+  family.restore(restoredCrossing.family);
+  const proposal = await family.proposeInGroup!(observedPressureRecoveryGroup,
+    restoredCrossing.observation, restoredCrossing.rows, [], 35);
+  assert.ok(proposal && 'activation' in proposal);
+  assert.deepEqual(proposal.activation.failures, restoredCrossing.family.activation.failures);
+  assert.equal(proposal.step.stage, 'approach');
+  assert.deepEqual(proposal.activation.at, restoredCrossing.family.activation.start);
+  assert.ok(proposal.route_refs?.includes(restoredCrossing.observation.observation_ref));
+  const delta = restoredCrossing.family.remembered.controls[proposal.actions[0]!.action_ref];
+  assert.deepEqual(proposal.step.to, proposal.activation.at.map((n: number, i: number) => n + delta[i]));
+});
+
+for (const failure of ['stale_return', 'missing_proof', 'ambiguous_carrier'] as const)
+  test('a recovered reception cannot preempt exploration with ' + failure, async () => {
+    const family = createSicReceptionAccess(), retained = structuredClone(restoredCrossing.family);
+    const observation = structuredClone(restoredCrossing.observation), rows = structuredClone(restoredCrossing.rows);
+    if (failure === 'stale_return') observation.observation_ref += ':foreign-command';
+    if (failure === 'missing_proof') retained.remembered.evidence = [];
+    if (failure === 'ambiguous_carrier') {
+      const local = retained.activation, pitch = local.layout.pitch;
+      const target = local.layout.cells.find(([x, y]: Point) => Math.abs(x - local.at[0]) + Math.abs(y - local.at[1]) > pitch * 2
+        && !local.walls.includes([x, y].join(',')) && !same([x, y], local.device)
+        && !local.layout.support_candidates.some((support: { anchor: Point }) => same(support.anchor, [x, y])))!;
+      assert.ok(target);
+      for (let y = target[1]; y < target[1] + pitch; y++) rows[y].fill(local.layout.background, target[0], target[0] + pitch);
+      for (const dx of [0, pitch - 1]) for (const dy of [0, pitch - 1]) rows[target[1] + dy][target[0] + dx] = local.carrierInk;
+    }
+    family.restore(retained);
+    assert.equal(await family.proposeInGroup!(observedPressureRecoveryGroup, observation, rows, [], 35), null);
+    assert.deepEqual(family.state().remembered, retained.remembered);
+    assert.deepEqual(family.state().activation.failures, retained.activation.failures);
+  });

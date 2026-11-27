@@ -4,6 +4,7 @@ import { sicNeedId } from './need-identity.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 import { motionIntoFootprint } from './observed-translation.ts';
+import { observedPressureRecoveryGroup } from './public-input-exploration.ts';
 import { chooseReceptionActivation, crossingRestoredStart, recordReceptionActivation, startReceptionActivation,
   type ReceptionActivation, type ReceptionActivationStep, type ReceptionMemory } from './reception-activation.ts';
 import { chooseReceptionSequence, receptionSequenceReturn, recordReceptionSequence, startReceptionSequence,
@@ -129,6 +130,24 @@ export function createSicReceptionAccess(family = receptionAccessId): NativeFami
 
   return {
     id: family,
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group !== observedPressureRecoveryGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      if (remembered?.epoch !== observation.level_epoch || !remembered.evidence.length) return null;
+      const proposal = await this.propose(observation, rows, inputs, remaining, execution);
+      if (!proposal) return null;
+      if (isActivation(proposal) || isSequence(proposal)) {
+        const local = isActivation(proposal) ? proposal.activation : proposal.sequence;
+        // A contact return, including a restored start, keeps its measured
+        // preparation ahead of unrelated trials only while that return is current.
+        if (local.evidence.at(-1) !== observation.observation_ref) return null;
+        const actors = receptionServiceCarriers(rows, local.layout);
+        if (local.visible ? actors.length !== 1 || !equal(actors[0]!.anchor, local.at)
+          : actors.length !== 0) return null;
+        return proposal;
+      }
+      return proposal.from && proposal.local.evidence.length && proposal.local.controls[proposal.choice.action]
+        ? proposal : null;
+    },
     propose(observation, rows, _inputs, remaining, execution) {
       const keys = observation.available_action_refs.filter(action => hints[action]);
       if (remaining < 1 || keys.length < 2 || observation.available_action_refs.includes('ACTION6')) return null;

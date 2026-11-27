@@ -1,0 +1,73 @@
+{
+  "schema": "sic.preview-cargo-regression.run.v1",
+  "manifestCreatedAt": "2026-11-27T00:55:31.684563+00:00",
+  "source": "f8b2f4f2ab202e24f755e38f590449432d2e34f9",
+  "tree": "60a2f1777c1603e108f9b2888e5ea8bedd68f0e8",
+  "remoteCommit": "f20cb3c160b6f1dbc14a5b0cfb5c696d07d0c4a5",
+  "base": "ee9dad5f8773fed3ed507ad3c575181deae5f754",
+  "checkout": "/workspace/scratch/082336907086/sic-27-work/preview-regression",
+  "mode": "sic",
+  "startLevel": 1,
+  "targetLevels": 6,
+  "workers": 1,
+  "command": [
+    "node",
+    "scripts/check-sic-chronological.mjs",
+    "GABA",
+    "auto",
+    "/workspace/scratch/082336907086/sic-27-work/pr132-gaba-ci/corrected-f8b2f4f2/strict-GABA.jsonl",
+    "1"
+  ],
+  "environment": {
+    "SIC_REPLAY_REFERENCES": "docs/architecture/sic-replay-reference-levels-20261126.json"
+  },
+  "referencesSha256": "67ae5216b80e87bbb2243138fde7970ea5c725a5f832f1b72aa8b0780e270854",
+  "cpuMax": null,
+  "sourceFrozen": true,
+  "archivedAt": "2026-11-27T00:58:28.822254+00:00",
+  "files": [
+    {
+      "path": "strict-GABA.jsonl.gz",
+      "decodedSha256": "4e6a2a6da7c0f6ff761b08932e0a28493fad88194c80c1bae035b96db39a8fe0",
+      "storedSha256": "a1b54ffe95cf2ea03f12a0cbde05b826893c3e61b31ccaaf6d207a94642059b4",
+      "decodedBytes": 60927,
+      "storedBytes": 4552
+    },
+    {
+      "path": "strict-GABA.levels.jsonl.gz",
+      "decodedSha256": "23846c9ccafbcbffae086b4cf2cc94198d010e2f6ed8b8d5ac2bcd6f70a4aa30",
+      "storedSha256": "94be412023cb03181e632c6461d6c9624856dd4746b2db18e3cdb66ffe9ca2f8",
+      "decodedBytes": 4021,
+      "storedBytes": 1299
+    },
+    {
+      "path": "baseline-GABA.jsonl.gz",
+      "decodedSha256": "99c5dbfa21c3e09df49a4d03cd11548d785200f444f87cc6ad6be8ffc22e5fc8",
+      "storedSha256": "f94ac8b2636d1cc51c9f1a885a0d05ce77c3ac829ccbde16e275c485df18495f",
+      "decodedBytes": 60925,
+      "storedBytes": 4548
+    },
+    {
+      "path": "ci-failure-GABA.jsonl.gz",
+      "decodedSha256": "277a02cf4471903f854ad2fa43627ef23fd26b6ab5c7aec8d2ac1d3fe3d70e25",
+      "storedSha256": "f3c918b223f8a5d16f9ddd087dd86a019e8fec3aba99ed383510da8fc521b8db",
+      "decodedBytes": 391050,
+      "storedBytes": 24527
+    },
+    {
+      "path": "first-divergence-public.json.gz",
+      "decodedSha256": "12d958070d82fe0b594c9f2362684e3e42f1963888134a583c7b7c993f9ed7ad",
+      "storedSha256": "a5c96e72afb22eb19bdb9f911e2706d9b5d649689b905ed847b4746363f71fff",
+      "decodedBytes": 3387122,
+      "storedBytes": 191299
+    }
+  ],
+  "CI": {
+    "run": 45915808188,
+    "job": 140234604980,
+    "zipSha256": "e55a64c7a4b09bf3d6018bb5da6a0c0d4da5e2d490ef5a72f2fb83311a13ec1f",
+    "source": "ee9dad5f8773fed3ed507ad3c575181deae5f754",
+    "url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/45915808188/job/140234604980"
+  },
+  "baselineSource": "4a546a139f9064422c078ef5f40b8c22133c39a8"
+}
