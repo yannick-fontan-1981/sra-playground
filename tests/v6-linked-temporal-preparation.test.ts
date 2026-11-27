@@ -181,3 +181,27 @@ test('contact digest retains Python default spaces and compact phase digest stay
   assert.deepEqual(temporalPatch([[1, 2, 3], [4, 5, 6]], [-2, 0], [2, 2]), [[], []]);
   assert.equal(temporalBytePatch([[1, 2, 3]], [-1, 0], [1, 1]), null);
 });
+
+test('same linked site and ACTION1 select a binding or access according to the current vector', async () => {
+  const { family, current } = await acquired();
+  const contact = family.phase.linked_contact;
+  const propose = (available = inputs) => contact.propose(family.phase, current.observation, current.rows, available, 40);
+  const access = propose()!;
+  assert.deepEqual([access.phase_plan.mode, access.actions, access.steps[0].to], ['access', [{ action_ref: 'ACTION1' }], [12, 12]]);
+  assert.ok(contact.vectors.delete('ACTION1'));
+  const trial = propose()!;
+  assert.deepEqual([trial.phase_plan.mode, trial.actions, trial.phase_plan.site, trial.steps[0].to], ['binding', access.actions, access.phase_plan.site, null]);
+  assert.deepEqual(trial.question.hypothesis_refs, [current.observation.observation_ref]);
+  assert.equal(propose(inputs.filter(input => input.action_ref === 'ACTION2')), null);
+});
+
+test('entry without changed remote pixels records a negative comparison and closes this contact offer', async () => {
+  const { family, current } = await acquired(), contact = family.phase.linked_contact;
+  const approach = family.propose(current.observation, current.rows, inputs, 40)!;
+  const entered = await packet([12, 12], 4);
+  const events = family.recordSource(current.observation, entered.observation, approach.actions[0], current.rows, entered.rows);
+  const effect = events.find(e => e.kind === 'linked_contact_effect')!;
+  assert.deepEqual([effect.before_ref, effect.after_ref, effect.pixels, effect.exclusive_cause_established],
+    [current.observation.observation_ref, entered.observation.observation_ref, [], false]);
+  assert.equal(contact.propose(family.phase, entered.observation, entered.rows, inputs, 40), null);
+});
