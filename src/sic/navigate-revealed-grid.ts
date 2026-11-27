@@ -334,6 +334,13 @@ function updateRailClock(rows: NativeRows, grid: Grid, prior?: RailClock): Pick<
   return { turn, rails };
 }
 
+function initialTiming(rows: NativeRows, grid: Grid, last: Reading): Timing | undefined {
+  if (!grid.mechanisms) return undefined;
+  return { start: last.position, patrols: updateTracks([], last.sentries ?? [], grid),
+    walls: updateTracks([], last.obstacles, grid), scannedPads: [],
+    ...(grid.sentryPatterns ? { clock: { ...updateRailClock(rows, grid), crossed: [], visits: [last.position], scans: [] } } : {}) };
+}
+
 function scheduledRailHazards(rows: NativeRows, grid: Grid, clock: NonNullable<Timing['clock']>) {
   return movingRails(rows, grid).flatMap(item => {
     const track = clock.rails[item.id];
@@ -495,6 +502,52 @@ export function observeRecalledNavigation({ local, choice }: NonNullable<ReturnT
     refs: [...local.refs.slice(-4), ref], consecutiveWaits: choice.kind === 'wait' ? local.consecutiveWaits + 1 : 0 } };
 }
 
+function acquireNavigationStep(local: State, choice: Choice, after: NativeObservation,
+  second: NativeRows, frames: readonly NativeRows[]) {
+  const next = read(second, local.grid, local.last);
+  if (!next) return null;
+  const contact = choice.entry ?? choice.target, timing = local.timing;
+  const reset = restoredGridStart(local, choice, next);
+  const ejected = !reset && choice.kind === 'move' && next.position !== local.last.position
+    && forcedLanding(local.grid, contact, next.position, frames);
+  if (ejected && next.landings) next.landings[contact] = next.position;
+  if (reset) next.failedEntrances = [...new Set([...(next.failedEntrances ?? []), contact])];
+  const clock = timing?.clock;
+  const didNotEnter = next.position === local.last.position || !!clock && next.position !== contact && frames.length > 0
+    && !frames.some(frame => showsActor(frame, local.grid, contact));
+  if (!reset && !ejected && choice.kind === 'move' && didNotEnter
+    && !next.obstacles.includes(contact) && !next.risk.includes(contact) && !next.closedDoors?.includes(contact)
+    && (!timing || !local.last.sentries?.includes(contact) && !next.sentries?.includes(contact))) {
+    next.memory[contact] = 'wall';
+  }
+  const scanned = !reset && choice.kind === 'pulse' && !!local.grid.mechanisms?.pads[contact];
+  const entered = clock && !reset && next.position !== local.last.position && local.grid.mechanisms?.doors[next.position] !== undefined
+    && !clock.crossed.includes(next.position) ? { gate: next.position, from: local.last.position } : undefined;
+  const left = clock?.gateEntry && next.position !== clock.gateEntry.gate ? clock.gateEntry : undefined;
+  const crossed = clock && !reset && left && next.position !== left.from ? [...clock.crossed, left.gate] : reset ? [] : clock?.crossed ?? [];
+  const gateEntry = reset ? undefined : entered ?? (left ? undefined : clock?.gateEntry);
+  const selectedGate = choice.kind === 'pulse' && local.last.closedDoors?.includes(contact) ? contact : clock?.gateGoal;
+  const gateGoal = reset || selectedGate !== undefined && crossed.includes(selectedGate) ? undefined : selectedGate;
+  const visits = !clock || reset ? [next.position] : next.position === local.last.position
+    ? clock.visits : [...clock.visits.slice(-31), next.position];
+  const scans = !clock || reset ? [] : choice.kind === 'pulse' && next.charges < local.last.charges
+    ? [...clock.scans, local.last.position] : clock.scans;
+  const state: State = { ...local, score: after.levels_completed, last: next, previousObstacle: next.obstacle !== local.last.obstacle ? local.last.obstacle : local.previousObstacle,
+    ...(local.grid.actorPixels ? { motions: track(local.last, next, local.grid, local.motions) } : {}),
+    ...(timing ? { timing: { start: timing.start, patrols: updateTracks(reset ? [] : timing.patrols, next.sentries ?? [], local.grid),
+      walls: updateTracks(reset ? [] : timing.walls, next.obstacles, local.grid),
+      scannedPads: reset ? [] : scanned ? [...timing.scannedPads, contact] : timing.scannedPads,
+      ...(clock ? { clock: { ...updateRailClock(second, local.grid, reset ? undefined : clock), crossed, visits, scans,
+        ...(gateGoal === undefined ? {} : { gateGoal }), ...(gateEntry ? { gateEntry } : {}) } } : {}),
+      ...(scanned ? { pendingPad: contact } : {}) } } : {}),
+    refs: [...local.refs.slice(-4), after.observation_ref],
+    consecutiveWaits: choice.kind === 'wait' ? local.consecutiveWaits + 1 : 0 };
+  const opened = timing && local.last.closedDoors?.some(cell => !next.closedDoors?.includes(cell));
+  return { state, ...(reset ? { reviewEvidence: 'The return restored the starting position and pulse reserve.' }
+    : ejected ? { reviewEvidence: 'The move entered the marked cell and the return showed the carrier slide to a new landing.' }
+    : opened ? { reviewEvidence: 'The pulse changed a closed passage into an opening.' } : {}) };
+}
+
 export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
   let state: State | null = null;
   return {
@@ -514,9 +567,7 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
       if (!grid) return null;
       const last = read(rows, grid, prior?.last);
       if (!last) return null;
-      const timing = grid.mechanisms ? prior?.timing ?? { start: last.position,
-        patrols: updateTracks([], last.sentries ?? [], grid), walls: updateTracks([], last.obstacles, grid), scannedPads: [],
-        ...(grid.sentryPatterns ? { clock: { ...updateRailClock(rows, grid), crossed: [], visits: [last.position], scans: [] } } : {}) } : null;
+      const timing = prior?.timing ?? initialTiming(rows, grid, last);
       if (timing) last.nextHazards = [...new Set(timing.clock
         ? [...forecastTracks(timing.patrols), ...scheduledRailHazards(rows, grid, timing.clock)]
         : forecastTracks([...timing.walls, ...timing.patrols]))];
@@ -583,7 +634,7 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } },
       };
     },
-    observePublicOutcome(before, after, command, first, second) {
+    observePublicOutcome(before, after, command, first, second, frames = []) {
       const inherited = state;
       const scope = before.observation_ref.split(':epoch:', 1)[0]!;
       if (!inherited || inherited.epoch !== before.level_epoch - 1 || inherited.score === undefined
@@ -594,8 +645,7 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
       const direction = directions.find(([action]) => action === command.action_ref);
       if (!direction || !before.available_action_refs.includes(command.action_ref)) return;
       const grid = measure(first, inherited.grid);
-      // This recovery concerns ordinary lattice movement; mechanisms retain their own acquisition path.
-      if (!grid || grid.mechanisms || !visibleLattice(second, grid)
+      if (!grid || !visibleLattice(second, grid)
         || measure(second) || measure(second, inherited.grid)) return;
       const [left, top, right, bottom] = tile(grid, grid.goal);
       for (let y = top; y <= bottom; y++) for (let x = left; x <= right; x++) {
@@ -606,14 +656,29 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
       const [, dx, dy] = direction, [x, y] = coordinate(previous.position, grid);
       const target = (y + dy) * grid.columns + x + dx;
       if (x + dx < 0 || x + dx >= grid.columns || target < 0 || target >= grid.size) return;
+      // Only an ordinary cardinal step is reassociated here. A pad or passage
+      // interaction keeps its own acquisition path, even if the carrier moved.
+      if (grid.mechanisms) {
+        const { pads, doors } = grid.mechanisms;
+        if ([previous.position, target].some(cell => pads[cell] || doors[cell] !== undefined)) return;
+        for (const cell of new Set([...Object.keys(pads), ...Object.keys(doors)].map(Number))) {
+          const [l, t, r, b] = tile(grid, cell);
+          for (let row = t; row <= b; row++) for (let column = l; column <= r; column++) {
+            if (first[row]?.[column] !== second[row]?.[column]) return;
+          }
+        }
+      }
       const moved = next.position === target;
       const blocked = next.position === previous.position && previous.memory[target] === undefined && next.memory[target] === 'wall';
       if ((!moved && !blocked) || next.charges !== previous.charges
         || Object.entries(previous.memory).some(([cell, value]) => next.memory[Number(cell)] !== value)) return;
-      state = { epoch: after.level_epoch, score: after.levels_completed, grid, last: next,
-        previousObstacle: next.obstacle !== previous.obstacle ? previous.obstacle : null,
-        ...(grid.actorPixels ? { motions: track(previous, next, grid) } : {}),
-        refs: [...inherited.refs.slice(-3), before.observation_ref, after.observation_ref], consecutiveWaits: 0 };
+      const timing = initialTiming(first, grid, previous);
+      const local: State = { epoch: before.level_epoch, score: before.levels_completed, grid, last: previous,
+        previousObstacle: null, refs: [...inherited.refs.slice(-3), before.observation_ref], consecutiveWaits: 0,
+        ...(timing ? { timing } : {}) };
+      const choice: Choice = { action: command, kind: 'move', target, uncertain: previous.memory[target] === undefined };
+      const acquired = acquireNavigationStep(local, choice, after, second, frames);
+      if (acquired) state = acquired.state;
     },
     before(proposal, index, packet, current) {
       if (index > 0 && proposal.walk) {
@@ -659,48 +724,10 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local;
       const walk = proposal.walk?.[index], choice = walk ? { ...proposal.choice, target: walk.target } : proposal.choice;
-      const next = read(second, local.grid, local.last);
-      if (!next) return { events: [] };
-      const contact = choice.entry ?? choice.target, timing = local.timing;
-      const reset = restoredGridStart(local, choice, next);
-      const ejected = !reset && choice.kind === 'move' && next.position !== local.last.position
-        && forcedLanding(local.grid, contact, next.position, frames);
-      if (ejected && next.landings) next.landings[contact] = next.position;
-      if (reset) next.failedEntrances = [...new Set([...(next.failedEntrances ?? []), contact])];
-      const clock = timing?.clock;
-      const didNotEnter = next.position === local.last.position || !!clock && next.position !== contact && frames.length > 0
-        && !frames.some(frame => showsActor(frame, local.grid, contact));
-      if (!reset && !ejected && choice.kind === 'move' && didNotEnter
-        && !next.obstacles.includes(contact) && !next.risk.includes(contact) && !next.closedDoors?.includes(contact)
-        && (!timing || !local.last.sentries?.includes(contact) && !next.sentries?.includes(contact))) {
-        next.memory[contact] = 'wall';
-      }
-      const scanned = !reset && choice.kind === 'pulse' && !!local.grid.mechanisms?.pads[contact];
-      const entered = clock && !reset && next.position !== local.last.position && local.grid.mechanisms?.doors[next.position] !== undefined
-        && !clock.crossed.includes(next.position) ? { gate: next.position, from: local.last.position } : undefined;
-      const left = clock?.gateEntry && next.position !== clock.gateEntry.gate ? clock.gateEntry : undefined;
-      const crossed = clock && !reset && left && next.position !== left.from ? [...clock.crossed, left.gate] : reset ? [] : clock?.crossed ?? [];
-      const gateEntry = reset ? undefined : entered ?? (left ? undefined : clock?.gateEntry);
-      const selectedGate = choice.kind === 'pulse' && local.last.closedDoors?.includes(contact) ? contact : clock?.gateGoal;
-      const gateGoal = reset || selectedGate !== undefined && crossed.includes(selectedGate) ? undefined : selectedGate;
-      const visits = !clock || reset ? [next.position] : next.position === local.last.position
-        ? clock.visits : [...clock.visits.slice(-31), next.position];
-      const scans = !clock || reset ? [] : choice.kind === 'pulse' && next.charges < local.last.charges
-        ? [...clock.scans, local.last.position] : clock.scans;
-      state = { ...local, score: after.levels_completed, last: next, previousObstacle: next.obstacle !== local.last.obstacle ? local.last.obstacle : local.previousObstacle,
-        ...(local.grid.actorPixels ? { motions: track(local.last, next, local.grid, local.motions) } : {}),
-        ...(timing ? { timing: { start: timing.start, patrols: updateTracks(reset ? [] : timing.patrols, next.sentries ?? [], local.grid),
-          walls: updateTracks(reset ? [] : timing.walls, next.obstacles, local.grid),
-          scannedPads: reset ? [] : scanned ? [...timing.scannedPads, contact] : timing.scannedPads,
-          ...(clock ? { clock: { ...updateRailClock(second, local.grid, reset ? undefined : clock), crossed, visits, scans,
-            ...(gateGoal === undefined ? {} : { gateGoal }), ...(gateEntry ? { gateEntry } : {}) } } : {}),
-          ...(scanned ? { pendingPad: contact } : {}) } } : {}),
-        refs: [...local.refs.slice(-4), after.observation_ref],
-        consecutiveWaits: choice.kind === 'wait' ? local.consecutiveWaits + 1 : 0 };
-      const opened = timing && local.last.closedDoors?.some(cell => !next.closedDoors?.includes(cell));
-      return { events: [], ...(reset ? { reviewEvidence: 'The return restored the starting position and pulse reserve.' }
-        : ejected ? { reviewEvidence: 'The move entered the marked cell and the return showed the carrier slide to a new landing.' }
-        : opened ? { reviewEvidence: 'The pulse changed a closed passage into an opening.' } : {}) };
+      const acquired = acquireNavigationStep(local, choice, after, second, frames);
+      if (!acquired) return { events: [] };
+      state = acquired.state;
+      return { events: [], ...(acquired.reviewEvidence ? { reviewEvidence: acquired.reviewEvidence } : {}) };
     },
     state: () => ({ state }),
     restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
