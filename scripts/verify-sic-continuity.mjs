@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import { requireExecutedPrefix } from './sic-continuity-contract.mjs';
+export { requireExecutedPrefix } from './sic-continuity-contract.mjs';
 import { measureManipulation, requireManipulation } from './measure-ss01-manipulation.mjs';
 import { compileLevel, equal, initialState, stepWorld } from '../experiments/sinking-star-ss02/src/core.ts';
 import { SS02_LEVELS } from '../experiments/sinking-star-ss02/src/levels.ts';
@@ -39,13 +41,116 @@ const requiredPhysical = {
   7: ['crate', 'position'],
   8: ['crate', 'mirror', 'position'],
 };
-const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SIGN: 'move', GABA: 'move', WA30: 'move', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move', SS06: 'move', SS07: 'move' };
+const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SIGN: 'move', GABA: 'move', LKEY: 'move', COLM: 'move', WA30: 'move', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move', SS06: 'move', SS07: 'move' };
 const markedFieldContinuity = [[15, 4], [44, 26], [56, 28], [22, 0], [53, 28], [81, 31]];
 const cargoContinuity = [[47, 38], [37, 34], [67, 62], [88, 82], [106, 99], [102, 93]];
 const orientedDeliveryCeilings = [32, 64, 92, 58, 136, 58, 51];
 // Executed [commands, continued commands, same-cargo translation pairs], 2026-11-26.
 const orientedDeliveryContinuity = [[26, 5, 1], [59, 18, 7], [76, 22, 10], [48, 0, 0], [113, 59, 41], [48, 24, 15], [42, 20, 13]];
 const orientedDeliverySeriesLevels = new Set([1, 2, 3, 5, 6, 7]);
+// Actual [commands, continued commands], chronological 165991ec, 2026-11-27.
+// L1 acquires the controls; L2–6 retain preparations, including grip and tools.
+const profileContinuity = [[8, 0], [8, 5], [20, 14], [29, 20], [24, 17], [30, 22]];
+// Existing strict campaign ceilings; the collector uses their maximum, 36.
+const profileCeilings = [13, 13, 24, 34, 29, 36];
+// Actual [commands, preparations before receive, prepared receives], b653fada.
+// Count only known preparation effects followed by the acquired receive contact
+// in the same native decision, independently on each level.
+const queueContinuity = [[17, 7, 4], [17, 11, 5], [20, 9, 5], [23, 13, 6], [10, 7, 3], [16, 10, 6]];
+const queueCeilings = [22, 34, 63, 32, 69, 26];
+const queueOwners = new Set(['sic_queued_placement', 'sic_place_after_observed_queue_controls']);
+
+function confirmedProfileReturn(ticket) {
+  const outcome = ticket.outcome;
+  return ticket.outcomeCount === 1 && typeof ticket.planId === 'string' && ticket.planId.length > 0
+    && outcome?.sic_plan === ticket.planId && outcome.index === ticket.actionIndex
+    && outcome.family === 'sic_verify_profile_transfer' && outcome.matched === true;
+}
+
+function measuredProfilePreparation(run, issued, groups) {
+  const offset = run.executedTickets.indexOf(issued[0]);
+  const effects = new Map(issued.map((ticket, index) => [ticket, run.steps?.[offset + index]]));
+  const prepared = [];
+  for (const group of groups.values()) {
+    if (group.length < 2 || !group.some(ticket => ticket.action === 'ACTION5')
+      || !group.some(ticket => /^ACTION[1-4]$/.test(ticket.action))
+      || !group.every(ticket => {
+        const effect = effects.get(ticket);
+        return confirmedProfileReturn(ticket) && /^ACTION[1-5]$/.test(ticket.action)
+          && effect?.a === Number(ticket.action.slice(6)) && effect.pixels > 0
+          && effect.family === ticket.outcome.family;
+      })) continue;
+    const first = issued.indexOf(group[0]);
+    prepared.push({ kind: 'profile preparation with grip', first, last: first + group.length - 1 });
+  }
+  assert.ok(prepared.length, 'LKEY lost its confirmed profile preparation series');
+  return prepared;
+}
+
+function measuredQueuePreparation(run, issued, groups) {
+  const offset = run.executedTickets.indexOf(issued[0]);
+  const effects = new Map(issued.map((ticket, index) => [ticket, run.steps?.[offset + index]]));
+  const pair = refs => Array.isArray(refs) && refs.length === 2 && refs[0] !== refs[1]
+    && refs.every(ref => typeof ref === 'string' && ref.length > 0);
+  const observation = ref => {
+    const match = typeof ref === 'string' && /^(.*):epoch:(\d+):revision:(\d+):frame:[0-9a-f]+$/.exec(ref);
+    return match ? { scope: match[1], epoch: Number(match[2]), revision: Number(match[3]) } : null;
+  };
+  const known = ticket => {
+    const q = ticket.queued, effect = effects.get(ticket);
+    const before = observation(q?.beforeRef), after = observation(q?.afterRef);
+    return queueOwners.has(ticket.outcome?.family) && q?.actionRef === ticket.action
+      && ['translate', 'reorder', 'receive'].includes(q.role) && pair(q.learnedEvidence)
+      && before && after && before.scope === after.scope && before.epoch === q.levelEpoch
+      && after.revision > before.revision && q.learnedEvidence.every(ref => {
+        const learned = observation(ref);
+        return learned && learned.scope === after.scope && learned.epoch <= q.levelEpoch
+          && learned.revision <= before.revision;
+      })
+      && Number.isSafeInteger(q.acquisitionEpoch) && q.acquisitionEpoch > 0 && q.acquisitionEpoch <= q.levelEpoch
+      && q.levelEpoch === ticket.level && q.scoreBefore === ticket.level - 1
+      && typeof q.beforeRef === 'string' && typeof q.afterRef === 'string' && q.beforeRef !== q.afterRef
+      && q.afterRef === ticket.outcome.observation_ref
+      && effect?.a === Number(ticket.action.slice(6)) && effect.family === ticket.outcome.family
+      && typeof effect.from === 'string' && typeof effect.to === 'string'
+      && q.beforeRef.endsWith(':frame:' + effect.from) && q.afterRef.endsWith(':frame:' + effect.to);
+  };
+  const receipt = ticket => {
+    if (!known(ticket) || ticket.queued.role !== 'receive' || ticket.sealCount !== 1
+      || ticket.outcome.seal_prefix !== true || ticket.outcome.matched === false) return false;
+    const q = ticket.queued, acquired = q.acquisition;
+    // The final public score may close the level before owner revalidation.
+    // Preserve that boundary as its own evidence instead of inventing acquisition.
+    if (ticket.outcome.reason === 'official_boundary') return ticket.outcome.matched === true
+      && q.scoreAfter === ticket.level;
+    return q.scoreAfter === q.scoreBefore && acquired?.epoch === q.levelEpoch
+      && acquired.kind === 'receive' && acquired.revalidatedEpoch === q.levelEpoch
+      && acquired.transition === 'received_then_automatic_or_return_unknown'
+      && pair(acquired.evidence) && acquired.evidence[0] === q.beforeRef && acquired.evidence[1] === q.afterRef;
+  };
+  // Validate every known receive, including unitary contacts. A stale record
+  // cannot be hidden by an unrelated successful series elsewhere in this level.
+  for (const ticket of issued) if (ticket.queued?.role === 'receive') {
+    assert.ok(receipt(ticket), 'COLM receive lost its actual contact, acquired proof or official boundary');
+  }
+  assert.ok(issued.some(ticket => ticket.outcome?.reason === 'official_boundary' && receipt(ticket)),
+    'COLM lost its public receive score boundary');
+  const prepared = [];
+  for (const group of groups.values()) {
+    if (group.length < 2 || !group.some(ticket => queueOwners.has(ticket.outcome?.family))) continue;
+    assert.ok(receipt(group.at(-1)), 'COLM preparation lost the receive contact at the end of its executed prefix');
+    assert.ok(group.slice(0, -1).every((ticket, index) => known(ticket)
+      && ['translate', 'reorder'].includes(ticket.queued.role)
+      && ticket.queued.scoreAfter === ticket.queued.scoreBefore && effects.get(ticket).pixels > 0
+      && ticket.outcome.family === group.at(-1).outcome.family
+      && ticket.planId === group.at(-1).planId
+      && ticket.queued.afterRef === group[index + 1].queued?.beforeRef),
+    'COLM lost its known physical preparation before receive');
+    const first = issued.indexOf(group[0]);
+    prepared.push({ kind: 'queue preparation then receive', first, last: first + group.length - 1 });
+  }
+  return prepared;
+}
 
 export function measureOrientedDelivery(issued, groups) {
   const same = (a, b) => Array.isArray(a) && Array.isArray(b) && a.length === 2 && b.length === 2
@@ -972,11 +1077,19 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SIGN: 6, GABA: cargoContinuity.length, WA30: orientedDeliveryCeilings.length, SS02: 8, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 8 };
+  const campaignLengths = { SIGN: 6, GABA: cargoContinuity.length, LKEY: profileContinuity.length, COLM: queueContinuity.length, WA30: orientedDeliveryCeilings.length, SS02: 8, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 8 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   if (code === 'WA30') {
     assert.equal(run.start, 1, 'WA30 must start at level one');
     assert.equal(run.initialCompleted, 0, 'WA30 must preserve one chronological session');
+  }
+  if (code === 'LKEY') {
+    assert.equal(run.start, 1, 'LKEY must start at level one');
+    assert.equal(run.initialCompleted, 0, 'LKEY must preserve one chronological session');
+  }
+  if (code === 'COLM') {
+    assert.equal(run.start, 1, 'COLM must start at level one');
+    assert.equal(run.initialCompleted, 0, 'COLM must preserve one chronological session');
   }
   assert.equal(
     tickets.length,
@@ -1022,6 +1135,7 @@ export function checkRun(run) {
         }
         assert.equal(group.at(-1).sealCount, 1, 'WA30 requires exactly one final reconciliation');
       }
+      if (code === 'LKEY' || code === 'COLM') requireExecutedPrefix(code, group);
       if (group.length < 2) continue;
       lengths.push(group.length);
       const clicks = group.filter((t) => t.action === 'ACTION6').length;
@@ -1034,7 +1148,8 @@ export function checkRun(run) {
         continued >= Math.min(issued.length - 1, Math.ceil((minContinued * issued.length) / actions)),
         code + ' L' + row.level + ' lost executed continuity (' + continued + '/' + issued.length + ')',
       );
-    } else if (code !== 'SIGN' && (code !== 'WA30' || orientedDeliverySeriesLevels.has(row.level)))
+    } else if (code !== 'SIGN' && (code !== 'LKEY' || profileContinuity[i][1] > 0)
+      && (code !== 'WA30' || orientedDeliverySeriesLevels.has(row.level)))
       assert.ok(kinds.has(sources[code]), code + ' lost its ' + sources[code] + ' series');
     if (code === 'SIGN') {
       const ceiling = [20, 58, 68, 27, 64, 98][row.level - 1];
@@ -1050,6 +1165,18 @@ export function checkRun(run) {
         'GABA exceeded its verified action ceiling or reset');
       assert.ok(continued >= Math.min(issued.length - 1, Math.ceil(minContinued * issued.length / actions)),
         'GABA L' + row.level + ' lost executed cargo continuity');
+    }
+    if (code === 'LKEY') {
+      const [actions, minimumContinued] = profileContinuity[i];
+      assert.ok(issued.length <= profileCeilings[i] && issued.every(ticket => ticket.resets === 0),
+        'LKEY exceeded its verified action ceiling or reset');
+      const confirmedContinued = issued.filter(ticket => ticket.actionIndex > 0 && confirmedProfileReturn(ticket)).length;
+      assert.ok(confirmedContinued >= Math.min(issued.length - 1, Math.ceil(minimumContinued * issued.length / actions)),
+        'LKEY L' + row.level + ' lost confirmed profile continuity');
+    }
+    if (code === 'COLM') {
+      assert.ok(issued.length <= queueCeilings[i] && issued.every(ticket => ticket.resets === 0),
+        'COLM exceeded its verified action ceiling or reset');
     }
     if (code === 'WA30') {
       assert.ok(issued.length <= orientedDeliveryCeilings[i] && issued.every(ticket => ticket.resets === 0),
@@ -1136,6 +1263,8 @@ export function checkRun(run) {
         ['sic_verify_marked_lattice', 'sic_learn_marked_lattice'])
       : code === 'GABA' ? measuredMotionSeries(run, issued, groups, 'cargo transport',
         ['sic_pivot_cargo', 'sic_deliver_cargo_after_observed_motion'], 'ACTION5')
+      : code === 'LKEY' && profileContinuity[i][1] > 0 ? measuredProfilePreparation(run, issued, groups)
+      : code === 'COLM' ? measuredQueuePreparation(run, issued, groups)
       : code === 'WA30' && orientedDeliverySeriesLevels.has(row.level) ? measureOrientedDelivery(issued, groups)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
@@ -1149,6 +1278,13 @@ export function checkRun(run) {
       assert.ok(physical.filter(effect => effect.kind === 'same cargo translation').length
         >= Math.ceil(minimumCargoPairs * issued.length / actions),
       'WA30 L' + row.level + ' lost consecutive translations of the same cargo');
+    }
+    if (code === 'COLM') {
+      const [actions, preparations, contacts] = queueContinuity[i];
+      assert.ok(physical.length >= Math.ceil(contacts * issued.length / actions)
+        && physical.reduce((total, effect) => total + effect.last - effect.first, 0)
+          >= Math.ceil(preparations * issued.length / actions),
+      'COLM L' + row.level + ' lost continuous preparation followed by receive');
     }
     result.push({
       game: code,
@@ -1186,6 +1322,8 @@ function main() {
       ['destination-set', 'SS07', '8', '180'],
       ['marked-field', 'source:SIGN', '6', '98'],
       ['cargo-transport', 'source:GABA', String(cargoContinuity.length), '128'],
+      ['profile-preparation', 'source:LKEY', String(profileContinuity.length), String(Math.max(...profileCeilings))],
+      ['queue-receipts', 'source:COLM', String(queueContinuity.length), String(Math.max(...queueCeilings))],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');
@@ -1201,7 +1339,7 @@ function main() {
       .split(/\r?\n/)
       .map((line) => JSON.parse(line)),
   );
-  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'GABA', 'HANO', 'SIGN', 'SS01', 'SS02', 'SS03', 'SS04', 'SS05', 'SS06', 'SS07', 'WA30']);
+  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'COLM', 'DC22', 'GABA', 'HANO', 'LKEY', 'SIGN', 'SS01', 'SS02', 'SS03', 'SS04', 'SS05', 'SS06', 'SS07', 'WA30']);
   console.table(runs.flatMap(checkRun));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();

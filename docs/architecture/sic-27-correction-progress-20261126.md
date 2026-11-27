@@ -131,3 +131,63 @@ TRCP termine le banc strict en 240 commandes : 24, 30, 37, 46, 54 et 49. La rece
 L'intégration retient le code TRCP sans le candidat SPOR encore partiel. La source combinée FOGW/TRCP doit passer son propre rejeu et le contrôle complet de continuité avant fusion et publication. Les 22 tests de ces deux rôles passent ensemble ainsi que TypeScript.
 
 VOIS demeure 5/6 sur le dernier passage (L6 : 42 commandes puis 27 secondes). GRIL atteint 2/6 avant une nouvelle interface élargie ; SPOR atteint 3/6 avant un contrôle non réassocié. WA30 reste 7/9. Ces étapes ne sont pas comptées comme jeux complets. Le bilan définitif de 107 jeux reste à exécuter sur une seule révision finale.
+
+### Réceptions et mélanges publiés en version 202
+
+PR134 est fusionnée sur `main` au commit `f38b03c52e92483c11e915a759323ba6aebc223c`, arbre `99a85b13fb3ce8d46bafc58b52252b07536c4e68`. Les 13 jobs de la CI 45924787064 passent, dont le contrôle complet de continuité (job 140265915755). La version Site **202** est publiée avec exactement ce SHA source ; aucune divergence GitHub/Site.
+
+Le rejeu strict de l'intégration termine FOGW et TRCP avec les mêmes 173 et 240 commandes, toutes autorisées et acquises par SIC, sous les budgets archivés. Les bruts, budgets et empreintes figurent dans `docs/diagnostics/sic-channel-reception-integration-20261127/`.
+
+Les deux parcours ont ensuite été reproduits par les boutons du viewer local servant cette source publiée, chacun depuis L1 en une seule session SIC, sans reset ni nouvelle session intermédiaire. Le message officiel est `The game reports WIN.` pour les deux : FOGW **18, 7, 18, 29, 38, 63** ; TRCP **24, 30, 37, 46, 54, 49**. La version 201 est également terminée dans l'interface pour CLRS **84** et SB26 **124**, ce qui complète ses cinq vérifications. Les compteurs sont conservés dans les fichiers `viewer-201.json` et `viewer-202.json` de leurs archives respectives.
+
+Neuf des 27 jeux de départ sont donc corrigés, intégrés, publiés et reproduits dans le viewer : UPST, CWSE, CRAF, SB26, CASC, CLRS, MIND, FOGW et TRCP. Ce suivi des corrections ne remplace pas la campagne finale des 107 jeux sur une seule source.
+
+### Interfaces de catalogue et transport de panneaux
+
+Les candidats suivants passent leur banc strict depuis L1 : GRIL **6/6 en 74 commandes** (5, 5, 8, 8, 13, 35) et RSWP **6/6 en 110 commandes** (3, 8, 8, 11, 30, 50). Les 184 commandes sont autorisées et acquises par SIC ; aucun reset/undo, aucun score tardif et aucun plafond modifié. Les décisions restent unitaires ; ce lot ne qualifie pas de nouvelles séries.
+
+GRIL conserve le rôle d'une vue déjà observée lorsque l'interface compatible s'élargit avec un sélecteur encore inconnu. RSWP réemploie le transport de panneau avant les previews indépendantes qui faisaient perdre trois commandes au début du L4. Les deux correctifs sont réunis sur la source de la version 202 ; la validation combinée, la CI, la fusion et le viewer restent à faire à ce checkpoint. Archives : `docs/diagnostics/sic-catalogue-view-transfer-20261127/` et `docs/diagnostics/sic-panel-transport-transfer-20261127/`.
+
+### Préparations de profil maintenues jusqu’au retour
+
+LKEY termine son banc strict en **119 commandes**, soit **8, 8, 20, 29, 24 et 30**, et six scores sous les plafonds originaux. Le L6 marque à **9,612 s sous 18 s**, après 30 commandes sur 36. Les cinq premiers préfixes restent identiques au diagnostic préalable. La préparation garde son préfixe connu, au plus 16 commandes, et vérifie le travail, la sélection, la prise, les profils, récepteurs et outils entre les retours ; les expériences dont la suite dépend d’un nouvel effet restent unitaires.
+
+Le collecteur indépendant reproduit les 119 commandes, avec 78 commandes de continuation après index 0. Le contrat vérifie les tickets, les retours exacts, la clôture après contradiction, la réconciliation unique et les préparations avec prise et pixels modifiés. Les seuils des 78 niveaux déjà protégés restent inchangés ; les six niveaux LKEY portent le contrôle à **84 niveaux et 14 jeux**, répartis en 12 cohortes. L’intégration commune GRIL/RSWP/LKEY doit encore passer son rejeu strict et la CI complète avant publication.
+
+### Interfaces et préparations publiées en version 203
+
+PR135 est fusionnée sur `main` au commit **`c97797426f619db16de5b29738a8d4209c78ebca`**, arbre `487bf0c739ba57dccfbb7cb9255e8eb6b0a4b3ce`. La branche de travail est `fix/sic-27-interface-profiles-20261127`, avec le commit local `fe822410b2d544553d6b8b2536c3af45cfb9e10f` et la tête GitHub `f52dca20974a95a07f43ad5a38f71a3a8d36800d`, de même arbre. Les **14 jobs** de la CI 45928738911 réussissent, dont `npm run test:sic-continuity` (job 140278610260). La version Site **203** est publiée avec exactement le SHA intégré ; aucune divergence GitHub/Site.
+
+Le rejeu strict de l’intégration gagne les 18 niveaux de GRIL, RSWP et LKEY en **303 commandes**, toutes autorisées et acquises par SIC, sans reset/undo ni modification des budgets. Le viewer local servant cette source publiée reproduit ensuite les trois victoires officielles, depuis L1 dans une seule session SIC par jeu :
+
+| Jeu | Commandes par niveau | Total | Plans terminés dans le viewer |
+|---|---|---:|---:|
+| GRIL | 5, 5, 8, 8, 13, 35 | 74 | 74 |
+| RSWP | 3, 8, 8, 11, 30, 50 | 110 | 110 |
+| LKEY | 8, 8, 20, 29, 24, 30 | 119 | 41 |
+
+Les trois interfaces affichent `The game reports WIN.`. L’archive `docs/diagnostics/sic-interface-profile-integration-20261127/viewer-203.json` conserve ces observations et la provenance de publication. Ces contrôles du viewer ne sont pas des mesures de temps et ne constituent pas un rejeu hébergé.
+
+**12 des 27 jeux sont maintenant intégrés, publiés et confirmés dans le viewer** : UPST, CWSE, CRAF, SB26, CASC, CLRS, MIND, FOGW, TRCP, GRIL, RSWP et LKEY. La campagne finale des 107 jeux sur une source unique reste nécessaire pour établir le nouveau total global.
+
+### Candidats encore hors livraison après la version 203
+
+| Jeu | Dernier résultat qualifié disponible | Prochaine étape |
+|---|---|---|
+| COLM | 6/6 en 103 commandes sur le candidat intégré `b653fada` ; collecteur identique | Ajouter le contrat de réception, CI complète, fusion puis viewer |
+| ESCT | 5/6 sur `11634ac4` ; L6 arrêté à 25 commandes sous le plafond de 18 s | Diagnostiquer la première perte de priorité L6 |
+| VOIS | 5/6 ; L6 arrêté sous le plafond de 27 s | Capturer la première perte au L6 sur le code courant |
+| SPOR | 3/6 sur le candidat `287d5fe6` | Réassocier l’interaction après le dernier contact observé |
+| ETAG | 3/6 sur `85883aa7` ; le rôle de passage est conservé mais L4 atteint encore 80 commandes | Reprendre le diagnostic du parcours L4 |
+| WA30 | 7/9 ; L8 reste arrêté sous 103 s | Reprendre les gardes des porteurs et leurs retours |
+| CGWL | 4/6 dans le témoin ; L5 arrêté sous 45 s | Premier diagnostic public |
+| DC22 | 5/6 dans le témoin ; L6 atteint 271 commandes | Diagnostiquer le rôle de support distant au passage L5→L6 |
+| GRAV | 4/6 dans le témoin ; L5 atteint 28 commandes | Premier diagnostic public |
+| LF52 | 5/10 dans le témoin ; L6 arrêté sous 76 s | Premier diagnostic public |
+| LS20 | 5/7 dans le témoin ; L6 arrêté sous 50 s | Premier diagnostic public |
+| PORT | 5/6 dans le témoin ; L6 arrêté sous 12 s | Premier diagnostic public |
+| SK48 | 5/8 dans le témoin ; L6 arrêté sous 34 s | Premier diagnostic public |
+| SNAR | 3/6 dans le témoin ; L4 arrêté sous 24 s | Capturer le premier préfixe connu interrompu |
+| WEAV | 1/6 dans le témoin ; L2 atteint 34 commandes | Premier diagnostic public |
+
+Ces résultats proviennent de révisions différentes et restent un suivi des corrections. Les candidats partiels ne sont pas annoncés comme des jeux corrigés. Les prochaines fusions conservent les seuils de la continuité existante et les budgets de la campagne de départ.

@@ -3,7 +3,10 @@ import {publicLesson} from './sic-study-public-lesson.mjs';
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { sourceInterface } from './sic-study-source-interface.mjs';
 import { fromSourceFork } from './sic-study-source-fork.mjs';
-import { bindContinuityPlan, collectContinuityReturn, observeOrientedContinuity, orientedContinuityEvidence } from './sic-continuity-evidence.mjs';
+import { bindContinuityPlan, collectContinuityReturn, observeOrientedContinuity, orientedContinuityEvidence,
+  captureQueuedControl, completeQueuedControl } from './sic-continuity-evidence.mjs';
+import { captureOpeningControl, measureOpeningReturn, completeOpeningControl, openingOwner } from './sic-route-opening-continuity.mjs';
+import { capturePopulationControl, measurePopulationReturn, completePopulationControl } from './sic-population-continuity.mjs';
 import { appendFile, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -40,6 +43,10 @@ const declarations = {
 const motion = source ? null : await load(solverRoot, 'src/sic/observed-translation.ts');
 const orientedScene = process.env.SIC_STUDY_CONTINUITY === '1'
   ? (await load(solverRoot, 'src/logos-engine/v6-oriented-coupling.ts')).orientedCouplingScene : null;
+const populationScene = process.env.SIC_STUDY_CONTINUITY === '1'
+  ? (await load(solverRoot, 'src/logos-engine/v6-reference-population-observation.ts')).measureReferencePopulation : null;
+const queuedOwners = new Set(['sic_queued_placement', 'sic_place_after_observed_queue_controls']);
+const populationOwners = new Set(['sic_verify_reference_placement', 'sic_learn_reference_placement']);
 
 const hash = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 function clickPatch(frame, data) {
@@ -115,8 +122,12 @@ async function run(code, games) {
         };
   const cursorAudit = process.env.SIC_STUDY_CURSOR_OFFERS ? [] : null;
   const boundaryAudit = process.env.SIC_STUDY_BOUNDARY_LAWS ? [] : null;
+  let continuityOwners;
   const service = new V6AgentService(async(recovery) => {
     const backend=await createNativeV6Runtime(declarations,{recovery});
+    if (process.env.SIC_STUDY_CONTINUITY === '1') continuityOwners = new Map(backend.families
+      .filter(family => queuedOwners.has(family.id) || populationOwners.has(family.id) || family.id === openingOwner)
+      .map(family => [family.id, family]));
     if (cursorAudit || boundaryAudit) {
       const family = backend.families.find(f => f.id === 'sic_test_prepared_effects');
       const original = family.proposeInGroup.bind(family);
@@ -142,18 +153,30 @@ async function run(code, games) {
   });
   // Count only commands acknowledged by the native service after dispatch.
   const executedTickets = process.env.SIC_STUDY_CONTINUITY === '1' ? [] : null;
-  let pendingTicket, pendingPlan, dispatchedActorPlan, dispatchedOriented;
+  let pendingTicket, pendingPlan, dispatchedActorPlan, dispatchedOriented, dispatchedQueued, dispatchedOpening, dispatchedPopulation;
   const transport = { async request(operation) {
     const result = await service.handle(operation);
     if (executedTickets) {
       if (operation.type === 'advance') {
         if (!pendingTicket || operation.ticketId !== pendingTicket.id) throw Error('Continuity ticket mismatch');
         const {level,decisionRevision,actionIndex,actionRef} = pendingTicket;
+        const returned = collectContinuityReturn(pendingTicket, pendingPlan, result.snapshot.trace);
+        const queued = dispatchedQueued !== undefined ? completeQueuedControl(dispatchedQueued,
+          () => continuityOwners?.get(pendingPlan?.family)?.state()?.state ?? null, returned, result.snapshot.levelsCompleted) : undefined;
+        const opening = dispatchedOpening !== undefined ? completeOpeningControl(dispatchedOpening,
+          () => continuityOwners?.get(pendingPlan?.family)?.state() ?? null, returned) : undefined;
+        const population = dispatchedPopulation !== undefined ? completePopulationControl(dispatchedPopulation,
+          () => continuityOwners?.get(pendingPlan?.family)?.state() ?? null, returned) : undefined;
         executedTickets.push({level,decisionRevision,actionIndex,action:actionRef,...(actionRef==='ACTION6'?{data:pendingTicket.data}:{}),resets,
-          ...collectContinuityReturn(pendingTicket, pendingPlan, result.snapshot.trace),
-          ...(dispatchedActorPlan?{actorPlan:dispatchedActorPlan}:{}), ...(dispatchedOriented!==undefined?{oriented:dispatchedOriented}:{})});
+          ...returned,
+          ...(dispatchedActorPlan?{actorPlan:dispatchedActorPlan}:{}), ...(dispatchedOriented!==undefined?{oriented:dispatchedOriented}:{}),
+          ...(queued !== undefined ? {queued} : {}), ...(opening !== undefined ? {opening} : {}),
+          ...(population !== undefined ? {population} : {})});
         dispatchedActorPlan = undefined;
         dispatchedOriented = undefined;
+        dispatchedQueued = undefined;
+        dispatchedOpening = undefined;
+        dispatchedPopulation = undefined;
       }
       pendingTicket = result.ticket;
       pendingPlan = bindContinuityPlan(pendingTicket, result.snapshot.trace, pendingPlan);
@@ -248,6 +271,14 @@ async function run(code, games) {
       const orientedProposal = executedTickets && ['sic_oriented_delivery','sic_verify_oriented_delivery','sic_learn_oriented_delivery'].includes(pendingPlan?.family)
         ? agent.snapshot.proposal : null;
       const ownBefore = orientedProposal ? observeOrientedContinuity(previous.frame, orientedProposal, orientedScene) : null;
+      if (executedTickets && queuedOwners.has(pendingPlan?.family))
+        dispatchedQueued = captureQueuedControl(agent.snapshot.proposal, pendingTicket);
+      if (executedTickets && pendingPlan?.family === openingOwner)
+        dispatchedOpening = captureOpeningControl(agent.snapshot.proposal, pendingTicket, previous.frame,
+          () => continuityOwners?.get(pendingPlan.family)?.state() ?? null);
+      const populationProposal = executedTickets && populationOwners.has(pendingPlan?.family) ? agent.snapshot.proposal : null;
+      if (populationProposal)
+        dispatchedPopulation = capturePopulationControl(populationProposal, pendingTicket, previous.frame, populationScene);
       if (executedTickets && plan?.family==='sic_observed_actor_composition') dispatchedActorPlan={strategy:plan.strategy,subjects:plan.need?.subjects??[],evidence:plan.need?.evidence??[]};
       const frameSeal=plan?.frameForecast?hash(plan.frameForecast):null;
       const terminalContactSeal=plan?.terminalContactForecast?hash(plan.terminalContactForecast):null;
@@ -276,6 +307,11 @@ async function run(code, games) {
       if (orientedProposal) dispatchedOriented = orientedContinuityEvidence(ownBefore,
         board.level === previous.level && board.levelsCompleted === previous.levelsCompleted
           ? observeOrientedContinuity(board.frame, orientedProposal, orientedScene) : null);
+      if (dispatchedOpening !== undefined)
+        dispatchedOpening = measureOpeningReturn(dispatchedOpening, board.frame, board.levelsCompleted);
+      if (populationProposal)
+        dispatchedPopulation = measurePopulationReturn(dispatchedPopulation, board.frame, populationProposal,
+          populationScene, board.levelsCompleted);
       issued++;
       if (process.env.SIC_STUDY_PROGRESS === '1' && issued % 100 === 0)
         console.log(JSON.stringify({ code, level:board.level, issued, seconds:Math.round(process.uptime()) }));

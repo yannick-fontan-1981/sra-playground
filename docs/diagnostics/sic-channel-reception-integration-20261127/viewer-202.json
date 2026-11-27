@@ -1,0 +1,67 @@
+{
+  "schema": "sic.viewer-validation.v1",
+  "sourceCommit": "f38b03c52e92483c11e915a759323ba6aebc223c",
+  "sourceTree": "99a85b13fb3ce8d46bafc58b52252b07536c4e68",
+  "siteVersion": 202,
+  "interface": "local managed preview of the exact published source",
+  "mode": "sic",
+  "entry": "game selector and Run to next level buttons",
+  "runs": [
+    {
+      "code": "FOGW",
+      "start": 1,
+      "initialActions": 0,
+      "initialCompleted": 0,
+      "cumulativeCommands": [
+        18,
+        25,
+        43,
+        72,
+        110,
+        173
+      ],
+      "levelCommands": [
+        18,
+        7,
+        18,
+        29,
+        38,
+        63
+      ],
+      "officialMessage": "The game reports WIN.",
+      "actions": 173,
+      "levelsSolved": 6,
+      "completedPlans": 151,
+      "newSessionOrResetDuringRun": false,
+      "validation": "Browser CUA visible controls and rendered session counters"
+    },
+    {
+      "code": "TRCP",
+      "start": 1,
+      "initialActions": 0,
+      "initialCompleted": 0,
+      "cumulativeCommands": [
+        24,
+        54,
+        91,
+        137,
+        191,
+        240
+      ],
+      "levelCommands": [
+        24,
+        30,
+        37,
+        46,
+        54,
+        49
+      ],
+      "officialMessage": "The game reports WIN.",
+      "actions": 240,
+      "levelsSolved": 6,
+      "completedPlans": 240,
+      "newSessionOrResetDuringRun": false,
+      "validation": "Browser CUA visible controls and rendered session counters"
+    }
+  ]
+}
