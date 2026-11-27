@@ -27,7 +27,7 @@ type KnownPassage = { side: number; actorPaint: number; ground: number; complete
 type Crossing = { pair: Pair; from: Frame; to: Frame };
 type Step = { direction: Direction; point: NativePoint; crossing?: Crossing };
 type Route = { steps: Step[]; target: Pick<Frame, 'box' | 'point'>; crossing?: Crossing; switchTest?: NativePoint };
-type Proposal = NativeProposal & { scene: Scene; memory: Memory; route: Route; needId: string; attempt: string };
+type Proposal = NativeProposal & { scene: Scene; memory: Memory; route: Route; known?: KnownPassage; needId: string; attempt: string };
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
 const height = ([, t, , b]: NativeBox) => b - t + 1;
@@ -222,6 +222,17 @@ function readSwitches(rows: NativeRows, parts: Part[], scene: Scene, visitedInk:
 }
 
 const topology = (pairs: Pair[]) => pairs.map(pair => pair.key).sort().join(';');
+function passageContext(scene: Scene) {
+  const frames = [...scene.pairs.flatMap(pair => pair.frames), ...(scene.unpaired ?? [])]
+    .map(frame => [key(frame.point), frame.box, frame.color, frame.area, scene.outlets?.[key(frame.point)] ?? null])
+    .sort((a, b) => String(a[0]).localeCompare(String(b[0])));
+  const flags = scene.flags.map(flag => [flag.bbox, flag.color, flag.area, flag.mask])
+    .sort((a, b) => JSON.stringify(a[0]).localeCompare(JSON.stringify(b[0])));
+  const switches = scene.switches;
+  const goal = [scene.goal.box, scene.goal.point, scene.goal.color, scene.goal.area];
+  return JSON.stringify([scene.neutral === true, goal, topology(scene.pairs), frames, flags,
+    switches ? [switches.badge, switches.statusInk, switches.visitedInk, switches.sites.map(key).sort()] : null]);
+}
 const switchTestKey = (scene: Scene, visits: string[], point: NativePoint) =>
   JSON.stringify([topology(scene.pairs), scene.switches!.statusInk, [...visits].sort(), point]);
 
@@ -440,12 +451,15 @@ export function createSicPairedPassage(family = pairedPassageId, transferObserve
         : route.crossing ? 'Approach a visible pair whose transfer is still unverified'
           : 'Reach the exit after observing a transfer through each pair';
       const [x, y] = step.point, last = width(scene.actor.bbox) - 1;
-      const plain = facts.routeSupported && !scene.neutral && !switches;
-      const routeStart = plain ? route.steps.findIndex(leg => leg.crossing) : 1;
+      // A known walk can approach a patterned opening or switch in one prefix.
+      // The first crossing or switch contact still needs its own observed return.
+      const routeStart = facts.routeSupported ? route.steps.findIndex(leg => leg.crossing
+        || switches?.sites.some(site => same(site, leg.point))) : 1;
       const path = route.steps.slice(0, Math.max(1, Math.min(routeStart < 0 ? route.steps.length : routeStart, remaining, maximumCommittedActions)));
       const actions = path.map(leg => ({ action_ref: leg.direction[0], data: {} }));
       return {
-        status: 'proposed', kind: family, scene, route, memory, needId: need.id, attempt: key(origin(scene.actor.bbox)) + '/' + action.action_ref,
+        status: 'proposed', kind: family, scene, route, memory, ...(known ? { known } : {}),
+        needId: need.id, attempt: key(origin(scene.actor.bbox)) + '/' + action.action_ref,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
         steps: actions.map((action, index) => ({ action, expected_after: path[index]!.point })),
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
@@ -465,13 +479,20 @@ export function createSicPairedPassage(family = pairedPassageId, transferObserve
     before(proposal, index, packet, observation) {
       if (index > 0) {
         const { scene, route, memory } = proposal, previous = route.steps[index - 1]!.point;
-        const current = measure(packet.frame_rows, memory.goal);
+        const parts = geometricComponents(packet.frame_rows);
+        const current = measure(packet.frame_rows, memory.goal, parts)
+          ?? (proposal.known ? patternedPassages(packet.frame_rows, parts, proposal.known, memory.goal) : null);
+        if (current) {
+          const switches = readSwitches(packet.frame_rows, parts, current, proposal.known?.visitedInk, memory.rewrite?.sites);
+          if (switches) current.switches = switches;
+        }
         const admitted = observation.level_epoch === memory.epoch && !!current && same(origin(current.actor.bbox), previous)
           && current.ground === scene.ground && current.pitch === scene.pitch && current.actor.color === scene.actor.color
-          && current.pairs.map(pair => pair.key).join('/') === scene.pairs.map(pair => pair.key).join('/')
+          && passageContext(current) === passageContext(scene)
           && Object.keys(current.floor).length === Object.keys(scene.floor).length
           && Object.keys(current.floor).every(tile => !!scene.floor[tile])
-          && !!current.floor[key(route.steps[index]!.point)];
+          && !!current.floor[key(route.steps[index]!.point)]
+          && observation.available_action_refs.includes(route.steps[index]!.direction[0]);
         return { admitted, reason: admitted ? 'paired_passage_corridor_retained' : 'paired_passage_context_changed' };
       }
       const admitted = proposal.binding?.observation_ref === observation.observation_ref;
