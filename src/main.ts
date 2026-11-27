@@ -3,6 +3,7 @@ import './styles.css';
 import { fallbackPalette } from './runtime/display-palette.ts';
 import './sra-agent.css';
 import { renderSiteHeader } from './site-header';
+import { bindDesignPremiseCarousel } from './design-premise-carousel';
 import { BrowserGameRuntime, type GameObservation } from './runtime/browser-games';
 import { AGENT_STATUS, type AgentAction } from './runtime/contracts';
 import { BrowserV6Agent, type V6AgentSnapshot } from './runtime/v6-agent.ts';
@@ -148,12 +149,27 @@ app.innerHTML = `
 
     <aside class="design-premise wrap" id="design-premise" aria-labelledby="design-premise-title">
       <h2 id="design-premise-title">DESIGN PREMISE</h2>
-      <div>
-        <p><strong>The design of artificial intelligence should begin with ethical principles.</strong> Symbolic reasoning makes deliberate design possible through explicit concepts, relations, and reasoning structures rooted in human intelligence. SRA draws its meaning and purpose from this human source, enabling us to take responsibility for the intelligence we build and thereby fulfill the ethical principle that guides its design.</p>
-        <blockquote class="design-premise-quote">
-          <p>Symbolic reasoning is a mechanism that can be conceived, recursively transformed, and trained; the result is a highly efficient, readable, maintainable, and controllable intelligence.</p>
-        </blockquote>
-        <a class="text-link" href="/motivation.html">Start here: Motivation ${icon('arrow')}</a>
+      <div id="design-premise-carousel" role="group" aria-roledescription="carousel" aria-labelledby="design-premise-title">
+        <div class="design-premise-viewport">
+          <div class="design-premise-track" id="design-premise-slides" aria-live="off">
+            <div role="group" aria-roledescription="slide" aria-label="Symbolic reasoning">
+              <blockquote class="design-premise-quote">
+                <p>Symbolic reasoning is a mechanism that can be designed, recursively transformed, and trained; the result is a highly efficient, readable, maintainable, and controllable intelligence.</p>
+              </blockquote>
+            </div>
+            <div role="group" aria-roledescription="slide" aria-label="Ethical principles" inert>
+              <p><strong>The design of artificial intelligence should begin with ethical principles.</strong> Symbolic reasoning makes deliberate design possible through explicit concepts, relations, and reasoning structures rooted in human intelligence. SRA draws its meaning and purpose from this human source, enabling us to take responsibility for the intelligence we build and thereby fulfill the ethical principle that guides its design.</p>
+            </div>
+          </div>
+        </div>
+        <div class="design-premise-footer">
+          <div class="design-premise-controls" role="group" aria-label="Slide controls">
+            <button type="button" id="design-premise-rotation" aria-controls="design-premise-slides">Pause rotation</button>
+            <button type="button" data-premise-select aria-pressed="true">Symbolic reasoning</button>
+            <button type="button" data-premise-select aria-pressed="false">Ethical principles</button>
+          </div>
+          <a class="text-link" href="/motivation.html">Start here: Motivation ${icon('arrow')}</a>
+        </div>
       </div>
     </aside>
 
@@ -1986,6 +2002,8 @@ function element<T extends HTMLElement>(selector: string): T {
   if (!found) throw new Error(`Missing interface element: ${selector}`);
   return found;
 }
+
+bindDesignPremiseCarousel(element('#design-premise-carousel'));
 
 const canvas = element<HTMLCanvasElement>('#game-canvas');
 const context = canvas.getContext('2d', { alpha: false });
