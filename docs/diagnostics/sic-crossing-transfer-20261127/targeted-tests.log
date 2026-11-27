@@ -1,0 +1,15 @@
+✔ a native crossing role continues before the unrelated preview (760.590406ms)
+✔ a native crossing role continues before the unrelated preview with reflected controls, different field shape, pitch, palette and commands (470.42187ms)
+✔ native crossing continuation declines ambiguous and retains the prior role (217.228143ms)
+✔ native crossing continuation declines missing_command and retains the prior role (260.166904ms)
+✔ native crossing continuation declines contradictory and retains the prior role (222.069214ms)
+✔ native crossing continuation declines missing_reference and retains the prior role (210.22385ms)
+✔ the first public lost crossing proposal reuses its actual official boundary and rejects stale or foreign evidence (7.82834ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3550.706089

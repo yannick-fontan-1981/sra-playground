@@ -1,0 +1,75 @@
+name: SIC strict qualified replays
+on:
+  pull_request:
+  merge_group:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: sic-strict-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  qualified-replays:
+    name: Original budgets on the combined source
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      SIC_REPLAY_REFERENCES: docs/architecture/sic-replay-reference-levels-20261126.json
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node scripts/prepare-python.mjs
+      - name: Replay complete games sequentially from level one
+        run: |
+          mkdir -p qualification
+          git rev-parse HEAD > qualification/source.sha
+          node scripts/check-sic-chronological.mjs CGWL,DC22,GRAV,WEAV auto qualification/strict.jsonl 1 sic
+      - name: Require all official completions within original budgets
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFileSync, writeFileSync } from 'node:fs';
+          import { createHash } from 'node:crypto';
+          const raw = readFileSync('qualification/strict.jsonl');
+          const runs = raw.toString().trim().split(/\r?\n/).map(JSON.parse);
+          assert.deepEqual(runs.map(run => run.code).sort(), ['CGWL', 'DC22', 'GRAV', 'WEAV']);
+          assert.equal(readFileSync('qualification/source.sha', 'utf8').trim(), process.env.GITHUB_SHA);
+          for (const run of runs) {
+            assert.equal(run.mode, 'sic'); assert.equal(run.parallelWorkers, 1);
+            assert.equal(run.reason, 'target_levels_completed');
+            assert.equal(run.target, 6); assert.equal(run.levels, 6);
+            assert.equal(run.authority, run.actions);
+            assert.deepEqual(run.recoveries, { reset: 0, undo: 0 });
+            assert.equal(run.levelStats.length, 6);
+            assert.equal(run.levelStats.at(-1).acquiredRecords, run.actions);
+            assert.equal(run.levelStats.reduce((sum, level) => sum + level.actions, 0), run.actions);
+            for (const [index, level] of run.levelStats.entries()) {
+              assert.equal(level.level, index + 1); assert.equal(level.won, true);
+              assert.ok(level.actions <= level.budget.actions, run.code + ' command ceiling');
+              assert.ok(Number.isFinite(level.scoredMs) && level.scoredMs <= level.budget.activeTimeMs,
+                run.code + ' original active-time ceiling');
+            }
+          }
+          writeFileSync('qualification/manifest.json', JSON.stringify({
+            schema: 'sic.strict-qualified.v1', sha: process.env.GITHUB_SHA, runId: process.env.GITHUB_RUN_ID,
+            codes: runs.map(run => run.code), sha256: createHash('sha256').update(raw).digest('hex'),
+            commands: Object.fromEntries(runs.map(run => [run.code, run.levelStats.map(level => level.actions)])),
+          }, null, 2) + '\n');
+          NODE
+      - name: Preserve strict receipts including failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sic-strict-${{ github.sha }}
+          path: qualification/
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 7

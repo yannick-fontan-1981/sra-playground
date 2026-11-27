@@ -224,3 +224,9 @@ La version Site **205** porte exactement le SHA intégré ; aucune divergence Gi
 Les trois interfaces affichent `The game reports WIN.`. L'archive `docs/diagnostics/sic-population-route-integration-20261127/viewer-205.json` conserve les compteurs et la provenance. Ces vérifications visibles ne sont ni des mesures chronométrées ni des rejeux hébergés ; la qualification native des mêmes parcours reste archivée séparément.
 
 **16 des 27 jeux de départ sont corrigés, fusionnés, publiés et confirmés dans le viewer** : UPST, CWSE, CRAF, SB26, CASC, CLRS, MIND, FOGW, TRCP, GRIL, RSWP, LKEY, COLM, ESCT, VOIS et PORT. Les onze jeux encore à terminer sont **CGWL, DC22, ETAG, GRAV, LF52, LS20, SK48, SNAR, SPOR, WA30 et WEAV**. Le nouveau total global sera établi par la campagne complète de 107 jeux sur une seule révision finale.
+
+### DC22 : qualification complète du candidat de panneau
+
+Le candidat local `294d68e88f63d43299d080ae2beffba7308b8276`, sauvegardé sur GitHub sous `97967f2d2d70ae008eb3f639be309a0c5258d089`, termine DC22 depuis L1 en une session SIC, **6/6 et 630 commandes**. Les cinq premiers parcours restent identiques au témoin ; le sixième passe en 258 coups, score à 255,108 s sous 271 coups / 455 s. Les preuves sont dans `docs/diagnostics/sic-public-panel-priority-20261127/strict-qualified/`.
+
+La continuation de panneau est désormais placée après les spécialistes déjà associés. Le premier candidat qui les interrompait reste archivé avec son échec L5. Le collecteur physique, la CI complète et la publication de ce nouveau candidat restent à effectuer ; le compte livré demeure 16/27 à ce stade. LS20 est qualifié 7/7 séparément et sa PR138 exécute le contrôle de 115 niveaux.

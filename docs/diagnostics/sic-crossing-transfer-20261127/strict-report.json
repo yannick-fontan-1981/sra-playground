@@ -1,0 +1,81 @@
+{
+  "schema": "sic.crossing-strict-result.v1",
+  "code": "WEAV",
+  "sourceLocal": "d9a296b130ef5aca7996ffd110a41d13e8c601f6",
+  "sourceCanonical": "667ddb2af8a3f1414a868075af24d4263d68c796",
+  "sourceTree": "7e116f66886b314cbc201c35f26267b851b981d5",
+  "qualification": "Strict chronological runner, one SIC session from L1, original archived budgets, one worker, no instrumentation.",
+  "complete": false,
+  "levelsWon": 2,
+  "targetLevels": 6,
+  "actions": 84,
+  "authority": 84,
+  "acquiredRecords": 84,
+  "recoveries": {
+    "reset": 0,
+    "undo": 0
+  },
+  "reason": "level_action_budget",
+  "status": "stopped",
+  "levelsMirrorExact": true,
+  "firstLevelPrefixUnchanged": true,
+  "firstCommandDivergence": 32,
+  "levels": [
+    {
+      "level": 1,
+      "won": true,
+      "actions": 27,
+      "scoredMs": 6399,
+      "ms": 6799,
+      "activeMs": 6534,
+      "budget": {
+        "actions": 33,
+        "activeTimeMs": 16000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WEAV; level=1; won=true",
+        "timeBasis": "measured"
+      },
+      "acquiredRecords": 27,
+      "prefixHash": "db33112f07ff753fb2ac8ed65958948d68395c7614070387a2293a5ca1fedff8"
+    },
+    {
+      "level": 2,
+      "won": true,
+      "actions": 28,
+      "scoredMs": 8157,
+      "ms": 8361,
+      "activeMs": 7989,
+      "budget": {
+        "actions": 34,
+        "activeTimeMs": 18000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WEAV; level=2; won=true",
+        "timeBasis": "measured"
+      },
+      "acquiredRecords": 55,
+      "prefixHash": "f0916bb06a0a2906be540050eba5010aaa768272e0799a36ebb1111c9933bd17"
+    },
+    {
+      "level": 3,
+      "won": false,
+      "actions": 29,
+      "scoredMs": null,
+      "ms": 14053,
+      "activeMs": 13614,
+      "budget": {
+        "actions": 29,
+        "activeTimeMs": 18000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WEAV; level=3; won=true",
+        "timeBasis": "measured"
+      },
+      "acquiredRecords": 84,
+      "prefixHash": "ea6b1f637eb9e6caf25ab1314f0dc7f72e2655e76204d796ad3ec0c3589bcda6"
+    }
+  ],
+  "unreachedLevels": [
+    4,
+    5,
+    6
+  ],
+  "trace": "ea6b1f637eb9e6caf25ab1314f0dc7f72e2655e76204d796ad3ec0c3589bcda6",
+  "sourceUnchanged": true,
+  "knownLimit": "The third level reaches the unchanged 29-command cap; its first loss after an alternate swatch selection is not yet publicly captured. No full-game or delivered victory is claimed."
+}
