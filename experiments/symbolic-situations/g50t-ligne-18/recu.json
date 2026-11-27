@@ -1,0 +1,25 @@
+{
+  "révisions": [
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "1a1cc965a4f4deb8b2702f8b4746ca2715ae5ebd"
+  ],
+  "cas": {
+    "historique": 1,
+    "retoursConstruits": 6,
+    "interventionsPreuveT3": 2
+  },
+  "pixelsDistantsHistoriques": 23,
+  "contreÉpreuves": {
+    "retrait": {
+      "famille": "observed_frontier",
+      "commande": "ACTION2"
+    }
+  },
+  "empreintes": {
+    "historique": "59800120d59b9cdcf8b91d0731f6910a8dda3d00da643b2bb4f199f8c6662c97",
+    "dev": "a73639177d9a9cfbdb581237bf4674ea1ff361660aaf0e666ab8c9438ff09cfa",
+    "res": "b2fac023785138210e83b5103f99f584e3eff9398aeb90f77b72406a0c30e629",
+    "mesurée": "745021ebf7fcd470e6d3a155a73ba1c6494e1af96c2454ed5d18a08ff18fe549",
+    "épuisée": "bd59cadce95921838adcf3c950a7224235a6f8a475644d61630c16448effc5b7"
+  }
+}
