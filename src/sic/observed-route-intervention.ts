@@ -3,6 +3,7 @@ import { outlineSameBox } from '../logos-engine/v6-outline-geometry.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { observedPressureRecoveryGroup } from './public-input-exploration.ts';
 
 export const observedRouteInterventionId = 'sic_intervene_on_observed_route';
 
@@ -20,6 +21,7 @@ type Shelter = { phase: 'meet' | 'hold' | 'exit'; cell: number }
 type ApproachProtection = { cage: { cell: number; rival: Rival } | null };
 type Memory = { epoch: number; grid: Grid; cells: Pick<Scene, 'walls' | 'rails' | 'exit'> & { rivals?: Rival[] };
   visited: number[]; intercept: string | null; caged: string[]; refs: string[]; count: number;
+  lastMatched?: boolean | null;
   forecast?: boolean; opening?: number; shield?: { cell: number; rivalId: string };
   rivalCount?: number; shelter?: Shelter | null; approach?: ApproachProtection | null };
 type ShelterAction = 'meet' | 'hold' | 'prepare' | 'release' | 'seal' | 'escort';
@@ -109,7 +111,8 @@ function gridOn(rows: NativeRows, { actor, carrier, wall, pitch }: RouteInterven
   return fits.length === 1 ? fits[0]! : null;
 }
 
-function project(rows: NativeRows, grid: Grid, roles: RouteInterventionWitness, prior: Memory['cells'], allowCueOverlap = false): Scene | null {
+function project(rows: NativeRows, grid: Grid, roles: RouteInterventionWitness, prior: Memory['cells'], allowCueOverlap = false,
+  requireUniqueCue = false): Scene | null {
   const walls = new Set<number>(), rails = new Set(prior.rails), oldWalls = new Set(prior.walls);
   const bodies = new Map<number, number[]>(), markers = new Map<number, number[]>();
   const terrain = new Set([roles.wall, roles.actor, grid.floor, grid.inset, grid.frame]);
@@ -146,7 +149,8 @@ function project(rows: NativeRows, grid: Grid, roles: RouteInterventionWitness, 
     }
   }
   const carrier = bodies.get(roles.carrier);
-  if (actor < 0 || exit < 0 || carrier?.length !== 1 || bodies.size < 2) return null;
+  if (actor < 0 || exit < 0 || carrier?.length !== 1 || bodies.size < 2
+    || requireUniqueCue && (markers.get(roles.carrier)?.length ?? 0) > 1) return null;
   rails.add(exit);
   return { actor, exit, carrier: carrier[0]!, cue: markers.get(roles.carrier)?.at(-1) ?? null, walls: [...walls], rails: [...rails],
     rivals: [...bodies].flatMap(([color, cells]) => color === roles.carrier ? []
@@ -430,6 +434,19 @@ export function createSicObservedRouteIntervention(): NativeFamily<Proposal> & {
   return {
     id: observedRouteInterventionId,
     learn(witness) { roles = witness; },
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group !== observedPressureRecoveryGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      const prior = state?.epoch === observation.level_epoch ? state : null, refs = prior?.refs ?? roles?.refs;
+      const scope = observation.observation_ref.split(':epoch:')[0]!;
+      if (!roles || roles.epoch !== observation.level_epoch || roles.score !== observation.levels_completed || roles.pitch < 4
+        || prior?.lastMatched === false || !refs || refs.length < 2 || refs.at(-1) !== observation.observation_ref
+        || !refs.every(ref => ref.startsWith(scope + ':epoch:'))) return null;
+      const grid = gridOn(rows, roles);
+      if (!grid || prior && JSON.stringify(prior.grid) !== JSON.stringify(grid)) return null;
+      const scene = project(rows, grid, roles, prior?.cells ?? { walls: [], rails: [], exit: -1 }, Boolean(prior?.shelter), true);
+      if (!scene) return null;
+      return this.propose(observation, rows, inputs, remaining, execution);
+    },
     async propose(observation, rows, inputs, remaining) {
       if (!roles || roles.epoch !== observation.level_epoch || roles.score !== observation.levels_completed
         || roles.pitch < 4 || remaining < 1 || ![...directions.map(([key]) => key), localCommand]
@@ -510,6 +527,7 @@ export function createSicObservedRouteIntervention(): NativeFamily<Proposal> & {
       const caged = choice.toggle && followedRival && verified !== false;
       const cells = verified === false && choice.toggle ? project(second, memory.grid, roles, scene, overlapping) ?? next : next;
       state = { ...memory, count: memory.count + 1, visited: [...new Set([...memory.visited, scene.carrier])], cells,
+        lastMatched: verified,
         intercept: caged ? null : followedRival?.id ?? null, caged: caged ? [...memory.caged, followedRival!.id] : memory.caged,
         refs: [...memory.refs.slice(-6), after.observation_ref], rivalCount: Math.max(memory.rivalCount ?? 0, scene.rivals.length) };
       if (choice.kind === 'open' && choice.toggle && verified !== false) state.opening = choice.target;
