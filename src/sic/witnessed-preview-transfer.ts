@@ -12,7 +12,9 @@ import {
 type Body = { at: XY; box: readonly number[]; form: string };
 export type VisualLayout = Record<string, Body[]>;
 type Gesture = { op: string; point?: 'indicator' | 'subject' };
+type PreviewInterface = { subject: string[]; indicator: string[] };
 export type PreviewWitness = {
+  interface?: PreviewInterface;
   geometry?: WitnessGeometry;
   before: string;
   after: string;
@@ -83,6 +85,7 @@ export type PreviewLearning = {
   lastActor: Record<string, XY>;
   seen: Record<string, number>;
   rejected: Record<string, number>;
+  refutedCommands?: Record<string, { before: string; after: string }>;
   last: string | null;
   calibratedSites?: Record<string, number>;
   motion: Record<string, Record<string, number>>;
@@ -143,6 +146,23 @@ function gesture(command: string, p: Body, r: Body): Gesture | null {
 }
 const keyOf = (p: string, r: string, g: Gesture) => JSON.stringify([p, r, g.op, g.point ?? null]);
 const contextKey = (k: string, from: XY, to: XY) => JSON.stringify([k, from, to]);
+const commandContext = (o: NativeObservation, command: string) => JSON.stringify([o.level_epoch, o.frame_hash, command]);
+
+// A small enclosing part can distinguish a selected source from the same
+// unselected shape. Retain its observed role, never its absolute position.
+function localInterface(layout: VisualLayout, body: Body): string[] {
+  const [l, t, r, b] = body.box as readonly [number, number, number, number];
+  return Object.entries(layout).flatMap(([role, parts]) => parts.some(part => {
+    const [x, y, u, v] = part.box as readonly [number, number, number, number];
+    return same(part.at, body.at) && x < l && y < t && u > r && v > b
+      && u - x + 1 <= 2 * (r - l + 1) + 1 && v - y + 1 <= 2 * (b - t + 1) + 1;
+  }) ? [role] : []).sort();
+}
+
+function compatibleInterface(witness: PreviewWitness, subject: string[], indicator: string[]) {
+  return !witness.interface || witness.interface.subject.every(role => subject.includes(role))
+    && witness.interface.indicator.every(role => indicator.includes(role));
+}
 function rememberVisibleGeometry(learned: PreviewLearning, o: NativeObservation, layout: VisualLayout) {
   for (const b of Object.values(learned.bindings)) {
     const subjects = layout[b.actor],
@@ -223,6 +243,7 @@ export function observePreviewBindings(
           gesture: g,
           witnesses: [],
         });
+      const observedInterface = { subject: localInterface(before, motion.from), indicator: localInterface(before, r) };
       if (
         binding.witnesses.some(
           (w) =>
@@ -230,11 +251,13 @@ export function observePreviewBindings(
             (w.epoch === b.level_epoch &&
               same(w.indicated, r.at) &&
               same(w.from, motion.from.at) &&
-              w.subjectForm === motion.to.form)
+              w.subjectForm === motion.to.form &&
+              JSON.stringify(w.interface ?? { subject: [], indicator: [] }) === JSON.stringify(observedInterface))
         )
       )
         continue;
       const witness: PreviewWitness = {
+        ...(observedInterface.subject.length || observedInterface.indicator.length ? { interface: observedInterface } : {}),
         before: b.observation_ref,
         after: a.observation_ref,
         epoch: b.level_epoch,
@@ -327,18 +350,26 @@ function visibleReadings(
     const subject =
       subjects.length === 1 ? subjects[0] : last ? subjects.find((v) => same(v.at, last)) : null;
     if (!subject || !markers.length) continue;
-    const prior = b.witnesses.at(-1)!;
+    const subjectInterface = localInterface(layout, subject);
     const inherited = b.witnesses.every((w) => w.epoch !== o.level_epoch),
       failures = learned.rejected[key] ?? 0;
     if (failures >= Math.max(2, new Set(b.witnesses.map((w) => w.indicated.join())).size)) continue;
     for (const mark of markers) {
       if (covers(subject, mark.at) || subjects.some((v) => v !== subject && covers(v, mark.at))) continue;
+      const indicatorInterface = localInterface(layout, mark);
+      let prior: PreviewWitness | undefined;
+      for (let i = b.witnesses.length - 1; i >= 0; i--) {
+        const witness = b.witnesses[i]!;
+        if (compatibleInterface(witness, subjectInterface, indicatorInterface)) { prior = witness; break; }
+      }
+      if (!prior) continue;
       const target = b.gesture.point === 'subject' ? subject : mark;
       const command = b.gesture.point
         ? 'ACTION6:' + Math.floor(target.at[0] / 2) + ',' + Math.floor(target.at[1] / 2)
         : b.gesture.op;
       if (!available.has(command) && !(b.gesture.point && o.available_action_refs.includes('ACTION6')))
         continue;
+      if (learned.refutedCommands?.[commandContext(o, command)]) continue;
       if (learned.seen[contextKey(key, subject.at, mark.at)] !== undefined) continue;
       const novel = b.witnesses.every((w) => w.epoch !== o.level_epoch || !same(w.indicated, mark.at));
       const v = JSON.stringify([command, diff(mark.at, subject.at)]);
@@ -481,6 +512,12 @@ export function checkWitnessedPreview(
   if (status !== 'inapplicable') {
     learned.seen[contextKey(x.key, x.from, x.indicated)] = a.revision;
     if (status === 'contradicted') learned.rejected[x.key] = (learned.rejected[x.key] ?? 0) + 1;
+    if (status === 'contradicted' && b.frame_hash === a.frame_hash) {
+      const rejected = learned.refutedCommands ??= {};
+      rejected[commandContext(b, command)] = { before: b.observation_ref, after: a.observation_ref };
+      const keys = Object.keys(rejected);
+      if (keys.length > 128) delete rejected[keys[0]!];
+    }
   }
   return { ...measured, status };
 }

@@ -51,7 +51,7 @@ Le retour public 15 d'UPST établit une ouverture et une alimentation. Le retour
 - Commit GitHub : `79fb7f8432f6c3fe6d1af10484e926ad78d6aacb`.
 - Arbre identique : `7e233ec8546647ffdfdf14a298662f4524b429ab` ; les métadonnées de création du commit diffèrent.
 - TypeScript et sept tests ciblés réussis, dont deux transferts natifs avec variations de formes, palettes et ports, et des cas ambigu/contradictoire.
-- Rejeu des observations archivées : l'essai attendu est proposé à la décision 19. Rejeu réel L1→6, contrôle complet de continuité, intégration et publication encore à faire.
+- Rejeu des observations archivées : l'essai attendu est proposé à la décision 19. Le premier rejeu réel est décrit ci-dessous ; contrôle complet de continuité, intégration et publication encore à faire.
 
 Premier rejeu réel sur cet arbre : L1 gagné en 19 commandes (score 8,429 s), L2 gagné en 4 commandes (score 2,071 s), puis arrêt L3 à 19 commandes sans changement de raster. Le clic gagnant L2 a été exécuté par une autre famille ; la capture suivante montre que le modèle conserve `completed: 1`. Le jeu reste incomplet et la frontière publique de progression fait l'objet du lot suivant.
 
@@ -64,6 +64,21 @@ Le premier rejeu depuis L1 sur `5d2e49f4` gagne les cinq premiers niveaux en **1
 ### Conditions des effets transférés
 
 Les captures CRAF et SB26 reproduisent exactement les commandes initiales de la campagne. Un dépôt appris avec une sélection visible est réutilisé alors que ce repère est absent. Des gestes identiques sans effet sont ensuite répétés pour plusieurs associations. Le correctif doit conserver les interfaces source/cible observées, retenir la réfutation du geste et laisser les rôles spécialisés acquis traiter leur domaine.
+
+La première cohorte stricte de huit jeux est terminée sur l'arbre `c296191cd767d2be7b39cff1a91fcb81b115dc80` (local `79e6cce7`, GitHub `4612293c`). Les plafonds archivés sont inchangés ; aucune relance n'est substituée au premier résultat.
+
+| Jeu | Résultat du rejeu natif | Commandes par niveau tenté |
+|---|---|---|
+| CRAF | 6/6, toutes les commandes réconciliées | 9, 11, 16, 19, 24, 27 |
+| SB26 | 8/8, toutes les commandes réconciliées | 9, 15, 15, 15, 17, 19, 17, 17 |
+| CASC | 6/6, toutes les commandes réconciliées | 6, 14, 22, 20, 11, 22 |
+| GRIL | 1/6 ; arrêt L2 au plafond de commandes | 5, 10 |
+| CLRS | 6/6, toutes les commandes réconciliées | 8, 10, 13, 15, 14, 24 |
+| RSWP | 4/6 ; arrêt L5 au plafond de commandes | 3, 8, 8, 14, 36 |
+| COLM | 1/6 ; arrêt L2 au plafond de commandes | 17, 34 |
+| WEAV | 1/6 ; arrêt L2 au plafond de commandes | 27, 34 |
+
+Ce tableau qualifie le rejeu natif de ce lot. Le contrôle des 107 jeux sur l'intégration finale et les vérifications de l'interface publiée restent à effectuer. La réfutation d'un geste est bornée à son niveau et son raster ; elle ne bloque pas un nouveau niveau qui réutilise la même image. Les 21 tests ciblés et TypeScript passent. Les nouveaux contrats de transfert sont ajoutés au workflow de continuité.
 
 ### Continuité des porteurs
 

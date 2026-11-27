@@ -13,15 +13,16 @@ export function planningGroupsWithExperiments(groups: readonly NativeSelectionGr
     projected.entryPoints.unshift(coveragePlanGroup);
   }
   const shared = groups.map(group => {
-    if (group.id === 'coordinate_visible_motion') return { ...group,
-      families: [...group.families, preparedEffectsId],
-      entryPoints: [...(group.entryPoints ?? group.families.map(() => null)), transferredPreviewGroup] };
     if (group.id !== observedPressureRecoveryGroup && group.id !== 'explore_available_inputs') return group;
     const entries = group.families.map((id, i) => ({ id, entry: group.entryPoints?.[i] ?? null }));
     if (group.id === observedPressureRecoveryGroup) {
       entries.push({ id: verifyMarkedLatticeId, entry: continueMarkedField }, { id: learnMarkedLatticeId, entry: continueMarkedField });
       entries.push({ id: preparedEffectsId, entry: evidencedPlanGroup }, {id:compositionFamily,entry:followCompositionGroup});
     } else {
+      // A transferred relation with changed geometry still needs a local test.
+      // Current slot, panel, catalogue and propagation plans get the same chance
+      // to continue as motion plans before that independent revalidation.
+      entries.unshift({ id: preparedEffectsId, entry: transferredPreviewGroup });
       const exploration = entries.findIndex(family => family.id === publicInputExplorationId);
       if (exploration < 0) throw Error('Missing public input exploration entry');
       entries.splice(exploration, 0,
