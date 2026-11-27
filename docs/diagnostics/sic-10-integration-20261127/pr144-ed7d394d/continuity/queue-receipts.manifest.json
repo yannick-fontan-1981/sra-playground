@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "ed7d394dcee931edb058d73ed68fcf1d361b1cd5",
+  "runId": "46033617663",
+  "name": "queue-receipts",
+  "cohort": "source:COLM",
+  "codes": [
+    "COLM"
+  ],
+  "start": 1,
+  "end": 6,
+  "cap": 69,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "queue-receipts.jsonl",
+  "sha256": "873a8ed479fa6048c4778105a9c8a4590260a8a8753c22778e4fbd12c5dc548d"
+}

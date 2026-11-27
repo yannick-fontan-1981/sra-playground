@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "ed7d394dcee931edb058d73ed68fcf1d361b1cd5",
+  "runId": "46033617663",
+  "name": "population-preparation",
+  "cohort": "source:VOIS",
+  "codes": [
+    "VOIS"
+  ],
+  "start": 1,
+  "end": 6,
+  "cap": 80,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "population-preparation.jsonl",
+  "sha256": "9b7efb090d26058e1a1663c40fb1b93123951d985bf79624709ef2d04db7254e"
+}

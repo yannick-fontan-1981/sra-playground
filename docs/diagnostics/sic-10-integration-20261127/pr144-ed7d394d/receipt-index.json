@@ -1,0 +1,720 @@
+{
+  "schema": "sic.integration-receipts.v1",
+  "pr": 144,
+  "head": "01226397e5b868d2d511d4b385f5f8c109cb1374",
+  "base": "53480b31192831f15a5d0550eb72a3e699c43911",
+  "testedMerge": "ed7d394dcee931edb058d73ed68fcf1d361b1cd5",
+  "tree": "c0e96cb3913a6b105506e035b222380f87c148ab",
+  "workflows": {
+    "strict": {
+      "runId": 46033617797,
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "name": "Original budgets on the combined source",
+          "conclusion": "failure",
+          "failedSteps": [
+            "Require all official completions within original budgets"
+          ]
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 15219575557,
+          "name": "sic-strict-ed7d394dcee931edb058d73ed68fcf1d361b1cd5",
+          "sha256": "5464d4e10a6d6199876dbb0543ac5b799a8cfaa9b46924c1dd8b6a0741f2beb2"
+        }
+      ]
+    },
+    "continuity": {
+      "runId": 46033617663,
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "TypeScript and continuity contracts",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / l-axe-violet",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / mirror-isles",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / oriented-delivery",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / actor-composition",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / la-ruse-verte",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / la-force-rouge",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / destination-set",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / local-carry",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / queue-receipts",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / observed-openings",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / population-preparation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / marked-field",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / profile-preparation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / cargo-transport",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / passage-walking",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / workshop-phase",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / matching-edges",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / carrier-preparation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / public-panel",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / crossing-rows",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / guarded-passengers",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / support-selection",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / grid-navigation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / surface-routes",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / native-sources",
+          "conclusion": "success"
+        },
+        {
+          "name": "Executed series and final reconciliation",
+          "conclusion": "success"
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 15215961546,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-actor-composition",
+          "sha256": "e5c02d6f766c627ec77240ba2851ad57acc838550e10d297f424f69151ace1a8"
+        },
+        {
+          "id": 15215164108,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-cargo-transport",
+          "sha256": "18aad1d22d14de802c67eafaf569b677036e629314fce1664edb38b0247fa347"
+        },
+        {
+          "id": 15216278126,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-carrier-preparation",
+          "sha256": "e5f840b9d0e2c684f83b5835ad4487a3d375be141fce6d7c3f4b6aca8b027172"
+        },
+        {
+          "id": 15216785953,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-crossing-rows",
+          "sha256": "a0ecf109f2828eb71effac4812915f3e25106f5c3e613ad0ae0f9881d486593f"
+        },
+        {
+          "id": 15216780096,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-destination-set",
+          "sha256": "84e994c3dcec4221401304014ec62ecef84fd22470b03d0aecab5529095133fe"
+        },
+        {
+          "id": 15217175481,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-grid-navigation",
+          "sha256": "87ca98d8c358190c28aaa676b425ec5bc9c6eecc4bdd62fb8327e8b251c31e48"
+        },
+        {
+          "id": 15215189599,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-guarded-passengers",
+          "sha256": "115e33c3b46bed8fefac8e0f2cb86498f174111c9b8c9934975602f64446318c"
+        },
+        {
+          "id": 15216465600,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-l-axe-violet",
+          "sha256": "180911f1d2974e3cff524e3ae2e5a995cf273791d9af6275dfd833b56930cf63"
+        },
+        {
+          "id": 15215751520,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-la-force-rouge",
+          "sha256": "b79d97060e41a827dee19dcfff646c9a661d4b26974f27f1807ac786f5c659cd"
+        },
+        {
+          "id": 15215003673,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-la-ruse-verte",
+          "sha256": "5a017d29c4507be0a98b2e95f973cbc7e1822fa2e7c8b57e49c0208bcd8c6c2a"
+        },
+        {
+          "id": 15216156021,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-local-carry",
+          "sha256": "29f0ca0ba80b5db0b534f08d0501035d0e24becc8f4e7942a4f4b454cebb47e9"
+        },
+        {
+          "id": 15215173820,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-marked-field",
+          "sha256": "ee26999c79f350f9eec21b4b9479ed0dbe9d78e05cfcf49a196eb9f059bf0f8c"
+        },
+        {
+          "id": 15215459372,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-matching-edges",
+          "sha256": "13caf0ff59428adf72012c20018505295a8ca86bdbefaa016ef3ed14f3126f22"
+        },
+        {
+          "id": 15214824236,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-mirror-isles",
+          "sha256": "588bb492ea12279ca47a379b8c953297735c1a1cf7f1c33e15d86156dc88aad1"
+        },
+        {
+          "id": 15217080474,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-native-sources",
+          "sha256": "c0c06fd891ef12d711a33cf95548b2739759befb71ae5dc9e7b4b14329dc44b5"
+        },
+        {
+          "id": 15216740561,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-observed-openings",
+          "sha256": "fd8dd7c86cba3b6244e57af6e942f7fa34edf0837f2ec2e253b68ab6a268dcda"
+        },
+        {
+          "id": 15216256157,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-oriented-delivery",
+          "sha256": "0b45b6c01f6b26569375f56ca55817ef10e1ebfec5bf0052c34bb7005a3c3586"
+        },
+        {
+          "id": 15215379188,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-passage-walking",
+          "sha256": "48216f4bb2075e75def20581598581f673041cfc476d6399152b247de9846b2a"
+        },
+        {
+          "id": 15216675681,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-population-preparation",
+          "sha256": "6ca7a5eaf8714519559e5e984c54a653270c6f155a2e9dcadb4e3109d40ac95a"
+        },
+        {
+          "id": 15215199058,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-profile-preparation",
+          "sha256": "90af1cd14cc947f5c1ff6ae4499db2e983cc34aa9fb5ac9fee256f035e345b6b"
+        },
+        {
+          "id": 15215928445,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-public-panel",
+          "sha256": "9666ad10de0c19d50cb8aadc64910c37bc9471efeebe08818e19983e252e633d"
+        },
+        {
+          "id": 15215986778,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-queue-receipts",
+          "sha256": "dfef06882d8e89122e50c0568c066b83dd112aa47b4c4e1a4edf47020ac646e7"
+        },
+        {
+          "id": 15216387546,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-support-selection",
+          "sha256": "74315e09dbd93d4d4cf618328fc288c981dcfe5faf1cd0095fc8220aae6421bd"
+        },
+        {
+          "id": 15215419890,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-surface-routes",
+          "sha256": "3813ae30de744c83e9d66bee2df436c18ba7b3f973ebe21e505c4ccd188e16e8"
+        },
+        {
+          "id": 15216087093,
+          "name": "sic-continuity-ed7d394dcee931edb058d73ed68fcf1d361b1cd5-workshop-phase",
+          "sha256": "eaefa945a05d13847f5466bc415959e9f2e7f541799d5c2512a3e6e2e851d9c5"
+        }
+      ]
+    }
+  },
+  "strictGames": [
+    {
+      "code": "CGWL",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 167,
+      "commandsByLevel": [
+        15,
+        16,
+        15,
+        18,
+        61,
+        42
+      ]
+    },
+    {
+      "code": "DC22",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 630,
+      "commandsByLevel": [
+        22,
+        44,
+        45,
+        76,
+        185,
+        258
+      ]
+    },
+    {
+      "code": "ETAG",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 274,
+      "commandsByLevel": [
+        7,
+        35,
+        40,
+        46,
+        66,
+        80
+      ]
+    },
+    {
+      "code": "GRAV",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 80,
+      "commandsByLevel": [
+        11,
+        32,
+        6,
+        8,
+        13,
+        10
+      ]
+    },
+    {
+      "code": "LF52",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 10,
+      "levels": 10,
+      "actions": 713,
+      "commandsByLevel": [
+        8,
+        40,
+        46,
+        54,
+        99,
+        91,
+        148,
+        68,
+        112,
+        47
+      ]
+    },
+    {
+      "code": "SK48",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 8,
+      "levels": 8,
+      "actions": 348,
+      "commandsByLevel": [
+        19,
+        39,
+        33,
+        33,
+        33,
+        69,
+        80,
+        42
+      ]
+    },
+    {
+      "code": "SNAR",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 163,
+      "commandsByLevel": [
+        16,
+        24,
+        23,
+        36,
+        35,
+        29
+      ]
+    },
+    {
+      "code": "SPOR",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 121,
+      "commandsByLevel": [
+        14,
+        14,
+        17,
+        17,
+        29,
+        30
+      ]
+    },
+    {
+      "code": "WA30",
+      "status": "stopped",
+      "reason": "level_wall_time_budget",
+      "target": 9,
+      "levels": 8,
+      "actions": 612,
+      "commandsByLevel": [
+        26,
+        59,
+        76,
+        48,
+        113,
+        48,
+        42,
+        135,
+        65
+      ]
+    },
+    {
+      "code": "WEAV",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 199,
+      "commandsByLevel": [
+        27,
+        28,
+        24,
+        40,
+        40,
+        40
+      ]
+    }
+  ],
+  "continuityReceived": {
+    "cohorts": 25,
+    "games": 26,
+    "levels": 170
+  },
+  "invalidReceiptLines": [],
+  "files": [
+    {
+      "path": "strict/source.sha",
+      "rawSha256": "a7448c9332d552f2b3ba2e307e74fc6164e7c64caed51330f90948e79851c82d",
+      "rawBytes": 41
+    },
+    {
+      "path": "strict/strict.jsonl.gz",
+      "rawSha256": "985380b6371ea060eebdd5a3b6dc03a1eeea034d59037e37236a38fc56b9d401",
+      "rawBytes": 466875
+    },
+    {
+      "path": "strict/strict.jsonl.levels.gz",
+      "rawSha256": "351a88630cb4357e9a6b672bab6ebaa52db682995e1a9e398d71dc019f5bc793",
+      "rawBytes": 44681
+    },
+    {
+      "path": "strict/github-failed-steps.log.gz",
+      "rawSha256": "900446ead92298a97b4e951f30b538182d2a72a303c0940cde30900e80462f35",
+      "rawBytes": 10856
+    },
+    {
+      "path": "continuity/actor-composition.jsonl.gz",
+      "rawSha256": "94aa59e2a278e2299e8aeb93dfad5257e18e70942e5c2691a525e9f004a09c1e",
+      "rawBytes": 680767
+    },
+    {
+      "path": "continuity/actor-composition.manifest.json",
+      "rawSha256": "cbed167a977819915465a03b04efd1a19ea451d98171eebb55f42662210b9776",
+      "rawBytes": 398
+    },
+    {
+      "path": "continuity/cargo-transport.jsonl.gz",
+      "rawSha256": "872ab0cdb894ccc3fc9bc17bedbc2a2382ddc38b1d63e829d8f55202a4c3c028",
+      "rawBytes": 325785
+    },
+    {
+      "path": "continuity/cargo-transport.manifest.json",
+      "rawSha256": "b6016c1bcc6dfe8ebf8bad6059ad2ea1a59dc84be15cda4f2f29871154d76bdd",
+      "rawBytes": 401
+    },
+    {
+      "path": "continuity/carrier-preparation.jsonl.gz",
+      "rawSha256": "32c3b2711f166840e229520c9cfb1c8be82ea6aca186e7238ef0c9b47d9d2279",
+      "rawBytes": 2131323
+    },
+    {
+      "path": "continuity/carrier-preparation.manifest.json",
+      "rawSha256": "d74e56b0d8b47a748a6a0c407532e994d51a8ec14f6689197bd7dee7796dad21",
+      "rawBytes": 410
+    },
+    {
+      "path": "continuity/crossing-rows.jsonl.gz",
+      "rawSha256": "3f1d9eb497cda74a70df8201c1a182414420dfd5152a659a2005782bd3043c3e",
+      "rawBytes": 1049103
+    },
+    {
+      "path": "continuity/crossing-rows.manifest.json",
+      "rawSha256": "dc2385ff8d9da68633ec73747b744ed5f5a7e2d0fbbdd6c53c38ec4bd535026d",
+      "rawBytes": 396
+    },
+    {
+      "path": "continuity/destination-set.jsonl.gz",
+      "rawSha256": "fddaecbd9901d7191635825bb7346051032091170da61106bd5729deb4a7c052",
+      "rawBytes": 944090
+    },
+    {
+      "path": "continuity/destination-set.manifest.json",
+      "rawSha256": "71ceb4d5ee398460dcc11788494ceed7631c14e5ec5fd68b23c0e39e26a66830",
+      "rawBytes": 394
+    },
+    {
+      "path": "continuity/grid-navigation.jsonl.gz",
+      "rawSha256": "af40ea8f3551e8fb99db8fb894c61f90356081eb931fdb83fe0a1d58ba349995",
+      "rawBytes": 235616
+    },
+    {
+      "path": "continuity/grid-navigation.manifest.json",
+      "rawSha256": "08ce7b9d65b2208fbdf20a2be85da3f40bf2627210bce92ac0551e3b3a4faf27",
+      "rawBytes": 400
+    },
+    {
+      "path": "continuity/guarded-passengers.jsonl.gz",
+      "rawSha256": "a0981bbb35b414998e08b6515fb3b25143971e22e74df63cd59c9b4a39f3efce",
+      "rawBytes": 394822
+    },
+    {
+      "path": "continuity/guarded-passengers.manifest.json",
+      "rawSha256": "f0d2d94bf58a947c17d196adff3f8b4160955e4398e5b9c5a0931739c4c34b60",
+      "rawBytes": 406
+    },
+    {
+      "path": "continuity/l-axe-violet.jsonl.gz",
+      "rawSha256": "4e9831f0ac448c9d5bbc15ae7a022a29cc096c0b6cf6ec2df0474a77f4c1d253",
+      "rawBytes": 284435
+    },
+    {
+      "path": "continuity/l-axe-violet.manifest.json",
+      "rawSha256": "23300084465fdd1edf053e0b41121bc26ff84fb93d719cc14f453247f18376ad",
+      "rawBytes": 388
+    },
+    {
+      "path": "continuity/la-force-rouge.jsonl.gz",
+      "rawSha256": "788fe37f1a14be01c6305e23365482c1225d7a298c0ef431b083891192cb2b53",
+      "rawBytes": 329245
+    },
+    {
+      "path": "continuity/la-force-rouge.manifest.json",
+      "rawSha256": "a42d15b82efcca1db8fb59cb5bcd285aed365966323bb8753c0dcf48b9c53f92",
+      "rawBytes": 392
+    },
+    {
+      "path": "continuity/la-ruse-verte.jsonl.gz",
+      "rawSha256": "8f62d347c2441973e5e6f9a913e4d8772403cdec6d9a73d7d8ef3725c1f34f89",
+      "rawBytes": 296915
+    },
+    {
+      "path": "continuity/la-ruse-verte.manifest.json",
+      "rawSha256": "86a221d2395e4c40f71190cacc877bd862dec0b203d1047e5ab7a8134a733f33",
+      "rawBytes": 390
+    },
+    {
+      "path": "continuity/local-carry.jsonl.gz",
+      "rawSha256": "6f70320fb158326a1bc866488aa2d228cdd7111d30c6926c9b5ea1ad988f07f2",
+      "rawBytes": 236034
+    },
+    {
+      "path": "continuity/local-carry.manifest.json",
+      "rawSha256": "32b5dd865b8d2777fa68cd6e1ece3f428ce41d3c61fab7b5ad571c915a4156e1",
+      "rawBytes": 386
+    },
+    {
+      "path": "continuity/marked-field.jsonl.gz",
+      "rawSha256": "f841e7cfae6573092f6b65266c280bb37842e506fb0ca77c214286ada0982f6c",
+      "rawBytes": 197559
+    },
+    {
+      "path": "continuity/marked-field.manifest.json",
+      "rawSha256": "7f2c1efc3ab0135e523fb1e8d7f8817f2a75f6297e5120e09bbe241c0b1c67b7",
+      "rawBytes": 394
+    },
+    {
+      "path": "continuity/matching-edges.jsonl.gz",
+      "rawSha256": "e91cab4f5bd8d45bc55607d641e94a8f8da44483a7e6b044fbc6992aa1c6b877",
+      "rawBytes": 681087
+    },
+    {
+      "path": "continuity/matching-edges.manifest.json",
+      "rawSha256": "cd18b1d01e6ba39bacf2e9c7f7764f13885785ebe0ae493cde7bae00a6474f9e",
+      "rawBytes": 398
+    },
+    {
+      "path": "continuity/mirror-isles.jsonl.gz",
+      "rawSha256": "eb59acce248ee4c33677cea4c7d0d71dc97f87facd3da6e88037dafb69ba1188",
+      "rawBytes": 339007
+    },
+    {
+      "path": "continuity/mirror-isles.manifest.json",
+      "rawSha256": "73871a66551edce5d88c411d6519a6d0e4d26e5ec4365a99179faee95a30c6d2",
+      "rawBytes": 388
+    },
+    {
+      "path": "continuity/native-sources.jsonl.gz",
+      "rawSha256": "26faea1f9627358084a07f555783f605e32ed3c338ad8f6f7cd513de2fc6dd38",
+      "rawBytes": 18303
+    },
+    {
+      "path": "continuity/native-sources.manifest.json",
+      "rawSha256": "570ba6d64676ab57fdbbaa4d8ca016209fdb8ddc25b0ecb29795d9b4f2533040",
+      "rawBytes": 416
+    },
+    {
+      "path": "continuity/observed-openings.jsonl.gz",
+      "rawSha256": "edb51416563c8117a96b72fd34b25670851dbbee9f745e92e07bbe4df8685683",
+      "rawBytes": 403636
+    },
+    {
+      "path": "continuity/observed-openings.manifest.json",
+      "rawSha256": "e21a898cb2722ea80e6ad21baf969e62a4dc7cb7f43bc023d40d84907d9add5c",
+      "rawBytes": 404
+    },
+    {
+      "path": "continuity/oriented-delivery.jsonl.gz",
+      "rawSha256": "2880fc850412e958350f6e6dfbf8f552aa5f5121b3ea641e64a8abce9a902b8b",
+      "rawBytes": 574924
+    },
+    {
+      "path": "continuity/oriented-delivery.manifest.json",
+      "rawSha256": "5d621da26106416634b254832000e6d5460c24f790be4e9c32dab743841be6b5",
+      "rawBytes": 405
+    },
+    {
+      "path": "continuity/passage-walking.jsonl.gz",
+      "rawSha256": "51d16fc9da76c5d78912d5aefde5645467f7af5123e0a480d096927761a47f71",
+      "rawBytes": 247605
+    },
+    {
+      "path": "continuity/passage-walking.manifest.json",
+      "rawSha256": "8072f9a078bbcfa1d506955ed6df015d32f06729caf7304e0d744fc9e92107b1",
+      "rawBytes": 400
+    },
+    {
+      "path": "continuity/population-preparation.jsonl.gz",
+      "rawSha256": "9b7efb090d26058e1a1663c40fb1b93123951d985bf79624709ef2d04db7254e",
+      "rawBytes": 591850
+    },
+    {
+      "path": "continuity/population-preparation.manifest.json",
+      "rawSha256": "61caaa7d911ffa0d69062c37deddba03ff9986eca9807ab094b2336e83d50671",
+      "rawBytes": 414
+    },
+    {
+      "path": "continuity/profile-preparation.jsonl.gz",
+      "rawSha256": "77756b4a6dee980515252e6a8d8eba371f7c7c31e1b7e539c95943d6f33894bb",
+      "rawBytes": 99547
+    },
+    {
+      "path": "continuity/profile-preparation.manifest.json",
+      "rawSha256": "3215feed556d6f5a0130795f5e2a490767f80f914623f5d632f626798464d1c7",
+      "rawBytes": 408
+    },
+    {
+      "path": "continuity/public-panel.jsonl.gz",
+      "rawSha256": "f355ce6fcdc255bbd11e187190226429d02c45c4e4bdf8c0abd681e002422aa9",
+      "rawBytes": 5478153
+    },
+    {
+      "path": "continuity/public-panel.manifest.json",
+      "rawSha256": "bb0218344422a2048eae23a82d1dd605408c5f532c3ffab77bc3d0de3674c378",
+      "rawBytes": 395
+    },
+    {
+      "path": "continuity/queue-receipts.jsonl.gz",
+      "rawSha256": "873a8ed479fa6048c4778105a9c8a4590260a8a8753c22778e4fbd12c5dc548d",
+      "rawBytes": 144818
+    },
+    {
+      "path": "continuity/queue-receipts.manifest.json",
+      "rawSha256": "29e94099c0ceae7e10695540ea0bcd08d12bcc0dd15b8b5a95c73f6c197428b9",
+      "rawBytes": 398
+    },
+    {
+      "path": "continuity/support-selection.jsonl.gz",
+      "rawSha256": "a36aeffd908d4c9334e27e249f851121d8bcb486a2808a9250046aa6a3b5854b",
+      "rawBytes": 759807
+    },
+    {
+      "path": "continuity/support-selection.manifest.json",
+      "rawSha256": "01fae0d59a1ed1e0ae8f0d4f0969b0c31a412bd6d051e8d69db06be740123c6a",
+      "rawBytes": 404
+    },
+    {
+      "path": "continuity/surface-routes.jsonl.gz",
+      "rawSha256": "b0976a8dcdc90b7b00372df9766b8e64a413ffe81463ca0af932f3ba989f9d34",
+      "rawBytes": 6897306
+    },
+    {
+      "path": "continuity/surface-routes.manifest.json",
+      "rawSha256": "9d379d92405e3b05df5ab263166afe4d2a6585424fcea4d562638970f5e5116b",
+      "rawBytes": 398
+    },
+    {
+      "path": "continuity/workshop-phase.jsonl.gz",
+      "rawSha256": "9910bdada161b8cec59fce1273fe02667065055a210a15a75f8b83e194da894f",
+      "rawBytes": 392803
+    },
+    {
+      "path": "continuity/workshop-phase.manifest.json",
+      "rawSha256": "bcdc283e0276e99bba170469a7c8bfbdcf866e04a470f202857c93290410bfb1",
+      "rawBytes": 399
+    }
+  ]
+}
