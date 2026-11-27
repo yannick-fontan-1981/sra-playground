@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { assertUnicode, canonical, compareUnicode, immutableJson, immutableJsonArray, immutableJsonRecord } from '../src/logos-engine/canonical.ts';
+import { assertUnicode, canonical, compareUnicode, immutableJson, immutableJsonArray, immutableJsonRecord, updateImmutableJsonRecord } from '../src/logos-engine/canonical.ts';
 import { digest } from '../src/logos-engine/canonical.ts';
 import { ShardedWeakSet } from '../src/logos-engine/sharded-weak-set.ts';
 
@@ -89,6 +89,18 @@ test('dense canonical integer rows retain exact bytes and the same nesting limit
   for (let depth = 0; depth < 127; depth++) nested = immutableJson([nested]);
   assert.doesNotThrow(() => canonical(nested));
   assert.throws(() => canonical(immutableJson([nested])), /size\/nesting/);
+});
+
+test('closed JSON replacements keep member order and literal prototype-like keys', () => {
+  const base = immutableJsonRecord([['é', 1], ['10', 2], ['2', 3], ['__proto__', 4], ['a', 5]]);
+  const replacements = new Map([['__proto__', 6], ['2', 7], ['é', null]]);
+  const changed = updateImmutableJsonRecord(base, replacements);
+  assert.deepEqual(Object.keys(changed), Object.keys(base));
+  assert.equal(Object.getPrototypeOf(changed), Object.prototype);
+  assert.equal(changed.__proto__, 6);
+  assert.equal(changed['é'], null);
+  assert.equal(base.__proto__, 4);
+  assert.equal(canonical(changed), canonical(Object.fromEntries([...Object.entries(base), ...replacements])));
 });
 
 test('cached scalars and tree encodings preserve Python Unicode code-point order', () => {

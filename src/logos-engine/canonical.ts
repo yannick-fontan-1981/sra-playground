@@ -226,13 +226,20 @@ export function updateImmutableJsonRecord<T extends JsonValue>(base: Readonly<Re
   if (!isOwnedImmutableJson(base) || Array.isArray(base)) throw new TypeError('Expected a validated immutable JSON record');
   const updates = new Map<string, T>();
   const keys = Object.keys(base);
+  const previousCount = keys.length;
   for (const [name, value] of changes) {
     const key = stringValue(name, 'JSON member');
     if (!Object.hasOwn(base, key) && !updates.has(key)) keys.push(key);
     updates.set(key, immutableJson(value));
   }
   if (keys.length + 1 > MAX_JSON_NODES) throw new TypeError('JSON size/nesting limit exceeded');
-  const result = Object.fromEntries<T>(keys.sort(compareUnicode).map(key => [key, updates.has(key) ? updates.get(key)! : base[key]!] as const));
+  // Replacing a data member keeps its insertion position. The closed base
+  // already has canonical member order, including JavaScript's index ordering.
+  if (keys.length !== previousCount) keys.sort(compareUnicode);
+  const result = Object.fromEntries<T>(keys.map(key => {
+    const updated = updates.get(key);
+    return [key, updated === undefined ? base[key]! : updated] as const;
+  }));
   Object.freeze(result);
   immutableObjects.add(result);
   return result;

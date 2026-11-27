@@ -31,7 +31,7 @@ type CompletedNavigation = { epoch: number; score: number; before: string; after
 type State = { epoch: number; score?: number; grid: Grid; last: Reading; previousObstacle: number | null; motions?: Motion[]; refs: string[]; consecutiveWaits: number; timing?: Timing; completed?: CompletedNavigation; stationary?: StationaryControl };
 type Choice = { action: NativeCommand; kind: 'pulse' | 'wait' | 'move'; target: number; uncertain: boolean; entry?: number };
 type Walk = { action: string; target: number; entry?: number };
-type Proposal = NativeProposal & { local: State; choice: Choice; walk?: Walk[]; hold?: GuardedHold; needId: string };
+type Proposal = NativeProposal & { local: State; choice: Choice; walk?: Walk[]; hold?: GuardedHold; exitAfterProbe?: number[]; needId: string };
 
 const directions = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION4', 1, 0], ['ACTION3', -1, 0]] as const;
 const width = ([l, , r]: NativeBox) => r - l + 1;
@@ -604,6 +604,41 @@ function selectedNavigationPath(local: State, choice: Choice, initial: Walk[] | 
   return matches(alternate) ? alternate : null;
 }
 
+function navigationDestination({ grid, last, timing }: State): number {
+  const clock = timing?.clock;
+  const door = clock ? clock.gateGoal ?? (last.charges
+    ? last.closedDoors?.find(cell => !clock.crossed.includes(cell)) : undefined) : undefined;
+  const gateEntry = clock?.gateEntry;
+  const across = gateEntry?.gate === last.position ? gateEntry.gate * 2 - gateEntry.from : undefined;
+  return across === undefined ? door ?? grid.goal : last.landings?.[across] ?? across;
+}
+
+function exitTile(rows: NativeRows, grid: Grid): number[] {
+  const [left, top, right, bottom] = tile(grid, grid.goal);
+  return rows.slice(top, bottom + 1).flatMap(row => row.slice(left, right + 1));
+}
+
+function guardedExitAfterProbe(local: State, choice: Choice, rows: NativeRows, initial: Walk[] | null,
+  destination: number, remaining: number): { walk: Walk[]; surface: number[] } | null {
+  const { grid, last } = local;
+  if (remaining < 2 || !local.timing?.clock || destination !== grid.goal || !choice.uncertain || choice.entry !== undefined
+      || last.memory[choice.target] !== undefined || grid.mechanisms?.pads[choice.target] || grid.mechanisms?.doors[choice.target] !== undefined
+      || grid.mechanisms?.pads[grid.goal] || grid.mechanisms?.doors[grid.goal] !== undefined) return null;
+  const walk = selectedNavigationPath(local, choice, initial, destination);
+  if (walk?.length !== 2 || walk[1]!.target !== grid.goal || walk[1]!.entry !== undefined
+      || !knownWalkCell(local, last, grid.goal, 1) || !knownWalkCell(local, last, grid.goal, 2)) return null;
+  const bounds = tile(grid, grid.goal);
+  const marker = geometricComponents(rows).filter(part => !part.rectangular && part.color !== grid.base && part.color !== grid.tint
+    && part.bbox.every((position, axis) => position === bounds[axis]));
+  return marker.length === 1 ? { walk, surface: exitTile(rows, grid) } : null;
+}
+
+function exitAfterProbeStillVisible(local: State, rows: NativeRows, expected: readonly number[]): boolean {
+  const actual = exitTile(rows, local.grid);
+  return navigationDestination(local) === local.grid.goal && actual.length === expected.length
+    && actual.every((ink, index) => ink === expected[index]);
+}
+
 function guardedHold(local: State, choice: Choice, rows: NativeRows, remaining: number): GuardedHold | null {
   const role = local.stationary, clock = local.timing?.clock;
   if (choice.kind !== 'wait' || !role || !clock || role.input !== choice.action.action_ref
@@ -627,6 +662,7 @@ function carriesCompletedNavigation(local: State | null, observation: NativeObse
 }
 
 function navigationChoice(proposal: Proposal, index: number): Choice {
+  if (index === 0 && proposal.exitAfterProbe) return proposal.choice;
   const leg = proposal.walk?.[index];
   return leg ? { action: proposal.actions[index]!, kind: 'move', target: leg.target, uncertain: false,
     ...(leg.entry === undefined ? {} : { entry: leg.entry }) } : { ...proposal.choice, action: proposal.actions[index]! };
@@ -680,12 +716,7 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
       const local: State = prior ? { ...prior, last } : { epoch: observation.level_epoch, score: observation.levels_completed, grid, last, previousObstacle: null,
         refs: !normal && inherited ? inherited.refs : [], consecutiveWaits: 0, ...(timing ? { timing } : {}),
         ...(inherited?.completed ? { completed: inherited.completed } : {}) };
-      const clock = timing?.clock;
-      const door = clock ? clock.gateGoal ?? (last.charges
-        ? last.closedDoors?.find(cell => !clock.crossed.includes(cell)) : undefined) : undefined;
-      const gateEntry = timing?.clock?.gateEntry;
-      const across = gateEntry?.gate === last.position ? gateEntry.gate * 2 - gateEntry.from : undefined;
-      const destination = across === undefined ? door ?? grid.goal : last.landings?.[across] ?? across;
+      const destination = navigationDestination(local);
       const path = route(last, grid, false, destination, timing?.clock), choice = timing ? grid.sentryPatterns
         ? chooseWithPulseReserve(local, path, destination) : chooseTimed(local, path) : choose(local, path);
       if (!choice) return null;
@@ -716,7 +747,8 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
         subjects: ['controlled_sprite', 'revealed_cells', 'moving_obstacle', 'exit'], parentObjective: parent, satisfactionContract: 'official_progress_at_visible_exit' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = navigateRevealedGridId + ':' + need.id, action = choice.action;
-      const walk: Walk[] = [];
+      const conditionalExit = guardedExitAfterProbe(local, choice, rows, path, destination, remaining);
+      const walk: Walk[] = conditionalExit?.walk ?? [];
       const selectedPath = known ? selectedNavigationPath(local, choice, path, destination) : null;
       for (const leg of selectedPath?.slice(0, Math.min(remaining, maximumCommittedActions)) ?? []) {
         if (!knownWalkCell(local, last, leg.target, walk.length + 1)) break;
@@ -728,6 +760,7 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
       return {
         status: 'proposed', kind: navigateRevealedGridId, local, choice, needId: need.id,
         ...(walk.length > 1 ? { walk } : {}), ...(hold ? { hold } : {}),
+        ...(conditionalExit ? { exitAfterProbe: conditionalExit.surface } : {}),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
         steps: actions.map((action, index) => ({ action, expected_after: choice.kind === 'move' ? tile(grid, walk[index]?.target ?? choice.target) : null })),
         sicSituationCard: { strategy: selected.id, need: 'Find a passable route to the exit', situation, evidence, agenda: entries, mode,
@@ -805,7 +838,8 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
         const reading = basis && read(packet.frame_rows, local.grid, basis.last), target = proposal.walk[index]!.target;
         const nextHazards = basis ? nextNavigationHazards(basis, packet.frame_rows) : [];
         const admitted = !!basis && local.epoch === current.level_epoch && reading?.position === proposal.walk[index - 1]!.target
-          && knownWalkCell(basis, { ...reading, nextHazards }, target, 1);
+          && knownWalkCell(basis, { ...reading, nextHazards }, target, 1)
+          && (!proposal.exitAfterProbe || exitAfterProbeStillVisible(basis, packet.frame_rows, proposal.exitAfterProbe));
         return { admitted, reason: admitted ? 'next_grid_cell_still_open' : 'revealed_grid_changed' };
       }
       const admitted = index === 0 && proposal.binding?.observation_ref === current.observation_ref;
@@ -843,10 +877,12 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
       }
       const routeChanged = proposal.walk?.slice(index + 1).some((leg, offset) =>
         !knownWalkCell(acquired?.state ?? local, next, leg.target, offset + 1));
+      const exitChanged = index === 0 && proposal.exitAfterProbe && (!acquired
+        || !exitAfterProbeStillVisible(acquired.state, second, proposal.exitAfterProbe));
       const holdChanged = proposal.hold && (!next.obstacles.includes(proposal.hold.target)
         || next.nextHazards?.includes(next.position)
         || acquired?.state.timing?.clock?.rails[proposal.hold.rail]?.period !== proposal.hold.period);
-      return { matched, seal_prefix: !matched || !!terrainContradicted || !!routeChanged || !!holdChanged || index + 1 >= proposal.actions.length, reason: choice.kind === 'pulse' ? 'check_revealed_cells' : choice.kind === 'move'
+      return { matched, seal_prefix: !matched || !!terrainContradicted || !!routeChanged || !!exitChanged || !!holdChanged || index + 1 >= proposal.actions.length, reason: choice.kind === 'pulse' ? 'check_revealed_cells' : choice.kind === 'move'
         ? probeLanding ? 'check_directional_marker_landing' : matched ? 'observed_grid_step' : 'grid_step_contradicted' : proposal.hold ? 'verify_stationary_control_return' : 'observe_obstacle_phase' };
     },
     record(before, after, _action, _first, second, proposal, index, frames) {
