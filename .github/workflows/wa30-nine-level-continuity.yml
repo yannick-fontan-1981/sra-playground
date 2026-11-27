@@ -1,0 +1,54 @@
+name: WA30 physical continuity receipts
+on:
+  push:
+    branches: [diagnostic/wa30-nine-level-continuity-20261127]
+permissions:
+  contents: read
+jobs:
+  physical-continuity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      SOURCE_SHA: b037f9f97d6d8f6df1f53e8e609c26683388262a
+      SIC_STUDY_CONTINUITY: '1'
+      SIC_STUDY_WORKERS: '1'
+      SIC_STUDY_SOLVER: sic
+    steps:
+      - name: Initialize receipt directory
+        run: |
+          mkdir -p "$RUNNER_TEMP/wa30-continuity"
+          printf '%s\n' "$SOURCE_SHA" > "$RUNNER_TEMP/wa30-continuity/source.sha"
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.SOURCE_SHA }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node scripts/prepare-python.mjs
+      - name: Collect the one-worker physical campaign from level one
+        shell: bash
+        run: |
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          test -z "$(git status --porcelain --untracked-files=no)"
+          sha256sum scripts/compare-source100.mjs scripts/sic-continuity-evidence.mjs scripts/sic-oriented-delivery-contract.mjs \
+            src/sic/oriented-delivery.ts > "$RUNNER_TEMP/wa30-continuity/source.sha256"
+          node scripts/compare-source100.mjs . . "$RUNNER_TEMP/wa30-continuity/wa30.jsonl" source:WA30 1 9 166 \
+            2>&1 | tee "$RUNNER_TEMP/wa30-continuity/wa30.log"
+      - name: Verify source and compact the physical receipt
+        shell: bash
+        run: |
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          test -z "$(git status --porcelain --untracked-files=no)"
+          sha256sum --check "$RUNNER_TEMP/wa30-continuity/source.sha256"
+          gzip "$RUNNER_TEMP/wa30-continuity/wa30.jsonl"
+      - name: Preserve physical receipts including failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wa30-continuity-${{ env.SOURCE_SHA }}
+          path: ${{ runner.temp }}/wa30-continuity/
+          if-no-files-found: error
+          retention-days: 14
