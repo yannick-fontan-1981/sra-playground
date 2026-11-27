@@ -8,6 +8,22 @@ import { initialState, decide, project } from './planifier.mjs';
 const acknowledgements = new Map([['marquer', 'marqué'], ['purger', 'purge terminée'],
   ['bloquer', 'butée bloquée'], ['retirer', 'poignée libérée'], ['indexer', 'poste indexé']]);
 
+export function qualifyReturn(model, pending, feedback) {
+  if (!feedback.trim() || feedback === 'Action indisponible.') return { reason: 'retour vide ou commande indisponible' };
+  if (feedback === 'succès' || feedback === 'échec') return { terminal: true };
+  if (pending.end) return { reason: 'verdict terminal non reconnu' };
+  const { command, next: options } = pending;
+  if (options.every(s => !s.revealed.length)) {
+    const declaration = model.receipts.get(key(command));
+    if (declaration?.ambiguous) return { reason: 'déclaration d’accusé matériel ambiguë' };
+    const expected = declaration?.text ?? acknowledgements.get(command[0]);
+    if (expected !== feedback) return { reason: 'accusé matériel non reconnu pour la commande demandée' };
+  }
+  const matches = options.filter(s => !s.revealed.length ||
+    (s.revealed.length === 1 && String(s.revealed[0].value) === feedback));
+  return matches.length === 1 ? { state: matches[0] } : { reason: 'retour sans interprétation publique unique' };
+}
+
 export class PublicSession {
   #model;
   #state;
@@ -30,28 +46,18 @@ export class PublicSession {
       }
       const pending = this.#pending, feedback = message.retour;
       this.#pending = undefined;
-      if (!feedback.trim() || feedback === 'Action indisponible.') return this.#stop('retour vide ou commande indisponible');
-      if (feedback === 'succès' || feedback === 'échec') {
+      const confirmed = qualifyReturn(this.#model, pending, feedback);
+      if (confirmed.reason) return this.#stop(confirmed.reason);
+      if (confirmed.terminal) {
         this.#closed = true;
         return null; // Seul l’opérateur classe le verdict réel.
       }
-      if (pending.end) return this.#stop('verdict terminal non reconnu');
-      const options = pending.next;
-      if (options.every(s => !s.revealed.length) && acknowledgements.get(pending.verb) !== feedback) {
-        return this.#stop('accusé matériel non reconnu pour la commande demandée');
-      }
-      // Le protocole donne le code observé pour une lecture. Un retour opaque
-      // ne peut pas décider deux branches. Une commande applicable sans lecture
-      // suit uniquement ses effets publics déterministes après l’accusé.
-      const matches = options.filter(s => !s.revealed.length ||
-        (s.revealed.length === 1 && String(s.revealed[0].value) === feedback));
-      if (matches.length !== 1) return this.#stop('retour sans interprétation publique unique');
-      this.#state = matches[0];
+      this.#state = confirmed.state;
       this.#history.push('retour:' + (this.#history.length + 1));
     }
     const choice = decide(this.#model, this.#state, this.#history);
     if (!choice.command) return this.#stop(choice.reason);
-    this.#pending = { ...project(this.#model, this.#state, key(choice.command)), verb: choice.command[0] };
+    this.#pending = { ...project(this.#model, this.#state, key(choice.command)), command: choice.command };
     return { action: choice.command.join(' ') };
   }
 

@@ -31,6 +31,27 @@ function matches(value, s) {
   });
 }
 
+// Convention publique pour un accusé littéral. La ligne doit être citée par
+// la commande et la nommer intégralement. Les effets restent dans les règles.
+function declaredAck(command, sources) {
+  const words = command.command, name = words.join(' '), args = words.slice(1).join(' ');
+  const labels = new Set(), lines = [];
+  for (const n of command.source) {
+    const line = sources[n];
+    if (!line.startsWith(name + ' ')) continue;
+    const clause = line.slice(name.length + 1);
+    if (!clause.includes('renvoie exactement')) continue;
+    const direct = /^renvoie exactement « ([^«»\r\n]+) »\.$/u.exec(clause);
+    const linked = /^est disponible si [^.!?«»\r\n]+\. La commande ([\p{L}\p{M}’'-]+)(.*?) et renvoie exactement « ([^«»\r\n]+) »\.$/u.exec(clause);
+    const label = direct?.[1] ?? (linked && linked[2] === (args ? ' ' + args : '') ? linked[3] : null);
+    if (!label || label.trim() !== label) return { ambiguous: true };
+    labels.add(label);
+    lines.push(n);
+  }
+  if (!labels.size) return null;
+  return labels.size === 1 ? { text: [...labels][0], source: lines } : { ambiguous: true };
+}
+
 export function admit(input) {
   if (!matches(input, schema)) throw new Error('Fiche hors schéma sra.public/1');
   const cited = [input.goal, ...input.observations, ...input.domains, ...input.commands, ...input.rules];
@@ -53,6 +74,11 @@ export function admit(input) {
     const obs = observations.get(ref);
     if (obs?.status === 'known' && !domain.values.includes(obs.value)) throw new Error('Observation hors domaine');
   }
-  return { goal: input.goal, commands, rules, domains, observations,
+  const receipts = new Map();
+  for (const [id, command] of commands) {
+    const ack = declaredAck(command, input.sources);
+    if (ack) receipts.set(id, ack);
+  }
+  return { goal: input.goal, commands, rules, domains, observations, receipts,
     lines: [...new Set(cited.flatMap(record => record.source))].sort((a, b) => a - b) };
 }
