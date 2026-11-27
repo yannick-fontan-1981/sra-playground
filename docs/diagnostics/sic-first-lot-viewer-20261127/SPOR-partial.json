@@ -1,0 +1,43 @@
+{
+  "game": "SPOR",
+  "source": "052d82dec4e92f4eef5fa90ab0c2a7fd3a5125da",
+  "published_site_version": 209,
+  "preview_url": "http://127.0.0.1:4173/",
+  "paused_url": "http://127.0.0.1:4173/?game=SPOR&level=6",
+  "mode": "SIC",
+  "initial_status": "Ready to run from level 1.",
+  "start": "2026-11-27T14:50:34.002Z",
+  "paused": "2026-11-27T14:52:47.472Z",
+  "cumulative_actions": [
+    14,
+    28,
+    45,
+    62,
+    91
+  ],
+  "actions_by_level": [
+    14,
+    14,
+    17,
+    17,
+    29
+  ],
+  "levels_solved": 5,
+  "total_levels": 6,
+  "last_status": "Level completed.",
+  "official_state": "NOT_FINISHED",
+  "continuous_reasoning_session": true,
+  "reset_count": 0,
+  "undo_count": 0,
+  "method": "CUA visible controls; one Run to next level click per completed level; public agent-panel counters after each settled level",
+  "observed_at": [
+    "2026-11-27T14:50:54.269Z",
+    "2026-11-27T14:51:16.960Z",
+    "2026-11-27T14:51:41.776Z",
+    "2026-11-27T14:52:07.729Z",
+    "2026-11-27T14:52:47.472Z"
+  ],
+  "pause_reason": "User requested a Codex continuation checkpoint; stopped after the already running level, before starting level 6.",
+  "browser_handoff_marked": true,
+  "next_action": "In the preserved browser session, click Run to next level once for level 6. Do not reload, reset, select another game, or start a new reasoning session. If the old browser session is unavailable, restart a separate complete campaign from level 1; the URL alone does not preserve learned state."
+}

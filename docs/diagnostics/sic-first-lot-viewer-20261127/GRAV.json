@@ -1,0 +1,41 @@
+{
+  "game": "GRAV",
+  "source": "052d82dec4e92f4eef5fa90ab0c2a7fd3a5125da",
+  "published_site_version": 209,
+  "preview_url": "http://127.0.0.1:4173/",
+  "final_url": "http://127.0.0.1:4173/?game=GRAV&level=6",
+  "mode": "SIC",
+  "initial_status": "Ready to run from level 1.",
+  "start": "2026-11-27T14:45:35.226Z",
+  "end": "2026-11-27T14:47:18.262Z",
+  "cumulative_actions": [
+    11,
+    43,
+    49,
+    57,
+    70,
+    80
+  ],
+  "actions_by_level": [
+    11,
+    32,
+    6,
+    8,
+    13,
+    10
+  ],
+  "levels_solved": 6,
+  "final_status": "The game reports WIN.",
+  "continuous_reasoning_session": true,
+  "reset_count": 0,
+  "undo_count": 0,
+  "method": "CUA visible controls; one Run to next level click per level; public agent-panel counters after each settled level",
+  "observed_at": [
+    "2026-11-27T14:45:49.568Z",
+    "2026-11-27T14:46:17.854Z",
+    "2026-11-27T14:46:28.978Z",
+    "2026-11-27T14:46:39.146Z",
+    "2026-11-27T14:46:50.839Z",
+    "2026-11-27T14:47:14.196Z"
+  ]
+}
