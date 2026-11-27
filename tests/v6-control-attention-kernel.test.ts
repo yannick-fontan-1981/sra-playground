@@ -99,7 +99,16 @@ test('real morphology, common strategy and WHY/ACT acquire unused control then r
   result = await service.handle({ type: 'advance', sessionId, sequence: 2, ticketId: result.ticket!.id,
     observation: protocol.step(result.command!), executionMs: 0 });
   assert.equal(result.kind, 'boundary');
-  assert.equal(read('caller:goal').episode.length, 2);
+  const history = read('caller:goal').episode;
+  assert.equal(history.length, 2);
+  const acquisition = proposal.question.control_acquisition;
+  const [original, repeated] = history;
+  assert.deepEqual(acquisition.evidence, [repeated[0].ref, original[0].ref, original[2].ref]);
+  for (const [signature, vector] of Object.entries(acquisition.expected_motion)) {
+    const start = repeated[0].roles[signature], end = repeated[2].roles[signature];
+    assert.deepEqual([end[0] - start[0], end[1] - start[1]], vector);
+  }
+  assert.ok(!(result.snapshot.trace as R[]).findLast(e => e.kind === 'sic_native_plan')?.missingControl);
   assert.equal((result.snapshot.caller as R).acquiredTransitions, 2);
   assert.equal(result.snapshot.actions, 2);
   assert.equal(result.snapshot.levelsCompleted, 0, 'Synthetic integration is not reported as an ARC level success');
