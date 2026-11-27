@@ -1,0 +1,107 @@
+{
+  "révisions": {
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021": {
+      "départs": 12,
+      "tickets": 92,
+      "réserveT7": 2,
+      "reprisesRéservées": 2,
+      "questionsInitialesÉpuisées": "information_goal",
+      "ordreDéclaré": "ACTION4",
+      "substitutionInitiale": "ACTION3",
+      "substitutionCanal": [
+        48,
+        3
+      ],
+      "préimages": 11
+    },
+    "75aa3829ddf9d7e4561c6c92297ad1bb8d2ac5ef": {
+      "départs": 12,
+      "tickets": 92,
+      "réserveT7": 2,
+      "reprisesRéservées": 2,
+      "questionsInitialesÉpuisées": "information_goal",
+      "ordreDéclaré": "ACTION4",
+      "substitutionInitiale": "ACTION4",
+      "substitutionCanal": [
+        57,
+        3
+      ],
+      "préimages": 11
+    }
+  },
+  "premierÉcartEntreMoteurs": {
+    "initial-bis": 1,
+    "canal-bis": 7,
+    "sans-loi": 0,
+    "initial-essayé": 0,
+    "initiaux-épuisés": 0,
+    "canal-essayé": 0,
+    "canaux-épuisés": 0,
+    "nominal": 0,
+    "ordre-déclaré": 0,
+    "préimage": 0,
+    "renommée": 0,
+    "renommée-essayée": 0
+  },
+  "contrôleFini": {
+    "phases": 12,
+    "cibles": [
+      {
+        "target": [
+          0,
+          3
+        ],
+        "goals": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ]
+        ],
+        "complet": {
+          "distance": 1,
+          "premiers": [
+            "v"
+          ]
+        },
+        "sansU": {
+          "distance": 1,
+          "premiers": [
+            "v"
+          ]
+        }
+      },
+      {
+        "target": [
+          2,
+          2
+        ],
+        "goals": [
+          [
+            1,
+            2
+          ]
+        ],
+        "complet": {
+          "distance": 3,
+          "premiers": [
+            "u",
+            "v"
+          ]
+        },
+        "sansU": {
+          "distance": null,
+          "premiers": []
+        }
+      }
+    ],
+    "décalagesAmbigus": [
+      1,
+      3
+    ],
+    "reçusErronésRejetés": 3
+  }
+}
