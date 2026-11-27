@@ -35,3 +35,11 @@ node accuses/croisement.mjs $sha $depot
 ```
 
 L'opérateur ajoute un chemin de reçu neuf puis `--historiques` à la première commande pour inclure les anciens lots locaux.
+
+## Contrôle indépendant du correctif A isolé
+
+Le SHA `6191afeeafe7baac597685f2d9e5b08b241cce99` admet les cinq départs publics. Seul le blob de `planifier.mjs` diffère du témoin `f296ac1c` dans le montage. Sur A, le premier geste devient `indexer P` dans les deux mondes. Après `poste indexé`, le solveur lit, reçoit R ou S, marque en conséquence et réussit **2/2 en quatre gestes**. Sur B, le geste est exécuté, puis le même arrêt sur `indexé` demeure **0/1**. Sur C, les deux lectures initiales conduisent à **2/2 succès en trois gestes**. Les quatre traces réussies appartiennent aux politiques minimales de l'évaluateur indépendant.
+
+```powershell
+node accuses/projection.mjs D:/dev/ARC-AGI/SRA-Playground/sic-agenda-effets-conditionnels
+```
