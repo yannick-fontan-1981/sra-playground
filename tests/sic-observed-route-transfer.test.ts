@@ -116,7 +116,11 @@ async function start(varied: boolean, mutation: Mutation = 'none') {
     result = await service.handle({ type: 'advance', sessionId, sequence: ++sequence, ticketId: result.ticket.id, executionMs: 1, observation });
     return result;
   }
-  return { route, outline, runtime, calls, advance, get result() { return result; } };
+  async function resume() {
+    result = await service.handle({ type: 'resume', sessionId, sequence });
+    return result;
+  }
+  return { route, outline, runtime, calls, advance, resume, get result() { return result; } };
 }
 
 for (const varied of [false, true]) test('native route ownership continues the acquired outline role before a preview'
@@ -144,6 +148,12 @@ for (const varied of [false, true]) test('native route ownership continues the a
     assert.equal(seal?.acquired_actions, 1);
     assert.equal(run.route.state!().state.lastMatched, true);
     assert.deepEqual(run.route.state!().roles, acquired);
+    // The native store restores record keys in canonical order. Compatibility
+    // must compare the measured fields, not the object's serialization order.
+    const continued = await run.resume();
+    assert.equal(continued.snapshot.proposal?.kind, run.route.id);
+    assert.equal(run.calls.at(-1)?.group, observedPressureRecoveryGroup);
+    assert.equal(run.calls.at(-1)?.proposed, true);
   } finally { run.runtime.close('test_complete'); }
 });
 

@@ -442,7 +442,8 @@ export function createSicObservedRouteIntervention(): NativeFamily<Proposal> & {
         || prior?.lastMatched === false || !refs || refs.length < 2 || refs.at(-1) !== observation.observation_ref
         || !refs.every(ref => ref.startsWith(scope + ':epoch:'))) return null;
       const grid = gridOn(rows, roles);
-      if (!grid || prior && JSON.stringify(prior.grid) !== JSON.stringify(grid)) return null;
+      if (!grid || prior && (grid.bounds.some((value, index) => value !== prior.grid.bounds[index])
+        || (['pitch', 'width', 'height', 'floor', 'inset', 'frame'] as const).some(key => grid[key] !== prior.grid[key]))) return null;
       const scene = project(rows, grid, roles, prior?.cells ?? { walls: [], rails: [], exit: -1 }, Boolean(prior?.shelter), true);
       if (!scene) return null;
       return this.propose(observation, rows, inputs, remaining, execution);
