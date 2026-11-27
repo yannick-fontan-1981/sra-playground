@@ -60,6 +60,10 @@ Les chemins relatifs et leurs numéros de ligne se lisent au SHA d’intégratio
 
 Les deux familles mesurent le pas signé après identification du sujet. Le choix P07, le rattachement du sujet et l’interprétation du reçu restent locaux. AS66 reprend sa mesure par `follow_measured_slide`. Dans G50T, la succession P07 puis P05 à un contact et la causalité « mouvement mesuré puis accès » ont des preuves différentes. [Transition AS66/G50T](https://github.com/yannick-fontan-1981/sra-playground/blob/981b9ab9/docs/architecture/sic-transition-effet-acces-as66-g50t.md) · [Comparaison des deux porteurs](https://github.com/yannick-fontan-1981/sra-playground/blob/e79b828d66c7c22e244c3be19d2d19a9bd52ac76/docs/architecture/sic-navigation-preuve-deplacement.md)
 
+## Premier candidat de migration d’une démarche historique
+
+**Ligne 90 · composition candidate sur `975d9d80`.** Après caractérisation au SHA `13ebd79d`, le vrai moteur LS19 reproduit les 13 tickets et les 14 observations du préfixe historique. Au tour 3, le graphe retient l’offre d’accès `ACTION1` à partir d’un gain conditionnel de 512 pixels. La première pose est confirmée et le retour de fin de préfixe atteste zéro pixel nouveau au tour 6 pour ce même objectif. Le candidat donne un contrat typé à la projection et au classement des trajectoires. Trois suites passent 32/32. Le transfert réservé est confié à SIC 3 et la qualification indépendante au Banc. Le compteur M sur `main` reste **0/98**. Le ticket d’obstruction de la ligne 91 sert de contre-épreuve et conserve sa propre ligne. [Contrat, appelants, tests et commandes](https://github.com/yannick-fontan-1981/sra-playground/blob/975d9d809ba1cb41dd8c63414586cb95498018b1/docs/architecture/sic-ls19-ligne-90.md)
+
 ## Registre des 98 lignes
 
 Le numéro ouvre la composition proposée et ses opérateurs à typer. Le témoin ouvre la ligne d’observation, avec son résultat et son nombre d’utilisations. Pour P, la dernière colonne rappelle la mesure à relier à une offre et à son test. Pour N, elle identifie le raccord en suspens. Toutes les lignes ont une composition proposée.
