@@ -20,6 +20,7 @@ type Relay = { axis: 0 | 1; line: number; direction: NativePoint; cells: NativeP
 type State = { epoch: number; geometry: Geometry; color: number; held: NativePoint | null; invitation: NativePoint | null;
   free: Record<string, NativePoint>; loaded: Record<string, NativePoint>; tried: string[]; refs: string[]; count: number;
   transports?: readonly Transport[]; sharedEvidence?: string; transportCarriers?: string[]; transportCouplings?: readonly TransportCoupling[];
+  contactAppearance?: ContactAppearance; releasedContact?: { point: NativePoint; ink: number; sources: readonly string[] };
   relay?: Relay; sectorNetwork?: SectorNetwork; passage?: DeliveryPassage; waits?: number; stalledWaits?: number; stopped?: boolean;
   interference?: { ink: number; ref: string }; interceptionRef?: string; interceptedInk?: number;
   rendezvousWaits?: number; transferEvidence?: { part: NativePoint; ref: string }; parallel?: ParallelDelivery;
@@ -27,6 +28,7 @@ type State = { epoch: number; geometry: Geometry; color: number; held: NativePoi
 type Transport = { readonly carrier: string; readonly pose: NativePoint; readonly box: NativePoint;
   readonly sources: readonly string[]; readonly shell?: number };
 type TransportCoupling = { readonly carrier: string; readonly shell: number; readonly sources: readonly string[] };
+type ContactAppearance = { readonly ink: number; readonly core: number; readonly restShell: number; readonly sources: readonly string[] };
 type Move = { pose: NativePoint; face: NativePoint; cargo: NativePoint | null };
 type Motion = { input: string; prediction: Move };
 type ParallelDelivery = { ink: number; ref: string; track?: NativePoint; returns: Record<string, Record<string, number>>;
@@ -185,6 +187,36 @@ function reservedTransports(local: State): readonly Transport[] {
     || item.sources.length > 0 && !!local.sharedEvidence && local.transportCarriers?.includes(item.carrier));
 }
 
+function peerShell(local: State, scene: Scene, box: NativePoint, carrier: string): number {
+  const value = scene.boxes[key(box)]!, contact = local.contactAppearance;
+  if (!contact || contact.sources.length < 3 || contact.core !== local.geometry.core || contact.restShell !== local.geometry.rest_shell
+    || value !== contact.ink || !same(box, add(scene.pose, scene.face)) || same(box, sceneHeld(scene))) return value;
+  const roles = local.transportCouplings?.filter(role => role.carrier === carrier && role.sources.length >= 2) ?? [];
+  return roles.length === 1 ? roles[0]!.shell : value;
+}
+
+function recordContactAppearance(before: NativeObservation, after: NativeObservation, local: State, next: State,
+  old: Scene, scene: Scene, step: Step): void {
+  const released = local.releasedContact;
+  delete next.releasedContact;
+  const unowned = (box: NativePoint) => ![...carrierPositions(before, local).values(), ...carrierPositions(after, local).values()]
+    .flat().some(pose => distance(pose, box) === 1);
+  if (released && released.sources.at(-1) === before.observation_ref && step.intent === 'motion' && !local.held
+    && same(released.point, add(old.pose, old.face)) && !same(released.point, add(scene.pose, scene.face))
+    && old.boxes[key(released.point)] === released.ink && Object.hasOwn(scene.boxes, key(released.point)) && unowned(released.point)) {
+    if (scene.boxes[key(released.point)] === local.geometry.rest_shell) {
+      next.contactAppearance = { ink: released.ink, core: local.geometry.core, restShell: local.geometry.rest_shell,
+        sources: [...released.sources, after.observation_ref] };
+    } else if (local.contactAppearance?.ink === released.ink) delete next.contactAppearance;
+  }
+  const held = sceneHeld(old), ink = held && scene.boxes[key(held)];
+  if (step.intent === 'release' && held && same(held, local.held) && !sceneHeld(scene)
+    && same(old.pose, scene.pose) && same(old.face, scene.face) && typeof ink === 'number'
+    && ink !== local.geometry.rest_shell && ink !== scene.face_value && unowned(held)) {
+    next.releasedContact = { point: held, ink, sources: [before.observation_ref, after.observation_ref] };
+  }
+}
+
 function transportReturn(before: NativeObservation, after: NativeObservation, local: State, old: Scene, next: Scene) {
   const { carriers, returned, pairs } = pairedCarriers(before, after, local);
   const removed = positions(old).filter(box => !Object.hasOwn(next.boxes, key(box)) && !same(box, local.held));
@@ -212,9 +244,9 @@ function transportReturn(before: NativeObservation, after: NativeObservation, lo
     if (pairs.length !== 1) continue;
     const shift = pairs[0]!;
     shifts.push(shift);
-    const shell = next.boxes[key(shift.to)]!;
+    const shell = peerShell(local, next, shift.to, carrier);
     const evidence = previous && same(previous.box, shift.from) && previous.shell === shell
-      && old.boxes[key(shift.from)] === shell ? previous.sources.slice(-1) : [];
+      && peerShell(local, old, shift.from, carrier) === shell ? previous.sources.slice(-1) : [];
     transports.push({ carrier, pose: position, box: shift.to, shell, sources: [...evidence, after.observation_ref] });
   }
   return { shifts, transports };
@@ -776,9 +808,9 @@ function peerRouteReturn(proposal: Proposal, walk: WalkStep, before: NativeObser
   for (const shift of external.shifts) {
     const carrier = external.transports.find(item => same(item.box, shift.to));
     if (!carrier || !local.transportCarriers?.includes(carrier.carrier)) return false;
-    const value = old.boxes[key(shift.from)]!;
+    if (peerShell(local, old, shift.from, carrier.carrier) !== peerShell(local, actual, shift.to, carrier.carrier)) return false;
     delete expected[key(shift.from)];
-    expected[key(shift.to)] = value;
+    expected[key(shift.to)] = actual.boxes[key(shift.to)]!;
   }
   for (const change of couplingReturns(before, after, { ...local, held: walk.cargoBefore }, old, actual)) {
     expected[key(change.box)] = change.shell;
@@ -877,7 +909,9 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
         ? { ...initial, ...(interference ? { interference } : {}), ...(relay ? { relay } : {}), ...(sectorNetwork ? { sectorNetwork } : {}), ...(passage ? { passage } : {}),
           ...(parallel ? { parallel } : {}),
           free: previous.free, loaded: previous.loaded, sharedEvidence: previous.sharedEvidence!,
-          transportCarriers: [...(previous.transportCarriers ?? [])], transportCouplings: [...(previous.transportCouplings ?? [])] } : initial;
+          transportCarriers: [...(previous.transportCarriers ?? [])], transportCouplings: [...(previous.transportCouplings ?? [])],
+          ...(previous.contactAppearance?.core === geometry.core && previous.contactAppearance.restShell === geometry.rest_shell
+            ? { contactAppearance: previous.contactAppearance } : {}) } : initial;
       if (passage && !local.passage) local = { ...local, passage };
       if (relay && !local.relay) {
         local = { ...local, relay, waits: 0, stalledWaits: 0 };
@@ -919,7 +953,8 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...new Set([...local.refs, local.sharedEvidence, local.interference?.ref, local.interceptionRef, parallel?.ref,
         local.transferEvidence?.ref,
-        ...(relay?.evidence ?? []), ...reserved.flatMap(item => item.sources), ...(local.transportCouplings ?? []).flatMap(role => role.sources)]
+        ...(relay?.evidence ?? []), ...reserved.flatMap(item => item.sources), ...(local.transportCouplings ?? []).flatMap(role => role.sources),
+        ...(local.contactAppearance?.sources ?? [])]
         .filter((value): value is string => !!value && value !== ref))];
       const known = step.intent === 'motion' ? (local.held ? local.loaded : local.free)[step.input] : null;
       const mode = execution?.reasoningMode ?? 'exploration';
@@ -1116,6 +1151,7 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const attachments = couplingReturns(before, after, local, old, scene).filter(change => change.attached);
       const next: State = { ...local, count: local.count + 1, invitation: null, refs: [...local.refs.slice(-5), after.observation_ref],
         tried: [...local.tried, index === 0 ? proposal.attempt : JSON.stringify([old.pose, old.face, old.boxes, local.held, action.action_ref])] };
+      recordContactAppearance(before, after, local, next, old, scene, step);
       if (local.transports?.length || external.transports.length || attachments.length) next.transports = [...external.transports, ...attachments];
       const confirmedCarriers = external.transports.filter(item => item.sources.length >= 2);
       if (confirmedCarriers.length) {

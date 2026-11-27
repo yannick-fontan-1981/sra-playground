@@ -1,0 +1,52 @@
+{
+  "scope": "public returns of owner-only diagnostic; not a full campaign",
+  "acquisition": [
+    {
+      "command": 98,
+      "matched": true,
+      "pending": {
+        "point": [
+          11,
+          3
+        ],
+        "ink": 3,
+        "sources": [
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:8:revision:510:frame:215eed598bc1c62f",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:8:revision:511:frame:289916bb1d1419b1"
+        ]
+      },
+      "learned": null
+    },
+    {
+      "command": 99,
+      "matched": false,
+      "pending": null,
+      "learned": {
+        "ink": 3,
+        "core": 9,
+        "restShell": 4,
+        "sources": [
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:8:revision:510:frame:215eed598bc1c62f",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:8:revision:511:frame:289916bb1d1419b1",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:8:revision:512:frame:f50c35d1753e25fa"
+        ]
+      }
+    }
+  ],
+  "changed": [
+    {
+      "command": 107,
+      "previous": false,
+      "current": true,
+      "before": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:8:revision:519:frame:3b6acb4ff1224f66",
+      "after": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:8:revision:520:frame:b18d12401f407ded"
+    },
+    {
+      "command": 108,
+      "previous": false,
+      "current": true,
+      "before": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:8:revision:520:frame:b18d12401f407ded",
+      "after": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:8:revision:521:frame:1fa2650c7612abf9"
+    }
+  ]
+}

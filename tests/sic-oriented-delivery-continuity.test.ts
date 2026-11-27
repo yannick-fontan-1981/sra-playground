@@ -25,7 +25,8 @@ async function witnessedRoom(rotated = false) {
     for (let y = 0; y < pitch; y++) for (let x = 0; x < pitch; x++)
       rows[phase[1] + v * pitch + y]![phase[0] + u * pitch + x] = pixels(x, y);
   };
-  function frame(tick: number, options: { blocked?: boolean; ambiguous?: boolean; lostCargo?: boolean; unpairedShift?: boolean; targetTaken?: boolean; secondOwner?: boolean; interference?: boolean; distantCargo?: boolean; duplicatePeer?: boolean; ambiguousPeers?: boolean; peerTick?: number; peerReleased?: boolean; unfamiliarPeerShell?: boolean; ambiguousPeerCargo?: boolean; peerFloor?: boolean } = {}) {
+  function frame(tick: number, options: { blocked?: boolean; ambiguous?: boolean; lostCargo?: boolean; unpairedShift?: boolean; targetTaken?: boolean; secondOwner?: boolean; interference?: boolean; distantCargo?: boolean; duplicatePeer?: boolean; ambiguousPeers?: boolean; peerTick?: number; peerReleased?: boolean; unfamiliarPeerShell?: boolean; ambiguousPeerCargo?: boolean; peerFloor?: boolean;
+    ownPose?: NativePoint; ownFace?: NativePoint; ownCargo?: NativePoint; ownShell?: number; extraBoxes?: NativePoint[]; peerShell?: number } = {}) {
     const rows = Array.from({ length: 64 }, () => Array<number>(64).fill(background));
     const receiverTiles: NativePoint[] = [[8, 2], [9, 2], [9, 5], [10, 5]];
     for (const site of receiverTiles) paint(rows, site, (x, y) => {
@@ -34,14 +35,18 @@ async function witnessedRoom(rotated = false) {
         || y === 0 && !adjacent(0, -1) || y === pitch - 1 && !adjacent(0, 1);
       return edge ? core : rotated ? 1 : 2;
     });
-    const own = (x: number, y: number) => (rotated ? y === pitch - 1 : x === pitch - 1) ? faceInk : actor;
+    const vector = options.ownFace ?? [1, 0], face = rotated ? [-vector[1]!, vector[0]!] : vector;
+    const own = (x: number, y: number) => (face[0] === 1 ? x === pitch - 1 : face[0] === -1 ? x === 0
+      : face[1] === 1 ? y === pitch - 1 : y === 0) ? faceInk : actor;
     const part = (ink: number) => (x: number, y: number) => x === 0 || y === 0 || x === pitch - 1 || y === pitch - 1 ? ink : core;
-    paint(rows, [tick, 2], own);
-    paint(rows, options.distantCargo ? [7, 2] : [tick + 1, 2], part(options.lostCargo || options.distantCargo ? shell : faceInk));
+    paint(rows, options.ownPose ?? [tick, 2], own);
+    paint(rows, options.ownCargo ?? (options.distantCargo ? [7, 2] : [tick + 1, 2]),
+      part(options.ownShell ?? (options.lostCargo || options.distantCargo ? shell : faceInk)));
+    for (const site of options.extraBoxes ?? []) paint(rows, site, part(shell));
     const peerTick = options.peerTick ?? tick;
     paint(rows, [2 + peerTick - Number(!!options.unpairedShift), 5], () => carrier);
     paint(rows, options.targetTaken ? [8, 2] : [3 + peerTick, 5],
-      part(options.unfamiliarPeerShell ? rotated ? 14 : 6 : options.peerReleased ? shell : peerShell));
+      part(options.peerShell ?? (options.unfamiliarPeerShell ? rotated ? 14 : 6 : options.peerReleased ? shell : peerShell)));
     if (options.ambiguousPeerCargo) paint(rows, [2 + peerTick, 6], part(peerShell));
     if (options.peerFloor) paint(rows, [5, 6], () => rotated ? 1 : 2);
     if (options.duplicatePeer) {
@@ -64,8 +69,8 @@ async function witnessedRoom(rotated = false) {
   const observe = (rows: number[][], revision: number) => measureNativeObservation({ frame_rows: rows, frame_hash: String(revision),
     state: 'NOT_FINISHED', level: 1, levels_completed: 0, available_action_refs: ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4', 'ACTION5'] }, revision, 'learned-room');
   const family = createSicVerifyOrientedDelivery();
-  await family.attachPrograms?.({ registerProgram: async () => ({ run: async ({ situation }: { situation: { routeSupported: boolean } }) =>
-    ({ result: situation.routeSupported ? 'P07' : 'P05', receipt: {} }) }) } as unknown as NativeProgramRegistry);
+  await family.attachPrograms?.({ registerProgram: async () => ({ run: async ({ situation }: { situation: { routeSupported: boolean; knownInteraction: boolean } }) =>
+    ({ result: situation.routeSupported ? 'P07' : situation.knownInteraction ? 'P02' : 'P05', receipt: {} }) }) } as unknown as NativeProgramRegistry);
   family.restore({ state: { epoch: 1, geometry, color: actor, held: at([1, 2]), invitation: null,
     free: { [command]: direction }, loaded: {}, tried: [], refs: ['previous-free-translation'], count: 0 } });
   for (let tick = 0; tick < 2; tick++) {
@@ -80,7 +85,9 @@ async function witnessedRoom(rotated = false) {
   assert.deepEqual(learned.loaded[command], direction, 'The carried translation must be acquired from its public return');
   assert.ok(learned.sharedEvidence && learned.transportCarriers.length === 1,
     'Two joint movements must establish the other carrier before its crate can vary during a route');
-  return { family, frame, packet, observe, command, direction, at, learned, interferingInk };
+  return { family, frame, packet, observe, command, direction, at, learned, interferingInk, shell, peerShell,
+    contactInk: rotated ? 14 : 3, vector: ([x, y]: NativePoint): NativePoint => rotated ? [-y, x] : [x, y],
+    inverseVector: ([x, y]: NativePoint): NativePoint => rotated ? [y, -x] : [x, y] };
 }
 
 async function settledParallelRoom(rotated = false) {
@@ -349,3 +356,90 @@ for (const condition of ['secondOwner', 'unfamiliarPeerShell', 'ambiguousPeerCar
   assert.equal(result.snapshot.trace.findLast(event => event.kind === 'sealed_prefix')?.acquired_actions, 1);
   assert.equal((room.family.state().state as Record<string, any>).sharedEvidence, room.learned.sharedEvidence);
 });
+
+async function contactAppearanceRoom(rotated: boolean) {
+  const room = await settledParallelRoom(rotated);
+  const state = room.family.state().state as Record<string, any>;
+  room.family.restore({ state: { ...state, geometry: { ...state.geometry,
+    targets: [...state.geometry.targets, room.at([3, 2])],
+    initial_boxes: [...state.geometry.initial_boxes, room.at([8, 6])] } } });
+  const service = new V6AgentService(() => new NativeV6Runtime({ families: [room.family], sourceDigest: 'acquire-contact-display', maxPointOccurrences: 250 }));
+  const sessionId = 'contact-display-learning-' + rotated;
+  const first = room.frame(2, { extraBoxes: [[8, 6]] });
+  let result = await service.handle({ type: 'init', sessionId, sequence: 0,
+    observation: toV6PublicObservation(room.packet(first)), budgets: { targetLevels: 2, levelActionCaps: [40, 40] } });
+  assert.ok(result.ticket);
+  assert.equal(result.ticket.actionRef, 'ACTION5', 'Actually release the part already on the current observed target');
+  assert.equal((room.family.state().state as Record<string, any>).contactAppearance, undefined);
+  result = await service.handle({ type: 'advance', sessionId, sequence: 1, ticketId: result.ticket.id, executionMs: 1,
+    observation: toV6PublicObservation(room.packet(room.frame(2, { ownShell: room.contactInk, extraBoxes: [[8, 6]] })), 1) });
+  assert.equal(result.kind, 'boundary');
+  const pending = room.family.state().state as Record<string, any>;
+  assert.ok(pending.releasedContact, 'The executed release records only a pending contact appearance');
+  assert.equal(pending.contactAppearance, undefined, 'A release alone does not prove a reversible display relation');
+  result = await service.handle({ type: 'resume', sessionId, sequence: 1 });
+  assert.ok(result.ticket);
+  const commands: Record<string, NativePoint> = { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0], ...room.learned.free };
+  const vector = room.inverseVector(commands[result.ticket.actionRef]!);
+  const pose: NativePoint = [2 + vector[0], 2 + vector[1]];
+  const returned = room.frame(2, { ownPose: pose, ownFace: vector, ownCargo: [3, 2], ownShell: room.shell, extraBoxes: [[8, 6]] });
+  result = await service.handle({ type: 'advance', sessionId, sequence: 2, ticketId: result.ticket.id, executionMs: 1,
+    observation: toV6PublicObservation(room.packet(returned), 2) });
+  assert.equal(result.kind, 'boundary');
+  const learned = room.family.state().state as Record<string, any>;
+  assert.equal(learned.contactAppearance.ink, room.contactInk);
+  assert.equal(learned.contactAppearance.sources.length, 3, 'Release and withdrawal retain all three actual observation references');
+  assert.equal(learned.releasedContact, undefined);
+  room.family.restore({ state: { ...state, held: null, tried: [], contactAppearance: learned.contactAppearance,
+    geometry: { ...state.geometry, initial_boxes: [room.at([9, 4]), room.at([5, 5])] } } });
+  return { ...room, contact: learned.contactAppearance };
+}
+
+for (const rotated of [false, true]) test('native peer transport reuses an actually acquired reversible contact display'
+  + (rotated ? ' with rotated cells, changed colors and remapped translation' : ''), async () => {
+  const room = await contactAppearanceRoom(rotated);
+  const service = new V6AgentService(() => new NativeV6Runtime({ families: [room.family], sourceDigest: 'reuse-contact-display', maxPointOccurrences: 250 }));
+  const sessionId = 'contact-display-transfer-' + rotated;
+  let result = await service.handle({ type: 'init', sessionId, sequence: 0,
+    observation: toV6PublicObservation(room.packet(room.frame(2, { ownPose: [5, 4], ownFace: [0, 1], ownCargo: [9, 4], ownShell: room.shell,
+      peerShell: room.contactInk }))), budgets: { targetLevels: 2, levelActionCaps: [40, 40] } });
+  assert.ok(result.ticket);
+  const proposal = result.snapshot.proposal as Record<string, any>;
+  assert.ok(room.contact.sources.every((ref: string) => proposal.route_refs.includes(ref)));
+  const indices: number[] = [];
+  for (let index = 0; index < 2; index++) {
+    assert.ok(result.ticket, 'The known display relation permits the next actual ticket');
+    assert.equal(result.ticket.actionRef, room.command);
+    indices.push(result.ticket.actionIndex);
+    result = await service.handle({ type: 'advance', sessionId, sequence: index + 1, ticketId: result.ticket.id, executionMs: 1,
+      observation: toV6PublicObservation(room.packet(room.frame(3 + index, { ownPose: [6 + index, 4], ownFace: [1, 0], ownCargo: [9, 4],
+        ownShell: room.shell })), index + 1) });
+    assert.equal(result.snapshot.trace.findLast(event => event.kind === 'actual_outcome')?.matched, true);
+  }
+  assert.deepEqual(indices, [0, 1]);
+  assert.equal(result.kind, 'boundary');
+  assert.equal(result.snapshot.trace.findLast(event => event.kind === 'sealed_prefix')?.acquired_actions, 2);
+  assert.deepEqual((room.family.state().state as Record<string, any>).contactAppearance, room.contact);
+});
+
+for (const condition of ['unlearned', 'offFace', 'ambiguousCoupling', 'contradictedShell', 'protectedTarget'] as const)
+  test('the observed contact display remains scoped on ' + condition, async () => {
+    const room = await contactAppearanceRoom(false), state = room.family.state().state as Record<string, any>;
+    if (condition === 'unlearned') delete state.contactAppearance;
+    if (condition === 'ambiguousCoupling') state.transportCouplings.push({ ...state.transportCouplings[0], shell: 6 });
+    room.family.restore({ state });
+    const service = new V6AgentService(() => new NativeV6Runtime({ families: [room.family], sourceDigest: 'refute-contact-display', maxPointOccurrences: 250 }));
+    const sessionId = 'contact-display-refutation-' + condition;
+    const result = await service.handle({ type: 'init', sessionId, sequence: 0,
+      observation: toV6PublicObservation(room.packet(room.frame(2, { ownPose: [5, 4], ownFace: condition === 'offFace' ? [1, 0] : [0, 1],
+        ownCargo: [9, 4], ownShell: room.shell, peerShell: room.contactInk }))), budgets: { targetLevels: 2, levelActionCaps: [40, 40] } });
+    assert.ok(result.ticket);
+    const next = await service.handle({ type: 'advance', sessionId, sequence: 1, ticketId: result.ticket.id, executionMs: 1,
+      observation: toV6PublicObservation(room.packet(room.frame(3, { ownPose: [6, 4], ownFace: [1, 0], ownCargo: [9, 4], ownShell: condition === 'protectedTarget' ? room.contactInk : room.shell,
+        ...(condition === 'contradictedShell' ? { unfamiliarPeerShell: true } : {}) })), 1) });
+    assert.equal(next.ticket, null);
+    assert.equal(next.snapshot.trace.findLast(event => event.kind === 'actual_outcome')?.matched, false);
+    assert.equal(next.snapshot.trace.findLast(event => event.kind === 'sealed_prefix')?.acquired_actions, 1);
+    assert.deepEqual((room.family.state().state as Record<string, any>).loaded, room.learned.loaded,
+      'An unrelated own movement fact survives the peer contradiction');
+  });
