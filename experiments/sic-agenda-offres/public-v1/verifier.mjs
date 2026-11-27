@@ -1,0 +1,76 @@
+import assert from 'node:assert/strict';
+import { readdir, readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import { admit, key } from './admission.mjs';
+import { initialState, decide, project, truth } from './planifier.mjs';
+import { PublicSession } from './solveur.mjs';
+
+const dir = process.argv[2];
+if (!dir) throw new Error('Indiquer le répertoire public-format/examples de développement');
+const files = (await readdir(dir)).filter(file => file.endsWith('.json')).sort();
+assert.equal(files.length, 12);
+const first = {};
+for (const file of files) {
+  const card = JSON.parse(await readFile(join(dir, file), 'utf8'));
+  const model = admit(card), state = initialState(model);
+  const choice = decide(model, state);
+  assert.ok(choice.command);
+  const session = new PublicSession();
+  assert.deepEqual(session.next({ fiche: card }), { action: choice.command.join(' ') });
+  assert.ok(session.admitted);
+  const variant = structuredClone(card);
+  for (const name of ['observations', 'domains', 'commands', 'rules']) variant[name].reverse();
+  for (const line of Object.keys(variant.sources)) variant.sources[line] = 'texte masqué';
+  assert.deepEqual(new PublicSession().next({ fiche: variant }), { action: choice.command.join(' ') });
+  assert.throws(() => admit({ ...card, monde: 2 }), /schéma/);
+  const refus = session.next({ retour: 'Action indisponible.' });
+  assert.ok(refus.arret);
+  assert.equal(session.next({ retour: 'suite' }), null);
+  first[choice.command[0]] = (first[choice.command[0]] ?? 0) + 1;
+}
+assert.deepEqual(first, { lire: 4, marquer: 4, purger: 1, sonder: 1, retirer: 1, bloquer: 1 });
+
+const card = JSON.parse(await readFile(join(dir, 'resource.json'), 'utf8'));
+const model = admit(card), state = initialState(model);
+const effort = card.domains[0].ref, archive = card.observations.find(o => o.ref[0] === 'archive');
+const condition = { eq: [effort, archive.value] };
+assert.equal(truth(condition, state.facts), undefined);
+assert.equal(model.observations.get(key(effort)).status, 'unknown');
+const absent = admit({ ...card, observations: card.observations.filter(o => key(o.ref) !== key(effort)) });
+assert.equal(absent.observations.has(key(effort)), false);
+assert.equal(truth(condition, initialState(absent).facts), undefined);
+assert.throws(() => admit({ ...card, observations: [...card.observations, { ref: ['x'], status: 'unknown', value: false, source: [3] }] }));
+assert.throws(() => admit({ ...card, rules: [{ ...card.rules[0], source: [9999] }] }), /Ligne publique absente/);
+assert.equal(truth({ eq: [['purged', effort[1]], false] }, state.facts), true);
+assert.equal(truth({ eq: [['omission'], false] }, state.facts), undefined);
+assert.equal(project(model, state, key(card.goal.command)).reason, 'condition nécessaire au succès contredite');
+const d = decide(model, state);
+assert.equal(d.cost, 6);
+const wrongAck = new PublicSession();
+assert.ok(wrongAck.next({ fiche: card }).action.startsWith('purger '));
+assert.ok(wrongAck.next({ retour: 'poste indexé' }).arret);
+assert.match(d.qualification, /conditions nécessaires/);
+assert.equal(decide(model, state, [], 1).command, null);
+
+const dial = JSON.parse(await readFile(join(dir, 'dial.json'), 'utf8'));
+const dialModel = admit(dial), cell = dial.observations.find(o => o.ref[0] === 'mark').ref;
+assert.equal(truth({ eq: [cell, null] }, initialState(dialModel).facts), true);
+assert.equal(decide(dialModel, initialState(dialModel)).cost, 4);
+const invalidRead = new PublicSession();
+assert.equal(invalidRead.next({ fiche: dial }).action, 'lire');
+assert.ok(invalidRead.next({ retour: 'hors domaine' }).arret);
+const choices = dial.domains[0].values.map(value => {
+  const s = new PublicSession();
+  const departure = s.next({ fiche: dial });
+  return { departure, next: s.next({ retour: value }) };
+});
+assert.deepEqual(choices[0].departure, choices[1].departure);
+assert.notDeepEqual(choices[0].next, choices[1].next);
+const observed = structuredClone(dial);
+observed.observations[0] = { ...observed.observations[0], status: 'known', value: dial.domains[0].values[0] };
+const certain = admit(observed);
+const tied = decide(certain, initialState(certain));
+assert.equal(tied.finalists.length, 2);
+assert.ok(tied.tie.lastRule);
+console.log('12 fiches admises et premières demandes vérifiées ' + JSON.stringify(first));
+console.log('Permutation, sources masquées, refus de métadonnées, omission, inconnue, faux, null et lecture hors domaine vérifiés.');
