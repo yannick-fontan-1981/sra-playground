@@ -148,11 +148,15 @@ export class RootedLineMemory {
       if (!candidates.length) return { status: 'unknown', reason: 'rooted_contact_plan_unresolved', search, block_unrelated_probe: true };
       let chosen = candidates[0];
       for (const candidate of candidates) if (candidate.effects.length < chosen.effects.length) chosen = candidate;
+      if (chosen.goal.projected_order_trial) search.projected_order_trial = chosen.goal.projected_order_trial;
       const count = Math.min(limit, 16, chosen.effects.length);
       actions = chosen.effects.slice(0, count).map((effect: R) => ({ action_ref: effect.action_ref }));
       predictions = chosen.steps.slice(0, count).map((step: R) => projectedRootedLine(step.configuration));
       configurations = chosen.steps.slice(0, count).map((step: R) => structuredClone(step.configuration));
-      why = cfg.compose; kind = 'conditional_composition';
+      why = chosen.goal.projected_order_trial
+        ? 'The projected station groups permit the requested order. The order within a tied station is unknown. Test the access and check each physical return.'
+        : cfg.compose;
+      kind = 'conditional_composition';
     }
     const plan = structuredClone({ scene, memory, commands: actions, predictions, configurations, search, why, kind,
       epoch: observation.level_epoch, score: observation.levels_completed, observation_ref: observation.observation_ref, frame_digest: identity(rows) });

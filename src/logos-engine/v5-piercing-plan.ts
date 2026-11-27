@@ -4,8 +4,8 @@
  * pinned at 786dcf51ca57773d8e3a8948ce9ea3655e7baf8e. Geometry, support laws,
  * command effects and bounds are supplied inputs; overlap never proves support.
  *
- * The only search extension is the optional native interruption budget. It
- * produces an explicit bound.native_interruption and an open, truncated search.
+ * Native callers can set an interruption budget. Rooted-line experiments can
+ * also opt into testing a projected order with indistinguishable axial ranks.
  * Staged profiles/continuations are rejected rather than silently approximated.
  */
 import { compareUnicode } from './canonical.ts';
@@ -120,24 +120,54 @@ export function measurePiercingIntersections(value: unknown): R {
   return intersections(piercingArray(v.rods, 1, 16).map(normalizePiercingRod), piercingArray(v.pieces, 0, 128).map(normalizePiercingPiece),
     piercingRef(v.requested_root_ref), piercingArray(v.requested_type_order, 0, 128).map(piercingRef));
 }
-function goal(configuration: PiercingConfiguration, root: string, order: string[]): R {
+type OrderPolicy = 'reference' | 'test_compatible_stations';
+
+/** Members of one station are unordered. Compare the multiset at each station
+ * with the corresponding slice of the requested type sequence. */
+function tiedStationOrder(configuration: PiercingConfiguration, measured: R, requested: string[]) {
+  if (!measured.requested_support_ref || measured.requested_support_piece_refs.length !== requested.length) return null;
+  const types = new Map(configuration.pieces.map(piece => [piece.piece_ref, piece.type_ref]));
+  const supported = new Set<string>(measured.requested_support_piece_refs);
+  const stations = new Map<number, { piece_ref: string; type_ref: string }[]>();
+  for (const hit of measured.intersections) {
+    if (hit.rod_ref !== measured.requested_support_ref || !supported.has(hit.piece_ref)) continue;
+    const members = stations.get(hit.first_root_index) ?? [];
+    members.push({ piece_ref: hit.piece_ref, type_ref: types.get(hit.piece_ref)! });
+    stations.set(hit.first_root_index, members);
+  }
+  const groups = [...stations].sort(([a], [b]) => a - b).map(([station, members]) => ({ station, members }));
+  if (!groups.some(group => new Set(group.members.map(member => member.type_ref)).size > 1)) return null;
+  let offset = 0;
+  const compatible = groups.every(({ members }) => {
+    const slice = requested.slice(offset, offset + members.length);
+    offset += members.length;
+    return tupleCompare(sorted(members.map(m => m.type_ref)), sorted(slice)) === 0;
+  });
+  return { status: compatible ? 'compatible_unordered' : 'incompatible', requested: [...requested], groups };
+}
+
+function goal(configuration: PiercingConfiguration, root: string, order: string[], policy: OrderPolicy = 'reference'): R {
   const unresolved = sorted(new Set([...configuration.missing_piece_refs,
     ...configuration.possible_support_pairs.map(([, p]) => p), ...configuration.hypothetical_support_pairs.map(([, p]) => p)]));
   if (!configuration.rods.length) return { requested_root_ref: root, requested_support_ref: null, ordered_piece_refs: [], measured_type_order: [],
     rooted_match: false, predicted_rooted_match: false, coordinate_scope_ref: configuration.coordinate_scope_ref, unresolved_piece_refs: unresolved,
     remaining_piece_refs: sorted(configuration.pieces.map(p => p.piece_ref)), schema_version: 'yf_arc3_v5.piercing_goal_measurements.v1' };
   const measured = intersections(configuration.rods, configuration.pieces, root, order);
-  return { requested_root_ref: root, requested_support_ref: measured.requested_support_ref, ordered_piece_refs: measured.requested_support_piece_refs,
-    measured_type_order: measured.requested_support_type_order,
-    rooted_match: measured.rooted_match && !unresolved.length && !configuration.is_predicted_configuration,
-    predicted_rooted_match: measured.rooted_match && !configuration.missing_piece_refs.length && !configuration.possible_support_pairs.length,
+  const trial = policy === 'test_compatible_stations' ? tiedStationOrder(configuration, measured, order) : null;
+  const matches = !trial && measured.rooted_match;
+  return { requested_root_ref: root, requested_support_ref: measured.requested_support_ref,
+    ordered_piece_refs: trial ? [] : measured.requested_support_piece_refs,
+    measured_type_order: trial ? [] : measured.requested_support_type_order,
+    rooted_match: matches && !unresolved.length && !configuration.is_predicted_configuration,
+    predicted_rooted_match: matches && !configuration.missing_piece_refs.length && !configuration.possible_support_pairs.length,
+    ...(trial ? { projected_order_trial: trial } : {}),
     coordinate_scope_ref: configuration.coordinate_scope_ref, unresolved_piece_refs: unresolved,
     remaining_piece_refs: measured.remaining_unconstrained_piece_refs, schema_version: 'yf_arc3_v5.piercing_goal_measurements.v1' };
 }
-export function measurePiercingGoal(value: unknown): R {
+export function measurePiercingGoal(value: unknown, policy: OrderPolicy = 'reference'): R {
   const v = piercingObject(value, ['configuration', 'requested_root_ref', 'requested_type_order', 'schema_version']);
   if (v.schema_version !== undefined) piercingRef(v.schema_version);
-  return goal(normalizePiercingConfiguration(v.configuration), piercingRef(v.requested_root_ref), piercingArray(v.requested_type_order).map(piercingRef));
+  return goal(normalizePiercingConfiguration(v.configuration), piercingRef(v.requested_root_ref), piercingArray(v.requested_type_order).map(piercingRef), policy);
 }
 
 function simulateModel(request: PiercingStepInput, model: PiercingConditionalModel, budget: WorkBudget): R {
@@ -379,7 +409,7 @@ export function simulatePiercingModel(request: unknown, model: unknown, nativeBu
   return simulateModel(normalizePiercingStepInput(request), normalizePiercingConditionalModel(model), new WorkBudget(nativeBudget));
 }
 
-export function searchPiercingPlans(value: unknown, nativeBudget?: PiercingNativeBudget): R {
+export function searchPiercingPlans(value: unknown, nativeBudget?: PiercingNativeBudget, policy: OrderPolicy = 'reference'): R {
   const request = normalizePiercingSearchInput(value), budget = new WorkBudget(nativeBudget);
   type Row = [PiercingConditionalModel, PiercingConfiguration, PiercingCommandEffect[], R[]];
   let queue: Row[] = [...request.models].sort((a, b) => compareUnicode(a.model_ref, b.model_ref)).map(m => [m, request.configuration, [], []]);
@@ -392,8 +422,10 @@ export function searchPiercingPlans(value: unknown, nativeBudget?: PiercingNativ
     if (budget.stopped()) { bounds.add('bound.native_interruption'); missing.add('bound.native_interruption'); break; }
     const [model, configuration, path, steps] = queue.shift()!;
     expanded++;
-    const measuredGoal = goal(configuration, request.goal_requested_root_ref, request.goal_requested_type_order);
-    if (measuredGoal.predicted_rooted_match) {
+    const measuredGoal = goal(configuration, request.goal_requested_root_ref, request.goal_requested_type_order, policy);
+    const trial = path.length > 0 && configuration.is_predicted_configuration && measuredGoal.projected_order_trial?.status === 'compatible_unordered'
+      && !configuration.missing_piece_refs.length && !configuration.possible_support_pairs.length;
+    if (measuredGoal.predicted_rooted_match || trial) {
       const pathKey = symbolicDigest(path);
       if (witnessPathKeys.has(pathKey) || witnessPathKeys.size < request.max_plans) {
         witnessPathKeys.add(pathKey);

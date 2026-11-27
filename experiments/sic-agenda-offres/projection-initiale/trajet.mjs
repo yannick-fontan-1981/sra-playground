@@ -14,10 +14,8 @@ export async function trace(r,commands,engine=root) {
     const goal=measurePiercingGoal({configuration,requested_root_ref:'current_root',requested_type_order:r.scene.order});
     const intersection=measurePiercingIntersections({rods:configuration.rods,pieces:configuration.pieces,
       requested_root_ref:'current_root',requested_type_order:r.scene.order});
-    out.push({cmd,physical:projectedRootedLine(configuration),supports:configuration.pieces.map(p=>[p.piece_ref,p.support_refs]),
-      expectedOrder:r.scene.order,order:intersection.requested_type_order ?? intersection.requested_root_type_order,
-      contacts:intersection.intersections.map(p=>[p.piece_ref,p.first_root_index]),
-      matched:goal.predicted_rooted_match,intersection,goal});
+    out.push({cmd,configuration,physical:projectedRootedLine(configuration),supports:configuration.pieces.map(p=>[p.piece_ref,p.support_refs]),
+      contacts:intersection.intersections.map(p=>[p.piece_ref,p.first_root_index]),matched:goal.predicted_rooted_match});
   }
   return out;
 }
@@ -25,7 +23,6 @@ if(process.argv[1] && pathToFileURL(process.argv[1]).href===import.meta.url){
   const r=await inquire(process.argv.slice(2).map(Number));
   const cmds=[1,1,1,4,4,4,4,2,3,2,4].map(i=>'ACTION'+i);
   const report=await trace(r,cmds);
-  console.log(JSON.stringify(report.map(s=>({cmd:s.cmd,root:s.physical.root,tip:s.physical.tip,pieces:s.physical.pieces,
-    match:s.matched,touches:s.contacts}))));
-  console.log(JSON.stringify(report.at(-1).intersection).slice(-1000));
+  const end=report.at(-1);
+  console.log(JSON.stringify({gestes:report.length,physique:end.physical,stations:end.contacts,accordDeReference:end.matched}));
 }
