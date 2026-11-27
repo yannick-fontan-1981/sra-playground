@@ -22,3 +22,9 @@ Node 24.22.3 sous Windows a reproduit les 161 commandes sur les deux versions me
 La comparaison utilise une seule exécution de chaque version. Les durées échantillonnées peuvent se chevaucher. Le candidat ajoute aussi un chemin direct pour les lignes d'entiers portables lors de l'encodage du graphe. Les descripteurs, la profondeur, l'identité des fragments, l'ordre des valeurs et le traitement des nombres signés ou fractionnaires restent contrôlés. Les tests ciblés couvrent les tableaux numériques, la stabilité des fragments, les états persistés et les parcours natifs de navigation.
 
 La qualification doit rejouer SNAR depuis L1 sur un seul worker, en mode SIC, sans reset ni undo, avec les six couples commandes et délais d'origine. Ce diagnostic ne change ni le score de qualification ni le périmètre des protections.
+
+## Premier rejeu strict avec l'optimisation
+
+Le rejeu GitHub **46024779478** a vérifié le candidat `817cd8c7b620097b802c3affca60afa55d0f7b2f` et l'arbre `59f0ffee56ca3c4ac2ddb9249aa95554e0a52151` sur Ubuntu24 et Node24. Les cinq premiers parcours conservent leurs commandes et empreintes. Le niveau 6 atteint **28 commandes et 17 000 ms**, pour un total de 162 commandes et un résultat **5/6**.
+
+Le dossier `ci-817cd8c7-46024779478/` contient le manifeste, l'échec brut, le journal, les reçus par niveau et les empreintes. Le reçu d'échec du watchdog ne renseigne pas le champ `mode`, ce qui déclenche la première assertion du contrôle après l'écriture de `result.json`. Le motif opérationnel reste `level_wall_time_budget`. Le mode SIC et le worker unique sont fixés dans la commande archivée.
