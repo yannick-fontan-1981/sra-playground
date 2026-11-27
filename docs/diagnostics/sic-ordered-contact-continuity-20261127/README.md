@@ -20,4 +20,8 @@ Les apprentissages et l'acteur actif sont mis à jour selon la jambe réellement
 
 Les mutations couvrent un marquage contradictoire, une sélection sans effet, une liaison de rail supprimée, un contrôle adressé altéré, des références d'une autre portée et des effets ambigus. Les contrats géométriques existants sur les stocks et les croisements sont conservés.
 
-Le rejeu strict complet des huit niveaux reste à qualifier sur la source figée. Cette note ne revendique pas encore une victoire complète de SK48.
+## Qualification stricte complète
+
+La source figée `dd683bd38281de5ba84801e53008df1d74c33069` (GitHub `a397a6b12d62de789c51f0dbb79fac11131f7c29`, arbre `dee28a3a2cf928344974cad29b91e45d8ab10da5`) gagne les huit niveaux depuis L1 : **348 commandes**, une session SIC, un worker, aucun reset ni undo. Les comptes sont **19, 39, 33, 33, 33, 69, 80, 42** ; les huit plafonds de commandes et de temps d'origine sont respectés. Les 348 commandes sont autorisées par SIC et acquises par le runtime, avec onze séries réelles mêlant clics et déplacements. Le huitième niveau prend 12 852 ms pour une limite inchangée de 17 000 ms.
+
+Les reçus bruts, le manifeste de source/runner/références et le résumé vérifié sont dans `qualification/`. Cette victoire stricte reste à intégrer dans le contrôle physique complet, fusionner sur main, publier et vérifier dans le viewer avant de la déclarer livrée.

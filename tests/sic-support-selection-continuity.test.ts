@@ -14,6 +14,8 @@ import type { NativeFamily } from '../src/logos-engine/v6-native-types.ts';
 import { standalonePlanningGroups } from '../src/sic/standalone-families.ts';
 import { planningGroupsWithExperiments } from '../src/sic/experiment-selection-groups.ts';
 import { preparedEffectsId } from '../src/sic/test-prepared-effects.ts';
+import { bindContinuityPlan, collectContinuityReturn } from '../scripts/sic-continuity-evidence.mjs';
+import { captureSupportSelection, observeSupportSelectionReturn, completeSupportSelection, measureSupportSelection } from '../scripts/sic-support-selection-continuity.mjs';
 
 type Return = { action: { id: number; data?: { x: number; y: number } }; before: number[][]; after: number[][]; won?: boolean };
 const fixture: { training: Return[]; selection: Return[] } = JSON.parse(gunzipSync(await readFile(
@@ -75,11 +77,15 @@ async function runPublicSelection(varied: boolean, mutation?: 'marking' | 'pose'
   let sequence = 0, reply = await service.handle({ type: 'init', sessionId, sequence,
     observation: packet(variant.rows(fixture.training[0]!.before), sequence, 1), budgets: { targetLevels: 2, levelActionCaps: [50, 90] } });
   const tickets: V6Ticket[] = [], replies: typeof reply[] = [], mixedProposals: any[] = [];
+  const executed: any[] = [];
+  let priorPlan: any;
   const mutationAt = mutation === 'rail' ? 9 : mutation === 'control' ? 18 : 12;
   try {
     for (const [index, returned] of [...fixture.training, ...fixture.selection.slice(0, 25)].entries()) {
       assert.ok(reply.ticket, JSON.stringify({ index, reason: reply.snapshot.reason }));
       const expected = variant.command(returned.action), ticket = reply.ticket;
+      const plan = priorPlan = bindContinuityPlan(ticket, reply.snapshot.trace, priorPlan);
+      const capture = captureSupportSelection(reply.snapshot.proposal, ticket, variant.rows(returned.before), () => family.state());
       assert.deepEqual({ actionRef: ticket.actionRef, data: ticket.data }, expected, 'The native ticket follows the observed public action at ' + index);
       const currentLevel = index < fixture.training.length ? 1 : 2;
       const local = index - fixture.training.length;
@@ -116,10 +122,15 @@ async function runPublicSelection(varied: boolean, mutation?: 'marking' | 'pose'
       reply = await service.handle({ type: 'advance', sessionId, sequence: ++sequence, ticketId: ticket.id,
         executionMs: 1, observation: packet(rows, sequence, returned.won ? 2 : currentLevel) });
       replies.push(reply);
+      const actual = collectContinuityReturn(ticket, plan, reply.snapshot.trace);
+      executed.push({ level: ticket.level, decisionRevision: ticket.decisionRevision, actionIndex: ticket.actionIndex,
+        action: ticket.actionRef, ...(ticket.actionRef === 'ACTION6' ? { data: ticket.data } : {}), resets: 0, ...actual,
+        supportSelection: completeSupportSelection(observeSupportSelectionReturn(capture, returned.won ? null : rows),
+          () => family.state(), actual, reply.snapshot.levelsCompleted) });
       if (mutation && local === mutationAt) break;
       if (reply.kind === 'boundary' && local !== 24) reply = await service.handle({ type: 'resume', sessionId, sequence });
     }
-    return { familyState: family.state(), tickets, replies, reply, mixedProposals };
+    return { familyState: family.state(), tickets, replies, reply, mixedProposals, executed };
   } finally { runtime.close('test_complete'); }
 }
 
@@ -137,6 +148,20 @@ for (const varied of [false, true]) test('native acquisition reuses measured sel
   assert.equal(run.mixedProposals[0].selectionEvidence.length, 4);
   for (const ref of run.mixedProposals[0].selectionEvidence) assert.ok(run.mixedProposals[0].route_refs.includes(ref));
   assert.ok(!run.reply.snapshot.trace.some(event => event.kind === 'native_acquisition_incomplete'));
+  const groups = new Map<string, any[]>();
+  for (const ticket of run.executed) groups.set(ticket.planId, [...(groups.get(ticket.planId) ?? []), ticket]);
+  const physical = measureSupportSelection(run.executed, groups);
+  assert.ok(physical.some(series => series.movements > 0 && series.selections >= 3 && series.continued === 15));
+  for (const mutate of ['selection', 'physical', 'proof', 'acquisition']) {
+    const edited = structuredClone(run.executed), selected = edited.find(ticket => ticket.actionIndex > 0 && ticket.supportSelection?.selecting)!;
+    if (mutate === 'selection') selected.supportSelection.witness = null;
+    if (mutate === 'physical') selected.supportSelection.after.markings = selected.supportSelection.before.markings;
+    if (mutate === 'proof') selected.supportSelection.witness.refs[0] = 'other:epoch:2:revision:1:frame:0000000000000000';
+    if (mutate === 'acquisition') edited.at(-1)!.supportSelection.acquisition.refs = [];
+    const changedGroups = new Map<string, any[]>();
+    for (const ticket of edited) changedGroups.set(ticket.planId, [...(changedGroups.get(ticket.planId) ?? []), ticket]);
+    assert.throws(() => measureSupportSelection(edited, changedGroups), /SK48/);
+  }
 });
 
 for (const mutation of ['marking', 'pose'] as const) test('a contradictory selection seals only the actually executed native prefix: ' + mutation, async () => {
