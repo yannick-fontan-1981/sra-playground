@@ -70,6 +70,29 @@ test('foreign restore inputs keep public clone behavior and failures preserve th
   }
 });
 
+test('complete hydrated state can survive two restores before the first mutable access', async () => {
+  const source = initialMemory(4);
+  const store = new NativeKnowledgeStore('prepared-source', 'prepared-scope');
+  await store.commit([{ id: stateId, kind: 'family_state', family: 'sic_test_prepared_effects',
+    value: retainNativeJson(source) }], cause('complete-state'));
+  const graphState = store.value(stateId) as typeof source;
+  const family = createPreparedEffects();
+  const chain = store.graphChain;
+  family.restoreNative!(graphState);
+  family.restoreNative!(graphState);
+  assert.equal(family.nativeState!(), graphState);
+  await store.commit([{ id: stateId, kind: 'family_state', family: family.id,
+    value: family.nativeState!() }], cause('unchanged-restored-state'));
+  assert.equal(store.graphChain, chain);
+  const working = family.state();
+  assert.notEqual(working, graphState);
+  assert.equal(family.state(), working);
+  working.scenes.push('real mutable working state');
+  assert.deepEqual(graphState.scenes, []);
+  assert.deepEqual(family.nativeState!().scenes, ['real mutable working state']);
+  assert.equal(store.graphChain, chain);
+});
+
 async function frame(revision: number, subject: number, mark: number | null, level = 1) {
   const rows = Array.from({ length: 16 }, () => Array<number>(30).fill(0));
   rows[6]![subject] = 9;

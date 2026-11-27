@@ -42,6 +42,7 @@ import {
 import { sicNeedId } from './need-identity.ts';
 import { exhaustedGroup } from './test-observed-compositions.ts';
 import { copyNativeValue, retainNativeJson } from '../logos-engine/v6-native-owned.ts';
+import { isHydratedNativeJson } from '../logos-engine/v6-native-state-graph.ts';
 export const preparedEffectsId = 'sic_test_prepared_effects';
 import { freshCapabilities } from './derive-capabilities.ts';
 import { newSpatialMemory } from './spatial-access.ts';
@@ -134,13 +135,19 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
   const prepareArrival=seekAccess || comparePreparations && informationPreference?.strategy==='paired_arrival';
   let m = initialMemory(0);
   let checkpoint: typeof m | undefined;
+  let borrowed = false;
   function restoreCopiedMemory(value: typeof m) {
     m = value;
+    borrowed = false;
     m.delayed ??= newDelayedMemory();
     m.frontier ??= {...newFrontierMemory(),lastEdge:m.turns,lastScene:m.turns};
     m.projection ??= newProjectionMemory();
     m.space ??= newSpatialMemory();
     m.equations ??= freshCapabilities();
+  }
+  function workingMemory() {
+    if (borrowed) restoreCopiedMemory(copyNativeValue(m));
+    return m;
   }
   function enter(o:NativeObservation){
     if(m.epoch===o.level_epoch)return;
@@ -168,6 +175,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     next: NativeRows,
     x?: Experiment
   ) {
+    workingMemory();
     enter(b);
     let transportResult:string|undefined;
     if(!x?.relative && m.relativeMotion?.active)delete m.relativeMotion.active;
@@ -271,6 +279,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       return this.proposeInGroup!(entry, observation, rows, inputs, remaining, execution);
     },
     async proposeInGroup(group, o, rows, inputs, remaining) {
+      workingMemory();
       const revalidatePreview = group === transferredPreviewGroup;
       if (revalidatePreview) group = evidencedPlanGroup;
       enter(o);
@@ -611,8 +620,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         : sicObservedTransportDeadlock;
     },
     stateAfterLevelReset(o, _rows, entry) {
-      const proof = m.contactFrontier?.deadlock;
-      if (!proof || !entry) return;
+      if (!m.contactFrontier?.deadlock || !entry) return;
+      const proof = workingMemory().contactFrontier!.deadlock!;
       const edges = [...new Set([...(m.contactFrontier?.recoveredEdges ?? []), proof.edge])];
       const restored = structuredClone(entry) as typeof m;
       restored.transportRetry = { epoch: o.level_epoch, edges, ...(proof.repair ? {repair:proof.repair} : {}) };
@@ -623,14 +632,20 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       }
       return restored;
     },
-    state: () => m,
+    state: workingMemory,
     restore(value) {
       restoreCopiedMemory(structuredClone(value as typeof m));
     },
-    nativeState: () => checkpoint = retainNativeJson(m, checkpoint),
+    nativeState: () => borrowed ? m : checkpoint = retainNativeJson(m, checkpoint),
     restoreNative(value) {
-      // The graph value is immutable; only this detached working copy mutates.
-      restoreCopiedMemory(copyNativeValue(value as typeof m));
+      // Only authoritative hydrated JSON may remain shared between restores.
+      // Materialize a detached copy before planning, acquisition or public state access.
+      const memory = value as typeof m;
+      if (isHydratedNativeJson(memory) && memory.delayed != null && memory.frontier != null
+        && memory.projection != null && memory.space != null && memory.equations != null) {
+        m = memory;
+        borrowed = true;
+      } else restoreCopiedMemory(copyNativeValue(memory));
     },
   };
 }
