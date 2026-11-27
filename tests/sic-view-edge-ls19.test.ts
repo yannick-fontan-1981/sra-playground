@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { gunzipSync } from 'node:zlib';
 import { createNativeV6Runtime } from '../src/logos-engine/v6-native-runtime.ts';
+import { hydrateNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
 import { V6AgentService } from '../src/runtime/v6-agent-service.ts';
 import { toV6PublicObservation, type V6Command } from '../src/runtime/v6-agent-protocol.ts';
 import { sourceBackend } from '../scripts/sic-study-source-games.mjs';
@@ -17,7 +18,7 @@ const declarations = {
   strategy: JSON.parse(readFileSync(new URL('morphology_policy/strategy.drm', source), 'utf8')),
 };
 
-test('LS19 historical edge approach releases ACTION1 and closes its own objective after the fourth step', async () => {
+test('LS19 historical edge approach releases ACTION1 and closes its own objective after the fourth step', async t => {
   const capture = JSON.parse(gunzipSync(readFileSync(new URL('./fixtures/sic-view-edge-ls19-l1.json.gz', import.meta.url))).toString());
   const { sessionId, budgets, observations, commands } = capture;
   const gameRoot = process.env.SIC_LS19_GAME_ROOT;
@@ -32,7 +33,8 @@ test('LS19 historical edge approach releases ACTION1 and closes its own objectiv
     assert.deepEqual(historical, observations[sequence], `public game return ${sequence}`);
     return packet;
   }
-  const service = new V6AgentService(recovery => createNativeV6Runtime(declarations, { recovery, now: () => 0 }));
+  const runtime = await createNativeV6Runtime(declarations, { now: () => 0 });
+  const service = new V6AgentService(() => runtime);
   let result = await service.handle({ type: 'init', sessionId, sequence: 0, budgets, observation: input(0) });
   let firstObjective: string | undefined, secondObjective: string | undefined;
   assert.equal(commands.length, 13);
@@ -93,6 +95,38 @@ test('LS19 historical edge approach releases ACTION1 and closes its own objectiv
       assert.deepEqual(outcome?.viewOutcome, { objective: turn === 6 ? firstObjective : secondObjective, status: 'no_new_area', newPixels: 0 });
     }
     if (turn === 13) assert.deepEqual(outcome?.viewOutcome, { objective: decision.objective.id, status: 'no_new_area', newPixels: 0 });
+    if (turn === 13) await t.test('line 91 spends exactly one repeat on the bound LS19 obstruction', async () => {
+      assert.deepEqual([guard.index, guard.admitted, guard.reason, proposal.steps.length, proposal.steps[0].expected_after],
+        [0, true, 'bound_view_step', 1, null]);
+      const details = proposal.view_plan.details;
+      assert.deepEqual([details.previous_clear_entry, details.stationary_trials, details.exclusive_blocking_cause], [true, 1, false]);
+      assert.deepEqual([outcome?.matched, outcome?.reason], [null, 'probe_outcome_observed']);
+      const graph = runtime.inspectKnowledge();
+      const transition = (revision: number) => {
+        const node = graph.nodes[`reasoning:transition:${revision}`]!;
+        const value = hydrateNativeState(node.value!, id => graph.nodes[id]!.value) as Record<string, any>;
+        return value.caller_acquisition.view_result;
+      };
+      const firstStop = transition(12), repeatedStop = transition(13);
+      const key = details.obstruction_key;
+      assert.equal(key, 'b03ddaef9975ff61cfea0e67f15909467db18a1e05c723b624b7378185e52619');
+      assert.deepEqual(firstStop.blockage_question, { key, stationary_trials: 1 });
+      assert.deepEqual(repeatedStop.blockage_question, { key, stationary_trials: 2 });
+      assert.deepEqual(repeatedStop.registration.offset, [0, 0]);
+      assert.equal(firstStop.after_ref, repeatedStop.source_ref);
+      assert.notEqual(repeatedStop.after_ref, repeatedStop.source_ref);
+      assert.deepEqual(repeatedStop.sic_view_return, {
+        evidence: repeatedStop.after_ref, need: decision.need.id, newPixels: 0, objective: release.subObjective, status: 'no_new_area',
+      });
+      const next = result.kind === 'boundary' ? await service.handle({ type: 'resume', sessionId, sequence: turn }) : result;
+      assert.equal(next.kind, 'action');
+      assert.equal(next.command!.actionRef, 'ACTION3');
+      const resumed = (next.snapshot.proposal as Record<string, any>).sic_frontier_decision;
+      assert.equal(resumed.purpose, 'view_continuity');
+      assert.equal(resumed.strategy, 'test_local_input');
+      assert.ok(resumed.need.evidence.includes(repeatedStop.after_ref));
+      assert.notEqual(resumed.need.id, decision.need.id);
+    });
     if (turn === 3) {
       // Full public plan, references, guard and measured outcome from the 8ce7ee35 replay.
       const evidence = [commands[index], proposal.view_plan, decision, release, guard, outcome?.matched, outcome?.reason, outcome?.viewOutcome];
