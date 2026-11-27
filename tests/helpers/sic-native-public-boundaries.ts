@@ -8,7 +8,7 @@ import { toV6PublicObservation } from '../../src/runtime/v6-agent-protocol.ts';
 
 /** Drive the required native L1 start through unrelated public fixture boundaries.
  * The tested family's retained role is never modified by this fixture. */
-export async function nativeAfterPublicBoundaries(family: NativeFamily<any>, next: GameObservation, sessionId: string) {
+export async function nativeAfterPublicBoundaries(family: NativeFamily<any>, next: GameObservation, sessionId: string, actionCap = 8, groupId?: string) {
   const source: NativeFamily = {
     id: 'test_public_boundary_source',
     async propose(observation, rows) {
@@ -23,11 +23,13 @@ export async function nativeAfterPublicBoundaries(family: NativeFamily<any>, nex
     after: () => ({ matched: true, seal_prefix: true, reason: 'fixture_observed' }),
     record: () => ({ events: [] }), state: () => ({}), restore() {},
   };
-  const service = new V6AgentService(() => new NativeV6Runtime({ families: [family, source], sourceDigest: 'public-role-transfer', maxPointOccurrences: 250 }));
+  const service = new V6AgentService(() => new NativeV6Runtime({ families: [family, source], sourceDigest: 'public-role-transfer', maxPointOccurrences: 250,
+    ...(groupId ? { groups: [{ id: groupId, families: [family.id] },
+      { id: 'public_boundary_fixture', families: [source.id] }] } : {}) }));
   const empty = Array.from({ length: 64 }, () => Array<number>(64).fill(0));
   const packet = (level: number) => level === next.level ? next : { ...next, level, levelsCompleted: level - 1, frame: empty, frames: [empty] };
   let sequence = 0, reply = await service.handle({ type: 'init', sessionId, sequence,
-    observation: toV6PublicObservation(packet(1)), budgets: { targetLevels: next.level, levelActionCaps: Array(next.level).fill(8) } });
+    observation: toV6PublicObservation(packet(1)), budgets: { targetLevels: next.level, levelActionCaps: Array(next.level).fill(actionCap) } });
   for (let level = 2; level <= next.level; level++) {
     assert.ok(reply.ticket);
     sequence++;
