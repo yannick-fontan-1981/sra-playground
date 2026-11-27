@@ -10,6 +10,7 @@ from pathlib import Path
 
 BENCH = Path(__file__).resolve().parents[1]
 ASSEMBLY = "1afdede0dcdd4a5bb2c7b284b1ead20e1782fe0d"
+TEN_LINES = "8a424aab6ca2e2f6b902cc4b9c89313ed6947b74"
 FRONTIER = "experiments/sic-agenda-offres"
 
 
@@ -40,7 +41,8 @@ def main():
     p.add_argument("--node", default="node")
     args = p.parse_args()
     engine, out = args.engine.resolve(), args.output.resolve()
-    assert git("-C", str(engine), "rev-parse", "HEAD").decode().strip() == ASSEMBLY
+    source_sha = git("-C", str(engine), "rev-parse", "HEAD").decode().strip()
+    assert source_sha in (ASSEMBLY, TEN_LINES)
     git("-C", str(engine), "diff", "--exit-code", "HEAD", "--", "src", "scripts", "reference", "public", "tests")
     overlay = out / "overlay"
     overlay.mkdir(parents=True)
@@ -55,11 +57,25 @@ def main():
         tests.extend(path for path in paths if path.endswith(".test.ts"))
     tests.extend("tests/" + name + ".test.ts" for name in
                  ("v6-view-frontier", "v6-caller-integration", "v6-point-display", "v6-goal-attention", "v6-control-attention-reference"))
+    if source_sha == TEN_LINES:
+        for revision in ("16f3c5e8", "1a1cc965", "1aaafe36"):
+            paths = git("diff", "--name-only", "d0e7527c", revision, "--", "tests").decode().splitlines()
+            for path in paths:
+                if path in tests:
+                    # Preserve both branches' assertions when their tests share a filename.
+                    alias = "tests/" + revision + "-" + Path(path).name
+                    (overlay / alias).write_bytes(git("show", revision + ":" + path))
+                    tests.append(alias)
+                else:
+                    copy_git(revision, [path], overlay)
+                    if path.endswith(".test.ts"):
+                        tests.append(path)
     fogw = "docs/diagnostics/sic-reception-transfer-20261127/fogw-arrival-boundary-a10dde47.json.gz"
     copy_git("a5a90c33", [fogw], overlay)
     for source, folder in [("ba04161f", "frontiere-22-23"), ("ba04161f", "essai-local-23"), ("c0b9f402", "dico-87")]:
         copy_git(source, git("ls-tree", "-r", "--name-only", source, FRONTIER + "/" + folder).decode().splitlines(), overlay)
-    env = {**os.environ, **{key: str(engine) for key in ("SIC_LS19_GAME_ROOT", "SIC_INFORMATION_GAME_ROOT", "SIC_POINT_GAME_ROOT")}}
+    env = {**os.environ, **{key: str(engine) for key in ("SIC_LS19_GAME_ROOT", "SIC_INFORMATION_GAME_ROOT", "SIC_POINT_GAME_ROOT",
+                                                        "SIC_TARGET_GAME_ROOT", "SIC_LINKED_GAME_ROOT", "SIC_CAVITY_GAME_ROOT")}}
     def run(name, argv):
         with (out / name).open("wb") as log, (out / (name + ".stderr")).open("wb") as errors:
             subprocess.run([args.node, *argv], cwd=overlay, env=env, stdout=log, stderr=errors, check=True)
@@ -85,7 +101,7 @@ def main():
             assert result["rows"][3] == dico["alternate"]
         else:
             assert result == dico["candidate"][mode]
-    print(json.dumps({"source": ASSEMBLY, "suites": sorted(set(tests)), "passed": passes, "line23": expected,
+    print(json.dumps({"source": source_sha, "suites": sorted(set(tests)), "passed": passes, "line23": expected,
                       "line87": ["catalogue", "curieux", "autre-optimum"]}))
 
 
