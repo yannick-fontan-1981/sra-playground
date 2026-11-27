@@ -104,6 +104,23 @@ def validate_manifest(manifest, source, tree, run_id, workflow, plan, hashes):
     return shard, games
 
 
+def official_win_commands(effects, actions, levels_scored):
+    if not isinstance(effects, list) or len(effects) != actions:
+        return None
+    wins = []
+    previous = 0
+    for index, effect in enumerate(effects, 1):
+        if not isinstance(effect, list) or len(effect) <= 5 or not count(effect[5]):
+            return None
+        completed = effect[5]
+        if completed not in (previous, previous + 1):
+            return None
+        if completed > previous:
+            wins.append(index)
+        previous = completed
+    return wins if previous == levels_scored else None
+
+
 def audit_game(raw, target, budgets):
     issues = []
     status, reason = raw.get("status"), raw.get("reason")
@@ -113,6 +130,7 @@ def audit_game(raw, target, budgets):
     levels_scored = raw.get("levels")
     child = hex_digest(raw.get("trace"))
     rows_won = reconciled = cumulative_actions = 0
+    win_commands = []
     score_overruns = []
     if status != "harness_error" and status not in CHILD_STATUSES:
         issues.append("invalid_status")
@@ -152,6 +170,7 @@ def audit_game(raw, target, budgets):
             cumulative_actions += commands
         if won is True:
             rows_won += 1
+            win_commands.append(cumulative_actions)
             if not count(row.get("scoredMs")):
                 issues.append(f"score_time_missing:L{level}")
             elif row["scoredMs"] > budgets[index]["activeTimeMs"]:
@@ -166,6 +185,8 @@ def audit_game(raw, target, budgets):
         issues.append("command_total_mismatch")
     if child and hex_digest(last_hash) and raw["trace"] != last_hash:
         issues.append("terminal_trace_mismatch")
+    if child and not error and official_win_commands(raw.get("effects"), actions, levels_scored) != win_commands:
+        issues.append("official_win_command_mismatch")
     recoveries = raw.get("recoveries")
     if "recoveries" in raw and (not isinstance(recoveries, dict)
                                or any(not count(recoveries.get(key)) for key in ("reset", "undo"))):
