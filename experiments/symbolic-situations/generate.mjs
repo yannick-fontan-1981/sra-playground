@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
+import { writeFiles } from './write-set.mjs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
@@ -130,35 +130,7 @@ function writeCorpus(directory, corpus) {
     files.set('public/' + id + '.md', publicCard(model));
     files.set('corriges/' + id + '.md', answerCard(key, model));
   }
-  if (existsSync(directory)) {
-    // Allow an identical rerun, including a checked-out example with native newlines.
-    for (const sub of ['public', 'corriges']) {
-      const folder = join(directory, sub);
-      const expected = [...files.keys()].filter(file => file.startsWith(sub + '/')).length;
-      if (!existsSync(folder) || readdirSync(folder).length !== expected) {
-        throw new Error('Inventaire différent dans ' + folder + '. Choisir un nouveau --out.');
-      }
-    }
-    for (const [file, data] of files) {
-      const path = join(directory, file);
-      if (!existsSync(path) || readFileSync(path, 'utf8').replaceAll('\r\n', '\n') !== data) {
-        throw new Error('Le dossier contient un autre jeu de fiches. Choisir un nouveau --out.');
-      }
-    }
-    return;
-  }
-  mkdirSync(dirname(directory), { recursive: true });
-  const staging = mkdtempSync(directory + '.');
-  try {
-    for (const [file, data] of files) {
-      const target = join(staging, file);
-      mkdirSync(dirname(target), { recursive: true });
-      writeFileSync(target, data, 'utf8');
-    }
-    renameSync(staging, directory);
-  } finally {
-    rmSync(staging, { recursive: true, force: true });
-  }
+  writeFiles(directory, files);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

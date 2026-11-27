@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "seed": "17",
+  "cases": [
+    {
+      "id": "8fdcd8d8ca5824f24e0c",
+      "model": {
+        "source": "J4cdc9a",
+        "receiver": "J679fb3",
+        "drop": "Jbbd6ad",
+        "jam": "Jbc2cd1",
+        "indexed": true,
+        "archive": "Jbbd6ad",
+        "purged": true,
+        "current": "Jbbd6ad"
+      },
+      "key": {
+        "Jbbd6ad": [
+          [
+            "bloquer J4cdc9a",
+            "retirer J4cdc9a",
+            "indexer J679fb3",
+            "sceller J679fb3"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "bb50dcdbaa354a6e4a85",
+      "model": {
+        "source": "J4cdc9a",
+        "receiver": "J679fb3",
+        "drop": "Jbbd6ad",
+        "jam": "Jbc2cd1",
+        "indexed": true,
+        "archive": "Jbbd6ad",
+        "purged": true,
+        "current": "Jbc2cd1"
+      },
+      "key": {
+        "Jbc2cd1": [
+          [
+            "retirer J4cdc9a",
+            "bloquer J4cdc9a",
+            "indexer J679fb3",
+            "sceller J679fb3"
+          ],
+          [
+            "retirer J4cdc9a",
+            "indexer J679fb3",
+            "bloquer J4cdc9a",
+            "sceller J679fb3"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "9d6cd17397079244694a",
+      "model": {
+        "source": "J4cdc9a",
+        "receiver": "J679fb3",
+        "drop": "Jbbd6ad",
+        "jam": "Jbc2cd1",
+        "indexed": true,
+        "archive": "Jbbd6ad",
+        "purged": true,
+        "current": null
+      },
+      "key": {
+        "Jbbd6ad": [
+          [
+            "sonder J4cdc9a",
+            "bloquer J4cdc9a",
+            "retirer J4cdc9a",
+            "indexer J679fb3",
+            "sceller J679fb3"
+          ]
+        ],
+        "Jbc2cd1": [
+          [
+            "sonder J4cdc9a",
+            "retirer J4cdc9a",
+            "bloquer J4cdc9a",
+            "indexer J679fb3",
+            "sceller J679fb3"
+          ],
+          [
+            "sonder J4cdc9a",
+            "retirer J4cdc9a",
+            "indexer J679fb3",
+            "bloquer J4cdc9a",
+            "sceller J679fb3"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "345436640366130fd8c3",
+      "model": {
+        "source": "J4cdc9a",
+        "receiver": "J679fb3",
+        "drop": "Jbbd6ad",
+        "jam": "Jbc2cd1",
+        "indexed": true,
+        "archive": "Jbbd6ad",
+        "purged": false,
+        "current": null
+      },
+      "key": {
+        "Jbbd6ad": [
+          [
+            "purger J4cdc9a",
+            "sonder J4cdc9a",
+            "bloquer J4cdc9a",
+            "retirer J4cdc9a",
+            "indexer J679fb3",
+            "sceller J679fb3"
+          ]
+        ],
+        "Jbc2cd1": [
+          [
+            "purger J4cdc9a",
+            "sonder J4cdc9a",
+            "retirer J4cdc9a",
+            "bloquer J4cdc9a",
+            "indexer J679fb3",
+            "sceller J679fb3"
+          ],
+          [
+            "purger J4cdc9a",
+            "sonder J4cdc9a",
+            "retirer J4cdc9a",
+            "indexer J679fb3",
+            "bloquer J4cdc9a",
+            "sceller J679fb3"
+          ]
+        ]
+      }
+    }
+  ]
+}
