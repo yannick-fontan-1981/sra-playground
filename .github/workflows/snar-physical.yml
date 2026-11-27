@@ -1,0 +1,72 @@
+name: SNAR physical continuity from level one
+on:
+  push:
+    branches: [qualification/snar-physical-combined-20261127]
+permissions:
+  contents: read
+jobs:
+  collect-grid:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      SOURCE_SHA: 339f31bf84a557fe551bcda93b084230d750127a
+      SIC_STUDY_CONTINUITY: '1'
+      SIC_STUDY_WORKERS: '1'
+      SIC_STUDY_SOLVER: sic
+    steps:
+      - name: Initialize receipt
+        run: |
+          mkdir -p "$RUNNER_TEMP/snar-physical"
+          printf '%s\n' 'node scripts/compare-source100.mjs . . receipt.jsonl source:SNAR 1 6 44' > "$RUNNER_TEMP/snar-physical/command.txt"
+          printf '%s\n' "$SOURCE_SHA" > "$RUNNER_TEMP/snar-physical/expected-source.sha"
+      - uses: actions/checkout@v4
+        with:
+          ref: 339f31bf84a557fe551bcda93b084230d750127a
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node scripts/prepare-python.mjs
+      - name: Save the exact source before collection
+        run: |
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          git rev-parse HEAD HEAD^{tree} > "$RUNNER_TEMP/snar-physical/source.txt"
+          git status --porcelain --untracked-files=no > "$RUNNER_TEMP/snar-physical/tracked-status.txt"
+          test ! -s "$RUNNER_TEMP/snar-physical/tracked-status.txt"
+          sha256sum scripts/compare-source100.mjs scripts/sic-grid-continuity.mjs scripts/sic-grid-continuity-contract.mjs src/sic/navigate-revealed-grid.ts > "$RUNNER_TEMP/snar-physical/source.sha256"
+      - name: Collect real grid tickets and public returns
+        run: |
+          node scripts/compare-source100.mjs . . "$RUNNER_TEMP/snar-physical/receipt.jsonl" source:SNAR 1 6 44 \
+            2>&1 | tee "$RUNNER_TEMP/snar-physical/collection.log"
+      - name: Verify frozen source and original action budgets
+        run: |
+          sha256sum --check "$RUNNER_TEMP/snar-physical/source.sha256"
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          test -z "$(git status --porcelain --untracked-files=no)"
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFileSync } from 'node:fs';
+          import { join } from 'node:path';
+          const raw = readFileSync(join(process.env.RUNNER_TEMP, 'snar-physical', 'receipt.jsonl'), 'utf8');
+          const run = JSON.parse(raw.trim());
+          assert.equal(run.code, 'SNAR');
+          assert.equal(run.solver, 'sic');
+          assert.equal(run.parallelWorkers, 1);
+          assert.equal(run.start, 1);
+          assert.equal(run.levels.length, 6);
+          const caps = [21, 29, 28, 44, 42, 35];
+          assert.ok(run.levels.every((level, index) => level.level === index + 1 && level.won && level.actions <= caps[index]));
+          assert.equal(run.executedTickets.length, run.issued);
+          assert.ok(run.executedTickets.every(ticket => ticket.resets === 0));
+          console.log(JSON.stringify({code:run.code, start:run.start, solved:run.levels.length, actions:run.levels.map(level=>level.actions)}));
+          NODE
+      - name: Preserve native physical receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: snar-physical-collector
+          path: ${{ runner.temp }}/snar-physical/
+          retention-days: 14
+          if-no-files-found: error
