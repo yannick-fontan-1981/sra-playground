@@ -49,8 +49,10 @@ export async function play(vendor,variant='nominal',engine=root,observeHooks=tru
     const board=await game.step(Number(ticket.actionRef.slice(6)),ticket.data);
     result=await service.handle({type:'advance',sessionId,sequence:i+1,ticketId:ticket.id,observation:observe(board,i+1),executionMs:0});
     const e=result.snapshot.trace.findLast(e=>e.kind==='actual_outcome');
+    const acquiredView=result.snapshot.trace.findLast(item=>item.kind==='sic_view_return' && item.evidence===e?.observation_ref);
     history.push({...row,returned:{ref:e?.observation_ref,matched:e?.matched,status:e?.status ?? null,reason:e?.reason ?? null,
-      acquisition:e?.sic_frontier_outcome ?? null,view:e?.viewOutcome ?? null,
+      acquisition:e?.sic_frontier_outcome ?? null,view:acquiredView ? {objective:acquiredView.objective,status:acquiredView.status,
+        newPixels:acquiredView.newPixels} : null,
       registration:events.findLast(r=>r.kind==='vue-acquise' && r.ref===e?.observation_ref)?.data ?? null,completed:board.levelsCompleted}});
   }
   return {prefix,history,stop:result.reason ?? null};
