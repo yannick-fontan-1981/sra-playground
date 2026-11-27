@@ -1,0 +1,15 @@
+{
+  "révisions": [
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "1aaafe36177ab73edf63c18f1a0950bd790a9c6c"
+  ],
+  "départsParRévision": 8,
+  "parcours": 2,
+  "construitsDéveloppement": 4,
+  "construitsRéserve": 2,
+  "empreintes": {
+    "parcours": "a6f508200e9a9a4c94be831bd1ef99d2fd32b36701b38f44bb00e78d221c7897",
+    "développement": "913146ba465d06482e1e1aaf2e5c5604b69926f5cca0e5377b8676bd1d80bece",
+    "réserve": "186b78e0a3a8900413f3d8a5486934bd577888e51914e370f7803b81b0b53bee"
+  }
+}
