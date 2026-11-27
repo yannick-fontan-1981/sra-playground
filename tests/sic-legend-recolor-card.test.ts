@@ -1,8 +1,18 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { readFileSync } from 'node:fs';
+import { gunzipSync } from 'node:zlib';
 import { executeWorkflow } from '../src/logos-engine/interpreter.ts';
+import { NativeV6Runtime } from '../src/logos-engine/v6-native-runtime.ts';
+import { ObservedInputDomain } from '../src/logos-engine/v6-native-observer.ts';
+import type { NativeFamily, NativePoint } from '../src/logos-engine/v6-native-types.ts';
 import { measure } from '../src/logos-engine/v6-topological-recolor-geometry.ts';
 import { checkExampleWorkflow, matchExampleModule, matchExampleOperations, matchExampleWorkflow } from '../src/sic/legend-recolor-card.ts';
+import { createSicLegendRecolor } from '../src/sic/legend-recolor.ts';
+import { observedPressureRecoveryGroup } from '../src/sic/public-input-exploration.ts';
+import { preparedEffectsId } from '../src/sic/test-prepared-effects.ts';
+import { V6AgentService } from '../src/runtime/v6-agent-service.ts';
+import { toV6PublicObservation } from '../src/runtime/v6-agent-protocol.ts';
 
 test('the SRC example card selects or reuses a value and checks outside preservation', async () => {
   const module = await matchExampleModule();
@@ -100,3 +110,68 @@ test('aligned pockets reveal an example whose contour shares the legend backdrop
   rows[14]![2] = 1;
   assert.equal(read(), null);
 });
+
+const captured = JSON.parse(gunzipSync(readFileSync(new URL(
+  '../docs/diagnostics/sic-hole-20261127/selection-window-public.json.gz', import.meta.url,
+))).toString()) as { number: number; before: number[][]; after: number[][] }[];
+
+for (const scenario of ['observed', 'permuted palette', 'wrong pigment', 'changed field', 'unwitnessed selection'] as const) {
+  test('a palette selection retains priority for its immediate acquired recoloring: ' + scenario, async () => {
+    const owner = createSicLegendRecolor();
+    const selection = captured.find(row => row.number === 2)!;
+    const disruption = captured.find(row => row.number === 3)!;
+    const permuted = scenario === 'permuted palette', unwitnessed = scenario === 'unwitnessed selection';
+    const preview: NativeFamily = {
+      id: preparedEffectsId,
+      async propose(observation, rows) {
+        if (observation.revision === 1 && !unwitnessed) return null;
+        const point: NativePoint = [22, 59];
+        const action = { action_ref: 'ACTION6', data: { x: point[0], y: point[1] } };
+        const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, point,
+          { reason: 'Inspect the other visible control', evidence: [observation.observation_ref] });
+        return { status: 'proposed', kind: this.id, actions: [action], steps: [{ action, point_binding: witness }],
+          sicLocalDecision: { strategy: 'inspect_visible_control' }, binding: { observation_ref: observation.observation_ref } };
+      },
+      before: (proposal, _index, _packet, observation) =>
+        ({ admitted: proposal.binding?.observation_ref === observation.observation_ref, reason: 'visible_control_bound' }),
+      after: () => ({ matched: null, seal_prefix: true, reason: 'inquiry_return' }),
+      record: () => ({ events: [] }), state: () => ({}), restore() {},
+    };
+    const observe = (rows: number[][], stepIndex = 0) => {
+      const frame = permuted ? rows.map(row => row.map(value => (value + 5) % 16)) : rows;
+      return toV6PublicObservation({ gameCode: 'PUBLIC', frame, frames: [frame], state: 'NOT_FINISHED',
+        level: 1, levelCount: 2, levelsCompleted: 0, availableActionIds: [6], canUndo: false, canSelectLevel: true, defaultFps: 10 }, stepIndex);
+    };
+    const service = new V6AgentService(() => new NativeV6Runtime({ families: [owner, preview], sourceDigest: 'legend-retained-color',
+      maxPointOccurrences: 250, groups: [
+        { id: observedPressureRecoveryGroup, families: [owner.id, preview.id] },
+        { id: 'follow_symbol_diagram', families: [owner.id] },
+      ] }));
+    const sessionId = 'legend-color-' + scenario.replaceAll(' ', '-');
+    let result = await service.handle({ type: 'init', sessionId, sequence: 0, observation: observe(unwitnessed ? selection.after : selection.before),
+      budgets: { targetLevels: 2, levelActionCaps: [10, 10] } });
+    const currentPlan = () => result.snapshot.trace.findLast(event => event.kind === 'sic_native_plan');
+    assert.ok(result.ticket, result.snapshot.reason);
+    if (unwitnessed) {
+      assert.equal(currentPlan()?.family, preview.id);
+      return;
+    }
+    assert.equal(currentPlan()?.strategy, 'acquire_legend_pigment');
+    const returned = structuredClone(scenario === 'wrong pigment' ? disruption.after : selection.after);
+    if (scenario === 'changed field') returned[1]![8] = (returned[1]![8]! + 1) % 16;
+    result = await service.handle({ type: 'advance', sessionId, sequence: 1, ticketId: result.ticket.id, executionMs: 1,
+      observation: observe(returned, 1) });
+    const matched = scenario === 'observed' || permuted;
+    const actual = result.snapshot.trace.findLast(event => event.kind === 'actual_outcome');
+    assert.equal(actual?.matched, matched, actual?.reason);
+    assert.equal(result.kind, 'boundary');
+    result = await service.handle({ type: 'resume', sessionId, sequence: 1 });
+    assert.ok(result.ticket, result.snapshot.reason);
+    assert.equal(currentPlan()?.family, matched ? owner.id : preview.id);
+    if (matched) {
+      assert.equal(currentPlan()?.strategy, 'apply_legend_pigment');
+      const proposal = result.snapshot.proposal as Record<string, any>;
+      assert.ok(proposal.route_refs.includes(actual?.observation_ref));
+    }
+  });
+}

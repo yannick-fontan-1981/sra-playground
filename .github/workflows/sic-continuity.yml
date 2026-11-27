@@ -33,7 +33,7 @@ jobs:
       - run: node --test tests/sic-oriented-delivery-continuity.test.ts tests/sic-oriented-delivery-contract.test.mjs tests/v6-knowledge-store-noop.test.ts tests/sic-prepared-effects-native-state.test.ts
       - run: node --test tests/sic-timed-grid-continuity.test.ts tests/sic-patrol-terrain-continuity.test.ts tests/v6-incremental-memory.test.ts
       - run: node --test tests/sic-grid-continuity-evidence.test.mjs
-      - run: node --test tests/sic-preview-interface.test.ts tests/sic-experiment-arbitration.test.ts tests/sic-population-control-transfer.test.ts tests/sic-transferred-population-selection.test.ts
+      - run: node --test tests/sic-preview-interface.test.ts tests/sic-experiment-arbitration.test.ts tests/sic-population-control-transfer.test.ts tests/sic-transferred-population-selection.test.ts tests/sic-legend-recolor-card.test.ts
       - run: node --test tests/sic-compartment-encounter.test.ts tests/sic-directional-reception-transfer.test.ts
       - run: node --test tests/sic-ordered-feedback-transfer.test.ts tests/sic-feedback-partitions.test.ts
       - run: node --test tests/sic-channel-mixture-transfer.test.ts
