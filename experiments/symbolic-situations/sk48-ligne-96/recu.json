@@ -1,0 +1,28 @@
+{
+  "totauxParRévision": {
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021": {
+      "départsInitiaux": 10,
+      "complément": 2,
+      "nonAtteints": 4,
+      "contradictions": 8,
+      "reprisesConfirmées": 4,
+      "refusSansTémoin": 4,
+      "niveauxTerminés": 2
+    },
+    "08fa10a6b9986e7028551fbfc9d9e16eb83726b7": {
+      "départsInitiaux": 10,
+      "complément": 2,
+      "nonAtteints": 4,
+      "contradictions": 8,
+      "reprisesConfirmées": 4,
+      "refusSansTémoin": 4,
+      "niveauxTerminés": 2
+    }
+  },
+  "empreintes": {
+    "historique": "d0352dc8f9d6bcf341288cc60677463d7f72fe97a5dc43c76d2c5592c8601fd0",
+    "développement": "9a4fbfea86741fb4d16041a6f8d5718538a290de38af42d63dd6cf1f4ee9287d",
+    "réserve": "f10926709aa9b59fd421b5b741e9402d7b85b5d69b5f0a4543b8694ab0bfa875",
+    "complément": "50a56615b5094ea997c6c91bf5c77a3889bab4a62f668f7dc8be62cb54e30c49"
+  }
+}
