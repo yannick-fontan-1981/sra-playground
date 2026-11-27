@@ -45,3 +45,23 @@ The 25 role/route/native tests and TypeScript check passed before this run. The 
 Independent review confirmed that planning does not acquire a passage or its continuation context, and that consumed context proofs are filtered to the current observation scope. It also found a narrow restoration case: globally deduplicating context/outcome pairs could let a retained foreign-scope pair prevent reacquisition of the same pair in the current scope. Deduplication now includes the observation scope. Foreign evidence remains retained, while actual current returns establish their own proof pair; only those current pairs enter a proposal's evidence. Two additional native restoration cases verify this with the real L1 acquisition sequence and two geometric variants. Stationary and ambiguous subsequent returns both close the prefix and preserve independent facts.
 
 This follow-up changes only the scope test in production. The 6/6 strict archive above remains explicitly attached to `e531143b`, before this narrow repair. Physical collection uses the repaired candidate and compares its entire command/return trajectory with that archive. The combined integration strict job is responsible for qualifying the final production tree before main integration.
+
+
+## Complete physical continuity proof
+
+The passive full campaign ran on local `be09f7e504da3f429698ffdb47ce8b8514109a1e` (GitHub `465c41764a014f3256b0bf9f17e1781f83676230`, exact tree `cd94653289b49439c7e805eda029efed1ea1b29e`) from 14:34:55.518 to 14:36:08.130 UTC. Its source remained frozen and clean. All 274 commands and every public frame, including animation frames, match the strict campaign exactly after the narrow scope repair. No command or active-time qualification limit was changed. The archived collector is passive and makes no additional active-time claim.
+
+| Level | Commands | Continued native commands | Passages within series | Already acquired passages within series | Continued preparation moves | Passages with continuous preparation |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| L1 | 7 | 2 | 0 | 0 | 0 | 0 |
+| L2 | 35 | 29 | 5 | 1 | 25 | 4 |
+| L3 | 40 | 33 | 5 | 0 | 28 | 5 |
+| L4 | 46 | 37 | 7 | 0 | 30 | 7 |
+| L5 | 66 | 55 | 9 | 0 | 46 | 9 |
+| L6 | 80 | 67 | 11 | 0 | 56 | 11 |
+
+The contract verifies actual native ticket identity, ordered scope-bound evidence, the independently located actor and public surface indicator, raw frame digests, translation under the observed directional role, paired openings and actual arrival after each crossing. Unknown crossings carry no acquired destination before their actual return and close the prefix. Known crossings match the retained passage. Acquisition is read only at final native closure. Official completion additionally requires the commanded contact with the visible goal and the resulting acquired score. L1's single contradicted trial is retained as a contradiction and never counted as physical continuity. Two foreign-family unitary commands remain in the full public trajectory; the 272 surface-owner receipts are measured independently.
+
+This protects 223 continued native commands, 37 real passages inside bounded series (one already acquired passage), and 185 continued preparation movements before 36 actual passages. Preparation counters restart after each crossing; movement elsewhere cannot compensate for a lost contact. The per-level gate scales each measured requirement against its own command baseline and preserves every original 80-command ceiling. The new `surface-routes` cohort runs ETAG from L1 through L6 with one native worker. Existing cohorts and thresholds remain unchanged.
+
+All 30 targeted role/route/observer checks pass, including the two scope-restoration scenarios. Twenty additional contract checks accept the complete archive and reject altered native identity, intermediate reconciliation, continued contradictions, stale/foreign/future evidence, missing or forged physical measurements, predicted-but-unexecuted movement, incompatible openings, early or missing acquisition, invented known passages, missing goal contact, incomplete campaigns and resets. The complete multi-game continuity suite and combined-source strict CI remain required before integration; publication and delivered-interface reproduction are coordinated separately.

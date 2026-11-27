@@ -1,9 +1,17 @@
 import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { continuityObservation, requireExecutedPrefix } from './sic-continuity-contract.mjs';
 import { surfaceOwners, observeSurfaceBoard, observeSurfaceOpening } from './sic-surface-continuity.mjs';
 
 export const surfaceCeilings = [80, 80, 80, 80, 80, 80];
-const equal = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+// Actual [commands, continued, crossings in series, acquired crossings,
+// continued preparation movements, crossings with continued preparation].
+// Frozen be09f7e5 collection; full public trace equals the e531143b strict.
+export const surfaceContinuity = [
+  [7, 2, 0, 0, 0, 0], [35, 29, 5, 1, 25, 4], [40, 33, 5, 0, 28, 5],
+  [46, 37, 7, 0, 30, 7], [66, 55, 9, 0, 46, 9], [80, 67, 11, 0, 56, 11],
+];
+const equal = isDeepStrictEqual;
 const vectors = { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0] };
 const opposite = [1, 0, 3, 2];
 const known = (refs, current) => Array.isArray(refs) && refs.length && refs.every(ref => {
@@ -34,7 +42,7 @@ export function measureSurfaceContinuity(run, issued, groups) {
     if (!group.some(ticket => surfaceOwners.has(ticket.outcome?.family))) continue;
     requireExecutedPrefix('ETAG', group);
     assert.ok(group.every(ticket => surfaceOwners.has(ticket.outcome?.family) && ticket.surface), 'Surface lost its passive observations');
-    let successful = true, crossings = 0, preparations = 0, preparing = 0;
+    let successful = true, crossings = 0, knownCrossings = 0, preparations = 0, preparedCrossings = 0, preparing = 0;
     for (const [index, ticket] of group.entries()) {
       const s = ticket.surface, effect = effects.get(ticket), { before, after } = publicTicket(ticket, s, effect);
       if (ticket.level > 1) assert.ok(s.roleEpoch === ticket.level && s.roleScore === ticket.level - 1
@@ -43,8 +51,14 @@ export function measureSurfaceContinuity(run, issued, groups) {
       if (index > 0) assert.ok(group[index - 1].surface.afterRef === s.beforeRef
         && equal(group[index - 1].surface.after, s.before), 'Surface changed between continued native tickets');
       if (ticket.outcome.reason === 'official_boundary') {
+        const target = s.expectedActor, delta = vectors[ticket.action];
+        const targetInk = target && [s.before.frame[target[1]]?.[target[0]], s.before.frame[target[1]]?.[target[0] + 1],
+          s.before.frame[target[1] + 1]?.[target[0]], s.before.frame[target[1] + 1]?.[target[0] + 1]];
         assert.ok(index === group.length - 1 && s.scoreAfter === ticket.level && ticket.outcome.matched === true
-          && s.acquisition?.roleScore === ticket.level && s.acquisition.roleEvidence.includes(s.afterRef),
+          && s.acquisition?.roleScore === ticket.level && s.acquisition.roleEvidence.includes(s.afterRef)
+          && targetInk?.every(ink => ink === s.roles.goal) && delta
+          && target[0] === s.before.actor[0] + delta[0] * s.roles.pitch
+          && target[1] === s.before.actor[1] + delta[1] * s.roles.pitch,
         'Surface completion lost its official and acquired success');
         continue;
       }
@@ -69,7 +83,9 @@ export function measureSurfaceContinuity(run, issued, groups) {
         else assert.ok(s.expectedTo === null && index === group.length - 1
           && s.acquisition && equal(s.acquisition.step, s.after.address), 'Surface acquired an experiment before its actual crossing closed');
         crossings++;
+        if (s.kind === 'linked') knownCrossings++;
         preparations += preparing;
+        if (preparing > 0) preparedCrossings++;
         preparing = 0;
       }
       if (index === group.length - 1) assert.ok(s.acquisition && s.acquisition.evidence.includes(s.afterRef),
@@ -79,7 +95,7 @@ export function measureSurfaceContinuity(run, issued, groups) {
     if (successful && group.length > 1) {
       const first = issued.indexOf(group[0]);
       series.push({ kind: 'surface route and measured passage', first, last: first + group.length - 1,
-        continued: group.length - 1, crossings, preparations });
+        continued: group.length - 1, crossings, knownCrossings, preparations, preparedCrossings });
     }
   }
   return series;
