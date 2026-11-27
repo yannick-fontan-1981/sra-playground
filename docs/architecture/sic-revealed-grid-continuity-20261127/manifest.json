@@ -1,11 +1,11 @@
 {
-  "createdAt": "2026-11-27T03:11:18.761205+00:00",
+  "createdAt": "2026-11-27T03:50:04.345593+00:00",
   "game": "SNAR",
-  "status": "partial_checkpoint",
+  "status": "partial_checkpoint_4_of_6",
   "source": {
-    "local": "d6f8040d4f590170d9d5c801ac1846a257729b61",
-    "github": "a0a78147caa681af6f1d6ee96e6167f42c1154f4",
-    "tree": "622ad28949e2a42f65c1115ee308c62a1852c341",
+    "local": "07676e1eb49caf0d4323c798df20b15a2e480161",
+    "github": "5773d96313daec7d62d6d314c484274f03ed565c",
+    "tree": "9e155b4413a2cc109c5ea37e0ea38d701b2878f9",
     "base": "c97797426f619db16de5b29738a8d4209c78ebca"
   },
   "baselineSource": "4a546a139f9064422c078ef5f40b8c22133c39a8",
@@ -13,16 +13,16 @@
   "workers": 1,
   "references": "docs/architecture/sic-replay-reference-levels-20261126.json",
   "qualification": {
-    "levels": 3,
+    "levels": 4,
     "target": 6,
-    "actions": 91,
-    "authority": 91,
+    "actions": 132,
+    "authority": 132,
     "reason": "level_wall_time_budget",
     "levelStats": [
       {
         "level": 1,
         "won": true,
-        "activeMs": 6270,
+        "activeMs": 6208,
         "budget": {
           "actions": 21,
           "activeTimeMs": 16000,
@@ -30,35 +30,35 @@
           "timeBasis": "measured"
         },
         "actions": 16,
-        "ms": 6750,
-        "gameMs": 320,
+        "ms": 6701,
+        "gameMs": 350,
         "costs": {
           "init": {
-            "ms": 1252,
+            "ms": 1214,
             "count": 1
           },
           "advance": {
-            "ms": 2686,
+            "ms": 2609,
             "count": 16
           },
           "resume": {
-            "ms": 2197,
+            "ms": 2207,
             "count": 9
           }
         },
-        "graph": "a729c3ff2b56c6edc4c6af3aae8a45762764317d2f0b254ba762f59e7a0bd278",
+        "graph": "680e344daa84949cf543fd5df495f5e920e467731a6f1754cc40110db12e8707",
         "deltas": 2679,
         "acquiredRecords": 16,
         "nodes": 565,
         "traceEvents": 72,
         "prefixHash": "b9af930c627d06ddb5ecfa96d1425cd5ce3c10e8e5660d9bdf6b16afbd2cd121",
-        "scoredMs": 6557,
-        "settlementMs": 193
+        "scoredMs": 6511,
+        "settlementMs": 189
       },
       {
         "level": 2,
         "won": true,
-        "activeMs": 8910,
+        "activeMs": 8709,
         "budget": {
           "actions": 29,
           "activeTimeMs": 24000,
@@ -66,35 +66,35 @@
           "timeBasis": "measured"
         },
         "actions": 21,
-        "ms": 9541,
-        "gameMs": 431,
+        "ms": 9355,
+        "gameMs": 403,
         "costs": {
           "init": {
             "ms": 0,
             "count": 0
           },
           "advance": {
-            "ms": 4758,
+            "ms": 4635,
             "count": 21
           },
           "resume": {
-            "ms": 3916,
+            "ms": 3867,
             "count": 15
           }
         },
-        "graph": "2e625e085b4477604ff228d7ffb14a7eda07325a3db734b15235514e68bb05fc",
+        "graph": "4ca662d42931343294069c222e420a7b5ba436e30c32531d6ca0206c991bdd4d",
         "deltas": 6154,
         "acquiredRecords": 37,
         "nodes": 860,
         "traceEvents": 128,
         "prefixHash": "50ecdcd21c3bd4d156f844fdbecd847aeb8ac45caf8d79814e05ce9856909735",
-        "scoredMs": 9227,
-        "settlementMs": 314
+        "scoredMs": 9014,
+        "settlementMs": 342
       },
       {
         "level": 3,
         "won": true,
-        "activeMs": 8189,
+        "activeMs": 8124,
         "budget": {
           "actions": 28,
           "activeTimeMs": 15000,
@@ -102,50 +102,86 @@
           "timeBasis": "measured"
         },
         "actions": 23,
-        "ms": 8856,
-        "gameMs": 390,
+        "ms": 8784,
+        "gameMs": 382,
         "costs": {
           "init": {
             "ms": 0,
             "count": 0
           },
           "advance": {
-            "ms": 6172,
+            "ms": 6090,
             "count": 23
           },
           "resume": {
-            "ms": 1828,
+            "ms": 1857,
             "count": 16
           }
         },
-        "graph": "98e72a3a9dbf64b6bb62640549b303b51354d505f2ac2d10563c7d41054bcff4",
+        "graph": "ead1e09131fda026a258f44b3774ed90ea8c5615fa8fb6cd32c529049353f652",
         "deltas": 9914,
         "acquiredRecords": 60,
         "nodes": 1228,
         "traceEvents": 128,
         "prefixHash": "80e7b15eb24a474261548e78d9afdfccfbb3773b785a8d9f208c335501404ed6",
-        "scoredMs": 8526,
-        "settlementMs": 330
+        "scoredMs": 8439,
+        "settlementMs": 345
       },
       {
         "level": 4,
-        "won": false,
-        "actions": 31,
-        "ms": 24002,
+        "won": true,
+        "activeMs": 16040,
         "budget": {
           "actions": 44,
           "activeTimeMs": 24000,
           "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=4; won=true",
           "timeBasis": "measured"
+        },
+        "actions": 36,
+        "ms": 17343,
+        "gameMs": 841,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 12041,
+            "count": 36
+          },
+          "resume": {
+            "ms": 3569,
+            "count": 28
+          }
+        },
+        "graph": "2d6615a20487db732086055b0f1c2fa16b028d006729444a95be0f7ce5d81a98",
+        "deltas": 16527,
+        "acquiredRecords": 96,
+        "nodes": 1905,
+        "traceEvents": 128,
+        "prefixHash": "1ab077d6170d1094e39672aa4936aed74fc2ade2ab9578c481b5d2fbdf1f06d5",
+        "scoredMs": 16886,
+        "settlementMs": 456
+      },
+      {
+        "level": 5,
+        "won": false,
+        "actions": 36,
+        "ms": 28001,
+        "budget": {
+          "actions": 42,
+          "activeTimeMs": 28000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=5; won=true",
+          "timeBasis": "measured"
         }
       }
     ],
-    "completedPrefixHashesMatchBaseline": true
+    "completedPrefixHashesMatchPrevious": true
   },
   "tests": {
-    "targetedPassed": 11,
+    "targetedPassed": 24,
     "typecheck": true,
-    "independentReview": "favorable; no test run by reviewer",
+    "independentReview": "favorable; read-only by feedback",
     "globalContinuityGate": "not run for this partial checkpoint"
   },
   "diagnostic": {
@@ -188,6 +224,34 @@
       "sha256": "6337b85878c78f70298371e754e150a05c86081c90c2a48b662075263b63843c",
       "uncompressedBytes": 7998,
       "uncompressedSha256": "51b5088e6cccfebb22975ef99b25126d68349efd474946eccb744212683de8aa"
+    },
+    "reassociated-native.jsonl.gz": {
+      "bytes": 1168,
+      "sha256": "d96d07f914ee13f8403bfdd1d42b3bb0c7456bf0964ab41ac4810ce7a2275598",
+      "uncompressedBytes": 3842,
+      "uncompressedSha256": "06e517e187f872eaa917fcab24a80f314b7916fd3a43f4bb3a277680497c82ca"
+    },
+    "reassociated-native.levels.jsonl.gz": {
+      "bytes": 957,
+      "sha256": "ef8b1bb171e71d6bd548cf7879d0de712a91611c04f302336c632d83b4290572",
+      "uncompressedBytes": 2975,
+      "uncompressedSha256": "f7fb427a9c0a9014b8d649976784d771113bd77707ff26eebc7e932db1186fd6"
+    },
+    "confirmed-prefix-and-boundary.json.gz": {
+      "bytes": 58262,
+      "sha256": "22278eb8be0aa82b1d9159c8fb15ee29114628a1835702c6a01bfa7dcdca8a29",
+      "uncompressedBytes": 2009155,
+      "uncompressedSha256": "602118254a4a03cbfabc9e9ef70399e78b3d4280ca3abbd649553adad5cfd7a0"
+    },
+    "boundary-native-diagnostic.jsonl.gz": {
+      "bytes": 2340,
+      "sha256": "74d03c4e10973efcf3c8ecee117c6836e69d351e6124a0c0d91e96df902db269",
+      "uncompressedBytes": 14127,
+      "uncompressedSha256": "0ad0671a12cb1021bf9a580db6dbe3497998c9eeb4c67e342229460e64a26acb"
     }
-  }
+  },
+  "previousCheckpoint": "checkpoint-3-levels.json",
+  "qualifiedRaw": "reassociated-native.jsonl.gz",
+  "qualifiedLevels": "reassociated-native.levels.jsonl.gz",
+  "nextMissingMeasure": "First foreign return at L5, before any extension to special mechanisms"
 }

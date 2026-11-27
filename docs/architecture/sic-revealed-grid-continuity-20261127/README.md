@@ -1,6 +1,24 @@
 # SNAR — continuité sur une grille déjà observée
 
-## État du lot
+## État actuel : quatre niveaux gagnés
+
+Le second correctif gagne désormais **L1–4**, en **16, 21, 23 et 36 commandes**. Le L4 marque son score à **16,886 s**, puis réconcilie en **0,456 s**, sous les plafonds inchangés de 44 commandes et 24 s. Le strict s’arrête au L5 après 36 commandes sur 42 et 28,001 s sur 28 s ; ses huit derniers gestes viennent de `sic_cavity_access`. Il reste donc **4/6**, avec 132 commandes toutes autorisées par SIC. L6 n’a pas été atteint. Les empreintes complètes L1–3 restent celles du témoin.
+
+Source locale `07676e1eb49caf0d4323c798df20b15a2e480161`, GitHub `5773d96313daec7d62d6d314c484274f03ed565c`, arbre identique `9e155b4413a2cc109c5ea37e0ea38d701b2878f9`. Les 24 tests ciblés et le contrôle de types passent ; la revue indépendante est favorable. Le lot n’est pas intégré ou publié et le contrôle global reste requis.
+
+### Acquisition perdue à la frontière publique
+
+Au premier geste L4 (global 61), une autre famille exécute ACTION1 avant que la navigation soit consultée. La géométrie héritée était reconnue sans ambiguïté juste avant. L’acteur reste dans sa cellule et le mur immédiatement visé apparaît. Seule cette cellule change dans la grille : les obstacles ne changent pas. Le contour du mur ajoute un second cadre de couleur unique ; la reconnaissance complète ne peut plus désigner une sortie unique. La lecture avec la géométrie observée avant le geste conserve pourtant un acteur unique, le quadrillage, la sortie et le mur révélé.
+
+L’observateur retient désormais ce retour étranger seulement avec un rôle hérité et son score, des preuves de la même session, une époque et un score stables pendant le geste, une commande disponible et une géométrie unique avant. Il exige une translation commandée confirmée, ou une immobilité attestée par un mur nouvellement révélé exactement devant l’acteur. Il contrôle le quadrillage, l’image de la sortie, les réserves et les terrains connus ; il préserve les autres faits en cas de refus. Il n’intervient pas si la reconnaissance complète fonctionne encore ou si des mécanismes spéciaux sont présents.
+
+Les deux transferts natifs apprennent réellement depuis L1 et traversent trois victoires avant la commande étrangère. La variante change palette, positions, forme du porteur et commande. Le premier ticket utile réemploie les faits réassociés. Dix refus et un cas d’idempotence vérifient notamment absence de mur nouveau, ambiguïté, commande contradictoire et frontière. Le retour du pulse final des tests est une extension synthétique déclarée, pas une victoire réelle supplémentaire.
+
+La capture supplémentaire prouve également la continuité réelle du premier correctif : les commandes 19–23 exécutent les cinq gestes du même plan L2, tous concordants, avec clôture seulement après le dernier. La matrice L1/L2/L3 relève 6/6/7 commandes continuées et des séries maximales de 5/5/5.
+
+La prochaine capture est bornée au premier retour L5, pour déterminer si la réassociation y est encore perdue et quelle preuve manque avant toute extension.
+
+## Premier checkpoint : clôture après une découverte
 
 Le correctif est sauvegardé et testé, mais **SNAR reste à 3/6 niveaux**. Le strict corrigé s’arrête au L4 après 31 commandes à 24,002 s, sous les plafonds inchangés de 44 commandes et 24 s. L1–3 gagnent en 16/21/23 ; leurs empreintes complètes sont identiques au témoin de campagne. Aucune victoire supplémentaire n’est attribuée à ce checkpoint.
 
