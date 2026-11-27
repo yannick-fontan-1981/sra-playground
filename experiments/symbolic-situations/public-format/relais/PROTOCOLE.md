@@ -25,3 +25,17 @@ node relais/mesurer.mjs --sha <SHA-complet> --depot <checkout> --format v1.1 --e
 ```
 
 Répéter `--dep` pour chaque fichier du montage. Pour un contrôle de compatibilité du même exécutable, remplacer le format par `v1`. L'option opérateur `--historiques` inclut les anciennes partitions locales et `--rapport` exige un fichier de sortie neuf.
+
+Montage effectivement qualifié, depuis `public-format`, avec Node 24 dans le PATH :
+
+```powershell
+$repo = 'D:/dev/ARC-AGI/SRA-Playground/sic-agenda-accuses-structures'
+$base = 'experiments/sic-agenda-offres'
+$v = "$base/public-v1"
+$montage = @('--sha','2c8168f2e1df1eaa6961c0f39a473ffdf0cde147','--depot',$repo,'--entree',"$v/solveur.mjs",
+  '--dep',"$v/admission.mjs",'--dep',"$v/planifier.mjs",'--dep',"$v/schema.json",
+  '--dep',"$v/protocole-1.1/contrat.mjs",'--dep',"$v/protocole-1.1/schema.json",
+  '--dep',"$base/agenda.mjs",'--dep','src/sic/reasoning-mode.ts')
+node relais/mesurer.mjs @montage --format v1.1
+node relais/ecarts.mjs @montage
+```
