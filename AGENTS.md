@@ -4,7 +4,7 @@ Ces règles s'appliquent à tout travail réalisé sur ce dépôt, quelle que so
 
 ## Vision du projet
 
-> Symbolic reasoning is a mechanism that can be conceived, recursively transformed, and trained; the result is a highly efficient, readable, maintainable, and controllable intelligence.
+> Symbolic reasoning is a mechanism that can be designed, recursively transformed, and trained; the result is a highly efficient, readable, maintainable, and controllable intelligence.
 
 L’objectif est de traiter le raisonnement symbolique comme un ensemble d’articulations que l’on peut entraîner.
 
