@@ -1,5 +1,7 @@
 # Qualification du déplacement axial · a5a90c33
 
+**Les 107 reçus de l’enfant concordent directement avec ceux du parent et avec ceux du gel.** Les trois campagnes totalisent chacune 692 niveaux gagnés et réconciliés et 18 560 commandes autorisées. Pour dix jeux, le banc établit aussi l’égalité parent → enfant au niveau de 23 103 événements de décision. Les 97 autres verdicts portent sur les champs du reçu historique. [Index chaîné par jeu](sic-qualification-a5a90c33/qualification.json)
+
 Le candidat `a5a90c3349ea49bba8e40055444cea2026bee962` est l’enfant direct de `3c2d6bcfd4a7d7abf28650e2f8ffed3d3510c3b4`. La [qualification du parent](sic-qualification-3c2d6bcf.md) relie ses 107 reçus au gel `d0e7527ca8033bd805a6d7a8bb021eff62e87021`. Le diff de production de l’enfant touche trois fichiers. Il extrait `singleStepDisplacement` dans `observed-translation.ts` et l’appelle dans les deux méthodes `record` étudiées. [Contrat de l’extraction](https://github.com/yannick-fontan-1981/sra-playground/blob/a5a90c3349ea49bba8e40055444cea2026bee962/docs/architecture/sic-candidat-deplacement-axial.md)
 
 ## Deux consommateurs observés
@@ -57,3 +59,19 @@ Les captures locales ont été lancées en série sur le poste Windows, avec les
 | FOGW, parent → même parent | Le premier parent atteint 60 commandes en L6, le second 50. Le premier écart est à l’événement 1 489. |
 
 Chaque paire locale concorde jusqu’à la frontière indiquée. Ces écarts de complétude et de réconciliation restent observables sur ce poste. Les essais ne départagent pas les causes de la variation de temps. Le verdict des dix parcours complets provient des runners Ubuntu avec les plafonds historiques.
+
+## Campagne des 107 et reprise
+
+La première tentative du workflow `4a66adc86b93c28ebb5bba731c5115c0ed0b0eec` a rejoué le SHA enfant sur 24 lots équilibrés, en série dans chaque lot. Les 107 codes sont distincts. Aucune différence d’effet, de préfixe par niveau ou de résultat au niveau des reçus, aucun dépassement au score. SNAR a gagné 6/6 en 163 commandes. SS01 (444 commandes) et SS04 (443) ont gagné 8/8 avec chacun un reset. Les 105 autres jeux comptent zéro reset et les 107 zéro undo. [Run de l’enfant](https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46071413619)
+
+Du lancement à la fin du dernier contrôle, **11 min 41 s** se sont écoulées. Les 24 étapes de rejeu couvrent une fenêtre de 9 min 28 s, avec un pic de 20 étapes simultanées et une durée cumulée de **1 h 46 min 14 s**. Le pic des jobs de lot est également de 20, pour 2 h 11 min 25 s cumulées. [Intervalles par lot](sic-qualification-a5a90c33/horaires.json)
+
+L’[archive des 107 reçus](sic-qualification-a5a90c33/recus.zip) a pour SHA-256 `efbe2f46f94a6349fb901470fe7315468b742507650ede88550badbb9b74b906`. Le contrôle chaîné ci-dessous vérifie les deux archives, les paramètres, les 24 manifestes de chacune, le lien de parenté, les SHA-256 de chaque reçu, les dix preuves détaillées et les deux comparaisons pour chaque jeu. Dans un nouveau clone, récupérer d’abord les objets Git des archives et workflows.
+
+```powershell
+git fetch origin audit/sic-107-a5a90c33-20261127 audit/sic-107-3c2d6bcf-20261127 audit/sic-107-4be368a3-20261127 audit/sic-107-workflow-tooling-20261127
+$d = 'docs/diagnostics/sic-qualification-a5a90c33'
+py scripts/sic-compare-receipt-chain.py --parent docs/diagnostics/sic-qualification-3c2d6bcf --candidate a5a90c3349ea49bba8e40055444cea2026bee962 --workflow 4a66adc86b93c28ebb5bba731c5115c0ed0b0eec --run-id 46071413619 --receipts "$d/recus.zip" --pairs "$d/paires.zip"
+```
+
+La commande `import-ci` du [banc de reprise](sic-qualification-progressive-107.md) accepte ces mêmes SHA et ce numéro de run avec `--download` pointant vers l’archive décompressée. Un nouvel import a traité trois témoins, puis 104 nouveaux jeux, puis a réutilisé 107 verdicts. L’index regénéré est identique octet pour octet. Les reçus téléchargés et les états de reprise sont dans `artifacts/qualification-a5a90c33/ci-46071413619/` et `artifacts/qualification-a5a90c33/reimport-public/`.

@@ -1,0 +1,2050 @@
+{
+  "frozen": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "parent": "3c2d6bcfd4a7d7abf28650e2f8ffed3d3510c3b4",
+  "parentRunId": "46067464905",
+  "candidate": "a5a90c3349ea49bba8e40055444cea2026bee962",
+  "candidateTree": "b25c054ab5c63dbb4ea850f8b73f6a168a4cc20d",
+  "workflow": "4a66adc86b93c28ebb5bba731c5115c0ed0b0eec",
+  "runId": "46071413619",
+  "attempt": 1,
+  "archiveSHA256": "efbe2f46f94a6349fb901470fe7315468b742507650ede88550badbb9b74b906",
+  "games": [
+    {
+      "game": "AMZE",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 34,
+      "authority": 34,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "05",
+      "referenceRowSHA256": "d01838994338c70de80b83154f49a8a0356506ad857246d21d65ba800efc4a7c",
+      "parentRowSHA256": "d1e23c5aa4643ddabf97b82fe91690880c371ac8f8e3413d56bc0cd3205436e9",
+      "candidateRowSHA256": "15e944b24b3d7510e01eacba382ec994f2e94ee9e4de4ef7b99e9695fc972018"
+    },
+    {
+      "game": "AR25",
+      "matches": true,
+      "target": 8,
+      "scored": 8,
+      "reconciled": 8,
+      "actions": 255,
+      "authority": 255,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "19",
+      "referenceRowSHA256": "89e3f40e80395e50d58056e69b9d01a75f311f235d248a6b945dbfd64dacdde2",
+      "parentRowSHA256": "f83a01e7e32997ab2b2474934d4f9e4174a048b972ef435ce580b850b881de2f",
+      "candidateRowSHA256": "1c01928b9578721d2751c8566e8ecbc2f6348e3fa5a54ed4e943c106bd099612"
+    },
+    {
+      "game": "AS66",
+      "matches": true,
+      "target": 9,
+      "scored": 9,
+      "reconciled": 9,
+      "actions": 161,
+      "authority": 161,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "23",
+      "referenceRowSHA256": "0ff69696ce9ed30fec8c83c4ad273d38cea24828ada5d09778f3114b0198dbe3",
+      "parentRowSHA256": "bb02a266e7cf781cdf613584e7896f0f44f25814c951d9798667fe4d18f29d71",
+      "candidateRowSHA256": "45bbb01f025ada02ad4cca64fe2263ad47591c353c17c0e25edde9545a75b647",
+      "decisions": {
+        "comparison": {
+          "equal": true,
+          "game": "AS66",
+          "events": 1613,
+          "decisions": 161
+        },
+        "sha256A": "afe063f42626c5bff0c1434f19902acc5f5f0462ece4d6daf8e2ce2c5889b337",
+        "sha256B": "afe063f42626c5bff0c1434f19902acc5f5f0462ece4d6daf8e2ce2c5889b337",
+        "method": "verified-parent-trace-sha256"
+      }
+    },
+    {
+      "game": "BP35",
+      "matches": true,
+      "target": 9,
+      "scored": 9,
+      "reconciled": 9,
+      "actions": 397,
+      "authority": 397,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "04",
+      "referenceRowSHA256": "2346d981cdffc7de21ed369b4d985bbeedb908595cd6cc5867d24087b5fc86cd",
+      "parentRowSHA256": "c75e5b6d95fe7f5afd69986f1881adf947f61dba18660a4b017f6dd5ebd9b581",
+      "candidateRowSHA256": "379568a9e57397680ab1c355e684745dab36c6adf91aa6358397430e260deff4"
+    },
+    {
+      "game": "CASC",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 95,
+      "authority": 95,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "10",
+      "referenceRowSHA256": "82379480aafd2049957e474c55c3619e542222b19251119e167d997ed4979af5",
+      "parentRowSHA256": "3baf02a090aa9732a7ad9352161f8e5a24e62ff9ce1897aaf8ed04db8ff361f3",
+      "candidateRowSHA256": "96ba291f66a34b31be9962a25cb399308f9192d992dc2e4c6d4b9330fd96e506"
+    },
+    {
+      "game": "CATL",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 48,
+      "authority": 48,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "06",
+      "referenceRowSHA256": "180717204af7451deef98769cf33a7b29445102d10da37dc7dd8adaefd406d4d",
+      "parentRowSHA256": "e15a82de553dfc6311a3fb589f04d37b31670b95a8bad3e477268e7f99b5810b",
+      "candidateRowSHA256": "faef1eff356cfdd238955ea9052ea8ae6604e63626373fe3333d2b2423bf3b0a"
+    },
+    {
+      "game": "CATR",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 121,
+      "authority": 121,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "22",
+      "referenceRowSHA256": "aa77c5af47c649f1ee180f4d0d0fae9c050daff07259c645f6fa7739940968b0",
+      "parentRowSHA256": "d9ea22771b430b2615c656c02363e0330676f71210ffdc3a94a2923f72d4a8af",
+      "candidateRowSHA256": "a092a9916855cbf110955b702b6e79c7c680a204d074e359af32ddb31490a0fa"
+    },
+    {
+      "game": "CAVA",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 83,
+      "authority": 83,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "09",
+      "referenceRowSHA256": "d3ab5e160373afd2ab0f0473078a82b6ab22b40ea079800d9320d8fa850ed519",
+      "parentRowSHA256": "dfc0b7ce34d52ace07bfab9da4c0b12907e6b7047f81052bfb698dd5297c9a65",
+      "candidateRowSHA256": "59bc4af52831896ea540dfebcad317dcc8b22985037e741f8cb12ef28b3269e5"
+    },
+    {
+      "game": "CD82",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 111,
+      "authority": 111,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "23",
+      "referenceRowSHA256": "5744f292ed882f6d646912ea9869813a5a2c827d8b0c328a5d4a3e16b5b21a8e",
+      "parentRowSHA256": "b8de75376ec0c573a65064f1088c19c088356fc559d912ea973af990d96f4f6b",
+      "candidateRowSHA256": "693ada7f22cc40512563918e7b7d10e3f8829b1e5afd7c12b9ad379c84468140"
+    },
+    {
+      "game": "CGWL",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 167,
+      "authority": 167,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "16",
+      "referenceRowSHA256": "0cca6a3d6ef9e04de8be8486405fbf8dcc567bc84b9916b45e1171300daeb9bb",
+      "parentRowSHA256": "cd8323d6d638dc8175d4330b712b117cb27296b8f808e6f4b1c14afeab40d5d7",
+      "candidateRowSHA256": "c3e3e2b8a0b7b35d4cc3142099c21d2cc4c815995e3be08012f23d640a3e4b9c"
+    },
+    {
+      "game": "CLRS",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 84,
+      "authority": 84,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "06",
+      "referenceRowSHA256": "652eb4edc1f310b478cceba1bbd398583621b628d7486babf0c54230dbbb9aaa",
+      "parentRowSHA256": "a2cb07f8f2f0af56ded10080f06c6ad574f4d7b1e8e303e958a348cca0fe4d4b",
+      "candidateRowSHA256": "46ba36bd2579807b5df34eef1ca6b5d228d08a6eebc8eed1e1f1d6651693b78a"
+    },
+    {
+      "game": "CN04",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 240,
+      "authority": 240,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "21",
+      "referenceRowSHA256": "6215f59d2e700cac5b87f582e40a7608e34e7dc874907bb67a87681a9b67c236",
+      "parentRowSHA256": "5c621d77343085ac691380e650e01759e94d61a03f94aa7846fa2774b7acbc77",
+      "candidateRowSHA256": "5395c12efba94cc85135396a43df4d67bd50a047dbb1ba8cf9a5e2ce8225cfd6"
+    },
+    {
+      "game": "COLM",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 103,
+      "authority": 103,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "15",
+      "referenceRowSHA256": "272da5afe5c983c58a647e02c8a598f1d86af394e7cd0aace6674db99bb515c6",
+      "parentRowSHA256": "91e12791291ac3de3f27fa2b0910857f5c8179d195e027a79bdfb086a1c8232f",
+      "candidateRowSHA256": "5420b00856f05be968247a938d75f1ba9fb8b25bbbba70dee4ebef5aca97e0fb"
+    },
+    {
+      "game": "COMB",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 90,
+      "authority": 90,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "20",
+      "referenceRowSHA256": "9d932b707a39c5007dea25136729ce061fba68b2de8c9ae84b732eaa1d4258b9",
+      "parentRowSHA256": "f8ff2638779b48eafd31d2d4a62492b3ad592f53b7926556b22f29890c516e15",
+      "candidateRowSHA256": "9cad7e130cd6efac3567daedcffac024b4ed78ba3e8c27c0bf31eb812b7bed05"
+    },
+    {
+      "game": "CONN",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 66,
+      "authority": 66,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "24",
+      "referenceRowSHA256": "95ad376d561504da4203bc3ab1e024149f110e9318dcc77b3f3fc413e92253b2",
+      "parentRowSHA256": "61c9bcf194317bdd67e14094c641921eedcbe6c061c71f171df6231012487f94",
+      "candidateRowSHA256": "ab562a0d0471b794636bc89824d184f2a684df533586179aa58b5982043ffb3e"
+    },
+    {
+      "game": "CRAF",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 106,
+      "authority": 106,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "19",
+      "referenceRowSHA256": "66618142e46e35d07acfab41fe3e2b2181b000f629fd883d9b5c51c8c5ada48e",
+      "parentRowSHA256": "bef0c946d5e31afbb0786b1bb4bfa47cbf341333d33506b1e8239feb6bb5d97e",
+      "candidateRowSHA256": "bffa0dfa6d52d2bd80b96a288d66489ebe24841e4273f119b448fb9d9cff599a"
+    },
+    {
+      "game": "CWSE",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 195,
+      "authority": 195,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "22",
+      "referenceRowSHA256": "9d6c18fa5c6526247931d2d94bda0d622095459bb55e6cb3057be83eb2346382",
+      "parentRowSHA256": "82ebdd9e30f3be9ed32cb15700a7e70a28c3aae6d306494c2dfe77852bb0cc19",
+      "candidateRowSHA256": "761c1982f3695788b347e05b6db80bf41087f5d8243b283f26ed8512f5f0aa85",
+      "decisions": {
+        "comparison": {
+          "equal": true,
+          "game": "CWSE",
+          "events": 1950,
+          "decisions": 195
+        },
+        "sha256A": "816b173c29806f66ee4c1e5650fa6715b0b8996f6d511b1013b46057454c3045",
+        "sha256B": "816b173c29806f66ee4c1e5650fa6715b0b8996f6d511b1013b46057454c3045",
+        "method": "ordered-pair"
+      }
+    },
+    {
+      "game": "DAME",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 65,
+      "authority": 65,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "10",
+      "referenceRowSHA256": "a2036ebc39a5330bca125ffbe14ca6f161dcb499eff13950ab03cdeed879e653",
+      "parentRowSHA256": "0008eb9628fdfc8d990be534af81df0fc0e88e2a9b05f42fdea82fd374264dce",
+      "candidateRowSHA256": "5b4a07825877f2c0b717870fd224e24b14654a980447b54b2576bb38a3c33304"
+    },
+    {
+      "game": "DC22",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 630,
+      "authority": 630,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "02",
+      "referenceRowSHA256": "106a11a957f44d8cb521b611873d8aee815d2c341a071969f2cb4374089ae218",
+      "parentRowSHA256": "54864e5acaed6282a492966028972fd446e47db4a5d8de4ab6eaff61af46d2d8",
+      "candidateRowSHA256": "cb37115383a1e1e5c6aa1e0bf1768295b198db430d7dc2da84b06e7d34dccced",
+      "decisions": {
+        "comparison": {
+          "equal": true,
+          "game": "DC22",
+          "events": 5662,
+          "decisions": 630
+        },
+        "sha256A": "c4ef882d35797e0cf64e40c6687336bdd48df83a85fb0154ff3329c78e9315f1",
+        "sha256B": "c4ef882d35797e0cf64e40c6687336bdd48df83a85fb0154ff3329c78e9315f1",
+        "method": "verified-parent-trace-sha256"
+      }
+    },
+    {
+      "game": "DICO",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 71,
+      "authority": 71,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "21",
+      "referenceRowSHA256": "ab3a213ec8335dffa40da9e0b1657fb42c0ff871d5ab3dc56f0213810f68e303",
+      "parentRowSHA256": "7d5c000ba73afd884640fcb6c747c3137edb2da62565aa1d76a3a94caa33f956",
+      "candidateRowSHA256": "73c5450d9e100f8565f4aaeb46854943374b7f837c2cd8d1395ccf8991950674"
+    },
+    {
+      "game": "DNOI",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 59,
+      "authority": 59,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "12",
+      "referenceRowSHA256": "ff33041b58fff0105bcb49854f0ec8298e9be222e1cebf2b4570a098924b471b",
+      "parentRowSHA256": "2f957a2101b063c692e7e23adcc29726925f21a39344329a892fcc2ac6b183a6",
+      "candidateRowSHA256": "0109b499d2149b9f9e1c994605bdd0457161c32901975b37613d3b2a8ffedad7"
+    },
+    {
+      "game": "ELAS",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 268,
+      "authority": 268,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "12",
+      "referenceRowSHA256": "0871da2be670eeb123175b392f66c0a023ef288a4eb3b7f37943390fab789f6b",
+      "parentRowSHA256": "fcd9ff667eb9b46ef7d2784af2f4e95bbdb487c60ee7ba350a34451d607359cc",
+      "candidateRowSHA256": "d486e30874ec738d3da941054cd1008f3af84df0de69745fa6ad03522e3411d2"
+    },
+    {
+      "game": "ESCT",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 118,
+      "authority": 118,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "11",
+      "referenceRowSHA256": "b477493115108196b2357fcd20e93946b613ddc9567b10e4e9dfb624521444a2",
+      "parentRowSHA256": "7f20e0eea89207d32b3344246450c74db96ac3dadfda06f2ef16e73d241f962f",
+      "candidateRowSHA256": "c58f82d6b050f552d772da8eae0437ace1cec03811193069cda65485f0227d25"
+    },
+    {
+      "game": "ETAG",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 274,
+      "authority": 274,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "09",
+      "referenceRowSHA256": "0860a38d0c05c5822205c671ea72103f2ff23d200a8dc862dc354b15f94585e8",
+      "parentRowSHA256": "26c49d5440f70cd48f9d0af8cef5e26ed04f42ed86760a064b165d5c54eeb6cc",
+      "candidateRowSHA256": "784c0f51ce44786c55cf20cc2034e660d05969c88194967da3eef0e11a5dcb86"
+    },
+    {
+      "game": "EVAS",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 86,
+      "authority": 86,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "05",
+      "referenceRowSHA256": "d481b6e4e3c84c745227ca8c667340d5590cab0669d8395e13e1323a61c8d418",
+      "parentRowSHA256": "6af84b3478fd6bdc9413237d62c818cce8929d2b2466b47fd0b95102a337b97b",
+      "candidateRowSHA256": "799e7d2852182531395899d294430ba94c7a97d1a9580e8106a5cb7cd587208f"
+    },
+    {
+      "game": "FITE",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 64,
+      "authority": 64,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "17",
+      "referenceRowSHA256": "a21fcf58bfcb5e857bc23fa05a021529ddc23d9cdf2d6bbc749f86036bbd086a",
+      "parentRowSHA256": "b9589a9768edf856cb6dcdff0ebd0bcc88f4a19ad2d3aa626960469d14424765",
+      "candidateRowSHA256": "83aecbb2b4f5ab94c74e456950b299115ec4b3626313f6040671b3bdf7508584"
+    },
+    {
+      "game": "FOGW",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 173,
+      "authority": 173,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "03",
+      "referenceRowSHA256": "a13498cff84caf9f0a6aee23587b838551f8d6a472de9eb406a0e7168d19ae8c",
+      "parentRowSHA256": "b6d68d3e7890f48c332f03b11333a5095f62727ad8a386cb816b7d71b7ec09ca",
+      "candidateRowSHA256": "f8ac33ffb60c31600d6c6ec954ad487bb52e955f3d0857a4905ff456c25b411d",
+      "decisions": {
+        "comparison": {
+          "equal": true,
+          "game": "FOGW",
+          "events": 1623,
+          "decisions": 173
+        },
+        "sha256A": "427111dce42f58710996fb638dcf2720103f5a1315abe700372d2aa52a916594",
+        "sha256B": "427111dce42f58710996fb638dcf2720103f5a1315abe700372d2aa52a916594",
+        "method": "ordered-pair"
+      }
+    },
+    {
+      "game": "FT09",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 75,
+      "authority": 75,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "08",
+      "referenceRowSHA256": "810cc3361d69ae64f4e6f250013d51499cbdde6369c3493c8028c8eca2fb0e72",
+      "parentRowSHA256": "49848438d66be96cca4451587ab1b067ac63878628d3d6c982b15451b0f579f9",
+      "candidateRowSHA256": "720e562446f0e3cbcbec3e8ed2c901fba42975615e11759a2efbf502662f461f"
+    },
+    {
+      "game": "FUIT",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 190,
+      "authority": 190,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "18",
+      "referenceRowSHA256": "662bb83af499eeeb1880dc53b34c6afcaa2614c9439978624f49bf736beecf1d",
+      "parentRowSHA256": "47f0568f17056f737575250b09eac5dcb1f8e5761f609e68927b0985ecfd02d7",
+      "candidateRowSHA256": "1a838246f7c47964aa6f0578d5f71f9a5686e7f6bb88948ab0ee61930abd33f6"
+    },
+    {
+      "game": "G50T",
+      "matches": true,
+      "target": 7,
+      "scored": 7,
+      "reconciled": 7,
+      "actions": 301,
+      "authority": 301,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "05",
+      "referenceRowSHA256": "38c7b8fd9bd25520c64ea9db2ca996c4e9b07ae06877ffbafbc773bb838faab7",
+      "parentRowSHA256": "dcd11f517b82d26e8d45e7647b109180a3dadd272ad6b46b3640628dd85dbb56",
+      "candidateRowSHA256": "53ceacec930f2c9cb0baf661207052677c31c2b9ec570375870a09dd01661440",
+      "decisions": {
+        "comparison": {
+          "equal": true,
+          "game": "G50T",
+          "events": 3004,
+          "decisions": 301
+        },
+        "sha256A": "3c465801169b0b29f6a84ff92182c90efd2e55915787d594b3a5bcda7f4736e5",
+        "sha256B": "3c465801169b0b29f6a84ff92182c90efd2e55915787d594b3a5bcda7f4736e5",
+        "method": "ordered-pair"
+      }
+    },
+    {
+      "game": "GABA",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 447,
+      "authority": 447,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "18",
+      "referenceRowSHA256": "2e3f4b7a7298b61a530075177ad98a53e266c0bd74e91179521040715418218f",
+      "parentRowSHA256": "3daa2af6742b349a12f047b9caaf6285092066152c0810eee2d20f47c63951d4",
+      "candidateRowSHA256": "f14d838bff599e2cbf87f7f3ebb8f048dfebb4da2c6fce3f514584f5fce4be1f"
+    },
+    {
+      "game": "GARE",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 56,
+      "authority": 56,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "04",
+      "referenceRowSHA256": "9cef6bb12dd3cc9ae3a1b801dc49bd3dad0503691d420476987006122d1827fd",
+      "parentRowSHA256": "af20a218ab3d4069e8887c991b75d61928b27d29b40d4730f30f5f2d8715a3d3",
+      "candidateRowSHA256": "2d4f3636ff166af899c170e3471194e1e71a28731d4177e9477701a7c7f0e740"
+    },
+    {
+      "game": "GIGO",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 70,
+      "authority": 70,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "17",
+      "referenceRowSHA256": "7a687d2e22db080d6632dd961f5a07b6e7c3c837b433f4f36f65ba50cee78552",
+      "parentRowSHA256": "7c10692f5141dfc101358189cd19adaba521151fc847178504233c5c411d1cc4",
+      "candidateRowSHA256": "31badce42c4a80d7a0d1cd86a8f334703c3e7b378d7374c10b72f8bfd16de384"
+    },
+    {
+      "game": "GLOB",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 79,
+      "authority": 79,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "07",
+      "referenceRowSHA256": "d307f32ed36d66db43b5c224ee3d1c51aeae4c872c7cefc5b65665eb83635b98",
+      "parentRowSHA256": "3d70f41fe07de6c00294ba346dbdae3d5c33f51a63371ffe7189cde8fe785f66",
+      "candidateRowSHA256": "6cb146fdbadd0afdd6c599a9a285abbd15e236838a19ff7b24dcb95473ed7937"
+    },
+    {
+      "game": "GMAP",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 69,
+      "authority": 69,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "11",
+      "referenceRowSHA256": "226eefde8988d1018183f6404553920065ae9458d526fb7ea0f7a6921cee0ebe",
+      "parentRowSHA256": "83deaf86197dcc963150e7304412e1478763ae04770def589df3c882d839b778",
+      "candidateRowSHA256": "eedcfea5b872f07d9e17e961fee495caaed9f6f4c12022a68cfda9b8db258e2c"
+    },
+    {
+      "game": "GORI",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 46,
+      "authority": 46,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "19",
+      "referenceRowSHA256": "9227769418e84b23311572d9a04ce10bd917ede5abf7e540fcda79cdf91fb45a",
+      "parentRowSHA256": "fdd7f62a07cbf776854643fdc84c92b5db3ef6a0ff0132be0e37204bfcaedebf",
+      "candidateRowSHA256": "08793a3483a1d6e14a6a4a94da3c912f33fe90aa0adf8e7beb55e11503a137d5"
+    },
+    {
+      "game": "GRAV",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 80,
+      "authority": 80,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "19",
+      "referenceRowSHA256": "90f42b7ec31c910be1df19e2fdfc539652919a4efdba6c044096a3fc4cab68a3",
+      "parentRowSHA256": "adb3f2eb03195da331814958a10a6d0765e23ee8c7127cf7549c33e87ffc715f",
+      "candidateRowSHA256": "8f91e7709b4c52ee419642e08b892cc391549044ef2b284b9f72ac968ca24331"
+    },
+    {
+      "game": "GRIL",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 74,
+      "authority": 74,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "10",
+      "referenceRowSHA256": "224dac2af6cadae831f718c73b7c5144c0c78787f4109a3977dc95f47e3eb627",
+      "parentRowSHA256": "3af29d13a85fd90f7f6477b3c17b18873342d3cf7f0e4e104d60e4f0696599ce",
+      "candidateRowSHA256": "479c8dbf2945751ad059544bc148b54aacd27b86c3756405e48edf8392fc57ba"
+    },
+    {
+      "game": "HANO",
+      "matches": true,
+      "target": 4,
+      "scored": 4,
+      "reconciled": 4,
+      "actions": 60,
+      "authority": 60,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "22",
+      "referenceRowSHA256": "bcbbed8ad76f86370fceb247b80a31781b82ce7571c2a28c43d76e5691fbdccc",
+      "parentRowSHA256": "aba33faa8a063eafff6b35cbc2da206b2ba99f879591ce7d0ff7daf6d55b5b97",
+      "candidateRowSHA256": "e52499b61216def977b287760be6379c1926fc5ee95eb6f784935d5e3dd07acd"
+    },
+    {
+      "game": "HOLE",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 78,
+      "authority": 78,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "06",
+      "referenceRowSHA256": "abd43fdf55215d66ecff725e276a4102dacd84644fed27e49fc870f06f6a4179",
+      "parentRowSHA256": "c3b480bdaf33a3ba87237bfc75a8064d54ab19a7407dc159d5cd98c3787efb4c",
+      "candidateRowSHA256": "de9fb96c67b25b14eed6029402ae156e67dfa2718e4cc99efa2c612c3d60003b",
+      "decisions": {
+        "comparison": {
+          "equal": true,
+          "game": "HOLE",
+          "events": 784,
+          "decisions": 78
+        },
+        "sha256A": "d7ae06dab522b7e386dde870ef33fa61fcc120c0efe30ad02da12ab3fd9eddbd",
+        "sha256B": "d7ae06dab522b7e386dde870ef33fa61fcc120c0efe30ad02da12ab3fd9eddbd",
+        "method": "verified-parent-trace-sha256"
+      }
+    },
+    {
+      "game": "HPDL",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 54,
+      "authority": 54,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "11",
+      "referenceRowSHA256": "e3960840bb698df5d9fceef033927236eb363e04283fbcf046d5653b29564a64",
+      "parentRowSHA256": "0f25db613b780ac2207a2d7a6eb0090a4fd18b00ffc03d97dd3df30bb59a0c89",
+      "candidateRowSHA256": "b0a553da3d485169e0a6c209450f25faf353ac27e66e9101fddf7f60add128f1"
+    },
+    {
+      "game": "ISOS",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 33,
+      "authority": 33,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "12",
+      "referenceRowSHA256": "888dff11a9de24bef4c88d4ee53bcbe3ebbc420794b30ed2e9af34e7f649f7ea",
+      "parentRowSHA256": "2f73f3f9c07673e5c191517b0cef2845d0c85145d8cf50a996034ff34b02b6f5",
+      "candidateRowSHA256": "be90109ce2dbfbf69bc1f509af62f541ab9ea91d6417007f7a3379d8b19319e4"
+    },
+    {
+      "game": "KA59",
+      "matches": true,
+      "target": 7,
+      "scored": 7,
+      "reconciled": 7,
+      "actions": 311,
+      "authority": 311,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "17",
+      "referenceRowSHA256": "0b31c62c22c016ed2f01840a4910edcb6ca30135e2a272cac71f894a24884a83",
+      "parentRowSHA256": "9b2fe0b17d9582719564cfb17b3a777311142e9d9799eaba8a161655af901087",
+      "candidateRowSHA256": "8df4dcc7fa4a95f176095fe3168c1920024b23da70c97ff795abaaf08fb59173"
+    },
+    {
+      "game": "KATA",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 144,
+      "authority": 144,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "14",
+      "referenceRowSHA256": "0878b81f0b69528d7bef4b14e037f7e441f965c110723fdbed3e4da831af225c",
+      "parentRowSHA256": "6cb7bc8520b3aae894a34e7320992b3440832436eebf766bcaf5ed4daeba35fb",
+      "candidateRowSHA256": "353b7ae4e52f2d0e7232c1b40bee95f8a59fdf53d375f462df9b3badc10cf571"
+    },
+    {
+      "game": "KEYD",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 153,
+      "authority": 153,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "21",
+      "referenceRowSHA256": "a944f7e2e3d0cebe4cebf2358d2f3b43865bb592dec2437e5916abdcc2d5023f",
+      "parentRowSHA256": "8155cea4614726f1a8a2ca9545824a37a9a3ea44d07e79f1b977d289d68ab5d7",
+      "candidateRowSHA256": "6fa85c95f3fb776a8be54312208c78f1b20b415113af009803f745619546cc26"
+    },
+    {
+      "game": "KLOT",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 100,
+      "authority": 100,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "23",
+      "referenceRowSHA256": "376fb8664f1785e9168ddabf6d5290f545f9a31b86bccf9f8e99dbc70fa4076a",
+      "parentRowSHA256": "9dfe1309a95dd2c4e0f28d216749bfd1cb9a2c9c001781c9817705b20587e4a6",
+      "candidateRowSHA256": "e9a6a2c182bd9c9fe6acb5c06b1ff1ca6790f5c3b6de2a69af2569b9284c3336"
+    },
+    {
+      "game": "LF52",
+      "matches": true,
+      "target": 10,
+      "scored": 10,
+      "reconciled": 10,
+      "actions": 713,
+      "authority": 713,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "01",
+      "referenceRowSHA256": "c4dcd569ed897a6cc771b96faf58a4255fe207886c323e330d0a9b8edb8ad30d",
+      "parentRowSHA256": "703c09470b5dce4f11836e611d1e913cbbe15e186f4f7199cbfc4ad94e365112",
+      "candidateRowSHA256": "746740937ac4b1902661bf66190d69a94fd43faa51603624a544b1f986b19b36"
+    },
+    {
+      "game": "LIFE",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 139,
+      "authority": 139,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "14",
+      "referenceRowSHA256": "fed8f8303d925044870858b0ad2078cf997b7dccdba2adc27c708a0a1604a9eb",
+      "parentRowSHA256": "5eb8e421ebf97febea70924039174ba4e961ca68ddeb4b33b62a562a5a03ec18",
+      "candidateRowSHA256": "4a713bf1fc96cd3c9135821243f5be85b60a9a1f710946ebe6dd796a2af4d553"
+    },
+    {
+      "game": "LKEY",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 119,
+      "authority": 119,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "12",
+      "referenceRowSHA256": "11ce1632413efef1debfea4adb42e2d5d157cee229aca87e94a5dd235d52a914",
+      "parentRowSHA256": "97b5709a7ca25074ab53c8ddaeed49dee3f99f3d766bd7466d41c508aa156ed1",
+      "candidateRowSHA256": "419cf359299299cda40da8fdde439b5ddcd721db97f84e2dfb3dbd053fe3a52e"
+    },
+    {
+      "game": "LOGI",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 30,
+      "authority": 30,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "13",
+      "referenceRowSHA256": "0e678c2eb370fb9a7eb103711fd5d613d5b92c1690f2a30c2a08d1f723a437bc",
+      "parentRowSHA256": "5bf8d5db2207a78299d0cb963b9d30dfa6f4028bc4d555a2f8d61fd9f1bedc47",
+      "candidateRowSHA256": "3c9d63a3564367ca9eef31296e15973eedc7812310af3a18e87106350c6d9f9a"
+    },
+    {
+      "game": "LP85",
+      "matches": true,
+      "target": 8,
+      "scored": 8,
+      "reconciled": 8,
+      "actions": 189,
+      "authority": 189,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "21",
+      "referenceRowSHA256": "63814ea3bcfaf431cd999a2a4fe48719d65c421fc70c961956601763c1c7457f",
+      "parentRowSHA256": "b7573ecbdd035917a742f11ed591dfcf6183c9a65d36a48b62d5e74d014b4c41",
+      "candidateRowSHA256": "e55ea64c88fb7d6a23888a8591c38417e1213fabe7fe984be32d6867a267fdbe"
+    },
+    {
+      "game": "LS19",
+      "matches": true,
+      "target": 8,
+      "scored": 8,
+      "reconciled": 8,
+      "actions": 332,
+      "authority": 332,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "20",
+      "referenceRowSHA256": "66a19e230742b9981d8c995fb4fa14002e8c7c27827ef28f0f538cf2d2b57055",
+      "parentRowSHA256": "09590d408a7f953674b0bc9af8e828740d50db00ea4f2b568ad56bb08ea31d3a",
+      "candidateRowSHA256": "aea29c6d9c8ef0240223f857838b441c8edd687e317e7ab99db2afcf9d86db39"
+    },
+    {
+      "game": "LS20",
+      "matches": true,
+      "target": 7,
+      "scored": 7,
+      "reconciled": 7,
+      "actions": 393,
+      "authority": 393,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "15",
+      "referenceRowSHA256": "f07a05de8af7850d30100da8d8fb3a0ca1f9d578a4e0d3825ba3025fc3cfd30d",
+      "parentRowSHA256": "5cbcc278d2d5c7c938b7f72061ce2f11a394749b437553ac74cadc6ea4f0d1fa",
+      "candidateRowSHA256": "7550db6f6c064553e9cade4217ed0033ff2531d015c7934ce6e9354b2679be50"
+    },
+    {
+      "game": "M0R0",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 210,
+      "authority": 210,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "15",
+      "referenceRowSHA256": "86302dc4fee4aee340805685fb1e2eb8a33e8521191267db60357f7075493069",
+      "parentRowSHA256": "98a8ddbc8e8a5418f6fd09e9062c415b8efd2c8095820b3c5f6841dd41d3ab4b",
+      "candidateRowSHA256": "1c8b03d258270125b7995a81f307c189b42ee20c00392f42c334da307e91e5b7"
+    },
+    {
+      "game": "MEMO",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 60,
+      "authority": 60,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "09",
+      "referenceRowSHA256": "b73fa3e02f38830e68ef41cb29d82132be02bd6970bd715363f1ec4358cc03ec",
+      "parentRowSHA256": "d30353c53cfe9ea93c8dd8d85978c7b9656b8b7adde85615f0fd495596f387a7",
+      "candidateRowSHA256": "147d0b7f11e6e48fa2deb072a24249d8a6509a3f71c575d43720f046c6cf47a1"
+    },
+    {
+      "game": "MIND",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 93,
+      "authority": 93,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "16",
+      "referenceRowSHA256": "c78e4560ca64e45aa427f70236f06946f8721ec69975e2128c9eb9d9568823e8",
+      "parentRowSHA256": "d0041738ef34e6b81e51a00bddba774c4bb3edbb5ca2b1579519975a502e11c7",
+      "candidateRowSHA256": "0ad3ed7c8406e188579eabbc502e90195b6ae373ccac27423ebec65df796ede5"
+    },
+    {
+      "game": "MOTO",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 57,
+      "authority": 57,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "20",
+      "referenceRowSHA256": "cbe3b359576b5ca694c637df0652c0932a45b14258251d2b0d6c1459347d43e2",
+      "parentRowSHA256": "28632048d10d8c416ad5b28e891f5966e79835dc4c2c945f2745137f3eff415c",
+      "candidateRowSHA256": "4bd48a537af215a56f9bd9b5bee6269638dade4af1f3d02b948cbd22ee5835ed"
+    },
+    {
+      "game": "ONDE",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 44,
+      "authority": 44,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "07",
+      "referenceRowSHA256": "b6f5da1464f79a38b81108f23bdb92195257f6ab657de88bf0589ca900451fbe",
+      "parentRowSHA256": "d5b3127a6198c08bb55c8376f75882603245a6838d978de6d83a42f9c9de5627",
+      "candidateRowSHA256": "13a0b4ffb6e5164ddeeeda8058b7832da0886a6dfe40efd18666efe84d2eebaf"
+    },
+    {
+      "game": "PIPE",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 84,
+      "authority": 84,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "16",
+      "referenceRowSHA256": "74ea8ec1017af151c90d1cf2dba419fd896e9c808553a0a854246a1d6e167c36",
+      "parentRowSHA256": "55780148701f6f89fb575639ea199c5040a8548d0e2820829c4de6ea07e5291b",
+      "candidateRowSHA256": "0dff2a287db6c0e19ebcddf7332960c07511831d01481a3016ff349714381a4e"
+    },
+    {
+      "game": "POLA",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 40,
+      "authority": 40,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "15",
+      "referenceRowSHA256": "3e617125d7e386a7ac33ea8e97c0df80b7a471e82702c9b15fabf3b283458720",
+      "parentRowSHA256": "1e360b176894dcbca5ba59ea1576002a6d7f9174d912ecf98085f372258a296b",
+      "candidateRowSHA256": "dbf4630c803e01f7ed6767355ace1468e0b839611f46630a74c61db805278575"
+    },
+    {
+      "game": "PORT",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 116,
+      "authority": 116,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "18",
+      "referenceRowSHA256": "c2a6fb925fbdeaaedb9797e118bfd809bc0eff4e53ae7453d7b9b4c29d1acd0f",
+      "parentRowSHA256": "cbb28673f51faeb1e0b28d20135ed3a0d26847b60c8e62d230cfd25255a8849a",
+      "candidateRowSHA256": "9c24f0ddc21fba63d2e3c20752402a25076fe81af1c85db31d2fc2107bf50bfe",
+      "decisions": {
+        "comparison": {
+          "equal": true,
+          "game": "PORT",
+          "events": 844,
+          "decisions": 116
+        },
+        "sha256A": "9934e6a4fb2b45762bb0da666b2a9f011cb11395eab6552603c108c7773d9cba",
+        "sha256B": "9934e6a4fb2b45762bb0da666b2a9f011cb11395eab6552603c108c7773d9cba",
+        "method": "verified-parent-trace-sha256"
+      }
+    },
+    {
+      "game": "PRTL",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 108,
+      "authority": 108,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "14",
+      "referenceRowSHA256": "8baab4e7eebd8313b8eb230ba9ad7b2dd5d56b9edc509d98ceaf7933ada4ac28",
+      "parentRowSHA256": "9ca1878793d909a3b3eb59538aadd7d41f0ecc3861ab43f92d2d1c59d84d920f",
+      "candidateRowSHA256": "881432e992d7763d2cbc801d1e58aba328c0989446e0a2fa908e6bea4bc696aa"
+    },
+    {
+      "game": "R11L",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 97,
+      "authority": 97,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "18",
+      "referenceRowSHA256": "97a6292a5cdc5a74877e1fdf4c92fe6a6fa79bc6083539c531f7b1ae90da55c2",
+      "parentRowSHA256": "2c2ca0688f6156238eff64f7c27a0d09ae97fc52b74be7a0d6b33388e26f3b81",
+      "candidateRowSHA256": "ed3f54326ec7dd9f180c525b8c76fc2ae278c87988e2c32d4323f8b61dd5395f"
+    },
+    {
+      "game": "RE86",
+      "matches": true,
+      "target": 8,
+      "scored": 8,
+      "reconciled": 8,
+      "actions": 561,
+      "authority": 561,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "07",
+      "referenceRowSHA256": "3da9339316a075e56d4fe048490310ec3816c18d17e8bdaed98104015dcd31de",
+      "parentRowSHA256": "884298d4b2d304a85d9aad6348f76862b96a7972275ad76e65173491b17cbf5b",
+      "candidateRowSHA256": "b6a37f3a5286d8b8fc5a7e1355579d7d47cc929db7f9d2d925f1d7b58cf59bde"
+    },
+    {
+      "game": "RECR",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 134,
+      "authority": 134,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "16",
+      "referenceRowSHA256": "f9e2b8f300672de0725b7f616c4877d66a19cc6e055ff9ee2683342ce21a417b",
+      "parentRowSHA256": "915217fe560c073ee0a98a670059a26e3241937210ff2f0188a5577a6306b663",
+      "candidateRowSHA256": "e55538d06ce0548593f04c43ba7e6544cf5c8a7477c8162e3ef25003dd8de52b"
+    },
+    {
+      "game": "REGN",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 132,
+      "authority": 132,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "10",
+      "referenceRowSHA256": "e702edd34587b28cbb1452b3cfe2505855e0fd0079a7db2b12c249594de4371b",
+      "parentRowSHA256": "fc3c34f165aeaac5c7ab3fd91a05b4d177206f92fe622641849c81e047b67f0e",
+      "candidateRowSHA256": "a7d9b7db6bdb2b7404f55711fd35ae13246cf230fdec62e0e50bd5b43ad080c3"
+    },
+    {
+      "game": "REWI",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 31,
+      "authority": 31,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "19",
+      "referenceRowSHA256": "c3c105d901447bee9110b5385b74d2cdc13502bea147b4e08e49af1939281a88",
+      "parentRowSHA256": "41078a52890a1fbffebbde095de99d8d50ebea66bcb01b56119460c5f5de97df",
+      "candidateRowSHA256": "9256b4cdacad01a0ff4a3be0b2032701497204bee223892f3597df6ced0a6645"
+    },
+    {
+      "game": "RSWP",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 110,
+      "authority": 110,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "22",
+      "referenceRowSHA256": "0e94e1842517ffc868666c06bf417da2fe4c29071f550a809151453ea191a6f1",
+      "parentRowSHA256": "74825a88799e905ed285cc6f881bcf76f6ab7dfbc8f595d284c11fb93c25103b",
+      "candidateRowSHA256": "df48d748e0b8f590aa5f8731a739eec20a4b1bb2294bb781dd047a35186ebf5a"
+    },
+    {
+      "game": "S5I5",
+      "matches": true,
+      "target": 8,
+      "scored": 8,
+      "reconciled": 8,
+      "actions": 252,
+      "authority": 252,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "23",
+      "referenceRowSHA256": "348db321fd35dfc9512c5dfa8d548665d37207ab932ccb15968ab3a8750e9556",
+      "parentRowSHA256": "b2ed44362250592565f98b12ba5752bfd9d8f441a1a67151cfa5c8ce499a472b",
+      "candidateRowSHA256": "08fa7813357fd992534fc4fbad4224cb2a0f99eea4a6fa51d710742eebad1ec8"
+    },
+    {
+      "game": "SB26",
+      "matches": true,
+      "target": 8,
+      "scored": 8,
+      "reconciled": 8,
+      "actions": 124,
+      "authority": 124,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "20",
+      "referenceRowSHA256": "d853a22977375a61b1a80bdf11dcbd5ede1e1b194d832010248c44d7d317fd74",
+      "parentRowSHA256": "e84f5fdc012371e0640e8a5c55e878c605c39b09ab3b929b436f5035ecb50e10",
+      "candidateRowSHA256": "d669cdb63950c8647a2e5dd50d2185ec76e59057abc8a212a844b661a93d8047"
+    },
+    {
+      "game": "SC25",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 153,
+      "authority": 153,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "20",
+      "referenceRowSHA256": "b63d9191384ce3f9e8fe748a2a3be16a0833ad7149254b52783d2054b6e1ad60",
+      "parentRowSHA256": "b7fa98ef1c97e3b4b86b25eaf1635c00c66a09ddd5549c2a05431951ed5d058c",
+      "candidateRowSHA256": "23c6f8eedfa48e3b7a1282e82d8e70115fff032afa0a120a89165c6efaaf09ca"
+    },
+    {
+      "game": "SELE",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 117,
+      "authority": 117,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "13",
+      "referenceRowSHA256": "cfc3846164ad36e96ed9a8f884de03ad3514b7723ff4ac05bbe78e195bd67c1b",
+      "parentRowSHA256": "84b6f65c433d67e51a3398f77fd43b9ebb45e5f0c258c66b15dd575fa85d4fc5",
+      "candidateRowSHA256": "3fa28bec500979ea12b363435504a7052b73ea090d3ac295a4daabfe1ef1247a"
+    },
+    {
+      "game": "SEQN",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 46,
+      "authority": 46,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "21",
+      "referenceRowSHA256": "913ba6d5d5e98d09562da5741d050602d68329fbc64ab09b325beea3744276ad",
+      "parentRowSHA256": "b2b6c6d13c4dfd5cd108369f46a708cd7233e1b7ea91931d6108c65d686bb104",
+      "candidateRowSHA256": "586319936d15fc7796fece202a23187593dc2322226a0d2a9ad48672e51ece86"
+    },
+    {
+      "game": "SERI",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 54,
+      "authority": 54,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "04",
+      "referenceRowSHA256": "9fdb8ce038e7ccff7180dc9b1f6e423e12b6949d7a61af1fc8421b09b3f380ad",
+      "parentRowSHA256": "f42dd861303078f624131c789df676f986d2dde364bd06a2a1f5e06b9adfb3aa",
+      "candidateRowSHA256": "65e809e7726e888daa8e50ea02d7b57ed8aa0648a74940222de768a5743d5f5a"
+    },
+    {
+      "game": "SIGN",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 271,
+      "authority": 271,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "24",
+      "referenceRowSHA256": "306d166fa2ca0d3f29ea180eff0fe334a00db892d2bbce3fa804308907c902ce",
+      "parentRowSHA256": "c6e02755b577aeb9d306cc56b913183cbaf438423f6d261762693ae05435a281",
+      "candidateRowSHA256": "49ed522994d0e66669b884607a698aaf070c9c2e3b2b57293a7e150b1e1cbeff"
+    },
+    {
+      "game": "SK48",
+      "matches": true,
+      "target": 8,
+      "scored": 8,
+      "reconciled": 8,
+      "actions": 348,
+      "authority": 348,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "17",
+      "referenceRowSHA256": "3c46c9b7eaa89d9dea1b2b17559ccc099b298c02061081a639310e475db45ad2",
+      "parentRowSHA256": "c9dda116403f1d81ad8117efe3f7ae65d8bc882d9db06e550e2a0079906da9e4",
+      "candidateRowSHA256": "5d647e45e76c0481f2685823cbc577e2d90fe3c80ea743eb2881a8b51334009f"
+    },
+    {
+      "game": "SKBN",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 109,
+      "authority": 109,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "17",
+      "referenceRowSHA256": "2bb0d3d1e53878ea83aaa7fe4e036efe81484abac11e9067d6e21c64a0cfa293",
+      "parentRowSHA256": "acbf0a0e3a37fea43bbc3684e096da64e0602a422cd8fa334e1444a7bf594447",
+      "candidateRowSHA256": "d2a4c35717f8c71c07a1408d8084d25f003779258209c586ebdd65aaffea4950"
+    },
+    {
+      "game": "SMLP",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 59,
+      "authority": 59,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "09",
+      "referenceRowSHA256": "e43b11c8ee7fcb257c36cfc5a78656a5b47026adca601a886fdb4f61bc467a8e",
+      "parentRowSHA256": "755aa06c14dd083f1185282964cd0c1beae144cdbf2a79e53d695fb4cfc52327",
+      "candidateRowSHA256": "126051e7e10ef246c072890c2e7cbd63cf20015f38787c7b938d7c7bbbc43a62"
+    },
+    {
+      "game": "SNAR",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 163,
+      "authority": 163,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "07",
+      "referenceRowSHA256": "777829699c72c1c3e6d75d42eb4863e4a3d145ef7d3705a022fb404bffa1a8bb",
+      "parentRowSHA256": "985342800ad3993cd25cca3c25111fd07d84ec924eaec291ee5d523c62cb1168",
+      "candidateRowSHA256": "4bfce4751657e34c28f6486d325fb89e023546738abffb7714b14c1b7f343104",
+      "decisions": {
+        "comparison": {
+          "equal": true,
+          "game": "SNAR",
+          "events": 1423,
+          "decisions": 163
+        },
+        "sha256A": "a67b4273d5a04a2fd782480706d7cb5fcac8b97633292ff9624a6aef4780aa8f",
+        "sha256B": "a67b4273d5a04a2fd782480706d7cb5fcac8b97633292ff9624a6aef4780aa8f",
+        "method": "ordered-pair"
+      }
+    },
+    {
+      "game": "SP80",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 110,
+      "authority": 110,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "15",
+      "referenceRowSHA256": "0eb09d4e8612cfd6055a0a71de3b07c85e06cd2e5421f0d0356c748cbb86114f",
+      "parentRowSHA256": "d0a486637c3592c1c246446ea017298a3e8b298b7812f5ee369a0370aacabfdd",
+      "candidateRowSHA256": "e492b52a546f668e0d710e73d7f314bb9e83ce5a9f1842883ae763d307bb9cfb"
+    },
+    {
+      "game": "SPOR",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 121,
+      "authority": 121,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "23",
+      "referenceRowSHA256": "db1436306e0af4db8c394008de06fc3040ff22d0f2584e758249012a94df10a0",
+      "parentRowSHA256": "b93612830702af7b3c1429e82eac091fa0f53dff626f67bbf28e540fc035079c",
+      "candidateRowSHA256": "af0b8b40b4917f1ff7b4e4f668fc8150686e7ba3428469963a1956a3c10c19a2"
+    },
+    {
+      "game": "SS01",
+      "matches": true,
+      "target": 8,
+      "scored": 8,
+      "reconciled": 8,
+      "actions": 444,
+      "authority": 444,
+      "recoveries": {
+        "reset": 1,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "08",
+      "referenceRowSHA256": "dad0adc13fdb9ec9cefc18b24ad2b9f5821071f53e1124556c8713aa39b35ab6",
+      "parentRowSHA256": "454a12a256033ec59c4cf584b8e36baac59a932d5b65eb89a7f2faa914bd5761",
+      "candidateRowSHA256": "564a3b091b882a35ad5224a157c8d44eaa1b8d3f23c98f23db9088491254e578",
+      "decisions": {
+        "comparison": {
+          "equal": true,
+          "game": "SS01",
+          "events": 3622,
+          "decisions": 444
+        },
+        "sha256A": "3b1bb57f45660bfc7273e2bd5f31edc5555486c253f3d309ff324e960f53e668",
+        "sha256B": "3b1bb57f45660bfc7273e2bd5f31edc5555486c253f3d309ff324e960f53e668",
+        "method": "ordered-pair"
+      }
+    },
+    {
+      "game": "SS02",
+      "matches": true,
+      "target": 8,
+      "scored": 8,
+      "reconciled": 8,
+      "actions": 546,
+      "authority": 546,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "10",
+      "referenceRowSHA256": "532feb52286eb5f09407436db3e78bcbee453510e7471bf44147bd2658236ad3",
+      "parentRowSHA256": "d060c6b50996f9f64014ab69d29678590174bf14df527a536563cedae5a4fec7",
+      "candidateRowSHA256": "4589fdcbf437b65f2f3716dfbc267c4d52941cbc8d642a33668e20fcee1c381f"
+    },
+    {
+      "game": "SS03",
+      "matches": true,
+      "target": 8,
+      "scored": 8,
+      "reconciled": 8,
+      "actions": 491,
+      "authority": 491,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "14",
+      "referenceRowSHA256": "4ea4f5a0b50dd8d4267efac01afbfae43930ffada201b3294124ab687eadf4fb",
+      "parentRowSHA256": "d16d3dfb8a6369daf109caa0b0d969fd72c03fca92d1d1a83e4feb09c4f1b6fd",
+      "candidateRowSHA256": "38a41fbba1a9b7f5ba213bc4c39bebe7c6c57cbd61e0f9944365f57e51123440"
+    },
+    {
+      "game": "SS04",
+      "matches": true,
+      "target": 8,
+      "scored": 8,
+      "reconciled": 8,
+      "actions": 443,
+      "authority": 443,
+      "recoveries": {
+        "reset": 1,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "19",
+      "referenceRowSHA256": "970f2b97c275e431c8f8d2efdadf1818f0a6f545528c73104562b0c77ef1cb76",
+      "parentRowSHA256": "0000ba4f2393b49e494f6bdd5653b9ed5a12b2cac33892b82c9fdfafbf0b9a83",
+      "candidateRowSHA256": "d7279bc79100f24e44516148383ae3058c74481c6b51fd2ad386079d5465f133",
+      "decisions": {
+        "comparison": {
+          "equal": true,
+          "game": "SS04",
+          "events": 2578,
+          "decisions": 443
+        },
+        "sha256A": "9dc960e221e04fb817d96f4bb6372c7b4df639a773d5a72a38acf1b90f9726d9",
+        "sha256B": "9dc960e221e04fb817d96f4bb6372c7b4df639a773d5a72a38acf1b90f9726d9",
+        "method": "ordered-pair"
+      }
+    },
+    {
+      "game": "SS05",
+      "matches": true,
+      "target": 8,
+      "scored": 8,
+      "reconciled": 8,
+      "actions": 393,
+      "authority": 393,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "08",
+      "referenceRowSHA256": "6c76f9e616a07a7706fea71c31e1daf5cfc6ea316e145ac185f889a21cbf4b9b",
+      "parentRowSHA256": "e51b2f9d4f631a256683e8b57ea2640a8676115c38b24cf43e63075a09237521",
+      "candidateRowSHA256": "d5ce252626e2eb1c46679a8c45200d7b4e4d0781f374bedbd416c5678ed2eda8"
+    },
+    {
+      "game": "SS06",
+      "matches": true,
+      "target": 8,
+      "scored": 8,
+      "reconciled": 8,
+      "actions": 399,
+      "authority": 399,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "11",
+      "referenceRowSHA256": "f756fad6f7be924c625cba4bf84207640cd41ca109ad9157d5d1bb73cb752b92",
+      "parentRowSHA256": "c4e525e4d38faf2c322d9ac9f70b0d4353455856460c57999f663abe9b37451d",
+      "candidateRowSHA256": "04623be366ab70f994fa37fe07da45c5cffcf3e85fb53f353b38b83adb510c28"
+    },
+    {
+      "game": "SS07",
+      "matches": true,
+      "target": 8,
+      "scored": 8,
+      "reconciled": 8,
+      "actions": 549,
+      "authority": 549,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "06",
+      "referenceRowSHA256": "2ea35e5074a5f696ea84a35563feba17859b3228b5fc2dc88e9aab13ffde0315",
+      "parentRowSHA256": "f7a4fa42456bb7294ae77bf3560fe79a6a769f016ca011988deac84418518f3d",
+      "candidateRowSHA256": "ccdd472bc86193254cb3b629ad7fcf99f5402761d0dab0b46b2ededdc04df0b9"
+    },
+    {
+      "game": "STCK",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 52,
+      "authority": 52,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "16",
+      "referenceRowSHA256": "d92620f2ead1c11876c9a5944c0466b419a02ebf657bc6d03a3ac7905b09dbd3",
+      "parentRowSHA256": "a4ffc9941009b4f6b6d048b6ef1dabf1eb731d3995b1a4ac16b3cb6721655308",
+      "candidateRowSHA256": "72a62f22fb831d1c11ff0e54a67ab4facddbc1b9d0d4f14398d842c33afdf64e"
+    },
+    {
+      "game": "SU15",
+      "matches": true,
+      "target": 9,
+      "scored": 9,
+      "reconciled": 9,
+      "actions": 122,
+      "authority": 122,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "15",
+      "referenceRowSHA256": "ab973c8b39f317f9189a598e2058b9eea5a3de07004bde8d803592de2e786606",
+      "parentRowSHA256": "b22adac41bcac44b5d2b43e25493e16f5c167b7f65fcc94d0f81c654b202b33d",
+      "candidateRowSHA256": "2c51821c7e555fd5132d3ed2b3cbd9496f82c2a344573855a03dd69a94315168"
+    },
+    {
+      "game": "SWCH",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 198,
+      "authority": 198,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "24",
+      "referenceRowSHA256": "c007f2f4a8b6b305acf21451797d0281670978e8faee1864ce3de49e4841ef09",
+      "parentRowSHA256": "05cdcde8bd4dda0b97ef9dcc3f18e6a20b1437e60d1c61c47517ddd5dbe58248",
+      "candidateRowSHA256": "aa46fd9d8ccc0fd39fad2124ba464142a6f57557dec1991c9efe93975e518d47"
+    },
+    {
+      "game": "SYME",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 78,
+      "authority": 78,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "05",
+      "referenceRowSHA256": "0ad1f19ab15daf97dee0277f81ba4fd11abcc25605178400ca2d821e523bb212",
+      "parentRowSHA256": "aba87cb5f4def19d80951e3bc04ad916026555fa8eaee8ca8f1508b7a838a2f7",
+      "candidateRowSHA256": "8896ab9ceb5590e7128446cba2c0c9dfc230f5c691c14112ee47ee8c3abafc51"
+    },
+    {
+      "game": "TEQU",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 106,
+      "authority": 106,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "11",
+      "referenceRowSHA256": "17e56aa28646d6f173e44f9a77f7fdb242c33306c53977398f0243a8e0779ed8",
+      "parentRowSHA256": "1f8f0d638a63401a1ad5234a1235b1e94b06933c6e7ecc7dc4c1ac2e5def57db",
+      "candidateRowSHA256": "3c0b4f9ef5861256331daa403d69982d448e7fed164869bf8182a43e9de774b3"
+    },
+    {
+      "game": "THER",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 47,
+      "authority": 47,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "14",
+      "referenceRowSHA256": "384010c51dc4b45c6f67911bd176a060e05bb2bdf39e95b8c50d87f50ed3438d",
+      "parentRowSHA256": "b172175cf8005b14b8355e99ac75516f4b3e7f6020c5cf27a367ed742dc4c527",
+      "candidateRowSHA256": "51a831d0bb87da43f500bf4329f08ba7434983d570f362bfd77d139ce8cea467"
+    },
+    {
+      "game": "TICT",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 58,
+      "authority": 58,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "24",
+      "referenceRowSHA256": "8afb8f3e6d5a81a4f0807bf6687c99a1df20227940526eb092b7440e1bcad6f9",
+      "parentRowSHA256": "513ceda5b1afd6299071fa29436bcc7fd83c3e5147e20279f097703e496c207c",
+      "candidateRowSHA256": "aa9cedbfa523b741d8376a1e5166148a338764f03cc0dfb746442c218afe6679"
+    },
+    {
+      "game": "TN36",
+      "matches": true,
+      "target": 7,
+      "scored": 7,
+      "reconciled": 7,
+      "actions": 138,
+      "authority": 138,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "12",
+      "referenceRowSHA256": "64a4a98879d7b63bffda78ba3d5f354ae5a9d07be211c8e6264cffc22cd727ee",
+      "parentRowSHA256": "e7b73f8732d297797ca3a4cd393fe425f3e40e68039123e2a0dd53f4ee57011f",
+      "candidateRowSHA256": "9eb75c803f6605fc31682c66b243ca4bc5917d99f60ed86b5acbb6a22cb7c3c0"
+    },
+    {
+      "game": "TR87",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 199,
+      "authority": 199,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "24",
+      "referenceRowSHA256": "e7758d162842e60a314d04f0510b7f192e1096798eb55b91c210813f7d5bb62d",
+      "parentRowSHA256": "5cc49b9a7afd8294a3566766b8492f3a1158887b6f956abc89a4061a729c3ac8",
+      "candidateRowSHA256": "d2d77ba156de9a814335c536824c928d23dd74c1a0a81a0133cec3e71858968d"
+    },
+    {
+      "game": "TRCP",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 240,
+      "authority": 240,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "13",
+      "referenceRowSHA256": "0fe71f73a91454fcf8ffd3274c41dea352fa233ae9ad870a66478eb6f796520a",
+      "parentRowSHA256": "81f06c5c47d34a6549f36543a3b4be4d806cd7941740562a1678501f06f3acaf",
+      "candidateRowSHA256": "f3c089aca6410c22adda8f0d3ee84c53d94b41d5b6fdbdbd416bd7399ae1c8c0"
+    },
+    {
+      "game": "TRIA",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 119,
+      "authority": 119,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "13",
+      "referenceRowSHA256": "e6a3c3fc34c70dcede0b709d483392eb94d1c1b9940835ce7496707efaa3ac98",
+      "parentRowSHA256": "845839704854029c2d056d02b5a0597bccfaf4de5366ff4cf73fe83c243f1f73",
+      "candidateRowSHA256": "34d47cd751b4912bd0a181f36decb0d6bf7614b6b2e5d3c5cd6275d8820be419"
+    },
+    {
+      "game": "TU93",
+      "matches": true,
+      "target": 9,
+      "scored": 9,
+      "reconciled": 9,
+      "actions": 205,
+      "authority": 205,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "22",
+      "referenceRowSHA256": "4bfa7b09a15660ecfa070f9db1a8ed0d04959446f528bc71fdeba2a0011614c3",
+      "parentRowSHA256": "901cd12ff784ef2531cfa5da7779a261baf8609939f18c25cb422119373a720b",
+      "candidateRowSHA256": "fd24eeacc6884715e1b87841e3c7077b304db3c8084da58148e072880040d790"
+    },
+    {
+      "game": "UPST",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 72,
+      "authority": 72,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "18",
+      "referenceRowSHA256": "bb59e178b4ebc851e52963e1ee4152ef214f455a3fd17bf1249b7f0869c59edd",
+      "parentRowSHA256": "374aa586c17419c457837502bebefc3d50c14a29a05ef8c5c58e73591e26b84d",
+      "candidateRowSHA256": "7af9832410a15b62e4e0e9f23f4ad23f26d9d7c01e943f083bc1d918f415cd13"
+    },
+    {
+      "game": "VALV",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 57,
+      "authority": 57,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "13",
+      "referenceRowSHA256": "f002534389db471667e38cfd6970c804d39726c4230465591986154726269922",
+      "parentRowSHA256": "81b3be0c625cf29427cd827f94d8f1a8af76c49c14084aa01f9a33175387727d",
+      "candidateRowSHA256": "6045b7be8bfa4f82690e4687d4c205dc3349edec7ac73345440828a87c29f35f"
+    },
+    {
+      "game": "VC33",
+      "matches": true,
+      "target": 7,
+      "scored": 7,
+      "reconciled": 7,
+      "actions": 192,
+      "authority": 192,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "16",
+      "referenceRowSHA256": "e682195d3a453521cf1ff8fb5b6503adb189eb6dca74bfb74ba20152a9250844",
+      "parentRowSHA256": "a0f356c390fe491366e87291b439fcac07ba7d518d69a4c0ac07ed3fc30e259f",
+      "candidateRowSHA256": "408fe0fe98674e675b0220774ed8f86d55bd1ad700d5c1f6746a39d0fad2fa44"
+    },
+    {
+      "game": "VOIS",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 196,
+      "authority": 196,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "09",
+      "referenceRowSHA256": "2d17b3d00ca39c96a6f94cd5c761da3899addbb2d38e9a3933e3f503978ea219",
+      "parentRowSHA256": "5a07deb9633f43a29b3c3e1f275f04e7c095e66ae5d5afbb4107bfe13c2a085a",
+      "candidateRowSHA256": "ba7620bcc17784f58f790a2590850d9fd396027832278826dce2b346bc10c209"
+    },
+    {
+      "game": "WA30",
+      "matches": true,
+      "target": 9,
+      "scored": 9,
+      "reconciled": 9,
+      "actions": 613,
+      "authority": 613,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "03",
+      "referenceRowSHA256": "5c3580207ef35e430cd127c7743cc787673cdb051c69fc458bc0617be8e1ecad",
+      "parentRowSHA256": "9af8b8936f8160a776f6a73c0c929021b031b4a65af09e88d579aefa5489eff9",
+      "candidateRowSHA256": "bfdcf041ddf0bb12aa533afab603721e47b8ee4b67ba1a36d1443a21fa964b79"
+    },
+    {
+      "game": "WEAV",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 199,
+      "authority": 199,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "21",
+      "referenceRowSHA256": "43e4dd65d3427c65201dedd4c4805f5dc8c1c711f7ba09fc04603c1cb2b42b05",
+      "parentRowSHA256": "fec06c31232a7da4d60380d81367373f6c1954c0181befc97e88761e302a17d4",
+      "candidateRowSHA256": "afe2bb32948ba74b1f38ac2d8f6a475882537e6b629aa7cfe57f57fad59fae33"
+    },
+    {
+      "game": "ZIPP",
+      "matches": true,
+      "target": 6,
+      "scored": 6,
+      "reconciled": 6,
+      "actions": 101,
+      "authority": 101,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "category": "complete",
+      "shard": "08",
+      "referenceRowSHA256": "13dbc2e8071309fbf7e370491cd866115da12b5f64fc0fc811be1e9c0734e6c7",
+      "parentRowSHA256": "b1a8124d488c05e156202e0342adac4d2395f73163428c65c700d15c334403f9",
+      "candidateRowSHA256": "3da0142613a682220a4a7aa25b8ecad87aa118ffbb24015f33ffc827b6692abb"
+    }
+  ],
+  "decisionArchiveSHA256": "aceb46dc8552586f1bab974de3328f5399d70d9969b0a7f45f2ece3b74145d60"
+}
