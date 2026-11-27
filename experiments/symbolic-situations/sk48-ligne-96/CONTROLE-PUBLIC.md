@@ -1,0 +1,3 @@
+# Contrôle public supplémentaire
+
+Le premier essai sous 9 ↔ 14 s’est arrêté après quatre tickets, avant la retouche programmée au retour 12. Ces quatre départs restent au dénominateur du protocole initial. Pour rendre la contre-épreuve de contact directement rejouable en développement, ajouter deux départs du même jeu avec la palette historique. Échanger les pièces 9 et 14 uniquement dans la zone x=42…45, y=30…40 au retour 12. Comparer les deux priorités déjà publiées. Attendus fixés avant ce contrôle supplémentaire : douze commandes exécutées, support et pointe conformes, première pièce correctement déplacée, deux trajectoires individuelles incompatibles, aucune révision de contact libérée. Les compter séparément du premier essai.
