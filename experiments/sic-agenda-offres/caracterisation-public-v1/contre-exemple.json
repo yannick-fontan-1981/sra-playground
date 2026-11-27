@@ -1,0 +1,12 @@
+{
+  "base": "dial.json",
+  "ref": ["required_stamp", "X6e9ba2"],
+  "avant": "Xa16dcd",
+  "apres": "X03a3e1",
+  "ligne": 10,
+  "planSansLecture": [
+    ["marquer", "X022d46", "X03a3e1"],
+    ["marquer", "Xfc26f3", "X03a3e1"],
+    ["valider"]
+  ]
+}
