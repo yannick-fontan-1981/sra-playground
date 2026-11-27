@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "1df5dcbba217696f6a94137e162dab3c8da4dd9f",
+  "runId": "46043528762",
+  "name": "local-carry",
+  "cohort": "SS05",
+  "codes": [
+    "SS05"
+  ],
+  "start": 1,
+  "end": 8,
+  "cap": 155,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "local-carry.jsonl",
+  "sha256": "941f0f6bbed29762f51b8733529e433ecdc39e575dbb385b9db77a8fbbd8bd50"
+}

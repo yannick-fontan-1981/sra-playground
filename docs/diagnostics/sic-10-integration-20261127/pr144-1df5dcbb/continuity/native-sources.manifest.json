@@ -1,0 +1,18 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "1df5dcbba217696f6a94137e162dab3c8da4dd9f",
+  "runId": "46043528762",
+  "name": "native-sources",
+  "cohort": "source:AR25,HANO",
+  "codes": [
+    "AR25",
+    "HANO"
+  ],
+  "start": 1,
+  "end": 1,
+  "cap": 120,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "native-sources.jsonl",
+  "sha256": "bf3cdac11179dd5f48775f5428c4630bf548b4628859527998c817c47036faf8"
+}

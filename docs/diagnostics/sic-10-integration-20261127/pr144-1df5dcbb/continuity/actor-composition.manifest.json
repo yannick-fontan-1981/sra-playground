@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "1df5dcbba217696f6a94137e162dab3c8da4dd9f",
+  "runId": "46043528762",
+  "name": "actor-composition",
+  "cohort": "SS06",
+  "codes": [
+    "SS06"
+  ],
+  "start": 1,
+  "end": 8,
+  "cap": 125,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "actor-composition.jsonl",
+  "sha256": "8a281ed37fdb03c039d95301a652f6e2a9e268e2813ecb35577ee24fa5c4fe43"
+}

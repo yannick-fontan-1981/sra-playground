@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "1df5dcbba217696f6a94137e162dab3c8da4dd9f",
+  "runId": "46043528762",
+  "name": "surface-routes",
+  "cohort": "source:ETAG",
+  "codes": [
+    "ETAG"
+  ],
+  "start": 1,
+  "end": 6,
+  "cap": 80,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "surface-routes.jsonl",
+  "sha256": "f73c965915d188ef4d5e16251e15b3fc96468f7d62bf1d058b27094e5651c72a"
+}
