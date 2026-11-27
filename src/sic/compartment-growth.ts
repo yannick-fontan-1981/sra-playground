@@ -4,6 +4,7 @@ import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 import { selectTimedCompartment } from './timed-compartment-growth.ts';
 import type { TimedCompartmentChoice } from './timed-compartment-growth.ts';
+import { continueRoleAfterPublicCompletion, publicCompletionFrames } from './observed-role-completion.ts';
 
 export const compartmentGrowthId = 'sic_verify_compartment_growth';
 
@@ -387,19 +388,48 @@ function observeCompartmentGate(calibration: Calibration, gate: Gate, before: Na
 
 export type CompartmentAcquisition = { epoch: number; calibration: Calibration | null; model?: Reusable };
 
+function completedKnownEncounter(model: Reusable, layout: CompartmentLayout, gate: Gate,
+  first: NativeRows, frames: readonly NativeRows[]): boolean {
+  const contents = readInhabitants(layout, first), references = contents.filter(sprite => sprite.color === model.threshold);
+  const reference = references[0], open = openGates(layout, first);
+  if (references.length !== 1 || !reference || open.includes(gate)) return false;
+  const isolated = gateRegion(reference.room, open), joined = gateRegion(reference.room, [...open, gate]);
+  const candidates = contents.filter(sprite => sprite.color === model.grower && sprite.area >= reference.area);
+  const candidate = candidates[0];
+  if (candidates.length !== 1 || !candidate || isolated.has(candidate.room) || !joined.has(candidate.room)) return false;
+  const shape = inhabitantShape(first, candidate), target = inhabitantShape(first, reference);
+  return frames.some(rows => {
+    if (!openGates(layout, rows).includes(gate)) return false;
+    const returned = readInhabitants(layout, rows), actors = returned.filter(sprite => sprite.color === model.grower
+      && inhabitantShape(rows, sprite) === shape), targets = returned.filter(sprite => sprite.color === model.threshold);
+    return actors.length === 1 && actors[0]!.room === reference.room && targets.length === 1
+      && targets[0]!.box.every((value, index) => value === reference.box[index]) && inhabitantShape(rows, targets[0]!) === target;
+  });
+}
+
 export function acquireCompartmentReturn(prior: CompartmentAcquisition | undefined, before: NativeObservation, after: NativeObservation,
-  command: NativeCommand, first: NativeRows, second: NativeRows): CompartmentAcquisition | undefined {
-  if (!clickInterface(before) || command.action_ref !== 'ACTION6' || prior?.model?.completed === before.levels_completed) return prior;
+  command: NativeCommand, first: NativeRows, second: NativeRows, frames: readonly NativeRows[] = []): CompartmentAcquisition | undefined {
+  if (!clickInterface(before) || command.action_ref !== 'ACTION6') return prior;
   let local = prior;
   if (!local || local.epoch !== before.level_epoch) {
     const layout = measureCompartments(first), reference = layout && uniqueLargest(readInhabitants(layout, first));
-    local = { epoch: before.level_epoch, calibration: layout && reference ? { layout, threshold: reference.color } : null };
+    const knownReference = layout && prior?.model?.completed === before.levels_completed
+      ? readInhabitants(layout, first).filter(sprite => sprite.color === prior.model!.threshold) : null;
+    const threshold = knownReference?.length === 1 ? knownReference[0] : reference;
+    local = { epoch: before.level_epoch, calibration: layout && threshold ? { layout, threshold: threshold.color } : null,
+      ...(prior?.model ? { model: prior.model } : {}) };
   }
   if (!local.calibration) return local;
   const { layout } = local.calibration, { x, y } = command.data;
   if (x === undefined || y === undefined) return local;
   const gate = layout.gates.find(({ point: [gx, gy] }) => Math.abs(gx - x) <= 3 && Math.abs(gy - y) <= 3);
   if (!gate || openGates(layout, first).includes(gate)) return local;
+  if (local.model?.completed === before.levels_completed) {
+    const continued = continueRoleAfterPublicCompletion(local.model, before, after,
+      after.levels_completed > before.levels_completed && completedKnownEncounter(local.model, layout, gate, first,
+        publicCompletionFrames(before, after, second, frames)));
+    return continued ? { ...local, model: continued } : local;
+  }
   return { ...local, ...observeCompartmentGate(local.calibration, gate, before, after, first, second) };
 }
 
@@ -413,12 +443,14 @@ export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
   return {
     id: compartmentGrowthId,
     async attachPrograms(registry) { choose = await registry.registerProgram(chooseLanding, {}, await landingModule()); },
-    observePublicOutcome(before, after, command, first, second) {
+    observePublicOutcome(before, after, command, first, second, frames = []) {
       if (!clickInterface(before) || command.action_ref !== 'ACTION6') return;
       if (measuredEpoch !== before.level_epoch) {
         measuredEpoch = before.level_epoch;
         const layout = measureCompartments(first);
-        const threshold = layout && uniqueLargest(readInhabitants(layout, first));
+        const knownReference = layout && model?.completed === before.levels_completed
+          ? readInhabitants(layout, first).filter(sprite => sprite.color === model!.threshold) : null;
+        const threshold = knownReference?.length === 1 ? knownReference[0] : layout && uniqueLargest(readInhabitants(layout, first));
         calibration = layout && threshold ? { layout, threshold: threshold.color } : null;
       }
       if (!calibration) return;
@@ -427,6 +459,12 @@ export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
       if (x === undefined || y === undefined) return;
       const gate = layout.gates.find(({ point: [gx, gy] }) => Math.abs(gx - x) <= 3 && Math.abs(gy - y) <= 3);
       if (!gate || openGates(layout, first).includes(gate)) return;
+      if (model?.completed === before.levels_completed && after.levels_completed > before.levels_completed) {
+        const continued = continueRoleAfterPublicCompletion(model, before, after, completedKnownEncounter(model, layout, gate, first,
+          publicCompletionFrames(before, after, second, frames)));
+        if (continued) model = continued;
+        return;
+      }
       if (!meter && before.level_epoch === after.level_epoch && openGates(layout, second).includes(gate)) {
         meter = learnMeter(layout, first, second, after.observation_ref);
       }
@@ -520,8 +558,7 @@ export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
         return { events: [] };
       }
       if (model?.completed === before.levels_completed && after.levels_completed > before.levels_completed) {
-        model = { ...model, completed: after.levels_completed,
-          evidence: [...model.evidence.slice(-4), before.observation_ref, after.observation_ref] };
+        model = continueRoleAfterPublicCompletion(model, before, after, true) ?? model;
       } else if (before.level_epoch === after.level_epoch) {
         const confirmed = assessCompartmentInteraction(proposal, first, second);
         const phase = proposal.choice.phase;

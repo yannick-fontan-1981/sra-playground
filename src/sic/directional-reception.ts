@@ -12,6 +12,7 @@ import { exposureBearing, exposureLayout, exposureMatches, exposureMoves, exposu
   type CouplingColors, type ExposureBoard, type ExposureDial, type ExposureScene, type ExposureSite, type ExposureState } from './coupled-exposure.ts';
 import { observeExposureConditions, type ExposureObservations } from './observed-exposure-conditions.ts';
 import { maximumCommittedActions } from './plan-step.ts';
+import { continueRoleAfterPublicCompletion, publicCompletionFrames } from './observed-role-completion.ts';
 
 export const directionalReceptionId = 'sic_directional_reception';
 export const learnDirectionalReceptionId = 'sic_learn_reception_from_motion';
@@ -36,7 +37,7 @@ type Dial = ExposureDial;
 type Scene = ExposureScene;
 type State = { epoch: number; layout: string; directions: Record<string, NativePoint>; coupled: number[]; tried: string[];
   evidence: string[]; count: number; beam?: { at: NativePoint; actor: NativePoint; direction: NativePoint } };
-type LearnedControls = { completed: number; pitch: number; directions: Record<string, NativePoint>; ref: string; measuredAt?: string };
+type LearnedControls = { completed: number; pitch: number; directions: Record<string, NativePoint>; ref: string; measuredAt?: string; evidence?: string[] };
 type Effect = { kind: 'follow' | 'orient' | 'continue'; actor: NativePoint; body: Site; receiver: Site; direction: NativePoint };
 type Choice = { command: NativeCommand; target?: Site; dial?: Dial; effect?: Effect };
 type Aim = { choice: Choice; scene: Scene; receiver: Site };
@@ -158,6 +159,45 @@ export function createSicDirectionalReception(family = directionalReceptionId, t
     const a = measureExposedReception(first) as Scene | null, b = a && measureExposedReception(second) as Scene | null;
     if (a && b) observations = observeExposureConditions(observations, before.level_epoch, a, b, input, after.observation_ref);
   }
+  function retainPublicCompletion(before: NativeObservation, after: NativeObservation, input: NativeCommand,
+    first: NativeRows, second: NativeRows, frames: readonly NativeRows[]) {
+    if (after.levels_completed <= before.levels_completed || !known || !photo
+      || known.completed !== before.levels_completed || !before.available_action_refs.includes(input.action_ref)) return;
+    const scene = measureExposedReception(first) as Scene | null;
+    if (!scene || scene.pitch !== known.pitch) return;
+    const current = exposure?.epoch === before.level_epoch && !exposure.stopped
+      && observeExposure(first, exposure, exposure.current) ? exposure : null;
+    const local = state?.epoch === before.level_epoch && state.layout === scene.layout ? state : null;
+    if (!current && (!local || photo.epoch !== before.level_epoch)) return;
+    const retained = coupling?.epoch === before.level_epoch ? coupling : null;
+    const measured = current ? [current.board, current.current] as const : exposureLayout(scene,
+      { shadow: photo.shadow, lit: photo.lit, ...(retained ? { linked: retained.linked, released: retained.released }
+        : { linked: null, released: null }) });
+    if (!measured) return;
+    const [board, initial] = measured, directions = { ...known.directions, ...local?.directions };
+    const direction = directions[input.action_ref];
+    const dials = input.action_ref === 'ACTION6' ? scene.dial.filter(dial => same(dial.point, [input.data.x!, input.data.y!])) : [];
+    const heading = dials.length === 1 ? exposureBearing(dials[0]!.vector) : -1;
+    const operation = direction ? exposureMoves.findIndex(delta => same(delta, direction))
+      : input.action_ref === 'ACTION5' ? 4 : heading >= 0 ? 5 + heading : -1;
+    if (operation < 0) return;
+    const expected = exposureRules(board).project(initial, operation), active = scene.dial.filter(dial => dial.active);
+    if (!finishedExposure(board, expected) || active.length !== 1) return;
+    const dialInk = first[active[0]!.point[1]]?.[active[0]!.point[0]];
+    if (dialInk === undefined || !publicCompletionFrames(before, after, second, frames).some(rows => {
+      const visible = measureExposedReception(rows) as Scene | null;
+      if (visible?.layout === scene.layout && exposureMatches(board, expected, visible)) return true;
+      const observed = readTrackedExposure(rows, scene, board, dialInk);
+      return observed && exposureMatches(board, expected, observed);
+    })) return;
+    const continued = continueRoleAfterPublicCompletion(known, before, after, true,
+      [known.ref, photo.ref, ...(current?.refs ?? local?.evidence ?? [])]);
+    if (!continued) return;
+    known = { ...continued, directions, ref: after.observation_ref };
+    photo = { ...photo, epoch: before.level_epoch };
+    if (board.colors.linked !== null && board.colors.released !== null) coupling = {
+      linked: board.colors.linked, released: board.colors.released, epoch: before.level_epoch, ref: after.observation_ref };
+  }
   let choose: NativeProgramHandle | undefined;
   async function offerExposure(observation: NativeObservation, rows: NativeRows, remaining: number,
     execution?: NativeExecution): Promise<ExposureProposal | null> {
@@ -207,7 +247,8 @@ export function createSicDirectionalReception(family = directionalReceptionId, t
     const rules = exposureRules(board);
     const expected = rules.project(current, step), movement = step < 4;
     const evidence: [string, ...string[]] = [ref,
-      ...new Set([...(fitted ? fitted.refs : [photo!.ref, known!.ref]), ...(retained ? [retained.ref] : []), ...memory.refs].filter(value => value !== ref))];
+      ...new Set([...(fitted ? fitted.refs : [photo!.ref, known!.ref, ...(known!.evidence ?? [])]),
+        ...(retained ? [retained.ref] : []), ...memory.refs].filter(value => value !== ref))];
     const mode = execution?.reasoningMode ?? 'solving', offer = { input: action.action_ref, expected: exposurePoint(expected.actor, board.width), evidence };
     const navigation = resolveNavigationPrimitives({ mode, evidence, probe: null, access: movement ? offer : null, interaction: movement ? null : offer });
     if (!navigation.selected) return null;
@@ -292,7 +333,8 @@ export function createSicDirectionalReception(family = directionalReceptionId, t
       const local: State = prior?.layout === scene.layout ? prior : {
         epoch: observation.level_epoch, layout: scene.layout,
         directions: prior?.directions ?? reusable?.directions ?? (receipt && delta ? { [receipt.command]: delta } : {}),
-        coupled: [], tried: [], evidence: prior?.evidence ?? (reusable ? [reusable.ref, ...(reusable.measuredAt ? [reusable.measuredAt] : [])] : receipt ? [receipt.beforeRef] : []), count: prior?.count ?? 0,
+        coupled: [], tried: [], evidence: prior?.evidence ?? (reusable ? [...new Set([reusable.ref, ...(reusable.evidence ?? []),
+          ...(reusable.measuredAt ? [reusable.measuredAt] : [])])] : receipt ? [receipt.beforeRef] : []), count: prior?.count ?? 0,
       };
       if (local.count >= 32) return null;
       const key = (action: NativeCommand) => JSON.stringify([observation.frame_hash, action]);
@@ -447,7 +489,10 @@ export function createSicDirectionalReception(family = directionalReceptionId, t
       const local = index > 0 ? state ?? proposal.local : proposal.local;
       learnConditions(before, after, issued, _first, second);
       if (after.levels_completed > before.levels_completed && Object.keys(local.directions).length) {
+        const retained = known?.completed === before.levels_completed && known.pitch === proposal.scene.pitch ? known : null;
         known = { completed: after.levels_completed, pitch: proposal.scene.pitch, directions: local.directions, ref: after.observation_ref,
+          evidence: [...new Set([...(retained?.evidence ?? []), ...(retained ? [retained.ref] : []),
+            ...local.evidence, before.observation_ref, after.observation_ref])],
           ...(transferObservedReception ? { measuredAt: local.evidence.at(-1) ?? before.observation_ref } : {}) };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
@@ -496,8 +541,9 @@ export function createSicDirectionalReception(family = directionalReceptionId, t
       const status = returned?.layout !== scene.layout ? 'receiver_layout_changed' : colorMatched ? 'receiver_color_match_observed' : 'receiver_return_measured';
       return { events: [{ status, evidence: [before.observation_ref, after.observation_ref] }] };
     },
-    observePublicOutcome(before, after, input, first, second) {
+    observePublicOutcome(before, after, input, first, second, frames = []) {
       if (learns && state?.epoch === before.level_epoch) learnConditions(before, after, input, first, second);
+      retainPublicCompletion(before, after, input, first, second, frames);
     },
     state: () => ({ state, known, photo, exposure, coupling, ...(observations ? {observations} : {}) }),
     restore(value: NativeRecord) {
