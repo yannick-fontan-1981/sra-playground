@@ -1,0 +1,25 @@
+{
+  "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "candidat": "ba04161fbce03f9660e9e73c14ed2c14ef2538d7",
+  "typescript": "5.9.3",
+  "compiled": {
+    "avecCommentaires": {
+      "identique": true,
+      "gel": "8f404590b53a244d133a49ab611dd3444d0c59eb48e5507c64cd3f2bd7bdf296",
+      "candidat": "8f404590b53a244d133a49ab611dd3444d0c59eb48e5507c64cd3f2bd7bdf296"
+    },
+    "sansCommentaires": {
+      "identique": true,
+      "gel": "f5c8da5e1defbfa748db5e2f0806fe040e484842a5d6041e63ab40c5a2b1aabc",
+      "candidat": "f5c8da5e1defbfa748db5e2f0806fe040e484842a5d6041e63ab40c5a2b1aabc"
+    }
+  },
+  "groupes": {
+    "dev": "3e7b1761b09c854861421d69b1265feaaa18963ce3a73f10a81ef4062dc052ce",
+    "res": "a23dccd9d414c857d594eb1decc98145bb98004a80afcec5706978541cbb70bf",
+    "G50T": "f877703f5aed4666135574d705b9cb1ec760709f7d26521965486823e67c4749",
+    "REGN": "69ecba135643a6fcac13198a9e76ab51dff84c57e5da1280a06ee64c24ed0099",
+    "dialogue-dev": "8474a2e4635f88601379b75526968126faef242069cb074afc9858307e0f7622",
+    "dialogue-res": "7114118a694794a28a7296c1ef520d60114bb3f0d61ab79fc324966f6686a84d"
+  }
+}
