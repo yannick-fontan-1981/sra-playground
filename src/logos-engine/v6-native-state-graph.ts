@@ -3,6 +3,7 @@ import { assertUnicode, compareUnicode, denseIntegerText, immutableJson, immutab
 import { sha256Bytes, symbolicDigest } from './v6-hash.ts';
 import type { JsonObject, JsonValue } from './ir.ts';
 import { BoundedWeakCache } from './bounded-weak-cache.ts';
+import { isRetainedNativeCopy } from './v6-native-owned.ts';
 
 export const NATIVE_STATE_GRAPH_PROFILE = 'logos-engine.v6.state-graph.v1';
 export const NATIVE_STATE_FRAGMENT_PREFIX = 'state_fragment:';
@@ -17,6 +18,10 @@ type GroupKind = 'concat' | 'merge';
 function sameEncoded(left: Encoded, right: Encoded | undefined): boolean {
   return left === right || (left !== null && typeof left === 'object' && left.kind === 'ref'
     && right != null && typeof right === 'object' && right.kind === 'ref' && left.id === right.id);
+}
+
+function portableInteger(value: unknown): value is number {
+  return typeof value === 'number' && Number.isSafeInteger(value) && !Object.is(value, -0);
 }
 
 export interface NativeStateGraphRoot extends JsonObject {
@@ -204,7 +209,7 @@ export function splitNativeState(value: unknown, component: string, options: Spl
     if (typeof input === 'string') { assertUnicode(input); return { node: input, cost: 1 }; }
     if (typeof input === 'number') {
       if (!Number.isFinite(input)) throw new TypeError('Native state numbers must be finite');
-      if (Number.isSafeInteger(input) && !Object.is(input, -0)) return { node: input, cost: 1 };
+      if (portableInteger(input)) return { node: input, cost: 1 };
       const bytes = new Uint8Array(8); new DataView(bytes.buffer).setFloat64(0, input, false);
       const bits = [...bytes].map(byte => byte.toString(16).padStart(2, '0')).join('');
       const before = priorNode(previous);
@@ -217,14 +222,15 @@ export function splitNativeState(value: unknown, component: string, options: Spl
     ancestors.add(input);
     try {
       const array = Array.isArray(input);
-      let entries: [string, unknown][];
-      if (isOwnedImmutableJson(input)) {
-        // A private immutableJson identity already certifies the complete own
-        // property domain. Raw numbers and nesting still pass visit below.
+      const owned = isOwnedImmutableJson(input) || isRetainedNativeCopy(input) || isHydratedNativeJson(input);
+      // Owned arrays already have dense immutable data properties. Read their
+      // slots directly, while untrusted inputs keep their descriptor snapshot.
+      const arrayValues = array && owned ? input : undefined;
+      let entries: [string, unknown][] = [];
+      if (owned && !array) {
         entries = Object.entries(input);
-      } else {
+      } else if (!arrayValues) {
         if (Object.getOwnPropertySymbols(input).length) throw new TypeError('Symbolic native state members are unsupported');
-        entries = [];
         for (const name of Object.getOwnPropertyNames(input)) {
           const descriptor = Object.getOwnPropertyDescriptor(input, name);
           if (!descriptor) continue;
@@ -260,18 +266,20 @@ export function splitNativeState(value: unknown, component: string, options: Spl
         });
         // Portable integers contribute one node and no fragment each. Dense
         // raster rows can be encoded without allocating a Sized leaf per pixel.
-        // The property snapshot above remains the only source of input values.
-        const flatCost = 3 + entries.length;
-        if (flatCost <= bound && entries.every(([, value]) => typeof value === 'number' && Number.isSafeInteger(value) && !Object.is(value, -0))) {
-          if (entries.length) {
+        const length = arrayValues?.length ?? entries.length;
+        const flatCost = 3 + length;
+        if (flatCost <= bound && (arrayValues?.every(portableInteger) ?? entries.every(([, value]) => portableInteger(value)))) {
+          if (length) {
             if (depth === 128) throw new TypeError('Native state nesting exceeds the V7 structural contract');
             note(0, true);
           }
-          const node = priorArray?.items.length === entries.length && entries.every(([, value], index) => value === priorArray.items[index])
-            ? priorArray : ownedEncoded({ kind: 'array', items: entries.map(([, value]) => value as number) });
+          const values = arrayValues ?? entries.map(([, value]) => value);
+          const node = priorArray?.items.length === length && values.every((value, index) => value === priorArray.items[index])
+            ? priorArray : ownedEncoded({ kind: 'array', items: values as readonly number[] });
           return { node, cost: flatCost };
         }
-        const children = entries.map(([, value], index) => visit(value, depth + 1, priorItems?.[index]));
+        const children = arrayValues ? arrayValues.map((value, index) => visit(value, depth + 1, priorItems?.[index]))
+          : entries.map(([, value], index) => visit(value, depth + 1, priorItems?.[index]));
         const cost = 3 + children.reduce((n, child) => n + child.cost, 0);
         if (cost <= bound) {
           const node = priorArray?.items.length === children.length && children.every((child, i) => sameEncoded(child.node, priorArray.items[i]))
