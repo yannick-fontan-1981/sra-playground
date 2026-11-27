@@ -1,0 +1,57 @@
+{
+  "source": "efd29d975aa7d74c5444908398d5db53c3df4f00",
+  "workflowCommit": "8bd69be891a895175d6c02c79b66113b9426d117",
+  "runId": "46050383195",
+  "node": "v24.22.3",
+  "start": 1,
+  "target": 6,
+  "workers": 1,
+  "mode": "sic",
+  "command": [
+    "node",
+    "scripts/check-sic-chronological.mjs",
+    "SNAR",
+    "auto",
+    "strict.jsonl",
+    "1",
+    "sic"
+  ],
+  "budgets": [
+    {
+      "actions": 21,
+      "activeTimeMs": 16000,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=1; won=true",
+      "timeBasis": "measured"
+    },
+    {
+      "actions": 29,
+      "activeTimeMs": 24000,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=2; won=true",
+      "timeBasis": "measured"
+    },
+    {
+      "actions": 28,
+      "activeTimeMs": 15000,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=3; won=true",
+      "timeBasis": "measured"
+    },
+    {
+      "actions": 44,
+      "activeTimeMs": 24000,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=4; won=true",
+      "timeBasis": "measured"
+    },
+    {
+      "actions": 42,
+      "activeTimeMs": 28000,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=5; won=true",
+      "timeBasis": "measured"
+    },
+    {
+      "actions": 35,
+      "activeTimeMs": 17000,
+      "source": "docs/architecture/sic-v8-validation.md :: SNAR niveau 6, traverser les rails et préserver les passages ouverts",
+      "timeBasis": "measured"
+    }
+  ]
+}

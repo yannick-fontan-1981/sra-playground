@@ -1,0 +1,59 @@
+{
+  "source": "efd29d975aa7d74c5444908398d5db53c3df4f00",
+  "code": "SNAR",
+  "reason": "target_levels_completed",
+  "status": "stopped",
+  "actions": 163,
+  "won": 6,
+  "byLevel": [
+    {
+      "level": 1,
+      "won": true,
+      "actions": 16,
+      "scoredMs": 4701,
+      "activeMs": 4458,
+      "prefixHash": "b9af930c627d06ddb5ecfa96d1425cd5ce3c10e8e5660d9bdf6b16afbd2cd121"
+    },
+    {
+      "level": 2,
+      "won": true,
+      "actions": 24,
+      "scoredMs": 5728,
+      "activeMs": 5406,
+      "prefixHash": "866682c03c73d6c6bb084d8ebb0bf4a02637ac2cac9f062a27aafe6de6471045"
+    },
+    {
+      "level": 3,
+      "won": true,
+      "actions": 23,
+      "scoredMs": 6447,
+      "activeMs": 6187,
+      "prefixHash": "58a7e3c5ea6f58c3a8cff96b82f0c6310ef10a9974917c582fba1696c51d5c9d"
+    },
+    {
+      "level": 4,
+      "won": true,
+      "actions": 36,
+      "scoredMs": 12287,
+      "activeMs": 11624,
+      "prefixHash": "8dced2e20837ed63a2401b33c21ce7290ab84a600d4a0eded3dec121d2c64bc9"
+    },
+    {
+      "level": 5,
+      "won": true,
+      "actions": 35,
+      "scoredMs": 14723,
+      "activeMs": 14538,
+      "prefixHash": "761f2fce5f691dfe3379190fcff9b02c579acb61ab215f99ced9d08da1915e0b"
+    },
+    {
+      "level": 6,
+      "won": true,
+      "actions": 29,
+      "scoredMs": 11265,
+      "activeMs": 11447,
+      "prefixHash": "40b06f85374db265048d2038dc306694100f2092255abc2059fea4e09f79169b"
+    }
+  ],
+  "resultSHA256": "9303876280d37436c0a6d059253e86a9273b6852a6c41aca4a481d01651180e5"
+}
