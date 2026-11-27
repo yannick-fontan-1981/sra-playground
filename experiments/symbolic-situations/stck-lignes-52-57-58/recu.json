@@ -1,0 +1,125 @@
+{
+  "chargements": 1,
+  "gestes": 16,
+  "départsParSHA": 7,
+  "retraitsSurBranche": 3,
+  "occurrences": {
+    "52": 3,
+    "57": 8,
+    "58": 2
+  },
+  "chronologies": {
+    "jeu": {
+      "images": 26,
+      "ordre": [
+        {
+          "mot": [
+            11,
+            8
+          ],
+          "premier": 12,
+          "preuve": "prospective_local_translation"
+        },
+        {
+          "mot": [
+            10,
+            8,
+            8
+          ],
+          "premier": 23,
+          "preuve": "retrospective_revealed_translation"
+        }
+      ],
+      "suivant": "containment_and_contact",
+      "arrêt": null
+    },
+    "finale": {
+      "images": 1,
+      "ordre": null,
+      "suivant": null,
+      "arrêt": "respondent_probe_observed_goal_model_open"
+    },
+    "premier-visible": {
+      "images": 52,
+      "ordre": [
+        {
+          "mot": [
+            11,
+            8
+          ],
+          "premier": 12,
+          "preuve": "prospective_local_translation"
+        },
+        {
+          "mot": [
+            10,
+            8,
+            8
+          ],
+          "premier": 49,
+          "preuve": "retrospective_revealed_translation"
+        }
+      ],
+      "suivant": "containment_and_contact",
+      "arrêt": null
+    },
+    "premier-révélé": {
+      "images": 52,
+      "ordre": [
+        {
+          "mot": [
+            10,
+            8,
+            8
+          ],
+          "premier": 23,
+          "preuve": "retrospective_revealed_translation"
+        },
+        {
+          "mot": [
+            11,
+            8
+          ],
+          "premier": 38,
+          "preuve": "prospective_local_translation"
+        }
+      ],
+      "suivant": "containment_and_contact",
+      "arrêt": null
+    }
+  },
+  "replis": {
+    "1": {
+      "famille": "observed_frontier",
+      "type": "experiment",
+      "action": "ACTION5",
+      "point": {},
+      "suite": "marked_collection_edit",
+      "arrêt": null
+    },
+    "4": {
+      "famille": "animated_contact",
+      "type": "measured_animated_contact",
+      "action": "ACTION6",
+      "point": {
+        "x": 33,
+        "y": 24
+      },
+      "suite": null,
+      "arrêt": "frontier_unknown"
+    },
+    "12": {
+      "famille": "containment",
+      "type": "containment_and_contact",
+      "action": "ACTION5",
+      "point": {},
+      "suite": "experiment",
+      "arrêt": null
+    }
+  },
+  "empreintes": {
+    "décisions": "203b5178844ef2c7d9aa9ac41f679c01ce26f41f32c72b885dc275472a91ddd1",
+    "ordre": "4c348d7b71549619d5b67dc6ab5b25486c61124f213dcaa2e3e481cb96db1bad",
+    "réserve": "b250401f56d5b020e26ac71f30faba02226f849ed6f90afe65776f26ba5a554a"
+  }
+}
