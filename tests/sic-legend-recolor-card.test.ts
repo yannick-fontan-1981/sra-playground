@@ -115,7 +115,7 @@ const captured = JSON.parse(gunzipSync(readFileSync(new URL(
   '../docs/diagnostics/sic-hole-20261127/selection-window-public.json.gz', import.meta.url,
 ))).toString()) as { number: number; before: number[][]; after: number[][] }[];
 
-for (const scenario of ['observed', 'permuted palette', 'wrong pigment', 'changed field', 'unwitnessed selection'] as const) {
+for (const scenario of ['observed', 'permuted palette', 'wrong pigment', 'changed field', 'changed legend', 'unwitnessed selection'] as const) {
   test('a palette selection retains priority for its immediate acquired recoloring: ' + scenario, async () => {
     const owner = createSicLegendRecolor();
     const selection = captured.find(row => row.number === 2)!;
@@ -159,16 +159,17 @@ for (const scenario of ['observed', 'permuted palette', 'wrong pigment', 'change
     assert.equal(currentPlan()?.strategy, 'acquire_legend_pigment');
     const returned = structuredClone(scenario === 'wrong pigment' ? disruption.after : selection.after);
     if (scenario === 'changed field') returned[1]![8] = (returned[1]![8]! + 1) % 16;
+    if (scenario === 'changed legend') returned[1]![2] = (returned[1]![2]! + 1) % 16;
     result = await service.handle({ type: 'advance', sessionId, sequence: 1, ticketId: result.ticket.id, executionMs: 1,
       observation: observe(returned, 1) });
-    const matched = scenario === 'observed' || permuted;
+    const keepsPriority = scenario === 'observed' || permuted;
     const actual = result.snapshot.trace.findLast(event => event.kind === 'actual_outcome');
-    assert.equal(actual?.matched, matched, actual?.reason);
+    assert.equal(actual?.matched, keepsPriority || scenario === 'changed legend', actual?.reason);
     assert.equal(result.kind, 'boundary');
     result = await service.handle({ type: 'resume', sessionId, sequence: 1 });
     assert.ok(result.ticket, result.snapshot.reason);
-    assert.equal(currentPlan()?.family, matched ? owner.id : preview.id);
-    if (matched) {
+    assert.equal(currentPlan()?.family, keepsPriority ? owner.id : preview.id);
+    if (keepsPriority) {
       assert.equal(currentPlan()?.strategy, 'apply_legend_pigment');
       const proposal = result.snapshot.proposal as Record<string, any>;
       assert.ok(proposal.route_refs.includes(actual?.observation_ref));

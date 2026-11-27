@@ -79,4 +79,7 @@ console.log(JSON.stringify({
     currentMemory:{ active:local.state.active,ref:local.state.evidence.at(-1),stopped:local.state.stopped }})),
   sameBeforeHistoricalWin:history.at(-1).hash, winningClick:history.at(-1).data
 }, null, 2));
-if (process.argv[2]) writeFileSync(process.argv[2],gzipSync(JSON.stringify(evidence)),{flag:'wx'});
+if (process.argv[2]) {
+  const testWindows = evidence.filter(({number}) => number <= 3).map(({number,before,after}) => ({number,before,after}));
+  writeFileSync(process.argv[2],gzipSync(JSON.stringify(testWindows)),{flag:'wx'});
+}
