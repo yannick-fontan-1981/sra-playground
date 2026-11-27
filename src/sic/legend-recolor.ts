@@ -48,6 +48,14 @@ function activePigment(rows: NativeRows, wells: Region[]) {
   return active.length === 1 ? active[0]!.value : null;
 }
 
+function preservesPigmentContext(scene: Scene, first: NativeRows, second: NativeRows) {
+  const [left, top, right, bottom] = scene.legend;
+  for (let y = top; y <= bottom; y++) for (let x = left; x <= right; x++) {
+    if (first[y]?.[x] !== second[y]?.[x]) return false;
+  }
+  return scene.wells.every(well => well.cells.every(point => at(second, point) === well.value));
+}
+
 export function createSicLegendRecolor(family = legendRecolorId): NativeFamily<Proposal> {
   const declarative = family === matchExampleId;
   let state: State | null = null;
@@ -159,7 +167,7 @@ export function createSicLegendRecolor(family = legendRecolorId): NativeFamily<P
       lastVerified = undefined;
       state = { ...local, active: body.target, count: local.count + 1, stopped: !matched,
         evidence: [...local.evidence.slice(-4), after.observation_ref] };
-      if (matched && selecting) state.selectionRef = after.observation_ref;
+      if (matched && selecting && preservesPigmentContext(local.scene, first, second)) state.selectionRef = after.observation_ref;
       else delete state.selectionRef;
       return { events: [] };
     },
