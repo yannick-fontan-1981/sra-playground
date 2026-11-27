@@ -97,9 +97,14 @@ test('both planning modes dispatch the same experimental capabilities and accept
   for (const id of [preparedEffectsId, compositionFamily]) assert.ok(full.registeredFamilies.includes(id));
   const byId = (groups: typeof full.sourceGroups) => Object.fromEntries(groups.map(group => [group.id, group]));
   assert.deepEqual(byId(full.sourceGroups), byId(fallback.sourceGroups));
-  const motion = byId(full.sourceGroups).coordinate_visible_motion!;
-  assert.equal(motion.families.at(-1), preparedEffectsId);
-  assert.equal(motion.entryPoints?.at(-1), transferredPreviewGroup);
+  const exploration = byId(full.sourceGroups).explore_available_inputs!;
+  assert.equal(exploration.families[0], preparedEffectsId);
+  assert.equal(exploration.entryPoints?.[0], transferredPreviewGroup);
+  for (const id of ['coordinate_visible_motion', 'interpret_examples_and_collections',
+    'construct_executable_program', 'follow_symbol_diagram', 'place_incoming_groups']) {
+    assert.ok(full.sourceGroups.findIndex(group => group.id === id)
+      < full.sourceGroups.findIndex(group => group.id === exploration.id), id);
+  }
   const projected = fallback.sourceGroups[0]!;
   assert.equal(projected.entryPoints?.[0], 'test_or_continue_a_grounded_coverage_plan');
   assert.ok(full.sourceGroups.findIndex(group => group.id === projected.id) > 0);
