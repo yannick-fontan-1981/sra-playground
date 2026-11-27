@@ -86,3 +86,14 @@ test('the executable surface prefix respects both native and remaining limits', 
   assert.ok(planSurfacePrefix(firstLoss.memoryBefore, firstLoss.first.address, 51, 4).length <= 4);
   assert.deepEqual(planSurfacePrefix(firstLoss.memoryBefore, firstLoss.first.address, 0, 16), []);
 });
+
+
+test('the remaining execution cap does not discard a longer visible route to the goal', () => {
+  const run = JSON.parse(gunzipSync(readFileSync(new URL('../docs/diagnostics/sic-surface-goal-access-20261127/public-map-level5-before.json.gz', import.meta.url))));
+  const sample = run.samples.find((entry: any) => entry.levelAction === 53);
+  assert.equal(sample.action.id, 1, 'The bounded search chose a nearby unrelated opening');
+  const prefix = planSurfacePrefix(sample.memoryBefore, sample.first.address, 28, 16);
+  assert.equal(prefix[0]?.direction, 1, 'Keep the goal-directed route even when the full path exceeds this execution budget');
+  assert.ok(prefix.length <= 16);
+  assert.equal(prefix.at(-1)?.expected, null);
+});

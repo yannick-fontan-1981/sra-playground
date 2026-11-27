@@ -6,9 +6,9 @@ import { blockedRouteStep, rememberRouteRefusal, type RouteRefusals } from './ro
 import { sicNeedId } from './need-identity.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
-import { emptySurfaceMemory, measureSurface, observedSurfacePassage, planSurfacePrefix, rememberSurface, rememberSurfaceStep,
+import { emptySurfaceMemory, measureSurface, observedPassageContinuation, observedSurfacePassage, planSurfacePrefix, preferredPassageContext, rememberSurface, rememberSurfaceStep,
   sameSurfaceAddress, surfaceDirections, surfacePoint, surfaceStepCurrent,
-  type SurfaceMemory, type SurfacePlan, type SurfaceRoles, type SurfaceView } from './observed-surfaces.ts';
+  type SurfaceMemory, type SurfacePassageEvidence, type SurfacePlan, type SurfaceRoles, type SurfaceView } from './observed-surfaces.ts';
 
 export const switchedSurfaceId = 'sic_switched_surface';
 export const learnSwitchedSurfaceId = 'sic_follow_observed_surface_change';
@@ -156,7 +156,13 @@ export function createSicSwitchedSurface(family = switchedSurfaceId, transferObs
   let ascertained: { epoch: number; roles: SurfaceRoles; ref: string } | null = null;
   let witness: SurfaceWitness | null = null;
   let mapped: LearnedSurfaces | null = null;
+  let passageEvidence: SurfacePassageEvidence[] = [];
   let decide: NativeProgramHandle | undefined;
+  function rememberContinuation(first: SurfaceView, second: SurfaceView, command: string, beforeRef: string, afterRef: string) {
+    const sample = observedPassageContinuation(first, second, command);
+    if (sample && !passageEvidence.some(item => item.throughSupport === sample.throughSupport && item.onward === sample.onward))
+      passageEvidence.push({ ...sample, refs: [beforeRef, afterRef] });
+  }
   function retainPublicPassage(before: NativeObservation, after: NativeObservation, command: NativeCommand,
     first: NativeRows, second: NativeRows): boolean {
     if (!witness || witness.epoch !== before.level_epoch || witness.score !== before.levels_completed
@@ -170,6 +176,7 @@ export function createSicSwitchedSurface(family = switchedSurfaceId, transferObs
     const view = measureSurface(first, witness.roles), next = measureSurface(second, witness.roles);
     const plan = view && next && observedSurfacePassage(view, next, command.action_ref);
     if (!view || !next || !plan) return false;
+    rememberContinuation(view, next, command.action_ref, before.observation_ref, after.observation_ref);
     const prior = mapped?.epoch === before.level_epoch ? mapped : null;
     const memory = rememberSurface(prior?.memory ?? emptySurfaceMemory(), view);
     mapped = { epoch: before.level_epoch, memory: rememberSurfaceStep(memory, view, next, plan),
@@ -215,10 +222,14 @@ export function createSicSwitchedSurface(family = switchedSurfaceId, transferObs
         if (view) {
           const prior = mapped?.epoch === observation.level_epoch ? mapped : null;
           const memory = rememberSurface(prior?.memory ?? emptySurfaceMemory(), view);
-          const walk = planSurfacePrefix(memory, view.address, remaining, maximumCommittedActions), plan = walk[0];
+          const scope = ref.split(':epoch:', 1)[0]!;
+          const cases = passageEvidence.filter(item => item.refs.every(value => value.split(':epoch:', 1)[0] === scope));
+          const preference = preferredPassageContext(cases);
+          const walk = planSurfacePrefix(memory, view.address, remaining, maximumCommittedActions, preference), plan = walk[0];
           if (plan) {
             const local = { epoch: observation.level_epoch, memory, refs: prior?.refs ?? refs };
-            const evidence: [string, ...string[]] = [ref, ...local.refs.filter(value => value !== ref)];
+            const evidence: [string, ...string[]] = [ref, ...new Set([...local.refs,
+              ...(preference === null ? [] : cases.flatMap(item => item.refs))].filter(value => value !== ref))];
             const mode = execution?.reasoningMode ?? 'solving';
             const actions = walk.map(step => ({ action_ref: directions[step.direction][0], data: {} })), action = actions[0]!;
             const offer = { input: action.action_ref, expected: plan.expected?.cell ?? plan.focus.cell, evidence };
@@ -351,6 +362,7 @@ export function createSicSwitchedSurface(family = switchedSurfaceId, transferObs
         if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
         const { local, walk, roles } = proposal.transfer, view = measureSurface(first, roles), next = measureSurface(second, roles);
         const prior = mapped?.epoch === before.level_epoch ? mapped : local;
+        if (view && next) rememberContinuation(view, next, _action.action_ref, before.observation_ref, after.observation_ref);
         if (view && next) mapped = { epoch: local.epoch,
           memory: rememberSurfaceStep(rememberSurface(prior.memory, view), view, next, walk[index]!),
           refs: [...prior.refs.slice(-6), before.observation_ref, after.observation_ref] };
@@ -377,12 +389,13 @@ export function createSicSwitchedSurface(family = switchedSurfaceId, transferObs
         entry, blocked: blocked ? rememberRouteRefusal(local.blocked, scene.actor.point, step.direction[0], after.observation_ref, scene.context) : local.blocked };
       return { events: [] };
     },
-    state: () => ({ model, ascertained, witness, mapped }),
+    state: () => ({ model, ascertained, witness, mapped, passageEvidence }),
     restore(value: NativeRecord) {
       model = structuredClone(value.model as Model | null);
       ascertained = structuredClone((value.ascertained as typeof ascertained | undefined) ?? null);
       witness = structuredClone((value.witness as SurfaceWitness | null | undefined) ?? null);
       mapped = structuredClone((value.mapped as LearnedSurfaces | null | undefined) ?? null);
+      passageEvidence = structuredClone((value.passageEvidence as SurfacePassageEvidence[] | undefined) ?? []);
     },
   };
 }
