@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { continuityObservation } from './sic-continuity-contract.mjs';
 
 const owners = new Set(['sic_verify_reference_placement', 'sic_learn_reference_placement']);
 const key = cell => JSON.stringify(cell);
@@ -84,6 +85,29 @@ function actualMovement(ticket) {
 
 export function measuredPopulationPreparation(run, issued, groups) {
   const prepared = [];
+  for (const ticket of issued) {
+    const p = ticket.population;
+    if (!p) continue;
+    const effect = run.steps?.[run.executedTickets.indexOf(ticket)];
+    const before = continuityObservation(p.beforeRef), after = continuityObservation(p.afterRef);
+    assert.ok(owners.has(ticket.outcome?.family) && p.actionRef === ticket.action
+      && before && after && before.scope === after.scope && after.revision > before.revision
+      && p.levelEpoch === ticket.level && before.epoch === p.levelEpoch
+      && p.scoreBefore === ticket.level - 1 && p.afterRef === ticket.outcome.observation_ref
+      && effect?.a === Number(ticket.action.slice(6)) && effect.family === ticket.outcome.family
+      && before.frame === effect.from && after.frame === effect.to
+      && (p.boundary ? p.scoreAfter === ticket.level && after.epoch >= before.epoch && after.epoch <= before.epoch + 1
+        : p.scoreAfter === p.scoreBefore && after.epoch === before.epoch),
+    'VOIS receipt is not bound to its actual ticket, public frames, score and epoch');
+    for (const ref of [...p.learnedEvidence, ...(p.neighborEffectRef ? [p.neighborEffectRef] : [])]) {
+      const learned = continuityObservation(ref);
+      assert.ok(learned && learned.scope === before.scope && learned.epoch <= before.epoch
+        && learned.revision <= before.revision,
+      'VOIS reused a foreign or future learned observation');
+    }
+    if (p.before && p.after) assert.equal(p.before.reference, p.after.reference,
+      'VOIS changed its public reference within a prepared movement');
+  }
   const neighborEffects = issued.filter(ticket => ticket.population?.changedNeighbors?.length);
   for (const ticket of neighborEffects) {
     const p = ticket.population;
