@@ -1,5 +1,7 @@
 # P05 · Qualification progressive sur les 107 jeux
 
+Le candidat `3c2d6bcf` a depuis été qualifié sur les 107 jeux, avec cinq comparaisons supplémentaires au niveau des décisions. [Résultats, compteurs des appelants et reçus reproductibles](sic-qualification-3c2d6bcf.md)
+
 Le [catalogue par jeu](sic-qualification-progressive-107.json) couvre **107 codes distincts, 692 niveaux et 24 lots**. Chaque ligne donne le score, les limites par niveau (commandes et millisecondes), les récupérations, le lot, les empreintes du reçu, la disponibilité d’A et les indices propres aux deux appelants. Les mesures du premier lot restent disponibles dans la [fiche A/A′](sic-comparaison-decisions.md).
 
 | Ordre | Jeux | Preuve disponible et question |
@@ -50,7 +52,7 @@ Le lanceur réutilise le workflow historique à 24 lots équilibrés, un worker 
 py scripts/prepare-sic-107-rerun.py --source $sha
 ```
 
-Au créneau retenu, créer un checkout de la branche d’audit indiquée par cette commande au SHA exact du candidat. Depuis ce checkout, appeler le même script du banc avec `--source $sha --write`, committer le workflow produit, puis pousser **la branche d’audit** pour démarrer la campagne. Le run de préparation pour `3c2d6bcfd4a7d7abf28650e2f8ffed3d3510c3b4` donne l’empreinte `b2145cca6c34b5a7b3802c0e348fe1eb4ea9af29db57bc2f885d5200f84115d6`. Le lancement et le verdict candidat restent à effectuer.
+Au créneau retenu, créer un checkout de la branche d’audit indiquée par cette commande au SHA exact du candidat. Depuis ce checkout, appeler le même script du banc avec `--source $sha --write`, committer le workflow produit, puis pousser **la branche d’audit** pour démarrer la campagne. Le run de préparation pour `3c2d6bcfd4a7d7abf28650e2f8ffed3d3510c3b4` donne l’empreinte `b2145cca6c34b5a7b3802c0e348fe1eb4ea9af29db57bc2f885d5200f84115d6`. Le verdict de cette campagne figure dans la fiche du candidat en tête de page.
 
 Après la campagne, télécharger les artefacts avec `gh run download <run-id> --dir <dossier>`. Fournir le commit du workflow annoncé par GitHub (`headSha`, récupéré par Git) et le SHA du moteur séparément. L’import vérifie les 24 lots de la première tentative du run, puis compare les reçus et reprend jeu par jeu dans son propre état.
 
