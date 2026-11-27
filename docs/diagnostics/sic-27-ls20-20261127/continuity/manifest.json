@@ -1,0 +1,60 @@
+{
+  "schema": "sic.evidence-files.v1",
+  "files": [
+    {
+      "file": "README.md",
+      "bytes": 3320,
+      "sha256": "f9e19aeeeb6bfc0a6a0a70133536e08cf8a4bf6d0735ac15b3e8dd2051b33030",
+      "gitBlob": "6d705366566139973cc17cc88f89ae6d10addfd1"
+    },
+    {
+      "file": "collector-hooks.log",
+      "bytes": 2115,
+      "sha256": "bd688d1c8b26cdebf9f30800ee6a7a70c3e52b51ac56358dcf4d8dbc171d58f4",
+      "gitBlob": "3cad9257fffaa66562d16918ad3ba3fd803486c6"
+    },
+    {
+      "file": "contracts.log",
+      "bytes": 4536,
+      "sha256": "be2b8114716f29d297fcb273372b6e9fc0286a7d3b1672540cd4eb9d489b0871",
+      "gitBlob": "f393543e7aa61d75c72a0795267f1c5d21796621"
+    },
+    {
+      "file": "results.jsonl.gz",
+      "bytes": 30068,
+      "sha256": "f5bb358560652fd36e30efa8fd3e6249c86796031082a667fbe25647cae147b7",
+      "gitBlob": "9f852655ce80c3247ef1f1dfecbf4381f9a83485"
+    },
+    {
+      "file": "run-end.json",
+      "bytes": 1183,
+      "sha256": "2ca8021516e7bbbac4355f7ef929dddd885a6d908c7359656066f27917122dbf",
+      "gitBlob": "88d30d899c2ab0cd911c7896c174f9fb37301e05"
+    },
+    {
+      "file": "run-manifest.json",
+      "bytes": 2132,
+      "sha256": "9d002ba03c7a72ddd08c0dfc0c98507800baddbbeca4c4a77e6f20b36ded2f73",
+      "gitBlob": "06e98c2332f26cc7252ad9d5a8474a4e279304f8"
+    },
+    {
+      "file": "run-workshop-continuity.py",
+      "bytes": 3194,
+      "sha256": "29f3e74ef1993e65e8ac9b4bc3850d593dd7e750b0e161e5aacd0bf583f9f5ac",
+      "gitBlob": "4ec66d277182ca11a0fa5dd15f5181ae387b990d"
+    },
+    {
+      "file": "runner.log",
+      "bytes": 278,
+      "sha256": "8353e402300aebd3a136af035621027477e6bbf2bfbffe9594209b3bdb70af2f",
+      "gitBlob": "844f20f25435078dfee56e5674469d1cec5bc108"
+    },
+    {
+      "file": "summary.json",
+      "bytes": 4025,
+      "sha256": "b671163d69ef6caf4c7dcdc65758ded9448e5d06cc2a1b67827994fe1920700b",
+      "gitBlob": "e0eb9dbae7a70a1c7a033c55f93138d98654f87a"
+    }
+  ],
+  "decodedResultSha256": "20fbaa1d0618edb4544c1c9f7b2295a6e397ed89c882ea2da7f7a2dd8312bff4"
+}
