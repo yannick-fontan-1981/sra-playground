@@ -1,0 +1,208 @@
+{
+  "node": "v24.22.3",
+  "mode": "sic",
+  "target": "auto",
+  "startLevel": 1,
+  "seed": 0,
+  "workers": 1,
+  "localDirectory": "artifacts\\qualification-a5a90c33",
+  "attempts": [
+    {
+      "directory": "FOGW-parent-plafond-1",
+      "label": "A",
+      "game": "FOGW",
+      "source": "3c2d6bcfd4a7d7abf28650e2f8ffed3d3510c3b4",
+      "levels": 5,
+      "actions": 170,
+      "reason": "level_wall_time_budget",
+      "stopLevel": 6,
+      "stopLevelActions": 60,
+      "elapsedMs": 37014,
+      "levelBudget": {
+        "actions": 76,
+        "activeTimeMs": 37000,
+        "source": "docs/architecture/sic-v8-validation.md :: FOGW niveau 6, réactiver les supports après un franchissement refusé",
+        "timeBasis": "measured"
+      },
+      "receiptSHA256": "6a7e1e0ab35041f22e373832f1682e700cf676c972383dab232b2118ac6c2520",
+      "traceSHA256": "a70415fa7c74b3bff464b71e428047e0987fa75ccb3e97e87967e765635447f1"
+    },
+    {
+      "directory": "FOGW",
+      "label": "A",
+      "game": "FOGW",
+      "source": "3c2d6bcfd4a7d7abf28650e2f8ffed3d3510c3b4",
+      "levels": 5,
+      "actions": 160,
+      "reason": "level_wall_time_budget",
+      "stopLevel": 6,
+      "stopLevelActions": 50,
+      "elapsedMs": 37014,
+      "levelBudget": {
+        "actions": 76,
+        "activeTimeMs": 37000,
+        "source": "docs/architecture/sic-v8-validation.md :: FOGW niveau 6, réactiver les supports après un franchissement refusé",
+        "timeBasis": "measured"
+      },
+      "receiptSHA256": "3fed54676b6892799b0ea2c39529b25702f39b317b15ed4364a8bbb423380c8a",
+      "traceSHA256": "ca92ec502c9448d4b764575288be2f0bc6efaee79ade35658100fce068ae3a20"
+    },
+    {
+      "directory": "FOGW",
+      "label": "B",
+      "game": "FOGW",
+      "source": "a5a90c3349ea49bba8e40055444cea2026bee962",
+      "levels": 5,
+      "actions": 160,
+      "reason": "level_wall_time_budget",
+      "stopLevel": 6,
+      "stopLevelActions": 50,
+      "elapsedMs": 37015,
+      "levelBudget": {
+        "actions": 76,
+        "activeTimeMs": 37000,
+        "source": "docs/architecture/sic-v8-validation.md :: FOGW niveau 6, réactiver les supports après un franchissement refusé",
+        "timeBasis": "measured"
+      },
+      "receiptSHA256": "ddb1748aad58ce6cbc8d32c71144c74d7a3568997f04abeab76ce2a797927b86",
+      "traceSHA256": "002a783704b681bee5ba7116cf53e232270e50e5a99655e35c54060c2e6bdcc2"
+    },
+    {
+      "directory": "G50T",
+      "label": "B",
+      "game": "G50T",
+      "source": "a5a90c3349ea49bba8e40055444cea2026bee962",
+      "levels": 5,
+      "actions": 255,
+      "reason": "level_wall_time_budget",
+      "stopLevel": 6,
+      "stopLevelActions": 48,
+      "elapsedMs": 47012,
+      "levelBudget": {
+        "actions": 59,
+        "activeTimeMs": 47000,
+        "source": "docs/architecture/sic-v8-validation.md :: G50T niveau 6, synchroniser les enregistrements avec un porteur autonome",
+        "timeBasis": "measured"
+      },
+      "receiptSHA256": "8a8c6425a5edf55efd9431cfcf5deb4b01484c5ffec74d49bc17e27149fcd7f3",
+      "traceSHA256": "25211c1f45d6192bb25f02e63194af2ff159b4da21c66d31fc14895e75bc5c4f"
+    },
+    {
+      "directory": "G50T-controle-mural",
+      "label": "A",
+      "game": "G50T",
+      "source": "3c2d6bcfd4a7d7abf28650e2f8ffed3d3510c3b4",
+      "levels": 5,
+      "actions": 255,
+      "reason": "level_wall_time_budget",
+      "stopLevel": 6,
+      "stopLevelActions": 48,
+      "elapsedMs": 47009,
+      "levelBudget": {
+        "actions": 59,
+        "activeTimeMs": 47000,
+        "source": "docs/architecture/sic-v8-validation.md :: G50T niveau 6, synchroniser les enregistrements avec un porteur autonome",
+        "timeBasis": "measured"
+      },
+      "receiptSHA256": "2662f0ae7b10f0e7cecf308938b19d31e6142eebf0b646247eed3e41edf6b66b",
+      "traceSHA256": "29a281055115ab11a956e9f0aefec56364863a7f7ac286b61a0128be78a83d2b"
+    },
+    {
+      "directory": "G50T-controle-mural",
+      "label": "B",
+      "game": "G50T",
+      "source": "a5a90c3349ea49bba8e40055444cea2026bee962",
+      "levels": 2,
+      "actions": 84,
+      "reason": "level_wall_time_budget",
+      "stopLevel": 3,
+      "stopLevelActions": 25,
+      "elapsedMs": 83015,
+      "levelBudget": {
+        "actions": 77,
+        "activeTimeMs": 83000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=G50T; level=3; won=true",
+        "timeBasis": "measured"
+      },
+      "receiptSHA256": "1163f0cbd10954f014e748d9c0a71ee349c89c15e79a149fb187133343990e59",
+      "traceSHA256": "0721eab8142fad594a50060d0e06bbec9a2ee7f67ac374c0bf4d143dbd979b41"
+    }
+  ],
+  "firstDifferences": [
+    {
+      "left": "FOGW-parent-plafond-1/A",
+      "right": "FOGW/A",
+      "comparison": {
+        "equal": false,
+        "event": 1489,
+        "game": "FOGW",
+        "level": 6,
+        "turn": 50,
+        "kind": "native",
+        "field": "/kind",
+        "before": "native",
+        "after": "stop"
+      }
+    },
+    {
+      "left": "FOGW/A",
+      "right": "FOGW/B",
+      "comparison": {
+        "equal": false,
+        "event": 1489,
+        "game": "FOGW",
+        "level": 6,
+        "turn": 50,
+        "kind": "stop",
+        "field": "/kind",
+        "before": "stop",
+        "after": "native"
+      }
+    },
+    {
+      "left": "G50T parent qualifié du lot P05",
+      "right": "G50T/B",
+      "comparison": {
+        "equal": false,
+        "event": 2542,
+        "game": "G50T",
+        "level": 6,
+        "turn": 49,
+        "kind": "native",
+        "field": "/turn",
+        "before": 49,
+        "after": 48
+      }
+    },
+    {
+      "left": "G50T-controle-mural/A",
+      "right": "G50T/B",
+      "comparison": {
+        "equal": false,
+        "event": 2539,
+        "game": "G50T",
+        "level": 6,
+        "turn": 48,
+        "kind": "stop",
+        "field": "/kind",
+        "before": "stop",
+        "after": "native"
+      }
+    },
+    {
+      "left": "G50T-controle-mural/A",
+      "right": "G50T-controle-mural/B",
+      "comparison": {
+        "equal": false,
+        "event": 826,
+        "game": "G50T",
+        "level": 3,
+        "turn": 25,
+        "kind": "native",
+        "field": "/kind",
+        "before": "native",
+        "after": "stop"
+      }
+    }
+  ]
+}

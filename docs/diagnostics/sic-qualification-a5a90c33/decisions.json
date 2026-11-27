@@ -1,0 +1,244 @@
+{
+  "frozen": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "parent": "3c2d6bcfd4a7d7abf28650e2f8ffed3d3510c3b4",
+  "child": "a5a90c3349ea49bba8e40055444cea2026bee962",
+  "pairArchiveSHA256": "aceb46dc8552586f1bab974de3328f5399d70d9969b0a7f45f2ece3b74145d60",
+  "games": [
+    {
+      "game": "FOGW",
+      "runId": "46069878515",
+      "workflow": "47173ea8febff274b3e4aeb53c88db92ab52fecd",
+      "method": "ordered-pair",
+      "levels": 6,
+      "decisions": 173,
+      "events": 1623,
+      "traceSHA256": "427111dce42f58710996fb638dcf2720103f5a1315abe700372d2aa52a916594",
+      "parentRowSHA256": "b6d68d3e7890f48c332f03b11333a5095f62727ad8a386cb816b7d71b7ec09ca",
+      "trajectory": "3cf90da4101acf07b405e5550bbbb21497aac5aff132425eb53e75212c23c7dd",
+      "callsParent": {
+        "site": "reception-access.ts",
+        "variant": "inline",
+        "turn": 3,
+        "observed": {
+          "file": "reception-access.ts",
+          "from": [
+            30,
+            42
+          ],
+          "position": [
+            34,
+            42
+          ],
+          "step": 4,
+          "command": "ACTION4",
+          "observation": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:1:revision:4:frame:2ef366caf5b05817",
+          "displacement": [
+            4,
+            0
+          ]
+        },
+        "callsBySite": {
+          "replay-access.ts": 0,
+          "reception-access.ts": 15
+        },
+        "prefixHash": "4711a8652d6ce194b1d75befd4d2a1bd814000e0ffabe9a2540c9452257e9e8e",
+        "allSamplesSHA256": "e003b85bade887d711724380b37b0edc9094340311b31def50f829bf59380ed8"
+      },
+      "callsChild": {
+        "site": "reception-access.ts",
+        "variant": "singleStepDisplacement",
+        "turn": 3,
+        "observed": {
+          "file": "reception-access.ts",
+          "from": [
+            30,
+            42
+          ],
+          "position": [
+            34,
+            42
+          ],
+          "step": 4,
+          "command": "ACTION4",
+          "observation": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:1:revision:4:frame:2ef366caf5b05817",
+          "displacement": [
+            4,
+            0
+          ]
+        },
+        "callsBySite": {
+          "replay-access.ts": 0,
+          "reception-access.ts": 15
+        },
+        "prefixHash": "4711a8652d6ce194b1d75befd4d2a1bd814000e0ffabe9a2540c9452257e9e8e",
+        "allSamplesSHA256": "e003b85bade887d711724380b37b0edc9094340311b31def50f829bf59380ed8"
+      }
+    },
+    {
+      "game": "G50T",
+      "runId": "46069878515",
+      "workflow": "47173ea8febff274b3e4aeb53c88db92ab52fecd",
+      "method": "ordered-pair",
+      "levels": 7,
+      "decisions": 301,
+      "events": 3004,
+      "traceSHA256": "3c465801169b0b29f6a84ff92182c90efd2e55915787d594b3a5bcda7f4736e5",
+      "parentRowSHA256": "dcd11f517b82d26e8d45e7647b109180a3dadd272ad6b46b3640628dd85dbb56",
+      "trajectory": "3439182e859d557cbabe18d6955270bde6036bf1ad888c418617571f827f182c",
+      "callsParent": {
+        "site": "replay-access.ts",
+        "variant": "inline",
+        "turn": 5,
+        "observed": {
+          "file": "replay-access.ts",
+          "from": [
+            14,
+            8
+          ],
+          "position": [
+            20,
+            8
+          ],
+          "step": 6,
+          "command": "ACTION4",
+          "observation": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:1:revision:6:frame:bd5da91d68f0d73d",
+          "displacement": [
+            6,
+            0
+          ]
+        },
+        "callsBySite": {
+          "replay-access.ts": 25,
+          "reception-access.ts": 0
+        },
+        "prefixHash": "39d192be6d253d0c6bf1dc86b618dcd286f068fed5f926d6f6e45a3b9ef2d05b",
+        "allSamplesSHA256": "aaab246c608533dc4271afff565c2815d5bcc8ec01f851aa7cd882055a3ea5b1"
+      },
+      "callsChild": {
+        "site": "replay-access.ts",
+        "variant": "singleStepDisplacement",
+        "turn": 5,
+        "observed": {
+          "file": "replay-access.ts",
+          "from": [
+            14,
+            8
+          ],
+          "position": [
+            20,
+            8
+          ],
+          "step": 6,
+          "command": "ACTION4",
+          "observation": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:1:revision:6:frame:bd5da91d68f0d73d",
+          "displacement": [
+            6,
+            0
+          ]
+        },
+        "callsBySite": {
+          "replay-access.ts": 25,
+          "reception-access.ts": 0
+        },
+        "prefixHash": "39d192be6d253d0c6bf1dc86b618dcd286f068fed5f926d6f6e45a3b9ef2d05b",
+        "allSamplesSHA256": "aaab246c608533dc4271afff565c2815d5bcc8ec01f851aa7cd882055a3ea5b1"
+      }
+    },
+    {
+      "game": "AS66",
+      "runId": "46070652873",
+      "workflow": "4591cacddd40de77f8adbdb922f0b25e6f0d9a64",
+      "method": "verified-parent-trace-sha256",
+      "levels": 9,
+      "decisions": 161,
+      "events": 1613,
+      "traceSHA256": "afe063f42626c5bff0c1434f19902acc5f5f0462ece4d6daf8e2ce2c5889b337",
+      "parentRowSHA256": "bb02a266e7cf781cdf613584e7896f0f44f25814c951d9798667fe4d18f29d71",
+      "trajectory": "c6127bbfc62744eb0d3f2ea55cd17c0bcde795b35c2aec23ee377497e521bd33"
+    },
+    {
+      "game": "CWSE",
+      "runId": "46070652873",
+      "workflow": "4591cacddd40de77f8adbdb922f0b25e6f0d9a64",
+      "method": "ordered-pair",
+      "levels": 6,
+      "decisions": 195,
+      "events": 1950,
+      "traceSHA256": "816b173c29806f66ee4c1e5650fa6715b0b8996f6d511b1013b46057454c3045",
+      "parentRowSHA256": "82ebdd9e30f3be9ed32cb15700a7e70a28c3aae6d306494c2dfe77852bb0cc19",
+      "trajectory": "6c91655b9494547ad9303fcb7e0199842229e8d173816885f4ad25bef53f4682"
+    },
+    {
+      "game": "DC22",
+      "runId": "46070652873",
+      "workflow": "4591cacddd40de77f8adbdb922f0b25e6f0d9a64",
+      "method": "verified-parent-trace-sha256",
+      "levels": 6,
+      "decisions": 630,
+      "events": 5662,
+      "traceSHA256": "c4ef882d35797e0cf64e40c6687336bdd48df83a85fb0154ff3329c78e9315f1",
+      "parentRowSHA256": "54864e5acaed6282a492966028972fd446e47db4a5d8de4ab6eaff61af46d2d8",
+      "trajectory": "854ad877ba896c78a9a63fb3e30bf49d1a8778c164861f1fb935abce3c706e36"
+    },
+    {
+      "game": "HOLE",
+      "runId": "46070652873",
+      "workflow": "4591cacddd40de77f8adbdb922f0b25e6f0d9a64",
+      "method": "verified-parent-trace-sha256",
+      "levels": 6,
+      "decisions": 78,
+      "events": 784,
+      "traceSHA256": "d7ae06dab522b7e386dde870ef33fa61fcc120c0efe30ad02da12ab3fd9eddbd",
+      "parentRowSHA256": "c3b480bdaf33a3ba87237bfc75a8064d54ab19a7407dc159d5cd98c3787efb4c",
+      "trajectory": "f243570d5075a0824ceb6586edcdcefa8690a9ac50a199cff3add98642185902"
+    },
+    {
+      "game": "PORT",
+      "runId": "46070652873",
+      "workflow": "4591cacddd40de77f8adbdb922f0b25e6f0d9a64",
+      "method": "verified-parent-trace-sha256",
+      "levels": 6,
+      "decisions": 116,
+      "events": 844,
+      "traceSHA256": "9934e6a4fb2b45762bb0da666b2a9f011cb11395eab6552603c108c7773d9cba",
+      "parentRowSHA256": "cbb28673f51faeb1e0b28d20135ed3a0d26847b60c8e62d230cfd25255a8849a",
+      "trajectory": "6ac0996092896e035f77015d8a6f76a5aaba6857ca936c6af7832723877834e1"
+    },
+    {
+      "game": "SNAR",
+      "runId": "46070652873",
+      "workflow": "4591cacddd40de77f8adbdb922f0b25e6f0d9a64",
+      "method": "ordered-pair",
+      "levels": 6,
+      "decisions": 163,
+      "events": 1423,
+      "traceSHA256": "a67b4273d5a04a2fd782480706d7cb5fcac8b97633292ff9624a6aef4780aa8f",
+      "parentRowSHA256": "985342800ad3993cd25cca3c25111fd07d84ec924eaec291ee5d523c62cb1168",
+      "trajectory": "40b06f85374db265048d2038dc306694100f2092255abc2059fea4e09f79169b"
+    },
+    {
+      "game": "SS01",
+      "runId": "46070652873",
+      "workflow": "4591cacddd40de77f8adbdb922f0b25e6f0d9a64",
+      "method": "ordered-pair",
+      "levels": 8,
+      "decisions": 444,
+      "events": 3622,
+      "traceSHA256": "3b1bb57f45660bfc7273e2bd5f31edc5555486c253f3d309ff324e960f53e668",
+      "parentRowSHA256": "454a12a256033ec59c4cf584b8e36baac59a932d5b65eb89a7f2faa914bd5761",
+      "trajectory": "fa0a9473ed9bc3257f157ef41ff5e5bd9399cdc5d74807407fca0530c0498044"
+    },
+    {
+      "game": "SS04",
+      "runId": "46070652873",
+      "workflow": "4591cacddd40de77f8adbdb922f0b25e6f0d9a64",
+      "method": "ordered-pair",
+      "levels": 8,
+      "decisions": 443,
+      "events": 2578,
+      "traceSHA256": "9dc960e221e04fb817d96f4bb6372c7b4df639a773d5a72a38acf1b90f9726d9",
+      "parentRowSHA256": "0000ba4f2393b49e494f6bdd5653b9ed5a12b2cac33892b82c9fdfafbf0b9a83",
+      "trajectory": "edd2a72881e8a3ceb9ef474839491ececb9198884912422803ec2adda1e33340"
+    }
+  ]
+}
