@@ -1,0 +1,123 @@
+{
+  "frozen": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "proof": "0540f12425e9004dd63b3d701b9e4ea125c17482",
+  "srcTree": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "changes": [
+    "docs/architecture/sic-upst-ligne-16.md",
+    "tests/fixtures/sic-point-contrasts-public.json.gz",
+    "tests/sic-information-points.test.ts"
+  ],
+  "publicFixtureSHA256": "72ba64fea5d81508bda021561dcdc0b913360b36c8014e2824f10c9b55607c22",
+  "historicalSource": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+  "publishedInventoryCount": 5,
+  "captures": {
+    "8ce7ee3563fa1d5eca1639c6ad03975cfc962460": "7cdcc29d255008c33926619fea4c3f59be185468ea949359cdcabd75b6b31385",
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021": "1201a8e6dec33811f6f7d9461c2ec24e8f6a455283abb034a2695a9276e24b37",
+    "0540f12425e9004dd63b3d701b9e4ea125c17482": "488f211828b489867fcb1730a19735021f4c3a48bd4436c972de00d879343468"
+  },
+  "inventory": {
+    "UPST": {
+      "actions": 16,
+      "stop": "session_action_budget",
+      "line16": [
+        [
+          1,
+          4,
+          {
+            "id": 6,
+            "data": {
+              "x": 21,
+              "y": 13
+            }
+          }
+        ]
+      ],
+      "trajectorySHA256": "69e8c0de7de3fa6ad44da01f9db9736daf9421f71c2bf700643958bcfa04916c"
+    },
+    "EVAS": {
+      "actions": 16,
+      "stop": "session_action_budget",
+      "line16": [
+        [
+          1,
+          15,
+          {
+            "id": 6,
+            "data": {
+              "x": 31,
+              "y": 30
+            }
+          }
+        ],
+        [
+          1,
+          16,
+          {
+            "id": 6,
+            "data": {
+              "x": 32,
+              "y": 35
+            }
+          }
+        ]
+      ],
+      "trajectorySHA256": "f113bede32aa40afb227898df1499a880814fdc37bf3b33e52149df0dce715f2"
+    }
+  },
+  "tests": {
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021": {
+      "passed": 3,
+      "tests": 3,
+      "sourceGameBackend": true,
+      "outputSHA256": "a44683cfa28bfa5b59c74459f6c2e99f76cd08fd87a62bb9bfc6d5f7a06fa0e9"
+    },
+    "0540f12425e9004dd63b3d701b9e4ea125c17482": {
+      "passed": 117,
+      "tests": 117,
+      "sourceGameBackend": true,
+      "outputSHA256": "a62ca4cd3a861a8b4e2fe8a3b8f581b7d8275f77b35b47f990169599e5d23fdd"
+    }
+  },
+  "frozenCampaign": {
+    "rawSource": "4be368a365a6347fb551bb4c73dd5756413bb34e",
+    "archive": "e36b550cfcaa79f5ee210694a8569cdf47265323",
+    "run": "46051058377",
+    "UPST": {
+      "shard": "18",
+      "rowSHA256": "bb59e178b4ebc851e52963e1ee4152ef214f455a3fd17bf1249b7f0869c59edd",
+      "shardSHA256": "0e367cec6282fce803b93bf0604831e77a767fb77a91e70b1c145b2bcdcd175f",
+      "nodeVersion": "v24.22.3",
+      "runnerOS": "Linux",
+      "runnerArch": "X64",
+      "runAttempt": "1",
+      "actions": 72,
+      "levels": 6,
+      "mode": "sic",
+      "authority": 72,
+      "trace": "eb53670dec4cedd4802ed4e627590c9d9c71e197d82179fa03bfc0a6acd5f091",
+      "families": {
+        "sic_public_input_exploration": 28,
+        "sic_verify_compartment_growth": 41,
+        "sic_follow_stable_reference": 3
+      }
+    },
+    "EVAS": {
+      "shard": "05",
+      "rowSHA256": "d481b6e4e3c84c745227ca8c667340d5590cab0669d8395e13e1323a61c8d418",
+      "shardSHA256": "ad722183e6d8031e1fea6b084373579b561eac08fae3d6dd3553910117a7e7a1",
+      "nodeVersion": "v24.22.3",
+      "runnerOS": "Linux",
+      "runnerArch": "X64",
+      "runAttempt": "1",
+      "actions": 86,
+      "levels": 6,
+      "mode": "sic",
+      "authority": 86,
+      "trace": "46369580aed408e434b5d9e617dc67ae556fc5bbe4775f56d7c03630f5657dfc",
+      "families": {
+        "sic_lit_route": 86
+      }
+    }
+  },
+  "archiveSHA256": "b1f6fcac90ede586dee3675c77700750f93420de475befc0d07ee4489f41a482"
+}
