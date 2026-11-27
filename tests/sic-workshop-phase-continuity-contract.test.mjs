@@ -23,6 +23,7 @@ const counterexamples = {
   'publication before closure': run => { run.executedTickets[0].workshop.acquisition = run.executedTickets[2].workshop.acquisition; },
   'stale acquired phase': run => { run.executedTickets[2].workshop.acquisition.cycle = run.executedTickets[0].workshop.cycle; },
   'missing intermediate acquisition': run => { run.executedTickets[2].workshop.acquisition.evidence = [run.executedTickets[2].workshop.afterRef]; },
+  'reordered acquired returns': run => { run.executedTickets[2].workshop.acquisition.evidence.reverse(); },
   'foreign acquired epoch': run => { run.executedTickets[2].workshop.acquisition.epoch = 99; },
   'continuation after contradiction': run => { run.executedTickets[0].outcome.matched = false; },
   'early sealed prefix': run => { run.executedTickets[0].outcome.seal_prefix = true; },

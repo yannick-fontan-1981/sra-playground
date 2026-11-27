@@ -86,8 +86,11 @@ export function measureWorkshopPhaseContinuity(run, issued, groups) {
           && acquired.evidence.every(ref => {
             const learned = continuityObservation(ref);
             return learned && learned.scope === after.scope && learned.epoch === after.epoch && learned.revision <= after.revision;
-          }) && group.slice(-8).every(returned => acquired.evidence.includes(returned.workshop.afterRef)),
+          }),
         'LS20 workshop lost its ordered acquired observations');
+        const retainedRefs = group.slice(-8).map(returned => returned.workshop.afterRef);
+        assert.deepEqual(acquired.evidence.slice(-retainedRefs.length), retainedRefs,
+          'LS20 workshop did not acquire its physical returns in native order');
         assert.deepEqual(acquired.at, p.actorAfter, 'LS20 workshop acquired a different actor position');
         const shift = group.length % first.cycle.length;
         assert.deepEqual(acquired.cycle, [...first.cycle.slice(shift), ...first.cycle.slice(0, shift)],
