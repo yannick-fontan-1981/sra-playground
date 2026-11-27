@@ -1,6 +1,6 @@
 {
   "recordedAt": "2026-11-27T04:50:50.592992+00:00",
-  "status": "candidate_saved_targeted_tests_passed_pending_strict_replay",
+  "status": "strict_partial_three_of_six_candidate_not_integrated",
   "candidate": {
     "local": "aebdb01a9f45436b4d7e1210db4f57e19a1c30fd",
     "remote": "e447b19328e3e31f1eb19e4e1fd8bf3f7616c676",
@@ -200,7 +200,201 @@
         "log": "targeted-tests.txt"
       }
     },
-    "strictCandidate": null,
+    "strictCandidate": {
+      "source": {
+        "startedAt": "2026-11-27T05:00:20.739753+00:00",
+        "local": "0b89cca08d13dff424d30a55811813e4d170a1cf",
+        "remote": "053889f8f3a6023787be3d4ed3c392b94f4d5f01",
+        "tree": "1406955d48f22bcd8cdd94c039fa774d1f541b11",
+        "productionLocal": "aebdb01a9f45436b4d7e1210db4f57e19a1c30fd",
+        "productionRemote": "e447b19328e3e31f1eb19e4e1fd8bf3f7616c676",
+        "checkout": "/workspace/scratch/082336907086/sic-27-work/compositions",
+        "command": [
+          "node",
+          "/workspace/scratch/082336907086/sic-27-work/compositions/scripts/check-sic-chronological.mjs",
+          "SPOR",
+          "6",
+          "/workspace/scratch/082336907086/sic-27-work/spor-strict-aebdb01a.jsonl",
+          "1"
+        ],
+        "startLevel": 1,
+        "targetLevels": 6,
+        "workers": 1,
+        "references": "/workspace/scratch/082336907086/sic-27-work/compositions/docs/architecture/sic-replay-reference-levels-20261126.json",
+        "referencesSha256": "67ae5216b80e87bbb2243138fde7970ea5c725a5f832f1b72aa8b0780e270854",
+        "runnerSha256": "2cb80e62a41e1269f1a2a0dd9e9de20a32504b70724c167abaac1a8b9bae3111",
+        "budgetsChanged": false,
+        "result": "/workspace/scratch/082336907086/sic-27-work/spor-strict-aebdb01a.jsonl",
+        "endedAt": "2026-11-27T05:01:02.911526+00:00",
+        "exitCode": 0,
+        "finalLocal": "0b89cca08d13dff424d30a55811813e4d170a1cf",
+        "finalTree": "1406955d48f22bcd8cdd94c039fa774d1f541b11",
+        "finalStatus": "",
+        "sourceUnchanged": true
+      },
+      "levels": 3,
+      "target": 6,
+      "actions": 67,
+      "authority": 67,
+      "acquiredRecords": 67,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "level_action_budget",
+      "status": "stopped",
+      "series": [],
+      "usage": {
+        "sic_public_input_exploration": 14,
+        "sic_test_prepared_effects": 5,
+        "sic_follow_observed_compartment_readiness": 48
+      },
+      "levelStats": [
+        {
+          "level": 1,
+          "won": true,
+          "activeMs": 7371,
+          "budget": {
+            "actions": 23,
+            "activeTimeMs": 26000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SPOR; level=1; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 14,
+          "ms": 7824,
+          "gameMs": 248,
+          "costs": {
+            "init": {
+              "ms": 1242,
+              "count": 1
+            },
+            "advance": {
+              "ms": 3334,
+              "count": 14
+            },
+            "resume": {
+              "ms": 2720,
+              "count": 13
+            }
+          },
+          "graph": "794cfe0ba8b6b1722205aeed23672fb84ade4ee52b447d3393ea63dedd04f6c5",
+          "deltas": 3553,
+          "acquiredRecords": 14,
+          "nodes": 579,
+          "traceEvents": 86,
+          "prefixHash": "e00e189c359a7ae72c9f5a38f69c53daac3ef3b6c48b73eca423d6783531e8e1",
+          "scoredMs": 7259,
+          "settlementMs": 565
+        },
+        {
+          "level": 2,
+          "won": true,
+          "activeMs": 6033,
+          "budget": {
+            "actions": 18,
+            "activeTimeMs": 14000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SPOR; level=2; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 14,
+          "ms": 6954,
+          "gameMs": 489,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 5000,
+              "count": 14
+            },
+            "resume": {
+              "ms": 838,
+              "count": 14
+            }
+          },
+          "graph": "3586d21038513d5f741cca7cf9df89dd034f634363f10be4fb89439cc96b28c0",
+          "deltas": 6739,
+          "acquiredRecords": 28,
+          "nodes": 785,
+          "traceEvents": 128,
+          "prefixHash": "edf66eb6bdc7fb0cf05a3dce7ba2b9e6c1cca952392592c0b6833b4a6ed11658",
+          "scoredMs": 6242,
+          "settlementMs": 712
+        },
+        {
+          "level": 3,
+          "won": true,
+          "activeMs": 8354,
+          "budget": {
+            "actions": 21,
+            "activeTimeMs": 17000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SPOR; level=3; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 17,
+          "ms": 9630,
+          "gameMs": 632,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 6885,
+              "count": 17
+            },
+            "resume": {
+              "ms": 1258,
+              "count": 17
+            }
+          },
+          "graph": "5a4504b043226421f108642c1fc7fa4741294aa750757869aa24180f37246de9",
+          "deltas": 10640,
+          "acquiredRecords": 45,
+          "nodes": 1067,
+          "traceEvents": 128,
+          "prefixHash": "c0b37ff9e0c7e44d6ac98272db3698f89cac5b5d28f079426483e9e68928e197",
+          "scoredMs": 8930,
+          "settlementMs": 700
+        },
+        {
+          "level": 4,
+          "won": false,
+          "activeMs": 11050,
+          "budget": {
+            "actions": 22,
+            "activeTimeMs": 18000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SPOR; level=4; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 22,
+          "ms": 12698,
+          "gameMs": 769,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 8672,
+              "count": 22
+            },
+            "resume": {
+              "ms": 2151,
+              "count": 22
+            }
+          },
+          "graph": "5d1aa3f244868009a1c7aada89e5fc89e20d1161d66652c75ee667747b614dbf",
+          "deltas": 15706,
+          "acquiredRecords": 67,
+          "nodes": 1449,
+          "traceEvents": 128,
+          "prefixHash": "3406c832ebe773a5f53e45cb709a797900cbb3f6b43c2cfd2bf472c417ea3055"
+        }
+      ],
+      "trajectory": "3406c832ebe773a5f53e45cb709a797900cbb3f6b43c2cfd2bf472c417ea3055"
+    },
     "integration": false,
     "deliveredUi": false
   },
@@ -244,6 +438,74 @@
     "targeted-tests.txt": {
       "bytes": 2403,
       "sha256": "3e8045540b57f616ecc2197d62171956779c0d8a1e344962da62531b4521597a"
+    },
+    "strict-result.jsonl.gz": {
+      "bytes": 2545,
+      "sha256": "d53961e950a66eec4fac2c3f5cacb7661d4649d0b930ddc2974c4e816c4c90fb",
+      "uncompressedBytes": 18701,
+      "uncompressedSha256": "189d0889b05cbda7529e2aa3aba339d2edc912bfaccc2a36ab8fbbbc115594ea"
+    },
+    "strict-levels.jsonl.gz": {
+      "bytes": 916,
+      "sha256": "8ecab8dc801a6b667422e6c2e80563fb4497e0b816cbfa874d5505a46e928837",
+      "uncompressedBytes": 2653,
+      "uncompressedSha256": "7c06a9a0e41c0fcb18691b8578f96ba4a7f8e0fe84506927cbef999dbaf45dd8"
+    },
+    "strict-log.txt.gz": {
+      "bytes": 160,
+      "sha256": "1a534663b662424665bb46762343d77cdfb6d1a201089e44fb318e69a38c7a93",
+      "uncompressedBytes": 348,
+      "uncompressedSha256": "d9ffa200155a4e75b4e9badd0a79628ae2bfeac7622397393dbe7b6dc0d91563"
+    },
+    "strict-start.json.gz": {
+      "bytes": 574,
+      "sha256": "f0fb802a47620b094ad6c9f1a7b86a0faa5f69d097af6bffce81f47906d5cc55",
+      "uncompressedBytes": 1144,
+      "uncompressedSha256": "dc03cc6d538a5a57607547dff694e59c7b50601f20869016ae3261ac342a438e"
+    },
+    "strict-end.json.gz": {
+      "bytes": 636,
+      "sha256": "da0bdaf7aaa66c62681e722f958e5a3ed2b511fcf763fa5fc305df4d55865c83",
+      "uncompressedBytes": 1377,
+      "uncompressedSha256": "d34e2753b4cb68847dd8e1006266a8abb2ce2e85918e1bb78e394b0523d067ff"
+    },
+    "strict-wrapper.py.gz": {
+      "bytes": 1227,
+      "sha256": "ae1fa4d2858b35cc9bb99f073a4ad938952216d3d7c5cb34d51d2ee6dd0448cf",
+      "uncompressedBytes": 2610,
+      "uncompressedSha256": "f5ce1e43a16903752d862190d830d34841f8142e0eebb6d5fed041df2583a3ec"
     }
-  }
+  },
+  "priorCheckpointComparison": {
+    "sourceLocal": "98a0d69a15030a75e32eec68608fe6b2b5dd69cc",
+    "firstThreeLevels": [
+      {
+        "level": 1,
+        "actionsBefore": 14,
+        "actionsAfter": 14,
+        "samePublicTrajectory": true
+      },
+      {
+        "level": 2,
+        "actionsBefore": 14,
+        "actionsAfter": 14,
+        "samePublicTrajectory": true
+      },
+      {
+        "level": 3,
+        "actionsBefore": 17,
+        "actionsAfter": 17,
+        "samePublicTrajectory": true
+      }
+    ],
+    "level4Commands": 22,
+    "consumedRecalledControlAtLevel4Commands": [
+      2,
+      5,
+      20
+    ],
+    "wonLevelAdded": false,
+    "newEffectKnown": "The actual runner uses the recalled-control strategy at commands 2 and 5 while the old runner used other inputs. Early actual_outcome events have rolled out of its bounded terminal trace; their exact local return must be measured before another modification. The command-20 local return is matched, without official score."
+  },
+  "nextMissingMeasurement": "Capture the actual public before/after grids and matching return for the newly admitted level-4 command 2. Distinguish unchanged control identity from whether changed pocket readiness alters the control effect; do not infer delivery from strategy or local pixel change."
 }
