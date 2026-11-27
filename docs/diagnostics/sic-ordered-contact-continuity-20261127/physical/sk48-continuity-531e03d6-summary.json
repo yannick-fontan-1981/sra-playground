@@ -1,0 +1,98 @@
+[
+  {
+    "level": 1,
+    "actions": 19,
+    "won": true,
+    "continued": 13,
+    "series": 2,
+    "physical": 0,
+    "movements": 0,
+    "selections": 0,
+    "confirmedContinued": 0,
+    "mixed": 0
+  },
+  {
+    "level": 2,
+    "actions": 39,
+    "won": true,
+    "continued": 35,
+    "series": 3,
+    "physical": 0,
+    "movements": 0,
+    "selections": 0,
+    "confirmedContinued": 0,
+    "mixed": 0
+  },
+  {
+    "level": 3,
+    "actions": 33,
+    "won": true,
+    "continued": 30,
+    "series": 2,
+    "physical": 0,
+    "movements": 0,
+    "selections": 0,
+    "confirmedContinued": 0,
+    "mixed": 0
+  },
+  {
+    "level": 4,
+    "actions": 33,
+    "won": true,
+    "continued": 25,
+    "series": 2,
+    "physical": 0,
+    "movements": 0,
+    "selections": 0,
+    "confirmedContinued": 0,
+    "mixed": 0
+  },
+  {
+    "level": 5,
+    "actions": 33,
+    "won": true,
+    "continued": 30,
+    "series": 2,
+    "physical": 0,
+    "movements": 0,
+    "selections": 0,
+    "confirmedContinued": 0,
+    "mixed": 0
+  },
+  {
+    "level": 6,
+    "actions": 69,
+    "won": true,
+    "continued": 60,
+    "series": 6,
+    "physical": 6,
+    "movements": 53,
+    "selections": 12,
+    "confirmedContinued": 59,
+    "mixed": 4
+  },
+  {
+    "level": 7,
+    "actions": 80,
+    "won": true,
+    "continued": 70,
+    "series": 7,
+    "physical": 6,
+    "movements": 59,
+    "selections": 8,
+    "confirmedContinued": 61,
+    "mixed": 4
+  },
+  {
+    "level": 8,
+    "actions": 42,
+    "won": true,
+    "continued": 34,
+    "series": 3,
+    "physical": 3,
+    "movements": 35,
+    "selections": 2,
+    "confirmedContinued": 34,
+    "mixed": 2
+  }
+]

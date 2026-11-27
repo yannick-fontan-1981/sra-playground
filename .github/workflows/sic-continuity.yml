@@ -48,8 +48,8 @@ jobs:
       - run: node --test tests/sic-marked-control-state.test.ts tests/sic-marked-outlet-transfer.test.ts tests/sic-marked-compartment-flow.test.ts
       - run: node --test tests/sic-paired-passage-continuity.test.ts
       - run: node --test tests/sic-carrier-camera.test.ts tests/sic-carrier-reduction-transfer.test.ts tests/sic-carrier-preparation-continuity.test.ts tests/sic-carrier-preparation-contract.test.mjs
-      - run: node --test tests/sic-support-selection-continuity.test.ts
-      - run: node --test tests/sic-surface-exploration-transfer.test.ts tests/sic-surface-passage-transfer.test.ts tests/sic-surface-goal-route.test.ts tests/sic-surface-continuity-evidence.test.mjs
+      - run: node --test tests/sic-support-selection-continuity.test.ts tests/sic-support-selection-contract.test.mjs
+      - run: node --test tests/sic-surface-exploration-transfer.test.ts tests/sic-surface-passage-transfer.test.ts tests/sic-surface-goal-route.test.ts tests/sic-surface-continuity-evidence.test.mjs tests/sic-surface-continuity-contract.test.mjs
       - run: node --test tests/sic-glyph-cycle-continuity.test.ts tests/sic-moving-glyph-route.test.ts
       - run: node --test tests/sic-workshop-phase-continuity-evidence.test.mjs tests/sic-workshop-phase-continuity-contract.test.mjs tests/sic-workshop-phase-real-continuity.test.mjs tests/sic-continuity-workshop-gate.test.mjs
 
@@ -85,6 +85,8 @@ jobs:
           - { name: guarded-passengers, cohort: 'source:CGWL', end: 6, cap: 74 }
           - { name: crossing-rows, cohort: 'source:WEAV', end: 6, cap: 48 }
           - { name: carrier-preparation, cohort: 'source:LF52', end: 10, cap: 178 }
+          - { name: support-selection, cohort: 'source:SK48', end: 8, cap: 96 }
+          - { name: surface-routes, cohort: 'source:ETAG', end: 6, cap: 80 }
           - { name: native-sources, cohort: 'source:AR25,HANO', end: 1, cap: 120 }
     env:
       SIC_STUDY_CONTINUITY: '1'
@@ -197,6 +199,8 @@ jobs:
             ['guarded-passengers', 'source:CGWL', 6, 74],
             ['crossing-rows', 'source:WEAV', 6, 48],
             ['carrier-preparation', 'source:LF52', 10, 178],
+            ['support-selection', 'source:SK48', 8, 96],
+            ['surface-routes', 'source:ETAG', 6, 80],
             ['native-sources', 'source:AR25,HANO', 1, 120],
           ];
           const { GITHUB_SHA: sha, GITHUB_RUN_ID: runId } = process.env;

@@ -59,7 +59,7 @@ export function measureSupportSelection(issued, groups) {
       && ticket.planId === group[0].planId && ticket.decisionRevision === group[0].decisionRevision
       && ticket.outcome.family === supportSelectionOwner), 'SK48 lost its bounded native owner');
     const first = continuityObservation(group[0].supportSelection.beforeRef);
-    let selections = 0, movements = 0, continued = 0;
+    let selections = 0, movements = 0, continued = 0, successful = true;
     for (const [index, ticket] of group.entries()) {
       const q = ticket.supportSelection, before = continuityObservation(q?.beforeRef), after = continuityObservation(q?.afterRef);
       assert.ok(q && before && after && q.action === ticket.action && q.level === ticket.level
@@ -77,13 +77,26 @@ export function measureSupportSelection(issued, groups) {
           && same(prior.after.pose, q.before.pose) && same(prior.after.markings, q.before.markings)
           && prior.active === q.previousActive, 'SK48 lost successive measured support returns');
       }
+      if (index < group.length - 1) assert.equal(q.acquisition, null, 'SK48 acquired before its native prefix ended');
       if (ticket.outcome.reason === 'official_boundary') {
         assert.ok(index === group.length - 1 && ticket.outcome.matched === true && ticket.outcome.seal_prefix === true
           && q.scoreAfter === q.scoreBefore + 1, 'SK48 lost its official final return');
         continue;
       }
-      assert.ok(q.after?.frame === after.frame && q.scoreAfter === q.scoreBefore && after.epoch === before.epoch
-        && ticket.outcome.matched === true && crossedPiercingKey(q.after.pose) === crossedPiercingKey(q.expected)
+      assert.ok(q.after?.frame === after.frame && q.scoreAfter === q.scoreBefore && after.epoch === before.epoch,
+        'SK48 lost its measured public return');
+      if (ticket.outcome.matched !== true) {
+        // The actual stock can stop following a support. Its guarded final
+        // return must close and reconcile the prefix; it supplies no credited
+        // physical series, even if the earlier movements were confirmed.
+        assert.ok(index === group.length - 1 && ticket.outcome.matched === false && ticket.outcome.seal_prefix === true
+          && q.acquisition?.epoch === q.level && q.acquisition.pending === 0
+          && q.acquisition.active === q.active && q.acquisition.pose === crossedPiercingKey(q.after.pose)
+          && q.acquisition.refs.includes(q.afterRef), 'SK48 continued or failed to acquire a contradicted support return');
+        successful = false;
+        continue;
+      }
+      assert.ok(crossedPiercingKey(q.after.pose) === crossedPiercingKey(q.expected)
         && same(q.after.markings, q.expectedMarkings), 'SK48 lacks the expected actual support return');
       if (q.selecting) {
         const effect = q.witness;
@@ -111,7 +124,7 @@ export function measureSupportSelection(issued, groups) {
         && q.acquisition.refs.includes(q.afterRef), 'SK48 did not acquire its actual final support state');
     }
     assert.equal(group.at(-1).sealed, group.length, 'SK48 lost its final reconciliation');
-    physical.push({ kind: 'observed support movements and selections', first: issued.indexOf(group[0]),
+    if (successful) physical.push({ kind: 'observed support movements and selections', first: issued.indexOf(group[0]),
       last: issued.indexOf(group.at(-1)), movements, selections, continued });
   }
   return physical;

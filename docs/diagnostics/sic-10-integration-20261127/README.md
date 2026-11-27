@@ -38,3 +38,11 @@ SK48 et ETAG ont leurs preuves strictes et leurs scénarios natifs variés ; leu
 ## Publication
 
 Au checkpoint, main et le Site208 portent `5b14136d237af3e5715436c555688802b581fad4`. Les modifications indépendantes de citation et carrousel sont conservées. Les prochains lots doivent être fusionnés, publiés avec leur SHA exact, puis reproduits depuis L1 dans le viewer avant d'être marqués livrés. LS20, déjà fusionné/publié, attend aussi son reçu viewer.
+
+## Mise à jour après fusion du premier lot
+
+PR141 a finalement fusionné normalement, après les **24 checks verts** de la tête actualisée `c0d730c7`, au commit main **`052d82dec4e92f4eef5fa90ab0c2a7fd3a5125da`**. La version Site **209** est publiée, statut `succeeded/ready`, avec exactement ce SHA. Le fichier `site209-delivery.json` conserve les identités des contrôles et de publication. La vérification viewer de ces cinq jeux et LS20 est en cours ; elle n'est pas encore comptée comme livrée.
+
+La branche d'intégration suivante a incorporé ce main. Ses **162 niveaux** de contrats passent sur les reçus physiques conservés : 138 du premier lot, LF52 (10), SK48 (8), ETAG (6). Les 38 tests de contrat de ces trois ajouts passent ensemble. La prochaine CI rejouera leurs parties sur la source combinée ; les archives actuelles restent liées à leurs sources individuelles. SK48 reproduit348 commandes et ETAG274 avec leurs observations passives ; ETAG conserve aussi exactement la trace complète du strict après sa correction de scope.
+
+Le workflow strict inclut maintenant les huit jeux qualifiés. Son délai global passe à45 minutes pour la cohorte séquentielle élargie ; les limites de commandes et de temps de chaque niveau restent les limites originales. SNAR demeure5/6 et WA30 est en cours de nouveau rejeu ; leurs niveaux finaux ne sont pas ajoutés avant qualification.

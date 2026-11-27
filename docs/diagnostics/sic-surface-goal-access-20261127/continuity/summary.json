@@ -1,0 +1,499 @@
+{
+  "sourceCommit": "be09f7e504da3f429698ffdb47ce8b8514109a1e",
+  "durableEquivalent": "465c41764a014f3256b0bf9f17e1781f83676230",
+  "sourceTree": "cd94653289b49439c7e805eda029efed1ea1b29e",
+  "sourceUnchanged": true,
+  "startedAt": "2026-11-27T14:34:55.518245+00:00",
+  "endedAt": "2026-11-27T14:36:08.130205+00:00",
+  "commands": 274,
+  "commandsByLevel": [
+    7,
+    35,
+    40,
+    46,
+    66,
+    80
+  ],
+  "wonByLevel": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "trace": "07b73e6e24a00c5f06ad367675c145e59bac9681d2e1911becb12e7dfb537baa",
+  "strictFullPublicTraceEqual": true,
+  "strictSourceCommit": "e531143b7d39502e8b06a9de92d65cbe93b780fc",
+  "productionDifferenceFromStrict": "Only passage-context deduplication additionally compares observation scope; combined strict integration CI qualifies the final tree.",
+  "physicalByLevel": [
+    {
+      "level": 1,
+      "commands": 7,
+      "continued": 2,
+      "series": 1,
+      "totals": {
+        "continued": 2,
+        "crossings": 0,
+        "knownCrossings": 0,
+        "preparations": 0,
+        "preparedCrossings": 0
+      },
+      "physical": [
+        {
+          "kind": "surface route and measured passage",
+          "first": 2,
+          "last": 4,
+          "continued": 2,
+          "crossings": 0,
+          "knownCrossings": 0,
+          "preparations": 0,
+          "preparedCrossings": 0
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "commands": 35,
+      "continued": 29,
+      "series": 4,
+      "totals": {
+        "continued": 29,
+        "crossings": 5,
+        "knownCrossings": 1,
+        "preparations": 25,
+        "preparedCrossings": 4
+      },
+      "physical": [
+        {
+          "kind": "surface route and measured passage",
+          "first": 1,
+          "last": 5,
+          "continued": 4,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 3,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 6,
+          "last": 17,
+          "continued": 11,
+          "crossings": 2,
+          "knownCrossings": 1,
+          "preparations": 10,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 18,
+          "last": 23,
+          "continued": 5,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 4,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 24,
+          "last": 33,
+          "continued": 9,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 8,
+          "preparedCrossings": 1
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "commands": 40,
+      "continued": 33,
+      "series": 5,
+      "totals": {
+        "continued": 33,
+        "crossings": 5,
+        "knownCrossings": 0,
+        "preparations": 28,
+        "preparedCrossings": 5
+      },
+      "physical": [
+        {
+          "kind": "surface route and measured passage",
+          "first": 1,
+          "last": 6,
+          "continued": 5,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 4,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 7,
+          "last": 12,
+          "continued": 5,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 4,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 13,
+          "last": 26,
+          "continued": 13,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 12,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 27,
+          "last": 32,
+          "continued": 5,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 4,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 33,
+          "last": 38,
+          "continued": 5,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 4,
+          "preparedCrossings": 1
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "commands": 46,
+      "continued": 37,
+      "series": 7,
+      "totals": {
+        "continued": 37,
+        "crossings": 7,
+        "knownCrossings": 0,
+        "preparations": 30,
+        "preparedCrossings": 7
+      },
+      "physical": [
+        {
+          "kind": "surface route and measured passage",
+          "first": 1,
+          "last": 7,
+          "continued": 6,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 5,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 8,
+          "last": 12,
+          "continued": 4,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 3,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 13,
+          "last": 15,
+          "continued": 2,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 1,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 16,
+          "last": 25,
+          "continued": 9,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 8,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 26,
+          "last": 32,
+          "continued": 6,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 5,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 33,
+          "last": 37,
+          "continued": 4,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 3,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 38,
+          "last": 44,
+          "continued": 6,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 5,
+          "preparedCrossings": 1
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "commands": 66,
+      "continued": 55,
+      "series": 9,
+      "totals": {
+        "continued": 55,
+        "crossings": 9,
+        "knownCrossings": 0,
+        "preparations": 46,
+        "preparedCrossings": 9
+      },
+      "physical": [
+        {
+          "kind": "surface route and measured passage",
+          "first": 1,
+          "last": 6,
+          "continued": 5,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 4,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 7,
+          "last": 12,
+          "continued": 5,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 4,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 13,
+          "last": 18,
+          "continued": 5,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 4,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 19,
+          "last": 24,
+          "continued": 5,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 4,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 25,
+          "last": 40,
+          "continued": 15,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 14,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 41,
+          "last": 46,
+          "continued": 5,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 4,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 47,
+          "last": 52,
+          "continued": 5,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 4,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 53,
+          "last": 58,
+          "continued": 5,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 4,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 59,
+          "last": 64,
+          "continued": 5,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 4,
+          "preparedCrossings": 1
+        }
+      ]
+    },
+    {
+      "level": 6,
+      "commands": 80,
+      "continued": 67,
+      "series": 11,
+      "totals": {
+        "continued": 67,
+        "crossings": 11,
+        "knownCrossings": 0,
+        "preparations": 56,
+        "preparedCrossings": 11
+      },
+      "physical": [
+        {
+          "kind": "surface route and measured passage",
+          "first": 1,
+          "last": 6,
+          "continued": 5,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 4,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 7,
+          "last": 13,
+          "continued": 6,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 5,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 14,
+          "last": 18,
+          "continued": 4,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 3,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 19,
+          "last": 24,
+          "continued": 5,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 4,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 25,
+          "last": 31,
+          "continued": 6,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 5,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 32,
+          "last": 47,
+          "continued": 15,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 14,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 48,
+          "last": 53,
+          "continued": 5,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 4,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 54,
+          "last": 60,
+          "continued": 6,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 5,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 61,
+          "last": 65,
+          "continued": 4,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 3,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 66,
+          "last": 71,
+          "continued": 5,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 4,
+          "preparedCrossings": 1
+        },
+        {
+          "kind": "surface route and measured passage",
+          "first": 72,
+          "last": 78,
+          "continued": 6,
+          "crossings": 1,
+          "knownCrossings": 0,
+          "preparations": 5,
+          "preparedCrossings": 1
+        }
+      ]
+    }
+  ],
+  "files": {
+    "etag.log.gz": "86f5578114425bdb8cf6566a8aa5ecfcc154b0a95383f7b28cdc5fb2e6a0d0c1",
+    "run-end.json.gz": "cfcb6d6f097d6cfd497e9d8735fe8c00c66c0737d0d2650925e03cf0d21a3d12",
+    "etag.jsonl.gz": "e2a49f452518b49fddaa53f7a7d1600bb4c15535b9494079fd7f8d84af0ee58d",
+    "physical-summary.json": "ff46c0f72e41c6498bf38ccd9e66e0dc69f5284529166c60a3c37c72b30d6896",
+    "run-collector.py": "dcb8d9e1ad4fd4dfea6682928d4d9588f34cdb0d7d66dfd2dea886bdf20f712d",
+    "run-manifest.json.gz": "6ae37145f23fe59cff624dd0b1b468b5c180509e731b5d57eaac05817ceb2a96"
+  }
+}
