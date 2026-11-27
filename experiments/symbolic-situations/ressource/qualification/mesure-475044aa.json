@@ -1,0 +1,94 @@
+{
+  "agenda": "475044aa609fe2934101b6286a96ae544aa24250",
+  "runtime": "v24.22.3",
+  "empreintesSolveur": {
+    "solveur.mjs": "ded7a45cb675f0f887a761e64d9b854fdff0166ae273894c48a74c0273b6f505",
+    "experiments/sic-agenda-offres/transfert/fiche-publique.mjs": "2e58618d08bb53f53ef7cf0feba6ac1bca7a50a4d06a419c368f5d8639c071e1",
+    "experiments/sic-agenda-offres/agenda.mjs": "d17770b18de12ba8326654fc95f44c0b7b1e41941b939336bf3bfe07d6d3a3e0",
+    "src/sic/reasoning-mode.ts": "db73cdd28e0e6f24010c7e4684318e59436b082ddd69cfeb7b10b43aae4b1777"
+  },
+  "totaux": {
+    "departs": 6,
+    "formatsIncompatibles": 6,
+    "succes": 0,
+    "echecsAction": 0,
+    "autresArrets": 0,
+    "commandesProposees": 0,
+    "commandesExecutees": 0,
+    "commandesRefusees": 0
+  },
+  "departs": [
+    {
+      "fiche": "6140c58e4e0b169cdd59.md",
+      "mondeOperateur": 1,
+      "sha256Entree": "a9192db903d2cfa66a2160974883e13ee5a0d9555922187d31d33cde44cbdd52",
+      "statut": "format_incompatible",
+      "premierEcart": {
+        "tour": 0,
+        "etape": "lecture_fiche",
+        "detail": "Contrat public non reconnu"
+      },
+      "tours": []
+    },
+    {
+      "fiche": "f500cbc9828b806ca9b1.md",
+      "mondeOperateur": 1,
+      "sha256Entree": "8786a44e7029b49a3982f75f2b8961ca23d3c7bb0389c016d9e55c8a451b0a12",
+      "statut": "format_incompatible",
+      "premierEcart": {
+        "tour": 0,
+        "etape": "lecture_fiche",
+        "detail": "Contrat public non reconnu"
+      },
+      "tours": []
+    },
+    {
+      "fiche": "fa73464ce2717edc3841.md",
+      "mondeOperateur": 1,
+      "sha256Entree": "b7b479f0a232ea5a1d7cd37612b7b6b8635b93a0b5640c9c7b97c07eaa2da6d2",
+      "statut": "format_incompatible",
+      "premierEcart": {
+        "tour": 0,
+        "etape": "lecture_fiche",
+        "detail": "Contrat public non reconnu"
+      },
+      "tours": []
+    },
+    {
+      "fiche": "fa73464ce2717edc3841.md",
+      "mondeOperateur": 2,
+      "sha256Entree": "b7b479f0a232ea5a1d7cd37612b7b6b8635b93a0b5640c9c7b97c07eaa2da6d2",
+      "statut": "format_incompatible",
+      "premierEcart": {
+        "tour": 0,
+        "etape": "lecture_fiche",
+        "detail": "Contrat public non reconnu"
+      },
+      "tours": []
+    },
+    {
+      "fiche": "302945400fd94308fa4e.md",
+      "mondeOperateur": 1,
+      "sha256Entree": "2403c69207a06f1f7b2e6c43f9b7f291e5cfc06d49f224d1dda973af20f9e4be",
+      "statut": "format_incompatible",
+      "premierEcart": {
+        "tour": 0,
+        "etape": "lecture_fiche",
+        "detail": "Contrat public non reconnu"
+      },
+      "tours": []
+    },
+    {
+      "fiche": "302945400fd94308fa4e.md",
+      "mondeOperateur": 2,
+      "sha256Entree": "2403c69207a06f1f7b2e6c43f9b7f291e5cfc06d49f224d1dda973af20f9e4be",
+      "statut": "format_incompatible",
+      "premierEcart": {
+        "tour": 0,
+        "etape": "lecture_fiche",
+        "detail": "Contrat public non reconnu"
+      },
+      "tours": []
+    }
+  ]
+}
