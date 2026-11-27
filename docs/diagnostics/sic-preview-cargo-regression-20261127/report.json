@@ -1,0 +1,145 @@
+{
+  "source": "f8b2f4f2ab202e24f755e38f590449432d2e34f9",
+  "remoteSource": "f20cb3c160b6f1dbc14a5b0cfb5c696d07d0c4a5",
+  "tree": "60a2f1777c1603e108f9b2888e5ea8bedd68f0e8",
+  "result": {
+    "code": "GABA",
+    "levels": 6,
+    "actions": 447,
+    "authority": 447,
+    "acquiredRecords": 447,
+    "recoveries": {
+      "reset": 0,
+      "undo": 0
+    },
+    "resumes": 38,
+    "status": "stopped",
+    "reason": "target_levels_completed"
+  },
+  "levels": [
+    {
+      "level": 1,
+      "won": true,
+      "actions": 47,
+      "scoredMs": 8390,
+      "activeMs": 8425,
+      "ms": 8760,
+      "settlementMs": 370,
+      "budget": {
+        "actions": 57,
+        "activeTimeMs": 20000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GABA; level=1; won=true",
+        "timeBasis": "measured"
+      },
+      "acquiredRecords": 47,
+      "prefixHash": "0d8e377ccf65a5dba2b576f1d917a66478ccc0d59a03c6be1ae81550d1ea9a7d"
+    },
+    {
+      "level": 2,
+      "won": true,
+      "actions": 37,
+      "scoredMs": 5346,
+      "activeMs": 6333,
+      "ms": 6604,
+      "settlementMs": 1258,
+      "budget": {
+        "actions": 45,
+        "activeTimeMs": 16000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GABA; level=2; won=true",
+        "timeBasis": "measured"
+      },
+      "acquiredRecords": 84,
+      "prefixHash": "d8e84441f18b906b07106f0e72ad42f49a461e36cdb53e6e462dc31bbec2baa6"
+    },
+    {
+      "level": 3,
+      "won": true,
+      "actions": 67,
+      "scoredMs": 10000,
+      "activeMs": 10984,
+      "ms": 11447,
+      "settlementMs": 1448,
+      "budget": {
+        "actions": 81,
+        "activeTimeMs": 23000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GABA; level=3; won=true",
+        "timeBasis": "measured"
+      },
+      "acquiredRecords": 151,
+      "prefixHash": "a0627f59c092de0e16b6e6e10bb8de142ed57cf265c8da6d49bfc4375225e16c"
+    },
+    {
+      "level": 4,
+      "won": true,
+      "actions": 88,
+      "scoredMs": 15785,
+      "activeMs": 17041,
+      "ms": 17681,
+      "settlementMs": 1896,
+      "budget": {
+        "actions": 106,
+        "activeTimeMs": 36000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GABA; level=4; won=true",
+        "timeBasis": "measured"
+      },
+      "acquiredRecords": 239,
+      "prefixHash": "7caac7d46109ffbf5b01b2c8379443abafeb7a7133588dee28aba778cac70377"
+    },
+    {
+      "level": 5,
+      "won": true,
+      "actions": 106,
+      "scoredMs": 21065,
+      "activeMs": 22994,
+      "ms": 23763,
+      "settlementMs": 2698,
+      "budget": {
+        "actions": 128,
+        "activeTimeMs": 50000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GABA; level=5; won=true",
+        "timeBasis": "measured"
+      },
+      "acquiredRecords": 345,
+      "prefixHash": "865b551d1c70fe9086b7762930e160f85039918bd397876d352d576127adaba2"
+    },
+    {
+      "level": 6,
+      "won": true,
+      "actions": 102,
+      "scoredMs": 25806,
+      "activeMs": 28049,
+      "ms": 28820,
+      "settlementMs": 3015,
+      "budget": {
+        "actions": 120,
+        "activeTimeMs": 37000,
+        "source": "docs/architecture/sic-v8-validation.md :: GABA niveau 6, s\u00e9parer les charges au retour de l'attachement",
+        "timeBasis": "measured"
+      },
+      "acquiredRecords": 447,
+      "prefixHash": "6e150708fd23daf07480d4e310a4fe9855659861132d179b26a9a9822cc412cc"
+    }
+  ],
+  "comparison": {
+    "effectsExactlyEqualToBaseline": true,
+    "allSixPrefixHashesEqual": true,
+    "levelBudgetsEqual": true,
+    "levelMirrorEqual": true,
+    "timingOverruns": [],
+    "firstCIFailureDivergence": {
+      "globalCommand": 347,
+      "level": 6,
+      "levelCommand": 2,
+      "baselineAction": "ACTION1",
+      "ciAction": "ACTION2",
+      "first346CommandsEqual": true
+    }
+  },
+  "validation": {
+    "targetedTests": 20,
+    "typecheck": "passed",
+    "review": "independent static review passed",
+    "fullContinuity": "pending PR132 integration CI",
+    "deliveredViewer": "pending root integration/publication"
+  }
+}
