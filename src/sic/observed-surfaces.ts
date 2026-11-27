@@ -62,6 +62,25 @@ export function rememberSurface(memory: SurfaceMemory, { address, surface }: Sur
   return { ...memory, floors: { ...memory.floors, [address.floor]: { gates, free: [...free], goal } } };
 }
 
+/** Attribute a public return to one visibly paired passage, independently of its issuing family. */
+export function observedSurfacePassage(before: SurfaceView, after: SurfaceView, command: string): SurfacePlan | null {
+  const direction = directions.find(index => surfaceDirections[index][0] === command);
+  if (direction === undefined || before.address.floor === after.address.floor) return null;
+  const [, dx, dy] = surfaceDirections[direction], origin = before.address.cell;
+  const approach: NativePoint = [origin[0] + dx, origin[1] + dy];
+  const originGate = before.surface.gates[key(origin)];
+  const candidates: NativePoint[] = [];
+  if ((originGate === undefined || originGate === direction)
+    && before.surface.gates[key(approach)] === opposite[direction]
+    && key(after.address.cell) === key(approach)
+    && after.surface.gates[key(approach)] === direction) candidates.push(approach);
+  if (originGate !== undefined && opposite[originGate] === direction
+    && key(after.address.cell) === key(origin)
+    && after.surface.gates[key(origin)] === direction) candidates.push(origin);
+  if (candidates.length !== 1) return null;
+  return { direction, expected: after.address, focus: { floor: before.address.floor, cell: candidates[0]! }, kind: 'linked' };
+}
+
 export function rememberSurfaceStep(memory: SurfaceMemory, before: SurfaceView, after: SurfaceView,
   plan: SurfacePlan): SurfaceMemory {
   const from = before.address, target = after.address, id = stepKey(from, plan.direction);
@@ -77,44 +96,96 @@ export function rememberSurfaceStep(memory: SurfaceMemory, before: SurfaceView, 
     ? { ...next.links, [addressKey(gate)]: target, [addressKey(target)]: gate } : next.links };
 }
 
-type RouteNode = { address: Address; first: SurfacePlan | null; depth: number };
-type Frontier = { plan: SurfacePlan; cost: number };
+type RouteNode = { address: Address; path: SurfacePlan[] };
+type Frontier = { path: SurfacePlan[]; cost: number };
 
-export function planAcrossSurfaces(memory: SurfaceMemory, start: Address, remaining: number): SurfacePlan | null {
-  const queue: RouteNode[] = [{ address: start, first: null, depth: 0 }], seen = new Set([addressKey(start)]);
+/** Check only the public premises of one already chosen route step. */
+export function surfaceStepCurrent(view: SurfaceView, memory: SurfaceMemory, plan: SurfacePlan): boolean {
+  const { address, surface } = view, { floor, cell } = address;
+  if (memory.blocked.includes(stepKey(address, plan.direction))) return false;
+  const [, dx, dy] = surfaceDirections[plan.direction];
+  const approach: Address = { floor, cell: [cell[0] + dx, cell[1] + dy] };
+  const originGate = surface.gates[key(cell)], targetGate = surface.gates[key(approach.cell)];
+  const exiting = originGate === undefined || originGate === plan.direction;
+  if (plan.kind === 'move') return !!plan.expected && sameSurfaceAddress(plan.expected, approach)
+    && exiting && targetGate === undefined
+    && (surface.free.includes(key(approach.cell)) || !!surface.goal && key(surface.goal) === key(approach.cell));
+  const inverse = originGate !== undefined && opposite[originGate] === plan.direction;
+  const entering = exiting && targetGate !== undefined && targetGate === opposite[plan.direction];
+  const locus = inverse ? address : approach;
+  if ((!inverse && !entering) || !sameSurfaceAddress(plan.focus, locus)) return false;
+  if (plan.kind === 'probe') return plan.expected === null;
+  const known = memory.steps[stepKey(address, plan.direction)] ?? memory.links[addressKey(locus)];
+  return !!known && !!plan.expected && sameSurfaceAddress(known, plan.expected);
+}
+
+/**
+ * A visible opposite opening is a candidate destination, never an acquired link.
+ * Prefer an entirely known route. If the known goal remains disconnected, use
+ * compatible observed openings to choose which discovery can reconnect it.
+ * The executable prefix always ends at the first unobserved crossing.
+ */
+export function planSurfacePrefix(memory: SurfaceMemory, start: Address, remaining: number, maximum: number): SurfacePlan[] {
+  if (remaining < 1 || maximum < 1 || !memory.floors[start.floor]) return [];
   const free = Object.fromEntries(Object.entries(memory.floors).map(([floor, map]) => [floor, new Set(map.free)]));
   const blocked = new Set(memory.blocked);
-  let frontier: Frontier | null = null;
-  for (let cursor = 0; cursor < queue.length; cursor++) {
-    const { address, first, depth } = queue[cursor]!, { floor, cell } = address, map = memory.floors[floor]!;
-    if (map.goal && key(map.goal) === key(cell) && first) return first;
-    if (depth >= remaining) continue;
-    const originGate = map.gates[key(cell)];
-    for (const direction of directions) {
-      const id = stepKey(address, direction);
-      if (blocked.has(id)) continue;
-      const [, dx, dy] = surfaceDirections[direction];
-      const approach: Address = { floor, cell: [cell[0] + dx, cell[1] + dy] };
-      const targetGate = map.gates[key(approach.cell)];
-      const exiting = originGate === undefined || originGate === direction;
-      const inverse = originGate !== undefined && opposite[originGate] === direction;
-      const entering = exiting && targetGate !== undefined && targetGate === opposite[direction];
-      const locus = inverse ? address : approach;
-      const linked = inverse || entering ? memory.links[addressKey(locus)] : undefined;
-      const measured = memory.steps[id] ?? linked;
-      if (!measured && (inverse || entering)) {
-        const cost = depth + (inverse ? directions.length : 0);
-        if (!frontier || cost < frontier.cost) frontier = { cost, plan: first ?? { direction, expected: null, focus: locus, kind: 'probe' } };
-        continue;
+  function search(hypotheses: boolean): { goal: SurfacePlan[] | null; frontier: Frontier | null } {
+    const queue: RouteNode[] = [{ address: start, path: [] }], seen = new Set([addressKey(start)]);
+    let frontier: Frontier | null = null;
+    for (let cursor = 0; cursor < queue.length; cursor++) {
+      const { address, path } = queue[cursor]!, { floor, cell } = address, map = memory.floors[floor]!;
+      if (map.goal && key(map.goal) === key(cell) && path.length) return { goal: path, frontier };
+      if (path.length >= remaining) continue;
+      const originGate = map.gates[key(cell)];
+      for (const direction of directions) {
+        const id = stepKey(address, direction);
+        if (blocked.has(id)) continue;
+        const [, dx, dy] = surfaceDirections[direction];
+        const approach: Address = { floor, cell: [cell[0] + dx, cell[1] + dy] };
+        const targetGate = map.gates[key(approach.cell)];
+        const exiting = originGate === undefined || originGate === direction;
+        const inverse = originGate !== undefined && opposite[originGate] === direction;
+        const entering = exiting && targetGate !== undefined && targetGate === opposite[direction];
+        const locus = inverse ? address : approach;
+        const linked = inverse || entering ? memory.links[addressKey(locus)] : undefined;
+        const measured = memory.steps[id] ?? linked;
+        let destinations: { address: Address; plan: SurfacePlan }[] = [];
+        if (!measured && (inverse || entering)) {
+          const plan: SurfacePlan = { direction, expected: null, focus: locus, kind: 'probe' };
+          const cost = path.length + (inverse ? directions.length : 0);
+          if (!frontier || cost < frontier.cost) frontier = { cost, path: [...path, plan] };
+          if (hypotheses) {
+            const sourceSide = map.gates[key(locus.cell)];
+            if (sourceSide !== undefined) destinations = Object.entries(memory.floors)
+              .filter(([other, surface]) => other !== floor && surface.gates[key(locus.cell)] === opposite[sourceSide])
+              .map(([other]) => ({ address: { floor: other, cell: locus.cell }, plan }));
+          }
+        } else {
+          if (!measured && (!exiting || targetGate !== undefined || !free[floor]!.has(key(approach.cell)))) continue;
+          const next = measured ?? approach;
+          destinations = [{ address: next, plan: { direction, expected: next, focus: locus,
+            kind: next.floor !== floor ? 'linked' : 'move' } }];
+        }
+        for (const next of destinations) {
+          const nextKey = addressKey(next.address);
+          if (seen.has(nextKey) || !memory.floors[next.address.floor]) continue;
+          seen.add(nextKey);
+          queue.push({ address: next.address, path: [...path, next.plan] });
+        }
       }
-      if (!measured && (!exiting || targetGate !== undefined || !free[floor]!.has(key(approach.cell)))) continue;
-      const next = measured ?? approach, nextKey = addressKey(next);
-      if (seen.has(nextKey) || !memory.floors[next.floor]) continue;
-      seen.add(nextKey);
-      queue.push({ address: next, depth: depth + 1, first: first ?? {
-        direction, expected: next, focus: locus, kind: next.floor !== floor ? 'linked' : 'move',
-      } });
     }
+    return { goal: null, frontier };
   }
-  return frontier?.plan ?? null;
+  const known = search(false);
+  const route = known.goal ?? search(true).goal ?? known.frontier?.path ?? [];
+  const prefix: SurfacePlan[] = [];
+  for (const step of route.slice(0, Math.min(remaining, maximum))) {
+    prefix.push(step);
+    if (step.expected === null) break;
+  }
+  return prefix;
+}
+
+export function planAcrossSurfaces(memory: SurfaceMemory, start: Address, remaining: number): SurfacePlan | null {
+  return planSurfacePrefix(memory, start, remaining, 1)[0] ?? null;
 }

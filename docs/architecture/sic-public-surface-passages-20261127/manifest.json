@@ -1,0 +1,255 @@
+{
+  "recordedAt": "2026-11-27T02:42:27.716573+00:00",
+  "source": {
+    "local": "9357a511b2c20f8a7c0859ff443905f5b9c97a04",
+    "remote": "85883aa7ed2283f2a013b3fe1c9e9d7d88df7ae9",
+    "tree": "8aef5795245c0c6963c5e237fe6afb94878ff11b",
+    "branch": "fix/sic-27-surface-evidence-20261127",
+    "baseMain": "f38b03c52e92483c11e915a759323ba6aebc223c"
+  },
+  "baselineSource": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+  "diagnosticSource": "f38b03c52e92483c11e915a759323ba6aebc223c",
+  "startLevel": 1,
+  "target": 6,
+  "wonLevels": 3,
+  "actions": 220,
+  "authority": 220,
+  "acquiredRecords": 220,
+  "reason": "level_action_budget",
+  "usage": {
+    "sic_switched_surface": 219,
+    "sic_test_prepared_effects": 1
+  },
+  "levels": [
+    {
+      "level": 1,
+      "won": true,
+      "activeMs": 2303,
+      "budget": {
+        "actions": 80,
+        "activeTimeMs": 90000,
+        "source": "no_level_reference"
+      },
+      "actions": 7,
+      "ms": 2381,
+      "gameMs": 44,
+      "costs": {
+        "init": {
+          "ms": 1034,
+          "count": 1
+        },
+        "advance": {
+          "ms": 867,
+          "count": 7
+        },
+        "resume": {
+          "ms": 399,
+          "count": 4
+        }
+      },
+      "graph": "5e85e0a00b92834a1f1829ccefd832caa824f5d90df4b61ed775251fd1d68618",
+      "deltas": 1522,
+      "acquiredRecords": 7,
+      "nodes": 468,
+      "traceEvents": 34,
+      "prefixHash": "fa59891322e73aeb1069b27230f36be95d4245bd53e3f195965b5f93c5ec4eaf",
+      "scoredMs": 2278,
+      "settlementMs": 102
+    },
+    {
+      "level": 2,
+      "won": true,
+      "activeMs": 23644,
+      "budget": {
+        "actions": 80,
+        "activeTimeMs": 90000,
+        "source": "no_level_reference"
+      },
+      "actions": 55,
+      "ms": 24247,
+      "gameMs": 300,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 17600,
+          "count": 55
+        },
+        "resume": {
+          "ms": 5962,
+          "count": 55
+        }
+      },
+      "graph": "5ffc962602e40770bdb4c1bb85d09e0f4640054c2cd953ecda1af41de48ed946",
+      "deltas": 14312,
+      "acquiredRecords": 62,
+      "nodes": 1598,
+      "traceEvents": 128,
+      "prefixHash": "47e8a841ee743518b9eef46d88e0d11bfe8006d3fcceebb17ef5c431424a1e38",
+      "scoredMs": 23738,
+      "settlementMs": 508
+    },
+    {
+      "level": 3,
+      "won": true,
+      "activeMs": 51109,
+      "budget": {
+        "actions": 80,
+        "activeTimeMs": 90000,
+        "source": "no_level_reference"
+      },
+      "actions": 78,
+      "ms": 51995,
+      "gameMs": 462,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 37684,
+          "count": 78
+        },
+        "resume": {
+          "ms": 13336,
+          "count": 78
+        }
+      },
+      "graph": "4419acd613cfe1b8efa28df4f2912d8d8f4cd80794f141cbf09e1a72e0201786",
+      "deltas": 32965,
+      "acquiredRecords": 140,
+      "nodes": 3715,
+      "traceEvents": 128,
+      "prefixHash": "4be5aa582f4cd19fc1afc36b00b2c0c1b9458e30d6cee7692cc72e3cc7d1edb4",
+      "scoredMs": 51307,
+      "settlementMs": 689
+    },
+    {
+      "level": 4,
+      "won": false,
+      "activeMs": 63418,
+      "budget": {
+        "actions": 80,
+        "activeTimeMs": 90000,
+        "source": "no_level_reference"
+      },
+      "actions": 80,
+      "ms": 64350,
+      "gameMs": 436,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 45248,
+          "count": 80
+        },
+        "resume": {
+          "ms": 18148,
+          "count": 80
+        }
+      },
+      "graph": "86f784540e41f2945706bdf5e8c1699494ed6d64671f03b4a733a3f38a8c4388",
+      "deltas": 52001,
+      "acquiredRecords": 220,
+      "nodes": 5787,
+      "traceEvents": 128,
+      "prefixHash": "64629bfb71ac5c0ee42d01dead2a890e78cd3f105c615a44594356b105e88ff6"
+    }
+  ],
+  "budgets": "All unchanged at no_level_reference fallback: 80 commands / 90000 ms per level.",
+  "comparison": {
+    "firstChangedCommand": 143,
+    "prefixes": [
+      {
+        "level": 1,
+        "identical": true
+      },
+      {
+        "level": 2,
+        "identical": true
+      },
+      {
+        "level": 3,
+        "identical": true
+      },
+      {
+        "level": 4,
+        "identical": false
+      }
+    ],
+    "wonLevelsBefore": 3,
+    "wonLevelsAfter": 3,
+    "nativeConsumption": "At level 4 command 3, actual ACTION4 through a known visible cell replaces the earlier ACTION2 passage experiment. The subsequent level-4 trajectory differs."
+  },
+  "model": {
+    "role": "Keep an observed passage and both measured surfaces when another strategy executes its crossing.",
+    "acquisition": "Global command 141 changes the public surface after a directional movement through opposite paired openings. The source view includes a visible goal. The original role had already been acquired by level 1 and retained through the level-3 official score.",
+    "previousLoss": "The selected preview was not observed by the navigation instance. Its memory remained in epoch 3; the next proposal reconstructed only the arrival surface and lost the source goal.",
+    "reuse": "A current witnessed role in the same session, level epoch, score and state; unique measured actor; actual directional movement or reversal compatible with uniquely paired opposite openings.",
+    "refutation": "Absent role, ambiguous actor, incompatible gate or command, foreign session and level transition decline the new acquisition and preserve independent prior facts."
+  },
+  "qualification": {
+    "nativeReplay": "Three official levels won from level 1 in one SIC session; level 4 stops at 80 commands. No complete game qualification.",
+    "tests": "9 targeted tests pass: two native L1 transfer cases, one idempotence/reverse case, five refusals and one absent-role case. Typecheck passes.",
+    "review": "Independent read-only review favorable.",
+    "series": "The existing 3-command series at level 1 remains. No new multi-command continuity is claimed.",
+    "globalGate": "Not claimed for this partial checkpoint.",
+    "ui": "Not delivered; no interface victory claimed."
+  },
+  "historicalReferenceGap": {
+    "compiledReferences": "ETAG entries in sic-replay-reference-levels-20261126.json remain null.",
+    "documentedLevel4": {
+      "source": "docs/architecture/sic-v8-validation.md, level-4 victories on 48bc2cfa",
+      "commands": 111,
+      "seconds": 221.1,
+      "trajectoryHash": "f5e4c5159ca66138d9cc41915313ef33b012ed370a2b85ee7021611b76b08141"
+    },
+    "documentedLevel5": {
+      "source": "docs/architecture/sic-v8-validation.md, Niveaux 5",
+      "commands": 96
+    },
+    "decision": "No budget or reference was changed. The current 80-command stop is not by itself proof of another planning defect."
+  },
+  "remainingMeasurement": "At the next unresolved level-4 frontier, capture the measured map, current address, visible goal and known/unknown passage links; distinguish a missing acquired relation from necessary exploration before changing the planner.",
+  "timingNote": "Source frozen and one native game at a time; no comparative speed claim.",
+  "files": {
+    "etag-native.jsonl.gz": {
+      "bytes": 3064,
+      "sha256": "aeeccb2884fd052c669b7893cace6fe23b891e55aadde967602803d35f72d95e",
+      "uncompressedBytes": 33469,
+      "uncompressedSha256": "90f16bd533c324e82f6de96bb769a24402977cf6df83cb0ae2b0b93926e5a201"
+    },
+    "etag-native.levels.jsonl.gz": {
+      "bytes": 798,
+      "sha256": "889fc37760b018a528f0dd3758a0a76306c4519844640e0b89bec8bbc2be4ec8",
+      "uncompressedBytes": 2102,
+      "uncompressedSha256": "26b5a97a5de4247ef2f9f30e8b63a7a0d635aeccd9a70436a6c164160eacd330"
+    },
+    "baseline-etag-native.jsonl.gz": {
+      "bytes": 3067,
+      "sha256": "bf3dd18aae072b89997554279b950969235a6d8e41dbf193f186ac434d798657",
+      "uncompressedBytes": 33465,
+      "uncompressedSha256": "d71124fa799ba06832b6e259a24a8a52bbd02bfb63295710c0b4b91554cee0fc"
+    },
+    "diagnostic-native.jsonl.gz": {
+      "bytes": 2644,
+      "sha256": "495796edfbc69a8a181e4fa784d3f749a99a5a32ada449a099847bbad53002db",
+      "uncompressedBytes": 23762,
+      "uncompressedSha256": "a36c852c7ad8d5b4ffe41ba9caf3c10437ce1864619bd959112b958f44351501"
+    },
+    "public-passage-reacquisition.json": {
+      "bytes": 8197,
+      "sha256": "4c23a7e21f56869e0935c3278a2cbf4aadf0a93d870df211924a430e7e263f24"
+    },
+    "boundary-public-capture.json.gz": {
+      "bytes": 19384,
+      "sha256": "9470d188ec7e8b2d7e2684762342320217f51c4210f6607aa505dcbe5922a316",
+      "uncompressedBytes": 371127,
+      "uncompressedSha256": "a3dee54c73962fca6d85068e343b252a28d5546c44b4d3f56bb7a73d23d63c6a"
+    }
+  }
+}

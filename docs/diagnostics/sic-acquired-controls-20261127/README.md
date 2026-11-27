@@ -23,6 +23,24 @@ The public-panel role preserves a reachable preparation following an observed pa
 
 The passive collectors independently remeasure public pieces, obstacles, attachment state, actor positions and field/panel changes. They keep predictions and measured returns separate, retain original role references, and sample acquired state only after the actual native reconciliation. Missing and ambiguous observations remain missing. An official level boundary is recorded explicitly; a predicted old board is never substituted for the new public scene.
 
+## Passive physical contract
+
+The second immutable campaign uses collector source `f3de0a0646dbd7b26d3c0448da1573322441a90b`, saved with an identical tree on GitHub as `5d8f6ef5df0e5a862233e4e8ae7488913c15b8a8`. All production hashes equal the strict replay. Both complete public trajectory hashes equal the strict runs, including every returned animation frame. `continuity/` stores the raw native tickets, measured public pixels, manifests and checksums; its runtime is not used as timing qualification.
+
+| Protected effect | Actual executed evidence |
+| --- | --- |
+| GRAV L3–4 role reuse | Every directional command retains its acquired reference pair; actual measured pieces and fixed obstacles agree with the native return. |
+| GRAV L5 continuous settling | One seven-command prefix, six continued commands, one final reconciliation. The newly tested inverse attachment command is separately unitary before this prefix. |
+| GRAV L6 acquired attachment composition | One ten-command prefix, nine continued commands, two attachment toggles already acquired in L5, one final reconciliation and the official score. |
+| DC22 L1–3 existing compositions | Continued-command counts 7, 22 and 22. Mixed movement/click series remain required at L1 and L3. |
+| DC22 L6 physical preparation | Five movements at commands 20–24 followed by the real contact at 25; three movements at 30–32 followed by contact 33; four movements at 116–119 followed by contact 120. These are three distinct transfers, with nine continued preparation movements. |
+
+DC22 L4–5 remain unitary. L6 has 80 continued commands across all native series, but the physical preparation counter credits only the three completed approaches immediately followed by their separately executed acquired contact. Later wall trials may end a prefix with a contradiction, and some later cursor images are partially occluded. Those raw returns are preserved and the generic native contract enforces a stop and one reconciliation; they are not substituted with predicted positions or credited as completed physical preparations.
+
+The gate now covers all six levels of each campaign under their unchanged action ceilings. DC22 moves from the shared one-level cohort to its own full campaign, retaining the original L1 mixed-series requirement. GRAV adds a complete cohort. Relative to main `22e60471`, this protects 126 levels in 20 games and 19 cohorts before the other concurrent lots are added.
+
+Four passive observer tests and 22 contract tests pass. The contract mutations reject foreign or reversed role references, a missing actor, an ambiguous actor, forged pixels, an unacquired attachment direction, continued execution after contradiction, lost reconciliation, omitted or physically ineffective contact, changed click coordinates, loss of the earlier mixed-series witness and incomplete/reset campaigns. The original native role-transfer tests are included in the CI contract job.
+
 ## Integration status
 
-The two strict campaigns pass. Passive continuity collection, contract calibration and the complete integration gate are still in progress in this checkpoint. No main merge, Site publication or delivered-viewer qualification is claimed here. Root coordinates those steps after the physical contracts are complete.
+Both strict campaigns, the two complete passive campaigns, their 12-level gate checks and the targeted evidence/contract tests pass. The complete combined `npm run test:sic-continuity` gate remains the integration prerequisite. No main merge, Site publication or delivered-viewer qualification is claimed in this branch checkpoint; root coordinates those final steps.
