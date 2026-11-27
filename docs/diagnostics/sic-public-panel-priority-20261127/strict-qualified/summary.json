@@ -1,0 +1,189 @@
+{
+  "schema": "sic.public-panel-strict-qualified.v1",
+  "localSource": "294d68e88f63d43299d080ae2beffba7308b8276",
+  "githubSource": "97967f2d2d70ae008eb3f639be309a0c5258d089",
+  "sourceTree": "3ef1d10fc30ec5ea7363bffb2ef9f02429c637e9",
+  "startLevel": 1,
+  "target": 6,
+  "levels": 6,
+  "commands": 630,
+  "sicCommands": 630,
+  "acquiredRecords": 630,
+  "recoveries": {
+    "reset": 0,
+    "undo": 0
+  },
+  "workers": 1,
+  "reason": "target_levels_completed",
+  "rawSha256": "8b0e2c59c5a864a0bbed0f8e12eee10ca1e87c27213f852db8cc92209408cb6a",
+  "firstFivePrefixMatches": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "firstDifference": {
+    "globalCommand": 392,
+    "candidate": [
+      1,
+      null,
+      8,
+      [
+        24,
+        50,
+        25,
+        53
+      ],
+      1,
+      5,
+      "P07",
+      "sic_public_input_exploration",
+      "Follow the measured terrain to test a panel control from a matching marker",
+      4
+    ],
+    "baseline": [
+      3,
+      null,
+      8,
+      [
+        22,
+        52,
+        25,
+        53
+      ],
+      1,
+      5,
+      "test_composition",
+      "sic_test_observed_compositions",
+      "Test whether an observed movement brings two visible components together",
+      5
+    ]
+  },
+  "levelsMeasured": [
+    {
+      "level": 1,
+      "won": true,
+      "activeMs": 6932,
+      "budget": {
+        "actions": 27,
+        "activeTimeMs": 18000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=DC22; level=1; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 22,
+      "prefixHash": "b1b5c16f11a012560f0638c481b4b7d346e4fa119ef5fb943357f3185d5e0c8e",
+      "scoredMs": 7063,
+      "settlementMs": 91
+    },
+    {
+      "level": 2,
+      "won": true,
+      "activeMs": 12757,
+      "budget": {
+        "actions": 53,
+        "activeTimeMs": 34000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=DC22; level=2; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 44,
+      "prefixHash": "8773b34b1edba0ca44544949307c9a563b9d9af493488a916c795912a161b910",
+      "scoredMs": 13096,
+      "settlementMs": 125
+    },
+    {
+      "level": 3,
+      "won": true,
+      "activeMs": 11628,
+      "budget": {
+        "actions": 54,
+        "activeTimeMs": 27000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=DC22; level=3; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 45,
+      "prefixHash": "0750b95ce856e9bedf3cc4ec9662c081823559bdc232b23788eefe5bf677c11f",
+      "scoredMs": 12030,
+      "settlementMs": 134
+    },
+    {
+      "level": 4,
+      "won": true,
+      "activeMs": 29677,
+      "budget": {
+        "actions": 92,
+        "activeTimeMs": 64000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=DC22; level=4; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 76,
+      "prefixHash": "87e1c51418d91b86058950faeac3bbb2dd173f92191a3def59b435a0d2d72cbe",
+      "scoredMs": 30915,
+      "settlementMs": 218
+    },
+    {
+      "level": 5,
+      "won": true,
+      "activeMs": 130506,
+      "budget": {
+        "actions": 215,
+        "activeTimeMs": 228000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=DC22; level=5; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 185,
+      "prefixHash": "58c84f6d809d7558184d9a844e5a1058874644183e7f7bf25e5861ea07918509",
+      "scoredMs": 134268,
+      "settlementMs": 422
+    },
+    {
+      "level": 6,
+      "won": true,
+      "activeMs": 250560,
+      "budget": {
+        "actions": 271,
+        "activeTimeMs": 455000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=DC22; level=6; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 258,
+      "prefixHash": "854ad877ba896c78a9a63fb3e30bf49d1a8778c164861f1fb935abce3c706e36",
+      "scoredMs": 255108,
+      "settlementMs": 841
+    }
+  ],
+  "knownPreparation": {
+    "first": 392,
+    "last": 396,
+    "actions": [
+      1,
+      1,
+      3,
+      3,
+      3
+    ],
+    "actualContact": 397,
+    "contactAction": [
+      6,
+      {
+        "x": 51,
+        "y": 25
+      },
+      120,
+      [
+        0,
+        4,
+        35,
+        59
+      ],
+      1,
+      5,
+      "P05",
+      "sic_public_input_exploration",
+      "Test the same panel control while the moving piece covers the matching marker",
+      3
+    ],
+    "learnedRoleActualReturn": 391
+  },
+  "qualificationLimit": "Native strict only. Physical collector, full combined continuity, main merge, publication and delivered viewer replay remain pending."
+}

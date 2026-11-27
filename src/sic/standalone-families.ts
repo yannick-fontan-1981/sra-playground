@@ -6,7 +6,7 @@ import { learnSupportMovesId, learnObservedSupportsId } from './learn-support-mo
 import { subsetExperimentId } from './subset-experiment.ts';
 import { learnScopeEffectsId, learnVisibleGroupEffectsId } from './learn-scope-effects.ts';
 import { cavityAccessId } from './cavity-access.ts';
-import { observedPressureRecoveryGroup, publicInputExplorationId } from './public-input-exploration.ts';
+import { continueObservedPanelGroup, observedPressureRecoveryGroup, publicInputExplorationId } from './public-input-exploration.ts';
 import { cursorRoleMemoryId } from './cursor-role-memory.ts';
 import { recheckDirectionalControlsId } from './recheck-directional-controls.ts';
 import { trialRepeatedLinearControlsId } from './trial-repeated-linear-controls.ts';
@@ -118,7 +118,7 @@ import { learnCorrespondenceId, learnRepeatedCellsId } from './learn-corresponde
 import { learnMaterialAssemblyId, materialAssemblyId } from './material-assembly.ts';
 
 export const standalonePlanningGroups = [
-  { id: observedPressureRecoveryGroup, families: [observedActorCompositionId, publicInputExplorationId, verifyOrderedFeedbackId, receptionAccessId, observedRouteInterventionId] },
+  { id: observedPressureRecoveryGroup, families: [observedActorCompositionId, publicInputExplorationId, verifyOrderedFeedbackId, receptionAccessId, observedRouteInterventionId, markedCompartmentFlowId] },
   { id: observedMechanicsGroup, families: [markedCollectionId, visibleConfigurationCoverageId, markedCompartmentFlowId, animationContactId,
     observedRelayRouteId, observedPrefixQuotasId, observedCarrierReductionId, observedLinePlacementId, observedPolePairId, verifyPreviewPlacementId, learnTransportAccessId,
     learnTurnPostsId, learnDirectionalReceptionId, verifyOrderedFeedbackId,
@@ -137,7 +137,8 @@ export const standalonePlanningGroups = [
   { id: 'fill_visible_partition', families: [verifyPreviewPlacementId, learnPreviewPlacementId, verifyReferencePlacementId, learnReferencePlacementId, metricCompositionId, learnMetricCompositionId] },
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, matchExampleId, facetGrowthId, learnFacetGrowthId] },
   { id: 'visit_marked_surface', families: [verifyTraceCoverageId, verifyMarkedLatticeId, learnMarkedLatticeId] },
-  { id: 'place_incoming_groups', families: [queuedPlacementId, learnQueuedPlacementId, gatedCascadeId, learnCascadeId] },
+  { id: 'place_incoming_groups', families: [queuedPlacementId, learnQueuedPlacementId, gatedCascadeId, learnCascadeId, publicInputExplorationId],
+    entryPoints: [null, null, null, null, continueObservedPanelGroup] },
   { id: 'explore_available_inputs', families: [cursorRoleMemoryId, displayCouplingId, contrastControlsId, fieldIsolationId, learnFieldIsolationId, cavityAccessId, learnCorrespondenceId, verifyGaugeEffectId, learnGaugeEffectId, verifyChannelAccessId, compartmentGrowthId, learnGridAccessId, learnSelectedAccessId, contrastProbeId, compareAvailableControlsId, learnRepeatedCellsId, learnVisibleGroupEffectsId, learnReactiveMotionId, publicInputExplorationId, recheckDirectionalControlsId, trialRepeatedLinearControlsId] },
 ] as const;
 

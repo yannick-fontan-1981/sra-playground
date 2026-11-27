@@ -1,0 +1,238 @@
+{
+  "code": "SPOR",
+  "target": 6,
+  "mode": "sic",
+  "parallelWorkers": 1,
+  "recoveries": {
+    "reset": 0,
+    "undo": 0
+  },
+  "actions": 121,
+  "levels": 6,
+  "reason": "target_levels_completed",
+  "status": "stopped",
+  "authority": 121,
+  "series": [],
+  "levelStats": [
+    {
+      "level": 1,
+      "won": true,
+      "activeMs": 8730,
+      "budget": {
+        "actions": 23,
+        "activeTimeMs": 26000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SPOR; level=1; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 14,
+      "ms": 9241,
+      "gameMs": 273,
+      "costs": {
+        "init": {
+          "ms": 1318,
+          "count": 1
+        },
+        "advance": {
+          "ms": 4122,
+          "count": 14
+        },
+        "resume": {
+          "ms": 3207,
+          "count": 13
+        }
+      },
+      "graph": "8cbb0daca7612756f0b28c71a57c7a5e7a893e747079b5c13b502f6e73ddfcc1",
+      "deltas": 3553,
+      "acquiredRecords": 14,
+      "nodes": 579,
+      "traceEvents": 86,
+      "prefixHash": "e00e189c359a7ae72c9f5a38f69c53daac3ef3b6c48b73eca423d6783531e8e1",
+      "scoredMs": 8504,
+      "settlementMs": 736
+    },
+    {
+      "level": 2,
+      "won": true,
+      "activeMs": 6836,
+      "budget": {
+        "actions": 18,
+        "activeTimeMs": 14000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SPOR; level=2; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 14,
+      "ms": 7836,
+      "gameMs": 535,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 5626,
+          "count": 14
+        },
+        "resume": {
+          "ms": 982,
+          "count": 14
+        }
+      },
+      "graph": "2f205d713d86f842046b4b3ab136bf6129d3c6cea33d831cb332e29a4f35faee",
+      "deltas": 6739,
+      "acquiredRecords": 28,
+      "nodes": 785,
+      "traceEvents": 128,
+      "prefixHash": "edf66eb6bdc7fb0cf05a3dce7ba2b9e6c1cca952392592c0b6833b4a6ed11658",
+      "scoredMs": 7123,
+      "settlementMs": 713
+    },
+    {
+      "level": 3,
+      "won": true,
+      "activeMs": 9485,
+      "budget": {
+        "actions": 21,
+        "activeTimeMs": 17000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SPOR; level=3; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 17,
+      "ms": 10887,
+      "gameMs": 658,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 7763,
+          "count": 17
+        },
+        "resume": {
+          "ms": 1502,
+          "count": 17
+        }
+      },
+      "graph": "fc8fece73d62d439a90afc3e4850ca9a171593210f83437ecd3916ff35e55e82",
+      "deltas": 10640,
+      "acquiredRecords": 45,
+      "nodes": 1067,
+      "traceEvents": 128,
+      "prefixHash": "c0b37ff9e0c7e44d6ac98272db3698f89cac5b5d28f079426483e9e68928e197",
+      "scoredMs": 9961,
+      "settlementMs": 930
+    },
+    {
+      "level": 4,
+      "won": true,
+      "activeMs": 10025,
+      "budget": {
+        "actions": 22,
+        "activeTimeMs": 18000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SPOR; level=4; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 17,
+      "ms": 11473,
+      "gameMs": 679,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 8185,
+          "count": 17
+        },
+        "resume": {
+          "ms": 1623,
+          "count": 17
+        }
+      },
+      "graph": "bf8029609f70fe1e487e2bf886c1215148bccf36399a13d19f16531038c61e78",
+      "deltas": 14521,
+      "acquiredRecords": 62,
+      "nodes": 1329,
+      "traceEvents": 128,
+      "prefixHash": "be09d0d1267283adbae9bc7b99d8aee02c8bce78cd767c2fc7a07b747512b409",
+      "scoredMs": 10616,
+      "settlementMs": 854
+    },
+    {
+      "level": 5,
+      "won": true,
+      "activeMs": 17265,
+      "budget": {
+        "actions": 33,
+        "activeTimeMs": 27000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SPOR; level=5; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 29,
+      "ms": 19751,
+      "gameMs": 1157,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 13921,
+          "count": 29
+        },
+        "resume": {
+          "ms": 2963,
+          "count": 29
+        }
+      },
+      "graph": "e4b15862d3ba837f6d9e08ae06e6cff956e7aa532f41c523825b4328ac90bd80",
+      "deltas": 21215,
+      "acquiredRecords": 91,
+      "nodes": 1848,
+      "traceEvents": 128,
+      "prefixHash": "3308a5691f806e2773a18d58e89cb966dce9e155219f85e13908f8d668596a6b",
+      "scoredMs": 19048,
+      "settlementMs": 703
+    },
+    {
+      "level": 6,
+      "won": true,
+      "activeMs": 19398,
+      "budget": {
+        "actions": 35,
+        "activeTimeMs": 29000,
+        "source": "docs/architecture/sic-v8-validation.md :: SPOR niveau 6, alimenter les lots en respectant les r\u00e9serves",
+        "timeBasis": "measured"
+      },
+      "actions": 30,
+      "ms": 21816,
+      "gameMs": 1195,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 15595,
+          "count": 30
+        },
+        "resume": {
+          "ms": 3427,
+          "count": 30
+        }
+      },
+      "graph": "7540574637456e47d7cd67cad53e29f7e8951c38bb771c38336549f2ecf58412",
+      "deltas": 28117,
+      "acquiredRecords": 121,
+      "nodes": 2362,
+      "traceEvents": 128,
+      "prefixHash": "e9d1391feb5cbfccc0f1cd6136478a63542de64eb85fc8e6e71fdb94aa0b55ac",
+      "scoredMs": 20603,
+      "settlementMs": 1214
+    }
+  ],
+  "local_source": "f95e3d66d82cc488f052830fcf2a9510ab651bdd",
+  "source_tree": "a5f869ddd70a87e079f9d1596b7c186653d31981",
+  "raw_sha256": "ed0df5921d1f11ae4a14f598c3494a87c0831dc04da0a61ecf93568526a368b7",
+  "notes": "The standard runner is unchanged. Short integration unit tests ran during the last level; all original timed ceilings still pass. No other timed campaign ran concurrently."
+}

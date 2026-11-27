@@ -1,0 +1,46 @@
+{
+  "schema": "sic.passenger-continuity-initial.v1",
+  "source": "37d873385c6f63b4693e595da807b9d237246776",
+  "githubEquivalent": "f642211d4793f095b086af69aa11649fd343e667",
+  "tree": "8bce251d229e2ed5acd869364af5df9e4e877f46",
+  "archive": "continuity-initial-component-observer.jsonl.gz",
+  "rawSha256": "dc173a93f52f3bf38f6a49a15d1fcab0d7854868039a4d82c7b64635238784b8",
+  "trajectory": "e3419ba179db97e57c5b63bb515e7d7abca1991678dda6866b40201496c43a99",
+  "strictTrajectoryEqual": true,
+  "commands": [
+    15,
+    16,
+    15,
+    18,
+    61,
+    42
+  ],
+  "authorized": 167,
+  "reset": 0,
+  "continued": [
+    3,
+    0,
+    0,
+    0,
+    29,
+    13
+  ],
+  "loadedContinued": [
+    0,
+    0,
+    0,
+    0,
+    22,
+    12
+  ],
+  "approachContinued": [
+    0,
+    0,
+    0,
+    0,
+    7,
+    1
+  ],
+  "nativeScope": "Actual tickets from one chronological L1 session and one native worker, no prefix replay or injected state. Collector per-level action cap is74; the independent strict replay uses unchanged archived per-level caps. Their complete trajectories match.",
+  "physicalScope": "The initial connected-component box observer failed on public command107. This archive is the counterexample, not a passing physical gate. The corrected footprint observer is unit-tested; the integrated fresh continuity campaign must supply its passing receipt."
+}

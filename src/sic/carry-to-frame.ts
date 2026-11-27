@@ -122,9 +122,17 @@ function guardedProposal(family: string, observation: NativeObservation, run: Gu
     subjects: run.ferry.cargo.map(item => item.berths[1].join(',')), parentObjective: parent,
     satisfactionContract: 'official_progress_after_reversible_ferry_deliveries' };
   const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = family + ':' + need.id;
-  const action = { action_ref: leg.input, data: {} }, actions = [action];
+  const prefix: typeof plan = [];
+  for (const step of plan) {
+    if (prefix.length >= Math.min(remaining, maximumCommittedActions)
+      || !observation.available_action_refs.includes(step.input) || prefix.length > 0 && step.role !== 'move') break;
+    prefix.push(step);
+    if (step.role !== 'move') break;
+  }
+  const actions = prefix.map(step => ({ action_ref: step.input, data: {} }));
   return { status: 'proposed', kind: family, guarded: { ...run, plan }, needId: need.id, actions,
-    steps: [{ action, expected_after: leg.expect }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+    steps: prefix.map((step, index) => ({ action: actions[index]!, expected_after: step.expect })),
+    binding: { observation_ref: ref, level_epoch: observation.level_epoch },
     sicSituationCard: { strategy, need: 'Transport the passengers while preserving safe combinations', situation: label, mode: 'solving',
       evidence, agenda: [], actor: actor.bbox, ...(cargo ? { object: run.heldBox ?? cargo.berths[run.at.bank], frame: cargo.berths[leg.expect.bank] } : {}) },
     question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
@@ -141,6 +149,14 @@ export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Pro
   let previousDelivery: DeliveryModel | null = null;
   let multiple: { epoch: number; deliveries: DeliveryState } | null = null;
   let guarded: GuardedFerry | null = null;
+  // Guards follow only the actual public prefix. Publication remains in record,
+  // once and in order when the native runtime closes the executed series.
+  const guardedReturns = new WeakMap<GuardedProposal, Map<number, { ref: string; run: GuardedFerry }>>();
+  const guardedAt = (proposal: GuardedProposal, index: number, observation: NativeObservation) => {
+    if (index === 0) return proposal.guarded;
+    const prior = guardedReturns.get(proposal)?.get(index - 1);
+    return prior?.ref === observation.observation_ref ? prior.run : null;
+  };
   let choose: NativeProgramHandle | undefined;
   return {
     id: family,
@@ -252,6 +268,13 @@ export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Pro
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
     before(proposal, index, packet, observation) {
+      if (index > 0 && isGuarded(proposal)) {
+        const run = guardedAt(proposal, index, observation);
+        const actor = run && find_body(observation, run.ferry.model.actor) as NativeEntity | null;
+        const admitted = !!run && run.epoch === observation.level_epoch && run.frame === observation.frame_hash
+          && !!actor && equal(center(actor.bbox), run.at.actor);
+        return { admitted, reason: admitted ? 'guarded_passenger_prefix_confirmed' : 'guarded_passenger_prefix_changed' };
+      }
       if (index > 0 && !isMulti(proposal) && !isGuarded(proposal) && proposal.walk) {
         const { local } = proposal, leg = proposal.walk[index]!;
         const actor = local.actor && find_body(observation, local.actor) as NativeEntity | null;
@@ -267,8 +290,16 @@ export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Pro
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (isGuarded(proposal)) {
-        const proof = observeGuardedFerry(proposal.guarded, proposal.guarded.plan[0]!, after, second, []);
-        return { matched: !!proof, seal_prefix: true, reason: proof?.reason ?? 'check_ferry_return_for_a_contradiction' };
+        const run = guardedAt(proposal, index, before);
+        const proof = run && before.level_epoch === after.level_epoch && before.state === after.state
+          ? observeGuardedFerry(run, run.plan[0]!, after, second, []) : null;
+        if (proof) {
+          const prefix = guardedReturns.get(proposal) ?? new Map();
+          prefix.set(index, { ref: after.observation_ref, run: proof.run });
+          guardedReturns.set(proposal, prefix);
+        }
+        return { matched: !!proof, seal_prefix: !proof || index + 1 >= proposal.actions.length,
+          reason: proof?.reason ?? 'check_ferry_return_for_a_contradiction' };
       }
       if (isMulti(proposal)) {
         const proof = assessDelivery(proposal.deliveries, proposal.transfer, after, first, second, proposal.actor);
@@ -283,7 +314,12 @@ export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Pro
     },
     record(before, after, command, first, second, proposal, index, frames) {
       if (isGuarded(proposal)) {
-        const { guarded: run } = proposal;
+        const run = index === 0 ? proposal.guarded
+          : guarded?.epoch === before.level_epoch && guarded.frame === before.frame_hash ? guarded : null;
+        if (!run) {
+          guarded = { ...proposal.guarded, stopped: true };
+          return { events: [], reviewEvidence: 'The preceding passenger return was not acquired in order.' };
+        }
         if (after.levels_completed > before.levels_completed) {
           previousDelivery = { ...run.ferry.model, completed: after.levels_completed,
             evidence: [...new Set([...run.refs, before.observation_ref, after.observation_ref])] };

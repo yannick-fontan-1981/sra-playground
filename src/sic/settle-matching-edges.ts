@@ -230,6 +230,19 @@ function edgeBox({ x, y, rows, cols, pitch }: Grid, direction: number): NativeBo
 
 const fitKey = ({ grid }: Board) => grid.edges.join(',');
 
+function currentSwitchEvidence(memory: Memory | null, observation: NativeObservation): boolean {
+  // A newly introduced control is usable after its measured return in this
+  // context. Cross-level reuse still requires the existing scored witness.
+  const scope = observation.observation_ref.split(':epoch:')[0];
+  return Object.values(memory?.switchRefs ?? {}).some(witness => {
+    if (!witness || witness.input !== 'ACTION5' || !Array.isArray(witness.refs) || witness.refs.length !== 2) return false;
+    const refs = witness.refs.map(ref => typeof ref === 'string' ? ref.match(/^(.*):epoch:(\d+):revision:(\d+):frame:(.+)$/) : null);
+    return refs.every(ref => ref && ref[1] === scope && Number(ref[2]) === observation.level_epoch
+      && Number.isSafeInteger(Number(ref[3])) && Number(ref[3]) <= observation.revision)
+      && Number(refs[0]![3]) < Number(refs[1]![3]);
+  });
+}
+
 export function createSicSettleMatchingEdges(): NativeFamily<Proposal> {
   let memory: Memory | null = null;
   const expectedBoard = (frame: NativeRows, { grid, predicted, blockers = [], slidePath, attachmentMarks }: Proposal, index: number) => {
@@ -244,7 +257,8 @@ export function createSicSettleMatchingEdges(): NativeFamily<Proposal> {
     const input = command.action_ref, won = after.levels_completed > before.levels_completed;
     const directional = /^ACTION[1-4]$/.test(input);
     const possibleSwitch = before.available_action_refs.includes('ACTION5') && (input === 'ACTION5' || input === 'ACTION6');
-    const switching = (memory?.switchVerifiedAt ?? Infinity) <= before.level_epoch && before.available_action_refs.includes('ACTION5');
+    const switching = ((memory?.switchVerifiedAt ?? Infinity) <= before.level_epoch || currentSwitchEvidence(memory, before))
+      && before.available_action_refs.includes('ACTION5');
     if (!directional && !possibleSwitch && !(won && input === 'ACTION6')) return;
     const switchedBoard = possibleSwitch || switching ? findBoard(first, true) : null;
     const bounds = switchedBoard?.panel?.box, { x, y } = command.data;
@@ -314,7 +328,7 @@ export function createSicSettleMatchingEdges(): NativeFamily<Proposal> {
       const controls = Object.entries(memory.controls).filter(([input]) => observation.available_action_refs.includes(input))
         .sort((a, b) => a[1].direction - b[1].direction);
       if (new Set(controls.map(([, witness]) => witness.direction)).size !== directions.length) return null;
-      const switching = (memory.switchVerifiedAt ?? Infinity) <= observation.level_epoch
+      const switching = ((memory.switchVerifiedAt ?? Infinity) <= observation.level_epoch || currentSwitchEvidence(memory, observation))
         && observation.available_action_refs.includes('ACTION5');
       const board = (switching ? findBoard(rows, true) : null) ?? findBoard(rows);
       if (!board || fitKey(board) !== memory.fit) return null;

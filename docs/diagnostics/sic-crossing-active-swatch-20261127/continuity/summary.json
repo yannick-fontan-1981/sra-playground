@@ -1,0 +1,120 @@
+{
+  "source": "f95e3d66d82cc488f052830fcf2a9510ab651bdd",
+  "raw_sha256": "0a1514cdfa0ef7789f3786943e34ec4cae93ea65aeac09e7b4fc40681066259d",
+  "issued": 199,
+  "sic": 199,
+  "resets": 0,
+  "levels": [
+    {
+      "level": 1,
+      "won": true,
+      "actions": 27,
+      "reason": null,
+      "state": "NOT_FINISHED",
+      "compositionTrials": 0,
+      "changedTrials": 0,
+      "newScenes": 0,
+      "relational": 0
+    },
+    {
+      "level": 2,
+      "won": true,
+      "actions": 28,
+      "reason": null,
+      "state": "NOT_FINISHED",
+      "compositionTrials": 0,
+      "changedTrials": 0,
+      "newScenes": 0,
+      "relational": 0
+    },
+    {
+      "level": 3,
+      "won": true,
+      "actions": 24,
+      "reason": null,
+      "state": "NOT_FINISHED",
+      "compositionTrials": 0,
+      "changedTrials": 0,
+      "newScenes": 0,
+      "relational": 0
+    },
+    {
+      "level": 4,
+      "won": true,
+      "actions": 40,
+      "reason": null,
+      "state": "NOT_FINISHED",
+      "compositionTrials": 0,
+      "changedTrials": 0,
+      "newScenes": 0,
+      "relational": 0
+    },
+    {
+      "level": 5,
+      "won": true,
+      "actions": 40,
+      "reason": null,
+      "state": "NOT_FINISHED",
+      "compositionTrials": 0,
+      "changedTrials": 0,
+      "newScenes": 0,
+      "relational": 0
+    },
+    {
+      "level": 6,
+      "won": true,
+      "actions": 40,
+      "reason": "target_levels_completed",
+      "state": "WIN",
+      "compositionTrials": 0,
+      "changedTrials": 0,
+      "newScenes": 0,
+      "relational": 0
+    }
+  ],
+  "reference_rows": [
+    [
+      27,
+      10,
+      15,
+      7,
+      9
+    ],
+    [
+      28,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      24,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      40,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      40,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      40,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "scope": "First room: actual continuous cell advances including acquired crossings. Later rooms: unitary commands; no continuous series claimed."
+}

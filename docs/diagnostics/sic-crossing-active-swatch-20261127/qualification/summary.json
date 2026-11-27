@@ -1,0 +1,271 @@
+{
+  "code": "WEAV",
+  "target": 6,
+  "mode": "sic",
+  "parallelWorkers": 1,
+  "recoveries": {
+    "reset": 0,
+    "undo": 0
+  },
+  "actions": 199,
+  "levels": 6,
+  "reason": "target_levels_completed",
+  "status": "stopped",
+  "authority": 199,
+  "series": [
+    2,
+    3,
+    3,
+    2,
+    3,
+    3
+  ],
+  "pathKinds": [
+    {
+      "length": 2,
+      "type": "move"
+    },
+    {
+      "length": 3,
+      "type": "move"
+    },
+    {
+      "length": 3,
+      "type": "move"
+    },
+    {
+      "length": 2,
+      "type": "move"
+    },
+    {
+      "length": 3,
+      "type": "move"
+    },
+    {
+      "length": 3,
+      "type": "move"
+    }
+  ],
+  "local_source": "24df980efd3b97e578913ec6fc2b4fdbdf63f7e2",
+  "github_source": "e1ef5d26613b52f9e5d9c8d1e1f735339990a8fc",
+  "source_tree": "4d7c72762dccbeba797e15c9413ed2f37de26f40",
+  "raw_sha256": "ea5ae4a51eb1721e62c5f4ec17446a0fee3fb50c0eb43cf50e7637c3dd292194",
+  "levelStats": [
+    {
+      "level": 1,
+      "won": true,
+      "activeMs": 6933,
+      "budget": {
+        "actions": 33,
+        "activeTimeMs": 16000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WEAV; level=1; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 27,
+      "ms": 7223,
+      "gameMs": 103,
+      "costs": {
+        "init": {
+          "ms": 1201,
+          "count": 1
+        },
+        "advance": {
+          "ms": 4521,
+          "count": 27
+        },
+        "resume": {
+          "ms": 1251,
+          "count": 16
+        }
+      },
+      "graph": "8751757eaab1d73574bd1ac85ad92a37a72e5c847e02d3e0878f3a3e75daad92",
+      "deltas": 4248,
+      "acquiredRecords": 27,
+      "nodes": 640,
+      "traceEvents": 122,
+      "prefixHash": "db33112f07ff753fb2ac8ed65958948d68395c7614070387a2293a5ca1fedff8",
+      "scoredMs": 6818,
+      "settlementMs": 403
+    },
+    {
+      "level": 2,
+      "won": true,
+      "activeMs": 9038,
+      "budget": {
+        "actions": 34,
+        "activeTimeMs": 18000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WEAV; level=2; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 28,
+      "ms": 9443,
+      "gameMs": 109,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 7048,
+          "count": 28
+        },
+        "resume": {
+          "ms": 2044,
+          "count": 28
+        }
+      },
+      "graph": "3e93348668ca10cf5a9f34e95a056fc6da3143f05efde7fc958d8c444a61eeff",
+      "deltas": 10589,
+      "acquiredRecords": 55,
+      "nodes": 1039,
+      "traceEvents": 128,
+      "prefixHash": "f0916bb06a0a2906be540050eba5010aaa768272e0799a36ebb1111c9933bd17",
+      "scoredMs": 9218,
+      "settlementMs": 225
+    },
+    {
+      "level": 3,
+      "won": true,
+      "activeMs": 9697,
+      "budget": {
+        "actions": 29,
+        "activeTimeMs": 18000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WEAV; level=3; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 24,
+      "ms": 10107,
+      "gameMs": 96,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 7263,
+          "count": 24
+        },
+        "resume": {
+          "ms": 2517,
+          "count": 24
+        }
+      },
+      "graph": "4f0aff0cc381cbc7fe6dc6fb459b520941131a5912f4d8f73dfe1e418d2bdae0",
+      "deltas": 16071,
+      "acquiredRecords": 79,
+      "nodes": 1427,
+      "traceEvents": 128,
+      "prefixHash": "d549b3f466a74205fe6bc9b201305a1592f3da01d12ac7487b16c225439afaa2",
+      "scoredMs": 9813,
+      "settlementMs": 295
+    },
+    {
+      "level": 4,
+      "won": true,
+      "activeMs": 19486,
+      "budget": {
+        "actions": 48,
+        "activeTimeMs": 29000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WEAV; level=4; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 40,
+      "ms": 20216,
+      "gameMs": 159,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 14695,
+          "count": 40
+        },
+        "resume": {
+          "ms": 4977,
+          "count": 40
+        }
+      },
+      "graph": "df2b9b6f898e95259f43b4277a0eac1f930749102412378ed98662d14bd9d920",
+      "deltas": 25342,
+      "acquiredRecords": 119,
+      "nodes": 2210,
+      "traceEvents": 128,
+      "prefixHash": "77f1b8856302af3963654d5aa7b06f1fbe14cd41092109268dcd8e66aede182a",
+      "scoredMs": 19777,
+      "settlementMs": 440
+    },
+    {
+      "level": 5,
+      "won": true,
+      "activeMs": 22267,
+      "budget": {
+        "actions": 48,
+        "activeTimeMs": 29000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WEAV; level=5; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 40,
+      "ms": 23113,
+      "gameMs": 163,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 16914,
+          "count": 40
+        },
+        "resume": {
+          "ms": 5619,
+          "count": 40
+        }
+      },
+      "graph": "90e8d0fb5203fc46869ae8d47f8a12f7fdc1a41a38613e99ba185e4f4497083d",
+      "deltas": 34650,
+      "acquiredRecords": 159,
+      "nodes": 3030,
+      "traceEvents": 128,
+      "prefixHash": "891e87fee28525a1f041c30c108a7cd62740f4656d47fa09c1331655b23bdb0c",
+      "scoredMs": 22660,
+      "settlementMs": 454
+    },
+    {
+      "level": 6,
+      "won": true,
+      "activeMs": 26978,
+      "budget": {
+        "actions": 48,
+        "activeTimeMs": 28000,
+        "source": "docs/architecture/sic-v8-validation.md :: WEAV niveau 6, pr\u00e9server les pastilles qui commandent les lignes",
+        "timeBasis": "measured"
+      },
+      "actions": 40,
+      "ms": 27894,
+      "gameMs": 174,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 20406,
+          "count": 40
+        },
+        "resume": {
+          "ms": 6845,
+          "count": 40
+        }
+      },
+      "graph": "2c6a35a8df2419bbc4766b04f802ee8a1915ec17e03b6998863b22636deaa02b",
+      "deltas": 44055,
+      "acquiredRecords": 199,
+      "nodes": 3947,
+      "traceEvents": 128,
+      "prefixHash": "edfe272676670067ceab7237f32bad22a26aa779a47be0b2e6733c650682595f",
+      "scoredMs": 27305,
+      "settlementMs": 589
+    }
+  ]
+}

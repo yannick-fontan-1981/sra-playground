@@ -1,0 +1,153 @@
+{
+  "schema": "sic.guarded-passenger-first-loss.v1",
+  "source": "d558c9d8ec199a02bae4de4c414a8540039b1c15",
+  "startLevel": 1,
+  "completedLevelPrefixComparison": [
+    {
+      "level": 1,
+      "actions": 15,
+      "baselineActions": 15,
+      "prefixMatches": true
+    },
+    {
+      "level": 2,
+      "actions": 16,
+      "baselineActions": 16,
+      "prefixMatches": true
+    },
+    {
+      "level": 3,
+      "actions": 15,
+      "baselineActions": 15,
+      "prefixMatches": true
+    },
+    {
+      "level": 4,
+      "actions": 18,
+      "baselineActions": 18,
+      "prefixMatches": true
+    }
+  ],
+  "capturedCommands": 74,
+  "cutoffStatus": "error",
+  "cutoffMessage": "The public board changed while V6 was reasoning. Start a new session. Start a new reasoning session to continue.",
+  "cutoffQualification": "Intentional diagnostic stop through canDispatch after command74. The host reports stale-board when that flag becomes false. This is not a game verdict or a timing measurement; only the earlier executed public returns are used.",
+  "learnedRole": "Motion, crossing and object transport acquired through L1\u2013L4, rebound to three passengers on measured departure and receiving banks.",
+  "firstLoss": [
+    {
+      "command": 65,
+      "action": {
+        "id": 1
+      },
+      "announcedActions": 1,
+      "remainingPlan": 18,
+      "roles": [
+        "move",
+        "move",
+        "take",
+        "move",
+        "move",
+        "move",
+        "move",
+        "move",
+        "move"
+      ],
+      "actualBeforeRef": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:65:frame:db0c1878a43ebcce",
+      "afterLevel": 5,
+      "afterCompleted": 4
+    },
+    {
+      "command": 66,
+      "action": {
+        "id": 3
+      },
+      "announcedActions": 1,
+      "remainingPlan": 17,
+      "roles": [
+        "move",
+        "take",
+        "move",
+        "move",
+        "move",
+        "move",
+        "move",
+        "move",
+        "move"
+      ],
+      "actualBeforeRef": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:66:frame:017dae5835427307",
+      "afterLevel": 5,
+      "afterCompleted": 4
+    },
+    {
+      "command": 67,
+      "action": {
+        "id": 5
+      },
+      "announcedActions": 1,
+      "remainingPlan": 16,
+      "roles": [
+        "take",
+        "move",
+        "move",
+        "move",
+        "move",
+        "move",
+        "move",
+        "move",
+        "cross"
+      ],
+      "actualBeforeRef": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:67:frame:49298fbe77f62d32",
+      "afterLevel": 5,
+      "afterCompleted": 4
+    },
+    {
+      "command": 68,
+      "action": {
+        "id": 2
+      },
+      "announcedActions": 1,
+      "remainingPlan": 15,
+      "roles": [
+        "move",
+        "move",
+        "move",
+        "move",
+        "move",
+        "move",
+        "move",
+        "cross",
+        "release"
+      ],
+      "actualBeforeRef": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:68:frame:59c53bd342098a28",
+      "afterLevel": 5,
+      "afterCompleted": 4
+    },
+    {
+      "command": 69,
+      "action": {
+        "id": 2
+      },
+      "announcedActions": 1,
+      "remainingPlan": 14,
+      "roles": [
+        "move",
+        "move",
+        "move",
+        "move",
+        "move",
+        "move",
+        "cross",
+        "release",
+        "cross"
+      ],
+      "actualBeforeRef": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:69:frame:2db036ee69730bb2",
+      "afterLevel": 5,
+      "afterCompleted": 4
+    }
+  ],
+  "reusableCondition": "The current actor, all passengers, their banks and carried offset match the measured plan; only consecutive ordinary motion steps are candidates for a shared native prefix.",
+  "contradiction": "Changed actor/passenger position, missing or ambiguous body, changed epoch/reference, or a returning animation seals the actual prefix. Pickup, release and crossing remain boundaries.",
+  "rawBytes": 1302424,
+  "rawSha256": "1caa54d49d5b518b77753c2f121f7c35f7c274d98b623e4659aec4442a71306a",
+  "compressedBytes": 131641
+}
