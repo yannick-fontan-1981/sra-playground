@@ -23,6 +23,15 @@ export interface ReceptionServiceOptions {
 export const freshReceptionServiceMemory = (): R => ({ epoch: null, scene: null, controls: {}, trials: {}, evidence: [],
   wait_spent: 0, refuted: [], residual_events: [] });
 
+// A wait is spent for the first matched HUD request on this support. Its
+// moving counterpart may change position or be hidden between observations.
+function sameReceptionSubject(previous: R | null, current: R | null): boolean {
+  if (!previous || !current || previous.layout !== current.layout) return false;
+  const first = previous.counterparts?.[0], second = current.counterparts?.[0];
+  return typeof first?.request_shape === 'string' && first.request_shape === second?.request_shape &&
+    Array.isArray(first.request_bbox) && equal(first.request_bbox, second.request_bbox);
+}
+
 export function receptionServiceBefore(proposal: R, index: number, rows: NativeRows, meta: BeforeMeta): R {
   const plan = proposal.reception_service_plan;
   if (!truth(plan)) throw new TypeError('Reception service admission requires reception_service_plan');
@@ -31,7 +40,8 @@ export function receptionServiceBefore(proposal: R, index: number, rows: NativeR
     && equal(proposal.actions, plan.commands) && equal(plan.commands, proposal.bundle_template.actions)
     && proposal.proposal_id === 'reception-service:' + identity(plan) && meta.available.includes(step.action_ref);
   if (index === 0) admitted = admitted && identity(rows) === plan.frame_digest && meta.observation_ref === plan.observation_ref;
-  else admitted = admitted && actors.length === 1 && equal(actors[0]!.anchor, step.from);
+  else admitted = admitted && actors.length === 1 && equal(actors[0]!.anchor, step.from) &&
+    (plan.kind !== 'reception_observation' || sameReceptionSubject(plan.scene, scene));
   return { admitted: Boolean(admitted), reason: admitted ? 'current_reception_binding' : 'reception_context_changed' };
 }
 
@@ -41,6 +51,9 @@ export function receptionServiceAfter(proposal: R, index: number, _rows: NativeR
   const scene = measureReceptionService(later, plan.scene), actors = scene ? receptionServiceCarriers(later, scene) : [];
   const boundary = !equal([meta.epoch, meta.score], [plan.epoch, plan.score]), expected = plan.steps[index].to;
   const matched = boundary || expected === null || actors.length !== 1 ? null : equal(actors[0]!.anchor, expected);
+  if (matched && plan.kind === 'reception_observation' && !sameReceptionSubject(plan.scene, scene)) {
+    return { matched, seal_prefix: true, reason: 'reception_subject_changed' };
+  }
   return { matched, seal_prefix: boundary || matched !== true,
     reason: matched ? 'reception_control_projection' : 'reception_boundary_unknown_or_divergence' };
 }
@@ -62,6 +75,16 @@ export class ReceptionServiceMemory {
     this.version++; this.receptionMemory = owned.memory; this.receptionEvents.push(owned);
   }
 
+  offerStationaryObservation(actor: readonly number[] | null, target: readonly number[], cells: readonly (readonly number[])[],
+    moves: Readonly<Record<string, readonly number[]>>, stationary?: Readonly<Record<string, readonly number[]>>): { command: string; confirmed: boolean } | null {
+    if (!equal(actor, target)) return null;
+    const outward = Object.entries(moves).filter(([, delta]) => !cells.some(cell =>
+      equal([target[0]! + delta[0]!, target[1]! + delta[1]!], cell))).map(([name]) => name).sort(compareUnicode);
+    if (!outward.length) return null;
+    const command = outward[0]!;
+    return { command, confirmed: equal(stationary?.[command] ?? null, target) };
+  }
+
   /** Null delegates to RootedLine; explicit source refusals remain blocking. */
   propose(observation: R, rows: NativeRows, inputs: readonly R[], limit: number, config: R): R | null {
     const cfg = config.reception_service_question;
@@ -78,6 +101,7 @@ export class ReceptionServiceMemory {
       // matching coordinates in a new epoch cannot authorize a wait batch.
       if (this.currentEpochAcquisition) delete memory.stationary;
     }
+    if (memory.stationary && !sameReceptionSubject(memory.scene, scene)) delete memory.stationary;
     if (truth(memory.refuted)) return { status: 'unknown', reason: 'reception_control_projection_refuted', block_unrelated_probe: true };
     const actors = receptionServiceCarriers(rows, scene), actor = actors.length === 1 ? actors[0]! : null;
     const allowed = new Set(inputs.filter(action => !truth(action.data)).map(action => action.action_ref as string));
@@ -89,28 +113,25 @@ export class ReceptionServiceMemory {
       steps = receptionServicePath(rows, scene, actor.anchor, target, moves, remaining) ?? [];
       if (steps.length) { kind = 'access'; why = cfg.access + ' ' + cfg.preserve_other_contacts; steps = steps.slice(0, Math.min(limit, 16)); }
     }
-    if (actor && equal(actor.anchor, target)) {
-      const outward = Object.entries(moves).filter(([, delta]) => !scene.cells.some((cell: number[]) =>
-        equal([target[0] + delta[0], target[1] + delta[1]], cell))).map(([name]) => name).sort(compareUnicode);
-      if (outward.length) {
-        const command = outward[0]!, confirmed = equal(memory.stationary?.[command] ?? null, target);
-        let count = confirmed ? Math.min(limit, 16, remaining, cfg.wait_batch) : 1;
-        const declaredMaximum = Object.hasOwn(config, 'level_action_cap') ? config.level_action_cap : remaining + memory.wait_spent;
-        if (config.native_reception_wait_budget === true && (!Number.isSafeInteger(declaredMaximum) || declaredMaximum < 0)) {
-          throw new RangeError('Native reception total action budget must be a nonnegative safe integer');
-        }
-        const ledger = normalizeReceptionWaitBudget({ parent_goal_ref: 'G_official_completion', parent_contribution_ref: 'reception_support_experiment',
-          consumer_request_ref: 'shape:' + scene.counterparts[0].request_shape, level_scope_ref: String(observation.level_epoch),
-          restore_epoch: 0, observed_clock: observation.revision,
-          maximum_total_wait_primitives: config.native_reception_wait_budget === true ? Math.min(128, declaredMaximum) : declaredMaximum,
-          spent_wait_primitives: memory.wait_spent, ledger_claim_ref: 'observed_wait:' + memory.wait_spent });
-        if (config.native_reception_wait_budget === true && ledger.spent_wait_primitives >= ledger.maximum_total_wait_primitives) {
-          return { status: 'unknown', reason: 'reception_wait_budget_exhausted', block_unrelated_probe: true };
-        }
-        count = Math.min(count, ledger.maximum_total_wait_primitives - ledger.spent_wait_primitives);
-        steps = Array.from({ length: Math.max(0, count) }, () => ({ action_ref: command, from: [...target], to: [...target], stationary_confirmed: confirmed }));
-        kind = 'reception_observation'; why = cfg.wait;
+    const hold = this.offerStationaryObservation(actor?.anchor ?? null, target, scene.cells, moves, memory.stationary);
+    if (hold) {
+      const { command, confirmed } = hold;
+      let count = confirmed ? Math.min(limit, 16, remaining, cfg.wait_batch) : 1;
+      const declaredMaximum = Object.hasOwn(config, 'level_action_cap') ? config.level_action_cap : remaining + memory.wait_spent;
+      if (config.native_reception_wait_budget === true && (!Number.isSafeInteger(declaredMaximum) || declaredMaximum < 0)) {
+        throw new RangeError('Native reception total action budget must be a nonnegative safe integer');
       }
+      const ledger = normalizeReceptionWaitBudget({ parent_goal_ref: 'G_official_completion', parent_contribution_ref: 'reception_support_experiment',
+        consumer_request_ref: 'shape:' + scene.counterparts[0].request_shape, level_scope_ref: String(observation.level_epoch),
+        restore_epoch: 0, observed_clock: observation.revision,
+        maximum_total_wait_primitives: config.native_reception_wait_budget === true ? Math.min(128, declaredMaximum) : declaredMaximum,
+        spent_wait_primitives: memory.wait_spent, ledger_claim_ref: 'observed_wait:' + memory.wait_spent });
+      if (config.native_reception_wait_budget === true && ledger.spent_wait_primitives >= ledger.maximum_total_wait_primitives) {
+        return { status: 'unknown', reason: 'reception_wait_budget_exhausted', block_unrelated_probe: true };
+      }
+      count = Math.min(count, ledger.maximum_total_wait_primitives - ledger.spent_wait_primitives);
+      steps = Array.from({ length: Math.max(0, count) }, () => ({ action_ref: command, from: [...target], to: [...target], stationary_confirmed: confirmed }));
+      kind = 'reception_observation'; why = cfg.wait;
     }
     if (!steps.length) {
       const probes: string[] = cfg.probe_order.filter((name: string) => allowed.has(name) && !Object.hasOwn(memory.controls, name));
@@ -154,6 +175,8 @@ export class ReceptionServiceMemory {
     for (const event of memory.residual_events) residual.applyEvent(event);
     memory.residual_events.push(...residual.record(before, command, after, rows, later, proposal, index));
     if (!boundary) {
+      const subjectContinues = sameReceptionSubject(scene, nextScene);
+      if (memory.stationary && (!sameReceptionSubject(memory.scene, scene) || !subjectContinues)) delete memory.stationary;
       memory.trials[key] = (memory.trials[key] ?? 0) + 1;
       if (first.length === 1 && second.length === 1) {
         const delta = [second[0]!.anchor[0] - first[0]!.anchor[0], second[0]!.anchor[1] - first[0]!.anchor[1]];
@@ -163,7 +186,11 @@ export class ReceptionServiceMemory {
         }
         const expected = plan.steps[index].to; detail.matched = expected === null ? null : equal(second[0]!.anchor, expected);
         if (expected !== null && detail.matched === false) memory.refuted.push(detail);
-        if (plan.kind === 'reception_observation' && equal(delta, [0, 0])) { memory.stationary ??= {}; memory.stationary[key] = second[0]!.anchor; }
+        if (plan.kind === 'reception_observation' && subjectContinues && sameReceptionSubject(plan.scene, scene) &&
+            equal(delta, [0, 0]) && detail.matched === true) {
+          memory.stationary ??= {};
+          memory.stationary[key] = second[0]!.anchor;
+        }
       }
       if (plan.kind === 'reception_observation') memory.wait_spent++;
       if (nextScene) memory.scene = nextScene;

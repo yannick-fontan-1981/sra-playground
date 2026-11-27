@@ -41,7 +41,7 @@ import { ProductPanelMemory, commonProductPanelProposal, bindProductPanel, produ
 import { LabeledSequenceMemory, commonLabeledSequenceProposal, bindLabeledSequence, labeledSequenceBefore, labeledSequenceAfter } from './v6-labeled-sequence-access.ts';
 import { TraceFieldMemory, commonTraceFieldProposal, bindTraceField, traceFieldBefore, traceFieldAfter } from './v6-trace-field-access.ts';
 import { LinkedPacketMemory, commonLinkedPacketProposal, bindLinkedPacket, linkedPacketBefore, linkedPacketAfter } from './v6-linked-packet-access.ts';
-import { markedCollectionQuestion, observedProgramQuestion, observedProgramBefore, observedProgramAfter,
+import { defaultProgramOffers, observedProgramQuestion, observedProgramBefore, observedProgramAfter,
   recordObservedProgram, recordObservedProgramPacket } from './v6-program-composition-access.ts';
 import { programIdentity } from './v6-program-identity.ts';
 import { sharedLearnedPreparationWitness, radialLearnedPreparationWitness } from './v6-learned-preparation.ts';
@@ -420,7 +420,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
 
   /** ProgramCompositionConstraint's declared question on the same ancestor memory. */
   async programPropose(observation: R, rows: NativeRows, inputs: readonly R[], remaining: number,
-    levelDeadline: number | null, now?: () => number): Promise<R | null> {
+    levelDeadline: number | null, now?: () => number, offers = defaultProgramOffers): Promise<R | null> {
     if (remaining < 1) return null;
     if (this.memory.compositionModels.length && (levelDeadline === null || levelDeadline === undefined)) {
       throw new TypeError('Program search requires the current level deadline');
@@ -430,8 +430,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       ...(now ? { now: () => now() / 1000 } : {}) };
     const unmodeledMembers = this.programControlDiscovery && this.memory.compositionModels.length > 0
       && programControlDiscoveryBlocksOrdinaryPlan(this.memory.compositionModels.at(-1)!, this.memory.controlDiscoveryEvents, rows);
-    const proposal = (unmodeledMembers ? null : observedProgramQuestion(this.memory, observation, rows, Math.min(16, remaining), config)
-      ?? markedCollectionQuestion(this.memory, observation, rows, inputs))
+    const proposal = (unmodeledMembers ? null : observedProgramQuestion(this.memory, observation, rows, Math.min(16, remaining), config, offers)
+      ?? offers.editCollection(this.memory, observation, rows, inputs))
       ?? (this.programRelationLearning && this.memory.compositionModels.length
         ? programRelationQuestion(this.memory.compositionModels.at(-1)!, this.memory.controlDiscoveryEvents, observation, rows,
           remaining, levelDeadline ?? Infinity, now) : null)
