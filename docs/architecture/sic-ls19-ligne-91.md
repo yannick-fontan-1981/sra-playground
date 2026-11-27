@@ -19,3 +19,39 @@ L’essai historique distingue trois révisions avec la même empreinte d’imag
 **Second scénario.** La fixture native de référence `known_entry_and_obstruction_cycle` utilise `ACTION1` et un mur en (8, 5). Après le deuxième arrêt, un clic unique `ACTION6(8,5)` devient admissible. Le changement de pixels sur le support permet ensuite une nouvelle `ACTION1` sous `test_reopened_access` avec le témoin du changement. Les contre-épreuves construites retirent l’historique du passage, perturbent la liaison du porteur, du support ou de l’origine, et changent le retour de la même commande. Ce second scénario et ces interventions sont distincts d’une seconde partie réelle LS19. [Fixture de référence](../../tests/fixtures/v6-view-reference.json) · [Assertions de transfert et de refus](../../tests/sic-view-obstruction.test.ts)
 
 **Critère de remise.** Retrouver le ticket historique, son garde, son objectif et le reçu de mesure, conserver la clé et ses références, passer le second scénario et les deux contre-épreuves, puis exposer au choix SIC les preuves typées de l’admissibilité et de la clôture de la répétition. La qualification réservée et l’intégration sur `main` se constatent séparément.
+
+## Ce qui est extrait
+
+Le contrat préalable est publié à `68efddd2d009ace4f4b898cc82c4bb7941e815ae`. Le candidat ajoute deux opérations sur le même témoin typé. `bindViewObstruction` rattache la clé à l’origine, au support encore présent et aux poses uniques, puis fournit au graphe les références et le fait « déjà répété ». La production utilise ce même fait pour préparer l’offre et pour évaluer sa garde dans l’agenda. `observedRepeatedStop` applique la mesure du retour aux mêmes poses, une fois la vue enregistrée. La famille conserve le compteur et ajoute la référence du retour en cas de nouvel arrêt. [Contrat typé](../../src/sic/view-obstruction-trial.ts) · [Consommation avant l’essai](../../src/logos-engine/v6-view-frontier.ts#L179) · [Mesure après l’essai](../../src/logos-engine/v6-view-frontier.ts#L298)
+
+L’identification du support et des textures, la construction de la clé, la disponibilité du clic, la mémoire d’intervention et l’attribution du résultat à l’objectif restent dans leurs appelants. Le graphe existant porte déjà les branches confirmation, changement de support et réouverture. Le garde de libération conserve son rôle sur un essai à un seul pas. L’empreinte historique du ticket 13 couvre le plan, l’agenda, les références, l’admission et le retour immédiat. Elle complète l’assertion explicite sur le passage de 1 à 2 et la reprise au tour 14. [Graphe](../../src/sic/view-strategy.ts#L25) · [Construction du premier témoin](../../src/logos-engine/v6-view-frontier.ts#L315) · [Conservation du reçu](../../src/logos-engine/v6-native-caller.ts#L548)
+
+## Effort comparé
+
+| Périmètre | Ligne 90 · accès au bord | Ligne 91 · confirmation |
+|---|---|---|
+| Préparation historique | Capture de deux sessions et création d’une fixture de 14 observations, 2 222 octets compressés | Réutilisation du même fichier. L’inventaire et le parent donnent le même résultat aux tours 12 à 14. |
+| Travail de production | Projection du coût et du gain, typage des trajectoires et classement des accès. Deux fichiers, 89 lignes ajoutées et 20 retirées. | Liaison du témoin à l’observation et mesure du deuxième arrêt. Deux fichiers, 54 lignes ajoutées et 8 retirées. |
+| Preuve propre à la ligne | Sélection du trajet, garde du premier pas et retour de fin de préfixe | Un sous-test supplémentaire dans le rejeu du service et quatre tests ciblés sur la seconde situation. Le compteur, la clôture et la reprise se vérifient séparément de l’accès. |
+
+Les volumes de production se vérifient par `git diff --numstat` dans `src` depuis le parent respectif. Ils mesurent l’étendue du changement. Le transfert indépendant de la ligne 90 a son propre reçu au SHA `331f4076`. Le transfert de la ligne 91 reste à qualifier par SIC 3. [Reçu indépendant de la ligne 90](https://github.com/yannick-fontan-1981/sra-playground/commit/331f4076240b192674e01ab10ea6c9fd4ae96ec0)
+
+## Rejeu pour SIC 3 et le Banc
+
+Depuis la racine, avec Node 24.22.3, exécuter les quatre suites ci-dessous. Le test LS19 rejoue le service avec les observations historiques. Les deux autres points d’entrée pour des situations indépendantes sont `ViewFrontier.propose / before / record` au niveau famille et `V6AgentService.handle` au niveau ticket. Le comparateur doit vérifier la provenance du premier arrêt, le nombre d’essais sur la même clé, le résultat et la commande suivante.
+
+```powershell
+node --test tests/sic-view-edge-ls19.test.ts tests/sic-view-obstruction.test.ts tests/v6-view-frontier.test.ts tests/v6-caller-integration.test.ts
+npm run typecheck
+```
+
+Pour vérifier les 13 commandes exécutées sur le vrai jeu puis la libération du ticket 14, activer le backend de jeu public de la même révision. Le contrôleur choisit toutes les commandes. La fixture sert à les vérifier et à comparer les observations reçues.
+
+```powershell
+node scripts/prepare-python.mjs
+$env:SIC_LS19_GAME_ROOT = (Resolve-Path .).Path
+node --test tests/sic-view-edge-ls19.test.ts
+Remove-Item Env:SIC_LS19_GAME_ROOT
+```
+
+La vérification locale couvre 37/37 tests sur les quatre suites avec le backend de jeu actif, ainsi que le contrôle TypeScript. Pour isoler le changement, comparer le candidat au parent de production `975d9d80`, ou directement au contrat `68efddd2` qui ajoute seulement la caractérisation. L’intégration reste à décider.

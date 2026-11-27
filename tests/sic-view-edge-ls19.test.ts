@@ -127,10 +127,12 @@ test('LS19 historical edge approach releases ACTION1 and closes its own objectiv
       assert.ok(resumed.need.evidence.includes(repeatedStop.after_ref));
       assert.notEqual(resumed.need.id, decision.need.id);
     });
-    if (turn === 3) {
-      // Full public plan, references, guard and measured outcome from the 8ce7ee35 replay.
+    if (turn === 3 || turn === 13) {
+      // Full public plan, references, guard and immediate outcome from each historical release.
       const evidence = [commands[index], proposal.view_plan, decision, release, guard, outcome?.matched, outcome?.reason, outcome?.viewOutcome];
-      assert.equal(createHash('sha256').update(JSON.stringify(evidence)).digest('hex'), '7560f18611c6ddcb766ec999e61e3eed46bb6aed322b503c4f04c50615e781a0');
+      const historical = turn === 3 ? '7560f18611c6ddcb766ec999e61e3eed46bb6aed322b503c4f04c50615e781a0'
+        : 'ad344913ece4e2fe1dbc2db47afeb777c933abe2103f17acb115f7eafa39187d';
+      assert.equal(createHash('sha256').update(JSON.stringify(evidence)).digest('hex'), historical);
     }
   }
 });

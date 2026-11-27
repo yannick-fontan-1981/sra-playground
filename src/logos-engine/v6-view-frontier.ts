@@ -6,6 +6,7 @@ import { pythonEqual as same, pythonTruthy as truth } from './v6-operations.ts';
 import type { NativeRows, NativePublicObservation } from './v6-native-types.ts';
 import { selectViewStrategy, viewStrategies, viewStrategyGraph, type ViewNeedSituation, type ViewStrategy } from '../sic/view-strategy.ts';
 import { projectViewEdge, selectViewEdgeAccess, type ViewEdgeProjection, type ViewPoint, type ViewShiftHypothesis } from '../sic/view-edge-access.ts';
+import { bindViewObstruction, observedRepeatedStop, type ViewObstructionWitness } from '../sic/view-obstruction-trial.ts';
 type R = Record<string, any>;
 type P = ViewPoint;
 type Cells = Map<string, P>;
@@ -88,7 +89,7 @@ export class ViewFrontier {
   epoch: number | null = null; origin: P = [0, 0]; segment = 0; coverage: Cells = new Map();
   offsets = new Map<string, Cells>(); offsetSource = new Map<string, string>();
   footprints = new Map<string, Map<string, number[]>>(); passRefs = new Map<string, string[]>();
-  block: R | null = null; followup: R | null = null; tested = new Set<string>(); accessTrials = new Map<string, number>();
+  block: ViewObstructionWitness | null = null; followup: R | null = null; tested = new Set<string>(); accessTrials = new Map<string, number>();
   knownSignatures = new Set<string>(); reveals: R[] = []; engaged = false; visibleHypotheses = new Map<string, string>();
   private offsetSet(action: string): Cells { if (!this.offsets.has(action)) this.offsets.set(action, new Map()); return this.offsets.get(action)!; }
   private footprintSet(path: string): Map<string, number[]> { if (!this.footprints.has(path)) this.footprints.set(path, new Map()); return this.footprints.get(path)!; }
@@ -175,10 +176,12 @@ export class ViewFrontier {
     }
     if (this.block) {
       const block = this.block, witness = obs.entities.find((e: R) => e.signature === block.signature && same(e.position, block.position));
-      const posesOk = Object.entries(block.poses).every(([k, v]) => Object.hasOwn(current, k) && same(current[k].position, v));
-      if (witness && posesOk && same(this.origin, block.origin) && !this.tested.has(block.key)) {
+      const obstruction = bindViewObstruction(block, {
+        carrierPresent: !!witness, origin: this.origin, movers: current, tested: this.tested,
+      });
+      if (obstruction) {
         let command: R | undefined, kind: ViewStrategy;
-        if (block.fail_count === 1) { command = block.command; kind = 'confirm_access_obstruction'; }
+        if (!obstruction.repeated) { command = block.command; kind = 'confirm_access_obstruction'; }
         else {
           const candidates = inputs.filter(a => truth(a.data) && support(witness).has(key([a.data.x ?? null, a.data.y ?? null])));
           if (candidates.length === 1) command = candidates[0]!;
@@ -190,7 +193,7 @@ export class ViewFrontier {
             obstruction_key: block.key, carrier: { signature: block.signature, position: block.position },
             previous_clear_entry: true, stationary_trials: block.fail_count, exclusive_blocking_cause: false } };
         }
-        return propose({ ...situation, obstruction: { refs: block.refs, repeated: block.fail_count !== 1 } });
+        return propose({ ...situation, obstruction });
       }
       this.block = null;
     }
@@ -253,7 +256,7 @@ export class ViewFrontier {
     const us = uniqueViewEntities(after), ok = Object.entries(expected).every(([k, v]) => Object.hasOwn(us, k) && same(us[k].position, v));
     return { matched: ok, seal_prefix: !ok || index + 1 === proposal.steps.length, reason: ok ? 'screen_pose_matched' : 'screen_pose_diverged' };
   }
-  async record(before: R, after: R, command: R, first: NativeRows, second: NativeRows, proposal: R, index: number): Promise<R> {
+  async record(before: R, after: R, command: ViewObstructionWitness['command'], first: NativeRows, second: NativeRows, proposal: R, index: number): Promise<R> {
     this.initialize(before, first);
     if (after.level_epoch !== before.level_epoch || after.state !== before.state) { this.initialize(after, second); return { status: 'official_boundary', new_viewport_pixels: null }; }
     const registration = globalViewRegistration(before, after, first, second), offset: P | null = registration.offset, width = second[0]!.length, height = second.length;
@@ -292,8 +295,10 @@ export class ViewFrontier {
       this.block = null;
     } else if (kind === 'test_reopened_access') this.followup = null;
     else if (kind === 'confirm_access_obstruction' && this.block) {
-      const stopped = same(offset, [0, 0]) && Object.entries(this.block.poses).every(([k, p]) => Object.hasOwn(a, k) && same(a[k].position, p));
-      if (stopped) { this.block.fail_count++; this.block.refs.push(after.observation_ref); } else this.block = null;
+      if (observedRepeatedStop(this.block, offset, a)) {
+        this.block.fail_count++;
+        this.block.refs.push(after.observation_ref);
+      } else this.block = null;
     } else if (kind === 'approach_view_edge' && same(offset, [0, 0])) {
       const step = view.steps[index], poses = step.expected_poses_before, vector = view.details.access_vector as P;
       const cells = union(Object.keys(poses).filter(sig => Object.hasOwn(b, sig)).map(sig => support(b[sig]))), entry = difference(shiftedViewCells(cells, vector), cells);
