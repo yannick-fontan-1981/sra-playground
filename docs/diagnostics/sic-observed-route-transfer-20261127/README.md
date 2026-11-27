@@ -39,6 +39,20 @@ SIC_REPLAY_REFERENCES=docs/architecture/sic-replay-reference-levels-20261126.jso
 
 ## État de sauvegarde et limites
 
+### Deuxième strict : comparaison après restitution native
+
+La capture bornée depuis L1, source locale `44d96245` / distante `cc7886c8`, reproduit les cinq empreintes gagnantes du premier strict. Le premier geste du niveau 2 est réellement `ACTION1` par le rôle route : les rasters mesurent le curseur de la cellule 65 à 53 et le porteur de 13 à 25 ; le record suivant est confirmé. Ces positions sont mesurées dans les images avec la géométrie observée, sans employer les positions anticipées comme preuve. L'extrait `roundtrip-first-loss.public.json.gz` les conserve.
+
+Au niveau 6, le premier refus de priorité intervient au geste 8, global 101, juste après une ouverture confirmée. Rôle, compteur, dernière référence et `lastMatched=true` sont conservés. Le stockage natif a trié les clés de la grille ; la nouvelle grille contient les mêmes valeurs dans un ordre d'insertion différent. La comparaison de sérialisation échouait donc malgré une géométrie identique. Le correctif compare tous les champs et toutes les bornes, et les deux tests natifs vérifient maintenant la proposition suivant la clôture et la restitution de la mémoire.
+
+Le deuxième strict, source locale `f9dd5336ec201aa6af258c182c85e9e296700316` / distante `3d46bb50ebdb68cc1cbb49fbee0d34c67f074a53`, conserve les cinq préfixes gagnants et les mêmes plafonds. Il reste **5/6** : **117 commandes SIC**, arrêt du niveau 6 à **24 commandes / 18,000 s**, sans score final. Les huit dernières commandes conservées sont toutes du rôle route, dont les contacts locaux aux gestes 21 et 22. Les acquisitions finales et les récupérations restent inconnues après l'arrêt dur. `roundtrip-report.json` et les nouveaux bruts gzip distinguent ce second verdict du premier.
+
+La capture diagnostique s'arrête volontairement après le premier geste d'une autre famille au niveau cible. Son `canDispatch=false` produit un statut `error` dans BrowserV6Agent ; ce statut de coupure est conservé et explicitement étiqueté comme diagnostic, sans être compté comme un verdict de campagne.
+
+Le coût restant étudié est borné : une fois le premier mouvement annoncé du porteur revenu, cinq déplacements du curseur visent le même mur adjacent au porteur immobile, sans repère, avant le premier contact d'ouverture. Le premier mouvement autonome doit rester unitaire. Aucun nouveau score ni gain de temps n'est attribué à cette préparation avant son propre rejeu strict.
+
+### Premier lot sauvegardé
+
 - Branche : `fix/sic-27-observed-route-20261127`.
 - Commit du code local : `6a7a4dfee703f0c710d84c0c32f2205162370650`.
 - Commit GitHub vérifié : `11634ac48179bed4ab75e7c4b741d36e87549075`.

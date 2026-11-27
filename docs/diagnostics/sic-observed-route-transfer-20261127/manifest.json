@@ -1,12 +1,14 @@
 {
   "schema": "sic.observed-route-transfer.archive.v1",
-  "codeSource": "11634ac48179bed4ab75e7c4b741d36e87549075",
-  "codeTree": "98bc812f2b253a54247bd281c45e153a57dfead3",
+  "codeSources": [
+    "11634ac48179bed4ab75e7c4b741d36e87549075",
+    "3d46bb50ebdb68cc1cbb49fbee0d34c67f074a53"
+  ],
   "files": [
     {
       "path": "README.md",
-      "bytes": 5687,
-      "sha256": "34095796aeb6e71f82a80e5f214e9cc6d626850764bf3a869a65bf6682cb1ae2"
+      "bytes": 8193,
+      "sha256": "b973eb6af86d58dd8674b1db241ba022dd46366de70449516cef437ce10f974f"
     },
     {
       "path": "baseline.jsonl.gz",
@@ -26,6 +28,42 @@
       "path": "report.json",
       "bytes": 11686,
       "sha256": "14b13e2bd92125b5987611f28521f95c4e06d1871e2c5b0eeb355b6b9ef0d8ff"
+    },
+    {
+      "path": "roundtrip-first-loss.public.json.gz",
+      "bytes": 17656,
+      "sha256": "cfb926238f694c1d8ec5b9efb80ef0b633f8fbe7f710ad244ab2cd635d608047",
+      "decodedBytes": 461609,
+      "decodedSha256": "92e52c3c9175317014e95ec73ed5d7395f7a6b8ed54ae805272b29cab22299a7"
+    },
+    {
+      "path": "roundtrip-report.json",
+      "bytes": 8529,
+      "sha256": "83810640067d6187a687cba779d3a84b06d8df64942c81713e07cd9ff66f5015"
+    },
+    {
+      "path": "roundtrip-run.execution-end.json",
+      "bytes": 69,
+      "sha256": "427048cbcced9c8c6fc51b02a7b0217482fa6cfe90fd1b5957487a783ebb9ca6"
+    },
+    {
+      "path": "roundtrip-run.manifest.json",
+      "bytes": 1272,
+      "sha256": "df47e682b04be4783cd028ae55cff4812ad7c44052b8c4d540c1c1aad7bc0a34"
+    },
+    {
+      "path": "roundtrip-strict-results.jsonl.gz",
+      "bytes": 1364,
+      "sha256": "35a6ac1870ae527c0a440f4e1cce716e303f10a98a65e4304cfcbb169e0fe0f9",
+      "decodedBytes": 4425,
+      "decodedSha256": "ce8f923e21a65fe03c075eed754c60a92c4873d5bee2b9000aa42db2d9f51087"
+    },
+    {
+      "path": "roundtrip-strict-results.levels.jsonl.gz",
+      "bytes": 1154,
+      "sha256": "63f9cba85255804082fee8e4a9b821c6251fd543f2f373621f9565263f337dd8",
+      "decodedBytes": 3622,
+      "decodedSha256": "1d32007f2745f6b8bc512679c42ea780f1c43a96b34f45336b8e3c1ede7a3ec3"
     },
     {
       "path": "strict-results.jsonl.gz",
