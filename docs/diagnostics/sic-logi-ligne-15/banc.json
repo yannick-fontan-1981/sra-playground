@@ -1,0 +1,239 @@
+{
+  "compiler": "5.9.3",
+  "emissions": {
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021": {
+      "srcTree": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+      "moduleBlob": "b33b34b3bd6055d7e47711c3f8e06059ba3c74c4",
+      "bytes": 9977,
+      "sha256": "8178d156fa9d96a27f2d03384ad8585cb0cc01fef3758a69778d5200d445be48"
+    },
+    "7bf3c85a4183baf0dd535ca7c97d055bb6a0b958": {
+      "srcTree": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+      "moduleBlob": "b33b34b3bd6055d7e47711c3f8e06059ba3c74c4",
+      "bytes": 9977,
+      "sha256": "8178d156fa9d96a27f2d03384ad8585cb0cc01fef3758a69778d5200d445be48"
+    },
+    "48472784f1ee59b1117dddb53ef5c9fced929ec8": {
+      "srcTree": "0187a7fe110a6ac44354dce686fc10b07223b955",
+      "moduleBlob": "1440849cb4b5fabcdb1d51bf626b9e3e611fed06",
+      "bytes": 9977,
+      "sha256": "8178d156fa9d96a27f2d03384ad8585cb0cc01fef3758a69778d5200d445be48"
+    }
+  },
+  "fixtureHash": "9f2a049421405a35829214a44950ceb9a30e08c126ae052e32e53de459949158",
+  "inventoryBlob": "8db1c9128be69e2477dd5cb7957c654e2e251aa7",
+  "sources": {
+    "8ce7ee3563fa1d5eca1639c6ad03975cfc962460": "83a8082d0504aa69400dd6a513c3c4128fa4c578b92cc677fc34f1f9b902424d",
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021": "6506a3b93742349ba1ebabe4aa3c805392bb3980c50bcc74c631941a88c931a8",
+    "7bf3c85a4183baf0dd535ca7c97d055bb6a0b958": "591e38aab55f3ff04da60bdbdc824230ed0f8cf4b170e896cdd5710052407434",
+    "48472784f1ee59b1117dddb53ef5c9fced929ec8": "f78179634f5dde154bd3ae12ecaca3c32f26555cc23481da0cedbc6430624938"
+  },
+  "inventory": {
+    "LOGI": {
+      "commands": 16,
+      "stop": "session_action_budget",
+      "line15": 16,
+      "levelsCompleted": 2,
+      "firstTwo": [
+        {
+          "id": 6,
+          "data": {
+            "x": 49,
+            "y": 50
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 5,
+            "y": 50
+          }
+        }
+      ],
+      "trajectorySHA256": "2603403c3fc39f512beb5814c08b75e4274c0f2dcb179afae78a1e53eec19d13"
+    },
+    "REWI": {
+      "commands": 11,
+      "stop": "frontier_unknown",
+      "line15": 6,
+      "levelsCompleted": 1,
+      "firstTwo": [
+        {
+          "id": 6,
+          "data": {
+            "x": 34,
+            "y": 61
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 28,
+            "y": 61
+          }
+        }
+      ],
+      "trajectorySHA256": "4a241ccbd261ee22a84d91cc59481ec08effbb7ff44cf69409dd6bce2074c24e"
+    }
+  },
+  "historicalInventoryCount": 24,
+  "archiveSHA256": "8472f92a192ac77b700a85c20f2a6d37a5b801c79adb1938d8c3adad385c81a8",
+  "tests": {
+    "7bf3c85a": {
+      "sourceBackend": true,
+      "total": 118,
+      "passed": 118,
+      "sha256": "056c923975d3415c8ca87f363c94d9032264172af4c0f3bcc5e01603771fd615"
+    },
+    "48472784": {
+      "sourceBackend": true,
+      "total": 118,
+      "passed": 118,
+      "sha256": "1ae75ed42bfe397d802ae12c16317fe56949bc78df14e18362c6893bb46aefd0"
+    }
+  },
+  "frozenCampaign": {
+    "source": "4be368a365a6347fb551bb4c73dd5756413bb34e",
+    "frozen": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "evidence": "e36b550cfcaa79f5ee210694a8569cdf47265323",
+    "workflow": "abab3da60767b520ede320033e8091a0c0ee8414",
+    "run": "46051058377",
+    "games": 107,
+    "levels": 692,
+    "inheritedRows": {
+      "LOGI": {
+        "shard": "13",
+        "rowSHA256": "0e678c2eb370fb9a7eb103711fd5d613d5b92c1690f2a30c2a08d1f723a437bc",
+        "shardSHA256": "e5da7d5f71f032a015e6072a21b5b3c341495cc5cdfc88310c0d4c7705585892",
+        "nodeVersion": "v24.22.3",
+        "runnerOS": "Linux",
+        "runnerArch": "X64",
+        "runAttempt": "1",
+        "levels": 6,
+        "target": 6,
+        "actions": 30,
+        "authority": 30,
+        "recoveries": {
+          "reset": 0,
+          "undo": 0
+        },
+        "trace": "b3c796ba0d1d3c7a9659ee41229cdc7ec884885648bbc94d30b63c228f4cda3d",
+        "reason": "target_levels_completed",
+        "mode": "sic",
+        "parallelWorkers": 1,
+        "actionsPerLevel": [
+          2,
+          2,
+          3,
+          9,
+          5,
+          9
+        ],
+        "budgetsPerLevel": [
+          {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          }
+        ],
+        "families": {
+          "sic_display_coupling": 30
+        }
+      },
+      "REWI": {
+        "shard": "19",
+        "rowSHA256": "c3c105d901447bee9110b5385b74d2cdc13502bea147b4e08e49af1939281a88",
+        "shardSHA256": "7da86aa1c63b9c5126a758f65e232dff4ca119fbeb2abef6a80664ed5e0a8fa3",
+        "nodeVersion": "v24.22.3",
+        "runnerOS": "Linux",
+        "runnerArch": "X64",
+        "runAttempt": "1",
+        "levels": 6,
+        "target": 6,
+        "actions": 31,
+        "authority": 31,
+        "recoveries": {
+          "reset": 0,
+          "undo": 0
+        },
+        "trace": "4d436c65678db38e0ab4a753940ddfba737cecd3e9a68c69898bd6d42c021044",
+        "reason": "target_levels_completed",
+        "mode": "sic",
+        "parallelWorkers": 1,
+        "actionsPerLevel": [
+          3,
+          5,
+          3,
+          8,
+          7,
+          5
+        ],
+        "budgetsPerLevel": [
+          {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          }
+        ],
+        "families": {
+          "sic_follow_stable_reference": 31
+        }
+      }
+    }
+  },
+  "candidateTypecheck": {
+    "version": "5.9.3",
+    "command": "tsc --noEmit",
+    "errors": 0
+  }
+}
