@@ -1,5 +1,13 @@
 # WA30 : routes continues après disparition des porteurs perturbateurs
 
+## Troisième tentative stricte : dernière commande non exécutée au niveau 8
+
+Le candidat `3872019d` conserve les sept premiers niveaux puis atteint 134 commandes au L8 avant le watchdog de 103 000 ms, soit 546 commandes au total. Il reste non qualifié à 7/9 ; les plafonds 166 commandes et 103 000 ms n’ont pas changé. Le manifeste, la sortie stricte, le journal et les fermetures publiques incrémentales sont archivés sous ce préfixe.
+
+Une restitution diagnostique des commandes publiques, depuis le L1, retrouve les six images de refus strictes (commandes 69, 99, 100, 103, 107 et 108). Elle restaure uniquement la famille orientée au préfixe public 61 et poursuit les commandes réellement dispatchées : le L8 se termine à la commande 135. Ce diagnostic n’est pas un SIC complet et n’est pas chronométriquement qualifiant. Il infirme la piste d’une approche mémorisée arbitrairement unitaire : les derniers transports possèdent déjà leurs préfixes continus. La dernière commande est simplement le dépôt, après une translation à la commande 134.
+
+Deux pertes évitables restent documentées aux commandes 107 et 108. Une caisse se déplace avec son propriétaire unique, mais son contour devient l’indication de contact lorsqu’elle passe devant la face du joueur, puis retrouve son contour lié quand le joueur se tourne. La commande 99 avait déjà observé la disparition de cette indication sur une caisse déposée et restée immobile lorsque le joueur s’écarte. Le prochain candidat devra acquérir cette relation à partir du dépôt et du retrait réellement observés, puis la réutiliser uniquement devant la face actuelle et pour un couplage acquis sans ambiguïté. Les gardes sur les cellules visées restent nécessaires. Aucun succès complet n’est revendiqué.
+
 ## Nouvelle tentative stricte : sept niveaux, puis délai au niveau 8
 
 Le candidat `71a6680b` repart du L1 avec un seul SIC, un seul worker et les références originales inchangées. Il conserve exactement les sept premiers comptes : 26, 59, 76, 48, 113, 48 et 42 commandes. Le niveau 8 atteint cette fois 110 commandes avant le watchdog à 103 001 ms, pour un total de 522 commandes. Le plafond reste 166 commandes et 103 000 ms. Le candidat reste donc non qualifié ; le niveau 9 n’est pas atteint.
