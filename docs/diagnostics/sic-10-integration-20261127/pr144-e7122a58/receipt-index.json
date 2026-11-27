@@ -2,10 +2,256 @@
   "schema": "sic.integration-receipts.v1",
   "pr": 144,
   "head": "8fd38588ee11d7b051eadc7812def30f36b4f29b",
+  "base": "53480b31192831f15a5d0550eb72a3e699c43911",
   "testedMerge": "e7122a5887418212ca9a10ab39933e106d68f0c4",
   "tree": "ccacd144970cca821bf884e57bdc812670c04cbb",
-  "strictRunId": 46040162842,
+  "workflows": {
+    "strict": {
+      "runId": 46040162842,
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "name": "Strict replay / ETAG",
+          "conclusion": "success"
+        },
+        {
+          "name": "Strict replay / LF52",
+          "conclusion": "success"
+        },
+        {
+          "name": "Strict replay / WEAV",
+          "conclusion": "success"
+        },
+        {
+          "name": "Strict replay / SK48",
+          "conclusion": "success"
+        },
+        {
+          "name": "Strict replay / GRAV",
+          "conclusion": "success"
+        },
+        {
+          "name": "Strict replay / DC22",
+          "conclusion": "success"
+        },
+        {
+          "name": "Strict replay / CGWL",
+          "conclusion": "success"
+        },
+        {
+          "name": "Strict replay / WA30",
+          "conclusion": "success"
+        },
+        {
+          "name": "Strict replay / SPOR",
+          "conclusion": "success"
+        },
+        {
+          "name": "Strict replay / SNAR",
+          "conclusion": "success"
+        },
+        {
+          "name": "Original budgets on the combined source",
+          "conclusion": "failure",
+          "failedSteps": [
+            "Require all official completions within original budgets"
+          ]
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 15220895552,
+          "name": "sic-strict-e7122a5887418212ca9a10ab39933e106d68f0c4",
+          "sha256": "0ff918f72ca3395063ff12533b87f27c462408864d3bf8c6f6600e7aafa58f22"
+        },
+        {
+          "id": 15219861100,
+          "name": "sic-strict-part-e7122a5887418212ca9a10ab39933e106d68f0c4-CGWL",
+          "sha256": "627631537c116683c15121e7f48f37dad33daf5b7ad97af4fa4b122ed9a0fa25"
+        },
+        {
+          "id": 15219399645,
+          "name": "sic-strict-part-e7122a5887418212ca9a10ab39933e106d68f0c4-DC22",
+          "sha256": "ba5d771213bf569123ff88c62f633f3a0243300cae7ee6e07728351cea9ebb6d"
+        },
+        {
+          "id": 15218549134,
+          "name": "sic-strict-part-e7122a5887418212ca9a10ab39933e106d68f0c4-ETAG",
+          "sha256": "1dd9aecc180efed52078e63dd9d1d7ee124168c5f595a802cb625cbf6010dd11"
+        },
+        {
+          "id": 15220210700,
+          "name": "sic-strict-part-e7122a5887418212ca9a10ab39933e106d68f0c4-GRAV",
+          "sha256": "d2fb3c2e0ed734e1e14c8044a1121d744399caadaff7eeb87c47c45498f94eb4"
+        },
+        {
+          "id": 15221120160,
+          "name": "sic-strict-part-e7122a5887418212ca9a10ab39933e106d68f0c4-LF52",
+          "sha256": "5481de7ec45c53697771019e2f2e28505d47af1754b3253046d46625b68035f1"
+        },
+        {
+          "id": 15220245637,
+          "name": "sic-strict-part-e7122a5887418212ca9a10ab39933e106d68f0c4-SK48",
+          "sha256": "d3283f01319910d6929fb1410e546b8fa670bf627b529b917da9d85b6af58438"
+        },
+        {
+          "id": 15219584860,
+          "name": "sic-strict-part-e7122a5887418212ca9a10ab39933e106d68f0c4-SNAR",
+          "sha256": "5a7ac4c7f6a179971de83d8e4b1b0408e3a5c9a692bce1a66711945d95def3ea"
+        },
+        {
+          "id": 15220280887,
+          "name": "sic-strict-part-e7122a5887418212ca9a10ab39933e106d68f0c4-SPOR",
+          "sha256": "3aeaf37071da102b3e07ca345a413362d833a61f35a6253ad7711b4d84756fc0"
+        },
+        {
+          "id": 15219906764,
+          "name": "sic-strict-part-e7122a5887418212ca9a10ab39933e106d68f0c4-WA30",
+          "sha256": "a66c49e8f34a9eccb876bdaebe57f71163668ab9e1ea7bf2657f5c80e8701ae5"
+        },
+        {
+          "id": 15220346038,
+          "name": "sic-strict-part-e7122a5887418212ca9a10ab39933e106d68f0c4-WEAV",
+          "sha256": "78926fe536d813e6c3d333b7fa6ad08ae52dfd4936202b938a0fbdd1e52a50fc"
+        }
+      ]
+    }
+  },
   "strictGames": [
+    {
+      "code": "CGWL",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 167,
+      "commandsByLevel": [
+        15,
+        16,
+        15,
+        18,
+        61,
+        42
+      ]
+    },
+    {
+      "code": "DC22",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 630,
+      "commandsByLevel": [
+        22,
+        44,
+        45,
+        76,
+        185,
+        258
+      ]
+    },
+    {
+      "code": "ETAG",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 274,
+      "commandsByLevel": [
+        7,
+        35,
+        40,
+        46,
+        66,
+        80
+      ]
+    },
+    {
+      "code": "GRAV",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 80,
+      "commandsByLevel": [
+        11,
+        32,
+        6,
+        8,
+        13,
+        10
+      ]
+    },
+    {
+      "code": "LF52",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 10,
+      "levels": 10,
+      "actions": 713,
+      "commandsByLevel": [
+        8,
+        40,
+        46,
+        54,
+        99,
+        91,
+        148,
+        68,
+        112,
+        47
+      ]
+    },
+    {
+      "code": "SK48",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 8,
+      "levels": 8,
+      "actions": 348,
+      "commandsByLevel": [
+        19,
+        39,
+        33,
+        33,
+        33,
+        69,
+        80,
+        42
+      ]
+    },
+    {
+      "code": "SNAR",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 163,
+      "commandsByLevel": [
+        16,
+        24,
+        23,
+        36,
+        35,
+        29
+      ]
+    },
+    {
+      "code": "SPOR",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 121,
+      "commandsByLevel": [
+        14,
+        14,
+        17,
+        17,
+        29,
+        30
+      ]
+    },
     {
       "code": "WA30",
       "status": "stopped",
@@ -24,9 +270,171 @@
         135,
         60
       ]
+    },
+    {
+      "code": "WEAV",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 199,
+      "commandsByLevel": [
+        27,
+        28,
+        24,
+        40,
+        40,
+        40
+      ]
     }
   ],
+  "continuityReceived": {
+    "cohorts": 0,
+    "games": 0,
+    "levels": 0
+  },
+  "invalidReceiptLines": [],
   "files": [
+    {
+      "path": "strict/source.sha",
+      "rawSha256": "4266fc5e5db3a577d0c3da9523354c35481659ac97d596f559727f1578f2048d",
+      "rawBytes": 41
+    },
+    {
+      "path": "strict/strict.jsonl.gz",
+      "rawSha256": "18dfe71be9a3bb631e9cc0e283e03a8fa815240956c9a6e2a0f1846dbc412db4",
+      "rawBytes": 466870
+    },
+    {
+      "path": "strict/strict.jsonl.levels.gz",
+      "rawSha256": "7f83f68abf711f6bd91ab1f3fef65959885faa30df5614356b9d9487ba369699",
+      "rawBytes": 44676
+    },
+    {
+      "path": "strict/github-failed-steps.log.gz",
+      "rawSha256": "8fe475bac425eeb650cab0b6c2ccdcf9175d84374b5da2d00cab29e50693b919",
+      "rawBytes": 14482
+    },
+    {
+      "path": "strict/parts/CGWL/source.sha",
+      "rawSha256": "4266fc5e5db3a577d0c3da9523354c35481659ac97d596f559727f1578f2048d",
+      "rawBytes": 41
+    },
+    {
+      "path": "strict/parts/CGWL/strict.jsonl.gz",
+      "rawSha256": "658b044d9a6805e3938eaf8374c8339511af7969f71030b7c092c7b8b460de1f",
+      "rawBytes": 27295
+    },
+    {
+      "path": "strict/parts/CGWL/strict.jsonl.levels.gz",
+      "rawSha256": "e10fa0f198d3cc012b362d409d6ed61c12d6004a42d2208e5182854137d1915d",
+      "rawBytes": 4012
+    },
+    {
+      "path": "strict/parts/DC22/source.sha",
+      "rawSha256": "4266fc5e5db3a577d0c3da9523354c35481659ac97d596f559727f1578f2048d",
+      "rawBytes": 41
+    },
+    {
+      "path": "strict/parts/DC22/strict.jsonl.gz",
+      "rawSha256": "73b2a4d48bf68a9e9fb3290a3a92b99112cc2ad22f5ac38dc1c25932e7a95281",
+      "rawBytes": 95063
+    },
+    {
+      "path": "strict/parts/DC22/strict.jsonl.levels.gz",
+      "rawSha256": "f4a52753af2809a32d0d6964e028f41022758dcaca33ac3eea01f0d46c406762",
+      "rawBytes": 4072
+    },
+    {
+      "path": "strict/parts/ETAG/source.sha",
+      "rawSha256": "4266fc5e5db3a577d0c3da9523354c35481659ac97d596f559727f1578f2048d",
+      "rawBytes": 41
+    },
+    {
+      "path": "strict/parts/ETAG/strict.jsonl.gz",
+      "rawSha256": "c0f82aa7cc535d7e0717238b21a881c6c31924e6848e711ad07d2de9b9369586",
+      "rawBytes": 39892
+    },
+    {
+      "path": "strict/parts/ETAG/strict.jsonl.levels.gz",
+      "rawSha256": "5dac4d95eb0250966fcc5a4cb2b7058be9b39fe438ac04d2d8f5c9d22f30d5d2",
+      "rawBytes": 3182
+    },
+    {
+      "path": "strict/parts/GRAV/source.sha",
+      "rawSha256": "4266fc5e5db3a577d0c3da9523354c35481659ac97d596f559727f1578f2048d",
+      "rawBytes": 41
+    },
+    {
+      "path": "strict/parts/GRAV/strict.jsonl.gz",
+      "rawSha256": "54387488955f3c2bf88c83f89096d54af4f0760840304b35cfa15cde0470a8f6",
+      "rawBytes": 16420
+    },
+    {
+      "path": "strict/parts/GRAV/strict.jsonl.levels.gz",
+      "rawSha256": "f27cd4be6b35969f32c7769cbad123466dff9a43e1f5164055c6482fb9d77ef9",
+      "rawBytes": 3980
+    },
+    {
+      "path": "strict/parts/LF52/source.sha",
+      "rawSha256": "4266fc5e5db3a577d0c3da9523354c35481659ac97d596f559727f1578f2048d",
+      "rawBytes": 41
+    },
+    {
+      "path": "strict/parts/LF52/strict.jsonl.gz",
+      "rawSha256": "f92f6241401a5eadb6842d578d03424b30d00d6fc74ec094408a596f1ec04537",
+      "rawBytes": 136959
+    },
+    {
+      "path": "strict/parts/LF52/strict.jsonl.levels.gz",
+      "rawSha256": "5bc4b1048440cbf0f265e889adf5ba8a3c047a9603f1cfa2d213b6007df3bea5",
+      "rawBytes": 6603
+    },
+    {
+      "path": "strict/parts/SK48/source.sha",
+      "rawSha256": "4266fc5e5db3a577d0c3da9523354c35481659ac97d596f559727f1578f2048d",
+      "rawBytes": 41
+    },
+    {
+      "path": "strict/parts/SK48/strict.jsonl.gz",
+      "rawSha256": "61953b17da4d3fb682010afb5df1aee95f19a689bc03903c7371ebc8e5e3d137",
+      "rawBytes": 61314
+    },
+    {
+      "path": "strict/parts/SK48/strict.jsonl.levels.gz",
+      "rawSha256": "7a2e6673306c20e8f23ed3c449ae7a31208d457c3d117137eaa879a825b1c3dd",
+      "rawBytes": 5241
+    },
+    {
+      "path": "strict/parts/SNAR/source.sha",
+      "rawSha256": "4266fc5e5db3a577d0c3da9523354c35481659ac97d596f559727f1578f2048d",
+      "rawBytes": 41
+    },
+    {
+      "path": "strict/parts/SNAR/strict.jsonl.gz",
+      "rawSha256": "d074f407810705fdcca8175466f3fb621ffea86065c5981483a943df291480e9",
+      "rawBytes": 25371
+    },
+    {
+      "path": "strict/parts/SNAR/strict.jsonl.levels.gz",
+      "rawSha256": "f751be2ca118332b056c09def8f8af7ad4a830713df520043d7ef67c1640f0d1",
+      "rawBytes": 4016
+    },
+    {
+      "path": "strict/parts/SPOR/source.sha",
+      "rawSha256": "4266fc5e5db3a577d0c3da9523354c35481659ac97d596f559727f1578f2048d",
+      "rawBytes": 41
+    },
+    {
+      "path": "strict/parts/SPOR/strict.jsonl.gz",
+      "rawSha256": "61aed1bbff5b26536f3c41ce0bc7f473b1dbd30b5b658e15c3326b6a1f0ceb8b",
+      "rawBytes": 25405
+    },
+    {
+      "path": "strict/parts/SPOR/strict.jsonl.levels.gz",
+      "rawSha256": "fe11e92785bf943af3236d3ea03904035880380024dd9ec53b41559a6016e706",
+      "rawBytes": 4005
+    },
     {
       "path": "strict/parts/WA30/source.sha",
       "rawSha256": "4266fc5e5db3a577d0c3da9523354c35481659ac97d596f559727f1578f2048d",
@@ -41,6 +449,21 @@
       "path": "strict/parts/WA30/strict.jsonl.levels.gz",
       "rawSha256": "3962b772f31463acd29bd57b28687c579a86a3f512a4671decce611a49e5ea22",
       "rawBytes": 5551
+    },
+    {
+      "path": "strict/parts/WEAV/source.sha",
+      "rawSha256": "4266fc5e5db3a577d0c3da9523354c35481659ac97d596f559727f1578f2048d",
+      "rawBytes": 41
+    },
+    {
+      "path": "strict/parts/WEAV/strict.jsonl.gz",
+      "rawSha256": "20588f5533f73bb033b71e7436d183cbff3e3c6e0d84067b6e6d58759de351e4",
+      "rawBytes": 32893
+    },
+    {
+      "path": "strict/parts/WEAV/strict.jsonl.levels.gz",
+      "rawSha256": "3fd698a5c13f2758f32eed29f248ba3efe2c44f936eb6fe48e97996c406e9114",
+      "rawBytes": 4014
     }
   ]
 }
