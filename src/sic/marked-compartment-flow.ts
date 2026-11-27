@@ -2,6 +2,7 @@ import { measureContextualCompartments } from '../logos-engine/v6-contextual-com
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
+import { publicCompletionFrames } from './observed-role-completion.ts';
 
 export const markedCompartmentFlowId = 'sic_follow_observed_compartment_readiness';
 export const markedCompartmentStrategies = {
@@ -12,11 +13,13 @@ export const markedCompartmentStrategies = {
 
 type Chamber = { box: NativeBox; point: NativePoint; filled: number; contents: [number, number][] };
 type Scene = { frames: Chamber[]; marked: Chamber[]; mark: number; normal: number; background: number; key: string };
+type OutletControl = { box: NativeBox; offset: NativePoint; pattern: number[][] };
+type OutletRelease = { box: NativeBox; pigments: number[]; empty: number[] };
 type Witness = { epoch: number; mark: number; normal: number; background: number; chambers: NativeBox[]; wins?: number;
-  outlet: NativeBox; refs: [string, string]; concurrentDelivery?: true };
+  outlet: NativeBox; refs: [string, string]; concurrentDelivery?: true; control?: OutletControl };
 type Flow = { sources: NativeBox[]; used: number[]; pending?: { chamber: Chamber; waits: number } };
 type Proposal = NativeProposal & { changedRegion: NativeBox; concurrentRegion?: NativeBox; attempt: string; needId: string;
-  flow?: Flow; source?: number; startBatch?: true; startProcess?: Chamber; delivery?: true; wait?: true };
+  flow?: Flow; source?: number; startBatch?: true; startProcess?: Chamber; delivery?: true; wait?: true; release?: OutletRelease };
 
 const boxKey = (box: NativeBox) => box.join(',');
 const contains = ([left, top, right, bottom]: NativeBox, [x, y]: NativePoint) => x >= left && x <= right && y >= top && y <= bottom;
@@ -33,7 +36,7 @@ function sameChamberSite(a: NativeBox, b: NativeBox): boolean {
   return width > 0 && height > 0 && width * height * 2 >= Math.max(area(a), area(b));
 }
 
-function continuationOf(scene: Scene, memory: Witness): boolean {
+function continuationOf(scene: Scene, memory: Pick<Witness, 'normal' | 'background' | 'chambers'>): boolean {
   if (scene.normal !== memory.normal || scene.background !== memory.background) return false;
   const matched = new Set<NativeBox>();
   for (const chamber of scene.frames) {
@@ -91,9 +94,60 @@ function changed(first: NativeRows, second: NativeRows, [left, top, right, botto
   return false;
 }
 
+function compartmentPattern(rows: NativeRows, [left, top, right, bottom]: NativeBox): number[][] {
+  return rows.slice(top, bottom + 1).map(row => [...row.slice(left, right + 1)]);
+}
+
+function outletControl(scene: Scene, witness: Witness, choice: Chamber, rows: NativeRows) {
+  const remembered = witness.control;
+  if (!remembered || !choice.filled || !sameChamberSite(choice.box, witness.outlet)) return { choice, controlBox: choice.box };
+  if (scene.marked.filter(chamber => sameChamberSite(chamber.box, witness.outlet)).length !== 1) return null;
+  const candidates = scene.frames.filter(chamber => sameChamberSite(chamber.box, remembered.box)
+    && chamber.box[2] - chamber.box[0] === remembered.box[2] - remembered.box[0]
+    && chamber.box[3] - chamber.box[1] === remembered.box[3] - remembered.box[1]
+    && remembered.pattern.every((line, y) => line.every((value, x) => rows[chamber.box[1] + y]?.[chamber.box[0] + x] === value)));
+  if (candidates.length !== 1) return null;
+  const control = candidates[0]!, point: NativePoint = [control.box[0] + remembered.offset[0], control.box[1] + remembered.offset[1]];
+  return { choice: { ...choice, point }, controlBox: control.box,
+    release: { box: choice.box, pigments: choice.contents.map(([pigment]) => pigment), empty: [scene.background, scene.normal, scene.mark] } };
+}
+
+function releaseConfirmed(first: NativeRows, second: NativeRows, release: OutletRelease): boolean {
+  const [left, top, right, bottom] = release.box;
+  let lost = 0, beforeCount = 0, afterCount = 0;
+  for (let y = top + 1; y < bottom; y++) for (let x = left + 1; x < right; x++) {
+    const before = first[y]?.[x], after = second[y]?.[x];
+    if (before === undefined || after === undefined) return false;
+    beforeCount += Number(release.pigments.includes(before));
+    afterCount += Number(release.pigments.includes(after));
+    if (before !== after && !release.pigments.includes(after) && !release.empty.includes(after)) return false;
+    if (!release.pigments.includes(before) || before === after) continue;
+    if (!release.empty.includes(after)) return false;
+    lost++;
+  }
+  return lost > 0 && afterCount < beforeCount;
+}
+
+async function releasedMarkedOutlet(scene: Scene, before: NativeObservation, after: NativeObservation,
+  second: NativeRows, frames: readonly NativeRows[]) {
+  const candidates = scene.marked.filter(chamber => chamber.filled > 0), released = new Set<Chamber>();
+  if (!candidates.length) return null;
+  const anchors = { normal: scene.normal, background: scene.background, chambers: scene.frames.map(chamber => chamber.box) };
+  for (const rows of publicCompletionFrames(before, after, second, frames)) {
+    const returned = await measureContextualCompartments(rows, scene.mark) as Scene | null;
+    if (!returned || !continuationOf(returned, anchors)) continue;
+    for (const candidate of candidates) {
+      const matched = returned.frames.filter(chamber => sameChamberSite(chamber.box, candidate.box));
+      if (matched.length === 1 && matched[0]!.filled === 0) released.add(candidate);
+    }
+  }
+  return released.size === 1 ? [...released][0]! : null;
+}
+
 export async function acquireMarkedOutlet(witness: Witness | null, before: NativeObservation, after: NativeObservation,
-  command: NativeCommand, first: NativeRows): Promise<Witness | null> {
+  command: NativeCommand, first: NativeRows, second: NativeRows = first, frames: readonly NativeRows[] = []): Promise<Witness | null> {
   if (after.levels_completed <= before.levels_completed || command.action_ref !== 'ACTION6' || !acceptsPoint(before)) return witness;
+  if (witness?.refs[0] === before.observation_ref && witness.refs[1] === after.observation_ref) return witness;
   const { x, y } = command.data;
   if (typeof x !== 'number' || typeof y !== 'number') return witness;
   const prior = witness?.epoch === before.level_epoch ? witness : null;
@@ -102,12 +156,21 @@ export async function acquireMarkedOutlet(witness: Witness | null, before: Nativ
   const scene = measured ?? (transferred && prior && continuationOf(transferred, prior) ? transferred : null);
   if (!scene) return witness;
   const candidates = scene.marked.filter(chamber => chamber.filled && contains(chamber.box, [x, y]));
-  if (candidates.length !== 1) return witness;
-  const outlet = candidates[0]!;
+  if (candidates.length > 1) return witness;
+  let outlet = candidates[0], control: OutletControl | undefined;
+  if (!outlet) {
+    const operated = scene.frames.filter(chamber => contains(chamber.box, [x, y]));
+    if (operated.length !== 1) return witness;
+    outlet = await releasedMarkedOutlet(scene, before, after, second, frames) ?? undefined;
+    if (!outlet || sameChamberSite(outlet.box, operated[0]!.box)) return witness;
+    const box = operated[0]!.box;
+    control = { box, offset: [x - box[0], y - box[1]], pattern: compartmentPattern(first, box) };
+  }
   const repeated = witness?.epoch === before.level_epoch && continuationOf(scene, witness) && sameChamberSite(witness.outlet, outlet.box);
   return { epoch: after.level_epoch, mark: scene.mark, normal: scene.normal, background: scene.background,
     chambers: scene.frames.map(chamber => chamber.box), outlet: outlet.box, wins: repeated ? (witness?.wins ?? 1) + 1 : 1,
-    refs: [before.observation_ref, after.observation_ref], ...(scene.marked.length > 1 ? { concurrentDelivery: true } : {}) };
+    refs: [before.observation_ref, after.observation_ref], ...(control ? { control } : {}),
+    ...(scene.marked.length > 1 ? { concurrentDelivery: true } : {}) };
 }
 
 export async function projectRecalledOutlet(witness: Witness, observation: NativeObservation, rows: NativeRows, attempted: readonly string[]) {
@@ -120,12 +183,13 @@ export async function projectRecalledOutlet(witness: Witness, observation: Nativ
     + 4 * Number(chamber.filled > 0 && sameChamberSite(chamber.box, witness.outlet));
   const choice = scene.marked.filter(chamber => !attempted.includes(attemptFor(chamber)))
     .sort((a, b) => rank(b) - rank(a) || (order ? order(b) - order(a) : 0) || a.box[0] - b.box[0] || a.box[1] - b.box[1])[0];
-  return choice ? { choice, outlet: witness.outlet, evidence: witness.refs, region: localRegion(choice.box, rows),
-    attempt: attemptFor(choice), novelty: !attempted.length && scene.marked.length > 1 } : null;
+  const selected = choice && outletControl(scene, witness, choice, rows);
+  return selected ? { ...selected, outlet: witness.outlet, evidence: witness.refs, region: localRegion(choice!.box, rows),
+    attempt: attemptFor(choice!), novelty: !attempted.length && scene.marked.length > 1 } : null;
 }
 
-export function checkRecalledOutlet({ region }: NonNullable<Awaited<ReturnType<typeof projectRecalledOutlet>>>, first: NativeRows, second: NativeRows) {
-  return changed(first, second, region);
+export function checkRecalledOutlet({ region, release }: NonNullable<Awaited<ReturnType<typeof projectRecalledOutlet>>>, first: NativeRows, second: NativeRows) {
+  return release ? releaseConfirmed(first, second, release) : changed(first, second, region);
 }
 
 export function createSicMarkedCompartmentFlow(): NativeFamily<Proposal> {
@@ -134,8 +198,8 @@ export function createSicMarkedCompartmentFlow(): NativeFamily<Proposal> {
   let flow: Flow | null = null;
   return {
     id: markedCompartmentFlowId,
-    async observePublicOutcome(before, after, command, first) {
-      const observed = await acquireMarkedOutlet(witness, before, after, command, first);
+    async observePublicOutcome(before, after, command, first, second, frames = []) {
+      const observed = await acquireMarkedOutlet(witness, before, after, command, first, second, frames);
       if (observed === witness) return;
       witness = observed;
       attempted = [];
@@ -164,6 +228,8 @@ export function createSicMarkedCompartmentFlow(): NativeFamily<Proposal> {
       const pending = batching?.pending, wait = !marked && pending && pending.waits < 2;
       const choice = marked ?? (wait ? pending.chamber : null);
       if (!choice) return null;
+      const selected = outletControl(scene, memory, choice, rows);
+      if (!selected) return null;
       const concurrent = !wait && downstream && available(choice)
         ? scene.marked.find(chamber => !available(chamber) && downstream(chamber) > downstream(choice)) : null;
       const strategy = wait ? 'advance_marked_process' : isOutlet(choice) ? 'deliver_from_confirmed_outlet'
@@ -172,16 +238,17 @@ export function createSicMarkedCompartmentFlow(): NativeFamily<Proposal> {
       const situation = concurrent ? 'Use an available input this turn and check the downstream compartment at the same time.' : label;
       const ref = observation.observation_ref, parent = 'G_official_completion';
       const evidence: [string, ...string[]] = [ref, ...memory.refs.filter(value => value !== ref)];
-      const [x, y] = choice.point;
+      const [x, y] = selected.choice.point;
       const action: NativeCommand = wait ? { action_ref: 'ACTION5', data: {} } : { action_ref: 'ACTION6', data: { x, y } };
       const actions = [action];
-      const pointBinding = wait ? null : await ObservedInputDomain.makeLocusWitness(observation, rows, choice.point, { reason: label, evidence });
+      const pointBinding = wait ? null : await ObservedInputDomain.makeLocusWitness(observation, rows, selected.choice.point, { reason: label, evidence });
       const goal = { kind: 'maintain_flow_toward_confirmed_outlet', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['marked_control', 'previous_scoring_outlet'], parentObjective: parent,
         satisfactionContract: 'confirm_local_transition_then_official_delivery' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `marked-compartment:${need.id}`;
       return { status: 'proposed', kind: markedCompartmentFlowId, actions, changedRegion: localRegion(choice.box, rows),
+        ...(selected.release ? { release: selected.release } : {}),
         ...(batching ? { flow: batching, source: sourceAt(choice),
           ...(!wait && startsBatch(choice) ? { startBatch: true } : {}),
           ...(!wait && choice.contents.filter(([ink]) => ink !== scene.normal).length > 1 ? { startProcess: choice } : {}),
@@ -192,7 +259,7 @@ export function createSicMarkedCompartmentFlow(): NativeFamily<Proposal> {
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, need: 'Advance material toward the outlet that led to progress',
           situation, mode: strategy === 'deliver_from_confirmed_outlet' ? 'solving' : 'assimilation',
-          agenda: [], evidence, chamber: choice.box, outlet: memory.outlet, ...(concurrent ? { concurrent: concurrent.box } : {}) },
+          agenda: [], evidence, chamber: selected.controlBox, outlet: memory.outlet, ...(concurrent ? { concurrent: concurrent.box } : {}) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },
@@ -207,17 +274,18 @@ export function createSicMarkedCompartmentFlow(): NativeFamily<Proposal> {
       if (after.levels_completed > before.levels_completed) {
         return { matched: true, seal_prefix: true, reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
       }
-      const matched = before.level_epoch === after.level_epoch && changed(first, second, proposal.changedRegion);
+      const matched = before.level_epoch === after.level_epoch && (proposal.release
+        ? releaseConfirmed(first, second, proposal.release) : changed(first, second, proposal.changedRegion));
       const concurrent = matched && proposal.concurrentRegion && changed(first, second, proposal.concurrentRegion);
       return { matched, seal_prefix: true, reason: concurrent ? 'input_and_downstream_change_observed'
         : matched ? 'local_compartment_change_observed' : 'no_local_compartment_change' };
     },
-    async record(before, after, command, first, second, proposal) {
-      if (after.levels_completed > before.levels_completed) await this.observePublicOutcome!(before, after, command, first, second);
+    async record(before, after, command, first, second, proposal, _index, frames = []) {
+      if (after.levels_completed > before.levels_completed) await this.observePublicOutcome!(before, after, command, first, second, frames);
       else {
         attempted = [...attempted, proposal.attempt];
         if (proposal.flow) {
-          const confirmed = changed(first, second, proposal.changedRegion);
+          const confirmed = proposal.release ? releaseConfirmed(first, second, proposal.release) : changed(first, second, proposal.changedRegion);
           const used = confirmed && proposal.startBatch ? [] : confirmed && (proposal.source ?? -1) >= 0
             ? [...proposal.flow.used, proposal.source!] : proposal.flow.used;
           const previous = proposal.flow.pending;
