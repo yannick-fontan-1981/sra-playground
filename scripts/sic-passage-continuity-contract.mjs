@@ -3,6 +3,9 @@ import { continuityObservation, requireExecutedPrefix } from './sic-continuity-c
 import { passageOwners } from './sic-passage-continuity.mjs';
 
 export const passageCeilings = [21, 23, 32, 22, 22, 21];
+// Actual [commands, continued walks, continued neutral-passage walks],
+// chronological 4034654d / GitHub 4b611313, 2026-11-27.
+export const passageContinuity = [[16, 10, 0], [18, 12, 12], [26, 17, 17], [19, 11, 11], [19, 10, 10], [18, 5, 5]];
 const direction = { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0] };
 const samePoint = (a, b) => Array.isArray(a) && Array.isArray(b) && a.length === 2 && b.length === 2
   && a.every((value, axis) => Number.isSafeInteger(value) && value === b[axis]);
@@ -34,6 +37,7 @@ export function measurePassageContinuity(run, issued, groups) {
       const p = ticket.passage, effect = effects.get(ticket), before = continuityObservation(p.beforeRef), after = continuityObservation(p.afterRef);
       const move = direction[ticket.action];
       assert.ok(p.role === 'walk' && p.strategy === 'P07' && move
+        && typeof p.neutral === 'boolean' && p.neutral === group[0].passage.neutral
         && Number.isSafeInteger(p.pitch) && p.pitch > 0 && p.levelEpoch === ticket.level
         && p.scoreBefore === ticket.level - 1 && before && after && before.scope === after.scope
         && before.epoch === p.levelEpoch && after.revision > before.revision
@@ -67,6 +71,26 @@ export function measurePassageContinuity(run, issued, groups) {
       }
     }
     const first = issued.indexOf(group[0]);
+    const last = group.at(-1);
+    if (last.outcome.reason !== 'official_boundary' && group.length < 16) {
+      const contact = issued[first + group.length], q = contact?.passage, effect = effects.get(contact);
+      const returned = continuityObservation(q?.afterRef), before = continuityObservation(last.passage.afterRef);
+      assert.ok(contact?.actionIndex === 0 && passageOwners.has(contact.outcome?.family)
+        && ['crossing', 'switch'].includes(q?.role) && contact.outcomeCount === 1
+        && contact.outcome.matched === true && contact.sealCount === 1 && contact.sealed === 1
+        && q.beforeRef === last.passage.afterRef && q.afterRef === contact.outcome.observation_ref
+        && samePoint(q.actorBefore, last.passage.actorAfter) && q.contextBefore === last.passage.contextAfter
+        && returned && returned.scope === before.scope && returned.revision > before.revision
+        && contact.level === last.level && q.levelEpoch === contact.level && before.epoch === q.levelEpoch
+        && q.scoreBefore === last.passage.scoreAfter
+        && (contact.outcome.reason === 'official_boundary'
+          ? q.scoreAfter === q.scoreBefore + 1 && [q.levelEpoch, q.levelEpoch + 1].includes(returned.epoch)
+          : q.scoreAfter === q.scoreBefore && returned.epoch === q.levelEpoch)
+        && effect?.a === Number(contact.action.slice(6))
+        && effect.family === contact.outcome.family && effect.pixels > 0
+        && effect.from === before.frame && effect.to === returned.frame,
+      'PORT continuous approach lost the separate actual passage contact');
+    }
     series.push({ kind: 'known walking between passage contacts', first, last: first + group.length - 1,
       neutral: group[0].passage.neutral === true, continued: group.length - 1 });
   }
