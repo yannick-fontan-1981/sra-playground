@@ -1,0 +1,97 @@
+{
+  "code": "LF52",
+  "target": 6,
+  "mode": "sic",
+  "parallelWorkers": 1,
+  "recoveries": {
+    "reset": 0,
+    "undo": 0
+  },
+  "resumes": 280,
+  "gaps": {
+    "continued": {
+      "count": 46,
+      "median": 51
+    },
+    "boundary": {
+      "count": 280,
+      "median": 533
+    }
+  },
+  "series": [
+    8,
+    2,
+    8,
+    5,
+    9,
+    8,
+    3,
+    3,
+    8,
+    2
+  ],
+  "pathKinds": [
+    {
+      "length": 8,
+      "type": "click"
+    },
+    {
+      "length": 2,
+      "type": "move"
+    },
+    {
+      "length": 8,
+      "type": "move"
+    },
+    {
+      "length": 5,
+      "type": "move"
+    },
+    {
+      "length": 9,
+      "type": "move"
+    },
+    {
+      "length": 8,
+      "type": "move"
+    },
+    {
+      "length": 3,
+      "type": "move"
+    },
+    {
+      "length": 3,
+      "type": "move"
+    },
+    {
+      "length": 8,
+      "type": "move"
+    },
+    {
+      "length": 2,
+      "type": "move"
+    }
+  ],
+  "actions": 327,
+  "levels": 5,
+  "reason": "level_action_budget",
+  "status": "stopped",
+  "trace": "5c4cd7eb4624852b017e9523a6d9891fa795220c1728718f683cd8139f6d6ca0",
+  "qualification": "Diagnostic only: original reference override omitted; L6 used fallback 80 commands / 90000 ms. First loss at command 32 is within both original and fallback limits.",
+  "baseline_source": "22e60471623fde25bde050ae633e54417f878a2b plus unrelated oriented-delivery candidate",
+  "first_loss": {
+    "level": 6,
+    "command": 32,
+    "global_command": 279,
+    "chosen_family": "sic_test_prepared_effects",
+    "chosen_strategy": "investigateContactFrontier",
+    "pending_role": "retained carrier reduction plan",
+    "current_reference": true,
+    "previous_return_confirmed": true
+  },
+  "artifact": {
+    "file": "first-preemption.json.gz",
+    "sha256": "d8166307b1f56636da3f41e4b794a747e3980ca4d6f01f1485b2257ab62b9fd4",
+    "bytes": 13602
+  }
+}

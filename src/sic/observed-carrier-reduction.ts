@@ -8,6 +8,7 @@ import { sicNeedId } from './need-identity.ts';
 import { acquireCarrierView, carrierView, reconcileCarrierTraffic, unpackCarrierView,
   type CarrierBoundaryTraffic, type CarrierView } from './carrier-camera.ts';
 import { maximumCommittedActions } from './plan-step.ts';
+import { observedPressureRecoveryGroup } from './public-input-exploration.ts';
 
 export const observedCarrierReductionId = 'sic_transport_and_reduce_visible_population';
 export const observedCarrierStrategies = {
@@ -209,6 +210,13 @@ export function createSicObservedCarrierReduction(): NativeFamily<Proposal> {
   let recalled: RecalledControls | null = null;
   return {
     id: observedCarrierReductionId,
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group !== observedPressureRecoveryGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      if (!state || state.epoch !== observation.level_epoch || state.stopped
+        || state.refs.at(-1) !== observation.observation_ref || !state.segment?.path.length) return null;
+      const proposal = await this.propose(observation, rows, inputs, remaining, execution);
+      return proposal && proposal.choice.effect && proposal.choice.stage !== 'probe' && !proposal.choice.peerTrial ? proposal : null;
+    },
     observePublicOutcome(before, after, command, first, second) {
       if (command.action_ref !== 'ACTION6') return;
       if (calibration?.epoch !== before.level_epoch) {
