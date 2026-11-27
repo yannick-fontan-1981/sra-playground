@@ -4,7 +4,7 @@
 import { ObservedInputDomain } from './v6-native-observer.ts';
 import { symbolicDigest as digest } from './v6-hash.ts';
 import { ControlDependencies } from './v6-transition-learning.ts';
-import { assessHypothesisPartition } from '../sic/discriminating-experiment.ts';
+import { selectSubsetQuery, subsetQuerySplit, type SubsetClick, type SubsetQueryOffer } from '../sic/subset-query.ts';
 import { supportParts as components, supportBox as bounds, supportCompare as compare, supportSame as same } from './v6-support-measurements.ts';
 import type { NativeAfterResult, NativeBeforeResult, NativeFamily, NativeRows } from './v6-native-types.ts';
 type R=Record<string,any>;
@@ -82,25 +82,26 @@ export class SubsetDiagnosis implements NativeFamily<any>{
   return{status:'subset_navigation_or_unknown',events:this.events};
  }
  async propose(obs:R,rows:NativeRows,_inputs:readonly any[],remaining:number):Promise<any>{
-  if(!this.policy.enabled||!obs.available_action_refs.includes('ACTION6')||!this.press_shapes.length||remaining<1)return null;const scene=measureSubsetScene(rows);if(!scene)return null;this.resetDomain(obs,scene);const candidates=sorted(this.candidates!),offers:any[][]=[],controls=scene.controls.filter((c:R)=>hasShape(this.press_shapes,c.shape));
-  const commandAt=(b:number[]):R=>({action_ref:'ACTION6',data:{x:Math.floor((b[0]!+b[2]!)/2),y:Math.floor((b[1]!+b[3]!)/2)}});
+  if(!this.policy.enabled||!obs.available_action_refs.includes('ACTION6')||!this.press_shapes.length||remaining<1)return null;const scene=measureSubsetScene(rows);if(!scene)return null;this.resetDomain(obs,scene);const candidates=sorted(this.candidates!),offers:SubsetQueryOffer[]=[],controls=scene.controls.filter((c:R)=>hasShape(this.press_shapes,c.shape));
+  const commandAt=(b:number[]):SubsetClick=>({action_ref:'ACTION6',data:{x:Math.floor((b[0]!+b[2]!)/2),y:Math.floor((b[1]!+b[3]!)/2)}});
   for(const c of controls){
    const tested:number[]=scene.scope_members[c.color],inside=candidates.filter(i=>tested.includes(i)).length;
    if(!inside||inside===candidates.length&&tested.length>1||this.tested.has(key([candidates,tested])))continue;
-   const partition=assessHypothesisPartition([inside,candidates.length-inside])!;
-   offers.push([partition.remaining,0,tested,commandAt(c.bbox),c.shape]);
+   offers.push({ kind: 'scope', tested, command: commandAt(c.bbox), controlShape: c.shape,
+     ...subsetQuerySplit(inside, candidates.length) });
   }
   const nav:any[][]=[];if(!offers.length&&candidates.length>2)for(const [color,tested0]of Object.entries(scene.scope_members)){const tested=tested0 as number[];if(!candidates.every(i=>tested.includes(i))||tested.length>=scene.focus.length||!tested.every(i=>scene.focus.includes(i)))continue;for(const c of scene.controls){if(c.color!==color||hasShape(this.press_shapes,c.shape))continue;const command=commandAt(c.bbox),question=digest([obs.level_epoch,'scope_navigation',{universe:scene.universe_ref,focus:scene.focus,desired:tested},command]);if(!this.questions.attempted.has(question))nav.push([tested.length,tested,command,c.shape,question]);}}
   let mode='query',navigation_proof:R|null=null,tested:number[],command:R,control_shape:any,question:string;
   if(nav.length){nav.sort((a,b)=>compare([a[0],a[2].data.x,a[2].data.y],[b[0],b[2].data.x,b[2].data.y]));[,tested,command,control_shape,question]=nav[0]!;mode='navigation';if(hasShape(this.nav_shapes,control_shape)){navigation_proof=subsetNavigationPrediction(scene,candidates,tested,remaining);if(navigation_proof===null)return null;}}
   else{
    if(candidates.length){
-    const single=assessHypothesisPartition([1,candidates.length-1])!;
-    for(const i of candidates)offers.push([single.remaining,1,[i],commandAt(scene.boxes[i]),null]);
+    const single = subsetQuerySplit(1, candidates.length);
+    for (const i of candidates) offers.push({ kind: 'member', tested: [i],
+      command: commandAt(scene.boxes[i]), controlShape: null, ...single });
    }
-   if(!offers.length)return null;
-   offers.sort((a,b)=>compare(a.slice(0,3),b.slice(0,3)));
-   [,,tested,command,control_shape]=offers[0]!;
+   const selected = selectSubsetQuery(offers);
+   if (!selected) return null;
+   ({ tested, command, controlShape: control_shape } = selected);
    question=digest([obs.level_epoch,'subset_information',{universe:scene.universe_ref,candidates,tested},command]);
   }
   if(scene.boxes.length>4096||candidates.length>4096)return null;const prediction=measureConditionalSubset(candidates,tested);

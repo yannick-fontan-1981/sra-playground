@@ -1,0 +1,233 @@
+{
+  "pre": {
+    "pre": {
+      "observation": "subset-qualification:epoch:1:revision:4:frame:44924ad65c1ab548",
+      "epoch": 1,
+      "universe": "d123ec8c392b8357a5f7677527c36ecd1699bd3dfa6252e4887b4aee29f34194",
+      "focus": [
+        0,
+        1,
+        4,
+        5,
+        6,
+        7
+      ],
+      "candidates": [
+        0,
+        1,
+        4,
+        5
+      ],
+      "evidence": [
+        "subset-qualification:epoch:1:revision:2:frame:384771a59f486608",
+        "subset-qualification:epoch:1:revision:3:frame:bb9f0a51464dfc1a"
+      ],
+      "offers": [
+        {
+          "remaining": 2,
+          "kind": "scope",
+          "tested": [
+            0,
+            4
+          ],
+          "command": {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 6,
+              "y": 3
+            }
+          },
+          "global": 2,
+          "local": 2
+        },
+        {
+          "remaining": 2,
+          "kind": "scope",
+          "tested": [
+            1,
+            5
+          ],
+          "command": {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 27,
+              "y": 3
+            }
+          },
+          "global": 2,
+          "local": 2
+        },
+        {
+          "remaining": 3,
+          "kind": "member",
+          "tested": [
+            0
+          ],
+          "command": {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 13,
+              "y": 26
+            }
+          },
+          "global": 1,
+          "local": 3
+        },
+        {
+          "remaining": 3,
+          "kind": "member",
+          "tested": [
+            1
+          ],
+          "command": {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 25,
+              "y": 26
+            }
+          },
+          "global": 1,
+          "local": 3
+        },
+        {
+          "remaining": 3,
+          "kind": "member",
+          "tested": [
+            4
+          ],
+          "command": {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 13,
+              "y": 38
+            }
+          },
+          "global": 1,
+          "local": 3
+        },
+        {
+          "remaining": 3,
+          "kind": "member",
+          "tested": [
+            5
+          ],
+          "command": {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 25,
+              "y": 38
+            }
+          },
+          "global": 1,
+          "local": 3
+        }
+      ]
+    },
+    "sha256": "c338cb858626bd0c69d0cf33c377ab83eb4023a27a746d3a0fa39b71f0a57d5d"
+  },
+  "query": {
+    "ticket": "subset-qualification:native:4",
+    "command": {
+      "x": 6,
+      "y": 3
+    },
+    "question": "74cd95c9b651b30d5b8401743745eb744e36efdd240849d4d7751f2c3437dd79",
+    "after": "subset-qualification:epoch:1:revision:5:frame:8956c13911042080",
+    "matched": null,
+    "frames": 9,
+    "feedback": "LOCAL",
+    "retained": [
+      1,
+      5
+    ]
+  },
+  "lastOnly": {
+    "ticket": "subset-qualification:native:4",
+    "command": {
+      "x": 6,
+      "y": 3
+    },
+    "question": "74cd95c9b651b30d5b8401743745eb744e36efdd240849d4d7751f2c3437dd79",
+    "after": "subset-qualification:epoch:1:revision:5:frame:8956c13911042080",
+    "matched": null,
+    "frames": 1,
+    "feedback": null,
+    "retained": [
+      0,
+      1,
+      4,
+      5
+    ]
+  },
+  "stationary": {
+    "ticket": "subset-qualification:native:4",
+    "command": {
+      "x": 6,
+      "y": 3
+    },
+    "question": "74cd95c9b651b30d5b8401743745eb744e36efdd240849d4d7751f2c3437dd79",
+    "after": "subset-qualification:epoch:1:revision:5:frame:44924ad65c1ab548",
+    "matched": null,
+    "frames": 1,
+    "feedback": null,
+    "retained": [
+      0,
+      1,
+      4,
+      5
+    ]
+  },
+  "permutation": {
+    "offerSet": "c338cb858626bd0c69d0cf33c377ab83eb4023a27a746d3a0fa39b71f0a57d5d",
+    "key": "74cd95c9b651b30d5b8401743745eb744e36efdd240849d4d7751f2c3437dd79",
+    "tested": [
+      0,
+      4
+    ],
+    "command": {
+      "action_ref": "ACTION6",
+      "data": {
+        "x": 6,
+        "y": 3
+      }
+    }
+  },
+  "otherOptimum": {
+    "ticket": "subset-qualification:native:4",
+    "command": {
+      "x": 27,
+      "y": 3
+    },
+    "question": "3357943feef55d884c06db7fe7c0c0b84ebf9ae5b5842bd0b6ce86fde125ce3b",
+    "after": "subset-qualification:epoch:1:revision:5:frame:5613a9c3764d242b",
+    "matched": null,
+    "frames": 16,
+    "feedback": "GLOBAL",
+    "retained": [
+      1,
+      5
+    ]
+  },
+  "openingControl": [
+    {
+      "step": 1,
+      "level": 1,
+      "kind": "experiment",
+      "command": {
+        "x": 25,
+        "y": 36
+      },
+      "completed": 1
+    },
+    {
+      "step": 4,
+      "level": 2,
+      "kind": "subset_scope_navigation",
+      "command": {
+        "x": 6,
+        "y": 3
+      },
+      "completed": 1
+    }
+  ]
+}
