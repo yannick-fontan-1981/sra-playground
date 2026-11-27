@@ -1,0 +1,59 @@
+{
+  "révisions": [
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "16f3c5e8d300903e475400fb9b67a513f2834663"
+  ],
+  "historique": {
+    "point": "ZIPP L2 T15",
+    "action": "ACTION2",
+    "mesureAntérieure": [
+      0,
+      12
+    ],
+    "prévision": [
+      0,
+      12
+    ],
+    "mesureNouvelle": [
+      0,
+      0
+    ],
+    "matched": null,
+    "T16": {
+      "actionRef": "ACTION6",
+      "data": {
+        "x": 14,
+        "y": 10
+      }
+    }
+  },
+  "construit": {
+    "dev": {
+      "départs": 4,
+      "répétitionsDemandées": 3,
+      "répétitionsPhysiques": 1,
+      "sansPreuve": 1,
+      "contrôlesNégatifs": 2
+    },
+    "res": {
+      "départs": 4,
+      "répétitionsDemandées": 3,
+      "répétitionsPhysiques": 1,
+      "sansPreuve": 1,
+      "contrôlesNégatifs": 2
+    }
+  },
+  "retrait": {
+    "famille": "observed_frontier",
+    "expérience": null,
+    "action": {
+      "actionRef": "ACTION2",
+      "data": {}
+    }
+  },
+  "empreintes": {
+    "ZIPP": "0b7a87bd31252b73cc1955ae0e2e38c020e97213be1f0a343e0bbd7d51b38388",
+    "dev": "6e10ef1b69444cc9e8c7ebf10b260ec2dcbfaa78adfc0416eb5337377d316ecb",
+    "res": "30a3aa53331e983ed53a3be844f3e79680d627baeb5673debf41b806cd01fcc3"
+  }
+}
