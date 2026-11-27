@@ -15,7 +15,7 @@ type Grid = Proposal['local']['grid'];
 type Packet = Pick<GameObservation, 'frame' | 'level' | 'levelsCompleted' | 'state' | 'availableActionIds'> & { frames?: number[][][] };
 type Transition = { before: Packet; after: Packet; action: number; family: string };
 const fixture = JSON.parse(gunzipSync(readFileSync(new URL('./fixtures/sic-patrol-terrain-public.json.gz', import.meta.url))).toString()) as {
-  learning: Transition[]; walk: Transition[]; grid: Grid; acquired: { state: Proposal['local'] }; proposal: Proposal;
+  learning: Transition[]; walk: Transition[]; selectedDetour: Transition[]; mechanismAfterDetour: Transition; grid: Grid; acquired: { state: Proposal['local'] }; proposal: Proposal;
 };
 const tile = (grid: Grid, cell: number) => [grid.box[0] + cell % grid.columns * grid.pitch,
   grid.box[1] + Math.floor(cell / grid.columns) * grid.pitch] as const;
@@ -100,24 +100,9 @@ for (const varied of [false, true]) test('native navigation retains known terrai
       reply = await service.handle({ type: 'advance', sessionId, sequence: ++sequence, ticketId: reply.ticket.id,
         executionMs: 1, observation: packet(transform(step.after, varied), sequence) });
       const outcome = reply.snapshot.trace.findLast(event => event.kind === 'actual_outcome');
-      assert.equal(outcome?.matched, true); assert.equal(outcome?.seal_prefix, false);
-      assert.deepEqual(family.state(), before, 'Actual readings remain private until the single ordered reconciliation');
+      assert.equal(outcome?.matched, true); assert.equal(outcome?.seal_prefix, index + 1 === fixture.walk.length);
+      if (index + 1 < fixture.walk.length) assert.deepEqual(family.state(), before, 'Actual readings remain private until the single ordered reconciliation');
     }
-    // The last continuation is a declared functional return, not a recorded
-    // backend frame: execute the actual directional input; other bodies keep
-    // their currently observed pose. The full strict campaign tests the backend.
-    assert.ok(reply.ticket); assert.equal(reply.ticket.actionIndex, 7);
-    assert.equal(reply.ticket.decisionRevision, revision);
-    const returned = transform(fixture.walk.at(-1)!.after, varied), grid = proposal.local.grid;
-    const from = proposal.walk![6]!.target;
-    const vector: Record<string,number> = { ACTION1: -grid.columns, ACTION2: grid.columns, ACTION3: -1, ACTION4: 1 };
-    const to = from + vector[reply.ticket.actionRef]!, [x,y] = tile(grid,from), [u,v] = tile(grid,to);
-    for (const [dx,dy] of grid.actorPixels!) returned.frame[y+dy]![x+dx]=grid.base;
-    for (const [dx,dy] of grid.actorPixels!) returned.frame[v+dy]![u+dx]=grid.actor;
-    returned.frames=[returned.frame];
-    reply = await service.handle({ type: 'advance', sessionId, sequence: ++sequence, ticketId: reply.ticket.id,
-      executionMs: 1, observation: packet(returned, sequence) });
-    assert.equal(reply.snapshot.trace.findLast(event => event.kind === 'actual_outcome')?.matched, true);
     assert.equal(reply.snapshot.acquiredRecords, fixture.learning.length + 8);
     const seal = reply.snapshot.trace.filter(event => event.kind === 'sealed_prefix' && event.revision === revision);
     assert.equal(seal.length, 1); assert.equal(seal[0]!.acquired_actions, 8);
@@ -125,6 +110,27 @@ for (const varied of [false, true]) test('native navigation retains known terrai
     assert.ok(crossed.every(cell => acquired.last.memory[cell] === 'free'), 'A moving patrol does not replace independently known terrain');
     assert.ok(acquired.last.sentries?.length);
     assert.equal(acquired.timing!.clock!.turn, proposal.local.timing!.clock!.turn + 8);
+    reply = await service.handle({ type: 'resume', sessionId, sequence });
+    assert.ok(reply.ticket);
+    const detour = reply.snapshot.proposal as Proposal, detourRevision = reply.ticket.decisionRevision;
+    assert.equal(detour.sicSituationCard?.strategy, 'P07', 'The selected ordinary access keeps its learned movement role');
+    assert.equal(detour.actions.length, 2, 'The selected safe path retains both already known cells');
+    assert.equal(detour.walk?.[0]!.target, detour.choice.target);
+    const detourBefore = structuredClone(family.state());
+    for (const [index, step] of fixture.selectedDetour.entries()) {
+      assert.ok(reply.ticket); assert.equal(reply.ticket.decisionRevision, detourRevision);
+      assert.equal(reply.ticket.actionIndex, index); assert.equal(reply.ticket.actionRef, 'ACTION' + action(step, varied));
+      reply = await service.handle({ type: 'advance', sessionId, sequence: ++sequence, ticketId: reply.ticket.id,
+        executionMs: 1, observation: packet(transform(step.after, varied), sequence) });
+      assert.equal(reply.snapshot.trace.findLast(event => event.kind === 'actual_outcome')?.matched, true);
+      if (index === 0) assert.deepEqual(family.state(), detourBefore);
+    }
+    const detourSeals = reply.snapshot.trace.filter(event => event.kind === 'sealed_prefix' && event.revision === detourRevision);
+    assert.equal(detourSeals.length, 1); assert.equal(detourSeals[0]!.acquired_actions, 2);
+    assert.equal(family.state().state!.timing!.clock!.turn, acquired.timing!.clock!.turn + 2);
+    reply = await service.handle({ type: 'resume', sessionId, sequence });
+    assert.ok(reply.ticket); assert.equal(reply.ticket.actionRef, 'ACTION' + action(fixture.mechanismAfterDetour, varied));
+    assert.equal((reply.snapshot.proposal as Proposal).actions.length, 1, 'The unmeasured marker landing remains a separate experiment');
   } finally { runtime.close('test_complete'); }
 });
 
@@ -248,3 +254,41 @@ test('an actual rail return contradicting the acquired recurrence closes before 
   assert.equal(outcome.matched,true); assert.equal(outcome.seal_prefix,true);
   assert.deepEqual(family.state(),retained);
 });
+
+for (const changed of ['ambiguous-carrier', 'contradicted-next-cell'] as const)
+  test('a native selected-route prefix closes on ' + changed + ' and preserves the unrelated acquired role', async () => {
+    const family = createSicNavigateRevealedGrid();
+    const runtime = new NativeV6Runtime({ families: [family], sourceDigest: 'selected-route-counterexample', maxPointOccurrences: 300 });
+    const service = new V6AgentService(() => runtime), sessionId = 'selected-route-' + changed;
+    let sequence = 0, reply = await service.handle({ type: 'init', sessionId, sequence,
+      observation: packet(fixture.learning[0]!.before, 0), budgets: { targetLevels: 6, levelActionCaps: [80,80,80,80,80,80] } });
+    try {
+      for (const step of [...fixture.learning, ...fixture.walk]) {
+        if (!reply.ticket) reply = await service.handle({ type: 'resume', sessionId, sequence });
+        assert.ok(reply.ticket); assert.equal(reply.ticket.actionRef, 'ACTION' + step.action);
+        reply = await service.handle({ type: 'advance', sessionId, sequence: ++sequence, ticketId: reply.ticket.id,
+          executionMs: 1, observation: packet(step.after, sequence) });
+      }
+      reply = await service.handle({ type: 'resume', sessionId, sequence });
+      assert.ok(reply.ticket); const proposal = reply.snapshot.proposal as Proposal;
+      assert.equal(proposal.actions.length, 2);
+      const acquired = structuredClone(family.state()), returned = structuredClone(fixture.selectedDetour[0]!.after);
+      const grid = proposal.local.grid, [x,y] = tile(grid,proposal.walk![1]!.target);
+      if (changed === 'ambiguous-carrier') {
+        for (const [dx,dy] of grid.actorPixels!) returned.frame[y+dy]![x+dx] = grid.actor;
+      } else {
+        const ink = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].find(value => ![grid.base,grid.tint,grid.actor,grid.enemy].includes(value))!;
+        for (let dy=0;dy<grid.pitch;dy++) for(let dx=0;dx<grid.pitch;dx++) returned.frame[y+dy]![x+dx] = dy===0?ink:grid.base;
+      }
+      returned.frames=[returned.frame];
+      reply = await service.handle({ type: 'advance', sessionId, sequence: ++sequence, ticketId: reply.ticket.id,
+        executionMs: 1, observation: packet(returned, sequence) });
+      assert.equal(reply.ticket, null);
+      const outcome=reply.snapshot.trace.findLast(event=>event.kind==='actual_outcome');
+      assert.equal(outcome?.seal_prefix,true); assert.equal(outcome?.matched,changed==='contradicted-next-cell');
+      assert.equal(reply.snapshot.trace.findLast(event=>event.kind==='sealed_prefix')?.acquired_actions,1);
+      assert.deepEqual(family.state().state!.completed, acquired.state!.completed);
+      if (changed === 'ambiguous-carrier') assert.deepEqual(family.state(), acquired, 'An unbound return cannot replace independent navigation facts');
+      else assert.equal(family.state().state!.last.memory[proposal.walk![1]!.target],'wall');
+    } finally { runtime.close('counterexample_complete'); }
+  });

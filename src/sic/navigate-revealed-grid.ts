@@ -593,6 +593,17 @@ function knownWalkCell(local: State, reading: Reading, target: number, turns: nu
     && (!reading.nextHazards?.includes(target) || turns > 1 && clearance);
 }
 
+// Hazard avoidance may select a different already measured route. Its known
+// prefix belongs to that selected access, not to the discarded initial path.
+function selectedNavigationPath(local: State, choice: Choice, initial: Walk[] | null, destination: number): Walk[] | null {
+  if (choice.kind !== 'move') return null;
+  const matches = (path: Walk[] | null) => path?.[0]?.action === choice.action.action_ref
+    && path[0].target === choice.target && path[0].entry === choice.entry;
+  if (matches(initial)) return initial;
+  const alternate = route(local.last, local.grid, true, destination, local.timing?.clock);
+  return matches(alternate) ? alternate : null;
+}
+
 function guardedHold(local: State, choice: Choice, rows: NativeRows, remaining: number): GuardedHold | null {
   const role = local.stationary, clock = local.timing?.clock;
   if (choice.kind !== 'wait' || !role || !clock || role.input !== choice.action.action_ref
@@ -706,8 +717,8 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = navigateRevealedGridId + ':' + need.id, action = choice.action;
       const walk: Walk[] = [];
-      const first = path?.[0];
-      if (known && (!timing || first?.action === action.action_ref && first.target === choice.target)) for (const leg of path!.slice(0, Math.min(remaining, maximumCommittedActions))) {
+      const selectedPath = known ? selectedNavigationPath(local, choice, path, destination) : null;
+      for (const leg of selectedPath?.slice(0, Math.min(remaining, maximumCommittedActions)) ?? []) {
         if (!knownWalkCell(local, last, leg.target, walk.length + 1)) break;
         if (timing && (leg.entry !== undefined || grid.mechanisms?.pads[leg.target] || grid.mechanisms?.doors[leg.target] !== undefined)) break;
         walk.push(leg);
