@@ -1,0 +1,79 @@
+{
+  "révisions": [
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "0540f12425e9004dd63b3d701b9e4ea125c17482"
+  ],
+  "arbreSrc": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "résultats": {
+    "UPST": [
+      {
+        "tour": 4,
+        "point": {
+          "x": 21,
+          "y": 13
+        },
+        "offres": 3,
+        "mesure": true,
+        "concordantes": 1,
+        "contredites": 2,
+        "paires": 2
+      }
+    ],
+    "EVAS": [
+      {
+        "tour": 15,
+        "point": {
+          "x": 31,
+          "y": 30
+        },
+        "offres": 11,
+        "mesure": true,
+        "concordantes": 3,
+        "contredites": 4,
+        "paires": 12
+      },
+      {
+        "tour": 16,
+        "point": {
+          "x": 32,
+          "y": 35
+        },
+        "offres": 5,
+        "mesure": false,
+        "concordantes": 1,
+        "contredites": 2,
+        "paires": 2
+      }
+    ],
+    "reprisesConstruites": {
+      "sans-positif": {
+        "famille": "observed_frontier",
+        "stratégie": "test_local_input",
+        "point": {
+          "x": 10,
+          "y": 48
+        }
+      },
+      "paires-connues": {
+        "famille": "observed_frontier",
+        "stratégie": "test_local_input",
+        "point": {
+          "x": 10,
+          "y": 48
+        }
+      }
+    }
+  },
+  "empreintesCommunes": {
+    "UPST.direct": "258a45e62d59db0b81d2f438f73f67189adcecfb24ded70a12b681bf977782fb",
+    "UPST.lecture": "0ab04b3f28278cf3f65a257db1b4546c7d2294126be39dbc1dd9ac2b06969a9e",
+    "EVAS.direct": "ac7835461ec1d92f6a7753f6f8ac3a20cfefc3fd0dc778a47d4e5b55ac6bea75",
+    "EVAS.lecture": "e068b50a9ac755094ff3abb846fd7311835ce6b467818a293d2037d5cbd27302",
+    "UPST.dedans": "6dff0d8077c66c85c47cdf8b073288542b62d76172a8ea44dda1d15b43beb7ac",
+    "UPST.dehors": "5fe467816feb88828cf23366e749bdccb394029a242db927465b38b839f36b53",
+    "UPST.sans-positif": "3c78a7dd843f52952349fc5c826a38630e0bebe2307ccac8772522731ae60b8f",
+    "UPST.paires-connues": "610a456a81614ce410ba3338d480d62d3fcd2b114e5039bfae1fe208ea9b703d",
+    "domaine.dev": "5efa7c137f0e31465b30a7efec720e33e30ba837c68f842f30735d1bee7adcc3",
+    "domaine.res": "2b9c07c5e1ff6a0ee3d252a5f4115b1d0842cf36b2ab8246d282da6963b043d9"
+  }
+}
