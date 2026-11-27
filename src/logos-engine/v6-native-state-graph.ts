@@ -252,6 +252,19 @@ export function splitNativeState(value: unknown, component: string, options: Spl
           offset += chunk.items.length;
           return chunk.items;
         });
+        // Portable integers contribute one node and no fragment each. Dense
+        // raster rows can be encoded without allocating a Sized leaf per pixel.
+        // The property snapshot above remains the only source of input values.
+        const flatCost = 3 + entries.length;
+        if (flatCost <= bound && entries.every(([, value]) => typeof value === 'number' && Number.isSafeInteger(value) && !Object.is(value, -0))) {
+          if (entries.length) {
+            if (depth === 128) throw new TypeError('Native state nesting exceeds the V7 structural contract');
+            note(0, true);
+          }
+          const node = priorArray?.items.length === entries.length && entries.every(([, value], index) => value === priorArray.items[index])
+            ? priorArray : ownedEncoded({ kind: 'array', items: entries.map(([, value]) => value as number) });
+          return { node, cost: flatCost };
+        }
         const children = entries.map(([, value], index) => visit(value, depth + 1, priorItems?.[index]));
         const cost = 3 + children.reduce((n, child) => n + child.cost, 0);
         if (cost <= bound) {

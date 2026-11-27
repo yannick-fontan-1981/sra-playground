@@ -115,17 +115,31 @@ export function retainNativeJson<T>(value: T, previous?: T): T {
       let unchanged = !!priorKeys && priorKeys.length === fields.length
         && fields.every(([key], index) => priorKeys[index] === key);
       let height = 0, shared = Object.isFrozen(input);
-      const entries = fields.map(([key, descriptor]) => {
-        assertUnicode(key);
+      const items = array ? new Array<unknown>(fields.length) : undefined;
+      const entries: [string, unknown][] = [];
+      for (let index = 0; index < fields.length; index++) {
+        const [key, descriptor] = fields[index]!;
+        // Array keys already matched the canonical decimal indices above.
+        if (!array) assertUnicode(key);
         if (!('value' in descriptor) || !descriptor.enumerable) throw new TypeError('Native retained state requires enumerable data properties');
+        if (items && typeof descriptor.value === 'number' && Number.isFinite(descriptor.value)) {
+          // Dense rasters and coordinate arrays need no leaf ownership record.
+          // Preserve Float64 identity, including negative zero, on comparison.
+          if (depth === 128) throw new TypeError('Native retained state nesting exceeds its contract');
+          items[index] = descriptor.value;
+          height = Math.max(height, 1);
+          unchanged &&= Object.is(descriptor.value, prior![key]);
+          continue;
+        }
         const child = visit(descriptor.value, depth + 1, prior?.[key]);
         height = Math.max(height, child.height + 1); shared &&= child.shared;
         unchanged &&= Object.is(child.value, prior![key]);
-        return [key, child.value] as const;
-      });
+        if (items) items[index] = child.value;
+        else entries.push([key, child.value]);
+      }
       const reuse = unchanged && (!shared || Object.getPrototypeOf(input) === Object.getPrototypeOf(prior));
       const result = reuse ? prior! : shared ? input
-        : Object.freeze(array ? entries.map(([, item]) => item) : Object.fromEntries(entries));
+        : Object.freeze(items ?? Object.fromEntries(entries));
       retained.set(result, height);
       return { value: result, height, shared };
     } finally { ancestors.delete(input); }
