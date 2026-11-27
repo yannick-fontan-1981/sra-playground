@@ -418,10 +418,17 @@ export function hydrateNativeState(root: unknown, readFragment: (id: string) => 
       // profile/content hash; every other object/id takes the full boundary.
       const found = cache.get(id); if (found !== undefined) return referenced(found, depth);
       const fragment = readFragment(id);
-      const retained = isJsonObject(fragment) ? hydratedLeaves.get(fragment) : undefined;
+      if (!isJsonObject(fragment)) throw new TypeError('Native state fragment digest mismatch or missing fragment');
+      const retained = hydratedLeaves.get(fragment);
       if (retained?.id === id) { cache.set(id, retained); return referenced(retained, depth); }
-      if (!isJsonObject(fragment) || fragment.profile !== NATIVE_STATE_GRAPH_PROFILE || !Object.hasOwn(fragment, 'node') || Object.keys(fragment).length !== 2 ||
-          `${NATIVE_STATE_FRAGMENT_PREFIX}${symbolicDigest(fragment, false)}` !== id) throw new TypeError('Native state fragment digest mismatch or missing fragment');
+      // The encoder hashed the exact immutable payload of an owned fragment.
+      // The resolver still supplies it and must resolve each descendant below.
+      const owned = ownedFragments.get(fragment);
+      if (owned ? owned.id !== id : fragment.profile !== NATIVE_STATE_GRAPH_PROFILE
+        || !Object.hasOwn(fragment, 'node') || Object.keys(fragment).length !== 2
+        || `${NATIVE_STATE_FRAGMENT_PREFIX}${symbolicDigest(fragment, false)}` !== id) {
+        throw new TypeError('Native state fragment digest mismatch or missing fragment');
+      }
       const parent = measure;
       const current = { base: depth + 1, height: 0, weight: 256, terminal: true };
       measure = current;

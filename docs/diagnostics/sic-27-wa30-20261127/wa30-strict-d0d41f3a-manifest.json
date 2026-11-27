@@ -1,0 +1,24 @@
+{
+  "preparedAt": "2026-11-27T14:41:55.003816+00:00",
+  "branch": "fix/sic-10-carriers-20261127",
+  "sourceCommit": "d0d41f3a2d2dd02a185500128a9d98c0368151bc",
+  "sourceTree": "a2836164e37c541c5d7d289484c286b1b9661a7a",
+  "mode": "sic",
+  "parallelWorkers": 1,
+  "startLevel": 1,
+  "referenceFile": "docs/architecture/sic-replay-reference-levels-20261126.json",
+  "uuid": "98d555fa-6cf9-42fc-b483-9225bfc834d9",
+  "runnerSHA256": "04433cd8216066b01090b945a669406f5477212cb229de9330619214ae30ae6a",
+  "files": {
+    "src/sic/observed-carrier-reduction.ts": "fd7c455641d962698c0185e58e074bedbe5bdd7c7399e83be3282321a444e1aa",
+    "src/sic/oriented-delivery.ts": "3a09d731b643a60becd5b0d85d2ca568ccd33c3466ad8dcec5635cdb5fd92ea2",
+    "src/sic/standalone-families.ts": "c824331fbf5ee9870292eb48a0ab80eca4c88d166eb0169e0a6aed1c16e0954b",
+    "scripts/sic-carrier-preparation-continuity.mjs": "68ef719f4fb792d5fb3e282021fc7be6e006d9773358553414a5ac75a1da019d",
+    "scripts/sic-continuity-evidence.mjs": "9b43fc59c7a7f0e6eed87abf4e45078abd0c3462df2b5849c527c269a7b14de5",
+    "docs/architecture/sic-replay-reference-levels-20261126.json": "67ae5216b80e87bbb2243138fde7970ea5c725a5f832f1b72aa8b0780e270854",
+    "scripts/check-sic-chronological.mjs": "2cb80e62a41e1269f1a2a0dd9e9de20a32504b70724c167abaac1a8b9bae3111",
+    "scripts/sic-replay-budgets.mjs": "308ae1c2d28a21dc7f2e3d06c83e601877d5388db2723148b5900d58c5a89931",
+    "scripts/sic-replay-watchdog.mjs": "469e7a78e3a473df8ee6255828ab68d1ca3f08c8b075b40e022b06ef69495c5e"
+  },
+  "sourceWorktree": "/workspace/scratch/8b7740e8a750/carriers-wa30-strict"
+}

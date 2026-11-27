@@ -137,6 +137,24 @@ test('missing and tampered persisted fragments cannot be hydrated', () => {
   assert.throws(() => hydrateNativeState({ ...graph.root, injected: true }, id => fragments.get(id)), /root/);
 });
 
+test('owned fragment addresses still require current authoritative descendants', () => {
+  const input = Array.from({ length: 96 }, (_, row) => Array.from({ length: 12 }, (_, cell) => 12 * row + cell));
+  const graph = splitNativeState(input, 'owned-transitive', { maxFragmentNodes: 32 });
+  const fragments = new Map(graph.fragments.map(fragment => [fragment.id, fragment.value]));
+  const reads: string[] = [];
+  const resolve = (id: string) => { reads.push(id); return fragments.get(id); };
+  assert.deepEqual(hydrateNativeState(graph.root, resolve), input);
+  const expectedReads = reads.splice(0);
+  assert.ok(expectedReads.length > 1);
+  assert.deepEqual(hydrateNativeState(graph.root, resolve), input);
+  assert.deepEqual(reads, expectedReads);
+  const last = expectedReads.at(-1)!;
+  fragments.delete(last);
+  assert.throws(() => hydrateNativeState(graph.root, resolve), /digest mismatch|missing fragment/);
+  fragments.set(last, fragments.get(expectedReads[0]!)!);
+  assert.throws(() => hydrateNativeState(graph.root, resolve), /digest mismatch/);
+});
+
 test('unsupported native values are rejected without invoking getters or accepting cycles', () => {
   const cyclic: unknown[] = []; cyclic.push(cyclic);
   let getterCalled = false;

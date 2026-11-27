@@ -30,7 +30,7 @@ jobs:
       - run: node --test tests/sic-cursor-role-memory.test.ts tests/sic-observed-actor-composition.test.ts tests/sic-contact-transfer.test.ts tests/sic-contact-frontier.test.ts
       - run: node --test tests/sic-observed-push-access.test.ts tests/sic-observed-coverage.test.ts tests/sic-observed-exchange.test.ts tests/sic-observed-field-carry.test.ts
       - run: node --test tests/v6-agent.test.ts tests/v6-native-runtime.test.ts
-      - run: node --test tests/sic-oriented-delivery-continuity.test.ts tests/v6-knowledge-store-noop.test.ts tests/sic-prepared-effects-native-state.test.ts
+      - run: node --test tests/sic-oriented-delivery-continuity.test.ts tests/sic-oriented-delivery-contract.test.mjs tests/v6-knowledge-store-noop.test.ts tests/sic-prepared-effects-native-state.test.ts
       - run: node --test tests/sic-timed-grid-continuity.test.ts tests/sic-patrol-terrain-continuity.test.ts tests/v6-incremental-memory.test.ts
       - run: node --test tests/sic-grid-continuity-evidence.test.mjs
       - run: node --test tests/sic-preview-interface.test.ts tests/sic-experiment-arbitration.test.ts tests/sic-population-control-transfer.test.ts tests/sic-transferred-population-selection.test.ts
@@ -63,10 +63,10 @@ jobs:
     timeout-minutes: 15
     strategy:
       fail-fast: false
-      max-parallel: 4
+      max-parallel: 8
       matrix:
         include:
-          - { name: oriented-delivery, cohort: 'source:WA30', end: 7, cap: 136 }
+          - { name: oriented-delivery, cohort: 'source:WA30', end: 9, cap: 166 }
           - { name: mirror-isles, cohort: SS01, end: 8, cap: 120 }
           - { name: la-force-rouge, cohort: SS02, end: 8, cap: 160 }
           - { name: la-ruse-verte, cohort: SS03, end: 8, cap: 240 }
@@ -186,7 +186,7 @@ jobs:
           import { createHash } from 'node:crypto';
           import { readFileSync, readdirSync } from 'node:fs';
           const expected = [
-            ['oriented-delivery', 'source:WA30', 7, 136], ['mirror-isles', 'SS01', 8, 120],
+            ['oriented-delivery', 'source:WA30', 9, 166], ['mirror-isles', 'SS01', 8, 120],
             ['la-force-rouge', 'SS02', 8, 160], ['la-ruse-verte', 'SS03', 8, 240],
             ['l-axe-violet', 'SS04', 8, 150], ['local-carry', 'SS05', 8, 155],
             ['actor-composition', 'SS06', 8, 125], ['destination-set', 'SS07', 8, 180],

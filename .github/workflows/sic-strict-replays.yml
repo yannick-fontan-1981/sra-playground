@@ -11,13 +11,18 @@ concurrency:
   group: sic-strict-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 jobs:
-  qualified-replays:
-    name: Original budgets on the combined source
+  replay:
+    name: Strict replay / ${{ matrix.game }}
     runs-on: ubuntu-24.04
-    # The expanded sequential cohort retains every original per-level budget.
     timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        game: [WA30, DC22, LF52, CGWL, ETAG, GRAV, SK48, SNAR, SPOR, WEAV]
     env:
       SIC_REPLAY_REFERENCES: docs/architecture/sic-replay-reference-levels-20261126.json
+      SIC_REPLAY_GAME: ${{ matrix.game }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -28,25 +33,66 @@ jobs:
           cache: npm
       - run: npm ci
       - run: node scripts/prepare-python.mjs
-      - name: Replay complete games sequentially from level one
+      - name: Replay the complete game from level one
         run: |
           mkdir -p qualification
           git rev-parse HEAD > qualification/source.sha
-          node scripts/check-sic-chronological.mjs CGWL,DC22,ETAG,GRAV,LF52,SK48,SNAR,SPOR,WEAV auto qualification/strict.jsonl 1 sic
+          node scripts/check-sic-chronological.mjs "$SIC_REPLAY_GAME" auto qualification/strict.jsonl 1 sic
+      - name: Preserve this game's strict receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sic-strict-part-${{ github.sha }}-${{ matrix.game }}
+          path: qualification/
+          if-no-files-found: error
+          retention-days: 7
+  qualified-replays:
+    name: Original budgets on the combined source
+    needs: replay
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      SIC_REPLAY_JOB_RESULT: ${{ needs.replay.result }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: sic-strict-part-${{ github.sha }}-*
+          path: parts
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
       - name: Require all official completions within original budgets
         run: |
           node --input-type=module <<'NODE'
           import assert from 'node:assert/strict';
-          import { readFileSync, writeFileSync } from 'node:fs';
+          import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
           import { createHash } from 'node:crypto';
-          const raw = readFileSync('qualification/strict.jsonl');
-          const runs = raw.toString().trim().split(/\r?\n/).map(JSON.parse);
-          const targets = { CGWL: 6, DC22: 6, ETAG: 6, GRAV: 6, LF52: 10, SK48: 8, SNAR: 6, SPOR: 6, WEAV: 6 };
-          assert.deepEqual(runs.map(run => run.code).sort(), Object.keys(targets).sort());
-          assert.equal(readFileSync('qualification/source.sha', 'utf8').trim(), process.env.GITHUB_SHA);
+          const targets = { CGWL: 6, DC22: 6, ETAG: 6, GRAV: 6, LF52: 10, SK48: 8, SNAR: 6, SPOR: 6, WA30: 9, WEAV: 6 };
+          const sourceSha = process.env.GITHUB_SHA;
+          const parts = Object.keys(targets).map(code => {
+            const directory = 'parts/sic-strict-part-' + sourceSha + '-' + code + '/';
+            const read = filename => existsSync(directory + filename) ? readFileSync(directory + filename) : null;
+            return { code, source: read('source.sha'), raw: read('strict.jsonl'), levels: read('strict.jsonl.levels') };
+          });
+          mkdirSync('qualification', { recursive: true });
+          const raw = Buffer.concat(parts.flatMap(part => part.raw ? [part.raw] : []));
+          writeFileSync('qualification/strict.jsonl', raw);
+          writeFileSync('qualification/strict.jsonl.levels', Buffer.concat(parts.flatMap(part => part.levels ? [part.levels] : [])));
+          assert.equal(process.env.SIC_REPLAY_JOB_RESULT, 'success');
+          const runs = parts.map(({ code, source, raw, levels }) => {
+            assert.equal(source?.toString().trim(), sourceSha, code + ' checked-out source');
+            assert.ok(raw && levels, code + ' strict receipts');
+            const lines = raw.toString().trim().split(/\r?\n/);
+            assert.equal(lines.length, 1, code + ' one chronological campaign');
+            const run = JSON.parse(lines[0]);
+            assert.equal(run.code, code, 'artifact game identity');
+            return run;
+          });
+          writeFileSync('qualification/source.sha', parts[0].source);
           for (const run of runs) {
+            assert.equal(run.reason, 'target_levels_completed', run.code + ' strict completion');
             assert.equal(run.mode, 'sic'); assert.equal(run.parallelWorkers, 1);
-            assert.equal(run.reason, 'target_levels_completed');
             assert.equal(run.target, targets[run.code]); assert.equal(run.levels, targets[run.code]);
             assert.equal(run.authority, run.actions);
             assert.deepEqual(run.recoveries, { reset: 0, undo: 0 });

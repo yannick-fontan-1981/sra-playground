@@ -42,6 +42,7 @@ import {
 import { sicNeedId } from './need-identity.ts';
 import { exhaustedGroup } from './test-observed-compositions.ts';
 import { copyNativeValue, retainNativeJson } from '../logos-engine/v6-native-owned.ts';
+import { isHydratedNativeJson } from '../logos-engine/v6-native-state-graph.ts';
 export const preparedEffectsId = 'sic_test_prepared_effects';
 import { freshCapabilities } from './derive-capabilities.ts';
 import { newSpatialMemory } from './spatial-access.ts';
@@ -134,13 +135,19 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
   const prepareArrival=seekAccess || comparePreparations && informationPreference?.strategy==='paired_arrival';
   let m = initialMemory(0);
   let checkpoint: typeof m | undefined;
+  let borrowed = false;
   function restoreCopiedMemory(value: typeof m) {
     m = value;
+    borrowed = false;
     m.delayed ??= newDelayedMemory();
     m.frontier ??= {...newFrontierMemory(),lastEdge:m.turns,lastScene:m.turns};
     m.projection ??= newProjectionMemory();
     m.space ??= newSpatialMemory();
     m.equations ??= freshCapabilities();
+  }
+  function workingMemory() {
+    if (borrowed) restoreCopiedMemory(copyNativeValue(m));
+    return m;
   }
   function enter(o:NativeObservation){
     if(m.epoch===o.level_epoch)return;
@@ -168,6 +175,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     next: NativeRows,
     x?: Experiment
   ) {
+    workingMemory();
     enter(b);
     let transportResult:string|undefined;
     if(!x?.relative && m.relativeMotion?.active)delete m.relativeMotion.active;
@@ -273,7 +281,12 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     async proposeInGroup(group, o, rows, inputs, remaining) {
       const revalidatePreview = group === transferredPreviewGroup;
       if (revalidatePreview) group = evidencedPlanGroup;
-      enter(o);
+      // Read-only refusals preserve the authoritative checkpoint. Helpers that
+      // can retain a claim or construct a new scene receive the working copy.
+      if (m.epoch !== o.level_epoch) {
+        workingMemory();
+        enter(o);
+      }
       if(remaining<1)return null;
       const focused=group===coveragePlanGroup;
       if(focused){if(!prioritizeCoverage||!m.coverage&&!m.crossing)return null;group=evidencedPlanGroup;}
@@ -283,7 +296,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       const again = (!!m.cursorSelection?.motions.length || comparePreparations && !!m.cursorSelection?.oriented?.length) && (!m.cursorSelection?.verified
         || (m.cursorSelection.returns??0)>0 || !!m.cursorSelection.blocked?.length);
       const offeredCursor = group===recurrentExperimentGroup && (opening || again || m.cursorSelection?.pending) || group===evidencedPlanGroup && m.cursorSelection?.pending
-        ? offerCursorTrial(m.cursorSelection??=newCursorMemory(),o,rows,!m.turns||!!m.configurationOpportunity,!opening,
+        ? offerCursorTrial(workingMemory().cursorSelection??=newCursorMemory(),o,rows,!m.turns||!!m.configurationOpportunity,!opening,
           group===recurrentExperimentGroup ? informationPreference : undefined) : null;
       let placementSelection=offeredCursor;
       const previous=m.landmarkMemory?.previousControl;
@@ -291,20 +304,20 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         group===recurrentExperimentGroup && m.cursorSelection && informationPreference){
         const l=visualLayout(o,rows),actor=l[previous.moving],peer=l[previous.parked];
         if(actor?.length===1 && peer?.length===1 && peer[0]!.at.every((v,i)=>v===previous.at[i])){
-          placementSelection=measuredReturnSelection(m.cursorSelection,o,rows,actor[0]!.box,peer[0]!.box,previous.ref,informationPreference);
+          placementSelection=measuredReturnSelection(workingMemory().cursorSelection!,o,rows,actor[0]!.box,peer[0]!.box,previous.ref,informationPreference);
         }
       }
       const coverage=planCoverage&&group===evidencedPlanGroup&&m.coverage&&limits
-        ?proposeCoverage(m.coverage,rows,o.available_action_refs,limits.maxDepth,limits.maxNodes):undefined;
+        ?proposeCoverage(workingMemory().coverage!,rows,o.available_action_refs,limits.maxDepth,limits.maxNodes):undefined;
       const crossing=bridgeSeries&&group===evidencedPlanGroup&&m.crossing&&m.transportLearning&&limits
-        ?proposeCrossing(m.crossing,m.transportLearning,rows,limits.maxDepth,limits.maxNodes):undefined;
+        ?proposeCrossing(workingMemory().crossing!,m.transportLearning,rows,limits.maxDepth,limits.maxNodes):undefined;
       if(focused&&!coverage&&!crossing)return null;
       const cooperative=coverage??crossing??(composeTransport&&group===evidencedPlanGroup&&m.transportLearning&&limits
-        ? chooseTransport(m.transportLearning,rows,limits.maxDepth,limits.maxNodes,stageRegions):undefined);
+        ? chooseTransport(workingMemory().transportLearning!,rows,limits.maxDepth,limits.maxNodes,stageRegions):undefined);
       let landmark=!cooperative && prepareArrival && limits && m.landmarkMemory && (group===evidencedPlanGroup && (m.landmarkMemory.active||m.landmarkMemory.redirect) || group===recurrentExperimentGroup && placementSelection?.stage==='select')
-        ? proposeLandmark(m.landmarkMemory,visualLayout(o,rows),o,rows,m.previewLearning?.partMotion??{},placementSelection,limits.maxNodes,seekAccess?limits.maxDepth:undefined):undefined;
+        ? proposeLandmark(workingMemory().landmarkMemory!,visualLayout(o,rows),o,rows,m.previewLearning?.partMotion??{},placementSelection,limits.maxNodes,seekAccess?limits.maxDepth:undefined):undefined;
       const challenge=landmark&&retrySelection&&m.placementVisits&&!m.cursorSelection?.pending
-        ?challengePlacement(m.placementVisits,landmark,o,visualLayout(o,rows)):undefined;
+        ?challengePlacement(workingMemory().placementVisits!,landmark,o,visualLayout(o,rows)):undefined;
       const verifyChallenge=retrySelection&&m.cursorSelection?.pending?.recurrentPlacement&&offeredCursor;
       if(challenge||verifyChallenge)landmark=undefined;
       const cursor=cooperative?null:challenge??(landmark?.stage==='select_after_contact'?refreshedSelection(landmark,visualLayout(o,rows)):landmark?null:offeredCursor);
@@ -313,10 +326,10 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       const justMovedLine=Object.values(m.relativeMotion?.models??{}).some(v=>v.contact?.latestDisplacement===o.observation_ref && !!v.contact?.freeWalk && !v.contact.contradicted);
       const repair=missingCue || justMovedLine || !!m.relativeMotion?.active || hasExperimentOpportunity(m);
       const relative=!cursor && repair && limits && group===evidencedPlanGroup && m.relativeMotion && m.previewLearning?.terminal?.length
-        ? chooseRelativePlan(m.relativeMotion,visualLayout(o,rows),o,rows,Object.fromEntries(m.previewLearning.terminal.map(w=>[w.marker,w.after])),limits,!missingCue) : null;
-      const relay=!focused && group===evidencedPlanGroup && limits && m.previewLearning && m.contactFrontier?.relayControl ? proposeRelayContact(m.contactFrontier,m.previewLearning,o,rows,limits):null;
+        ? chooseRelativePlan(workingMemory().relativeMotion!,visualLayout(o,rows),o,rows,Object.fromEntries(m.previewLearning.terminal.map(w=>[w.marker,w.after])),limits,!missingCue) : null;
+      const relay=!focused && group===evidencedPlanGroup && limits && m.previewLearning && m.contactFrontier?.relayControl ? proposeRelayContact(workingMemory().contactFrontier!,m.previewLearning,o,rows,limits):null;
       const contactProject=relay??(!focused && !cooperative && !landmark && !cursor && limits && group===evidencedPlanGroup && m.previewLearning && (m.previewLearning.terminal?.length || m.contactFrontier?.arrival || m.contactFrontier?.active)
-        ? proposeFrontierContact(m.contactFrontier??=newContactMemory(),m.previewLearning,o,rows,limits):null);
+        ? proposeFrontierContact(workingMemory().contactFrontier??=newContactMemory(),m.previewLearning,o,rows,limits):null);
       if (!contactProject && !cooperative && !landmark && !cursor && !relative && group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
       const localOpportunity=group===recurrentExperimentGroup && !!m.localCapacity &&
         (stalledLocal(m.localCapacity,o.frame_hash) || revisitedChoice(m.localCapacity,o.frame_hash) ||
@@ -336,7 +349,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           cursor.stage==='verify'?'test_whether_the_same_input_moves_the_clicked_body_while_the_old_body_stays':
           cursor.contrast?'compare_which_subject_responds_to_a_witnessed_motor_after_selection':
           'a_distinctive_colored_mark_on_a_homologous_piece_may_identify_the_controlled_cursor',refs:[],cursorTrial:cursor,
-      } : relative ? {phase:'useRelativePlacement',origin:-1,a:relative.op,b:relative.op,rule:'open_a_route_by_changing_a_relative_placement',refs:[],relative} : selectExperiment(m,o,available,group===exhaustedGroup,rows,localOpportunity,configurationOpportunity);
+      } : relative ? {phase:'useRelativePlacement',origin:-1,a:relative.op,b:relative.op,rule:'open_a_route_by_changing_a_relative_placement',refs:[],relative} : selectExperiment(workingMemory(),o,available,group===exhaustedGroup,rows,localOpportunity,configurationOpportunity);
       if(!landmark&&!cursor&&group===recurrentExperimentGroup&&!hasExperimentOpportunity(m)&&!experiment?.localCapacity&&!experiment?.configurationTrial)return null;
       if (group === evidencedPlanGroup && revalidatePreview !== requiresPreviewRevalidation(experiment)) return null;
       if (!experiment || (!contactProject && !cooperative && !landmark && !cursor && group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;
@@ -611,8 +624,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         : sicObservedTransportDeadlock;
     },
     stateAfterLevelReset(o, _rows, entry) {
-      const proof = m.contactFrontier?.deadlock;
-      if (!proof || !entry) return;
+      if (!m.contactFrontier?.deadlock || !entry) return;
+      const proof = workingMemory().contactFrontier!.deadlock!;
       const edges = [...new Set([...(m.contactFrontier?.recoveredEdges ?? []), proof.edge])];
       const restored = structuredClone(entry) as typeof m;
       restored.transportRetry = { epoch: o.level_epoch, edges, ...(proof.repair ? {repair:proof.repair} : {}) };
@@ -623,14 +636,20 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       }
       return restored;
     },
-    state: () => m,
+    state: workingMemory,
     restore(value) {
       restoreCopiedMemory(structuredClone(value as typeof m));
     },
-    nativeState: () => checkpoint = retainNativeJson(m, checkpoint),
+    nativeState: () => borrowed ? m : checkpoint = retainNativeJson(m, checkpoint),
     restoreNative(value) {
-      // The graph value is immutable; only this detached working copy mutates.
-      restoreCopiedMemory(copyNativeValue(value as typeof m));
+      // Only authoritative hydrated JSON may remain shared between restores.
+      // Materialize a detached copy before planning, acquisition or public state access.
+      const memory = value as typeof m;
+      if (isHydratedNativeJson(memory) && memory.delayed != null && memory.frontier != null
+        && memory.projection != null && memory.space != null && memory.equations != null) {
+        m = memory;
+        borrowed = true;
+      } else restoreCopiedMemory(copyNativeValue(memory));
     },
   };
 }

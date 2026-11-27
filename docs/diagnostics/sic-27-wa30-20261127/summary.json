@@ -1,0 +1,81 @@
+{
+  "evaluatedCommit": "966122137dc5fb4009a265e0f7ace243f79c2bab",
+  "baselineCommit": "d258b5b900c9f042b8535f75fee2c976ec5c71a5",
+  "verdict": "not_qualified_for_integration",
+  "target": 9,
+  "levelsWon": 7,
+  "actions": 510,
+  "stop": {
+    "level": 8,
+    "won": false,
+    "actions": 98,
+    "ms": 103003,
+    "budget": {
+      "actions": 166,
+      "activeTimeMs": 103000,
+      "source": "docs/architecture/sic-v8-validation.md :: WA30 niveau 8",
+      "timeBasis": "measured"
+    }
+  },
+  "firstSevenPrefixHashesMatch": true,
+  "unitTests": {
+    "orientedDeliveryContinuity": 20,
+    "orientedCycleAndDeliveryPassage": 9,
+    "typecheck": "passed"
+  },
+  "capturedDecisionAnalysis": {
+    "count": 38,
+    "multiActionProposals": 28,
+    "matched": [
+      90
+    ],
+    "blockedOnlyByDuplicateAppearanceScope": [
+      63,
+      76,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88
+    ],
+    "protectedSubjectChanged": [
+      67,
+      68,
+      69,
+      73,
+      74,
+      75,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99
+    ],
+    "otherShellChange": [
+      62,
+      70,
+      89,
+      93
+    ]
+  },
+  "archiveSha256": "454fd96a41ce13bcf0e81eaffcaac850b035e020979c1343f96f16a2accded22",
+  "archiveFileHashes": {
+    "baseline/results.jsonl": "e213303b0925fd356545155fd1b0898f8c0872144099e0deca03134a4b4af1c5",
+    "baseline/run-manifest.json": "b5bbdd95c2302c426a4c5114c893be749f2ec82dcfabab61dcfb81453e0f5cca",
+    "baseline/runner.log": "a271f8c88cbe95a2d319c34b710978f53be688c48879247f7c268d7537e8d3d6",
+    "baseline/wa30-baseline-13.jsonl": "bda5bae171e5efd2c632b4e2569a1e85b387dee1945b190e48c4d3e8707a0bc4",
+    "candidate/captured-decision62.json": "9ddd6c72c3a1d4b6f07538fbe80c8e32d39caa8c7a30217a9082c8e249f804fe",
+    "candidate/captured-guards62-99.json": "0d693fa06772a5c393c7f37d481646c244c7eb58a124843b9cb5c59cd62d90a0",
+    "candidate/results.jsonl": "e189f207850091aa45dafe1880072309131ed9c065c454c020e2d797e09208bb",
+    "candidate/run-end.json": "c75b5eb3cbe63b04b8dacd37c4cc49609fcaca5acd47c611702b27a6583c1c71",
+    "candidate/run-manifest.json": "a86a2581f75621d7d76ca0fe90a99db3646932abb2c4b9f3a5df7c1a691d35dd",
+    "candidate/runner.log": "d0d01dd4bb0ae58281546cae5f4f696500bee78f20150e75cb18577f419f38cd",
+    "probes/wa30-captured-guard-probe.mjs": "746cce21d8ad533b970e2c1d6124482f2334176b6dd45c19e10c0f216f4ea8e7",
+    "probes/wa30-route-profile.mjs": "3cee92be88228e9652eff5ce54bc00af7b899c96f0aef3cfd6c64122add5e625"
+  }
+}

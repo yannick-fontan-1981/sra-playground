@@ -1,0 +1,72 @@
+{
+  "source": "3872019d97921528a3c87bcfd0e9883067dbafc3",
+  "tree": "7e0dd85d0b7b79e09b8753a0a6ecc74fa308461d",
+  "strict": {
+    "qualified": false,
+    "won": 7,
+    "target": 9,
+    "actions": 546,
+    "level8Actions": 134,
+    "level8ActionCap": 166,
+    "level8ActiveCapMs": 103000,
+    "stop": "active_budget_exhausted",
+    "levels1to7": [
+      26,
+      59,
+      76,
+      48,
+      113,
+      48,
+      42
+    ]
+  },
+  "diagnostic": {
+    "scope": "owner-only public-prefix replay; not a full SIC qualification",
+    "level8CommandsToWin": 135,
+    "capturedFrameComparisons": [
+      69,
+      99,
+      100,
+      103,
+      107,
+      108
+    ]
+  },
+  "files": {
+    "wa30-strict-3872019d-manifest.json": {
+      "rawBytes": 1607,
+      "rawSHA256": "009b1a562463f7cfffaf21deddd03d929667646c8ad73bcdbefb9754a5c7388d",
+      "savedSHA256": "009b1a562463f7cfffaf21deddd03d929667646c8ad73bcdbefb9754a5c7388d"
+    },
+    "wa30-strict-3872019d.jsonl.gz": {
+      "rawBytes": 5618,
+      "rawSHA256": "fea22f76aa0aa7bbcf7b1ee5cae05b6a7ab05c9b373870ee31e2d8de94f8dabe",
+      "savedSHA256": "802c5356ed668ff9c5ef72e9ca12fe4bf89cd639acb33570f9de81f8a3171eb9"
+    },
+    "wa30-strict-3872019d.log.gz": {
+      "rawBytes": 1021,
+      "rawSHA256": "b599464f9b09b24bc8f497dfb7e450d8d36422a86e859570b87d989c6be04919",
+      "savedSHA256": "2b5e78e333b5578345fe0cd3bb3d3f45db79d023f410da82ecc8d40dcafd3820"
+    },
+    "wa30-strict-3872019d.jsonl.public.jsonl.gz": {
+      "rawBytes": 1252211,
+      "rawSHA256": "064c015bf6e9c86b32f34a36c6c1457de1496db393631e3b4aace147aa38be05",
+      "savedSHA256": "74ffa7765e658c32532660cfa8754ae9420e06af1a061f041eea9ca03e8e6659"
+    },
+    "wa30-last-part-probe.mjs": {
+      "rawBytes": 6226,
+      "rawSHA256": "9f77e4ace1f2dd7d679acecfbe02f792692b964dbe7021dc26455070a886e12c",
+      "savedSHA256": "9f77e4ace1f2dd7d679acecfbe02f792692b964dbe7021dc26455070a886e12c"
+    },
+    "wa30-last-part-public.jsonl.gz": {
+      "rawBytes": 5822803,
+      "rawSHA256": "eba64a396d67dbefaef970c22e91a2f917f6471c006b4638e888347f3da45a90",
+      "savedSHA256": "5b7309fc6242bcc7566a36025126ce8acf7c6274317634d698fcfde7d5bc0236"
+    },
+    "wa30-last-part-probe.log.gz": {
+      "rawBytes": 2215,
+      "rawSHA256": "caace59dff959f270002b580cdbaec5a3ff44a61414407a78635913f009e9be7",
+      "savedSHA256": "d007fa2f32a4ab29de71743e8910fce790f68a5cbb7c44a64f13ea214340c051"
+    }
+  }
+}
