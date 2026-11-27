@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "sra.public/1.1 — accusés matériels publics",
+  "type": "object",
+  "properties": {
+    "format": {
+      "const": "sra.public/1.1"
+    },
+    "goal": {
+      "$ref": "../schema.json#/properties/goal"
+    },
+    "observations": {
+      "$ref": "../schema.json#/properties/observations"
+    },
+    "domains": {
+      "$ref": "../schema.json#/properties/domains"
+    },
+    "commands": {
+      "$ref": "../schema.json#/properties/commands"
+    },
+    "rules": {
+      "$ref": "../schema.json#/properties/rules"
+    },
+    "sources": {
+      "$ref": "../schema.json#/properties/sources"
+    },
+    "receipts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/receipt"
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "format",
+    "goal",
+    "observations",
+    "domains",
+    "commands",
+    "rules",
+    "sources"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "covered": {
+      "type": "object",
+      "properties": {
+        "effect": {
+          "oneOf": [
+            {
+              "$ref": "../schema.json#/$defs/effect/oneOf/0"
+            },
+            {
+              "$ref": "../schema.json#/$defs/effect/oneOf/2"
+            }
+          ]
+        },
+        "source": {
+          "$ref": "../schema.json#/$defs/source"
+        }
+      },
+      "required": [
+        "effect",
+        "source"
+      ],
+      "additionalProperties": false
+    },
+    "reply": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[^\\r\\n]+$"
+            },
+            "kind": {
+              "const": "confirmed"
+            },
+            "coverage": {
+              "oneOf": [
+                {
+                  "const": "unknown"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/covered"
+                  },
+                  "minItems": 1
+                }
+              ]
+            },
+            "source": {
+              "$ref": "../schema.json#/$defs/source"
+            }
+          },
+          "required": [
+            "label",
+            "kind",
+            "coverage",
+            "source"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[^\\r\\n]+$"
+            },
+            "kind": {
+              "enum": [
+                "refused",
+                "ambiguous"
+              ]
+            },
+            "source": {
+              "$ref": "../schema.json#/$defs/source"
+            }
+          },
+          "required": [
+            "label",
+            "kind",
+            "source"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "receipt": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "$ref": "../schema.json#/$defs/command"
+            },
+            "status": {
+              "const": "undeclared"
+            }
+          },
+          "required": [
+            "command",
+            "status"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "$ref": "../schema.json#/$defs/command"
+            },
+            "status": {
+              "const": "ambiguous"
+            },
+            "source": {
+              "$ref": "../schema.json#/$defs/source"
+            }
+          },
+          "required": [
+            "command",
+            "status",
+            "source"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "$ref": "../schema.json#/$defs/command"
+            },
+            "status": {
+              "const": "declared"
+            },
+            "replies": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/reply"
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "command",
+            "status",
+            "replies"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}
