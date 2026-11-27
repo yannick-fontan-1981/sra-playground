@@ -1,0 +1,50 @@
+{
+  "révisions": [
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "c0b9f4027f1df257d7b8c96f5656f9dbb83661f0",
+    "e21781637371b846c60aa50de5ff080c136c9abf"
+  ],
+  "nominal": {
+    "rang": 147,
+    "offres": 147,
+    "max": 12,
+    "exÆquo": 4,
+    "point": {
+      "x": 25,
+      "y": 36
+    },
+    "niveauxTerminés": 1,
+    "verdict": "unknown_effect_observed"
+  },
+  "niveau2": {
+    "rang": 228,
+    "offres": 228,
+    "max": 13,
+    "exÆquo": 2,
+    "point": {
+      "x": 13,
+      "y": 12
+    },
+    "niveauxTerminés": 1,
+    "verdict": "unknown_effect_observed"
+  },
+  "alternative": {
+    "rang": 147,
+    "offres": 147,
+    "max": 12,
+    "exÆquo": 4,
+    "point": {
+      "x": 32,
+      "y": 35
+    },
+    "niveauxTerminés": 0,
+    "verdict": "unknown_effect_observed"
+  },
+  "empreintes": {
+    "dev": "69c5f3563a3eb0120ee41ae295989bfd2b818f690a1fb3bbf442997d875738ef",
+    "res": "e9f3db8cbbf332d30af0cb3077b0c548ae540540586eda82ceb1fb164bd5dc0e",
+    "DICO": "fea038101612942130ef8a5be603348a95dc5837edee942631b14f80bab33a80",
+    "shadow": "a2f10dc30b2230a39ac5e0f0c8b612c758e35a978a7b77e75396c185c1ac0632",
+    "MEMO": "389a3f07a98502cd963b5f934beede6b506f1ef2b0079b140df2871a21fc8612"
+  }
+}
