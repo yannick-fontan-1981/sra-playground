@@ -146,10 +146,13 @@ app.innerHTML = `
       </a>
     </section>
 
-    <aside class="design-premise wrap" aria-labelledby="design-premise-title">
+    <aside class="design-premise wrap" id="design-premise" aria-labelledby="design-premise-title">
       <h2 id="design-premise-title">DESIGN PREMISE</h2>
       <div>
         <p><strong>The design of artificial intelligence should begin with ethical principles.</strong> Symbolic reasoning makes deliberate design possible through explicit concepts, relations, and reasoning structures rooted in human intelligence. SRA draws its meaning and purpose from this human source, enabling us to take responsibility for the intelligence we build and thereby fulfill the ethical principle that guides its design.</p>
+        <blockquote class="design-premise-quote">
+          <p>Symbolic reasoning is a mechanism that can be conceived, recursively transformed, and trained; the result is a highly efficient, readable, maintainable, and controllable intelligence.</p>
+        </blockquote>
         <a class="text-link" href="/motivation.html">Start here: Motivation ${icon('arrow')}</a>
       </div>
     </aside>
