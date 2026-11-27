@@ -1,0 +1,169 @@
+{
+  "source": "e21781637371b846c60aa50de5ff080c136c9abf",
+  "frozen": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "parent": "c0b9f4027f1df257d7b8c96f5656f9dbb83661f0",
+  "coverage": {
+    "historique": {
+      "active": "fea038101612942130ef8a5be603348a95dc5837edee942631b14f80bab33a80",
+      "shadow": "1687ebfe6d1adf0ee3f68d5b6a8b38889749a8b0fb7e9b0fd87a686373e7a4f2",
+      "absent": "aa54a71ebe92fcdc1be9405ca52c86a9589cb68138562ced1af1adcaf81819c0",
+      "memo": "a0f1ec03f3d34402b99f00ea4d78de9d4f263e5f63cbade3108ee4c14f3d6892",
+      "fixture": "555e62f419be98b58048e47935503512fd7e2d90f8716b87796466f9c359cdd0"
+    },
+    "gel": {
+      "active": "fea038101612942130ef8a5be603348a95dc5837edee942631b14f80bab33a80",
+      "shadow": "1687ebfe6d1adf0ee3f68d5b6a8b38889749a8b0fb7e9b0fd87a686373e7a4f2",
+      "absent": "aa54a71ebe92fcdc1be9405ca52c86a9589cb68138562ced1af1adcaf81819c0",
+      "memo": "a0f1ec03f3d34402b99f00ea4d78de9d4f263e5f63cbade3108ee4c14f3d6892",
+      "fixture": "555e62f419be98b58048e47935503512fd7e2d90f8716b87796466f9c359cdd0"
+    },
+    "parent": {
+      "active": "fea038101612942130ef8a5be603348a95dc5837edee942631b14f80bab33a80",
+      "shadow": "1687ebfe6d1adf0ee3f68d5b6a8b38889749a8b0fb7e9b0fd87a686373e7a4f2",
+      "absent": "aa54a71ebe92fcdc1be9405ca52c86a9589cb68138562ced1af1adcaf81819c0",
+      "memo": "a0f1ec03f3d34402b99f00ea4d78de9d4f263e5f63cbade3108ee4c14f3d6892",
+      "fixture": "555e62f419be98b58048e47935503512fd7e2d90f8716b87796466f9c359cdd0"
+    }
+  },
+  "normal": [
+    {
+      "level": 1,
+      "count": 147,
+      "maximumRelations": 12,
+      "orderedMaxima": [
+        {
+          "x": 25,
+          "y": 36
+        },
+        {
+          "x": 32,
+          "y": 35
+        },
+        {
+          "x": 37,
+          "y": 24
+        },
+        {
+          "x": 37,
+          "y": 36
+        }
+      ],
+      "slateHash": "8f73d9b44d0d0546e818542e94876cdcd848a0d6ac0114152b3a548e7498aedf",
+      "command": {
+        "x": 25,
+        "y": 36
+      },
+      "guard": {
+        "admitted": true,
+        "reason": "current_public_premises_match_provisional_step"
+      },
+      "returned": {
+        "after": "subset-qualification:epoch:2:revision:2:frame:27d236e1c999562e",
+        "matched": null,
+        "status": "unknown_effect_observed",
+        "completed": 1,
+        "acquired": {
+          "objective": "Q_25c1916be61561533bb6",
+          "status": "observed",
+          "need": "sic-need:a5a4960a126b8ffdcb424b72fab619e9efbbbdb99a7e98d5adcc12155ea91803"
+        }
+      },
+      "objective": {
+        "id": "Q_25c1916be61561533bb6",
+        "label": "Investigate the richest observable composition",
+        "parent": "G_protocol_completion"
+      }
+    },
+    {
+      "level": 2,
+      "count": 228,
+      "maximumRelations": 13,
+      "orderedMaxima": [
+        {
+          "x": 13,
+          "y": 12
+        },
+        {
+          "x": 25,
+          "y": 12
+        }
+      ],
+      "slateHash": "18f5361c51f014302623085f7bc6c7d9dc84b1887dca67fa891146549e665a5d",
+      "command": {
+        "x": 13,
+        "y": 12
+      },
+      "guard": {
+        "admitted": true,
+        "reason": "current_public_premises_match_provisional_step"
+      },
+      "returned": {
+        "after": "subset-qualification:epoch:2:revision:3:frame:789ca94edae9ce43",
+        "matched": null,
+        "status": "unknown_effect_observed",
+        "completed": 1,
+        "acquired": {
+          "objective": "Q_0f7ae3b372ec456042ed",
+          "status": "observed",
+          "need": "sic-need:3c49c2b2f40953d6335396d21b3f4adb396aaa17b9dec46f197da883b7811f1b"
+        }
+      },
+      "objective": {
+        "id": "Q_0f7ae3b372ec456042ed",
+        "label": "Investigate the richest observable composition",
+        "parent": "G_protocol_completion"
+      }
+    }
+  ],
+  "regression87": "f910ba8e89c384bae0716fd5831988f52e3d5fb34b0218a06987290517f393f3",
+  "operator": "71b861a935411e50471118fd1f4208c00bbc73d9",
+  "substituted": {
+    "level": 1,
+    "count": 147,
+    "maximumRelations": 12,
+    "orderedMaxima": [
+      {
+        "x": 25,
+        "y": 36
+      },
+      {
+        "x": 32,
+        "y": 35
+      },
+      {
+        "x": 37,
+        "y": 24
+      },
+      {
+        "x": 37,
+        "y": 36
+      }
+    ],
+    "slateHash": "8f73d9b44d0d0546e818542e94876cdcd848a0d6ac0114152b3a548e7498aedf",
+    "command": {
+      "x": 37,
+      "y": 36
+    },
+    "guard": {
+      "admitted": true,
+      "reason": "current_public_premises_match_provisional_step"
+    },
+    "returned": {
+      "after": "subset-qualification:epoch:1:revision:2:frame:84161d4073ae6ee8",
+      "matched": null,
+      "status": "unknown_effect_observed",
+      "completed": 0,
+      "acquired": {
+        "objective": "Q_5f9afa3b4248510a359c",
+        "status": "observed",
+        "need": "sic-need:fd4ca177d6744d80a6ab10a71b57c2b1c4d68c199027b750ae941fdc1316e464"
+      }
+    },
+    "objective": {
+      "id": "Q_5f9afa3b4248510a359c",
+      "label": "Investigate the richest observable composition",
+      "parent": "G_protocol_completion"
+    }
+  },
+  "archiveSHA256": "144fb42c5d45e268dbbc74914265b12afe6a01b6a5e80199adbad1b85cd299ec"
+}
