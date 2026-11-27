@@ -5,6 +5,7 @@ import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseFromFeedback, feedbackChoiceFacts, feedbackChoiceModule } from './feedback-choice-card.ts';
 import { sicNeedId } from './need-identity.ts';
+import { observedMechanicsGroup } from './strategy-agenda.ts';
 
 export const feedbackTrialId = 'sic_feedback_trial';
 export const verifyOrderedFeedbackId = 'sic_verify_ordered_feedback';
@@ -35,6 +36,14 @@ function activePrefix(rows: NativeRows, layout: FeedbackLayout, active: Feedback
     equal(values, [...selected, ...Array(values.length - selected.length).fill(active.empty)]) ? selected : null;
 }
 
+function recalledEntry(layout: FeedbackLayout, retained: EntryEvidence | null, completed: number) {
+  const offsets = layout.slot_rows.map(row => row.y - layout.palette_y).sort((a, b) => a - b);
+  if (!retained || retained.completed !== completed || retained.pitch !== layout.pitch
+    || !equal(retained.size, layout.size) || !equal(retained.rowOffsets, offsets)) return null;
+  const rows = layout.slot_rows.filter(row => row.y - layout.palette_y === retained.activeOffset);
+  return rows.length === 1 ? rows[0]! : null;
+}
+
 export function createSicVerifyOrderedFeedback(): NativeFamily<Proposal> {
   let state: State | null = null;
   let retained: EntryEvidence | null = null;
@@ -44,6 +53,15 @@ export function createSicVerifyOrderedFeedback(): NativeFamily<Proposal> {
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseFromFeedback, {}, await feedbackChoiceModule());
     },
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      if (!retained?.proof.length || !observation.available_action_refs.includes(retained.submit)) return null;
+      const prior = state?.layout.epoch === observation.level_epoch ? state : null;
+      const layout = prior?.layout ?? initialFeedbackLayout(observation);
+      const active = layout && recalledEntry(layout, retained, observation.levels_completed);
+      if (!active || (prior && (prior.active?.y !== active.y || prior.submission !== retained.submit))) return null;
+      return this.propose(observation, rows, inputs, remaining, execution);
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.layout.epoch === observation.level_epoch ? state : null;
@@ -51,10 +69,7 @@ export function createSicVerifyOrderedFeedback(): NativeFamily<Proposal> {
       if (!layout || prior?.stopped || (prior?.history.length ?? 0) >= 12) return null;
       const palette = feedbackPalette(observation, layout);
       if (!palette) return null;
-      const offsets = layout.slot_rows.map(row => row.y - layout.palette_y).sort((a, b) => a - b);
-      const comparable = !prior && retained?.completed === observation.levels_completed && retained.pitch === layout.pitch
-        && equal(retained.size, layout.size) && equal(retained.rowOffsets, offsets);
-      const restoredRow = comparable ? layout.slot_rows.find(row => row.y - layout.palette_y === retained!.activeOffset) ?? null : null;
+      const restoredRow = !prior ? recalledEntry(layout, retained, observation.levels_completed) : null;
       const submission = restoredRow && retained && observation.available_action_refs.includes(retained.submit) ? retained.submit : null;
       const local: State = prior ?? { layout, active: restoredRow, repeatable: null, submission, history: [], blocked: [],
         evidence: restoredRow ? retained!.proof : [], stopped: false };

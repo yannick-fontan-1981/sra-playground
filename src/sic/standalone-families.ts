@@ -121,7 +121,7 @@ export const standalonePlanningGroups = [
   { id: observedPressureRecoveryGroup, families: [observedActorCompositionId, publicInputExplorationId] },
   { id: observedMechanicsGroup, families: [markedCollectionId, visibleConfigurationCoverageId, markedCompartmentFlowId, animationContactId,
     observedRelayRouteId, observedPrefixQuotasId, observedCarrierReductionId, observedLinePlacementId, observedPolePairId, verifyPreviewPlacementId, learnTransportAccessId,
-    learnTurnPostsId, learnDirectionalReceptionId,
+    learnTurnPostsId, learnDirectionalReceptionId, verifyOrderedFeedbackId,
     verifyInventoryTransferId, learnInventoryTransferId, chartRouteId, framedContactId, coupledGaugeRouteId, reproduceCueId, arrangeTurnPostsId, directionalReceptionId, pairedPassageId,
     remoteSupportRouteId, verifyFrameContactId, verifyProfileTransferId, protectGravityRouteId, translateCoupledPiecesId, learnContactAccessId, verifyConnectedRouteId, verifyCoupledRouteId, verifyOrientedDeliveryId, verifyReferencePlacementId, learnReferencePlacementId, verifyChannelAccessId,
     displayCouplingId, periodicProfileAlignmentId, materialAssemblyId, observedSharedRelationsId, observedPatternLayoutId, verifyReactiveMotionId, switchedSurfaceId, navigateRevealedGridId,
