@@ -1,0 +1,59 @@
+{
+  "source": "333b5048d8bac6ab34a387eeb1221413cd0a1673",
+  "code": "HOLE",
+  "reason": "target_levels_completed",
+  "status": "stopped",
+  "actions": 78,
+  "won": 6,
+  "byLevel": [
+    {
+      "level": 1,
+      "won": true,
+      "actions": 5,
+      "scoredMs": 1983,
+      "activeMs": 1992,
+      "prefixHash": "012c8aaf2cae6c42b84cff41bc39f11d4d9a76d61fdd2817e600c406ea372ebb"
+    },
+    {
+      "level": 2,
+      "won": true,
+      "actions": 6,
+      "scoredMs": 1457,
+      "activeMs": 1465,
+      "prefixHash": "af732526acba237a8c1e085a9d73a9ba48e9e3a52c181a17a138a183c9f71df5"
+    },
+    {
+      "level": 3,
+      "won": true,
+      "actions": 10,
+      "scoredMs": 3126,
+      "activeMs": 3038,
+      "prefixHash": "e8e2121889d31df93f3c3aa94e478a1d9ce39385eb36ae4c8921e739f0074c00"
+    },
+    {
+      "level": 4,
+      "won": true,
+      "actions": 9,
+      "scoredMs": 3100,
+      "activeMs": 3060,
+      "prefixHash": "c5f15e74aa132b85e6d1fe375529a8353c37a0964457337d03e0002fe20be482"
+    },
+    {
+      "level": 5,
+      "won": true,
+      "actions": 21,
+      "scoredMs": 9525,
+      "activeMs": 9199,
+      "prefixHash": "e75b601c864cd6f0a839cba87c9877d8587f7833ee23492f124b88e1a393c7b6"
+    },
+    {
+      "level": 6,
+      "won": true,
+      "actions": 27,
+      "scoredMs": 14059,
+      "activeMs": 13628,
+      "prefixHash": "f243570d5075a0824ceb6586edcdcefa8690a9ac50a199cff3add98642185902"
+    }
+  ],
+  "resultSHA256": "b073696deec210427d377b51a3809a01b48490977e740df4900e428db9b28e35"
+}
