@@ -1,0 +1,75 @@
+{
+  "source": "0a8b02e744cd9e5a2284a8c396593a0079de987a",
+  "workflowCommit": "fd673a7c6a5ecf92341cf3afe4e8a08a3fdcc898",
+  "runId": "46028295665",
+  "node": "v24.22.3",
+  "start": 1,
+  "target": 9,
+  "workers": 1,
+  "mode": "sic",
+  "command": [
+    "node",
+    "scripts/check-sic-chronological.mjs",
+    "WA30",
+    "9",
+    "strict.jsonl",
+    "1",
+    "sic"
+  ],
+  "budgets": [
+    {
+      "actions": 32,
+      "activeTimeMs": 18000,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WA30; level=1; won=true",
+      "timeBasis": "measured"
+    },
+    {
+      "actions": 64,
+      "activeTimeMs": 46000,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WA30; level=2; won=true",
+      "timeBasis": "measured"
+    },
+    {
+      "actions": 92,
+      "activeTimeMs": 41000,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WA30; level=3; won=true",
+      "timeBasis": "measured"
+    },
+    {
+      "actions": 58,
+      "activeTimeMs": 30000,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WA30; level=4; won=true",
+      "timeBasis": "measured"
+    },
+    {
+      "actions": 136,
+      "activeTimeMs": 61000,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WA30; level=5; won=true",
+      "timeBasis": "measured"
+    },
+    {
+      "actions": 58,
+      "activeTimeMs": 21000,
+      "source": "docs/architecture/sic-v8-validation.md :: WA30 niveau 6, retrouver un réceptacle masqué et interrompre un retrait",
+      "timeBasis": "measured"
+    },
+    {
+      "actions": 51,
+      "activeTimeMs": 22000,
+      "source": "docs/architecture/sic-v8-validation.md :: WA30 niveau 7, laisser libre la case du rendez-vous",
+      "timeBasis": "measured"
+    },
+    {
+      "actions": 166,
+      "activeTimeMs": 103000,
+      "source": "docs/architecture/sic-v8-validation.md :: WA30 niveau 8",
+      "timeBasis": "measured"
+    },
+    {
+      "actions": 80,
+      "activeTimeMs": 51000,
+      "source": "docs/architecture/sic-v8-validation.md :: WA30 niveau 9 — Combiner les relais, les livraisons locales et la coopération",
+      "timeBasis": "measured"
+    }
+  ]
+}

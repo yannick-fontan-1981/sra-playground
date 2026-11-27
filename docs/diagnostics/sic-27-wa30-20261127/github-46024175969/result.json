@@ -1,0 +1,80 @@
+{
+  "source": "90fb06f44016a1a60ecacf888086de1a69873783",
+  "code": "WA30",
+  "reason": "level_wall_time_budget",
+  "status": "stopped",
+  "actions": 588,
+  "won": 8,
+  "byLevel": [
+    {
+      "level": 1,
+      "won": true,
+      "actions": 26,
+      "scoredMs": 8177,
+      "activeMs": 8022,
+      "prefixHash": "b8590d9cd1f336a57ab225ee2221c5dad1bb5bc156b281cd9fce79e6b4889dd0"
+    },
+    {
+      "level": 2,
+      "won": true,
+      "actions": 59,
+      "scoredMs": 20308,
+      "activeMs": 19963,
+      "prefixHash": "8719651603c98bc70a2b99158bc36466a6fa7dcebbf5b2c85f7a8f13e4d2680e"
+    },
+    {
+      "level": 3,
+      "won": true,
+      "actions": 76,
+      "scoredMs": 28418,
+      "activeMs": 28023,
+      "prefixHash": "1edf2d53da640199b3f81fa992c683adf76bde5c48dd1f1789c41c94cf9ccd20"
+    },
+    {
+      "level": 4,
+      "won": true,
+      "actions": 48,
+      "scoredMs": 25885,
+      "activeMs": 25839,
+      "prefixHash": "28496b886b71f98917c9d5fc36cc7aa70065aaf39e3e794c0acff950611acd8f"
+    },
+    {
+      "level": 5,
+      "won": true,
+      "actions": 113,
+      "scoredMs": 43574,
+      "activeMs": 43227,
+      "prefixHash": "9accdb2af15f5800704fda20e8ab8e61df1a8a6181e8130f6d97424a64c85f79"
+    },
+    {
+      "level": 6,
+      "won": true,
+      "actions": 48,
+      "scoredMs": 17143,
+      "activeMs": 17257,
+      "prefixHash": "73ffd1e2c54aa69168c2146652a2ad1d8a8a34a80ac8ef01a98aff8f13c12f6f"
+    },
+    {
+      "level": 7,
+      "won": true,
+      "actions": 42,
+      "scoredMs": 16974,
+      "activeMs": 17112,
+      "prefixHash": "9eaad4abd00b3cac9da6b297f2872829cdf8d1425a6bc5154f40c7bb186e5240"
+    },
+    {
+      "level": 8,
+      "won": true,
+      "actions": 135,
+      "scoredMs": 90786,
+      "activeMs": 90421,
+      "prefixHash": "f7087cebfb21f5416cf68869f13a27cf4c92462870f06ecf7677cbef1d5ed8e0"
+    },
+    {
+      "level": 9,
+      "won": false,
+      "actions": 41
+    }
+  ],
+  "resultSHA256": "52362ee9579681561a54f798592a96ea3bd71fb8bcc39a0473b4f1b3cd575454"
+}
