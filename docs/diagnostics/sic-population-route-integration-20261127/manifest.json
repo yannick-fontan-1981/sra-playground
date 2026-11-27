@@ -1,0 +1,312 @@
+{
+  "schema": "sic.integration-qualification.v1",
+  "scope": "ESCT, VOIS, PORT; this is not a new 107-game total",
+  "strict": {
+    "localSource": "7443033e17f166777a811ea7de05524407ec5330",
+    "githubSource": "feebe6632e229dd3b544948749e12b72b23b6119",
+    "tree": "40889b02c6c82fa82d2be185a70f7ff0e2600dd1",
+    "command": "SIC_REPLAY_REFERENCES=docs/architecture/sic-replay-reference-levels-20261126.json node scripts/check-sic-chronological.mjs ESCT,VOIS,PORT auto /absolute/strict-results.jsonl 1 sic",
+    "workers": 1,
+    "startLevel": 1,
+    "continuousSessionPerGame": true,
+    "budgetsChanged": false
+  },
+  "continuity": {
+    "localSource": "4034654d236a5f177cd108e9890003a99200093f",
+    "githubSource": "4b611313f0e445c2a9c6d7c1e1ce02c3224db1f5",
+    "tree": "dbc4c6d94eb4fcba068c1ac1069bf7a64fb66811",
+    "runtimeDiffToStrict": [],
+    "commands": [
+      "SIC_STUDY_CONTINUITY=1 SIC_STUDY_WORKERS=1 SIC_STUDY_SOLVER=sic node scripts/compare-source100.mjs . . /absolute/vois-continuity.jsonl source:VOIS 1 6 80",
+      "SIC_STUDY_CONTINUITY=1 SIC_STUDY_WORKERS=1 SIC_STUDY_SOLVER=sic node scripts/compare-source100.mjs . . /absolute/port-continuity.jsonl source:PORT 1 6 32"
+    ],
+    "esctEvidence": "../sic-observed-route-transfer-20261127/opening-continuity-results.jsonl.gz"
+  },
+  "games": [
+    {
+      "game": "ESCT",
+      "completed": 6,
+      "target": 6,
+      "commands": 118,
+      "sicAuthorized": 118,
+      "acquired": 118,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "trajectorySha256": "59f699cae3803de03a511ccd66d05bc71ae5df61e2dcdcfb7e869ab0b8f06ef8",
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "commands": 16,
+          "scoredMs": 5943,
+          "settlementMs": 180,
+          "totalMs": 6123,
+          "actionCap": 21,
+          "timeCapMs": 14000,
+          "prefixSha256": "9861fc98ec4274351a8b2e035076a5356bd18a012440ce37a5933a6800e8357e"
+        },
+        {
+          "level": 2,
+          "won": true,
+          "commands": 17,
+          "scoredMs": 5757,
+          "settlementMs": 226,
+          "totalMs": 5983,
+          "actionCap": 22,
+          "timeCapMs": 12000,
+          "prefixSha256": "aa17dde1be31cda1c70095f977a29e0816ac7101981a9b72f17249bda1edebd8"
+        },
+        {
+          "level": 3,
+          "won": true,
+          "commands": 21,
+          "scoredMs": 9536,
+          "settlementMs": 356,
+          "totalMs": 9892,
+          "actionCap": 26,
+          "timeCapMs": 15000,
+          "prefixSha256": "96583f36a5010d8e7a1ac71aa8625b263d15bd950f113c8ccaa75e1ef1c17a1b"
+        },
+        {
+          "level": 4,
+          "won": true,
+          "commands": 22,
+          "scoredMs": 13395,
+          "settlementMs": 516,
+          "totalMs": 13910,
+          "actionCap": 27,
+          "timeCapMs": 16000,
+          "prefixSha256": "56225454e20ebe7ba19d59de8ef77bfbe66d6039b170cec77908573a6e04681d"
+        },
+        {
+          "level": 5,
+          "won": true,
+          "commands": 17,
+          "scoredMs": 10087,
+          "settlementMs": 530,
+          "totalMs": 10616,
+          "actionCap": 22,
+          "timeCapMs": 14000,
+          "prefixSha256": "dbbc34afa6e7e28d81068cb69b5ddd15ca9b2441223b92d576ccf0edfc4cfaa2"
+        },
+        {
+          "level": 6,
+          "won": true,
+          "commands": 25,
+          "scoredMs": 16245,
+          "settlementMs": 761,
+          "totalMs": 17006,
+          "actionCap": 30,
+          "timeCapMs": 18000,
+          "prefixSha256": "59f699cae3803de03a511ccd66d05bc71ae5df61e2dcdcfb7e869ab0b8f06ef8"
+        }
+      ]
+    },
+    {
+      "game": "VOIS",
+      "completed": 6,
+      "target": 6,
+      "commands": 196,
+      "sicAuthorized": 196,
+      "acquired": 196,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "trajectorySha256": "8324e6a9e34907ce62fe0b49a7ec8453fddd36705ad9309f756dedd3f3aff4bd",
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "commands": 14,
+          "scoredMs": 3329,
+          "settlementMs": 356,
+          "totalMs": 3687,
+          "actionCap": 19,
+          "timeCapMs": 15000,
+          "prefixSha256": "cbba416cc9be373a894c1ee08324922d8c0eb71a7dcad2c551a2593bee83f186"
+        },
+        {
+          "level": 2,
+          "won": true,
+          "commands": 18,
+          "scoredMs": 3614,
+          "settlementMs": 303,
+          "totalMs": 3916,
+          "actionCap": 23,
+          "timeCapMs": 15000,
+          "prefixSha256": "3f135185cabbc08b0b18ba5be3eeb843689afbfafe442b2acd752d6998899439"
+        },
+        {
+          "level": 3,
+          "won": true,
+          "commands": 34,
+          "scoredMs": 6373,
+          "settlementMs": 215,
+          "totalMs": 6587,
+          "actionCap": 41,
+          "timeCapMs": 18000,
+          "prefixSha256": "a973efa26aeddc92bbc8f941bc11ec99d561fef31953b7e90eb393425150671f"
+        },
+        {
+          "level": 4,
+          "won": true,
+          "commands": 23,
+          "scoredMs": 3587,
+          "settlementMs": 883,
+          "totalMs": 4470,
+          "actionCap": 28,
+          "timeCapMs": 14000,
+          "prefixSha256": "490c1ffbfc4fe7b94d5bc4d3893c316e7d838c46351399b9400c9481e751cd19"
+        },
+        {
+          "level": 5,
+          "won": true,
+          "commands": 36,
+          "scoredMs": 6779,
+          "settlementMs": 1874,
+          "totalMs": 8652,
+          "actionCap": 45,
+          "timeCapMs": 21000,
+          "prefixSha256": "6548237e4ed5d62b7b38e01186e22a03ec1e283a8e338deeff1d341ed588cf79"
+        },
+        {
+          "level": 6,
+          "won": true,
+          "commands": 71,
+          "scoredMs": 17816,
+          "settlementMs": 1934,
+          "totalMs": 19749,
+          "actionCap": 80,
+          "timeCapMs": 27000,
+          "prefixSha256": "8324e6a9e34907ce62fe0b49a7ec8453fddd36705ad9309f756dedd3f3aff4bd"
+        }
+      ]
+    },
+    {
+      "game": "PORT",
+      "completed": 6,
+      "target": 6,
+      "commands": 116,
+      "sicAuthorized": 116,
+      "acquired": 116,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "trajectorySha256": "6ac0996092896e035f77015d8a6f76a5aaba6857ca936c6af7832723877834e1",
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "commands": 16,
+          "scoredMs": 3561,
+          "settlementMs": 1239,
+          "totalMs": 4800,
+          "actionCap": 21,
+          "timeCapMs": 12000,
+          "prefixSha256": "e98e2dedd56d2d3ccd3342bdfb540d587d480b26de079f771e319927b6347d0f"
+        },
+        {
+          "level": 2,
+          "won": true,
+          "commands": 18,
+          "scoredMs": 3188,
+          "settlementMs": 857,
+          "totalMs": 4045,
+          "actionCap": 23,
+          "timeCapMs": 15000,
+          "prefixSha256": "a239c076afa87ac90d72495f49ef5b1dfc7940dc9fe41c06ed47caf77527eb30"
+        },
+        {
+          "level": 3,
+          "won": true,
+          "commands": 26,
+          "scoredMs": 7857,
+          "settlementMs": 771,
+          "totalMs": 8628,
+          "actionCap": 32,
+          "timeCapMs": 20000,
+          "prefixSha256": "7e97f58690f565a8855015ed27c827650482f4451a384aecaeba030d68082111"
+        },
+        {
+          "level": 4,
+          "won": true,
+          "commands": 19,
+          "scoredMs": 5357,
+          "settlementMs": 1838,
+          "totalMs": 7195,
+          "actionCap": 22,
+          "timeCapMs": 15000,
+          "prefixSha256": "f344e23b021c3f61d6c675ddde407141e2f7ef317cd1f93fe70fd73045414875"
+        },
+        {
+          "level": 5,
+          "won": true,
+          "commands": 19,
+          "scoredMs": 6377,
+          "settlementMs": 1437,
+          "totalMs": 7813,
+          "actionCap": 22,
+          "timeCapMs": 14000,
+          "prefixSha256": "95080a9cfa4725b41e802d91c0de44446e849cd2e09d4b4413945a85fbc1927e"
+        },
+        {
+          "level": 6,
+          "won": true,
+          "commands": 18,
+          "scoredMs": 9040,
+          "settlementMs": 1044,
+          "totalMs": 10084,
+          "actionCap": 21,
+          "timeCapMs": 12000,
+          "prefixSha256": "6ac0996092896e035f77015d8a6f76a5aaba6857ca936c6af7832723877834e1"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "strict-results.jsonl.gz",
+      "kind": "strict-campaign",
+      "original": "triple-strict-7443033e.jsonl",
+      "rawBytes": 78058,
+      "rawSha256": "bc4a40d6ca8a295ecc7fab8821ab0cad48a0814f3601632e8e23fbd27bb0c664",
+      "bytes": 9428,
+      "sha256": "847483c0114ab0f05d76af2477d69e536138056da3b2676a1bd55f7be4d1b610"
+    },
+    {
+      "path": "strict-levels.jsonl.gz",
+      "kind": "strict-level-events",
+      "original": "triple-strict-7443033e.jsonl.levels",
+      "rawBytes": 11982,
+      "rawSha256": "5c2007b7f16d23335abe5b476b34eee4d862a661e32b0e93c3147774ebaae732",
+      "bytes": 3120,
+      "sha256": "18ebe69e135ba4bd9d5bdc2ea2292860af661e37d85b2cb6d9a0f924951f21ed"
+    },
+    {
+      "path": "vois-continuity.jsonl.gz",
+      "kind": "actual-executed-prefixes",
+      "original": "vois-continuity-4034654d.jsonl",
+      "rawBytes": 591850,
+      "rawSha256": "aacd0d817480b2c8c3366659c569566d03d0dec395992f47984713c1ac22ac3e",
+      "bytes": 21612,
+      "sha256": "0a833581513ccec37ce2bff4a4c9139a5513d4df0994aa6e5862416a4ff84012"
+    },
+    {
+      "path": "port-continuity.jsonl.gz",
+      "kind": "actual-executed-prefixes",
+      "original": "port-continuity-4034654d.jsonl",
+      "rawBytes": 247605,
+      "rawSha256": "77907a20bc339a701f806a4841c63bd98c36944f46b1aef91851979ee0143566",
+      "bytes": 13703,
+      "sha256": "d67fb5398ac2fdf22bf89903d30fa5072ff3cf47a39127ce9454588b377dce64"
+    }
+  ],
+  "limitations": [
+    "Native strict replay and passive continuity collection are separate executions.",
+    "UI delivery and whole-campaign regression remain separate gates."
+  ]
+}

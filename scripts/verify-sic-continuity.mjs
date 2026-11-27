@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { requireExecutedPrefix } from './sic-continuity-contract.mjs';
 import { measuredOpeningPreparation } from './sic-route-opening-continuity.mjs';
+import { measuredPopulationPreparation } from './sic-population-continuity.mjs';
+import { measurePassageContinuity, passageCeilings, passageContinuity } from './sic-passage-continuity-contract.mjs';
 export { requireExecutedPrefix } from './sic-continuity-contract.mjs';
 import { measureManipulation, requireManipulation } from './measure-ss01-manipulation.mjs';
 import { compileLevel, equal, initialState, stepWorld } from '../experiments/sinking-star-ss02/src/core.ts';
@@ -42,7 +44,7 @@ const requiredPhysical = {
   7: ['crate', 'position'],
   8: ['crate', 'mirror', 'position'],
 };
-const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SIGN: 'move', GABA: 'move', LKEY: 'move', COLM: 'move', ESCT: 'move', WA30: 'move', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move', SS06: 'move', SS07: 'move' };
+const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SIGN: 'move', GABA: 'move', LKEY: 'move', COLM: 'move', ESCT: 'move', VOIS: 'mixed', PORT: 'move', WA30: 'move', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move', SS06: 'move', SS07: 'move' };
 const markedFieldContinuity = [[15, 4], [44, 26], [56, 28], [22, 0], [53, 28], [81, 31]];
 const cargoContinuity = [[47, 38], [37, 34], [67, 62], [88, 82], [106, 99], [102, 93]];
 const orientedDeliveryCeilings = [32, 64, 92, 58, 136, 58, 51];
@@ -64,6 +66,11 @@ const queueOwners = new Set(['sic_queued_placement', 'sic_place_after_observed_q
 // These two openings follow the retained route role; the other levels may be unitary.
 const openingContinuity = [[16, 0], [17, 0], [21, 3], [22, 0], [17, 0], [25, 5]];
 const openingCeilings = [21, 22, 26, 27, 22, 30];
+// Actual [commands, continued commands, prepared selections, movements after selection], 4b611313.
+// Early levels acquire directional controls. L3–6 combine a measured selection
+// with its learned movement, stopping when a stationary neighbour responds.
+const populationContinuity = [[14, 5, 0, 0], [18, 6, 0, 0], [34, 22, 6, 21], [23, 16, 4, 15], [36, 26, 6, 26], [71, 55, 13, 54]];
+const populationCeilings = [19, 23, 41, 28, 45, 80];
 
 function confirmedProfileReturn(ticket) {
   const outcome = ticket.outcome;
@@ -1082,7 +1089,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SIGN: 6, GABA: cargoContinuity.length, LKEY: profileContinuity.length, COLM: queueContinuity.length, ESCT: openingContinuity.length, WA30: orientedDeliveryCeilings.length, SS02: 8, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 8 };
+  const campaignLengths = { SIGN: 6, GABA: cargoContinuity.length, LKEY: profileContinuity.length, COLM: queueContinuity.length, ESCT: openingContinuity.length, VOIS: populationContinuity.length, PORT: passageContinuity.length, WA30: orientedDeliveryCeilings.length, SS02: 8, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 8 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   if (code === 'WA30') {
     assert.equal(run.start, 1, 'WA30 must start at level one');
@@ -1099,6 +1106,11 @@ export function checkRun(run) {
   if (code === 'ESCT') {
     assert.equal(run.start, 1, 'ESCT must start at level one');
     assert.equal(run.initialCompleted, 0, 'ESCT must preserve one chronological session');
+  }
+  if (code === 'VOIS' || code === 'PORT') {
+    assert.equal(run.start, 1, code + ' must start at level one');
+    assert.equal(run.initialCompleted, 0, code + ' must preserve one chronological session');
+    assert.equal(run.parallelWorkers, 1, code + ' must use one native worker');
   }
   assert.equal(
     tickets.length,
@@ -1144,7 +1156,7 @@ export function checkRun(run) {
         }
         assert.equal(group.at(-1).sealCount, 1, 'WA30 requires exactly one final reconciliation');
       }
-      if (code === 'LKEY' || code === 'COLM' || code === 'ESCT') requireExecutedPrefix(code, group);
+      if (['LKEY', 'COLM', 'ESCT', 'VOIS', 'PORT'].includes(code)) requireExecutedPrefix(code, group);
       if (group.length < 2) continue;
       lengths.push(group.length);
       const clicks = group.filter((t) => t.action === 'ACTION6').length;
@@ -1159,8 +1171,10 @@ export function checkRun(run) {
       );
     } else if (code !== 'SIGN' && (code !== 'LKEY' || profileContinuity[i][1] > 0)
       && (code !== 'ESCT' || openingContinuity[i][1] > 0)
-      && (code !== 'WA30' || orientedDeliverySeriesLevels.has(row.level)))
-      assert.ok(kinds.has(sources[code]), code + ' lost its ' + sources[code] + ' series');
+      && (code !== 'WA30' || orientedDeliverySeriesLevels.has(row.level))) {
+      const expectedKind = code === 'VOIS' && row.level <= 2 ? 'move' : sources[code];
+      assert.ok(kinds.has(expectedKind), code + ' lost its ' + expectedKind + ' series');
+    }
     if (code === 'SIGN') {
       const ceiling = [20, 58, 68, 27, 64, 98][row.level - 1];
       const [actions, minContinued] = markedFieldContinuity[i];
@@ -1191,6 +1205,17 @@ export function checkRun(run) {
     if (code === 'ESCT') {
       assert.ok(issued.length <= openingCeilings[i] && issued.every(ticket => ticket.resets === 0),
         'ESCT exceeded its verified action ceiling or reset');
+    }
+    if (code === 'VOIS') {
+      const [actions, minimumContinued] = populationContinuity[i];
+      assert.ok(issued.length <= populationCeilings[i] && issued.every(ticket => ticket.resets === 0),
+        'VOIS exceeded its verified action ceiling or reset');
+      assert.ok(continued >= Math.min(issued.length - 1, Math.ceil(minimumContinued * issued.length / actions)),
+        'VOIS L' + row.level + ' lost measured population continuity');
+    }
+    if (code === 'PORT') {
+      assert.ok(issued.length <= passageCeilings[i] && issued.every(ticket => ticket.resets === 0),
+        'PORT exceeded its verified action ceiling or reset');
     }
     if (code === 'WA30') {
       assert.ok(issued.length <= orientedDeliveryCeilings[i] && issued.every(ticket => ticket.resets === 0),
@@ -1280,6 +1305,7 @@ export function checkRun(run) {
       : code === 'LKEY' && profileContinuity[i][1] > 0 ? measuredProfilePreparation(run, issued, groups)
       : code === 'COLM' ? measuredQueuePreparation(run, issued, groups)
       : code === 'ESCT' ? measuredOpeningPreparation(run, issued, groups)
+      : code === 'PORT' ? measurePassageContinuity(run, issued, groups)
       : code === 'WA30' && orientedDeliverySeriesLevels.has(row.level) ? measureOrientedDelivery(issued, groups)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
@@ -1307,6 +1333,24 @@ export function checkRun(run) {
         >= Math.min(issued.length - 1, Math.ceil(preparations * issued.length / actions)),
       'ESCT L' + row.level + ' lost cursor preparation followed by its observed opening');
     }
+    if (code === 'PORT') {
+      const [actions, minimumContinued, minimumNeutral] = passageContinuity[i];
+      const moves = physical.reduce((sum, effect) => sum + effect.last - effect.first, 0);
+      const neutral = physical.filter(effect => effect.neutral).reduce((sum, effect) => sum + effect.last - effect.first, 0);
+      assert.ok(moves >= Math.min(issued.length - 1, Math.ceil(minimumContinued * issued.length / actions))
+        && neutral >= Math.min(issued.length - 1, Math.ceil(minimumNeutral * issued.length / actions)),
+      'PORT L' + row.level + ' lost known walking between contacts on its observed surface');
+    }
+    const population = code === 'VOIS' ? measuredPopulationPreparation(run, issued, groups) : null;
+    if (population) {
+      const [actions, , selections, movements] = populationContinuity[i];
+      assert.ok(population.preparedSelections >= Math.ceil(selections * issued.length / actions)
+        && population.movementsAfterSelection >= Math.ceil(movements * issued.length / actions),
+      'VOIS L' + row.level + ' lost its measured selection followed by learned movements');
+      if (row.level === 2) assert.ok(population.neighborEffects > 0, 'VOIS lost the acquired stationary-neighbor response');
+      if (row.level === 6) assert.ok(population.unknownSupportTickets > 0,
+        'VOIS lost reuse of the observed neighbor response on an unmeasured support');
+    }
     result.push({
       game: code,
       level: row.level,
@@ -1315,6 +1359,7 @@ export function checkRun(run) {
       physical: physical.map(r => r.kind + ' ' + r.first + '-' + r.last).join(', '),
       series: lengths.length,
       longest: Math.max(1, ...lengths),
+      ...(population ?? {}),
     });
   }
   return result;
@@ -1346,6 +1391,8 @@ function main() {
       ['profile-preparation', 'source:LKEY', String(profileContinuity.length), String(Math.max(...profileCeilings))],
       ['queue-receipts', 'source:COLM', String(queueContinuity.length), String(Math.max(...queueCeilings))],
       ['observed-openings', 'source:ESCT', String(openingContinuity.length), String(Math.max(...openingCeilings))],
+      ['population-preparation', 'source:VOIS', String(populationContinuity.length), String(Math.max(...populationCeilings))],
+      ['passage-walking', 'source:PORT', String(passageContinuity.length), String(Math.max(...passageCeilings))],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');
@@ -1361,7 +1408,7 @@ function main() {
       .split(/\r?\n/)
       .map((line) => JSON.parse(line)),
   );
-  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'COLM', 'DC22', 'ESCT', 'GABA', 'HANO', 'LKEY', 'SIGN', 'SS01', 'SS02', 'SS03', 'SS04', 'SS05', 'SS06', 'SS07', 'WA30']);
+  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'COLM', 'DC22', 'ESCT', 'GABA', 'HANO', 'LKEY', 'PORT', 'SIGN', 'SS01', 'SS02', 'SS03', 'SS04', 'SS05', 'SS06', 'SS07', 'VOIS', 'WA30']);
   console.table(runs.flatMap(checkRun));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();
