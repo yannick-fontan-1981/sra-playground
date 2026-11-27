@@ -1,0 +1,38 @@
+{
+  "schema": "sic.viewer-validation.v1",
+  "sourceCommit": "8ec8886de88c5d0e69abfc4ac650a8043448740c",
+  "sourceTree": "18babde84afc25501eec1fc7dbcafd181a5503e1",
+  "interface": "local managed preview of the exact published source",
+  "mode": "sic",
+  "entry": "game selector and Run to next level buttons",
+  "runs": [
+    {
+      "code": "UPST",
+      "start": 1,
+      "initialActions": 0,
+      "initialCompleted": 0,
+      "cumulativeCommands": [
+        19,
+        23,
+        34,
+        41,
+        55,
+        72
+      ],
+      "levelCommands": [
+        19,
+        4,
+        11,
+        7,
+        14,
+        17
+      ],
+      "officialMessage": "The game reports WIN.",
+      "actions": 72,
+      "levelsSolved": 6,
+      "urlAtVictory": "http://127.0.0.1:4173/?game=UPST&level=6",
+      "newSessionOrResetDuringRun": false,
+      "validation": "Browser CUA visible controls and rendered session counters"
+    }
+  ]
+}
