@@ -1,0 +1,699 @@
+{
+  "recordedAt": "2026-11-27T06:02:05.454003+00:00",
+  "status": "partial_strict_four_of_six",
+  "candidate": {
+    "local": "7f45cf182c5d9e0f9506f5d2fb07af64f3ae2def",
+    "remote": "56df4eab7b6701f65d5189913e61acb27865567b",
+    "tree": "21a7e7922081cdb34bc701539dc439008243e595",
+    "branch": "fix/sic-27-grid-mechanism-reassociation-20261127"
+  },
+  "diagnosticSource": {
+    "startedAt": "2026-11-27T05:08:15.642147+00:00",
+    "local": "c12edff8679d783d45d71bb0f6c3ece7630186e6",
+    "remote": "6f938fd61ee4dd3a92972184bb96cdb122279163",
+    "tree": "2169e97df62299ec9afdda129f6da431800bae89",
+    "productionLocal": "07676e1eb49caf0d4323c798df20b15a2e480161",
+    "productionRemote": "5773d96313daec7d62d6d314c484274f03ed565c",
+    "checkout": "/workspace/scratch/082336907086/sic-27-work/grid-continuity",
+    "command": [
+      "node",
+      "/workspace/scratch/082336907086/sic-27-work/grid-first-loss-diagnostic-v2.mjs",
+      "SNAR",
+      "5",
+      "/workspace/scratch/082336907086/sic-27-work/snar-l5-first-loss-v2-diagnostic-07676e1e.jsonl",
+      "1"
+    ],
+    "startLevel": 1,
+    "targetLevel": 5,
+    "diagnosticLimit": "At most eight commands in level 5; stop before the first cavity ticket if earlier.",
+    "newGameVerdict": null,
+    "workers": 1,
+    "references": "/workspace/scratch/082336907086/sic-27-work/grid-continuity/docs/architecture/sic-replay-reference-levels-20261126.json",
+    "referencesSha256": "67ae5216b80e87bbb2243138fde7970ea5c725a5f832f1b72aa8b0780e270854",
+    "runnerSha256": "424367b3bcc74fedc43a0a8264627808297a68d3894ceebb2ddba3616a462676",
+    "originalBudgetsUnchanged": true,
+    "result": "/workspace/scratch/082336907086/sic-27-work/snar-l5-first-loss-v2-diagnostic-07676e1e.jsonl",
+    "capture": "/workspace/scratch/082336907086/sic-27-work/snar-l5-first-loss-v2-capture-07676e1e.json",
+    "endedAt": "2026-11-27T05:09:08.259138+00:00",
+    "exitCode": 0,
+    "finalLocal": "c12edff8679d783d45d71bb0f6c3ece7630186e6",
+    "finalTree": "2169e97df62299ec9afdda129f6da431800bae89",
+    "finalStatus": "",
+    "sourceUnchanged": true
+  },
+  "diagnostic": {
+    "newGameVerdict": null,
+    "startLevel": 1,
+    "targetLevel": 5,
+    "commands": 102,
+    "authority": 102,
+    "levels": [
+      {
+        "level": 1,
+        "won": true,
+        "activeMs": 6155,
+        "budget": {
+          "actions": 21,
+          "activeTimeMs": 16000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=1; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 16,
+        "ms": 6629,
+        "gameMs": 364,
+        "costs": {
+          "init": {
+            "ms": 1011,
+            "count": 1
+          },
+          "advance": {
+            "ms": 2647,
+            "count": 16
+          },
+          "resume": {
+            "ms": 2309,
+            "count": 9
+          }
+        },
+        "graph": "5a8f8cedd7f303880045b8bbb99cc5c45a908982d8ecfc9dac3591a39228be57",
+        "deltas": 2679,
+        "acquiredRecords": 16,
+        "nodes": 565,
+        "traceEvents": 72,
+        "prefixHash": "b9af930c627d06ddb5ecfa96d1425cd5ce3c10e8e5660d9bdf6b16afbd2cd121",
+        "scoredMs": 6441,
+        "settlementMs": 187
+      },
+      {
+        "level": 2,
+        "won": true,
+        "activeMs": 9239,
+        "budget": {
+          "actions": 29,
+          "activeTimeMs": 24000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=2; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 21,
+        "ms": 9887,
+        "gameMs": 476,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 4865,
+            "count": 21
+          },
+          "resume": {
+            "ms": 4102,
+            "count": 15
+          }
+        },
+        "graph": "ce7108e57d9b4d0c0b01a74405b37ab740ca7039a57733e4fb971b730ba42474",
+        "deltas": 6154,
+        "acquiredRecords": 37,
+        "nodes": 860,
+        "traceEvents": 128,
+        "prefixHash": "50ecdcd21c3bd4d156f844fdbecd847aeb8ac45caf8d79814e05ce9856909735",
+        "scoredMs": 9612,
+        "settlementMs": 275
+      },
+      {
+        "level": 3,
+        "won": true,
+        "activeMs": 8423,
+        "budget": {
+          "actions": 28,
+          "activeTimeMs": 15000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=3; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 23,
+        "ms": 9100,
+        "gameMs": 444,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 6237,
+            "count": 23
+          },
+          "resume": {
+            "ms": 1958,
+            "count": 16
+          }
+        },
+        "graph": "ecbc4542ab8fc7d3a0ae9210a518ba0e31c29f6dc10d11ca028f874c8b00b71d",
+        "deltas": 9914,
+        "acquiredRecords": 60,
+        "nodes": 1228,
+        "traceEvents": 128,
+        "prefixHash": "80e7b15eb24a474261548e78d9afdfccfbb3773b785a8d9f208c335501404ed6",
+        "scoredMs": 8748,
+        "settlementMs": 352
+      },
+      {
+        "level": 4,
+        "won": true,
+        "activeMs": 16046,
+        "budget": {
+          "actions": 44,
+          "activeTimeMs": 24000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=4; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 36,
+        "ms": 17411,
+        "gameMs": 966,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 11891,
+            "count": 36
+          },
+          "resume": {
+            "ms": 3641,
+            "count": 28
+          }
+        },
+        "graph": "b6cff882330e24cb9c96ecf44a911f7f2165a3b62cf6d5b247a2aa6ee118ab1f",
+        "deltas": 16527,
+        "acquiredRecords": 96,
+        "nodes": 1905,
+        "traceEvents": 128,
+        "prefixHash": "1ab077d6170d1094e39672aa4936aed74fc2ade2ab9578c481b5d2fbdf1f06d5",
+        "scoredMs": 16961,
+        "settlementMs": 450
+      },
+      {
+        "level": 5,
+        "won": false,
+        "activeMs": 3428,
+        "budget": {
+          "actions": 42,
+          "activeTimeMs": 28000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=5; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 6,
+        "ms": 3730,
+        "gameMs": 192,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 2324,
+            "count": 6
+          },
+          "resume": {
+            "ms": 993,
+            "count": 7
+          }
+        },
+        "graph": "2ca494cbb2a1df61eb41bb593e91dcd98aaa14b9dd664648fe663e4c62362fe2",
+        "deltas": 17963,
+        "acquiredRecords": 102,
+        "nodes": 2061,
+        "traceEvents": 128,
+        "prefixHash": "e52c9bcb1285ad3c88d3368f6d278be4d43abf7b570a2e8f6aab16ec8140dba3"
+      }
+    ],
+    "stop": "Before the unexecuted first cavity ticket at global103, after six level5 commands. The host stop explains the runner error status.",
+    "sameWinningPrefixes": [
+      {
+        "level": 1,
+        "same": true
+      },
+      {
+        "level": 2,
+        "same": true
+      },
+      {
+        "level": 3,
+        "same": true
+      },
+      {
+        "level": 4,
+        "same": true
+      }
+    ]
+  },
+  "firstLoss": {
+    "ordinal": 98,
+    "level": 5,
+    "levelAction": 2,
+    "command": "ACTION3",
+    "actorBefore": 121,
+    "actorAfter": 121,
+    "newWall": 120,
+    "chargesBefore": 3,
+    "chargesAfter": 3,
+    "movingWall": [
+      65,
+      80
+    ],
+    "movingSentry": [
+      54,
+      55
+    ],
+    "measuredBefore": true,
+    "measuredAfter": false,
+    "exclusion": "The acquired grid observer rejects any grid carrying mechanisms.",
+    "projectedKnownSeriesBefore": false,
+    "scope": "Static public lattice and unchanged mechanism cells; the actual action does not contact a pad or door.",
+    "normalBefore": false,
+    "reboundBefore": true,
+    "normalAfter": false,
+    "reboundAfter": false
+  },
+  "validation": {
+    "targetedPassed": 40,
+    "targetedFailed": 0,
+    "newTests": 16,
+    "typecheckExitCode": 0,
+    "independentReview": "favorable_static_review",
+    "strict": {
+      "status": "stopped",
+      "reason": "level_wall_time_budget",
+      "wonLevels": 4,
+      "targetLevels": 6,
+      "commands": 136,
+      "sicAuthority": 136,
+      "finalAcquiredRecords": null,
+      "finalAcquisitionNote": "The watchdog receipt does not provide a final acquisition counter. The last completed-level receipt confirms 96 acquired records.",
+      "reset": null,
+      "undo": null,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "activeMs": 6337,
+          "budget": {
+            "actions": 21,
+            "activeTimeMs": 16000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=1; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 16,
+          "ms": 6810,
+          "gameMs": 327,
+          "costs": {
+            "init": {
+              "ms": 1230,
+              "count": 1
+            },
+            "advance": {
+              "ms": 2570,
+              "count": 16
+            },
+            "resume": {
+              "ms": 2377,
+              "count": 9
+            }
+          },
+          "graph": "445836b48552ad56e1b5ae0e09dc11c0e1b28278d8cac0ae42903143a910d751",
+          "deltas": 2679,
+          "acquiredRecords": 16,
+          "nodes": 565,
+          "traceEvents": 72,
+          "prefixHash": "b9af930c627d06ddb5ecfa96d1425cd5ce3c10e8e5660d9bdf6b16afbd2cd121",
+          "scoredMs": 6622,
+          "settlementMs": 188
+        },
+        {
+          "level": 2,
+          "won": true,
+          "activeMs": 8746,
+          "budget": {
+            "actions": 29,
+            "activeTimeMs": 24000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=2; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 21,
+          "ms": 9421,
+          "gameMs": 409,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 4643,
+              "count": 21
+            },
+            "resume": {
+              "ms": 3882,
+              "count": 15
+            }
+          },
+          "graph": "ecdd54ed60fa5bf2fe39968dbfd69340abe168df6fe5de767538fe070e76aa03",
+          "deltas": 6154,
+          "acquiredRecords": 37,
+          "nodes": 860,
+          "traceEvents": 128,
+          "prefixHash": "50ecdcd21c3bd4d156f844fdbecd847aeb8ac45caf8d79814e05ce9856909735",
+          "scoredMs": 8986,
+          "settlementMs": 435
+        },
+        {
+          "level": 3,
+          "won": true,
+          "activeMs": 8248,
+          "budget": {
+            "actions": 28,
+            "activeTimeMs": 15000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=3; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 23,
+          "ms": 8925,
+          "gameMs": 399,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 6301,
+              "count": 23
+            },
+            "resume": {
+              "ms": 1751,
+              "count": 16
+            }
+          },
+          "graph": "e48b5134df7c5cbd975270f7a129e4a39506d9d71c7b1a5fad8093e28f2c4ae7",
+          "deltas": 9914,
+          "acquiredRecords": 60,
+          "nodes": 1228,
+          "traceEvents": 128,
+          "prefixHash": "80e7b15eb24a474261548e78d9afdfccfbb3773b785a8d9f208c335501404ed6",
+          "scoredMs": 8593,
+          "settlementMs": 332
+        },
+        {
+          "level": 4,
+          "won": true,
+          "activeMs": 16231,
+          "budget": {
+            "actions": 44,
+            "activeTimeMs": 24000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=4; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 36,
+          "ms": 17576,
+          "gameMs": 896,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 12088,
+              "count": 36
+            },
+            "resume": {
+              "ms": 3652,
+              "count": 28
+            }
+          },
+          "graph": "196db57107ff25bd0e636b2d7c686116d8f96e6090fa21f98484e02659b24ba0",
+          "deltas": 16527,
+          "acquiredRecords": 96,
+          "nodes": 1905,
+          "traceEvents": 128,
+          "prefixHash": "1ab077d6170d1094e39672aa4936aed74fc2ade2ab9578c481b5d2fbdf1f06d5",
+          "scoredMs": 17137,
+          "settlementMs": 439
+        },
+        {
+          "level": 5,
+          "won": false,
+          "actions": 40,
+          "ms": 28002,
+          "budget": {
+            "actions": 42,
+            "activeTimeMs": 28000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=5; won=true",
+            "timeBasis": "measured"
+          }
+        }
+      ],
+      "recentCommands": [
+        {
+          "id": 5,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P05",
+          "index": 129,
+          "elapsedMs": 21600
+        },
+        {
+          "id": 5,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P05",
+          "index": 130,
+          "elapsedMs": 22430
+        },
+        {
+          "id": 2,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 131,
+          "elapsedMs": 23151
+        },
+        {
+          "id": 5,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P05",
+          "index": 132,
+          "elapsedMs": 23903
+        },
+        {
+          "id": 2,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 133,
+          "elapsedMs": 24701
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 134,
+          "elapsedMs": 25533
+        },
+        {
+          "id": 5,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P05",
+          "index": 135,
+          "elapsedMs": 26414
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 136,
+          "elapsedMs": 27298
+        }
+      ],
+      "preservedWinningPrefixes": [
+        {
+          "level": 1,
+          "prefixHash": "b9af930c627d06ddb5ecfa96d1425cd5ce3c10e8e5660d9bdf6b16afbd2cd121",
+          "matchesPrior": true
+        },
+        {
+          "level": 2,
+          "prefixHash": "50ecdcd21c3bd4d156f844fdbecd847aeb8ac45caf8d79814e05ce9856909735",
+          "matchesPrior": true
+        },
+        {
+          "level": 3,
+          "prefixHash": "80e7b15eb24a474261548e78d9afdfccfbb3773b785a8d9f208c335501404ed6",
+          "matchesPrior": true
+        },
+        {
+          "level": 4,
+          "prefixHash": "1ab077d6170d1094e39672aa4936aed74fc2ade2ab9578c481b5d2fbdf1f06d5",
+          "matchesPrior": true
+        }
+      ],
+      "exitCode": 0,
+      "sourceUnchanged": true
+    },
+    "integration": false,
+    "deliveredUi": false
+  },
+  "files": {
+    "public-first-loss.json.gz": {
+      "bytes": 73728,
+      "sha256": "6dca94d4f62ffb49ae94b4476f96b0798e6e516bf766727dc6d91d4db873d58b",
+      "uncompressedBytes": 2474296,
+      "uncompressedSha256": "6ab237c33fa8c5493588c7a1aad3107fdcbbd2bac0eb4dd4acabc386944c64a8"
+    },
+    "diagnostic-result.jsonl.gz": {
+      "bytes": 3075,
+      "sha256": "eee8616cba22e80e9e0c8f835f1a4d9256e5ac04fddb4781e8df8f578f6f49f1",
+      "uncompressedBytes": 20604,
+      "uncompressedSha256": "7503c52e778be61014fb9586cb9f78dd11f370035defe4a2ce3c3f2a55e93d9b"
+    },
+    "diagnostic-levels.jsonl.gz": {
+      "bytes": 1079,
+      "sha256": "afb5eeb9e4956c6f2701e9251f51c3bd231a6207c3f4181ace54676724b23ba3",
+      "uncompressedBytes": 3323,
+      "uncompressedSha256": "5c8af85569a71f2364b1ab9317df41b1d8cd35402b3d88e9edc83bf2aa02ee61"
+    },
+    "diagnostic-start.json.gz": {
+      "bytes": 680,
+      "sha256": "5276c2b2e5f28ec0a7c3f832296a46a1fc216d17d0ff0579adb307bc08de520e",
+      "uncompressedBytes": 1422,
+      "uncompressedSha256": "53147fa0e0d188e3f17f71498f08cee6e1605408511575a1bd5dc943f23cb326"
+    },
+    "diagnostic-end.json.gz": {
+      "bytes": 738,
+      "sha256": "1567e156c6e2ac4cbe4b85f9470af72c66794835e0bd8c1db821f582fe16108c",
+      "uncompressedBytes": 1655,
+      "uncompressedSha256": "731b755cffd4f8e80960b58f452d12fe2d324bca4ede7f2c911cc52e49dd2060"
+    },
+    "diagnostic-log.txt.gz": {
+      "bytes": 177,
+      "sha256": "4d00a11b492c8e63333dd780682c50b4d2c7e760c70f278e72671fe150482093",
+      "uncompressedBytes": 458,
+      "uncompressedSha256": "f4cdc1bc621d8d6ec2b0219fde29f584da5df961b510037dce3029a2cd346397"
+    },
+    "projection-report.json.gz": {
+      "bytes": 90695,
+      "sha256": "ccb5a6b4e9cf65214b888fc1379e043c5290e1b757eabfc2c96c70c85328b895",
+      "uncompressedBytes": 3408579,
+      "uncompressedSha256": "7b9efe5e236cd2764902404c32b3c1b4627bc2f7467af29c9c531ae90c6f382a"
+    },
+    "diagnostic-wrapper.mjs.gz": {
+      "bytes": 6121,
+      "sha256": "63c0d31b47ad0364418df6ff16517cd926ce59eb51d042a9d7ce232233451c31",
+      "uncompressedBytes": 18309,
+      "uncompressedSha256": "424367b3bcc74fedc43a0a8264627808297a68d3894ceebb2ddba3616a462676"
+    },
+    "launch-wrapper.py.gz": {
+      "bytes": 1394,
+      "sha256": "67d676f3451b44e0a807f2108f3933ff32073790d55080a6cc7d6f5d0f7c80ab",
+      "uncompressedBytes": 2999,
+      "uncompressedSha256": "1e9c6fb16517b84b956a253dd5d21e39ec3524c5e470f3f4c1bdbf022f289046"
+    },
+    "projection-wrapper.mjs.gz": {
+      "bytes": 1685,
+      "sha256": "271eb01f97b9a8faac30505394870a8794a62b6e41ee4ece48b08762b8508059",
+      "uncompressedBytes": 4229,
+      "uncompressedSha256": "ecb3c457e842ccf483531216ce21cad0d46be6c7760472d4085844e3e9f6381c"
+    },
+    "targeted-reassociation-tests.txt": {
+      "bytes": 3377,
+      "sha256": "46601169d18f6fff5cf4df69c0c136d198d4c12ff1d3bd768e3bcb964a3727e8"
+    },
+    "targeted-continuity-tests.txt": {
+      "bytes": 1105,
+      "sha256": "8946dc6ac947d8fd57b823aa9ce9183f5a7ca792b0f2b952b85a9efbf17699b6"
+    },
+    "strict-result.jsonl.gz": {
+      "bytes": 1164,
+      "sha256": "4a6eacaaf37e89b27888a8e47d6b61bd4c28e084958d5a0c4cd7c55f60cc10e0",
+      "uncompressedBytes": 3762,
+      "uncompressedSha256": "122d1ffa642ea524c2f4315a8aaddccc9369d8edaa73a7b2c1b4f06f689beb82"
+    },
+    "strict-levels.jsonl.gz": {
+      "bytes": 959,
+      "sha256": "0c40ca8162e4cb25445a616e920f424f5c39365956a7c86a322e054715f75a5c",
+      "uncompressedBytes": 2975,
+      "uncompressedSha256": "3aa22ae9e6d63e4f16c11bd12eebc95aac70a5db953d115cff264dd5b7670f97"
+    },
+    "strict-start.json.gz": {
+      "bytes": 529,
+      "sha256": "761b2e08d254dd72b1147202b96edd738c17a42ded06c477b467839094911c88",
+      "uncompressedBytes": 1153,
+      "uncompressedSha256": "918bfb8d4f011d5957ad524d3a1d18501d44901797da34c0b09e1311afe9ab29"
+    },
+    "strict-end.json.gz": {
+      "bytes": 591,
+      "sha256": "5a663354e929c35d085639b11f1984b2ad1636cc2a7423751ac63ebcd2544772",
+      "uncompressedBytes": 1386,
+      "uncompressedSha256": "a9fdeef88e86052cfbb09f7b57957ee9e183bc1369f075b73898375555dd8a23"
+    },
+    "strict-log.txt.gz": {
+      "bytes": 170,
+      "sha256": "9072de2009ab37e145431c8d422324a40ce1780972d05c90991461da02f2f73a",
+      "uncompressedBytes": 427,
+      "uncompressedSha256": "c9609020df5f323f81880d63036d7a870f51cd1fb25bb3b67a08e9dbd9039255"
+    },
+    "strict-launch-wrapper.py.gz": {
+      "bytes": 1172,
+      "sha256": "ed5a7d90fca8d7ef127ddf20f9f9744c7255c9859a51d7c372bb4a9e7462bf72",
+      "uncompressedBytes": 2613,
+      "uncompressedSha256": "ca5a8bf2e5777ae41058b0712a47c1a356939a61a8ee740d80ac032f5e985f9b"
+    },
+    "references.json": {
+      "bytes": 1264,
+      "sha256": "b8e8058cc046902a2b9bd82cdd9dd7f98c6d18de97a250625498c0667190fb83"
+    },
+    "typecheck.txt.gz": {
+      "bytes": 171,
+      "sha256": "bc667afc69ce5279ea930511eef7f5c9b4dd41122ab0daf76044f38275afa13b",
+      "uncompressedBytes": 200,
+      "uncompressedSha256": "fae6f2a6e6a58abce2d4697cfcc4af50796b7cc696ea816de0db1e68302d53f4"
+    }
+  },
+  "strictSource": {
+    "startedAt": "2026-11-27T05:49:06.346347+00:00",
+    "local": "7f45cf182c5d9e0f9506f5d2fb07af64f3ae2def",
+    "remote": "56df4eab7b6701f65d5189913e61acb27865567b",
+    "tree": "21a7e7922081cdb34bc701539dc439008243e595",
+    "productionLocal": "7f45cf182c5d9e0f9506f5d2fb07af64f3ae2def",
+    "productionRemote": "56df4eab7b6701f65d5189913e61acb27865567b",
+    "checkout": "/workspace/scratch/082336907086/sic-27-work/grid-continuity",
+    "command": [
+      "node",
+      "/workspace/scratch/082336907086/sic-27-work/grid-continuity/scripts/check-sic-chronological.mjs",
+      "SNAR",
+      "6",
+      "/workspace/scratch/082336907086/sic-27-work/snar-strict-7f45cf18.jsonl",
+      "1"
+    ],
+    "startLevel": 1,
+    "targetLevels": 6,
+    "workers": 1,
+    "references": "/workspace/scratch/082336907086/sic-27-work/grid-continuity/docs/architecture/sic-replay-reference-levels-20261126.json",
+    "referencesSha256": "67ae5216b80e87bbb2243138fde7970ea5c725a5f832f1b72aa8b0780e270854",
+    "runnerSha256": "2cb80e62a41e1269f1a2a0dd9e9de20a32504b70724c167abaac1a8b9bae3111",
+    "budgetsChanged": false,
+    "result": "/workspace/scratch/082336907086/sic-27-work/snar-strict-7f45cf18.jsonl",
+    "endedAt": "2026-11-27T05:50:22.261811+00:00",
+    "exitCode": 0,
+    "finalLocal": "7f45cf182c5d9e0f9506f5d2fb07af64f3ae2def",
+    "finalTree": "21a7e7922081cdb34bc701539dc439008243e595",
+    "finalStatus": "",
+    "sourceUnchanged": true
+  },
+  "nextMeasurement": "Before any further SNAR correction, capture the first remaining loss with the full original agent.run budget and a dispatch-only stop. The v2 diagnostic is a public counterexample under a reduced remaining horizon, not an exact reproduction of the full runner decision. The standard strict replay remains a valid four-of-six measurement.",
+  "diagnosticQualification": {
+    "kind": "public_counterexample_under_reduced_remaining_horizon",
+    "agentRunBudgetUnchanged": false,
+    "targetLevel": 5,
+    "agentRunTargetActions": 8,
+    "originalTargetActions": 42,
+    "watchdogReferenceBudgetsUnchanged": true,
+    "exactFullRunnerDecisionReproduction": false,
+    "earlierFourWinningPrefixHashesEqual": true,
+    "rawReceiptNote": "The originalBudgetsUnchanged field in the historical raw diagnostic receipt describes watchdog references only; it does not establish that agent.run received the full level budget.",
+    "requiredBeforeNextCorrection": "Capture the first loss again with the original agent.run budget; bound only dispatch permission after an observed return."
+  }
+}

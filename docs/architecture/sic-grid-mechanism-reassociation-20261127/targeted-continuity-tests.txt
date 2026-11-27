@@ -1,0 +1,19 @@
+✔ a pulse confirms a door opening even when it reveals no new cells (6.09833ms)
+✔ a forced landing requires evidence at the marked cell during the return (4.187534ms)
+✔ a displacement after a blocked move does not make the attempted cell passable (1.625104ms)
+✔ native known-grid prefix continues past an unrelated disclosure (461.702715ms)
+✔ native known-grid prefix continues past an unrelated disclosure after reflected positions, remapped colors, changed carrier shape and commands (353.876425ms)
+✔ a known-grid prefix still closes on known-terrain-contradiction (10.625206ms)
+✔ a known-grid prefix still closes on future-route-obstacle (9.216588ms)
+✔ a known-grid prefix still closes on ambiguous-carrier (14.954856ms)
+✔ a known-grid prefix still closes on wrong-displacement (15.883733ms)
+✔ a known-grid prefix still closes on official-boundary (16.760781ms)
+✔ an unreadable next carrier or a newly occupied target refuses the intermediate guard (16.89231ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2123.814492

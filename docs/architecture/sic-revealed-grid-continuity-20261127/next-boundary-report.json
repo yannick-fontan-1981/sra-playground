@@ -1,0 +1,2143 @@
+{
+  "ordinal": 97,
+  "level": 5,
+  "owner": "sic_test_prepared_effects",
+  "action": {
+    "id": 1
+  },
+  "ref": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:97:frame:804385724699706b",
+  "after": {
+    "normal": null,
+    "rebound": {
+      "box": [
+        2,
+        11,
+        61,
+        54
+      ],
+      "pitch": 4,
+      "columns": 15,
+      "size": 165,
+      "tint": 2,
+      "base": 4,
+      "actor": 0,
+      "enemy": 10,
+      "trail": 9,
+      "goal": 29,
+      "charges": [
+        [
+          44,
+          2
+        ],
+        [
+          48,
+          2
+        ],
+        [
+          52,
+          2
+        ]
+      ],
+      "actorPixels": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "rail": 5,
+      "sentry": [
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          8
+        ],
+        [
+          1,
+          2,
+          8
+        ],
+        [
+          2,
+          2,
+          8
+        ]
+      ],
+      "multipleSentries": true,
+      "mechanisms": {
+        "pads": {
+          "56": [
+            -1,
+            0
+          ],
+          "84": [
+            1,
+            0
+          ],
+          "107": [
+            1,
+            0
+          ]
+        },
+        "doors": {
+          "111": 12
+        }
+      }
+    },
+    "readWithBeforeGrid": {
+      "position": 121,
+      "obstacle": 65,
+      "obstacles": [
+        65,
+        101
+      ],
+      "risk": [
+        65,
+        80,
+        82,
+        95,
+        101,
+        116,
+        131
+      ],
+      "memory": {
+        "29": "free",
+        "56": "free",
+        "84": "free",
+        "107": "free",
+        "111": "free",
+        "121": "free",
+        "136": "free"
+      },
+      "charges": 3,
+      "sentries": [
+        54,
+        88
+      ],
+      "sentryRisk": [
+        54,
+        39,
+        69,
+        55,
+        53,
+        88,
+        73,
+        103,
+        89,
+        87
+      ],
+      "closedDoors": [
+        111
+      ],
+      "landings": {},
+      "failedEntrances": []
+    },
+    "proposed": {
+      "status": "proposed",
+      "kind": "sic_navigate_revealed_grid",
+      "local": {
+        "epoch": 5,
+        "score": 4,
+        "grid": {
+          "box": [
+            2,
+            11,
+            61,
+            54
+          ],
+          "pitch": 4,
+          "columns": 15,
+          "size": 165,
+          "tint": 2,
+          "base": 4,
+          "actor": 0,
+          "enemy": 10,
+          "trail": 9,
+          "goal": 29,
+          "charges": [
+            [
+              44,
+              2
+            ],
+            [
+              48,
+              2
+            ],
+            [
+              52,
+              2
+            ]
+          ],
+          "actorPixels": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              1
+            ]
+          ],
+          "rail": 5,
+          "sentry": [
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              2,
+              1,
+              8
+            ],
+            [
+              1,
+              2,
+              8
+            ],
+            [
+              2,
+              2,
+              8
+            ]
+          ],
+          "multipleSentries": true,
+          "mechanisms": {
+            "pads": {
+              "56": [
+                -1,
+                0
+              ],
+              "84": [
+                1,
+                0
+              ],
+              "107": [
+                1,
+                0
+              ]
+            },
+            "doors": {
+              "111": 12
+            }
+          }
+        },
+        "last": {
+          "position": 121,
+          "obstacle": 65,
+          "obstacles": [
+            65,
+            101
+          ],
+          "risk": [
+            65,
+            80,
+            82,
+            95,
+            101,
+            116,
+            131
+          ],
+          "memory": {
+            "29": "free",
+            "56": "free",
+            "84": "free",
+            "107": "free",
+            "111": "free",
+            "121": "free"
+          },
+          "charges": 3,
+          "sentries": [
+            54,
+            88
+          ],
+          "sentryRisk": [
+            54,
+            39,
+            69,
+            55,
+            53,
+            88,
+            73,
+            103,
+            89,
+            87
+          ],
+          "closedDoors": [
+            111
+          ],
+          "landings": {},
+          "failedEntrances": [],
+          "nextHazards": []
+        },
+        "previousObstacle": null,
+        "refs": [
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+        ],
+        "consecutiveWaits": 0,
+        "timing": {
+          "start": 121,
+          "patrols": [
+            [
+              54
+            ],
+            [
+              88
+            ]
+          ],
+          "walls": [
+            [
+              65
+            ],
+            [
+              101
+            ]
+          ],
+          "scannedPads": []
+        }
+      },
+      "choice": {
+        "action": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 106,
+        "uncertain": true
+      },
+      "needId": "sic-need:0ac3bde417e6640492e6c2a598f43c2f32dcf41bb73070aa22f993c38ff28d03",
+      "binding": {
+        "observation_ref": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:98:frame:public-next",
+        "level_epoch": 5
+      },
+      "actions": [
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        }
+      ],
+      "steps": [
+        {
+          "action": {
+            "action_ref": "ACTION1",
+            "data": {}
+          },
+          "expected_after": [
+            6,
+            39,
+            9,
+            42
+          ]
+        }
+      ],
+      "sicSituationCard": {
+        "strategy": "P05",
+        "need": "Find a passable route to the exit",
+        "situation": "Test the next unconfirmed cell on the route",
+        "evidence": [
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:98:frame:public-next",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+        ],
+        "agenda": [
+          {
+            "id": "P05",
+            "applicability": "applicable",
+            "reason": "A needed effect is still unknown in the current situation.",
+            "result": "selected",
+            "evidence": [
+              "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:98:frame:public-next",
+              "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+              "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+              "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+              "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+              "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+            ]
+          },
+          {
+            "id": "P07",
+            "applicability": "inapplicable",
+            "reason": "Condition not met: At least the next step of access is supported by an observed displacement.",
+            "result": "skipped",
+            "evidence": [
+              "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:98:frame:public-next",
+              "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+              "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+              "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+              "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+              "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+            ]
+          },
+          {
+            "id": "P02",
+            "applicability": "inapplicable",
+            "reason": "Condition not met: A known input can be tested again at a current, compatible target.",
+            "result": "skipped",
+            "evidence": [
+              "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:98:frame:public-next",
+              "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+              "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+              "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+              "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+              "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+            ]
+          }
+        ],
+        "mode": "exploration",
+        "triggerCard": "navigation:exploration",
+        "actor": [
+          6,
+          43,
+          9,
+          46
+        ],
+        "target": [
+          6,
+          39,
+          9,
+          42
+        ],
+        "exit": [
+          58,
+          15,
+          61,
+          18
+        ],
+        "obstacle": [
+          22,
+          27,
+          25,
+          30
+        ],
+        "obstacles": [
+          [
+            22,
+            27,
+            25,
+            30
+          ],
+          [
+            46,
+            35,
+            49,
+            38
+          ]
+        ],
+        "sentries": [
+          [
+            38,
+            23,
+            41,
+            26
+          ],
+          [
+            54,
+            31,
+            57,
+            34
+          ]
+        ],
+        "revealedWalls": 0
+      },
+      "question": {
+        "reason": "Test the next unconfirmed cell on the route",
+        "hypothesis_refs": [
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:98:frame:public-next",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+        ]
+      },
+      "route_refs": [
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:98:frame:public-next",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+      ],
+      "compositions": [
+        {
+          "id": "sic_navigate_revealed_grid:sic-need:0ac3bde417e6640492e6c2a598f43c2f32dcf41bb73070aa22f993c38ff28d03",
+          "observed": false,
+          "open_question": "Test the next unconfirmed cell on the route",
+          "relations": [
+            "contributes_to:G_official_completion"
+          ]
+        }
+      ],
+      "sicLocalDecision": {
+        "strategy": "P05",
+        "objective": {
+          "id": "sic_navigate_revealed_grid:sic-need:0ac3bde417e6640492e6c2a598f43c2f32dcf41bb73070aa22f993c38ff28d03",
+          "label": "Measure the effect of a needed control",
+          "parent": "G_official_completion"
+        },
+        "need": {
+          "kind": "navigate_with_partially_revealed_terrain",
+          "scope": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5",
+          "subjects": [
+            "controlled_sprite",
+            "revealed_cells",
+            "moving_obstacle",
+            "exit"
+          ],
+          "parentObjective": "G_official_completion",
+          "satisfactionContract": "official_progress_at_visible_exit",
+          "id": "sic-need:0ac3bde417e6640492e6c2a598f43c2f32dcf41bb73070aa22f993c38ff28d03",
+          "status": "assigned",
+          "evidence": [
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:98:frame:public-next",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+          ]
+        }
+      },
+      "bundle_template": {
+        "operation_key": "OP18",
+        "composition_ref": "sic_navigate_revealed_grid:sic-need:0ac3bde417e6640492e6c2a598f43c2f32dcf41bb73070aa22f993c38ff28d03",
+        "objective_ref": "G_official_completion",
+        "purpose": "Test the next unconfirmed cell on the route",
+        "preconditions": {},
+        "preserve_refs": [],
+        "evidence": [
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:98:frame:public-next",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+        ],
+        "actions": [
+          {
+            "action_ref": "ACTION1",
+            "data": {}
+          }
+        ],
+        "outcome_guard": {
+          "path": [
+            "value"
+          ],
+          "contains": "sic_navigate_revealed_grid:sic-need:0ac3bde417e6640492e6c2a598f43c2f32dcf41bb73070aa22f993c38ff28d03"
+        }
+      }
+    }
+  },
+  "offers": [],
+  "inherited": {
+    "consecutiveWaits": 0,
+    "epoch": 4,
+    "grid": {
+      "actor": 0,
+      "actorPixels": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "base": 4,
+      "box": [
+        6,
+        11,
+        57,
+        54
+      ],
+      "charges": [
+        [
+          44,
+          2
+        ],
+        [
+          48,
+          2
+        ],
+        [
+          52,
+          2
+        ]
+      ],
+      "columns": 13,
+      "enemy": 10,
+      "goal": 25,
+      "multipleSentries": true,
+      "pitch": 4,
+      "rail": 5,
+      "sentry": [
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          8
+        ],
+        [
+          1,
+          2,
+          8
+        ],
+        [
+          2,
+          2,
+          8
+        ]
+      ],
+      "size": 143,
+      "tint": 2,
+      "trail": 9
+    },
+    "last": {
+      "charges": 0,
+      "memory": {
+        "3": "wall",
+        "14": "free",
+        "15": "free",
+        "16": "free",
+        "17": "wall",
+        "18": "free",
+        "19": "free",
+        "20": "free",
+        "21": "free",
+        "22": "free",
+        "23": "free",
+        "24": "free",
+        "25": "free",
+        "27": "free",
+        "28": "wall",
+        "29": "free",
+        "30": "wall",
+        "31": "free",
+        "32": "wall",
+        "40": "free",
+        "41": "wall",
+        "42": "free",
+        "43": "free",
+        "44": "free",
+        "45": "wall",
+        "46": "free",
+        "47": "free",
+        "53": "free",
+        "54": "wall",
+        "55": "wall",
+        "56": "wall",
+        "57": "wall",
+        "58": "wall",
+        "59": "free",
+        "60": "wall",
+        "65": "wall",
+        "66": "free",
+        "67": "free",
+        "68": "free",
+        "69": "free",
+        "70": "free",
+        "71": "free",
+        "72": "free",
+        "73": "free",
+        "74": "free",
+        "78": "wall",
+        "79": "free",
+        "80": "wall",
+        "81": "free",
+        "82": "wall",
+        "83": "free",
+        "84": "free",
+        "85": "free",
+        "86": "wall",
+        "91": "wall",
+        "92": "free",
+        "93": "free",
+        "94": "free",
+        "95": "wall",
+        "96": "free",
+        "97": "free",
+        "98": "free",
+        "99": "free",
+        "104": "wall",
+        "105": "wall",
+        "106": "wall",
+        "107": "free",
+        "108": "wall",
+        "109": "wall",
+        "110": "wall",
+        "117": "wall",
+        "118": "free",
+        "119": "free",
+        "120": "free",
+        "121": "wall",
+        "122": "free",
+        "123": "free",
+        "124": "free",
+        "130": "wall",
+        "131": "wall",
+        "132": "wall",
+        "133": "wall",
+        "134": "wall",
+        "135": "wall",
+        "136": "wall"
+      },
+      "obstacle": 35,
+      "obstacles": [
+        35,
+        94
+      ],
+      "position": 24,
+      "risk": [
+        35,
+        48,
+        61,
+        68,
+        71,
+        81,
+        94,
+        107
+      ],
+      "sentries": [
+        50,
+        98
+      ],
+      "sentryRisk": [
+        37,
+        24,
+        50,
+        38,
+        36,
+        97,
+        84,
+        110,
+        98,
+        96,
+        85,
+        111,
+        99,
+        63,
+        51,
+        49,
+        86,
+        112,
+        100,
+        76,
+        64,
+        62,
+        87,
+        113,
+        101,
+        89,
+        77,
+        75,
+        83,
+        109,
+        95
+      ]
+    },
+    "motions": [
+      {
+        "at": 35,
+        "from": 48
+      },
+      {
+        "at": 94,
+        "from": 81
+      }
+    ],
+    "previousObstacle": 48,
+    "refs": [
+      "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+      "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+      "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+      "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+      "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+    ],
+    "score": 3
+  },
+  "actualPublicObservers": [
+    {
+      "family": "sic_navigate_revealed_grid",
+      "before": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:97:frame:804385724699706b",
+      "after": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:98:frame:8f7a2cac1d9efe56",
+      "command": {
+        "action_ref": "ACTION1",
+        "data": {}
+      },
+      "prior": {
+        "state": {
+          "consecutiveWaits": 0,
+          "epoch": 4,
+          "grid": {
+            "actor": 0,
+            "actorPixels": [
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                2,
+                1
+              ]
+            ],
+            "base": 4,
+            "box": [
+              6,
+              11,
+              57,
+              54
+            ],
+            "charges": [
+              [
+                44,
+                2
+              ],
+              [
+                48,
+                2
+              ],
+              [
+                52,
+                2
+              ]
+            ],
+            "columns": 13,
+            "enemy": 10,
+            "goal": 25,
+            "multipleSentries": true,
+            "pitch": 4,
+            "rail": 5,
+            "sentry": [
+              [
+                1,
+                1,
+                0
+              ],
+              [
+                2,
+                1,
+                8
+              ],
+              [
+                1,
+                2,
+                8
+              ],
+              [
+                2,
+                2,
+                8
+              ]
+            ],
+            "size": 143,
+            "tint": 2,
+            "trail": 9
+          },
+          "last": {
+            "charges": 0,
+            "memory": {
+              "3": "wall",
+              "14": "free",
+              "15": "free",
+              "16": "free",
+              "17": "wall",
+              "18": "free",
+              "19": "free",
+              "20": "free",
+              "21": "free",
+              "22": "free",
+              "23": "free",
+              "24": "free",
+              "25": "free",
+              "27": "free",
+              "28": "wall",
+              "29": "free",
+              "30": "wall",
+              "31": "free",
+              "32": "wall",
+              "40": "free",
+              "41": "wall",
+              "42": "free",
+              "43": "free",
+              "44": "free",
+              "45": "wall",
+              "46": "free",
+              "47": "free",
+              "53": "free",
+              "54": "wall",
+              "55": "wall",
+              "56": "wall",
+              "57": "wall",
+              "58": "wall",
+              "59": "free",
+              "60": "wall",
+              "65": "wall",
+              "66": "free",
+              "67": "free",
+              "68": "free",
+              "69": "free",
+              "70": "free",
+              "71": "free",
+              "72": "free",
+              "73": "free",
+              "74": "free",
+              "78": "wall",
+              "79": "free",
+              "80": "wall",
+              "81": "free",
+              "82": "wall",
+              "83": "free",
+              "84": "free",
+              "85": "free",
+              "86": "wall",
+              "91": "wall",
+              "92": "free",
+              "93": "free",
+              "94": "free",
+              "95": "wall",
+              "96": "free",
+              "97": "free",
+              "98": "free",
+              "99": "free",
+              "104": "wall",
+              "105": "wall",
+              "106": "wall",
+              "107": "free",
+              "108": "wall",
+              "109": "wall",
+              "110": "wall",
+              "117": "wall",
+              "118": "free",
+              "119": "free",
+              "120": "free",
+              "121": "wall",
+              "122": "free",
+              "123": "free",
+              "124": "free",
+              "130": "wall",
+              "131": "wall",
+              "132": "wall",
+              "133": "wall",
+              "134": "wall",
+              "135": "wall",
+              "136": "wall"
+            },
+            "obstacle": 35,
+            "obstacles": [
+              35,
+              94
+            ],
+            "position": 24,
+            "risk": [
+              35,
+              48,
+              61,
+              68,
+              71,
+              81,
+              94,
+              107
+            ],
+            "sentries": [
+              50,
+              98
+            ],
+            "sentryRisk": [
+              37,
+              24,
+              50,
+              38,
+              36,
+              97,
+              84,
+              110,
+              98,
+              96,
+              85,
+              111,
+              99,
+              63,
+              51,
+              49,
+              86,
+              112,
+              100,
+              76,
+              64,
+              62,
+              87,
+              113,
+              101,
+              89,
+              77,
+              75,
+              83,
+              109,
+              95
+            ]
+          },
+          "motions": [
+            {
+              "at": 35,
+              "from": 48
+            },
+            {
+              "at": 94,
+              "from": 81
+            }
+          ],
+          "previousObstacle": 48,
+          "refs": [
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+          ],
+          "score": 3
+        }
+      },
+      "next": {
+        "state": {
+          "consecutiveWaits": 0,
+          "epoch": 4,
+          "grid": {
+            "actor": 0,
+            "actorPixels": [
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                2,
+                1
+              ]
+            ],
+            "base": 4,
+            "box": [
+              6,
+              11,
+              57,
+              54
+            ],
+            "charges": [
+              [
+                44,
+                2
+              ],
+              [
+                48,
+                2
+              ],
+              [
+                52,
+                2
+              ]
+            ],
+            "columns": 13,
+            "enemy": 10,
+            "goal": 25,
+            "multipleSentries": true,
+            "pitch": 4,
+            "rail": 5,
+            "sentry": [
+              [
+                1,
+                1,
+                0
+              ],
+              [
+                2,
+                1,
+                8
+              ],
+              [
+                1,
+                2,
+                8
+              ],
+              [
+                2,
+                2,
+                8
+              ]
+            ],
+            "size": 143,
+            "tint": 2,
+            "trail": 9
+          },
+          "last": {
+            "charges": 0,
+            "memory": {
+              "3": "wall",
+              "14": "free",
+              "15": "free",
+              "16": "free",
+              "17": "wall",
+              "18": "free",
+              "19": "free",
+              "20": "free",
+              "21": "free",
+              "22": "free",
+              "23": "free",
+              "24": "free",
+              "25": "free",
+              "27": "free",
+              "28": "wall",
+              "29": "free",
+              "30": "wall",
+              "31": "free",
+              "32": "wall",
+              "40": "free",
+              "41": "wall",
+              "42": "free",
+              "43": "free",
+              "44": "free",
+              "45": "wall",
+              "46": "free",
+              "47": "free",
+              "53": "free",
+              "54": "wall",
+              "55": "wall",
+              "56": "wall",
+              "57": "wall",
+              "58": "wall",
+              "59": "free",
+              "60": "wall",
+              "65": "wall",
+              "66": "free",
+              "67": "free",
+              "68": "free",
+              "69": "free",
+              "70": "free",
+              "71": "free",
+              "72": "free",
+              "73": "free",
+              "74": "free",
+              "78": "wall",
+              "79": "free",
+              "80": "wall",
+              "81": "free",
+              "82": "wall",
+              "83": "free",
+              "84": "free",
+              "85": "free",
+              "86": "wall",
+              "91": "wall",
+              "92": "free",
+              "93": "free",
+              "94": "free",
+              "95": "wall",
+              "96": "free",
+              "97": "free",
+              "98": "free",
+              "99": "free",
+              "104": "wall",
+              "105": "wall",
+              "106": "wall",
+              "107": "free",
+              "108": "wall",
+              "109": "wall",
+              "110": "wall",
+              "117": "wall",
+              "118": "free",
+              "119": "free",
+              "120": "free",
+              "121": "wall",
+              "122": "free",
+              "123": "free",
+              "124": "free",
+              "130": "wall",
+              "131": "wall",
+              "132": "wall",
+              "133": "wall",
+              "134": "wall",
+              "135": "wall",
+              "136": "wall"
+            },
+            "obstacle": 35,
+            "obstacles": [
+              35,
+              94
+            ],
+            "position": 24,
+            "risk": [
+              35,
+              48,
+              61,
+              68,
+              71,
+              81,
+              94,
+              107
+            ],
+            "sentries": [
+              50,
+              98
+            ],
+            "sentryRisk": [
+              37,
+              24,
+              50,
+              38,
+              36,
+              97,
+              84,
+              110,
+              98,
+              96,
+              85,
+              111,
+              99,
+              63,
+              51,
+              49,
+              86,
+              112,
+              100,
+              76,
+              64,
+              62,
+              87,
+              113,
+              101,
+              89,
+              77,
+              75,
+              83,
+              109,
+              95
+            ]
+          },
+          "motions": [
+            {
+              "at": 35,
+              "from": 48
+            },
+            {
+              "at": 94,
+              "from": 81
+            }
+          ],
+          "previousObstacle": 48,
+          "refs": [
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+          ],
+          "score": 3
+        }
+      }
+    }
+  ],
+  "afterObserved": {
+    "state": {
+      "consecutiveWaits": 0,
+      "epoch": 4,
+      "grid": {
+        "actor": 0,
+        "actorPixels": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "base": 4,
+        "box": [
+          6,
+          11,
+          57,
+          54
+        ],
+        "charges": [
+          [
+            44,
+            2
+          ],
+          [
+            48,
+            2
+          ],
+          [
+            52,
+            2
+          ]
+        ],
+        "columns": 13,
+        "enemy": 10,
+        "goal": 25,
+        "multipleSentries": true,
+        "pitch": 4,
+        "rail": 5,
+        "sentry": [
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            2,
+            1,
+            8
+          ],
+          [
+            1,
+            2,
+            8
+          ],
+          [
+            2,
+            2,
+            8
+          ]
+        ],
+        "size": 143,
+        "tint": 2,
+        "trail": 9
+      },
+      "last": {
+        "charges": 0,
+        "memory": {
+          "3": "wall",
+          "14": "free",
+          "15": "free",
+          "16": "free",
+          "17": "wall",
+          "18": "free",
+          "19": "free",
+          "20": "free",
+          "21": "free",
+          "22": "free",
+          "23": "free",
+          "24": "free",
+          "25": "free",
+          "27": "free",
+          "28": "wall",
+          "29": "free",
+          "30": "wall",
+          "31": "free",
+          "32": "wall",
+          "40": "free",
+          "41": "wall",
+          "42": "free",
+          "43": "free",
+          "44": "free",
+          "45": "wall",
+          "46": "free",
+          "47": "free",
+          "53": "free",
+          "54": "wall",
+          "55": "wall",
+          "56": "wall",
+          "57": "wall",
+          "58": "wall",
+          "59": "free",
+          "60": "wall",
+          "65": "wall",
+          "66": "free",
+          "67": "free",
+          "68": "free",
+          "69": "free",
+          "70": "free",
+          "71": "free",
+          "72": "free",
+          "73": "free",
+          "74": "free",
+          "78": "wall",
+          "79": "free",
+          "80": "wall",
+          "81": "free",
+          "82": "wall",
+          "83": "free",
+          "84": "free",
+          "85": "free",
+          "86": "wall",
+          "91": "wall",
+          "92": "free",
+          "93": "free",
+          "94": "free",
+          "95": "wall",
+          "96": "free",
+          "97": "free",
+          "98": "free",
+          "99": "free",
+          "104": "wall",
+          "105": "wall",
+          "106": "wall",
+          "107": "free",
+          "108": "wall",
+          "109": "wall",
+          "110": "wall",
+          "117": "wall",
+          "118": "free",
+          "119": "free",
+          "120": "free",
+          "121": "wall",
+          "122": "free",
+          "123": "free",
+          "124": "free",
+          "130": "wall",
+          "131": "wall",
+          "132": "wall",
+          "133": "wall",
+          "134": "wall",
+          "135": "wall",
+          "136": "wall"
+        },
+        "obstacle": 35,
+        "obstacles": [
+          35,
+          94
+        ],
+        "position": 24,
+        "risk": [
+          35,
+          48,
+          61,
+          68,
+          71,
+          81,
+          94,
+          107
+        ],
+        "sentries": [
+          50,
+          98
+        ],
+        "sentryRisk": [
+          37,
+          24,
+          50,
+          38,
+          36,
+          97,
+          84,
+          110,
+          98,
+          96,
+          85,
+          111,
+          99,
+          63,
+          51,
+          49,
+          86,
+          112,
+          100,
+          76,
+          64,
+          62,
+          87,
+          113,
+          101,
+          89,
+          77,
+          75,
+          83,
+          109,
+          95
+        ]
+      },
+      "motions": [
+        {
+          "at": 35,
+          "from": 48
+        },
+        {
+          "at": 94,
+          "from": 81
+        }
+      ],
+      "previousObstacle": 48,
+      "refs": [
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+      ],
+      "score": 3
+    }
+  },
+  "normal": null,
+  "rebound": {
+    "box": [
+      2,
+      11,
+      61,
+      54
+    ],
+    "pitch": 4,
+    "columns": 15,
+    "size": 165,
+    "tint": 2,
+    "base": 4,
+    "actor": 0,
+    "enemy": 10,
+    "trail": 9,
+    "goal": 29,
+    "charges": [
+      [
+        44,
+        2
+      ],
+      [
+        48,
+        2
+      ],
+      [
+        52,
+        2
+      ]
+    ],
+    "actorPixels": [
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        1
+      ]
+    ],
+    "rail": 5,
+    "sentry": [
+      [
+        1,
+        1,
+        0
+      ],
+      [
+        2,
+        1,
+        8
+      ],
+      [
+        1,
+        2,
+        8
+      ],
+      [
+        2,
+        2,
+        8
+      ]
+    ],
+    "multipleSentries": true,
+    "mechanisms": {
+      "pads": {
+        "56": [
+          -1,
+          0
+        ],
+        "84": [
+          1,
+          0
+        ],
+        "107": [
+          1,
+          0
+        ]
+      },
+      "doors": {
+        "111": 12
+      }
+    }
+  },
+  "reading": {
+    "position": 136,
+    "obstacle": 65,
+    "obstacles": [
+      65,
+      101
+    ],
+    "risk": [
+      65,
+      80,
+      82,
+      95,
+      101,
+      116,
+      131
+    ],
+    "memory": {
+      "29": "free",
+      "56": "free",
+      "84": "free",
+      "107": "free",
+      "111": "free",
+      "136": "free"
+    },
+    "charges": 3,
+    "sentries": [
+      54,
+      88
+    ],
+    "sentryRisk": [
+      54,
+      39,
+      69,
+      55,
+      53,
+      88,
+      73,
+      103,
+      89,
+      87
+    ],
+    "closedDoors": [
+      111
+    ],
+    "landings": {},
+    "failedEntrances": []
+  },
+  "route": [
+    {
+      "action": "ACTION1",
+      "target": 121
+    },
+    {
+      "action": "ACTION1",
+      "target": 106
+    },
+    {
+      "action": "ACTION4",
+      "target": 107
+    },
+    {
+      "action": "ACTION1",
+      "target": 92
+    },
+    {
+      "action": "ACTION1",
+      "target": 77
+    },
+    {
+      "action": "ACTION1",
+      "target": 62
+    },
+    {
+      "action": "ACTION1",
+      "target": 47
+    },
+    {
+      "action": "ACTION1",
+      "target": 32
+    },
+    {
+      "action": "ACTION1",
+      "target": 17
+    },
+    {
+      "action": "ACTION4",
+      "target": 18
+    },
+    {
+      "action": "ACTION4",
+      "target": 19
+    },
+    {
+      "action": "ACTION4",
+      "target": 20
+    },
+    {
+      "action": "ACTION4",
+      "target": 21
+    },
+    {
+      "action": "ACTION4",
+      "target": 22
+    },
+    {
+      "action": "ACTION4",
+      "target": 23
+    },
+    {
+      "action": "ACTION4",
+      "target": 24
+    },
+    {
+      "action": "ACTION4",
+      "target": 25
+    },
+    {
+      "action": "ACTION4",
+      "target": 26
+    },
+    {
+      "action": "ACTION4",
+      "target": 27
+    },
+    {
+      "action": "ACTION4",
+      "target": 28
+    },
+    {
+      "action": "ACTION4",
+      "target": 29
+    }
+  ],
+  "proposed": {
+    "status": "proposed",
+    "kind": "sic_navigate_revealed_grid",
+    "local": {
+      "epoch": 5,
+      "score": 4,
+      "grid": {
+        "box": [
+          2,
+          11,
+          61,
+          54
+        ],
+        "pitch": 4,
+        "columns": 15,
+        "size": 165,
+        "tint": 2,
+        "base": 4,
+        "actor": 0,
+        "enemy": 10,
+        "trail": 9,
+        "goal": 29,
+        "charges": [
+          [
+            44,
+            2
+          ],
+          [
+            48,
+            2
+          ],
+          [
+            52,
+            2
+          ]
+        ],
+        "actorPixels": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "rail": 5,
+        "sentry": [
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            2,
+            1,
+            8
+          ],
+          [
+            1,
+            2,
+            8
+          ],
+          [
+            2,
+            2,
+            8
+          ]
+        ],
+        "multipleSentries": true,
+        "mechanisms": {
+          "pads": {
+            "56": [
+              -1,
+              0
+            ],
+            "84": [
+              1,
+              0
+            ],
+            "107": [
+              1,
+              0
+            ]
+          },
+          "doors": {
+            "111": 12
+          }
+        }
+      },
+      "last": {
+        "position": 136,
+        "obstacle": 65,
+        "obstacles": [
+          65,
+          101
+        ],
+        "risk": [
+          65,
+          80,
+          82,
+          95,
+          101,
+          116,
+          131
+        ],
+        "memory": {
+          "29": "free",
+          "56": "free",
+          "84": "free",
+          "107": "free",
+          "111": "free",
+          "136": "free"
+        },
+        "charges": 3,
+        "sentries": [
+          54,
+          88
+        ],
+        "sentryRisk": [
+          54,
+          39,
+          69,
+          55,
+          53,
+          88,
+          73,
+          103,
+          89,
+          87
+        ],
+        "closedDoors": [
+          111
+        ],
+        "landings": {},
+        "failedEntrances": [],
+        "nextHazards": []
+      },
+      "previousObstacle": null,
+      "refs": [
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+      ],
+      "consecutiveWaits": 0,
+      "timing": {
+        "start": 136,
+        "patrols": [
+          [
+            54
+          ],
+          [
+            88
+          ]
+        ],
+        "walls": [
+          [
+            65
+          ],
+          [
+            101
+          ]
+        ],
+        "scannedPads": []
+      }
+    },
+    "choice": {
+      "action": {
+        "action_ref": "ACTION1",
+        "data": {}
+      },
+      "kind": "move",
+      "target": 121,
+      "uncertain": true
+    },
+    "needId": "sic-need:0ac3bde417e6640492e6c2a598f43c2f32dcf41bb73070aa22f993c38ff28d03",
+    "binding": {
+      "observation_ref": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:97:frame:804385724699706b",
+      "level_epoch": 5
+    },
+    "actions": [
+      {
+        "action_ref": "ACTION1",
+        "data": {}
+      }
+    ],
+    "steps": [
+      {
+        "action": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "expected_after": [
+          6,
+          43,
+          9,
+          46
+        ]
+      }
+    ],
+    "sicSituationCard": {
+      "strategy": "P05",
+      "need": "Find a passable route to the exit",
+      "situation": "Test the next unconfirmed cell on the route",
+      "evidence": [
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:97:frame:804385724699706b",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+      ],
+      "agenda": [
+        {
+          "id": "P05",
+          "applicability": "applicable",
+          "reason": "A needed effect is still unknown in the current situation.",
+          "result": "selected",
+          "evidence": [
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:97:frame:804385724699706b",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+          ]
+        },
+        {
+          "id": "P07",
+          "applicability": "inapplicable",
+          "reason": "Condition not met: At least the next step of access is supported by an observed displacement.",
+          "result": "skipped",
+          "evidence": [
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:97:frame:804385724699706b",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+          ]
+        },
+        {
+          "id": "P02",
+          "applicability": "inapplicable",
+          "reason": "Condition not met: A known input can be tested again at a current, compatible target.",
+          "result": "skipped",
+          "evidence": [
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:97:frame:804385724699706b",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+          ]
+        }
+      ],
+      "mode": "exploration",
+      "triggerCard": "navigation:exploration",
+      "actor": [
+        6,
+        47,
+        9,
+        50
+      ],
+      "target": [
+        6,
+        43,
+        9,
+        46
+      ],
+      "exit": [
+        58,
+        15,
+        61,
+        18
+      ],
+      "obstacle": [
+        22,
+        27,
+        25,
+        30
+      ],
+      "obstacles": [
+        [
+          22,
+          27,
+          25,
+          30
+        ],
+        [
+          46,
+          35,
+          49,
+          38
+        ]
+      ],
+      "sentries": [
+        [
+          38,
+          23,
+          41,
+          26
+        ],
+        [
+          54,
+          31,
+          57,
+          34
+        ]
+      ],
+      "revealedWalls": 0
+    },
+    "question": {
+      "reason": "Test the next unconfirmed cell on the route",
+      "hypothesis_refs": [
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:97:frame:804385724699706b",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+      ]
+    },
+    "route_refs": [
+      "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:97:frame:804385724699706b",
+      "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+      "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+      "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+      "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+      "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+    ],
+    "compositions": [
+      {
+        "id": "sic_navigate_revealed_grid:sic-need:0ac3bde417e6640492e6c2a598f43c2f32dcf41bb73070aa22f993c38ff28d03",
+        "observed": false,
+        "open_question": "Test the next unconfirmed cell on the route",
+        "relations": [
+          "contributes_to:G_official_completion"
+        ]
+      }
+    ],
+    "sicLocalDecision": {
+      "strategy": "P05",
+      "objective": {
+        "id": "sic_navigate_revealed_grid:sic-need:0ac3bde417e6640492e6c2a598f43c2f32dcf41bb73070aa22f993c38ff28d03",
+        "label": "Measure the effect of a needed control",
+        "parent": "G_official_completion"
+      },
+      "need": {
+        "kind": "navigate_with_partially_revealed_terrain",
+        "scope": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5",
+        "subjects": [
+          "controlled_sprite",
+          "revealed_cells",
+          "moving_obstacle",
+          "exit"
+        ],
+        "parentObjective": "G_official_completion",
+        "satisfactionContract": "official_progress_at_visible_exit",
+        "id": "sic-need:0ac3bde417e6640492e6c2a598f43c2f32dcf41bb73070aa22f993c38ff28d03",
+        "status": "assigned",
+        "evidence": [
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:97:frame:804385724699706b",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+        ]
+      }
+    },
+    "bundle_template": {
+      "operation_key": "OP18",
+      "composition_ref": "sic_navigate_revealed_grid:sic-need:0ac3bde417e6640492e6c2a598f43c2f32dcf41bb73070aa22f993c38ff28d03",
+      "objective_ref": "G_official_completion",
+      "purpose": "Test the next unconfirmed cell on the route",
+      "preconditions": {},
+      "preserve_refs": [],
+      "evidence": [
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:97:frame:804385724699706b",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:92:frame:fff5d77ab3362092",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:93:frame:62e741a47445aebd",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:94:frame:b9694df16d9f00b5",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:95:frame:5d9bb6fab60da946",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:96:frame:2a65808470bd6890"
+      ],
+      "actions": [
+        {
+          "action_ref": "ACTION1",
+          "data": {}
+        }
+      ],
+      "outcome_guard": {
+        "path": [
+          "value"
+        ],
+        "contains": "sic_navigate_revealed_grid:sic-need:0ac3bde417e6640492e6c2a598f43c2f32dcf41bb73070aa22f993c38ff28d03"
+      }
+    }
+  },
+  "status": "diagnostic_first_return_remains_readable",
+  "qualification": false,
+  "finding": "At global97 an actual foreign ACTION1 moves136 to121. Inherited geometry is uniquely recognized before and after, including mechanisms. The navigation observer correctly leaves the prior role unchanged because full after recognition still succeeds. Both independently projected proposals contain one uncertain command, not a justified two-command series. No loss has been localized yet."
+}
