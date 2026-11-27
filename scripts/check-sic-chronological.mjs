@@ -48,9 +48,32 @@ async function run(code,requestedTarget,parallelWorkers) {
   const supplied=suppliedData ? JSON.parse(suppliedData) : undefined;
   const pack={...defaultRecoveryPack,solver:mode};
   const games=createGameDispatcher(loadLegacy);
-  const game=request=>games.dispatch(request);
+  const recorder = process.env.SIC_DECISION_TRACE
+    ? (await import('./sic-decision-trace.mjs')).createDecisionTrace(process.env.SIC_DECISION_TRACE, code) : null;
+  const game = recorder ? async request => {
+    const board = await games.dispatch(request);
+    if (request.type !== 'action') recorder.observe(request, board);
+    return board;
+  } : request => games.dispatch(request);
   let solver;const service=new V6AgentService(async recovery=>(solver=await createNativeV6Runtime({common,strategy},{recovery})));
-  const costs={};const transport={request:async operation=>{if(operation.type==='resume') resumes++;const start=performance.now();try{return await service.handle(operation);}finally{const stat=costs[operation.type]??={ms:0,count:0};stat.ms+=performance.now()-start;stat.count++;}},reset:()=>{},dispose:()=>{}};
+  const costs={};
+  const transport = {
+    async request(operation) {
+      if (operation.type === 'resume') resumes++;
+      const start = performance.now();
+      let result;
+      try {
+        result = await service.handle(operation);
+      } finally {
+        const stat = costs[operation.type] ??= { ms: 0, count: 0 };
+        stat.ms += performance.now() - start;
+        stat.count++;
+      }
+      recorder?.reply(operation, result, solver.inspectKnowledge());
+      return result;
+    },
+    reset() {}, dispose() {},
+  };
   const usage = new Map(), decisions = new Map(), series = new Map(); let resumes=0, priorDispatch=null;const continuedGaps=[], boundaryGaps=[]; let board=await game({type:'load',code,level:1}), gameMs=0, first=null; const effects=[]; const pathKinds = new Map();
   const target = requestedTarget ?? board.levelCount;
   const levelBudgets = replayCampaignBudgets(code, target, historical, supplied);
@@ -65,12 +88,14 @@ async function run(code,requestedTarget,parallelWorkers) {
       if (board.levelsCompleted >= target || board.level > target) throw new Error('Dispatch past the requested level');
       const issued=performance.now(); if(effects.length%25===0)console.log(JSON.stringify({progress:effects.length,level:board.level})); const plan=agent.snapshot.trace.findLast(e=>e.kind==='sic_native_plan'); if(plan){const kind=action.id===6?"click":action.id>=1&&action.id<=4?"move":"other"; const types=pathKinds.get(plan.id)??new Set();types.add(kind);pathKinds.set(plan.id,types);series.set(plan.id,(series.get(plan.id)??0)+1);if(priorDispatch){(priorDispatch.plan===plan.id?continuedGaps:boundaryGaps).push(issued-priorDispatch.at);}priorDispatch={plan:plan.id,at:issued};}
       first??=issued-start;
-      const previous=board; board=await game({type:'action',actionId:action.id,...(action.id===6?{data:action.data}:{})});
+      const request = {type:'action',actionId:action.id,...(action.id===6?{data:action.data}:{})};
+      const previous=board; board=await games.dispatch(request);
       const executionMs=performance.now()-issued; let changed=0, left=64, right=-1, top=64, bottom=-1; for(let y=0;y<64;y++) for(let x=0;x<64;x++) if(previous.frame[y][x]!==board.frame[y][x]){changed++; left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);} effects.push([action.id,action.data??null,changed,changed?[left,top,right,bottom]:null,board.frames.length,board.levelsCompleted,agent.snapshot.proposal?.sicSituationCard?.strategy,agent.snapshot.trace.findLast(e=>e.kind==="sic_native_plan")?.family,agent.snapshot.proposal?.sicSituationCard?.situation,agent.snapshot.proposal?.sicSituationCard?.evidence?.length]);
       process.send({ kind:'command-applied', sicAuthorized:plan!==undefined && mode==='sic', levelsCompleted:board.levelsCompleted,
         command: { id:action.id, family:plan?.family??null, strategy:plan?.strategy??null } });
       const family=agent.snapshot.trace.findLast(e=>e.kind==='sic_native_plan')?.family??'unbound'; usage.set(family,(usage.get(family)??0)+1); const strategy=agent.snapshot.trace.findLast(e=>e.kind==='sic_native_plan')?.strategy??'unbound'; decisions.set(strategy,(decisions.get(strategy)??0)+1);
       gameMs+=executionMs;
+      recorder?.observe(request, board);
       trajectory.update(JSON.stringify([action,board.frame,board.frames,board.level,board.levelsCompleted,board.state]));
       return {observation:board,executionMs};
     }});
@@ -107,7 +132,7 @@ async function run(code,requestedTarget,parallelWorkers) {
           'seal_prefix','acquired_actions'].filter(key => typeof event[key] === 'boolean' || typeof event[key] === 'string'
             || typeof event[key] === 'number').map(key => [key,event[key]]))) } : {}),
       trace:trajectory.digest('hex')};
-  }finally{agent.dispose();}
+  }finally{agent.dispose();recorder?.close();}
 }
 const { appendFile } = await import('node:fs/promises');
 const mode=process.argv[6]??'sic';
@@ -117,6 +142,7 @@ const parallelWorkers=Number(process.argv[5]);
 if ((target!==undefined && (!Number.isInteger(target)||target<1||target>10))
   || !Number.isInteger(parallelWorkers) || parallelWorkers<1) throw new Error('Invalid chronological campaign configuration');
 const codes=process.argv[2].split(',');
+if (process.env.SIC_DECISION_TRACE && codes.length !== 1) throw Error('Use one decision trace per game');
 if (replayChild) {
   const [code]=codes;
   let result;
@@ -133,4 +159,11 @@ if (replayChild) {
     await appendFile(process.argv[4]+'.levels',result.levelStats.map(level=>JSON.stringify({code,level})).join('\n')+'\n');
   }
   await appendFile(process.argv[4],JSON.stringify(result)+'\n');
+  if (process.env.SIC_DECISION_TRACE) {
+    const finalLevel=result.levelStats?.at(-1);
+    await appendFile(process.env.SIC_DECISION_TRACE, JSON.stringify({ game:code,
+      level:finalLevel?.level ?? 1, turn:Math.max(1,finalLevel?.actions ?? 0),
+      kind:'stop', value:{ status:result.status, reason:result.reason, levels:result.levels,
+        actions:result.actions, authority:result.authority, message:result.message } })+'\n');
+  }
 }
