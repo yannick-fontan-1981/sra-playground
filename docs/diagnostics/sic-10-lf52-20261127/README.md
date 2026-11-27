@@ -24,6 +24,8 @@ La seconde variante change la silhouette, les dimensions, la palette, les positi
 
 Les cinq tests natifs et TypeScript passent. La campagne réelle des dix niveaux et le contrôle global de continuité restent à exécuter avant qualification ou publication.
 
+Le collecteur passif `sic-carrier-preparation-continuity.mjs` mesure séparément les translations successives du même porteur, d’une même pièce transportée et d’un même auxiliaire transporté. Il utilise les positions relues dans les deux images publiques, la commande effectivement exécutée, son contrôle acquis et les retours natifs rattachés au même plan. Une proposition seule, un changement de décision, un retour périmé, une commande inconnue, un changement de caméra ou un contenu absent ne remplacent pas cette preuve. Huit tests vérifient ces refus sur le préfixe de deux commandes exécuté juste avant la préemption. L’archive `executed-carrier-prefix.json.gz` contient ce préfixe public (SHA-256 `bf97663df2fb993166b7f7a5f29e689f6e4dd91668296cc9ed6ff8b30e381879`). Les seuils par niveau attendent la campagne complète et ne sont pas extrapolés à partir de cet exemple.
+
 ```bash
 node --test tests/sic-carrier-reduction-transfer.test.ts
 SIC_REPLAY_REFERENCES=docs/architecture/sic-replay-reference-levels-20261126.json \

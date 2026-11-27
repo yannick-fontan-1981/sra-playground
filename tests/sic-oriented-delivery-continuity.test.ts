@@ -25,7 +25,7 @@ async function witnessedRoom(rotated = false) {
     for (let y = 0; y < pitch; y++) for (let x = 0; x < pitch; x++)
       rows[phase[1] + v * pitch + y]![phase[0] + u * pitch + x] = pixels(x, y);
   };
-  function frame(tick: number, options: { blocked?: boolean; ambiguous?: boolean; lostCargo?: boolean; unpairedShift?: boolean; targetTaken?: boolean; secondOwner?: boolean; interference?: boolean; distantCargo?: boolean; duplicatePeer?: boolean } = {}) {
+  function frame(tick: number, options: { blocked?: boolean; ambiguous?: boolean; lostCargo?: boolean; unpairedShift?: boolean; targetTaken?: boolean; secondOwner?: boolean; interference?: boolean; distantCargo?: boolean; duplicatePeer?: boolean; ambiguousPeers?: boolean } = {}) {
     const rows = Array.from({ length: 64 }, () => Array<number>(64).fill(background));
     const receiverTiles: NativePoint[] = [[8, 2], [9, 2], [9, 5], [10, 5]];
     for (const site of receiverTiles) paint(rows, site, (x, y) => {
@@ -43,6 +43,10 @@ async function witnessedRoom(rotated = false) {
     if (options.duplicatePeer) {
       paint(rows, [12 - tick, 8], () => carrier);
       paint(rows, [13 - tick, 8], part(peerShell));
+    }
+    if (options.ambiguousPeers) {
+      paint(rows, [7 - tick, 6], () => carrier);
+      paint(rows, [8 - tick, 6], part(peerShell));
     }
     if (options.blocked) paint(rows, [tick + 2, 2], () => rotated ? 0 : 6);
     if (options.secondOwner) paint(rows, [3 + tick, 6], () => rotated ? 0 : 6);
@@ -144,6 +148,25 @@ for (const rotated of [false, true]) test('independently matched carriers retain
   assert.deepEqual(state.transports.map((item: any) => item.box).sort(), [room.at([10, 5]), room.at([6, 8])].sort());
   assert.ok(state.transports.every((item: any) => item.sources.length === 2));
   assert.equal(result.snapshot.trace.findLast(event => event.kind === 'sealed_prefix')?.acquired_actions, 5);
+});
+
+for (const rotated of [false, true]) test('crossing appearances cannot assign two equally close peer transports'
+  + (rotated ? ' with rotated geometry and remapped commands' : ''), async () => {
+  const room = await settledParallelRoom(rotated);
+  room.family.restore({ state: { ...room.family.state().state as Record<string, any>,
+    geometry: { ...room.learned.geometry, initial_boxes: [...room.learned.geometry.initial_boxes, room.at([6, 6])] } } });
+  const service = new V6AgentService(() => new NativeV6Runtime({ families: [room.family], sourceDigest: 'ambiguous-observed-carrier-pairs', maxPointOccurrences: 250 }));
+  const sessionId = 'crossing-peer-route-' + rotated;
+  let result = await service.handle({ type: 'init', sessionId, sequence: 0,
+    observation: toV6PublicObservation(room.packet(room.frame(2, { ambiguousPeers: true }))), budgets: { targetLevels: 2, levelActionCaps: [40, 40] } });
+  assert.ok(result.ticket);
+  const remembered = structuredClone((room.family.state().state as Record<string, any>).transportCarriers);
+  result = await service.handle({ type: 'advance', sessionId, sequence: 1, ticketId: result.ticket.id, executionMs: 1,
+    observation: toV6PublicObservation(room.packet(room.frame(3, { ambiguousPeers: true })), 1) });
+  assert.equal(result.kind, 'boundary');
+  assert.equal(result.snapshot.trace.findLast(event => event.kind === 'actual_outcome')?.matched, false);
+  assert.equal(result.snapshot.trace.findLast(event => event.kind === 'sealed_prefix')?.acquired_actions, 1);
+  assert.deepEqual((room.family.state().state as Record<string, any>).transportCarriers, remembered);
 });
 
 for (const parallel of [false, true])
