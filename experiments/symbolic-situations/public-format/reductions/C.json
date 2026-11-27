@@ -1,0 +1,35 @@
+{
+  "format": "sra.public/1",
+  "goal": {"command":["valider"],"criterion":"minimax_actions","source":[1]},
+  "observations": [
+    {"ref":["dial"],"status":"unknown","source":[2]},
+    {"ref":["mark","P"],"status":"known","value":null,"source":[3]}
+  ],
+  "domains": [
+    {"ref":["dial"],"values":["R","S"],"stableWhen":true,"source":[2]}
+  ],
+  "commands": [
+    {"command":["lire"],"source":[4]},
+    {"command":["marquer","P","R"],"source":[5]},
+    {"command":["marquer","P","S"],"source":[5]},
+    {"command":["valider"],"source":[6]}
+  ],
+  "rules": [
+    {"command":["lire"],"maxUses":1,"source":[4]},
+    {"command":["lire"],"effect":{"reveal":["dial"]},"source":[4]},
+    {"command":["marquer","P","R"],"requires":{"eq":[["mark","P"],null]},"source":[3,5]},
+    {"command":["marquer","P","R"],"effect":{"set":[["mark","P"],"R"]},"source":[5]},
+    {"command":["marquer","P","S"],"requires":{"eq":[["mark","P"],null]},"source":[3,5]},
+    {"command":["marquer","P","S"],"effect":{"set":[["mark","P"],"S"]},"source":[5]},
+    {"command":["valider"],"when":{"eq":[["mark","P"],{"ref":["dial"]}]},"effect":{"end":"success"},"source":[6]},
+    {"command":["valider"],"when":{"not":{"eq":[["mark","P"],{"ref":["dial"]}]}},"effect":{"end":"failure"},"source":[6]}
+  ],
+  "sources": {
+    "1": "Obtenir succès par valider, en minimisant le nombre de commandes dans le pire cas.",
+    "2": "Le cadran fixe vaut R ou S. Sa position initiale est inconnue.",
+    "3": "La case P est vierge et ne peut recevoir qu'une seule marque.",
+    "4": "lire révèle la valeur du cadran une seule fois.",
+    "5": "marquer P R ou marquer P S inscrit la valeur choisie sur la case vierge. Le retour est « marqué ».",
+    "6": "valider termine sur succès si la marque de P égale la position du cadran, sur échec sinon."
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "format": "sra.public/1",
+  "goal": {"command":["valider"],"criterion":"minimax_actions","source":[1]},
+  "observations": [
+    {"ref":["indexed","P"],"status":"known","value":false,"source":[2]},
+    {"ref":["dial"],"status":"known","value":"R","source":[2]},
+    {"ref":["effort","P"],"status":"unknown","source":[2]},
+    {"ref":["mark","P"],"status":"known","value":null,"source":[5]}
+  ],
+  "domains": [
+    {"ref":["effort","P"],"values":["R","S"],"stableWhen":true,"source":[2]},
+    {"ref":["dial"],"values":["R","S"],"stableWhen":{"eq":[["indexed","P"],true]},"source":[4]}
+  ],
+  "commands": [
+    {"command":["indexer","P"],"source":[3]},
+    {"command":["lire"],"source":[6]},
+    {"command":["marquer","P","R"],"source":[7]},
+    {"command":["marquer","P","S"],"source":[7]},
+    {"command":["valider"],"source":[8]}
+  ],
+  "rules": [
+    {"command":["indexer","P"],"requires":{"eq":[["indexed","P"],false]},"source":[3]},
+    {"command":["indexer","P"],"effect":{"set":[["indexed","P"],true]},"source":[3]},
+    {"command":["indexer","P"],"when":{"eq":[["effort","P"],"R"]},"effect":{"set":[["dial"],"R"]},"source":[3]},
+    {"command":["indexer","P"],"when":{"eq":[["effort","P"],"S"]},"effect":{"set":[["dial"],"S"]},"source":[3]},
+    {"command":["lire"],"requires":{"eq":[["indexed","P"],true]},"source":[6]},
+    {"command":["lire"],"maxUses":1,"source":[6]},
+    {"command":["lire"],"effect":{"reveal":["dial"]},"source":[6]},
+    {"command":["marquer","P","R"],"requires":{"all":[{"eq":[["indexed","P"],true]},{"eq":[["mark","P"],null]}]},"source":[5,7]},
+    {"command":["marquer","P","R"],"effect":{"set":[["mark","P"],"R"]},"source":[7]},
+    {"command":["marquer","P","S"],"requires":{"all":[{"eq":[["indexed","P"],true]},{"eq":[["mark","P"],null]}]},"source":[5,7]},
+    {"command":["marquer","P","S"],"effect":{"set":[["mark","P"],"S"]},"source":[7]},
+    {"command":["valider"],"when":{"eq":[["mark","P"],{"ref":["dial"]}]},"effect":{"end":"success"},"source":[8]},
+    {"command":["valider"],"when":{"not":{"eq":[["mark","P"],{"ref":["dial"]}]}},"effect":{"end":"failure"},"source":[8]}
+  ],
+  "sources": {
+    "1": "Obtenir succès par valider, en minimisant le nombre de commandes dans le pire cas.",
+    "2": "P est non indexé. Le cadran indique R. Le guide fixe, inconnu, vaut R ou S.",
+    "3": "indexer P exige P non indexé, indexe P et rend « poste indexé ». Si le guide vaut R, le cadran passe à R. Si le guide vaut S, il passe à S.",
+    "4": "Après indexation, le cadran reste fixe. Ses valeurs possibles sont R et S.",
+    "5": "La case P est vierge et ne peut recevoir qu'une seule marque.",
+    "6": "Après indexation, lire révèle la valeur du cadran une seule fois.",
+    "7": "Après indexation, marquer P R ou marquer P S inscrit la valeur choisie sur la case vierge. Le retour est « marqué ».",
+    "8": "valider termine sur succès si la marque de P égale la position du cadran, sur échec sinon."
+  }
+}
