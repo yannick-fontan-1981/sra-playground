@@ -1,0 +1,7 @@
+2cb80e62a41e1269f1a2a0dd9e9de20a32504b70724c167abaac1a8b9bae3111  scripts/check-sic-chronological.mjs
+308ae1c2d28a21dc7f2e3d06c83e601877d5388db2723148b5900d58c5a89931  scripts/sic-replay-budgets.mjs
+469e7a78e3a473df8ee6255828ab68d1ca3f08c8b075b40e022b06ef69495c5e  scripts/sic-replay-watchdog.mjs
+67ae5216b80e87bbb2243138fde7970ea5c725a5f832f1b72aa8b0780e270854  docs/architecture/sic-replay-reference-levels-20261126.json
+364acf7c325fde77c447e3c7cbd5be9381958621235a0d471c23e7c1d1862c06  src/sic/navigate-revealed-grid.ts
+9dd71a06ec46ea78a33012b1f5d9abb59730fbe0fc4302e13c21bdd965949a95  src/logos-engine/v6-native-owned.ts
+91832a5ca8088cf37313ed2f51718b72e54151c511adeaefefd2ae07dc9bda44  src/logos-engine/v6-native-state-graph.ts

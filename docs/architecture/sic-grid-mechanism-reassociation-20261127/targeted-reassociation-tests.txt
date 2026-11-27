@@ -1,0 +1,37 @@
+✔ native inherited grid acquires an ordinary blocked return while separate mechanisms remain unchanged (1654.958685ms)
+✔ native inherited grid acquires an ordinary blocked return while separate mechanisms remain unchanged with moved tiles, another palette, carrier shape and opposite commands (1273.403081ms)
+✔ ordinary grid reassociation with mechanisms refuses wall-absent and keeps independent evidence (25.065206ms)
+✔ ordinary grid reassociation with mechanisms refuses ambiguous-carrier and keeps independent evidence (23.486902ms)
+✔ ordinary grid reassociation with mechanisms refuses nonlocal-landing and keeps independent evidence (13.097694ms)
+✔ ordinary grid reassociation with mechanisms refuses changed-pad and keeps independent evidence (11.455122ms)
+✔ ordinary grid reassociation with mechanisms refuses changed-door and keeps independent evidence (11.62397ms)
+✔ ordinary grid reassociation with mechanisms refuses changed-goal and keeps independent evidence (12.78078ms)
+✔ ordinary grid reassociation with mechanisms refuses pad-contact and keeps independent evidence (16.991192ms)
+✔ ordinary grid reassociation with mechanisms refuses door-contact and keeps independent evidence (10.155013ms)
+✔ ordinary grid reassociation with mechanisms refuses charge-change and keeps independent evidence (9.834985ms)
+✔ ordinary grid reassociation with mechanisms refuses wrong-command and keeps independent evidence (9.448407ms)
+✔ ordinary grid reassociation with mechanisms refuses new-level and keeps independent evidence (8.556589ms)
+✔ ordinary grid reassociation with mechanisms refuses changed-score and keeps independent evidence (7.398255ms)
+✔ ordinary grid reassociation with mechanisms refuses unacquired-role and keeps independent evidence (14.638189ms)
+✔ the reassociated mechanism-grid return acquires each observed peer track only once (10.655705ms)
+✔ native grid roles survive a foreign blocked step after the public level boundary (1168.132701ms)
+✔ native grid roles survive a foreign blocked step after the public level boundary with rotated locations, changed colors, another carrier shape and a different command (826.701916ms)
+✔ foreign grid reassociation refuses wall-absent without changing independent facts (16.284707ms)
+✔ foreign grid reassociation refuses ambiguous-carrier without changing independent facts (19.494965ms)
+✔ foreign grid reassociation refuses changed-lattice without changing independent facts (8.022475ms)
+✔ foreign grid reassociation refuses changed-goal without changing independent facts (9.833864ms)
+✔ foreign grid reassociation refuses wrong-command without changing independent facts (10.074541ms)
+✔ foreign grid reassociation refuses new-level without changing independent facts (7.182086ms)
+✔ foreign grid reassociation refuses changed-score without changing independent facts (8.728641ms)
+✔ foreign grid reassociation refuses other-session without changing independent facts (7.964727ms)
+✔ foreign grid reassociation refuses missing-proof without changing independent facts (7.463835ms)
+✔ foreign grid reassociation refuses unacquired-role without changing independent facts (8.191814ms)
+✔ the same foreign return is acquired once (11.989196ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4727.790131

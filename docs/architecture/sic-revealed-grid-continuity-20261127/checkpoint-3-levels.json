@@ -1,0 +1,193 @@
+{
+  "createdAt": "2026-11-27T03:11:18.761205+00:00",
+  "game": "SNAR",
+  "status": "partial_checkpoint",
+  "source": {
+    "local": "d6f8040d4f590170d9d5c801ac1846a257729b61",
+    "github": "a0a78147caa681af6f1d6ee96e6167f42c1154f4",
+    "tree": "622ad28949e2a42f65c1115ee308c62a1852c341",
+    "base": "c97797426f619db16de5b29738a8d4209c78ebca"
+  },
+  "baselineSource": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+  "runner": "scripts/check-sic-chronological.mjs",
+  "workers": 1,
+  "references": "docs/architecture/sic-replay-reference-levels-20261126.json",
+  "qualification": {
+    "levels": 3,
+    "target": 6,
+    "actions": 91,
+    "authority": 91,
+    "reason": "level_wall_time_budget",
+    "levelStats": [
+      {
+        "level": 1,
+        "won": true,
+        "activeMs": 6270,
+        "budget": {
+          "actions": 21,
+          "activeTimeMs": 16000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=1; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 16,
+        "ms": 6750,
+        "gameMs": 320,
+        "costs": {
+          "init": {
+            "ms": 1252,
+            "count": 1
+          },
+          "advance": {
+            "ms": 2686,
+            "count": 16
+          },
+          "resume": {
+            "ms": 2197,
+            "count": 9
+          }
+        },
+        "graph": "a729c3ff2b56c6edc4c6af3aae8a45762764317d2f0b254ba762f59e7a0bd278",
+        "deltas": 2679,
+        "acquiredRecords": 16,
+        "nodes": 565,
+        "traceEvents": 72,
+        "prefixHash": "b9af930c627d06ddb5ecfa96d1425cd5ce3c10e8e5660d9bdf6b16afbd2cd121",
+        "scoredMs": 6557,
+        "settlementMs": 193
+      },
+      {
+        "level": 2,
+        "won": true,
+        "activeMs": 8910,
+        "budget": {
+          "actions": 29,
+          "activeTimeMs": 24000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=2; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 21,
+        "ms": 9541,
+        "gameMs": 431,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 4758,
+            "count": 21
+          },
+          "resume": {
+            "ms": 3916,
+            "count": 15
+          }
+        },
+        "graph": "2e625e085b4477604ff228d7ffb14a7eda07325a3db734b15235514e68bb05fc",
+        "deltas": 6154,
+        "acquiredRecords": 37,
+        "nodes": 860,
+        "traceEvents": 128,
+        "prefixHash": "50ecdcd21c3bd4d156f844fdbecd847aeb8ac45caf8d79814e05ce9856909735",
+        "scoredMs": 9227,
+        "settlementMs": 314
+      },
+      {
+        "level": 3,
+        "won": true,
+        "activeMs": 8189,
+        "budget": {
+          "actions": 28,
+          "activeTimeMs": 15000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=3; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 23,
+        "ms": 8856,
+        "gameMs": 390,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 6172,
+            "count": 23
+          },
+          "resume": {
+            "ms": 1828,
+            "count": 16
+          }
+        },
+        "graph": "98e72a3a9dbf64b6bb62640549b303b51354d505f2ac2d10563c7d41054bcff4",
+        "deltas": 9914,
+        "acquiredRecords": 60,
+        "nodes": 1228,
+        "traceEvents": 128,
+        "prefixHash": "80e7b15eb24a474261548e78d9afdfccfbb3773b785a8d9f208c335501404ed6",
+        "scoredMs": 8526,
+        "settlementMs": 330
+      },
+      {
+        "level": 4,
+        "won": false,
+        "actions": 31,
+        "ms": 24002,
+        "budget": {
+          "actions": 44,
+          "activeTimeMs": 24000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=4; won=true",
+          "timeBasis": "measured"
+        }
+      }
+    ],
+    "completedPrefixHashesMatchBaseline": true
+  },
+  "tests": {
+    "targetedPassed": 11,
+    "typecheck": true,
+    "independentReview": "favorable; no test run by reviewer",
+    "globalContinuityGate": "not run for this partial checkpoint"
+  },
+  "diagnostic": {
+    "source": "c97797426f619db16de5b29738a8d4209c78ebca",
+    "stoppedByHarnessAtFirstPrefixCut": true,
+    "rawErrorAfterCanDispatchStop": "The public board changed while V6 was reasoning; intentional diagnostic stop, not a game verdict",
+    "level": 2,
+    "levelAction": 3,
+    "ordinal": 19,
+    "announced": 5,
+    "closedAfter": 1
+  },
+  "files": {
+    "baseline-native.jsonl.gz": {
+      "bytes": 1011,
+      "sha256": "1548bc07f8ed8b3123f3ddccdf7dd6a1a6d05abde009ebb9a07a309a07d06b56",
+      "uncompressedBytes": 3180,
+      "uncompressedSha256": "08e9ba64b44f81cc5dd2d6a38b06016cfb35d7256ca77b605a79676ff3047286"
+    },
+    "candidate-native.jsonl.gz": {
+      "bytes": 1015,
+      "sha256": "6462bcac16726a300c8f457e4610c20d5f4715458f2912282c1930192fd85d0e",
+      "uncompressedBytes": 3180,
+      "uncompressedSha256": "38bce2974b534a5f5b4eee13e0c10af6e87fbd74eb38693aa13e1f5c95dc38c8"
+    },
+    "candidate-native.levels.jsonl.gz": {
+      "bytes": 802,
+      "sha256": "2f3b2e249cc2983b59b75dabb65fec1afd65e152427bd5437e4ce2780939145d",
+      "uncompressedBytes": 2299,
+      "uncompressedSha256": "c7beab5bcfb99f9e58173c62e8048f428910c4b326b2d17f4ec1a34e774af96f"
+    },
+    "first-prefix-public-capture.json.gz": {
+      "bytes": 151552,
+      "sha256": "2c233928ae4756e800910fc8fac358f141ea0be891aa05bf31f7bd1ec43ec900",
+      "uncompressedBytes": 5275941,
+      "uncompressedSha256": "d236b9b0649717f03dbea2b4cdaf4b614e909269e44a3b51d750d708099241ae"
+    },
+    "diagnostic-native.jsonl.gz": {
+      "bytes": 1665,
+      "sha256": "6337b85878c78f70298371e754e150a05c86081c90c2a48b662075263b63843c",
+      "uncompressedBytes": 7998,
+      "uncompressedSha256": "51b5088e6cccfebb22975ef99b25126d68349efd474946eccb744212683de8aa"
+    }
+  }
+}

@@ -32,7 +32,7 @@ jobs:
         run: |
           mkdir -p qualification
           git rev-parse HEAD > qualification/source.sha
-          node scripts/check-sic-chronological.mjs CGWL,DC22,ETAG,GRAV,LF52,SK48,SPOR,WEAV auto qualification/strict.jsonl 1 sic
+          node scripts/check-sic-chronological.mjs CGWL,DC22,ETAG,GRAV,LF52,SK48,SNAR,SPOR,WEAV auto qualification/strict.jsonl 1 sic
       - name: Require all official completions within original budgets
         run: |
           node --input-type=module <<'NODE'
@@ -41,7 +41,7 @@ jobs:
           import { createHash } from 'node:crypto';
           const raw = readFileSync('qualification/strict.jsonl');
           const runs = raw.toString().trim().split(/\r?\n/).map(JSON.parse);
-          const targets = { CGWL: 6, DC22: 6, ETAG: 6, GRAV: 6, LF52: 10, SK48: 8, SPOR: 6, WEAV: 6 };
+          const targets = { CGWL: 6, DC22: 6, ETAG: 6, GRAV: 6, LF52: 10, SK48: 8, SNAR: 6, SPOR: 6, WEAV: 6 };
           assert.deepEqual(runs.map(run => run.code).sort(), Object.keys(targets).sort());
           assert.equal(readFileSync('qualification/source.sha', 'utf8').trim(), process.env.GITHUB_SHA);
           for (const run of runs) {
