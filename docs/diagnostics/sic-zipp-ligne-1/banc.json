@@ -1,0 +1,260 @@
+{
+  "historical": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+  "frozen": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "p05": "3c2d6bcfd4a7d7abf28650e2f8ffed3d3510c3b4",
+  "candidate": "16f3c5e8d300903e475400fb9b67a513f2834663",
+  "contract": "3c94bd96ec3bba066609cb560a6d3737971d19d5",
+  "proof": "273b95a740a26bde3688e37a45338a624fb5450c",
+  "clockMilliseconds": 1700000000000,
+  "comparisons": {
+    "native-8ce7ee35": {
+      "events": "tickets 1–16",
+      "differencesFromFrozen": [
+        "/decisions/0/ticket/graphChain",
+        "/decisions/1/ticket/graphChain",
+        "/ticketChains/1",
+        "/ticketChains/2",
+        "/ticketChains/3",
+        "/ticketChains/4",
+        "/ticketChains/5",
+        "/ticketChains/6",
+        "/ticketChains/7",
+        "/ticketChains/8",
+        "/ticketChains/9",
+        "/ticketChains/10",
+        "/ticketChains/11",
+        "/ticketChains/12",
+        "/ticketChains/13",
+        "/ticketChains/14",
+        "/ticketChains/15"
+      ]
+    },
+    "native-d0e7527c": {
+      "events": "tickets 1–16",
+      "differencesFromFrozen": []
+    },
+    "native-3c2d6bcf": {
+      "events": "tickets 1–16",
+      "differencesFromFrozen": []
+    },
+    "native-16f3c5e8": {
+      "events": "tickets 1–16",
+      "differencesFromFrozen": []
+    },
+    "previous-epoch-8ce7ee35": {
+      "events": "tickets 1–15",
+      "differencesFromFrozen": [
+        "/decisions/0/release/missingControl",
+        "/decisions/0/ticket/graphChain",
+        "/ticketChains/1",
+        "/ticketChains/2",
+        "/ticketChains/3",
+        "/ticketChains/4",
+        "/ticketChains/5",
+        "/ticketChains/6",
+        "/ticketChains/7",
+        "/ticketChains/8",
+        "/ticketChains/9",
+        "/ticketChains/10",
+        "/ticketChains/11",
+        "/ticketChains/12",
+        "/ticketChains/13",
+        "/ticketChains/14"
+      ]
+    },
+    "previous-epoch-d0e7527c": {
+      "events": "tickets 1–15",
+      "differencesFromFrozen": []
+    },
+    "previous-epoch-3c2d6bcf": {
+      "events": "tickets 1–15",
+      "differencesFromFrozen": []
+    },
+    "previous-epoch-16f3c5e8": {
+      "events": "tickets 1–15",
+      "differencesFromFrozen": []
+    }
+  },
+  "observed": {
+    "native": {
+      "acquisition": {
+        "action_ref": "ACTION2",
+        "experiment": "replicate_translation",
+        "evidence": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:15:frame:d247c339b72c5e8a",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:10:frame:eef05abae50b9912",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:11:frame:d247c339b72c5e8a"
+        ],
+        "pair_ref": "f375e1c12e0a8e64cee898cbd1ac38f40e447ac8d2cc9858dd4bb99a5d37336c",
+        "observation_ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:15:frame:d247c339b72c5e8a",
+        "objective": "Identify a controllable participant for this composition through a changed-origin replication or an unused public input.",
+        "expected_motion": {
+          "3da0201963e8a489478c6d250f50d32ebc32e24bad145c945a21bcc382ba0fe2": [
+            0,
+            12
+          ]
+        }
+      },
+      "guard": "current_public_premises_match_provisional_step",
+      "missingControl": null,
+      "outcome": {
+        "status": "unknown_effect_observed",
+        "matched": null
+      },
+      "boxes": [
+        [
+          [
+            11,
+            31,
+            17,
+            37
+          ],
+          [
+            11,
+            43,
+            17,
+            49
+          ]
+        ],
+        [
+          [
+            11,
+            43,
+            17,
+            49
+          ],
+          [
+            11,
+            43,
+            17,
+            49
+          ]
+        ]
+      ],
+      "next": {
+        "turn": 16,
+        "command": {
+          "actionRef": "ACTION6",
+          "data": {
+            "x": 14,
+            "y": 10
+          }
+        },
+        "observation": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:16:frame:d247c339b72c5e8a",
+        "family": "observed_frontier",
+        "strategy": "test_local_input"
+      }
+    },
+    "previous-epoch": {
+      "acquisition": {
+        "action_ref": "ACTION2",
+        "experiment": "sample_unused_control",
+        "evidence": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:15:frame:d247c339b72c5e8a"
+        ],
+        "pair_ref": "f375e1c12e0a8e64cee898cbd1ac38f40e447ac8d2cc9858dd4bb99a5d37336c",
+        "observation_ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:15:frame:d247c339b72c5e8a",
+        "objective": "Identify a controllable participant for this composition through a changed-origin replication or an unused public input."
+      },
+      "guard": "current_public_premises_match_provisional_step",
+      "missingControl": {
+        "id": "test_missing_control",
+        "need": "establish_control_effect_for_current_objective",
+        "action": "ACTION2",
+        "observationRef": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:15:frame:d247c339b72c5e8a",
+        "evidence": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:15:frame:d247c339b72c5e8a"
+        ],
+        "agenda": {
+          "id": "test_missing_control",
+          "applicability": "applicable",
+          "reason": "The proposed test refers to the current observation · An objective supported by evidence depends on this control · The subject of the test is identified · The effect has yet to be measured in this situation · The command is available in the current situation · The command has yet to be tried in this situation.",
+          "result": "selected",
+          "evidence": [
+            "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:15:frame:d247c339b72c5e8a"
+          ]
+        }
+      },
+      "outcome": {
+        "status": "unknown_effect_observed",
+        "matched": null
+      }
+    }
+  },
+  "callSites": {
+    "native": {
+      "calls": 7,
+      "nonNull": [
+        {
+          "command": "ACTION2",
+          "current": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:15:frame:d247c339b72c5e8a",
+          "trialCount": 1,
+          "offer": {
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:15:frame:d247c339b72c5e8a",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:10:frame:eef05abae50b9912",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:11:frame:d247c339b72c5e8a"
+            ],
+            "expected_motion": {
+              "3da0201963e8a489478c6d250f50d32ebc32e24bad145c945a21bcc382ba0fe2": [
+                0,
+                12
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "previous-epoch": {
+      "calls": 5,
+      "nonNull": []
+    },
+    "carre": {
+      "calls": 6,
+      "nonNull": [
+        {
+          "command": "ACTION1",
+          "current": "synthetic-control-attention-kernel:epoch:1:revision:2:frame:7923c631d7d11b42",
+          "trialCount": 1,
+          "offer": {
+            "evidence": [
+              "synthetic-control-attention-kernel:epoch:1:revision:2:frame:7923c631d7d11b42",
+              "synthetic-control-attention-kernel:epoch:1:revision:1:frame:7073d01abf2d9df9",
+              "synthetic-control-attention-kernel:epoch:1:revision:2:frame:7923c631d7d11b42"
+            ],
+            "expected_motion": {
+              "08b23d52f62e5417b38d7d6c5b498807c2235d310cc3fd76abfef9632cbe61df": [
+                2,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "historicalGraph": {
+    "firstTurn": 2,
+    "level": 1,
+    "hashes": [
+      "c1dad6be7a7e6c13ef03cf0b7e52a9600f5957e27c68e598d3dd35c07fcc38f6",
+      "03bff3401ed27e9d2ee3b27b5e071dd33d9ada42a02235d7e049aef508833634"
+    ],
+    "hydratedNodes": 225,
+    "differentFields": [
+      "/caller:controls/pending/0/palette",
+      "/caller:controls/pending/1/palette"
+    ],
+    "paletteLengthsOnFrozen": [
+      16,
+      16
+    ]
+  },
+  "square": {
+    "8ce7ee3563fa1d5eca1639c6ad03975cfc962460": "missing P05 release field on historical source",
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021": "passed",
+    "3c2d6bcfd4a7d7abf28650e2f8ffed3d3510c3b4": "passed",
+    "16f3c5e8d300903e475400fb9b67a513f2834663": "passed"
+  },
+  "archiveSHA256": "ef518bbc6e97ec70646958727414e9df6b2c04dde67efb95214b226568bddc6d"
+}
