@@ -1,0 +1,5 @@
+2cb80e62a41e1269f1a2a0dd9e9de20a32504b70724c167abaac1a8b9bae3111  scripts/check-sic-chronological.mjs
+308ae1c2d28a21dc7f2e3d06c83e601877d5388db2723148b5900d58c5a89931  scripts/sic-replay-budgets.mjs
+469e7a78e3a473df8ee6255828ab68d1ca3f08c8b075b40e022b06ef69495c5e  scripts/sic-replay-watchdog.mjs
+67ae5216b80e87bbb2243138fde7970ea5c725a5f832f1b72aa8b0780e270854  docs/architecture/sic-replay-reference-levels-20261126.json
+06d169a7eec4ebcac5d9b881207465a9b2e90f002b4ce4a3b28d182e270b0aeb  src/sic/oriented-delivery.ts

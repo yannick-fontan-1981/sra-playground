@@ -11,6 +11,8 @@ import { measureWorkshopPhaseContinuity, workshopPhaseCeilings, workshopPhaseCon
 import { measureMatchingEdgeContinuity, measurePublicPanelContinuity, matchingEdgeCeilings, publicPanelCeilings, matchingEdgeContinuity, publicPanelContinuity } from './sic-acquired-control-contract.mjs';
 import { measureSurfaceContinuity, surfaceCeilings, surfaceContinuity } from './sic-surface-continuity-contract.mjs';
 import { gridCeilings, gridContinuity, requireGridContinuity } from './sic-grid-continuity-contract.mjs';
+import { orientedDeliveryCeilings, orientedDeliverySeriesLevels, requireOrientedDelivery } from './sic-oriented-delivery-contract.mjs';
+export { measureOrientedDelivery } from './sic-oriented-delivery-contract.mjs';
 export { requireExecutedPrefix } from './sic-continuity-contract.mjs';
 import { measureManipulation, requireManipulation } from './measure-ss01-manipulation.mjs';
 import { compileLevel, equal, initialState, stepWorld } from '../experiments/sinking-star-ss02/src/core.ts';
@@ -55,10 +57,6 @@ const requiredPhysical = {
 const sources = { SNAR: 'move', ETAG: 'move', SK48: 'mixed', LF52: 'mixed', AR25: 'move', CGWL: 'move', WEAV: 'move', HANO: 'click', DC22: 'mixed', GRAV: 'move', SIGN: 'move', GABA: 'move', LKEY: 'move', COLM: 'move', ESCT: 'move', VOIS: 'mixed', PORT: 'move', LS20: 'move', WA30: 'move', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move', SS06: 'move', SS07: 'move' };
 const markedFieldContinuity = [[15, 4], [44, 26], [56, 28], [22, 0], [53, 28], [81, 31]];
 const cargoContinuity = [[47, 38], [37, 34], [67, 62], [88, 82], [106, 99], [102, 93]];
-const orientedDeliveryCeilings = [32, 64, 92, 58, 136, 58, 51];
-// Executed [commands, continued commands, same-cargo translation pairs], 2026-11-26.
-const orientedDeliveryContinuity = [[26, 5, 1], [59, 18, 7], [76, 22, 10], [48, 0, 0], [113, 59, 41], [48, 24, 15], [42, 20, 13]];
-const orientedDeliverySeriesLevels = new Set([1, 2, 3, 5, 6, 7]);
 // Actual [commands, continued commands], chronological 165991ec, 2026-11-27.
 // L1 acquires the controls; L2–6 retain preparations, including grip and tools.
 const profileContinuity = [[8, 0], [8, 5], [20, 14], [29, 20], [24, 17], [30, 22]];
@@ -170,34 +168,6 @@ function measuredQueuePreparation(run, issued, groups) {
     prepared.push({ kind: 'queue preparation then receive', first, last: first + group.length - 1 });
   }
   return prepared;
-}
-
-export function measureOrientedDelivery(issued, groups) {
-  const same = (a, b) => Array.isArray(a) && Array.isArray(b) && a.length === 2 && b.length === 2
-    && a.every((value, axis) => Number.isFinite(value) && value === b[axis]);
-  const delta = (a, b) => Array.isArray(a) && Array.isArray(b) && a.length === 2 && b.length === 2
-    && [...a, ...b].every(Number.isFinite) ? b.map((value, axis) => value - a[axis]) : null;
-  const ownMove = ticket => {
-    const result = ticket.outcome, observed = ticket.oriented;
-    if (!observed || typeof ticket.planId !== 'string' || !ticket.planId || ticket.outcomeCount !== 1
-      || result?.matched !== true || result.sic_plan !== ticket.planId
-      || result.index !== ticket.actionIndex || !['sic_verify_oriented_delivery', 'sic_learn_oriented_delivery'].includes(result.family)
-      || !/^ACTION[1-4]$/.test(ticket.action)) return null;
-    const movement = delta(observed.poseBefore, observed.poseAfter);
-    return movement?.some(value => value !== 0) ? movement : null;
-  };
-  const physical = [];
-  for (const group of groups.values()) for (let index = 1; index < group.length; index++) {
-    const before = group[index - 1], after = group[index], a = before.oriented, b = after.oriented;
-    const first = ownMove(before), second = ownMove(after);
-    if (!first || !second || before.planId !== after.planId || !same(a.poseAfter, b.poseBefore)) continue;
-    const start = issued.indexOf(before), end = issued.indexOf(after);
-    physical.push({ kind: 'own carrier walk', first: start, last: end });
-    if (same(delta(a.cargoBefore, a.cargoAfter), first) && same(delta(b.cargoBefore, b.cargoAfter), second)
-      && same(a.cargoAfter, b.cargoBefore)) physical.push({ kind: 'same cargo translation', first: start, last: end });
-  }
-  assert.ok(physical.some(effect => effect.kind === 'own carrier walk'), 'WA30 lost its measured own-carrier series');
-  return physical;
 }
 
 function measuredMotionSeries(run, issued, groups, kind, owners, contact) {
@@ -1157,13 +1127,6 @@ export function checkRun(run) {
       assert.ok(group.length <= 16, 'More than 16 commands under one decision');
       for (const t of group.slice(0, -1)) assert.equal(t.sealed, null, 'Reconciliation before end of series');
       assert.equal(group.at(-1).sealed, group.length, 'Missing final reconciliation of actual commands');
-      if (code === 'WA30') {
-        for (const ticket of group.slice(0, -1)) {
-          assert.equal(ticket.sealCount, 0, 'Unexpected intermediate reconciliation');
-          assert.notEqual(ticket.outcome?.matched, false, 'WA30 continued after a contradicted return');
-        }
-        assert.equal(group.at(-1).sealCount, 1, 'WA30 requires exactly one final reconciliation');
-      }
       if (['LKEY', 'COLM', 'ESCT', 'VOIS', 'PORT', 'LS20', 'GRAV', 'DC22', 'CGWL', 'WEAV', 'LF52', 'SK48', 'ETAG', 'SNAR'].includes(code)) requireExecutedPrefix(code, group);
       if (group.length < 2) continue;
       lengths.push(group.length);
@@ -1249,13 +1212,6 @@ export function checkRun(run) {
     if (code === 'LS20') {
       assert.ok(issued.length <= workshopPhaseCeilings[i] && issued.every(ticket => ticket.resets === 0),
         'LS20 exceeded its verified action ceiling or reset');
-    }
-    if (code === 'WA30') {
-      assert.ok(issued.length <= orientedDeliveryCeilings[i] && issued.every(ticket => ticket.resets === 0),
-        'WA30 exceeded its verified action ceiling or reset');
-      const [actions, minimumContinued] = orientedDeliveryContinuity[i];
-      assert.ok(continued >= Math.min(issued.length - 1, Math.ceil(minimumContinued * issued.length / actions)),
-        'WA30 L' + row.level + ' lost executed oriented-delivery continuity');
     }
     if (code === 'SS03' && row.level === 2) {
       // The exploratory route needed 111 commands and 95 decisions; the composed route needs 27 and 7.
@@ -1348,7 +1304,7 @@ export function checkRun(run) {
       : code === 'SK48' ? requireSupportSelection(row.level, issued, groups)
       : code === 'ETAG' ? measureSurfaceContinuity(run, issued, groups)
       : code === 'SNAR' ? requireGridContinuity(row.level, run, issued, groups)
-      : code === 'WA30' && orientedDeliverySeriesLevels.has(row.level) ? measureOrientedDelivery(issued, groups)
+      : code === 'WA30' ? requireOrientedDelivery(row.level, issued, groups)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
       : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay,measureBypassWithStackedSupport,measureSharedPressureTransport,measureReleasedControlCrossing,measureBridgeToReflector,measureWeightedPlatformCrossing][row.level-1](issued)
@@ -1356,12 +1312,6 @@ export function checkRun(run) {
         :row.level===8?measureHydraulicCrossing(issued)
         :row.level===7?measureLinkedCircuitTrials(issued):measureComposedAccess(row.level,issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
-    if (code === 'WA30') {
-      const [actions, , minimumCargoPairs] = orientedDeliveryContinuity[i];
-      assert.ok(physical.filter(effect => effect.kind === 'same cargo translation').length
-        >= Math.ceil(minimumCargoPairs * issued.length / actions),
-      'WA30 L' + row.level + ' lost consecutive translations of the same cargo');
-    }
     if (code === 'COLM') {
       const [actions, preparations, contacts] = queueContinuity[i];
       assert.ok(physical.length >= Math.ceil(contacts * issued.length / actions)
@@ -1446,7 +1396,7 @@ function main() {
     execute(['scripts/prepare-python.mjs']);
     files = [];
     for (const [name, cohort, end, cap] of [
-      ['oriented-delivery', 'source:WA30', String(orientedDeliveryCeilings.length), '136'],
+      ['oriented-delivery', 'source:WA30', String(orientedDeliveryCeilings.length), String(Math.max(...orientedDeliveryCeilings))],
       ['mirror-isles', 'SS01', '8', '120'],
       ['la-force-rouge', 'SS02', '8', '160'],
       ['la-ruse-verte', 'SS03', '8', '240'],

@@ -48,14 +48,20 @@ test('walking continuity alone cannot satisfy an object or launch-positioning re
 
 function orientedRun() {
   const levels = Array.from({ length: 7 }, (_, index) => ({ level: index + 1, won: true, actions: index === 3 ? 1 : 2 }));
-  const executedTickets = levels.flatMap(({ level, actions }) => Array.from({ length: actions }, (_, actionIndex) => ({
-    level, decisionRevision: level * 10, actionIndex, action: 'ACTION4', resets: 0,
-    sealed: actionIndex === actions - 1 ? actions : null, sealCount: actionIndex === actions - 1 ? 1 : 0,
-    planId: 'observed-plan-' + level, outcomeCount: 1,
-    outcome: { matched: true, family: 'sic_verify_oriented_delivery', sic_plan: 'observed-plan-' + level, index: actionIndex },
-    oriented: { poseBefore: [actionIndex, 2], poseAfter: [actionIndex + 1, 2],
-      cargoBefore: [actionIndex + 1, 2], cargoAfter: [actionIndex + 2, 2] },
-  })));
+  const executedTickets = levels.flatMap(({ level, actions }) => {
+    const decisionRevision = level * 10;
+    const planId = 'sic-plan:oriented-fixture:epoch:' + level + ':revision:' + decisionRevision + ':frame:abc0';
+    return Array.from({ length: actions }, (_, actionIndex) => {
+      const final = actionIndex === actions - 1;
+      const observation_ref = 'oriented-fixture:epoch:' + level + ':revision:' + (decisionRevision + actionIndex + 1) + ':frame:abc1';
+      return { level, decisionRevision, actionIndex, action: 'ACTION4', resets: 0,
+        sealed: final ? actions : null, sealCount: final ? 1 : 0, planId, outcomeCount: 1,
+        outcome: { matched: true, family: 'sic_verify_oriented_delivery', sic_plan: planId, index: actionIndex,
+          observation_ref, seal_prefix: final },
+        oriented: { poseBefore: [actionIndex, 2], poseAfter: [actionIndex + 1, 2],
+          cargoBefore: [actionIndex + 1, 2], cargoAfter: [actionIndex + 2, 2] } };
+    });
+  });
   return { code: 'WA30', solver: 'sic', start: 1, initialCompleted: 0, levels, executedTickets,
     sic: executedTickets.length, issued: executedTickets.length };
 }
@@ -73,7 +79,7 @@ test('oriented transport permits genuine unitary waits but requires one chronolo
   assert.throws(() => checkRun(reset), /action ceiling or reset/);
   const contradiction = orientedRun();
   contradiction.executedTickets[0].outcome.matched = false;
-  assert.throws(() => checkRun(contradiction), /continued after a contradicted return/);
+  assert.throws(() => checkRun(contradiction), /continued without a confirmed return/);
 });
 
 test('a peer changing pixels cannot stand in for measured motion of the controlled carrier', () => {
@@ -82,17 +88,17 @@ test('a peer changing pixels cannot stand in for measured motion of the controll
     ticket.oriented.poseAfter = ticket.oriented.poseBefore;
   }
   assert.throws(() => checkRun(stationary), /measured own-carrier series/);
-  for (const invalidate of [
-    ticket => { ticket.planId = null; ticket.outcome.sic_plan = null; },
-    ticket => { ticket.outcome.sic_plan = 'another-plan'; },
-    ticket => { ticket.outcome.index = 99; },
-    ticket => { ticket.outcome.matched = false; },
-    ticket => { ticket.outcomeCount = 2; },
-    ticket => { ticket.oriented = null; },
+  for (const [invalidate, failure] of [
+    [ticket => { ticket.planId = null; ticket.outcome.sic_plan = null; }, /executed ticket identity/],
+    [ticket => { ticket.outcome.sic_plan = 'another-plan'; }, /executed ticket identity/],
+    [ticket => { ticket.outcome.index = 99; }, /executed ticket identity/],
+    [ticket => { ticket.outcome.matched = false; }, /measured own-carrier series/],
+    [ticket => { ticket.outcomeCount = 2; }, /exactly one actual return/],
+    [ticket => { ticket.oriented = null; }, /measured own-carrier series/],
   ]) {
     const run = orientedRun();
     invalidate(run.executedTickets[1]);
-    assert.throws(() => checkRun(run), /measured own-carrier series/);
+    assert.throws(() => checkRun(run), failure);
   }
 });
 

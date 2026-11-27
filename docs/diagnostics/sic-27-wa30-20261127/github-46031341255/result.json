@@ -1,0 +1,83 @@
+{
+  "source": "b037f9f97d6d8f6df1f53e8e609c26683388262a",
+  "code": "WA30",
+  "reason": "target_levels_completed",
+  "status": "stopped",
+  "actions": 613,
+  "won": 9,
+  "byLevel": [
+    {
+      "level": 1,
+      "won": true,
+      "actions": 26,
+      "scoredMs": 5784,
+      "activeMs": 5671,
+      "prefixHash": "b8590d9cd1f336a57ab225ee2221c5dad1bb5bc156b281cd9fce79e6b4889dd0"
+    },
+    {
+      "level": 2,
+      "won": true,
+      "actions": 59,
+      "scoredMs": 14714,
+      "activeMs": 14468,
+      "prefixHash": "8719651603c98bc70a2b99158bc36466a6fa7dcebbf5b2c85f7a8f13e4d2680e"
+    },
+    {
+      "level": 3,
+      "won": true,
+      "actions": 76,
+      "scoredMs": 21293,
+      "activeMs": 21051,
+      "prefixHash": "1edf2d53da640199b3f81fa992c683adf76bde5c48dd1f1789c41c94cf9ccd20"
+    },
+    {
+      "level": 4,
+      "won": true,
+      "actions": 48,
+      "scoredMs": 18285,
+      "activeMs": 18275,
+      "prefixHash": "28496b886b71f98917c9d5fc36cc7aa70065aaf39e3e794c0acff950611acd8f"
+    },
+    {
+      "level": 5,
+      "won": true,
+      "actions": 113,
+      "scoredMs": 31433,
+      "activeMs": 31240,
+      "prefixHash": "9accdb2af15f5800704fda20e8ab8e61df1a8a6181e8130f6d97424a64c85f79"
+    },
+    {
+      "level": 6,
+      "won": true,
+      "actions": 48,
+      "scoredMs": 12102,
+      "activeMs": 12192,
+      "prefixHash": "73ffd1e2c54aa69168c2146652a2ad1d8a8a34a80ac8ef01a98aff8f13c12f6f"
+    },
+    {
+      "level": 7,
+      "won": true,
+      "actions": 42,
+      "scoredMs": 11810,
+      "activeMs": 11963,
+      "prefixHash": "9eaad4abd00b3cac9da6b297f2872829cdf8d1425a6bc5154f40c7bb186e5240"
+    },
+    {
+      "level": 8,
+      "won": true,
+      "actions": 135,
+      "scoredMs": 66359,
+      "activeMs": 66051,
+      "prefixHash": "f7087cebfb21f5416cf68869f13a27cf4c92462870f06ecf7677cbef1d5ed8e0"
+    },
+    {
+      "level": 9,
+      "won": true,
+      "actions": 66,
+      "scoredMs": 46027,
+      "activeMs": 47219,
+      "prefixHash": "b66300dd5d4096e5a33d3facc34ff9f5ff21fcd6d2238d60f5f69b93a8c9add9"
+    }
+  ],
+  "resultSHA256": "11245c65aa6838887c794dd5aa9718a4e7b43c7200e3259b238598bb1c7b1fbf"
+}
