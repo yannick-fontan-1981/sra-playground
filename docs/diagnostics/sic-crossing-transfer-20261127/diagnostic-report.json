@@ -1,0 +1,69 @@
+{
+  "schema": "sic.crossing-first-loss.v1",
+  "source": "0a87f48af56a7d3ad72983b9fa15cfbeb4621cee",
+  "sourceUnchanged": true,
+  "originalCaptureSha256": "81721dae86147d16c2f1e42de891ad9a61614f1e54e04e6ada39fce850ffdaaf",
+  "projectionSha256": "324596cc2b2e14e19fbf6751c3a3542698db14ee3132d4eb8400a816d06ef64f",
+  "probeSha256": "a4d6cfc0b3853795948b4f676bd47fb0d6106ec5975078780f0f555f427cef96",
+  "commandPrefixMatchesBaseline107": true,
+  "scoredPrefixesMatchBaseline107": true,
+  "sessionStartLevel": 1,
+  "workers": 1,
+  "diagnosticOnly": true,
+  "qualification": {
+    "chronometric": false,
+    "fullGame": false,
+    "scores": 1,
+    "commands": 33,
+    "intentionalStop": "After six commands at the first transferred interface; canDispatch=false yields the captured agent error state."
+  },
+  "firstLoss": {
+    "globalAction": 32,
+    "level": 2,
+    "levelAction": 5,
+    "retainedRole": "sic_verify_crossing_rows",
+    "actualOwner": "sic_test_prepared_effects",
+    "actualCommand": {
+      "id": 1
+    },
+    "currentObservation": "sra-v6-9347902a-5d16-4eb1-b8a5-32d52ace904e:epoch:2:revision:32:frame:0b0d99117bd3dfe3",
+    "lastRetainedObservation": "sra-v6-9347902a-5d16-4eb1-b8a5-32d52ace904e:epoch:2:revision:32:frame:0b0d99117bd3dfe3",
+    "currentProgress": {
+      "0:0:-1": 2,
+      "0:1:-1": 0,
+      "0:2:-1": 0,
+      "1:0:-1": 0,
+      "1:1:-1": 0,
+      "1:2:-1": 0
+    },
+    "stopped": false,
+    "nativeProgramReproposal": {
+      "action_ref": "ACTION2",
+      "data": {},
+      "strategy": "P05",
+      "cell": [
+        2,
+        0
+      ]
+    },
+    "nextRetainedObservation": "sra-v6-9347902a-5d16-4eb1-b8a5-32d52ace904e:epoch:2:revision:32:frame:0b0d99117bd3dfe3",
+    "nextPublicObservation": "sra-v6-9347902a-5d16-4eb1-b8a5-32d52ace904e:epoch:2:revision:33:frame:bced6a26a3344a4e"
+  },
+  "changedBehavior": "Give a current transferred crossing interface priority only while official boundary, current return, reference, selected controller and a learned available input remain compatible. Later acquisition stays available. No command or answer is supplied by a game identity.",
+  "validation": {
+    "targetedTests": {
+      "command": "node --test tests/sic-crossing-row-transfer.test.ts",
+      "passed": 7,
+      "failed": 0,
+      "exitCode": 0
+    },
+    "typecheck": {
+      "command": "npm run typecheck",
+      "exitCode": 0
+    },
+    "review": "Independent read-only review by compositions: no concrete blocker found.",
+    "strictReplay": "pending",
+    "fullContinuity": "pending",
+    "viewer": "pending"
+  }
+}
