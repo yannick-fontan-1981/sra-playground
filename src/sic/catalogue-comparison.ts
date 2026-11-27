@@ -31,7 +31,9 @@ type Scene = { field: NativeBox; palette: number; cards: Card[]; controls: Contr
 type State = { epoch: number; field: NativeBox; backgrounds: number[]; submitted: number[]; candidates: Record<string, number[]>;
   views: string[]; tried: string[]; stopped: boolean; evidence: string[] };
 type Choice = { action: NativeCommand; sprite: NativeBox | null; target: number | null };
-type LearnedViews = { scope: string; epoch: number; completed: number; commands: Record<string, string[]>; evidence: string[] };
+type ViewControl = readonly [number, number, number];
+type LearnedViews = { scope: string; epoch: number; completed: number; commands: Record<string, string[]>; evidence: string[];
+  controls?: ViewControl[] };
 type Strategy = keyof typeof catalogueComparisonStrategies;
 type SingleCatalogueProposal = NativeProposal & { local: State; scene: Scene; asked: Choice; attempt: string; strategy: Strategy; needId: string; candidateCount: number };
 type JointProposal = NativeProposal & { joint: JointCatalogue; slotted: SlottedCatalogue; choice: JointCatalogueAction; attempt: string; needId: string };
@@ -43,9 +45,10 @@ const directions = ['ACTION3', 'ACTION4', 'ACTION1', 'ACTION2'];
 const point = ([x, y]: NativePoint): NativeCommand => ({ action_ref: 'ACTION6', data: { x, y } });
 const catalogueKey = (scene: Scene) => key([scene.geometry_ref, scene.cards.map(card => card.mask), scene.palette]);
 const sourceScope = (observation: NativeObservation) => observation.observation_ref.split(':epoch:')[0]!;
-const viewInterface = (scene: Scene) => new Set(scene.controls.map(control => control.palette)).size !== scene.controls.length ? null
-  : key(scene.controls.map(control => [control.palette, control.bbox[2] - control.bbox[0], control.bbox[3] - control.bbox[1]])
-    .sort((a, b) => a[0]! - b[0]!));
+const viewControls = (scene: Scene): ViewControl[] | null => new Set(scene.controls.map(control => control.palette)).size !== scene.controls.length ? null
+  : scene.controls.map(control => [control.palette, control.bbox[2] - control.bbox[0], control.bbox[3] - control.bbox[1]] as const)
+    .sort((a, b) => a[0] - b[0]);
+const viewInterface = (scene: Scene) => { const controls = viewControls(scene); return controls && key(controls); };
 function viewReturn(first: NativeRows, second: NativeRows, scene: Scene): boolean | null {
   const returned = measureOccludedCatalogue(second) as Scene | null;
   if (!returned || !same(catalogueStructure(scene), catalogueStructure(returned))) return false;
@@ -64,9 +67,18 @@ export function createSicCatalogueComparison(family = catalogueComparisonId): Na
   let joint: JointCatalogue | null = null;
   let learnedViews: Record<string, LearnedViews> = {};
   const reusableViews = (observation: NativeObservation, scene: Scene) => {
-    const signature = viewInterface(scene), known = signature && learnedViews[signature];
-    return known && known.scope === sourceScope(observation) && known.completed === observation.levels_completed
-      && (known.epoch === observation.level_epoch || known.epoch === observation.level_epoch - 1) ? known : null;
+    const controls = viewControls(scene);
+    if (!controls) return null;
+    const eligible = (known: LearnedViews | undefined) => known?.scope === sourceScope(observation)
+      && known.completed === observation.levels_completed
+      && (known.epoch === observation.level_epoch || known.epoch === observation.level_epoch - 1);
+    const exact = learnedViews[key(controls)];
+    if (eligible(exact)) return exact;
+    // Additional selectors do not invalidate the unique controls already observed.
+    // Only their acquired commands are retained; a new subject still needs a return.
+    const extensions = Object.values(learnedViews).filter(known => eligible(known) && known.controls?.length
+      && known.controls.every(prior => controls.some(current => same(prior, current))));
+    return extensions.length === 1 ? extensions[0]! : null;
   };
   let choose: NativeProgramHandle | undefined;
   let verify: NativeProgramHandle | undefined;
@@ -281,8 +293,9 @@ export function createSicCatalogueComparison(family = catalogueComparisonId): Na
         return;
       }
       if (viewReturn(first, second, scene) !== true) return;
-      const prior = known?.scope === sourceScope(before) ? known : null;
+      const prior = known?.scope === sourceScope(before) ? known : reusableViews(before, scene);
       learnedViews[signature] = { scope: sourceScope(before), epoch: before.level_epoch, completed: before.levels_completed,
+        controls: viewControls(scene)!,
         commands: { ...prior?.commands, [scene.palette]: [...new Set([...(prior?.commands[scene.palette] ?? []), command.action_ref])] },
         evidence: [...new Set([...(prior?.evidence ?? []), before.observation_ref, after.observation_ref])] };
     },

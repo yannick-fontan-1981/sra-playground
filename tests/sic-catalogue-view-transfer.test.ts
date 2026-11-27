@@ -17,10 +17,31 @@ import type { V6PublicObservation } from '../src/runtime/v6-agent-protocol.ts';
 const captured = JSON.parse(gunzipSync(readFileSync(new URL('./fixtures/sic-catalogue-role-public.json.gz', import.meta.url))).toString());
 const raster = (rows: NativeRows, varied: boolean) => rows.map(row => varied ? [...row].reverse().map(value => (value * 3 + 1) % 16) : [...row]);
 const viewCommand = (varied: boolean) => varied ? 'ACTION1' : 'ACTION3';
+const extensionScene = measureOccludedCatalogue(captured.steps[5].before.frame)!;
+const extensionSource = extensionScene.controls.find((control: any) => control.palette !== extensionScene.palette)!;
+const extensionPalette = Array.from({ length: 16 }, (_, value) => value).find(value =>
+  !captured.steps[5].before.frame.some((row: number[]) => row.includes(value)) && !captured.nextViewReturn.frame.some((row: number[]) => row.includes(value)))!;
+const extensionSite = (() => {
+  const [left, top, right, bottom] = extensionScene.field;
+  for (let y = top + 1; y < bottom; y++) for (let x = left + 1; x < right; x++) if (
+    captured.steps[5].before.frame[y][x] === extensionSource.palette && captured.nextViewReturn.frame[y][x] === extensionSource.palette) return [x, y];
+  throw new Error('The public fixture must contain a stationary second subject');
+})();
+function extendSelectors(rows: NativeRows): number[][] {
+  const next = rows.map(row => [...row]), [left, top, right, bottom] = extensionSource.bbox;
+  const shift = right - left + 4;
+  for (let y = top; y <= bottom; y++) for (let x = left; x <= right; x++) next[y]![x + shift] = extensionPalette;
+  next[extensionSite[1]!]![extensionSite[0]!] = extensionPalette;
+  for (let y = 0; y < extensionScene.field[1]; y++) {
+    const row = [...next[y]!];
+    for (let x = 0; x < row.length; x++) next[y]![x] = row[x + 5] ?? row[0]!;
+  }
+  return next;
+}
 
-type Mutation = 'none' | 'ambiguous_selectors' | 'missing_command';
+type Mutation = 'none' | 'ambiguous_selectors' | 'missing_command' | 'extended_selectors';
 function packet(board: any, stepIndex: number, varied: boolean, mutation: Mutation = 'none'): V6PublicObservation {
-  const frame = raster(board.frame, varied);
+  const frame = raster(board.level === 2 && mutation === 'extended_selectors' ? extendSelectors(board.frame) : board.frame, varied);
   if (board.level === 2 && mutation === 'ambiguous_selectors') {
     const scene = measureOccludedCatalogue(frame)!;
     const [left, top, right, bottom] = scene.controls[1].bbox;
@@ -78,8 +99,9 @@ async function start(varied: boolean, mutation: Mutation = 'none') {
   return { catalogue, prepared, calls, runtime, advance, get result() { return result; } };
 }
 
-for (const varied of [false, true]) test('native catalogue reuses the acquired view before a selection preview' + (varied ? ' after a reflection, palette permutation and command change' : ''), async () => {
-  const run = await start(varied);
+for (const extended of [false, true]) for (const varied of [false, true]) test('native catalogue reuses the acquired view before a selection preview'
+  + (extended ? ' with an additional unlearned selector' : '') + (varied ? ' after a reflection, palette permutation and command change' : ''), async () => {
+  const mutation = extended ? 'extended_selectors' : 'none', run = await start(varied, mutation);
   try {
     assert.equal(run.result.snapshot.levelsCompleted, 1);
     assert.equal(run.result.snapshot.actions, 5);
@@ -93,13 +115,21 @@ for (const varied of [false, true]) test('native catalogue reuses the acquired v
     assert.deepEqual(proposal.local.backgrounds, [], 'The new substrate and answer must still be observed');
     assert.ok(proposal.local.evidence.some((ref: string) => ref.includes(':epoch:1:')));
     assert.ok(proposal.local.views.includes(viewCommand(varied)), 'The command comes from the acquired role');
-    const returned = await run.advance(raster(captured.nextViewReturn.frame, varied));
+    const returned = await run.advance(packet({ ...captured.steps[5].before, frame: captured.nextViewReturn.frame }, 6, varied, mutation).frame);
     assert.equal(returned.kind, 'boundary');
     assert.equal(returned.snapshot.actions, 6);
-    assert.ok(returned.snapshot.trace.some(event => event.kind === 'actual_outcome'
-      && event.family === run.catalogue.id && event.reason === 'catalogue_view_effect_observed' && event.matched === true));
+    const actual = returned.snapshot.trace.findLast(event => event.kind === 'actual_outcome' && event.family === run.catalogue.id);
+    assert.equal(actual?.reason, 'catalogue_view_effect_observed');
+    assert.equal(actual?.matched, true);
     assert.equal(returned.snapshot.trace.filter(event => event.kind === 'sealed_prefix').length, 6);
     assert.ok(run.catalogue.state!().state.backgrounds.length > 0);
+    if (extended) {
+      const learned = Object.values(run.catalogue.state!().learnedViews) as any[];
+      const current = learned.find(role => role.controls.length === 3)!;
+      assert.ok(current);
+      assert.equal(Object.keys(current.commands).length, 2, 'The added selector is not assigned an unobserved effect');
+      assert.ok(Object.values(current.commands).every((commands: any) => commands.includes(viewCommand(varied))));
+    }
   } finally { run.runtime.close('test_complete'); }
 });
 
@@ -150,4 +180,24 @@ test('a view executed by another family can establish the reusable catalogue rol
   const proposal = await catalogue.proposeInGroup!(continueCatalogueViewsGroup, current, completion.after.frame, [], 20);
   assert.equal(proposal?.actions[0]?.action_ref, 'ACTION3');
   assert.ok(proposal?.route_refs.includes((await observe(first.before, 1)).observation_ref));
+});
+
+test('two acquired interfaces that fit an extension leave its association ambiguous', async () => {
+  const catalogue = createSicCatalogueComparison(), first = captured.steps[0];
+  const observe = async (frame: NativeRows, revision: number) => measureNativeObservation({ frame_rows: frame,
+    frame_hash: await publicFrameHash(frame), level: 1, levels_completed: 0, state: first.before.state,
+    available_action_refs: first.before.availableActionIds.map((id: number) => 'ACTION' + id),
+  }, revision, 'ambiguous-catalogue-extension');
+  for (const [index, replace] of [false, true].entries()) {
+    const mapped = (rows: NativeRows) => rows.map(row => row.map(value => replace && value === extensionSource.palette ? extensionPalette : value));
+    const before = mapped(first.before.frame), after = mapped(first.after.frame);
+    await catalogue.observePublicOutcome!(await observe(before, 2 * index + 1), await observe(after, 2 * index + 2),
+      { action_ref: 'ACTION3', data: {} }, before, after);
+  }
+  const learned = structuredClone(catalogue.state!().learnedViews);
+  assert.equal(Object.keys(learned).length, 2);
+  const current = extendSelectors(first.before.frame);
+  assert.equal(measureOccludedCatalogue(current)?.controls.length, 3);
+  assert.equal(await catalogue.proposeInGroup!(continueCatalogueViewsGroup, await observe(current, 5), current, [], 20), null);
+  assert.deepEqual(catalogue.state!().learnedViews, learned);
 });
