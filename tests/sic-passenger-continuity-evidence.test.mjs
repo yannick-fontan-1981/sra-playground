@@ -22,7 +22,8 @@ for (const loaded of [false, true]) test('passive passenger observer measures a 
   assert.ok(passengerArrangementMeasured(after.after, after.expectedTo, after.cargo));
   assert.deepEqual(sample.proposal, original, 'Passive evidence cannot update the native proposal');
   assert.equal(after.geometry, undefined, 'Observer geometry is local instrumentation');
-  if (loaded) assert.deepEqual(after.after.carried.box, after.before.carried.box.map((value, axis) => value + after.motion[axis % 2]));
+  if (loaded) assert.deepEqual(after.after.carried.footprint,
+    after.before.carried.footprint.map((value, axis) => value + after.motion[axis % 2]));
 });
 
 test('passive passenger evidence retains missing and duplicate actors instead of a predicted landing', async () => {
@@ -43,6 +44,27 @@ test('passive passenger evidence retains missing and duplicate actors instead of
   const ambiguous = await capturePassengerContinuity(sample.proposal, ticket(sample), duplicate);
   assert.equal(ambiguous.before.actor, null);
   assert.equal(passengerArrangementMeasured(ambiguous.before, initial.expectedFrom, initial.cargo), false);
+});
+
+test('passive carried footprint survives touching same-ink art but rejects missing transported pixels', async () => {
+  const sample = samples.find(item => item.proposal.guarded.at.held !== null);
+  const before = await capturePassengerContinuity(sample.proposal, ticket(sample), sample.publicBefore.frame);
+  const actual = await observePassengerReturn(before, sample.publicAfter.frame, sample.publicAfter.levelsCompleted);
+  const [left, top, right, bottom] = actual.after.carried.footprint;
+  const ink = before.cargo[before.expectedFrom.held].ink;
+  const touching = structuredClone(sample.publicAfter.frame);
+  for (let y = top; y <= bottom; y++) for (let x = left - 3; x < left; x++) touching[y][x] = ink;
+  const joined = await observePassengerReturn(before, touching, sample.publicAfter.levelsCompleted);
+  assert.deepEqual(joined.after.carried, actual.after.carried,
+    'Only pixels inside the acquired transported footprint support continuation');
+  assert.ok(passengerArrangementMeasured(joined.after, before.expectedTo, before.cargo));
+  const missing = structuredClone(sample.publicAfter.frame);
+  for (let y = top; y <= bottom; y++) for (let x = left; x <= right; x++) {
+    if (missing[y][x] === ink) missing[y][x] = sample.publicAfter.frame[0][0];
+  }
+  const absent = await observePassengerReturn(before, missing, sample.publicAfter.levelsCompleted);
+  assert.equal(absent.after.carried.pixels, 0);
+  assert.equal(passengerArrangementMeasured(absent.after, before.expectedTo, before.cargo), false);
 });
 
 test('passive passenger acquisition is read once after a native seal', async () => {

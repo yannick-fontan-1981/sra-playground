@@ -31,12 +31,15 @@ async function measure(rows, geometry) {
   let carried = null;
   if (held !== null && actor) {
     const passenger = geometry.cargo[held], at = center(actor.bbox);
-    const candidates = observation.entities.filter(body => body.palette_value === passenger.ink
-      && body.area >= Math.ceil(passenger.area / 2)
-      && body.bbox[2] - body.bbox[0] <= passenger.shape[2] - passenger.shape[0] + 3
-      && Math.max(...center(body.bbox).map((v, axis) => Math.abs(v - at[axis]))) <= geometry.pickup + 4);
-    if (candidates.length === 1 && !candidates[0].identity_ambiguous)
-      carried = { box: [...candidates[0].bbox], pixels: mass(rows, candidates[0].bbox, passenger.ink) };
+    // A passenger may touch an unrelated component of the same ink. Its
+    // connected-component box is then not its physical transport footprint.
+    // Reuse only the offset acquired at the actual pickup; anchor it to the
+    // independently measured carrier, then count the current public pixels.
+    const acquired = geometry.carried;
+    if (acquired?.held === held) {
+      const footprint = acquired.box.map((value, axis) => value + at[axis % 2] - acquired.actor[axis % 2]);
+      carried = { footprint, pixels: mass(rows, footprint, passenger.ink) };
+    }
   }
   const passengers = geometry.cargo.map(passenger => ({
     visible: passenger.berths.map(bounds => mass(rows, bounds, passenger.ink)),
@@ -44,7 +47,7 @@ async function measure(rows, geometry) {
       const dx = passenger.centers[bank][0] - center(passenger.shape)[0], shifted = passenger.shape.map((v, axis) => v + (axis % 2 ? 0 : dx));
       let hidden = 0;
       for (let y = shifted[1]; y <= shifted[3]; y++) for (let x = shifted[0]; x <= shifted[2]; x++) {
-        if (rows[y]?.[x] !== passenger.ink && (inside(actor?.bbox, x, y) || inside(carried?.box, x, y))) hidden++;
+        if (rows[y]?.[x] !== passenger.ink && (inside(actor?.bbox, x, y) || inside(carried?.footprint, x, y))) hidden++;
       }
       return hidden;
     }),
@@ -64,7 +67,7 @@ export async function capturePassengerContinuity(proposal, ticket, rows) {
         || !Number.isSafeInteger(passenger.area) || passenger.area < 1)) return null;
     const expectedFrom = index === 0 ? run.at : run.plan[index - 1].expect;
     const geometry = { actor: run.ferry.model.actor, cargo: copy(run.ferry.cargo), held: expectedFrom.held,
-      pickup: run.ferry.pickup };
+      carried: run.at.held !== null && box(run.heldBox) ? { held: run.at.held, box: [...run.heldBox], actor: [...run.at.actor] } : null };
     return { actionRef: ticket.actionRef, role: leg.role, bindingRef: proposal.binding?.observation_ref ?? null,
       beforeRef: ticket.observationRef, levelEpoch: proposal.binding?.level_epoch ?? null,
       scoreBefore: ticket.levelsCompleted, strategy: proposal.sicSituationCard?.strategy ?? null,
@@ -72,6 +75,7 @@ export async function capturePassengerContinuity(proposal, ticket, rows) {
       motion: copy(run.ferry.model.motion[ticket.actionRef] ?? null),
       cargo: run.ferry.cargo.map(passenger => ({ area: passenger.area, ink: passenger.ink })),
       roleFingerprint: hash([run.ferry.model.actor, run.ferry.model.motion, run.ferry.cargo, run.ferry.pickup]),
+      carriedEvidence: geometry.carried ? { ...copy(geometry.carried), ref: run.refs.at(-1) ?? null } : null,
       learnedEvidence: refs(run.refs), hazards: copy(run.hazards), hazardRefs: refs(run.hazardRefs),
       before: await measure(rows, geometry), geometry };
   } catch { return null; }

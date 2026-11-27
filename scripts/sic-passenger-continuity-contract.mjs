@@ -3,6 +3,10 @@ import { continuityObservation, requireExecutedPrefix } from './sic-continuity-c
 import { passengerArrangementMeasured, passengerOwners } from './sic-passenger-continuity.mjs';
 
 export const passengerCeilings = [20, 21, 19, 23, 74, 48];
+// Actual [commands, continued commands, loaded continuations, approach continuations].
+// The guarded passenger role is present in the last two observed rooms.
+export const passengerContinuity = [[15, 3, 0, 0], [16, 0, 0, 0], [15, 0, 0, 0], [18, 0, 0, 0],
+  [61, 29, 22, 7], [42, 13, 12, 1]];
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const point = value => Array.isArray(value) && value.length === 2 && value.every(Number.isFinite);
 
@@ -58,8 +62,12 @@ export function measurePassengerContinuity(run, issued, groups) {
           assert.ok(passengerArrangementMeasured(p.after, p.expectedTo, p.cargo),
             'Passenger movement has no matching public return');
           if (p.expectedFrom.held !== null) {
-            const moved = p.before.carried.box.map((value, axis) => value + p.motion[axis % 2]);
-            assert.deepEqual(p.after.carried.box, moved, 'Passenger did not move with its carrier');
+            const learned = continuityObservation(p.carriedEvidence?.ref);
+            assert.ok(learned && learned.scope === scope.scope && learned.epoch === scope.epoch
+              && learned.revision <= scope.revision && p.carriedEvidence.held === p.expectedFrom.held
+              && initial.learnedEvidence.includes(p.carriedEvidence.ref), 'Passenger footprint has no acquired pickup offset');
+            const moved = p.before.carried.footprint.map((value, axis) => value + p.motion[axis % 2]);
+            assert.deepEqual(p.after.carried.footprint, moved, 'Passenger pixels were not measured in the translated footprint');
           }
           if (index > 0) continued++;
         } else assert.equal(index, group.length - 1, 'Passenger prefix continued after a contradicted physical return');
@@ -80,4 +88,20 @@ export function measurePassengerContinuity(run, issued, groups) {
       first: issued.indexOf(group[0]), last: issued.indexOf(group.at(-1)), continued });
   }
   return series;
+}
+
+export function requirePassengerContinuity(run, issued, groups) {
+  const index = issued[0]?.level - 1, reference = passengerContinuity[index];
+  assert.ok(reference && issued.length <= passengerCeilings[index]
+    && issued.every(ticket => ticket.resets === 0), 'Passenger campaign exceeded its action ceiling or reset');
+  const [actions, minimumContinued, minimumLoaded, minimumApproach] = reference;
+  assert.ok(issued.length - groups.size >= Math.min(issued.length - 1, Math.ceil(minimumContinued * issued.length / actions)),
+    'Passenger campaign lost its executed native continuation');
+  const physical = measurePassengerContinuity(run, issued, groups);
+  for (const [kind, minimum] of [['loaded passenger walk', minimumLoaded], ['passenger approach', minimumApproach]]) {
+    assert.ok(physical.filter(effect => effect.kind === kind).reduce((sum, effect) => sum + effect.continued, 0)
+      >= Math.min(issued.length - 1, Math.ceil(minimum * issued.length / actions)),
+    'Passenger campaign lost its measured ' + kind);
+  }
+  return physical;
 }
