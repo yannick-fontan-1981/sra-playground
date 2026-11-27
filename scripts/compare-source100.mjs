@@ -9,6 +9,8 @@ import { captureOpeningControl, measureOpeningReturn, completeOpeningControl, op
 import { capturePopulationControl, measurePopulationReturn, completePopulationControl } from './sic-population-continuity.mjs';
 import { passageOwners, capturePassageContinuity, observePassageReturn, completePassageContinuity } from './sic-passage-continuity.mjs';
 import { workshopPhaseOwners, captureWorkshopPhase, observeWorkshopPhaseReturn, completeWorkshopPhase } from './sic-workshop-phase-continuity.mjs';
+import { matchingEdgeOwner, captureMatchingEdge, observeMatchingEdgeReturn, completeMatchingEdge } from './sic-matching-edge-continuity.mjs';
+import { publicPanelOwner, capturePublicPanel, observePublicPanelReturn, completePublicPanel } from './sic-public-panel-continuity.mjs';
 import { appendFile, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -129,7 +131,8 @@ async function run(code, games) {
     const backend=await createNativeV6Runtime(declarations,{recovery});
     if (process.env.SIC_STUDY_CONTINUITY === '1') continuityOwners = new Map(backend.families
       .filter(family => queuedOwners.has(family.id) || populationOwners.has(family.id)
-        || passageOwners.has(family.id) || workshopPhaseOwners.has(family.id) || family.id === openingOwner)
+        || passageOwners.has(family.id) || workshopPhaseOwners.has(family.id) || family.id === openingOwner
+        || family.id === matchingEdgeOwner || family.id === publicPanelOwner)
       .map(family => [family.id, family]));
     if (cursorAudit || boundaryAudit) {
       const family = backend.families.find(f => f.id === 'sic_test_prepared_effects');
@@ -156,7 +159,7 @@ async function run(code, games) {
   });
   // Count only commands acknowledged by the native service after dispatch.
   const executedTickets = process.env.SIC_STUDY_CONTINUITY === '1' ? [] : null;
-  let pendingTicket, pendingPlan, dispatchedActorPlan, dispatchedOriented, dispatchedQueued, dispatchedOpening, dispatchedPopulation, dispatchedPassage, dispatchedWorkshop;
+  let pendingTicket, pendingPlan, dispatchedActorPlan, dispatchedOriented, dispatchedQueued, dispatchedOpening, dispatchedPopulation, dispatchedPassage, dispatchedWorkshop, dispatchedEdge, dispatchedPanel;
   const transport = { async request(operation) {
     const result = await service.handle(operation);
     if (executedTickets) {
@@ -174,12 +177,16 @@ async function run(code, games) {
           () => continuityOwners?.get(pendingPlan?.family)?.state() ?? null, returned, result.snapshot.levelsCompleted) : undefined;
         const workshop = dispatchedWorkshop !== undefined ? completeWorkshopPhase(dispatchedWorkshop,
           () => continuityOwners?.get(pendingPlan?.family)?.state() ?? null, returned, result.snapshot.levelsCompleted) : undefined;
+        const edge = dispatchedEdge !== undefined ? completeMatchingEdge(dispatchedEdge,
+          () => continuityOwners?.get(pendingPlan?.family)?.state() ?? null, returned, result.snapshot.levelsCompleted) : undefined;
+        const panel = dispatchedPanel !== undefined ? completePublicPanel(dispatchedPanel,
+          () => continuityOwners?.get(pendingPlan?.family)?.state() ?? null, returned, result.snapshot.levelsCompleted) : undefined;
         executedTickets.push({level,decisionRevision,actionIndex,action:actionRef,...(actionRef==='ACTION6'?{data:pendingTicket.data}:{}),resets,
           ...returned,
           ...(dispatchedActorPlan?{actorPlan:dispatchedActorPlan}:{}), ...(dispatchedOriented!==undefined?{oriented:dispatchedOriented}:{}),
           ...(queued !== undefined ? {queued} : {}), ...(opening !== undefined ? {opening} : {}),
           ...(population !== undefined ? {population} : {}), ...(passage !== undefined ? {passage} : {}),
-          ...(workshop !== undefined ? {workshop} : {})});
+          ...(workshop !== undefined ? {workshop} : {}), ...(edge !== undefined ? {edge} : {}), ...(panel !== undefined ? {panel} : {})});
         dispatchedActorPlan = undefined;
         dispatchedOriented = undefined;
         dispatchedQueued = undefined;
@@ -187,6 +194,8 @@ async function run(code, games) {
         dispatchedPopulation = undefined;
         dispatchedPassage = undefined;
         dispatchedWorkshop = undefined;
+        dispatchedEdge = undefined;
+        dispatchedPanel = undefined;
       }
       pendingTicket = result.ticket;
       pendingPlan = bindContinuityPlan(pendingTicket, result.snapshot.trace, pendingPlan);
@@ -293,6 +302,12 @@ async function run(code, games) {
         dispatchedPassage = capturePassageContinuity(agent.snapshot.proposal, pendingTicket, previous.frame);
       if (executedTickets && workshopPhaseOwners.has(pendingPlan?.family))
         dispatchedWorkshop = captureWorkshopPhase(agent.snapshot.proposal, pendingTicket, previous.frame);
+      if (executedTickets && pendingPlan?.family === matchingEdgeOwner)
+        dispatchedEdge = captureMatchingEdge(agent.snapshot.proposal, pendingTicket, previous.frame,
+          () => continuityOwners?.get(pendingPlan.family)?.state() ?? null);
+      if (executedTickets && pendingPlan?.family === publicPanelOwner)
+        dispatchedPanel = capturePublicPanel(agent.snapshot.proposal, pendingTicket, previous.frame,
+          () => continuityOwners?.get(pendingPlan.family)?.state() ?? null);
       if (executedTickets && plan?.family==='sic_observed_actor_composition') dispatchedActorPlan={strategy:plan.strategy,subjects:plan.need?.subjects??[],evidence:plan.need?.evidence??[]};
       const frameSeal=plan?.frameForecast?hash(plan.frameForecast):null;
       const terminalContactSeal=plan?.terminalContactForecast?hash(plan.terminalContactForecast):null;
@@ -331,6 +346,12 @@ async function run(code, games) {
           board.level === previous.level && board.levelsCompleted === previous.levelsCompleted ? board.frame : null);
       if (dispatchedWorkshop !== undefined)
         dispatchedWorkshop = observeWorkshopPhaseReturn(dispatchedWorkshop,
+          board.level === previous.level && board.levelsCompleted === previous.levelsCompleted ? board.frame : null);
+      if (dispatchedEdge !== undefined)
+        dispatchedEdge = observeMatchingEdgeReturn(dispatchedEdge,
+          board.level === previous.level && board.levelsCompleted === previous.levelsCompleted ? board.frame : null);
+      if (dispatchedPanel !== undefined)
+        dispatchedPanel = observePublicPanelReturn(dispatchedPanel,
           board.level === previous.level && board.levelsCompleted === previous.levelsCompleted ? board.frame : null);
       issued++;
       if (process.env.SIC_STUDY_PROGRESS === '1' && issued % 100 === 0)
