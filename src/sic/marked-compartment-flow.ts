@@ -98,17 +98,83 @@ function compartmentPattern(rows: NativeRows, [left, top, right, bottom]: Native
   return rows.slice(top, bottom + 1).map(row => [...row.slice(left, right + 1)]);
 }
 
+// Repeated enclosed pockets distinguish a compound control's contents from its
+// stable frame. The unique larger process cavity remains part of that frame.
+function repeatedControlPockets(pattern: number[][], background: number, normal: number): NativeBox[] {
+  const height = pattern.length, width = pattern[0]?.length ?? 0, seen = new Set<number>();
+  const groups = new Map<string, NativeBox[]>();
+  for (let row = 0; row < height; row++) for (let column = 0; column < width; column++) {
+    const first = row * width + column;
+    if (seen.has(first) || pattern[row]![column] !== background) continue;
+    const pending = [first], cells: number[] = []; seen.add(first);
+    while (pending.length) {
+      const cell = pending.pop()!, x = cell % width, y = Math.floor(cell / width); cells.push(cell);
+      for (const [dx, dy] of [[0, -1], [0, 1], [-1, 0], [1, 0]]) {
+        const u = x + dx!, v = y + dy!, key = v * width + u;
+        if (u < 0 || u >= width || v < 0 || v >= height || seen.has(key) || pattern[v]![u] !== background) continue;
+        seen.add(key); pending.push(key);
+      }
+    }
+    const xs = cells.map(cell => cell % width), ys = cells.map(cell => Math.floor(cell / width));
+    const left = Math.min(...xs), right = Math.max(...xs), top = Math.min(...ys), bottom = Math.max(...ys);
+    if (left === 0 || top === 0 || right === width - 1 || bottom === height - 1
+      || cells.length !== (right - left + 1) * (bottom - top + 1)) continue;
+    const border: number[] = [];
+    for (let y = top - 1; y <= bottom + 1; y++) for (let x = left - 1; x <= right + 1; x++) {
+      if (y === top - 1 || y === bottom + 1 || x === left - 1 || x === right + 1) border.push(pattern[y]![x]!);
+    }
+    if (!border.every(ink => ink === normal)) continue;
+    const key = `${right - left + 1}:${bottom - top + 1}`, group = groups.get(key) ?? [];
+    group.push([left, top, right, bottom]); groups.set(key, group);
+  }
+  const repeated = [...groups.values()].filter(group => group.length > 1);
+  return repeated.length === 1 ? repeated[0]! : [];
+}
+
+function compoundControlBoxes(rows: NativeRows, witness: Witness, control: OutletControl): NativeBox[] {
+  const pockets = repeatedControlPockets(control.pattern, witness.background, witness.normal);
+  if (!pockets.length) return [];
+  const width = control.box[2] - control.box[0] + 1, height = control.box[3] - control.box[1] + 1;
+  const varying = new Set(pockets.flatMap(([l, t, r, b]) => {
+    const cells: number[] = [];
+    for (let y = t - 1; y <= b + 1; y++) for (let x = l - 1; x <= r + 1; x++) cells.push(y * width + x);
+    return cells;
+  }));
+  const boxes: NativeBox[] = [];
+  for (let top = Math.max(0, control.box[1] - height + 1); top <= Math.min(rows.length - height, control.box[3]); top++) {
+    for (let left = Math.max(0, control.box[0] - width + 1); left <= Math.min(rows[0]!.length - width, control.box[2]); left++) {
+      const box: NativeBox = [left, top, left + width - 1, top + height - 1];
+      if (!sameChamberSite(box, control.box) || !control.pattern.every((line, y) => line.every((ink, x) =>
+        varying.has(y * width + x) || rows[top + y]?.[left + x] === ink))) continue;
+      const compatible = pockets.every(([l, t, r, b]) => {
+        const fill = rows[top + t]?.[left + l], border = rows[top + t - 1]?.[left + l - 1];
+        if (fill === undefined || fill === witness.normal || fill === witness.mark
+          || border !== witness.normal && border !== witness.mark) return false;
+        for (let y = t - 1; y <= b + 1; y++) for (let x = l - 1; x <= r + 1; x++) {
+          const edge = y === t - 1 || y === b + 1 || x === l - 1 || x === r + 1;
+          if (rows[top + y]?.[left + x] !== (edge ? border : fill)) return false;
+        }
+        return true;
+      });
+      if (compatible) boxes.push(box);
+    }
+  }
+  return boxes;
+}
+
 function outletControl(scene: Scene, witness: Witness, choice: Chamber, rows: NativeRows) {
   const remembered = witness.control;
   if (!remembered || !choice.filled || !sameChamberSite(choice.box, witness.outlet)) return { choice, controlBox: choice.box };
   if (scene.marked.filter(chamber => sameChamberSite(chamber.box, witness.outlet)).length !== 1) return null;
-  const candidates = scene.frames.filter(chamber => sameChamberSite(chamber.box, remembered.box)
+  const exact = scene.frames.filter(chamber => sameChamberSite(chamber.box, remembered.box)
     && chamber.box[2] - chamber.box[0] === remembered.box[2] - remembered.box[0]
     && chamber.box[3] - chamber.box[1] === remembered.box[3] - remembered.box[1]
-    && remembered.pattern.every((line, y) => line.every((value, x) => rows[chamber.box[1] + y]?.[chamber.box[0] + x] === value)));
+    && remembered.pattern.every((line, y) => line.every((value, x) => rows[chamber.box[1] + y]?.[chamber.box[0] + x] === value)))
+    .map(chamber => chamber.box);
+  const candidates = [...new Map([...exact, ...compoundControlBoxes(rows, witness, remembered)].map(box => [boxKey(box), box])).values()];
   if (candidates.length !== 1) return null;
-  const control = candidates[0]!, point: NativePoint = [control.box[0] + remembered.offset[0], control.box[1] + remembered.offset[1]];
-  return { choice: { ...choice, point }, controlBox: control.box,
+  const control = candidates[0]!, point: NativePoint = [control[0] + remembered.offset[0], control[1] + remembered.offset[1]];
+  return { choice: { ...choice, point }, controlBox: control,
     release: { box: choice.box, pigments: choice.contents.map(([pigment]) => pigment), empty: [scene.background, scene.normal, scene.mark] } };
 }
 
@@ -125,7 +191,9 @@ function releaseConfirmed(first: NativeRows, second: NativeRows, release: Outlet
     if (!release.empty.includes(after)) return false;
     lost++;
   }
-  return lost > 0 && afterCount < beforeCount;
+  // The acquired remote control emptied the outlet in the public winning
+  // frames. A gradual loss during some other turn is not that same effect.
+  return lost > 0 && beforeCount > 0 && afterCount === 0;
 }
 
 async function releasedMarkedOutlet(scene: Scene, before: NativeObservation, after: NativeObservation,
