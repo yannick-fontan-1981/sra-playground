@@ -294,7 +294,14 @@ export function createSicReceptionAccess(family = receptionAccessId): NativeFami
       }
       const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local;
       const from = proposal.route?.[index]?.from ?? proposal.from;
-      if (after.levels_completed > before.levels_completed && equal(from, local.scene.target.anchor)) {
+      const expected = proposal.route?.[index]?.to ?? proposal.choice.expected;
+      const motion = local.controls[issued.action_ref];
+      // Reception can score on the measured arrival itself. The old carrier
+      // may disappear into the completion animation, so bind that official
+      // return to this known displacement and this support, not another score.
+      const arrives = from && motion && equal(expected, local.scene.target.anchor)
+        && equal([from[0] + motion[0], from[1] + motion[1]], local.scene.target.anchor);
+      if (after.levels_completed === before.levels_completed + 1 && (equal(from, local.scene.target.anchor) || arrives)) {
         remembered = { epoch: after.level_epoch, pitch: local.scene.pitch, supportInk: local.scene.target.color,
           controls: { ...(remembered?.pitch === local.scene.pitch ? remembered.controls : {}), ...local.controls },
           evidence: [...local.evidence.slice(-4), before.observation_ref, after.observation_ref] };
