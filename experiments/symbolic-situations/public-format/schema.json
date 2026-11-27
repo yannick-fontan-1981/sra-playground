@@ -1,0 +1,452 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SRA public situation v1",
+  "type": "object",
+  "properties": {
+    "format": {
+      "const": "sra.public/1"
+    },
+    "goal": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "$ref": "#/$defs/command"
+        },
+        "criterion": {
+          "const": "minimax_actions"
+        },
+        "maintain": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/expr"
+          },
+          "minItems": 0
+        },
+        "source": {
+          "$ref": "#/$defs/source"
+        }
+      },
+      "required": [
+        "command",
+        "criterion",
+        "source"
+      ],
+      "additionalProperties": false
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/obs"
+      },
+      "minItems": 0
+    },
+    "domains": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ref": {
+            "$ref": "#/$defs/ref"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/value"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "stableWhen": {
+            "oneOf": [
+              {
+                "const": true
+              },
+              {
+                "$ref": "#/$defs/expr"
+              }
+            ]
+          },
+          "source": {
+            "$ref": "#/$defs/source"
+          }
+        },
+        "required": [
+          "ref",
+          "values",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "commands": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "command": {
+            "$ref": "#/$defs/command"
+          },
+          "source": {
+            "$ref": "#/$defs/source"
+          }
+        },
+        "required": [
+          "command",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/rule"
+      },
+      "minItems": 0
+    },
+    "sources": {
+      "type": "object",
+      "patternProperties": {
+        "^[1-9][0-9]*$": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "format",
+    "goal",
+    "observations",
+    "domains",
+    "commands",
+    "rules",
+    "sources"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "ref": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "command": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "value": {
+      "type": [
+        "string",
+        "boolean",
+        "null"
+      ]
+    },
+    "source": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "expr": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "eq": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "$ref": "#/$defs/ref"
+                },
+                {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/value"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "ref": {
+                          "$ref": "#/$defs/ref"
+                        }
+                      },
+                      "required": [
+                        "ref"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              ],
+              "items": false,
+              "minItems": 2
+            }
+          },
+          "required": [
+            "eq"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "all": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/expr"
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "all"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "any": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/expr"
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "any"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "not": {
+              "$ref": "#/$defs/expr"
+            }
+          },
+          "required": [
+            "not"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "effect": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "set": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "$ref": "#/$defs/ref"
+                },
+                {
+                  "$ref": "#/$defs/value"
+                }
+              ],
+              "items": false,
+              "minItems": 2
+            }
+          },
+          "required": [
+            "set"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "reveal": {
+              "$ref": "#/$defs/ref"
+            }
+          },
+          "required": [
+            "reveal"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "keep": {
+              "$ref": "#/$defs/ref"
+            }
+          },
+          "required": [
+            "keep"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "end": {
+              "enum": [
+                "success",
+                "failure",
+                "unspecified"
+              ]
+            }
+          },
+          "required": [
+            "end"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "obs": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "$ref": "#/$defs/ref"
+            },
+            "status": {
+              "const": "known"
+            },
+            "value": {
+              "$ref": "#/$defs/value"
+            },
+            "source": {
+              "$ref": "#/$defs/source"
+            }
+          },
+          "required": [
+            "ref",
+            "status",
+            "value",
+            "source"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "$ref": "#/$defs/ref"
+            },
+            "status": {
+              "const": "unknown"
+            },
+            "source": {
+              "$ref": "#/$defs/source"
+            }
+          },
+          "required": [
+            "ref",
+            "status",
+            "source"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "rule": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "$ref": "#/$defs/command"
+            },
+            "requires": {
+              "$ref": "#/$defs/expr"
+            },
+            "source": {
+              "$ref": "#/$defs/source"
+            }
+          },
+          "required": [
+            "command",
+            "requires",
+            "source"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "$ref": "#/$defs/command"
+            },
+            "maxUses": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "source": {
+              "$ref": "#/$defs/source"
+            }
+          },
+          "required": [
+            "command",
+            "maxUses",
+            "source"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "$ref": "#/$defs/command"
+            },
+            "successRequires": {
+              "$ref": "#/$defs/expr"
+            },
+            "source": {
+              "$ref": "#/$defs/source"
+            }
+          },
+          "required": [
+            "command",
+            "successRequires",
+            "source"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "$ref": "#/$defs/command"
+            },
+            "when": {
+              "$ref": "#/$defs/expr"
+            },
+            "effect": {
+              "$ref": "#/$defs/effect"
+            },
+            "source": {
+              "$ref": "#/$defs/source"
+            }
+          },
+          "required": [
+            "command",
+            "effect",
+            "source"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}
