@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import { requireExecutedPrefix } from './sic-continuity-contract.mjs';
+export { requireExecutedPrefix } from './sic-continuity-contract.mjs';
 import { measureManipulation, requireManipulation } from './measure-ss01-manipulation.mjs';
 import { compileLevel, equal, initialState, stepWorld } from '../experiments/sinking-star-ss02/src/core.ts';
 import { SS02_LEVELS } from '../experiments/sinking-star-ss02/src/levels.ts';
@@ -63,23 +65,6 @@ function confirmedProfileReturn(ticket) {
   return ticket.outcomeCount === 1 && typeof ticket.planId === 'string' && ticket.planId.length > 0
     && outcome?.sic_plan === ticket.planId && outcome.index === ticket.actionIndex
     && outcome.family === 'sic_verify_profile_transfer' && outcome.matched === true;
-}
-
-// A final exploratory contact may have matched=null. Every intermediate
-// return must be confirmed, and all actual commands are reconciled once.
-export function requireExecutedPrefix(code, group) {
-  for (const ticket of group) {
-    assert.equal(ticket.outcomeCount, 1, code + ' requires exactly one actual return per ticket');
-    assert.ok(typeof ticket.planId === 'string' && ticket.planId.length > 0
-      && ticket.outcome?.sic_plan === ticket.planId && ticket.outcome.index === ticket.actionIndex,
-    code + ' actual return lost its executed ticket identity');
-  }
-  for (const ticket of group.slice(0, -1)) {
-    assert.equal(ticket.sealCount, 0, code + ' reconciled before its series ended');
-    assert.equal(ticket.outcome.matched, true, code + ' continued without a confirmed return');
-    assert.equal(ticket.outcome.seal_prefix, false, code + ' continued after its owner closed the prefix');
-  }
-  assert.equal(group.at(-1).sealCount, 1, code + ' requires exactly one final reconciliation');
 }
 
 function measuredProfilePreparation(run, issued, groups) {

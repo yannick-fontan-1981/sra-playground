@@ -1,0 +1,312 @@
+{
+  "schema": "sic.observed-route-roundtrip.qualification.v1",
+  "qualification": "incomplete_five_of_six",
+  "source": {
+    "local": "f9dd5336ec201aa6af258c182c85e9e296700316",
+    "remote": "3d46bb50ebdb68cc1cbb49fbee0d34c67f074a53",
+    "tree": "5ac68ebebf967647840c29d21182af0542618138"
+  },
+  "counterexample": {
+    "globalIndex": 101,
+    "level": 6,
+    "levelAction": 8,
+    "roleRefsCurrent": true,
+    "lastMatched": true,
+    "storedGridKeyOrder": [
+      "bounds",
+      "floor",
+      "frame",
+      "height",
+      "inset",
+      "pitch",
+      "width"
+    ],
+    "measuredGridConstructionOrder": [
+      "bounds",
+      "pitch",
+      "width",
+      "height",
+      "floor",
+      "inset",
+      "frame"
+    ],
+    "resolution": "Compare every measured geometry field and bound, independent of property insertion order."
+  },
+  "tests": {
+    "passed": 8,
+    "failed": 0,
+    "typecheckExit": 0,
+    "nativeFollowupAfterSeal": true
+  },
+  "run": {
+    "status": "stopped",
+    "reason": "level_wall_time_budget",
+    "levels": 5,
+    "actions": 117,
+    "authority": 117,
+    "levelStats": [
+      {
+        "level": 1,
+        "won": true,
+        "activeMs": 5892,
+        "budget": {
+          "actions": 21,
+          "activeTimeMs": 14000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=1; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 16,
+        "ms": 6205,
+        "gameMs": 159,
+        "costs": {
+          "init": {
+            "ms": 1126,
+            "count": 1
+          },
+          "advance": {
+            "ms": 3292,
+            "count": 16
+          },
+          "resume": {
+            "ms": 1429,
+            "count": 14
+          }
+        },
+        "graph": "e085d33b4f90bfc2185fd83458e94308fc68109a37579ebbcf5958c9dc780fa0",
+        "deltas": 3782,
+        "acquiredRecords": 16,
+        "nodes": 608,
+        "traceEvents": 92,
+        "prefixHash": "9861fc98ec4274351a8b2e035076a5356bd18a012440ce37a5933a6800e8357e",
+        "scoredMs": 6031,
+        "settlementMs": 174
+      },
+      {
+        "level": 2,
+        "won": true,
+        "activeMs": 5971,
+        "budget": {
+          "actions": 22,
+          "activeTimeMs": 12000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=2; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 17,
+        "ms": 6311,
+        "gameMs": 180,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 4378,
+            "count": 17
+          },
+          "resume": {
+            "ms": 1528,
+            "count": 17
+          }
+        },
+        "graph": "7187fe96020dbe42122cc5d00ffe77a53da8455cc75f37d9db0c99da1fdacff1",
+        "deltas": 7663,
+        "acquiredRecords": 33,
+        "nodes": 886,
+        "traceEvents": 128,
+        "prefixHash": "aa17dde1be31cda1c70095f977a29e0816ac7101981a9b72f17249bda1edebd8",
+        "scoredMs": 6074,
+        "settlementMs": 237
+      },
+      {
+        "level": 3,
+        "won": true,
+        "activeMs": 10097,
+        "budget": {
+          "actions": 26,
+          "activeTimeMs": 15000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=3; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 21,
+        "ms": 10493,
+        "gameMs": 199,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 7271,
+            "count": 21
+          },
+          "resume": {
+            "ms": 2756,
+            "count": 21
+          }
+        },
+        "graph": "e9b243e92f74b40cebe37c299fd9151fa022bd96137ea56dbec2ecea967fcf82",
+        "deltas": 12537,
+        "acquiredRecords": 54,
+        "nodes": 1309,
+        "traceEvents": 128,
+        "prefixHash": "96583f36a5010d8e7a1ac71aa8625b263d15bd950f113c8ccaa75e1ef1c17a1b",
+        "scoredMs": 10128,
+        "settlementMs": 365
+      },
+      {
+        "level": 4,
+        "won": true,
+        "activeMs": 13986,
+        "budget": {
+          "actions": 27,
+          "activeTimeMs": 16000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=4; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 22,
+        "ms": 14413,
+        "gameMs": 214,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 10430,
+            "count": 22
+          },
+          "resume": {
+            "ms": 3484,
+            "count": 22
+          }
+        },
+        "graph": "f4923b8b952f31b17f5b837870d753b7ee3df51dea339fb50bebbe3882de7891",
+        "deltas": 17762,
+        "acquiredRecords": 76,
+        "nodes": 1871,
+        "traceEvents": 128,
+        "prefixHash": "56225454e20ebe7ba19d59de8ef77bfbe66d6039b170cec77908573a6e04681d",
+        "scoredMs": 13887,
+        "settlementMs": 526
+      },
+      {
+        "level": 5,
+        "won": true,
+        "activeMs": 10763,
+        "budget": {
+          "actions": 22,
+          "activeTimeMs": 14000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=5; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 17,
+        "ms": 11102,
+        "gameMs": 167,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 8131,
+            "count": 17
+          },
+          "resume": {
+            "ms": 2580,
+            "count": 17
+          }
+        },
+        "graph": "e1328fd6a4bb8bbc43bc11a771a70f1da28768f7b2d16cb2c77c5a233538c96c",
+        "deltas": 21770,
+        "acquiredRecords": 93,
+        "nodes": 2276,
+        "traceEvents": 128,
+        "prefixHash": "dbbc34afa6e7e28d81068cb69b5ddd15ca9b2441223b92d576ccf0edfc4cfaa2",
+        "scoredMs": 10597,
+        "settlementMs": 506
+      },
+      {
+        "level": 6,
+        "won": false,
+        "actions": 24,
+        "ms": 18000,
+        "budget": {
+          "actions": 30,
+          "activeTimeMs": 18000,
+          "source": "docs/architecture/sic-v8-validation.md :: ESCT niveau 6, libérer le rail occupé avant l'interception",
+          "timeBasis": "measured"
+        }
+      }
+    ],
+    "recentCommands": [
+      {
+        "id": 4,
+        "family": "sic_intervene_on_observed_route",
+        "strategy": "P07",
+        "index": 110,
+        "elapsedMs": 11510
+      },
+      {
+        "id": 4,
+        "family": "sic_intervene_on_observed_route",
+        "strategy": "P07",
+        "index": 111,
+        "elapsedMs": 12345
+      },
+      {
+        "id": 1,
+        "family": "sic_intervene_on_observed_route",
+        "strategy": "P07",
+        "index": 112,
+        "elapsedMs": 13705
+      },
+      {
+        "id": 2,
+        "family": "sic_intervene_on_observed_route",
+        "strategy": "P07",
+        "index": 113,
+        "elapsedMs": 14540
+      },
+      {
+        "id": 5,
+        "family": "sic_intervene_on_observed_route",
+        "strategy": "P05",
+        "index": 114,
+        "elapsedMs": 15299
+      },
+      {
+        "id": 5,
+        "family": "sic_intervene_on_observed_route",
+        "strategy": "P05",
+        "index": 115,
+        "elapsedMs": 16099
+      },
+      {
+        "id": 4,
+        "family": "sic_intervene_on_observed_route",
+        "strategy": "P07",
+        "index": 116,
+        "elapsedMs": 17013
+      },
+      {
+        "id": 4,
+        "family": "sic_intervene_on_observed_route",
+        "strategy": "P07",
+        "index": 117,
+        "elapsedMs": 17890
+      }
+    ]
+  },
+  "audit": {
+    "capsUnchanged": true,
+    "mirroredLevels": 6,
+    "mirrorExact": true,
+    "firstFiveWinningPrefixesUnchanged": true,
+    "confirmedAcquiredRecordsAtLastScore": 93,
+    "allExecutedAcquiredRecords": null,
+    "recoveries": null,
+    "detailedEffects": null,
+    "finalReconciliation": null
+  },
+  "nextQuestion": "The first announced carrier movement remains unitary. Once the carrier stops with no cue, five cursor preparations and the first opening contact still use separate decisions."
+}

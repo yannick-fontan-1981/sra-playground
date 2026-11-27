@@ -3,6 +3,8 @@ import { outlineSameBox } from '../logos-engine/v6-outline-geometry.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { observedPressureRecoveryGroup } from './public-input-exploration.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 
 export const observedRouteInterventionId = 'sic_intervene_on_observed_route';
 
@@ -20,6 +22,7 @@ type Shelter = { phase: 'meet' | 'hold' | 'exit'; cell: number }
 type ApproachProtection = { cage: { cell: number; rival: Rival } | null };
 type Memory = { epoch: number; grid: Grid; cells: Pick<Scene, 'walls' | 'rails' | 'exit'> & { rivals?: Rival[] };
   visited: number[]; intercept: string | null; caged: string[]; refs: string[]; count: number;
+  lastMatched?: boolean | null;
   forecast?: boolean; opening?: number; shield?: { cell: number; rivalId: string };
   rivalCount?: number; shelter?: Shelter | null; approach?: ApproachProtection | null };
 type ShelterAction = 'meet' | 'hold' | 'prepare' | 'release' | 'seal' | 'escort';
@@ -27,7 +30,7 @@ type Intervention = 'contain' | 'divert' | 'open' | 'accompany' | 'shield' | She
   | 'reach_interceptor' | 'cage_interceptor' | 'clear_interceptor';
 type Choice = { kind: Intervention; target: number; action: string; actor: number; carrier: number | null;
   toggle: boolean; rival: Scene['rivals'][number] | null };
-type Proposal = NativeProposal & { memory: Memory; scene: Scene; choice: Choice; needId: string };
+type Proposal = NativeProposal & { memory: Memory; scene: Scene; choice: Choice; route?: Choice[]; needId: string };
 
 const directions = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0]] as const;
 const localCommand = 'ACTION5';
@@ -109,7 +112,11 @@ function gridOn(rows: NativeRows, { actor, carrier, wall, pitch }: RouteInterven
   return fits.length === 1 ? fits[0]! : null;
 }
 
-function project(rows: NativeRows, grid: Grid, roles: RouteInterventionWitness, prior: Memory['cells'], allowCueOverlap = false): Scene | null {
+const sameGrid = (first: Grid, second: Grid) => first.bounds.every((value, index) => value === second.bounds[index])
+  && (['pitch', 'width', 'height', 'floor', 'inset', 'frame'] as const).every(key => first[key] === second[key]);
+
+function project(rows: NativeRows, grid: Grid, roles: RouteInterventionWitness, prior: Memory['cells'], allowCueOverlap = false,
+  requireUniqueCue = false): Scene | null {
   const walls = new Set<number>(), rails = new Set(prior.rails), oldWalls = new Set(prior.walls);
   const bodies = new Map<number, number[]>(), markers = new Map<number, number[]>();
   const terrain = new Set([roles.wall, roles.actor, grid.floor, grid.inset, grid.frame]);
@@ -146,12 +153,49 @@ function project(rows: NativeRows, grid: Grid, roles: RouteInterventionWitness, 
     }
   }
   const carrier = bodies.get(roles.carrier);
-  if (actor < 0 || exit < 0 || carrier?.length !== 1 || bodies.size < 2) return null;
+  if (actor < 0 || exit < 0 || carrier?.length !== 1 || bodies.size < 2
+    || requireUniqueCue && (markers.get(roles.carrier)?.length ?? 0) > 1) return null;
   rails.add(exit);
   return { actor, exit, carrier: carrier[0]!, cue: markers.get(roles.carrier)?.at(-1) ?? null, walls: [...walls], rails: [...rails],
     rivals: [...bodies].flatMap(([color, cells]) => color === roles.carrier ? []
       : trackRivals(grid, color, cells, markers.get(color) ?? [], prior.rivals ?? [], walls)) };
 }
+
+function measuredRouteScene(rows: NativeRows, grid: Grid, roles: RouteInterventionWitness, prior: Memory['cells']): Scene | null {
+  const measured = gridOn(rows, roles);
+  return measured && sameGrid(measured, grid) ? project(rows, grid, roles, prior, false, true) : null;
+}
+
+function openingThreatened(scene: Scene, grid: Grid, target: number): boolean {
+  const passage = new Set([target, ...neighbors(grid, target).map(step => step.cell)]);
+  return scene.rivals.some(rival => !scene.walls.includes(rival.cell)
+    && (passage.has(rival.cell) || rival.cue !== null && passage.has(rival.cue)));
+}
+
+function openingPreparation(scene: Scene, memory: Memory, choice: Choice, inputs: readonly NativeCommand[], remaining: number): Choice[] | null {
+  const limit = Math.min(remaining, maximumCommittedActions, 64 - memory.count);
+  if (limit < 2 || choice.kind !== 'open' || choice.toggle || scene.cue !== null || memory.shelter
+    || memory.opening !== undefined || !scene.walls.includes(choice.target)
+    || openingThreatened(scene, memory.grid, choice.target)
+    || distance(memory.grid, scene.carrier, choice.target) !== 1) return null;
+  const route: Choice[] = [{ ...choice, carrier: scene.carrier }];
+  let at = choice.actor;
+  while (at !== choice.target && route.length < limit) {
+    const step = neighbors(memory.grid, at).find(candidate => distance(memory.grid, candidate.cell, choice.target)
+      < distance(memory.grid, at, choice.target));
+    if (!step || !inputs.some(input => input.action_ref === step.action)) break;
+    route.push({ ...choice, actor: step.cell, action: step.action, carrier: scene.carrier });
+    at = step.cell;
+  }
+  if (at === choice.target && route.length < limit && inputs.some(input => input.action_ref === localCommand)) {
+    route.push({ ...choice, actor: at, action: localCommand, toggle: true, carrier: null });
+  }
+  return route.length > 1 ? route : null;
+}
+
+const openingStillWaiting = (proposal: Proposal, scene: Scene | null, actor: number) => !!scene
+  && scene.actor === actor && scene.carrier === proposal.scene.carrier && scene.cue === null
+  && scene.walls.includes(proposal.choice.target) && !openingThreatened(scene, proposal.memory.grid, proposal.choice.target);
 
 function shortCorridor(grid: Grid, scene: Scene, visited: readonly number[]): number[] {
   const best = new Map([[scene.carrier, 0]]), queue = [{ at: scene.carrier, cost: 0, path: [scene.carrier] }];
@@ -430,6 +474,19 @@ export function createSicObservedRouteIntervention(): NativeFamily<Proposal> & {
   return {
     id: observedRouteInterventionId,
     learn(witness) { roles = witness; },
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group !== observedPressureRecoveryGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      const prior = state?.epoch === observation.level_epoch ? state : null, refs = prior?.refs ?? roles?.refs;
+      const scope = observation.observation_ref.split(':epoch:')[0]!;
+      if (!roles || roles.epoch !== observation.level_epoch || roles.score !== observation.levels_completed || roles.pitch < 4
+        || prior?.lastMatched === false || !refs || refs.length < 2 || refs.at(-1) !== observation.observation_ref
+        || !refs.every(ref => ref.startsWith(scope + ':epoch:'))) return null;
+      const grid = gridOn(rows, roles);
+      if (!grid || prior && !sameGrid(grid, prior.grid)) return null;
+      const scene = project(rows, grid, roles, prior?.cells ?? { walls: [], rails: [], exit: -1 }, Boolean(prior?.shelter), true);
+      if (!scene) return null;
+      return this.propose(observation, rows, inputs, remaining, execution);
+    },
     async propose(observation, rows, inputs, remaining) {
       if (!roles || roles.epoch !== observation.level_epoch || roles.score !== observation.levels_completed
         || roles.pitch < 4 || remaining < 1 || ![...directions.map(([key]) => key), localCommand]
@@ -462,11 +519,13 @@ export function createSicObservedRouteIntervention(): NativeFamily<Proposal> & {
         parentObjective: parent, satisfactionContract: 'observe_marked_body_reach_matching_outline_and_score' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = `protect-route:${need.id}`, strategy = choice.toggle ? 'P05' : 'P07';
-      const reason = purposes[choice.kind], actions = [action];
+      const route = roles.routeVerified ? openingPreparation(scene, memory, choice, inputs, remaining) : null;
+      const reason = purposes[choice.kind], actions = route ? route.map(leg => inputs.find(input => input.action_ref === leg.action)!) : [action];
       return { status: 'proposed', kind: observedRouteInterventionId, actions,
         memory: canTransfer ? { ...memory, approach: { cage: null } } : memory, scene, choice, needId: need.id,
+        ...(route ? { route } : {}),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        steps: [{ action, expected_after: { cursor: choice.actor, markedBody: choice.carrier } }],
+        steps: (route ?? [choice]).map((leg, index) => ({ action: actions[index]!, expected_after: { cursor: leg.actor, markedBody: leg.carrier } })),
         sicSituationCard: { strategy, mode: choice.toggle ? 'exploration' : 'solving', need: 'Bring the autonomous body to its matching outline',
           situation: reason, evidence, agenda: [], controlledPiece: cellBox(grid, scene.actor), addressedRegion: cellBox(grid, choice.target),
           markedBody: cellBox(grid, scene.carrier), marker: scene.cue === null ? null : cellBox(grid, scene.cue),
@@ -477,20 +536,36 @@ export function createSicObservedRouteIntervention(): NativeFamily<Proposal> & {
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: reason,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
+    before(proposal, index, packet, observation) {
+      if (index > 0 && proposal.route) {
+        const scene = roles && measuredRouteScene(packet.frame_rows, proposal.memory.grid, roles, proposal.scene);
+        const admitted = !!roles?.routeVerified && roles.epoch === observation.level_epoch && roles.score === observation.levels_completed
+          && observation.available_action_refs.includes(proposal.actions[index]!.action_ref)
+          && openingStillWaiting(proposal, scene, proposal.route[index - 1]!.actor);
+        return { admitted, reason: admitted ? 'opening_preparation_still_supported' : 'opening_preparation_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'observed_route_bound' : 'observed_route_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const scene = roles ? project(second, proposal.memory.grid, roles, expectedCells(proposal), Boolean(proposal.memory.shelter)) : null;
-      const matched = roles ? verifyIntervention(proposal, scene, second, roles.wall) : false;
-      return { matched, seal_prefix: true, reason: matched === null ? 'intervention_covered_by_mobile'
+      const prior = proposal.route && roles ? measuredRouteScene(first, proposal.memory.grid, roles, proposal.scene) : proposal.scene;
+      const step = proposal.route ? { ...proposal, choice: proposal.route[index]!, scene: prior ?? proposal.scene } : proposal;
+      const scene = roles ? proposal.route ? measuredRouteScene(second, step.memory.grid, roles, expectedCells(step))
+        : project(second, step.memory.grid, roles, expectedCells(step), Boolean(step.memory.shelter)) : null;
+      const matched = roles && prior ? verifyIntervention(step, scene, second, roles.wall) : false;
+      const last = index + 1 >= proposal.actions.length;
+      const retained = !proposal.route || last || openingStillWaiting(proposal, scene, step.choice.actor);
+      return { matched, seal_prefix: last || matched !== true || !retained, reason: matched === null ? 'intervention_covered_by_mobile'
+        : !retained ? 'opening_preparation_premise_changed'
         : matched ? 'projected_route_effect_observed' : 'projected_route_effect_differs' };
     },
-    record(before, after, _command, _first, second, proposal) {
-      const { memory, scene, choice } = proposal;
+    record(before, after, _command, first, second, proposal, index) {
+      const memory = index > 0 && state?.epoch === before.level_epoch ? state : proposal.memory;
+      const scene = index > 0 && roles ? measuredRouteScene(first, memory.grid, roles, memory.cells) : proposal.scene;
+      if (!scene) return { events: [] };
+      const choice = proposal.route?.[index] ?? proposal.choice, step = { ...proposal, memory, scene, choice };
       if (roles && after.levels_completed > before.levels_completed) {
         roles = { ...roles, epoch: after.level_epoch, score: after.levels_completed,
           refs: [...memory.refs.slice(-5), after.observation_ref], routeVerified: roles.routeVerified || memory.opening !== undefined,
@@ -499,17 +574,19 @@ export function createSicObservedRouteIntervention(): NativeFamily<Proposal> & {
       }
       if (!roles || before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const overlapping = Boolean(memory.shelter);
-      const projected = expectedCells(proposal), next = project(second, memory.grid, roles, projected, overlapping);
+      const projected = expectedCells(step), next = proposal.route ? measuredRouteScene(second, memory.grid, roles, projected)
+        : project(second, memory.grid, roles, projected, overlapping);
       if (!next) {
         if (memory.shelter || choice.kind === 'meet' || choice.kind === 'hold') state = { ...memory, shelter: null };
         if (memory.approach) state = { ...memory, approach: null };
         return { events: [] };
       }
-      const verified = verifyIntervention(proposal, next, second, roles.wall);
+      const verified = verifyIntervention(step, next, second, roles.wall);
       const followedRival = choice.kind === 'contain' ? choice.rival : null;
       const caged = choice.toggle && followedRival && verified !== false;
       const cells = verified === false && choice.toggle ? project(second, memory.grid, roles, scene, overlapping) ?? next : next;
       state = { ...memory, count: memory.count + 1, visited: [...new Set([...memory.visited, scene.carrier])], cells,
+        lastMatched: verified,
         intercept: caged ? null : followedRival?.id ?? null, caged: caged ? [...memory.caged, followedRival!.id] : memory.caged,
         refs: [...memory.refs.slice(-6), after.observation_ref], rivalCount: Math.max(memory.rivalCount ?? 0, scene.rivals.length) };
       if (choice.kind === 'open' && choice.toggle && verified !== false) state.opening = choice.target;
