@@ -1,0 +1,418 @@
+{
+  "schema": "sic.lkey-profile-continuity.v1",
+  "sourceCommit": "165991ececa2f02dfbe8950882fbb3851910a14e",
+  "baseCommit": "8e4321073e1b5445b08cd128fe7a9b2c26fb0752",
+  "gateCommit": "44fce009fee528e0e422de77db5d30ad822f017d",
+  "branch": "fix/sic-27-profile-continuity-20261127",
+  "outcome": {
+    "levelsWon": 6,
+    "targetLevels": 6,
+    "actions": 119,
+    "reset": 0,
+    "undo": 0,
+    "authority": 119,
+    "acquiredRecords": 119,
+    "nativeDecisions": 41,
+    "continuedCommands": 78,
+    "longestSeries": 16,
+    "medianContinuedGapMs": 47,
+    "medianDecisionBoundaryGapMs": 538
+  },
+  "levels": [
+    {
+      "level": 1,
+      "actions": 8,
+      "actionCap": 13,
+      "scoredMs": 4218,
+      "scoreCapMs": 12000,
+      "settlementMs": 99,
+      "decisions": 8,
+      "continued": 0,
+      "seriesLengths": [],
+      "samePublicPrefixAsInstrumentedBaseline": true
+    },
+    {
+      "level": 2,
+      "actions": 8,
+      "actionCap": 13,
+      "scoredMs": 1326,
+      "scoreCapMs": 11000,
+      "settlementMs": 620,
+      "decisions": 3,
+      "continued": 5,
+      "seriesLengths": [
+        6
+      ],
+      "samePublicPrefixAsInstrumentedBaseline": true
+    },
+    {
+      "level": 3,
+      "actions": 20,
+      "actionCap": 24,
+      "scoredMs": 4449,
+      "scoreCapMs": 14000,
+      "settlementMs": 367,
+      "decisions": 6,
+      "continued": 14,
+      "seriesLengths": [
+        14,
+        2
+      ],
+      "samePublicPrefixAsInstrumentedBaseline": true
+    },
+    {
+      "level": 4,
+      "actions": 29,
+      "actionCap": 34,
+      "scoredMs": 5140,
+      "scoreCapMs": 19000,
+      "settlementMs": 2316,
+      "decisions": 9,
+      "continued": 20,
+      "seriesLengths": [
+        8,
+        14
+      ],
+      "samePublicPrefixAsInstrumentedBaseline": true
+    },
+    {
+      "level": 5,
+      "actions": 24,
+      "actionCap": 29,
+      "scoredMs": 4824,
+      "scoreCapMs": 18000,
+      "settlementMs": 3342,
+      "decisions": 7,
+      "continued": 17,
+      "seriesLengths": [
+        3,
+        2,
+        15
+      ],
+      "samePublicPrefixAsInstrumentedBaseline": true
+    },
+    {
+      "level": 6,
+      "actions": 30,
+      "actionCap": 36,
+      "scoredMs": 9612,
+      "scoreCapMs": 18000,
+      "settlementMs": 1661,
+      "decisions": 8,
+      "continued": 22,
+      "seriesLengths": [
+        3,
+        2,
+        16,
+        5
+      ],
+      "samePublicPrefixAsInstrumentedBaseline": null
+    }
+  ],
+  "strictManifest": {
+    "startedAt": "2026-11-27T02:11:52.734827+00:00",
+    "sourceCommit": "165991ececa2f02dfbe8950882fbb3851910a14e",
+    "sourceTree": "1a73f621f552fc4d6d371887c7294ab1c9f5b8d0",
+    "sourceHashes": {
+      "src/sic/profile-transfer.ts": "aac1e617b6098984c378fecd0351a6019c0a5d856d3651c9929c7e96ea38cd0f",
+      "src/sic/profile-rank-order.ts": "e562beebb0c7d8cf14ab119d76f588715f8a83063cfe3dd678979977cb1bd17c",
+      "src/sic/standalone-families.ts": "29a9be5ad5d516cb6b36dec8dcce79e84d923233f1f8d7e4fa6c705eb5b288a8",
+      "src/sic/experiment-selection-groups.ts": "9d82c04b886ff265b666d98de31beb1b72cea07f0ab1cbe9ed3828a489127db5",
+      "src/logos-engine/v6-native-runtime.ts": "ae5b257903e8e8dbe73a1fda0c4673efffbfcefadff99ad74f3936fc81471722",
+      "src/runtime/v6-agent-service.ts": "05333b7d65fc24d7ab3df6ea94733984836e21a05cfa49f5dc278f7d2a5c71d2",
+      "scripts/check-sic-chronological.mjs": "2cb80e62a41e1269f1a2a0dd9e9de20a32504b70724c167abaac1a8b9bae3111",
+      "scripts/sic-replay-budgets.mjs": "308ae1c2d28a21dc7f2e3d06c83e601877d5388db2723148b5900d58c5a89931",
+      "docs/architecture/sic-replay-reference-levels-20261126.json": "67ae5216b80e87bbb2243138fde7970ea5c725a5f832f1b72aa8b0780e270854",
+      "docs/architecture/sic-v8-level6-campaign-7bb9f152.json": "18cafd4d8b6a9a29c18f5e07ab1d1e63b74e53b1c0fc605f6dbbd390aae7efcc"
+    },
+    "instrumented": false,
+    "workers": 1,
+    "startLevel": 1,
+    "targetLevels": 6,
+    "game": "LKEY",
+    "cwd": "/workspace/scratch/082336907086/sic-27-work/profile",
+    "command": [
+      "node",
+      "scripts/check-sic-chronological.mjs",
+      "LKEY",
+      "6",
+      "/workspace/scratch/082336907086/sic-27-work/lkey-candidate-165991ec/results.jsonl",
+      "1",
+      "sic"
+    ],
+    "environment": {
+      "SIC_REPLAY_REFERENCES": "docs/architecture/sic-replay-reference-levels-20261126.json"
+    }
+  },
+  "strictEnd": {
+    "observedEndAt": "2026-11-27T02:12:35.422263+00:00",
+    "exitCode": 0,
+    "sourceCommit": "165991ececa2f02dfbe8950882fbb3851910a14e",
+    "clean": true,
+    "sourceHashes": {
+      "src/sic/profile-transfer.ts": "aac1e617b6098984c378fecd0351a6019c0a5d856d3651c9929c7e96ea38cd0f",
+      "src/sic/profile-rank-order.ts": "e562beebb0c7d8cf14ab119d76f588715f8a83063cfe3dd678979977cb1bd17c",
+      "src/sic/standalone-families.ts": "29a9be5ad5d516cb6b36dec8dcce79e84d923233f1f8d7e4fa6c705eb5b288a8",
+      "src/sic/experiment-selection-groups.ts": "9d82c04b886ff265b666d98de31beb1b72cea07f0ab1cbe9ed3828a489127db5",
+      "src/logos-engine/v6-native-runtime.ts": "ae5b257903e8e8dbe73a1fda0c4673efffbfcefadff99ad74f3936fc81471722",
+      "src/runtime/v6-agent-service.ts": "05333b7d65fc24d7ab3df6ea94733984836e21a05cfa49f5dc278f7d2a5c71d2",
+      "scripts/check-sic-chronological.mjs": "2cb80e62a41e1269f1a2a0dd9e9de20a32504b70724c167abaac1a8b9bae3111",
+      "scripts/sic-replay-budgets.mjs": "308ae1c2d28a21dc7f2e3d06c83e601877d5388db2723148b5900d58c5a89931",
+      "docs/architecture/sic-replay-reference-levels-20261126.json": "67ae5216b80e87bbb2243138fde7970ea5c725a5f832f1b72aa8b0780e270854",
+      "docs/architecture/sic-v8-level6-campaign-7bb9f152.json": "18cafd4d8b6a9a29c18f5e07ab1d1e63b74e53b1c0fc605f6dbbd390aae7efcc"
+    },
+    "resultsSha256": "272b33bb1429cefdd846d2963e924b81aa559b2ec5c6c122d65cf38dd34907f7",
+    "sourceUnchanged": true
+  },
+  "continuityManifest": {
+    "startedAt": "2026-11-27T02:16:39.389029+00:00",
+    "sourceCommit": "165991ececa2f02dfbe8950882fbb3851910a14e",
+    "sourceTree": "1a73f621f552fc4d6d371887c7294ab1c9f5b8d0",
+    "sourceHashes": {
+      "src/sic/profile-transfer.ts": "aac1e617b6098984c378fecd0351a6019c0a5d856d3651c9929c7e96ea38cd0f",
+      "src/logos-engine/v6-native-runtime.ts": "ae5b257903e8e8dbe73a1fda0c4673efffbfcefadff99ad74f3936fc81471722",
+      "src/runtime/v6-agent-service.ts": "05333b7d65fc24d7ab3df6ea94733984836e21a05cfa49f5dc278f7d2a5c71d2",
+      "scripts/compare-source100.mjs": "b41529f908e5bbd6ce93fbf4f0cd9d3021caafcb3cf2e34454f8b2f7021cdc58",
+      "scripts/sic-continuity-evidence.mjs": "7a0cc38b3040e0bdeade14430d2ecc44d5337edca1623a3eb03ec22e91d894ff"
+    },
+    "workers": 1,
+    "startLevel": 1,
+    "targetLevels": 6,
+    "game": "LKEY",
+    "cap": 36,
+    "purpose": "Executed continuity evidence; strict per-level timing qualification is recorded separately.",
+    "command": [
+      "node",
+      "scripts/compare-source100.mjs",
+      ".",
+      ".",
+      "/workspace/scratch/082336907086/sic-27-work/lkey-continuity-165991ec/results.jsonl",
+      "source:LKEY",
+      "1",
+      "6",
+      "36"
+    ],
+    "environment": {
+      "SIC_STUDY_CONTINUITY": "1",
+      "SIC_STUDY_WORKERS": "1",
+      "SIC_STUDY_SOLVER": "sic",
+      "SIC_STUDY_RECORD_COMMANDS": "1",
+      "SIC_STUDY_PROGRESS": "1"
+    },
+    "cwd": "/workspace/scratch/082336907086/sic-27-work/profile"
+  },
+  "continuityEnd": {
+    "observedEndAt": "2026-11-27T02:17:21.816417+00:00",
+    "exitCode": 0,
+    "sourceCommit": "165991ececa2f02dfbe8950882fbb3851910a14e",
+    "clean": true,
+    "sourceHashes": {
+      "src/sic/profile-transfer.ts": "aac1e617b6098984c378fecd0351a6019c0a5d856d3651c9929c7e96ea38cd0f",
+      "src/logos-engine/v6-native-runtime.ts": "ae5b257903e8e8dbe73a1fda0c4673efffbfcefadff99ad74f3936fc81471722",
+      "src/runtime/v6-agent-service.ts": "05333b7d65fc24d7ab3df6ea94733984836e21a05cfa49f5dc278f7d2a5c71d2",
+      "scripts/compare-source100.mjs": "b41529f908e5bbd6ce93fbf4f0cd9d3021caafcb3cf2e34454f8b2f7021cdc58",
+      "scripts/sic-continuity-evidence.mjs": "7a0cc38b3040e0bdeade14430d2ecc44d5337edca1623a3eb03ec22e91d894ff"
+    },
+    "resultsSha256": "799eaee749ce39af2f5b0ce113cdb7d7ef7bf89c18eac490fad51f46fee10568",
+    "sourceUnchanged": true
+  },
+  "diagnostic": {
+    "sourceCommit": "8e4321073e1b5445b08cd128fe7a9b2c26fb0752",
+    "instrumented": true,
+    "won": 5,
+    "stopLevel": 6,
+    "stopActions": 26,
+    "stopTimeCapMs": 18000,
+    "captureSha256": "e47fa29badc99fc1b29fa3222902f049e5bed4c8cc7590cf2dc6f94d50f0a8ba",
+    "limitation": "Diagnostic timings include observer overhead; no paired wall-time speedup is asserted."
+  },
+  "offlineChecks": [
+    {
+      "planNumber": 1,
+      "actionCount": 3,
+      "checkedReturns": 3,
+      "uncapturedCommands": 0,
+      "allAvailableCommandsAndGuardsMatch": true,
+      "allAvailableAcquiredStatesMatch": true
+    },
+    {
+      "planNumber": 5,
+      "actionCount": 1,
+      "checkedReturns": 1,
+      "uncapturedCommands": 0,
+      "allAvailableCommandsAndGuardsMatch": true,
+      "allAvailableAcquiredStatesMatch": true
+    },
+    {
+      "planNumber": 7,
+      "actionCount": 2,
+      "checkedReturns": 2,
+      "uncapturedCommands": 0,
+      "allAvailableCommandsAndGuardsMatch": true,
+      "allAvailableAcquiredStatesMatch": true
+    },
+    {
+      "planNumber": 10,
+      "actionCount": 16,
+      "checkedReturns": 16,
+      "uncapturedCommands": 0,
+      "allAvailableCommandsAndGuardsMatch": true,
+      "allAvailableAcquiredStatesMatch": true
+    },
+    {
+      "planNumber": 12,
+      "actionCount": 16,
+      "checkedReturns": 14,
+      "uncapturedCommands": 1,
+      "allAvailableCommandsAndGuardsMatch": true,
+      "allAvailableAcquiredStatesMatch": true
+    }
+  ],
+  "validation": {
+    "profileTests": {
+      "passed": 10,
+      "failed": 0
+    },
+    "continuityContractTests": {
+      "passed": 17,
+      "failed": 0
+    },
+    "typecheck": "passed before the frozen production commit; subsequent gate changes are JavaScript/YAML only",
+    "localCollectorContract": "six levels pass checkRun on 44fce009",
+    "fullSameSourceGate": "required on the integration CI; this archive does not assert an 84-level replay",
+    "independentReview": {
+      "production": "campaign_audit: no blocking defect",
+      "gate": "wa30_continuity: no blocking defect"
+    },
+    "ciCohorts": 12,
+    "ciGames": 14,
+    "ciLevels": 84
+  },
+  "archive": {
+    "file": "public-evidence.tar.gz",
+    "bytes": 1713363,
+    "sha256": "d359134c4f93af690a8d54f778bcd451191bd05ea5a4df1fc05267927d829c3b",
+    "entries": [
+      {
+        "path": "baseline-4a546a13/LKEY.json",
+        "bytes": 6524,
+        "sha256": "65cfdfb46813820d12960626e67b1742ecd2899247a06c0022379edc8297ee05"
+      },
+      {
+        "path": "continuity-165991ec/results.jsonl",
+        "bytes": 111477,
+        "sha256": "799eaee749ce39af2f5b0ce113cdb7d7ef7bf89c18eac490fad51f46fee10568"
+      },
+      {
+        "path": "continuity-165991ec/run-end.json",
+        "bytes": 831,
+        "sha256": "798ba3c84108351fcc68b15188982a2c9bc4434d34714383e083cd6fd6a145a1"
+      },
+      {
+        "path": "continuity-165991ec/run-manifest.json",
+        "bytes": 1407,
+        "sha256": "1132fb8f6449dd62a15faa0489df5a65161450c4ffacae6d2eaec6498ffc8282"
+      },
+      {
+        "path": "continuity-165991ec/runner.log",
+        "bytes": 154,
+        "sha256": "fd7c733f503fdd5d0e56d033db4001aed800995bc1b2ccae1d65f89c19e77c36"
+      },
+      {
+        "path": "diagnostic-8e432107/lkey-family-37.jsonl",
+        "bytes": 13062734,
+        "sha256": "e47fa29badc99fc1b29fa3222902f049e5bed4c8cc7590cf2dc6f94d50f0a8ba"
+      },
+      {
+        "path": "diagnostic-8e432107/results.jsonl",
+        "bytes": 4379,
+        "sha256": "c6580bd404d47152afad11b3617eb5c298a35aa0929756cc1df866890a6af3f9"
+      },
+      {
+        "path": "diagnostic-8e432107/results.jsonl.levels",
+        "bytes": 3608,
+        "sha256": "00143a0447112cea98aab771108ea9fed8e21794522bab90bb7d4585837aa633"
+      },
+      {
+        "path": "diagnostic-8e432107/run-end.json",
+        "bytes": 241,
+        "sha256": "11a1a410ced266e63a54984e08914a06d189e99ccdba37393bc57c20f2eaaac2"
+      },
+      {
+        "path": "diagnostic-8e432107/run-manifest.json",
+        "bytes": 2212,
+        "sha256": "33d2b04fadd379932162bb471ff0fba163356e1332e8385faeb243c2395db3dd"
+      },
+      {
+        "path": "diagnostic-8e432107/runner.log",
+        "bytes": 455,
+        "sha256": "cafd28e543332d544a8b074d4c77c36f96c5ed500fcd0be1236310ea6320bc50"
+      },
+      {
+        "path": "offline/captured-continuation.json",
+        "bytes": 29461,
+        "sha256": "4cb48c4ac5a448f8d07cf3d63ccab339b573ce48941d5dd8a4f0e76942013556"
+      },
+      {
+        "path": "probes/lkey-captured-continuation.mjs",
+        "bytes": 5030,
+        "sha256": "7fe1bc3fb171f3061ec8a9eee33c4977dd08c5ce07d8fb401630695e61ae3d4b"
+      },
+      {
+        "path": "probes/lkey-family-profile.mjs",
+        "bytes": 9289,
+        "sha256": "f13f6ae47d280bf629af690081b29656a5572160bbce34072628797fe28403a7"
+      },
+      {
+        "path": "probes/run-lkey-continuity.py",
+        "bytes": 2735,
+        "sha256": "896e1638677731d6a1cdf14e134d4fdb7693d0df9b69df06f2a5a18d26902b9d"
+      },
+      {
+        "path": "probes/run-lkey-strict.py",
+        "bytes": 2874,
+        "sha256": "b6d5d1168dd86bad86cef6fe9b58445d5053ace33bc7df9ee6db86457ed702e4"
+      },
+      {
+        "path": "strict-165991ec/results.jsonl",
+        "bytes": 19021,
+        "sha256": "272b33bb1429cefdd846d2963e924b81aa559b2ec5c6c122d65cf38dd34907f7"
+      },
+      {
+        "path": "strict-165991ec/results.jsonl.levels",
+        "bytes": 3980,
+        "sha256": "ac5da03828519fe33c0abeb07023562521c62545d992332780e6859907e3cb06"
+      },
+      {
+        "path": "strict-165991ec/run-end.json",
+        "bytes": 1422,
+        "sha256": "d4e07404bc228c8b6801acc56c1a18f1d0b0dd76d78c7ad31fec9b77668c9df9"
+      },
+      {
+        "path": "strict-165991ec/run-manifest.json",
+        "bytes": 1812,
+        "sha256": "d1e01cba1dad5218672b83557549c6375e282279392448e9c30bf7bfda586b7b"
+      },
+      {
+        "path": "strict-165991ec/runner.log",
+        "bytes": 512,
+        "sha256": "e80f7c7e9a791d50f8781383c904e73745fddf5b4589d7e4aac2f709e42400aa"
+      },
+      {
+        "path": "validation/lkey-gate-tests.log",
+        "bytes": 1927,
+        "sha256": "1eabebd8f02ebc6ffd49f3f222e28f9b2a55fca919cc67ba7ce773b17ff1a0e1"
+      },
+      {
+        "path": "validation/lkey-profile-tests.log",
+        "bytes": 1158,
+        "sha256": "160d5c42847506b9de7a6420abda6a7e5572ad0544eb99ebcd85c2c0be7eee11"
+      }
+    ]
+  },
+  "delivery": {
+    "integrated": "handled separately by parent task",
+    "siteVersion": null,
+    "scope": "Native strict and continuity witnesses only; delivered UI replay remains an integration step."
+  }
+}
