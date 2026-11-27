@@ -1,0 +1,264 @@
+{
+  "révisions": [
+    "699ac89e70be0e3cd9bceafa16689552576310a0",
+    "495ea14890c1d0cd69de356d40a3b243e0b86f6d"
+  ],
+  "départsParSHA": 5,
+  "occurrencesNominales": {
+    "44": 3,
+    "47": 6,
+    "48": 6
+  },
+  "cas": {
+    "nominal": {
+      "parent": {
+        "tour": 11,
+        "type": "field_service_transfer_experiment",
+        "phase": "revalidate_source_access",
+        "point": [
+          11,
+          35
+        ],
+        "retour": "field_service_transfer",
+        "mesure": {
+          "point": [
+            11,
+            35
+          ],
+          "de": "horizontal",
+          "à": "vertical"
+        },
+        "suite": [
+          "field_service_transfer_experiment",
+          "revalidate_conditional_service",
+          [
+            32,
+            51
+          ],
+          "ACTION6"
+        ],
+        "étatSuivant": "action"
+      },
+      "candidat": {
+        "tour": 11,
+        "type": "field_service_transfer_experiment",
+        "phase": "revalidate_source_access",
+        "point": [
+          11,
+          35
+        ],
+        "retour": "field_service_transfer",
+        "mesure": {
+          "point": [
+            11,
+            35
+          ],
+          "de": "horizontal",
+          "à": "vertical"
+        },
+        "suite": [
+          "field_service_transfer_experiment",
+          "revalidate_conditional_service",
+          [
+            32,
+            51
+          ],
+          "ACTION6"
+        ],
+        "étatSuivant": "action"
+      }
+    },
+    "publique": {
+      "parent": {
+        "tour": 11,
+        "type": "field_service_transfer_experiment",
+        "phase": "revalidate_source_access",
+        "point": [
+          11,
+          35
+        ],
+        "retour": "field_service_transfer",
+        "mesure": {
+          "point": [
+            11,
+            35
+          ],
+          "de": "horizontal",
+          "à": "vertical"
+        },
+        "suite": [
+          "field_service_transfer_experiment",
+          "revalidate_conditional_service",
+          [
+            32,
+            51
+          ],
+          "ACTION6"
+        ],
+        "étatSuivant": "action"
+      },
+      "candidat": {
+        "tour": 11,
+        "type": "nested_control_experiment",
+        "point": [
+          32,
+          51
+        ],
+        "retour": "nested_control_response",
+        "mesure": null,
+        "suite": [
+          "experiment",
+          null,
+          [
+            10,
+            35
+          ],
+          "ACTION6"
+        ],
+        "étatSuivant": "action"
+      }
+    },
+    "absence": {
+      "parent": {
+        "tour": 11,
+        "type": "nested_control_experiment",
+        "point": [
+          32,
+          51
+        ],
+        "retour": "nested_control_response",
+        "mesure": null,
+        "suite": [
+          "experiment",
+          null,
+          [
+            10,
+            35
+          ],
+          "ACTION6"
+        ],
+        "étatSuivant": "action"
+      },
+      "candidat": {
+        "tour": 11,
+        "type": "nested_control_experiment",
+        "point": [
+          32,
+          51
+        ],
+        "retour": "nested_control_response",
+        "mesure": null,
+        "suite": [
+          "experiment",
+          null,
+          [
+            10,
+            35
+          ],
+          "ACTION6"
+        ],
+        "étatSuivant": "action"
+      }
+    },
+    "lié": {
+      "parent": {
+        "tour": 12,
+        "type": "field_service_transfer_experiment",
+        "phase": "revalidate_conditional_service",
+        "point": [
+          32,
+          51
+        ],
+        "retour": "field_service_transfer",
+        "mesure": {
+          "point": [
+            11,
+            35
+          ],
+          "de": "horizontal",
+          "à": "vertical"
+        },
+        "suite": [
+          "field_service_transfer_experiment",
+          "revalidate_conditional_service",
+          [
+            32,
+            51
+          ],
+          "ACTION6"
+        ],
+        "étatSuivant": "action"
+      },
+      "candidat": {
+        "tour": 12,
+        "type": "nested_control_experiment",
+        "point": [
+          32,
+          51
+        ],
+        "retour": "nested_control_response",
+        "mesure": null,
+        "suite": [
+          "nested_control_experiment",
+          null,
+          [
+            32,
+            51
+          ],
+          "ACTION6"
+        ],
+        "étatSuivant": "action"
+      }
+    },
+    "réserve": {
+      "parent": {
+        "tour": 11,
+        "type": "field_service_transfer_experiment",
+        "phase": "revalidate_source_access",
+        "point": [
+          11,
+          35
+        ],
+        "retour": "field_service_transfer",
+        "mesure": {
+          "point": [
+            11,
+            35
+          ],
+          "de": "horizontal",
+          "à": "vertical"
+        },
+        "suite": [
+          "field_service_transfer_experiment",
+          "revalidate_conditional_service",
+          [
+            32,
+            51
+          ],
+          "ACTION6"
+        ],
+        "étatSuivant": "action"
+      },
+      "candidat": {
+        "tour": 11,
+        "type": "nested_control_experiment",
+        "point": [
+          32,
+          51
+        ],
+        "retour": "nested_control_response",
+        "mesure": null,
+        "suite": [
+          "experiment",
+          null,
+          [
+            10,
+            35
+          ],
+          "ACTION6"
+        ],
+        "étatSuivant": "action"
+      }
+    }
+  }
+}
