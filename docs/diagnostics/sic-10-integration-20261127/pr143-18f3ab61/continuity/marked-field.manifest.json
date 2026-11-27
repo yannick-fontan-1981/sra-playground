@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "18f3ab611cfe41fc48094f8e6ea718296cd7c92f",
+  "runId": "46029260117",
+  "name": "marked-field",
+  "cohort": "source:SIGN",
+  "codes": [
+    "SIGN"
+  ],
+  "start": 1,
+  "end": 6,
+  "cap": 98,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "marked-field.jsonl",
+  "sha256": "72fc479041965844f2b5b6f1d9cb805f133cc1026e3c10dbadc21e1eaafb0f48"
+}

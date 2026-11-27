@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "18f3ab611cfe41fc48094f8e6ea718296cd7c92f",
+  "runId": "46029260117",
+  "name": "public-panel",
+  "cohort": "source:DC22",
+  "codes": [
+    "DC22"
+  ],
+  "start": 1,
+  "end": 6,
+  "cap": 271,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "public-panel.jsonl",
+  "sha256": "eee4a5d0f2cb039a40b75e94c4b721f7dece85ec894e90f305d117db719c6546"
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "18f3ab611cfe41fc48094f8e6ea718296cd7c92f",
+  "runId": "46029260117",
+  "name": "matching-edges",
+  "cohort": "source:GRAV",
+  "codes": [
+    "GRAV"
+  ],
+  "start": 1,
+  "end": 6,
+  "cap": 57,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "matching-edges.jsonl",
+  "sha256": "d07002db11ae6effc577014c8cd7ea6639cb594f060fb5db913c04430e058773"
+}

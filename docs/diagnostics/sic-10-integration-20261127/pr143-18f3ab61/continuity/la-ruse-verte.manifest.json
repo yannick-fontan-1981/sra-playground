@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "18f3ab611cfe41fc48094f8e6ea718296cd7c92f",
+  "runId": "46029260117",
+  "name": "la-ruse-verte",
+  "cohort": "SS03",
+  "codes": [
+    "SS03"
+  ],
+  "start": 1,
+  "end": 8,
+  "cap": 240,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "la-ruse-verte.jsonl",
+  "sha256": "cb6588a577d2f32b00ec822edea7014c0fb825051d46c6db207505947f6ca300"
+}

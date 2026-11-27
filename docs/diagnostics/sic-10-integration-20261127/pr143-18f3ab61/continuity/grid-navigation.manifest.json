@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "18f3ab611cfe41fc48094f8e6ea718296cd7c92f",
+  "runId": "46029260117",
+  "name": "grid-navigation",
+  "cohort": "source:SNAR",
+  "codes": [
+    "SNAR"
+  ],
+  "start": 1,
+  "end": 6,
+  "cap": 44,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "grid-navigation.jsonl",
+  "sha256": "c2bb1a1d475eb472e70a215e7d28db0f4cdd217f52d736b57467d14ccfc15561"
+}

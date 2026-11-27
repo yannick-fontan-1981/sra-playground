@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "18f3ab611cfe41fc48094f8e6ea718296cd7c92f",
+  "runId": "46029260117",
+  "name": "oriented-delivery",
+  "cohort": "source:WA30",
+  "codes": [
+    "WA30"
+  ],
+  "start": 1,
+  "end": 7,
+  "cap": 136,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "oriented-delivery.jsonl",
+  "sha256": "a3c94b07fdf50c7a749464d456cc55fd9e2258dc165d39167ccdc40f82bc9c8f"
+}

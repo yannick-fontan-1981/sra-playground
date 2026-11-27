@@ -1,0 +1,698 @@
+{
+  "schema": "sic.integration-receipts.v1",
+  "pr": 143,
+  "head": "15f683fc8a5ff50aa809b68ec4fc598469d08f84",
+  "base": "4313d7ce41505cece5f397dc8125b430697176ed",
+  "testedMerge": "18f3ab611cfe41fc48094f8e6ea718296cd7c92f",
+  "integrated": "53480b31192831f15a5d0550eb72a3e699c43911",
+  "tree": "55c019cb0c8a7dcfda5f3d2983aa98908162ea06",
+  "workflows": {
+    "strict": {
+      "runId": 46029260013,
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "Original budgets on the combined source",
+          "conclusion": "success"
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 15215246132,
+          "name": "sic-strict-18f3ab611cfe41fc48094f8e6ea718296cd7c92f",
+          "sha256": "ad3aaba8be825472616f69300f9211c60adb8181b384eeea178781b7b5c841bf"
+        }
+      ]
+    },
+    "continuity": {
+      "runId": 46029260117,
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "TypeScript and continuity contracts",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / mirror-isles",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / la-ruse-verte",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / cargo-transport",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / local-carry",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / destination-set",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / oriented-delivery",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / observed-openings",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / profile-preparation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / actor-composition",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / marked-field",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / population-preparation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / la-force-rouge",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / l-axe-violet",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / queue-receipts",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / passage-walking",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / matching-edges",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / crossing-rows",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / guarded-passengers",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / workshop-phase",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / public-panel",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / support-selection",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / carrier-preparation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / surface-routes",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / grid-navigation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Continuity / native-sources",
+          "conclusion": "success"
+        },
+        {
+          "name": "Executed series and final reconciliation",
+          "conclusion": "success"
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 15214640220,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-actor-composition",
+          "sha256": "e6634537ff194e84ab6845c84ff9cda36bfcc44f5c0a0885a2859aa6ec79db7b"
+        },
+        {
+          "id": 15213024328,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-cargo-transport",
+          "sha256": "a5abc540b389369c1a8deb05d7183e79da389f3ed662090c3e96d8320594465c"
+        },
+        {
+          "id": 15214593028,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-carrier-preparation",
+          "sha256": "b3d39f88db854fa8c8d2f26cf30f12557ef9097dc6acdb53e784ac853030ade0"
+        },
+        {
+          "id": 15213454377,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-crossing-rows",
+          "sha256": "e784a45a23893695524258882b69e8fdd0c3188c57d9433ae4166d4545a438f4"
+        },
+        {
+          "id": 15214331931,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-destination-set",
+          "sha256": "afb572df9b25592502be2283a2c5be211e0b4484c7e7a6565a4d139a8ba3a0df"
+        },
+        {
+          "id": 15213814256,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-grid-navigation",
+          "sha256": "38916d9c0100804899fdce456ec2d74e53bb40a79775d8e736ccc78022557a02"
+        },
+        {
+          "id": 15214840968,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-guarded-passengers",
+          "sha256": "90bbc1b6470aabe4610d4a781ec7b224c1e7a17d3d5a12a677a05294172a5b68"
+        },
+        {
+          "id": 15213777092,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-l-axe-violet",
+          "sha256": "c670d362c966c8358638725f8bbd6499853792b8795385050946bfdd27c385a5"
+        },
+        {
+          "id": 15213876515,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-la-force-rouge",
+          "sha256": "14840211c2bcdf390ec0a225df283a1c988c96b7904a36adedc6174ae94076d1"
+        },
+        {
+          "id": 15212564725,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-la-ruse-verte",
+          "sha256": "2879d571d9851a07ff0afc31ddd93ea445569ec3f796749b26119c135ef70148"
+        },
+        {
+          "id": 15214067194,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-local-carry",
+          "sha256": "7946004416c640901428b82f4f42f9b9e82a69cead731a9000f927a5240b0260"
+        },
+        {
+          "id": 15214760037,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-marked-field",
+          "sha256": "354216cddddb3a4d4fe45626aba8f3a1619444cc49804aabb01864a6e4d873d8"
+        },
+        {
+          "id": 15213214333,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-matching-edges",
+          "sha256": "90cbfaa38a83b865f60a1b0abeb66a569e77ae53560a0032129015793f5524d4"
+        },
+        {
+          "id": 15214001747,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-mirror-isles",
+          "sha256": "963faa8cc61b3f5e9ea08d903948a907d51131a552c6c36b272ab707dc703cb9"
+        },
+        {
+          "id": 15214672300,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-native-sources",
+          "sha256": "a579d49f296550fca129ef5e005973cb42e91caada8618730a4db412b7ca2149"
+        },
+        {
+          "id": 15214182577,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-observed-openings",
+          "sha256": "9ab78c6132a6e7d1499e4feb81066856a077d24ef72872d5954345188ad5120e"
+        },
+        {
+          "id": 15213348031,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-oriented-delivery",
+          "sha256": "b8d9bdddc1ab3cba0a6dea77be6441de13a211255131fbd688a8a87a7b5d9f6e"
+        },
+        {
+          "id": 15213294075,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-passage-walking",
+          "sha256": "ec218a712839facea0ca2da1e3caf4a10d277b9e75547237a78ff95c2755ba3f"
+        },
+        {
+          "id": 15213703279,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-population-preparation",
+          "sha256": "c3d5835d784cf8e05870661b9dfea2f43e1841cbf5b0c30bbb7c36377e4f632d"
+        },
+        {
+          "id": 15213817564,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-profile-preparation",
+          "sha256": "4b03a8a695aea2648e1df1c5ed6a06e0fd95b60487af8d810551eb33b9f2bab4"
+        },
+        {
+          "id": 15213958860,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-public-panel",
+          "sha256": "93778930edb9c0d5715d1c4b38a062f3369ec19be2235746b0153fb2c8c6955c"
+        },
+        {
+          "id": 15213543742,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-queue-receipts",
+          "sha256": "ab0704750db5e11729401d39da7ab0bdc18586a207361408aa2526a8efad69ff"
+        },
+        {
+          "id": 15214298372,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-support-selection",
+          "sha256": "a60e52986210ec3c062c99153e56e5370ac65e0bca8e7265ef368c160c152a71"
+        },
+        {
+          "id": 15214756455,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-surface-routes",
+          "sha256": "c37fed54201c7c45c605a674f3f04b00355a2e1bfa059cef3d471ca2821a8fa4"
+        },
+        {
+          "id": 15213569149,
+          "name": "sic-continuity-18f3ab611cfe41fc48094f8e6ea718296cd7c92f-workshop-phase",
+          "sha256": "8f7917b19cae8c910c9ea5de75479c78039917417929243f1dfae214d101741d"
+        }
+      ]
+    }
+  },
+  "strictGames": [
+    {
+      "code": "CGWL",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 167,
+      "commandsByLevel": [
+        15,
+        16,
+        15,
+        18,
+        61,
+        42
+      ]
+    },
+    {
+      "code": "DC22",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 630,
+      "commandsByLevel": [
+        22,
+        44,
+        45,
+        76,
+        185,
+        258
+      ]
+    },
+    {
+      "code": "ETAG",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 274,
+      "commandsByLevel": [
+        7,
+        35,
+        40,
+        46,
+        66,
+        80
+      ]
+    },
+    {
+      "code": "GRAV",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 80,
+      "commandsByLevel": [
+        11,
+        32,
+        6,
+        8,
+        13,
+        10
+      ]
+    },
+    {
+      "code": "LF52",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 10,
+      "levels": 10,
+      "actions": 713,
+      "commandsByLevel": [
+        8,
+        40,
+        46,
+        54,
+        99,
+        91,
+        148,
+        68,
+        112,
+        47
+      ]
+    },
+    {
+      "code": "SK48",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 8,
+      "levels": 8,
+      "actions": 348,
+      "commandsByLevel": [
+        19,
+        39,
+        33,
+        33,
+        33,
+        69,
+        80,
+        42
+      ]
+    },
+    {
+      "code": "SNAR",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 163,
+      "commandsByLevel": [
+        16,
+        24,
+        23,
+        36,
+        35,
+        29
+      ]
+    },
+    {
+      "code": "SPOR",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 121,
+      "commandsByLevel": [
+        14,
+        14,
+        17,
+        17,
+        29,
+        30
+      ]
+    },
+    {
+      "code": "WEAV",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 199,
+      "commandsByLevel": [
+        27,
+        28,
+        24,
+        40,
+        40,
+        40
+      ]
+    }
+  ],
+  "continuityReceived": {
+    "cohorts": 25,
+    "games": 26,
+    "levels": 168
+  },
+  "files": [
+    {
+      "path": "strict/manifest.json",
+      "rawSha256": "35bc7820b81cd29aef162bfb362facd15a2701fd51ac2a22f72c70760ba1bfb8",
+      "rawBytes": 1126
+    },
+    {
+      "path": "strict/source.sha",
+      "rawSha256": "158650b6e11e8a90ad1da04815e8623386c8afb510845e00c65bc83c02d41861",
+      "rawBytes": 41
+    },
+    {
+      "path": "strict/strict.jsonl.gz",
+      "rawSha256": "9383fdb6c016c955c4c77e3fd17ddf34e69425909001e87757363ed482122602",
+      "rawBytes": 460602
+    },
+    {
+      "path": "strict/strict.jsonl.levels.gz",
+      "rawSha256": "e4829dcde6ffc96244a701e9d8fbe2b010a1934bfeb4a55ca8163893ed14e30b",
+      "rawBytes": 39114
+    },
+    {
+      "path": "continuity/actor-composition.jsonl.gz",
+      "rawSha256": "e7fac0100bfedfe367aa8ea43bf2575244e221580db6db5b1720244d40db1135",
+      "rawBytes": 680767
+    },
+    {
+      "path": "continuity/actor-composition.manifest.json",
+      "rawSha256": "3ede97a430cfc62ec49b98a0155fd2d87e6d8aaba66f26dabb2bba107957d029",
+      "rawBytes": 398
+    },
+    {
+      "path": "continuity/cargo-transport.jsonl.gz",
+      "rawSha256": "09ac086228b3b1588605e3a11207df7476ca819d65b07f75f7e56988eddee840",
+      "rawBytes": 325785
+    },
+    {
+      "path": "continuity/cargo-transport.manifest.json",
+      "rawSha256": "97786c654fbac547e1ad383d2700c7d4b9f6c6d68e2610eea4d6e0e390355fb0",
+      "rawBytes": 401
+    },
+    {
+      "path": "continuity/carrier-preparation.jsonl.gz",
+      "rawSha256": "0d113dd3b6f261eee1041d8e01539a7ce4cd40fdf5002035dfb836012c3c2701",
+      "rawBytes": 2131323
+    },
+    {
+      "path": "continuity/carrier-preparation.manifest.json",
+      "rawSha256": "6fae0f38540e812fffafb34c47c4bb4a7c078ac87c66b43b4ffec1b076828bc0",
+      "rawBytes": 410
+    },
+    {
+      "path": "continuity/crossing-rows.jsonl.gz",
+      "rawSha256": "e017b68a3bee1d189f9035eb0410568af83e2c7fbe1f9da739ca825e5e4ea028",
+      "rawBytes": 1049103
+    },
+    {
+      "path": "continuity/crossing-rows.manifest.json",
+      "rawSha256": "aae2ec8eabad1baed112c3f21d559ec992490cec1bd727e821c7f95005ad5a9f",
+      "rawBytes": 396
+    },
+    {
+      "path": "continuity/destination-set.jsonl.gz",
+      "rawSha256": "a2492f354d9d098c6e7240cd3a9e77485b09c3c8ad7ee4ed92a9f136d7d00ffc",
+      "rawBytes": 944090
+    },
+    {
+      "path": "continuity/destination-set.manifest.json",
+      "rawSha256": "713949890c08a18826abc93b16c0e884934119fe63aaa3d11c08ba954aa6f5d6",
+      "rawBytes": 394
+    },
+    {
+      "path": "continuity/grid-navigation.jsonl.gz",
+      "rawSha256": "c2bb1a1d475eb472e70a215e7d28db0f4cdd217f52d736b57467d14ccfc15561",
+      "rawBytes": 235616
+    },
+    {
+      "path": "continuity/grid-navigation.manifest.json",
+      "rawSha256": "862cd41ee62ee88a7b8f234f27df802a3fa846ae96a0ed485b334792e1d50285",
+      "rawBytes": 400
+    },
+    {
+      "path": "continuity/guarded-passengers.jsonl.gz",
+      "rawSha256": "d298372eba949e6b3e17b59e8a031a0c0eedd65fe6ba1efa28cab4d2f96b5512",
+      "rawBytes": 394822
+    },
+    {
+      "path": "continuity/guarded-passengers.manifest.json",
+      "rawSha256": "e0e9c32e6f9874adbf0fe3c061e58e2a407e607eb7cc7d39042ed24c4bace810",
+      "rawBytes": 406
+    },
+    {
+      "path": "continuity/l-axe-violet.jsonl.gz",
+      "rawSha256": "e76869658f4fa44a4d90e8b1e3c49a3737823990fc9875fcb11eee8824da4fb4",
+      "rawBytes": 284435
+    },
+    {
+      "path": "continuity/l-axe-violet.manifest.json",
+      "rawSha256": "ab2770ccf599edb571ac560f654c8a1d98948f1ac4929a3a43712c06d319355d",
+      "rawBytes": 388
+    },
+    {
+      "path": "continuity/la-force-rouge.jsonl.gz",
+      "rawSha256": "bde39489bc0d2f9c3abadb8188d83523f101599477aa6f023c7a4254a1b2058a",
+      "rawBytes": 329245
+    },
+    {
+      "path": "continuity/la-force-rouge.manifest.json",
+      "rawSha256": "40b13bc133d308cd47d025bf473fb1177b4a989ae0ddf143425897809ee7b586",
+      "rawBytes": 392
+    },
+    {
+      "path": "continuity/la-ruse-verte.jsonl.gz",
+      "rawSha256": "cb6588a577d2f32b00ec822edea7014c0fb825051d46c6db207505947f6ca300",
+      "rawBytes": 296915
+    },
+    {
+      "path": "continuity/la-ruse-verte.manifest.json",
+      "rawSha256": "cc3069b6d4235c2267a50a106cb64ce425595f97f342ae8555ecf8a85bd96bdd",
+      "rawBytes": 390
+    },
+    {
+      "path": "continuity/local-carry.jsonl.gz",
+      "rawSha256": "1df1b8a9d8d1ac729e7829718c721adc18ff11984e1672f45591ad96ed3450f6",
+      "rawBytes": 236034
+    },
+    {
+      "path": "continuity/local-carry.manifest.json",
+      "rawSha256": "e194e788a40dd5e01e11ddcd1d68298f7d5988af602e5589de6e06bec7d8628b",
+      "rawBytes": 386
+    },
+    {
+      "path": "continuity/marked-field.jsonl.gz",
+      "rawSha256": "72fc479041965844f2b5b6f1d9cb805f133cc1026e3c10dbadc21e1eaafb0f48",
+      "rawBytes": 197559
+    },
+    {
+      "path": "continuity/marked-field.manifest.json",
+      "rawSha256": "16b5421e28756809f232887ac06b604badd30afe3681c3007fab7992dfa2ab2b",
+      "rawBytes": 394
+    },
+    {
+      "path": "continuity/matching-edges.jsonl.gz",
+      "rawSha256": "d07002db11ae6effc577014c8cd7ea6639cb594f060fb5db913c04430e058773",
+      "rawBytes": 681087
+    },
+    {
+      "path": "continuity/matching-edges.manifest.json",
+      "rawSha256": "f0be355b081feb76ded6ea66d1e869b000fcb69ad9e13bcb8661d2b444303df4",
+      "rawBytes": 398
+    },
+    {
+      "path": "continuity/mirror-isles.jsonl.gz",
+      "rawSha256": "375ac8e6854449ece5338dae01793ab9487a3db5fef2abf711794a90a2e91ef0",
+      "rawBytes": 339007
+    },
+    {
+      "path": "continuity/mirror-isles.manifest.json",
+      "rawSha256": "7abaae908f4a4761338595fb7b4c5e31a0adb28f538310a9c521a6c62d0d4ca6",
+      "rawBytes": 388
+    },
+    {
+      "path": "continuity/native-sources.jsonl.gz",
+      "rawSha256": "678bc2fe40f3e842ab9a06fe526ad4ce7baa846f64408fae84f1bdd8cff3f7b3",
+      "rawBytes": 18303
+    },
+    {
+      "path": "continuity/native-sources.manifest.json",
+      "rawSha256": "189d601da0fcd9f938c2a9cb47614ab697144a2c026670a0f9dba9cc10c6e950",
+      "rawBytes": 416
+    },
+    {
+      "path": "continuity/observed-openings.jsonl.gz",
+      "rawSha256": "f4e63f47ce9912b061e2fe3abbbbe2668f577fbf88e60e3ad47e98204066311a",
+      "rawBytes": 403636
+    },
+    {
+      "path": "continuity/observed-openings.manifest.json",
+      "rawSha256": "06a853477e2489d15e45027856611d01f222a33e09f768f17a72135b073b71f5",
+      "rawBytes": 404
+    },
+    {
+      "path": "continuity/oriented-delivery.jsonl.gz",
+      "rawSha256": "a3c94b07fdf50c7a749464d456cc55fd9e2258dc165d39167ccdc40f82bc9c8f",
+      "rawBytes": 383608
+    },
+    {
+      "path": "continuity/oriented-delivery.manifest.json",
+      "rawSha256": "1dd76865fe0bdd95ee96190a6b2a1ad2be127fe2f5c8245d4b8015ddbfd73bff",
+      "rawBytes": 405
+    },
+    {
+      "path": "continuity/passage-walking.jsonl.gz",
+      "rawSha256": "7b2644ee8a1470cee3165f9242d1a6922d53870ede048503a95517c3a094b07e",
+      "rawBytes": 247605
+    },
+    {
+      "path": "continuity/passage-walking.manifest.json",
+      "rawSha256": "31a729c81c68f258f9b20a693b1cb3c16ca3d14f87b83b09d043cd3cec6de5ec",
+      "rawBytes": 400
+    },
+    {
+      "path": "continuity/population-preparation.jsonl.gz",
+      "rawSha256": "d9709a765846a0fcf075a6a4d39b3f82c7641a322e33869a2cf5c488bbffaf0d",
+      "rawBytes": 591850
+    },
+    {
+      "path": "continuity/population-preparation.manifest.json",
+      "rawSha256": "6a62955f9877849c297fea74edb41ccbfebe2b1570dd366e7016e6efb73f4e2d",
+      "rawBytes": 414
+    },
+    {
+      "path": "continuity/profile-preparation.jsonl.gz",
+      "rawSha256": "64c98a190211f290d4916bccd347cdd80e8d09f5e1690715213813ad46437863",
+      "rawBytes": 99547
+    },
+    {
+      "path": "continuity/profile-preparation.manifest.json",
+      "rawSha256": "7a7efc5f0eaf720aae6033032575fb0d0840c8778d6dfda8f0b5f91ff1e9b3dc",
+      "rawBytes": 408
+    },
+    {
+      "path": "continuity/public-panel.jsonl.gz",
+      "rawSha256": "eee4a5d0f2cb039a40b75e94c4b721f7dece85ec894e90f305d117db719c6546",
+      "rawBytes": 5478153
+    },
+    {
+      "path": "continuity/public-panel.manifest.json",
+      "rawSha256": "e10bde063333939ce5e95d2b29b7877151937e43e960fe41685c778d73872263",
+      "rawBytes": 395
+    },
+    {
+      "path": "continuity/queue-receipts.jsonl.gz",
+      "rawSha256": "af7ddee29ebab184a525220f20ca2289c195cd06b1e9af9a7d0c3f0574bd4aba",
+      "rawBytes": 144818
+    },
+    {
+      "path": "continuity/queue-receipts.manifest.json",
+      "rawSha256": "b8c4a670fb603582a67aacc3299136aad6c45555ef506c317dd324a769cef9e3",
+      "rawBytes": 398
+    },
+    {
+      "path": "continuity/support-selection.jsonl.gz",
+      "rawSha256": "cc078664f43cfb313b71af1c16435c3abd9c5becf531f7f5903f5910c4c19d3f",
+      "rawBytes": 759807
+    },
+    {
+      "path": "continuity/support-selection.manifest.json",
+      "rawSha256": "29370aea8cc6dd567050566dbfe9e3fd2aa653fc7c276b7f530b14726e6099d6",
+      "rawBytes": 404
+    },
+    {
+      "path": "continuity/surface-routes.jsonl.gz",
+      "rawSha256": "58e1217b3ae85dc1fadbf3681a8ca0c61ea59d9b4894b3acddd24f92220f0423",
+      "rawBytes": 6897306
+    },
+    {
+      "path": "continuity/surface-routes.manifest.json",
+      "rawSha256": "951c4ecff0ca041f54368f4c431aa82fe12cdce3a24f27b051ae178460bbf1ec",
+      "rawBytes": 398
+    },
+    {
+      "path": "continuity/workshop-phase.jsonl.gz",
+      "rawSha256": "021c8d7bfc3b52929df57a305e9523bc70117fceab8907ead121777d2acad781",
+      "rawBytes": 392803
+    },
+    {
+      "path": "continuity/workshop-phase.manifest.json",
+      "rawSha256": "40621d5f6efb9ff387fa8e07bcd4d64b84b6be29d6a1da328388707f85a15e1f",
+      "rawBytes": 399
+    }
+  ]
+}
