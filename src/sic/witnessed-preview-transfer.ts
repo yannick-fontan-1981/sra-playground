@@ -146,7 +146,6 @@ function gesture(command: string, p: Body, r: Body): Gesture | null {
 }
 const keyOf = (p: string, r: string, g: Gesture) => JSON.stringify([p, r, g.op, g.point ?? null]);
 const contextKey = (k: string, from: XY, to: XY) => JSON.stringify([k, from, to]);
-const commandContext = (o: NativeObservation, command: string) => JSON.stringify([o.level_epoch, o.frame_hash, command]);
 
 // A small enclosing part can distinguish a selected source from the same
 // unselected shape. Retain its observed role, never its absolute position.
@@ -162,6 +161,21 @@ function localInterface(layout: VisualLayout, body: Body): string[] {
 function compatibleInterface(witness: PreviewWitness, subject: string[], indicator: string[]) {
   return !witness.interface || witness.interface.subject.every(role => subject.includes(role))
     && witness.interface.indicator.every(role => indicator.includes(role));
+}
+
+// A stationary return can reject another binding of the same identified
+// interface. A visual coincidence without that interface only rejects its own
+// subject/indicator association; it does not establish that the input is inert.
+function commandContext(o: NativeObservation, command: string, layout: VisualLayout,
+  actor: string, indicator: string, from: XY, indicated: XY, witness: PreviewWitness): string | null {
+  const boundary = witness.interface;
+  if (!boundary || !boundary.subject.length && !boundary.indicator.length) return null;
+  const subjects = (layout[actor] ?? []).filter(body => same(body.at, from));
+  const indicators = (layout[indicator] ?? []).filter(body => same(body.at, indicated));
+  if (subjects.length !== 1 || indicators.length !== 1
+    || !compatibleInterface(witness, localInterface(layout, subjects[0]!), localInterface(layout, indicators[0]!))) return null;
+  return JSON.stringify([o.level_epoch, o.frame_hash, command,
+    boundary.subject.map(role => [role, from]), boundary.indicator.map(role => [role, indicated])]);
 }
 function rememberVisibleGeometry(learned: PreviewLearning, o: NativeObservation, layout: VisualLayout) {
   for (const b of Object.values(learned.bindings)) {
@@ -369,7 +383,8 @@ function visibleReadings(
         : b.gesture.op;
       if (!available.has(command) && !(b.gesture.point && o.available_action_refs.includes('ACTION6')))
         continue;
-      if (learned.refutedCommands?.[commandContext(o, command)]) continue;
+      const refused = commandContext(o, command, layout, b.actor, b.indicator, subject.at, mark.at, prior);
+      if (refused && learned.refutedCommands?.[refused]) continue;
       if (learned.seen[contextKey(key, subject.at, mark.at)] !== undefined) continue;
       const novel = b.witnesses.every((w) => w.epoch !== o.level_epoch || !same(w.indicated, mark.at));
       const v = JSON.stringify([command, diff(mark.at, subject.at)]);
@@ -512,9 +527,11 @@ export function checkWitnessedPreview(
   if (status !== 'inapplicable') {
     learned.seen[contextKey(x.key, x.from, x.indicated)] = a.revision;
     if (status === 'contradicted') learned.rejected[x.key] = (learned.rejected[x.key] ?? 0) + 1;
-    if (status === 'contradicted' && b.frame_hash === a.frame_hash) {
+    const refused = status === 'contradicted' && b.frame_hash === a.frame_hash
+      ? commandContext(b, command, before, x.actor, x.indicator, x.from, x.indicated, x.witness) : null;
+    if (refused) {
       const rejected = learned.refutedCommands ??= {};
-      rejected[commandContext(b, command)] = { before: b.observation_ref, after: a.observation_ref };
+      rejected[refused] = { before: b.observation_ref, after: a.observation_ref };
       const keys = Object.keys(rejected);
       if (keys.length > 128) delete rejected[keys[0]!];
     }
