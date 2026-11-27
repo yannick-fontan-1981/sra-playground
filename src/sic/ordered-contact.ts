@@ -13,6 +13,8 @@ import { situationChoiceWorkflow } from './situation-choice-workflow.ts';
 import { measureFixedGuides, planOrderedLattice } from './contact-lattice.ts';
 import { measureReceivingGuides, type ReceivingGuideLayout } from './receiving-guide-scene.ts';
 import { maximumCommittedActions } from './plan-step.ts';
+import { observeSupportSelection, supportSelectionAt, type ObservedSupportSelection } from './observed-support-selection.ts';
+import { observedPressureRecoveryGroup } from './public-input-exploration.ts';
 import { measureStockedPiercing, planStockedPiercing, stockedPiercingGeometry, stockedPiercingMoves, stockedPlacementKey,
   type RefusedPiercingStep } from './stocked-piercing.ts';
 import { crossedPiercingKey, crossedRailStepSupported, observeCrossedStockBoundary, planCrossedPiercing, predictCrossedPiercing,
@@ -27,14 +29,14 @@ type Projection = ReturnType<typeof physicalRootedLine>;
 type Configuration = Parameters<typeof projectedRootedLine>[0];
 type CrossedScene = NonNullable<ReturnType<typeof readCrossedPiercing>>;
 type CrossedMemory = { layout: CrossedPiercingLayout; active: number | null; pending: CrossedPiercingStep[]; refusals: CrossedPiercingRefusal[];
-  refs: string[]; pose: string };
+  refs: string[]; pose: string; selections?: ObservedSupportSelection[] };
 type Memory = { epoch: number; tried: string[]; effects: Record<string, EvidenceRow>;
   counterexample: readonly string[]; retained: Configuration | null; refused: boolean; guideRefused?: boolean; receiverLayout?: ReceivingGuideLayout;
   transferableContact: readonly string[]; stockRefusals?: RefusedPiercingStep[]; crossed?: CrossedMemory };
 type Plan = { command: NativeCommand; prediction: Projection | null; distance: number | null; configuration: Configuration | null };
 type ContactProposal = NativeProposal & { route: Plan[]; layout: unknown; strategy: ContactPhase; needId: string;
   receiverLayout?: ReceivingGuideLayout; adoptedEffect?: EvidenceRow; stocked?: true;
-  crossed?: { scene: CrossedScene; active: number | null; path: CrossedPiercingStep[] } };
+  crossed?: { scene: CrossedScene; active: number | null; path: CrossedPiercingStep[]; markings?: (string[] | null)[] } };
 const empty: Memory = { epoch: 0, tried: [], effects: {}, counterexample: [], retained: null, refused: false, transferableContact: [] };
 const objective = 'G_official_completion';
 const maximumReceivingGuidePlacements = 20_000;
@@ -99,9 +101,11 @@ function crossedOutcome(crossed: NonNullable<ContactProposal['crossed']>, rows: 
   const { scene, path } = crossed;
   const next = readCrossedPiercing(rows, scene.layout.stride, scene.layout);
   const expected = path[index];
-  const focusChanged = next?.tints.every((ink, i) => ink !== scene.tints[i]) ?? false;
+  const beforeMarkings = index > 0 ? crossed.markings?.[index - 1] ?? scene.tints : scene.tints;
+  const expectedMarkings = crossed.markings?.[index];
+  const focusChanged = next?.tints.every((ink, i) => ink !== beforeMarkings[i]) ?? false;
   const matched = !expected ? null : !!next && crossedPiercingKey(next.pose) === crossedPiercingKey(expected.pose)
-    && (expected.select ? focusChanged : equal(next.tints, scene.tints));
+    && (expected.select ? expectedMarkings ? equal(next.tints, expectedMarkings) : focusChanged : equal(next.tints, beforeMarkings));
   const railsChanged = !!next && !sameCrossedRails(scene.layout, next.layout);
   const nextLegSupported = !!next && crossedRailStepSupported(next.layout, next.pose, path[index + 1]);
   return { next, matched, focusChanged, railsChanged, nextLegSupported };
@@ -140,8 +144,9 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
       mode: execution?.reasoningMode ?? 'exploration' };
     const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
     if (decision?.result !== phase) return null;
+    const selections = local?.pose === pose && local.refs.at(-1) === ref ? local.selections ?? [] : [];
     const proof: [string, ...string[]] = [ref, ...new Set([...effects.flatMap(effect => effect.evidence_refs as string[]),
-      ...(local?.refs ?? [])].filter(item => item !== ref))];
+      ...(local?.refs ?? []), ...selections.flatMap(effect => effect.refs)].filter(item => item !== ref))];
     const shouldStop = () => !!execution?.signal?.aborted || (execution?.now ?? performance.now.bind(performance))() >= (execution?.deadlineMs ?? Infinity);
     const path = active === null ? [] : local?.pose === pose && local.pending.length
       && crossedRailStepSupported(scene.layout, scene.pose, local.pending[0]) ? local.pending
@@ -151,13 +156,24 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
       && scene.pose.heads.some((_head, i) => predictCrossedPiercing(scene.layout, scene.pose, i, vector))) : null;
     const first = path[0];
     if (shouldStop() || !first && !probe) return null;
-    const switchAt = path.findIndex(step => step.select);
-    const legs = path.slice(0, switchAt === 0 ? 1 : Math.min(maximumCommittedActions, remaining, switchAt < 0 ? path.length : switchAt));
+    const legs: CrossedPiercingStep[] = [], markings: (string[] | null)[] = [];
+    let expectedActive = active, expectedMarkings = scene.tints;
+    for (const step of path.slice(0, Math.min(maximumCommittedActions, remaining))) {
+      const selected = step.select && expectedActive !== null
+        ? supportSelectionAt(selections, expectedActive, step.active, step.action, step.select, expectedMarkings, rows, ref) : null;
+      if (step.select && !selected) {
+        // A first selection remains a single, sealed experiment.
+        if (!legs.length) { legs.push(step); markings.push(null); }
+        break;
+      }
+      if (selected) expectedMarkings = selected.after;
+      legs.push(step); markings.push([...expectedMarkings]); expectedActive = step.active;
+    }
     const actions = probe ? [available.get(probe.action)!] : legs.map(step => step.select
       ? { action_ref: step.action, data: { x: step.select[0], y: step.select[1] } } : available.get(step.action)!);
-    const locus = first?.select && await ObservedInputDomain.makeLocusWitness(observation, rows, first.select,
-      { reason: 'Select the support paired with this reference', evidence: proof });
-    if (first?.select && !locus || actions.some(action => !action)) return null;
+    const loci = await Promise.all(legs.map(step => step.select ? ObservedInputDomain.makeLocusWitness(observation, rows, step.select,
+      { reason: 'Select the support paired with this reference', evidence: proof }) : undefined));
+    if (actions.some(action => !action)) return null;
     const goal = { kind: active === null ? 'measure_control_effect' : 'achieve_observed_reference_order',
       scope: ref.split(':revision:', 1)[0]!, subjects: scene.layout.shafts.map(shaft => shaft.select.join(',')),
       parentObjective: objective, satisfactionContract: active === null ? 'observe_displacement_in_public_return' : 'observe_game_advance_after_alignment' };
@@ -169,8 +185,8 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
     const box = ([x,y]: NativePoint) => [x, y, x + stride - 1, y + stride - 1];
     return { status: 'proposed', kind: family, strategy: phase, layout: null, needId: need.id, actions,
       route: actions.map(command => ({ command, prediction: null, configuration: null, distance: path.length || null })),
-      crossed: { scene, active, path }, steps: actions.map((action, i) => ({ action, expected_after: legs[i]?.pose ?? null,
-        ...(locus ? { point_binding: locus } : {}) })),
+      crossed: { scene, active, path, markings }, steps: actions.map((action, i) => ({ action, expected_after: legs[i]?.pose ?? null,
+        ...(loci[i] ? { point_binding: loci[i] } : {}) })),
       binding: { observation_ref: ref, level_epoch: observation.level_epoch },
       sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
         instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: { ...facts, phase } },
@@ -188,6 +204,20 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
     id: family,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseContactResponse, {}, await contactChoiceModule());
+    },
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group !== observedPressureRecoveryGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      if (remaining < 1 || !policy) return null;
+      const local = memory.crossed;
+      if (learns || memory.epoch !== observation.level_epoch || !local?.pending.length || local.active === null
+        || local.refs.at(-1) !== observation.observation_ref || !local.selections?.length) return null;
+      const scene = readCrossedPiercing(rows, local.layout.stride, local.layout);
+      if (!scene || crossedPiercingKey(scene.pose) !== local.pose
+        || !local.selections.some(effect => effect.to === local.active && equal(effect.after, scene.tints))) return null;
+      const proposal = await offerCrossed(observation, rows, inputs, remaining, memory, execution);
+      // An unknown selector remains an ordinary experiment; only an acquired
+      // current role with an unspent route precedes unrelated preparations.
+      return proposal?.crossed?.path.length && proposal.crossed.markings?.[0] ? proposal : null;
     },
     async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || !policy) return null;
@@ -335,7 +365,8 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
         const current = readCrossedPiercing(packet.frame_rows, scene.layout.stride, scene.layout);
         const admitted = proposal.binding?.level_epoch === observation.level_epoch && !!current
           && crossedRailStepSupported(current.layout, current.pose, path[index])
-          && equal(current.tints, scene.tints) && crossedPiercingKey(current.pose) === crossedPiercingKey(path[index - 1]!.pose);
+          && equal(current.tints, proposal.crossed.markings?.[index - 1] ?? scene.tints)
+          && crossedPiercingKey(current.pose) === crossedPiercingKey(path[index - 1]!.pose);
         return { admitted, reason: admitted ? 'crossed_supports_bound' : 'crossed_supports_changed' };
       }
       const scene = index > 0 ? contactGeometry(packet.frame_rows, proposal.receiverLayout, proposal.stocked) : null;
@@ -375,20 +406,29 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
           return { events: [] };
         }
         const leg = path[index], previousPose = path[index - 1]?.pose ?? scene.pose;
+        const previousActive = path[index - 1]?.active ?? active;
+        const previousMarkings = index > 0 ? proposal.crossed.markings?.[index - 1] ?? scene.tints : scene.tints;
         const changed = next.pose.heads.flatMap(({ line, reach }, i) =>
           line !== previousPose.heads[i]!.line || reach !== previousPose.heads[i]!.reach ? [i] : []);
-        const chosen = active === null ? changed.length === 1 ? changed[0]! : null
-          : leg?.select && focusChanged ? leg.active : active;
-        const boundary = matched === false && active !== null && leg && !leg.select && equal(next.tints, scene.tints)
-          ? observeCrossedStockBoundary(scene.layout, previousPose, leg.pose, next.pose, active) : null;
+        const chosen = previousActive === null ? changed.length === 1 ? changed[0]! : null
+          : leg?.select ? matched && focusChanged ? leg.active : null : previousActive;
+        const boundary = matched === false && previousActive !== null && leg && !leg.select && equal(next.tints, previousMarkings)
+          ? observeCrossedStockBoundary(scene.layout, previousPose, leg.pose, next.pose, previousActive) : null;
         const refusals = previous.crossed?.refusals ?? [];
         const refs = [...(previous.crossed?.refs ?? []).slice(-4), before.observation_ref, after.observation_ref];
+        const priorSelections = previous.crossed?.selections ?? [];
+        const selections = leg?.select && previousActive !== null ? observeSupportSelection(priorSelections,
+          { from: previousActive, to: leg.active, action: command.action_ref, point: leg.select,
+            ink: oldRows[leg.select[1]]![leg.select[0]]!, before: [...previousMarkings], after: [...next.tints],
+            refs: [before.observation_ref, after.observation_ref] },
+          crossedPiercingKey(previousPose) === crossedPiercingKey(next.pose)
+            && oldRows[leg.select[1]]?.[leg.select[0]] === newRows[leg.select[1]]?.[leg.select[0]], matched === true) : priorSelections;
         memory = { ...previous, tried: active === null ? [...previous.tried, command.action_ref] : previous.tried,
           crossed: { layout: boundary ? { ...next.layout, innerStockOnly: true } : next.layout, active: chosen,
-            pending: matched && nextLegSupported ? path.slice(index + 1) : [], refs,
+            pending: matched && nextLegSupported ? path.slice(index + 1) : [], refs, selections,
             pose: crossedPiercingKey(next.pose),
-            refusals: active !== null && matched === false && !boundary ? [...refusals.slice(-23),
-              { placement: crossedPiercingKey(previousPose), active, action: command.action_ref }] : refusals } };
+            refusals: previousActive !== null && matched === false && !boundary ? [...refusals.slice(-23),
+              { placement: crossedPiercingKey(previousPose), active: previousActive, action: command.action_ref }] : refusals } };
         return { events: [], ...(active === null && chosen !== null ? { reviewEvidence: 'Only one of the supports responded to the direction.' }
           : boundary ? { reviewEvidence: 'The support withdrew but the cubes stayed inside the rails. The next plan respects that limit.' }
           : railsChanged ? { reviewEvidence: 'The visible rail connections changed. The next move is checked against the new connections.' }

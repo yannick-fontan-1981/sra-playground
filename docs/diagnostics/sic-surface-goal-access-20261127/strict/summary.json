@@ -1,0 +1,62 @@
+{
+  "sourceCommit": "e531143b7d39502e8b06a9de92d65cbe93b780fc",
+  "durableEquivalent": "0b6bdaad0db6cb55e4ed520a7bca5ea4670f833d",
+  "sourceTree": "92c6923459f285c77ab2ed096873472cf8b66d79",
+  "sourceUnchanged": true,
+  "levels": 6,
+  "commands": 274,
+  "commandsByLevel": [
+    7,
+    35,
+    40,
+    46,
+    66,
+    80
+  ],
+  "budgets": [
+    {
+      "actions": 80,
+      "activeTimeMs": 90000,
+      "source": "no_level_reference"
+    },
+    {
+      "actions": 80,
+      "activeTimeMs": 90000,
+      "source": "no_level_reference"
+    },
+    {
+      "actions": 80,
+      "activeTimeMs": 90000,
+      "source": "no_level_reference"
+    },
+    {
+      "actions": 80,
+      "activeTimeMs": 90000,
+      "source": "no_level_reference"
+    },
+    {
+      "actions": 80,
+      "activeTimeMs": 90000,
+      "source": "no_level_reference"
+    },
+    {
+      "actions": 80,
+      "activeTimeMs": 90000,
+      "source": "no_level_reference"
+    }
+  ],
+  "recoveries": {
+    "reset": 0,
+    "undo": 0
+  },
+  "authority": 274,
+  "trace": "07b73e6e24a00c5f06ad367675c145e59bac9681d2e1911becb12e7dfb537baa",
+  "activeMsByLevel": [
+    2775,
+    5451,
+    9305,
+    10882,
+    16189,
+    23202
+  ]
+}

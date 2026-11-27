@@ -1,0 +1,29 @@
+{
+  "schema": "sic.physical-campaign.v1",
+  "source": "531e03d666a8e4cf18c5802cde50d12a2008da4d",
+  "githubSource": "5e9940b50dd704bc2a62fae6a167cf895038a798",
+  "tree": "afcda36a2ff2c5ec7040fc32a42d29998ee0b739",
+  "startedAt": "2026-11-27T14:32:45.964330+00:00",
+  "command": [
+    "node",
+    "scripts/compare-source100.mjs",
+    ".",
+    ".",
+    "/workspace/scratch/8b7740e8a750/sk48-continuity-531e03d6-r3.jsonl",
+    "source:SK48",
+    "1",
+    "8",
+    "96"
+  ],
+  "env": {
+    "SIC_STUDY_CONTINUITY": "1",
+    "SIC_STUDY_WORKERS": "1",
+    "SIC_STUDY_SOLVER": "sic",
+    "SIC_STUDY_PROGRESS": "1"
+  },
+  "qualification": "Passive physical evidence; separate original-budget strict source dd683bd3 remains authoritative for timing.",
+  "endedAt": "2026-11-27T14:34:27.075379+00:00",
+  "exitCode": 0,
+  "sourceUnchanged": true,
+  "rawSha256": "e5ad869c656a71c1da6212e43c1501c3917babda5ee822c56fb978ce1fd317e4"
+}

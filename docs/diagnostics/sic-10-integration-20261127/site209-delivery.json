@@ -1,0 +1,141 @@
+{
+  "schema": "sic.first-batch-delivery.v1",
+  "pullRequest": 141,
+  "main": "052d82dec4e92f4eef5fa90ab0c2a7fd3a5125da",
+  "tree": "a15057faf6964fd0095e7feb4b140368957a418e",
+  "checkedHead": "c0d730c7f8f13611960bed16b3a89083e9f9a0c9",
+  "strictRunId": 46013962237,
+  "continuityRunId": 46013961863,
+  "checks": [
+    {
+      "name": "Executed series and final reconciliation",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140564889953"
+    },
+    {
+      "name": "Continuity / guarded-passengers",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556236116"
+    },
+    {
+      "name": "Continuity / native-sources",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556236113"
+    },
+    {
+      "name": "Continuity / matching-edges",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556235993"
+    },
+    {
+      "name": "Continuity / crossing-rows",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556235981"
+    },
+    {
+      "name": "Continuity / public-panel",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556235980"
+    },
+    {
+      "name": "Continuity / workshop-phase",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556235922"
+    },
+    {
+      "name": "Continuity / passage-walking",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556235840"
+    },
+    {
+      "name": "Original budgets on the combined source",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013962237/job/140556233630"
+    },
+    {
+      "name": "Continuity / queue-receipts",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556233373"
+    },
+    {
+      "name": "Continuity / l-axe-violet",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556233354"
+    },
+    {
+      "name": "Continuity / actor-composition",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556233344"
+    },
+    {
+      "name": "Continuity / oriented-delivery",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556233331"
+    },
+    {
+      "name": "Continuity / population-preparation",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556233274"
+    },
+    {
+      "name": "Continuity / cargo-transport",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556233269"
+    },
+    {
+      "name": "Continuity / destination-set",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556233263"
+    },
+    {
+      "name": "Continuity / local-carry",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556233238"
+    },
+    {
+      "name": "Continuity / mirror-isles",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556233224"
+    },
+    {
+      "name": "Continuity / profile-preparation",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556233220"
+    },
+    {
+      "name": "Continuity / la-ruse-verte",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556233212"
+    },
+    {
+      "name": "Continuity / observed-openings",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556233180"
+    },
+    {
+      "name": "Continuity / marked-field",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556233144"
+    },
+    {
+      "name": "Continuity / la-force-rouge",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556232824"
+    },
+    {
+      "name": "TypeScript and continuity contracts",
+      "conclusion": "success",
+      "details_url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46013961863/job/140556232331"
+    }
+  ],
+  "site": {
+    "version": 209,
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_308252f6e57081918192b6e6e16170f2",
+    "deploymentId": "appgprj_6adbc388d79081918581b93b919d7258~appgdep_a34fc5f533f8819195aa262efa874689",
+    "status": "succeeded",
+    "source": "052d82dec4e92f4eef5fa90ab0c2a7fd3a5125da",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site"
+  },
+  "viewer": "In progress; not yet a delivered viewer receipt"
+}

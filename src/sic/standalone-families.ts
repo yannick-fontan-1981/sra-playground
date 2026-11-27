@@ -118,7 +118,7 @@ import { learnCorrespondenceId, learnRepeatedCellsId } from './learn-corresponde
 import { learnMaterialAssemblyId, materialAssemblyId } from './material-assembly.ts';
 
 export const standalonePlanningGroups = [
-  { id: observedPressureRecoveryGroup, families: [observedActorCompositionId, publicInputExplorationId, verifyOrderedFeedbackId, receptionAccessId, observedRouteInterventionId, markedCompartmentFlowId] },
+  { id: observedPressureRecoveryGroup, families: [observedActorCompositionId, publicInputExplorationId, verifyOrderedFeedbackId, receptionAccessId, observedRouteInterventionId, observedCarrierReductionId, markedCompartmentFlowId, verifyContactOrderId] },
   { id: observedMechanicsGroup, families: [markedCollectionId, visibleConfigurationCoverageId, markedCompartmentFlowId, animationContactId,
     observedRelayRouteId, observedPrefixQuotasId, observedCarrierReductionId, observedLinePlacementId, observedPolePairId, verifyPreviewPlacementId, learnTransportAccessId,
     learnTurnPostsId, learnDirectionalReceptionId, verifyOrderedFeedbackId,
