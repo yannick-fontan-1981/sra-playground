@@ -16,6 +16,8 @@ Sous tout système avec Node ≥ 22.18, la commande équivalente est `node exper
 
 [Tableau attendu et obtenu](RESULTATS.md) · [Cas et témoins](cas.mjs) · [Arbitrage](agenda.mjs) · [Assertions](experiences.mjs)
 
+Le premier essai croisé réutilise ce cœur avec la fiche publique du cadran et l’opérateur du lot Transfert. Les deux mondes ont rendu `succès` en quatre actions. [Parcours, preuves, adaptation et commande de rejeu](transfert/README.md)
+
 ## Du parcours de SIC à la commande
 
 | Étape sur le SHA figé | Fonctionnement observé |
