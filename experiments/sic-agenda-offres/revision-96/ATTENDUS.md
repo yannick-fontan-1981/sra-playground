@@ -1,0 +1,15 @@
+# SK48 · Ligne 96 · Conditions fixées avant qualification
+
+Gel de référence vérifié `d0e7527ca8033bd805a6d7a8bb021eff62e87021`. Le témoin de la campagne ciblée est SK48, niveau 1 depuis son ouverture, récupération de contact active, priorité native du pack. Au geste 1, le calibrage du support appartient à la ligne 64. Au geste 12, une prédiction physique du premier accès diverge. Le premier geste attribuable à 96 est le 13, `ACTION3`, dans `public_occurrence_recall / revise_rooted_contact / observed_composition_services / rooted_line`. [Inventaire](../../../docs/architecture/sic-v8-strategies-observees.md?plain=1#L129)
+
+| Épreuve | Première différence attendue |
+|---|---|
+| Retour contraire de la campagne | Le préfixe commun mesure ses commandes et fait ses prédictions avant d'agir. Au geste 12, la position du support et la pointe prévues peuvent être bonnes alors qu'au moins deux pièces contiguës ont subi une translation de cellule entière. Comparer pièce par pièce. L'ancien modèle perd son autorité sur ce préfixe. |
+| Hypothèse révisée | Les références avant/après, la scène et les contrôles mesurés justifient une recherche conditionnelle. La proposition 13 prédit l'état physique de sa première commande. Comparer toute la projection au retour du jeu et suivre le même besoin jusqu'au progrès du geste 19. |
+| Projection alternative indépendante de l'attendu | À preuves identiques, donner priorité au repositionnement. Le préfixe de douze commandes reste commun. La première commande de récupération attendue devient `ACTION1` avec une autre projection. Laisser le même moteur autoriser, exécuter et contrôler ce geste. |
+| Seconde situation | Présenter le jeu avec une permutation bijective de deux couleurs de pièces sur chaque observation publique, y compris les images intermédiaires et la référence visible. Qualifier à nouveau la contradiction, les sujets, le besoin et le retour. Le jeu exécute ses propres commandes. Indiquer si ce contrôle réutilise la même géométrie. |
+| Preuve sans rapport | Une observation avec la même commande ou la même translation du support ne suffit pas. Construire au niveau du fournisseur un retour qui contredit la projection sans satisfaire le déplacement des pièces liant toute la chaîne. Garder la réfutation mais aucune permission de révision. Éprouver aussi une paire de références d'une autre portée. |
+| Aucune alternative accessible | Garder le témoin physique et restreindre la profondeur à un geste. Les deux méthodes doivent rendre la main sans commande. En shadow, le besoin peut rester ouvert sans traverser les planificateurs. |
+| Attribution | Le code du gel contient déjà l'admission du besoin, deux stratégies configurables et la garde d'une seule projection jusqu'au retour. Si la substitution et les deux réemplois passent par ces entrées natives, livrer les témoins sur branche de qualification. Toute lacune est relevée avant de changer une décision du moteur. |
+
+Les observations du jeu et les résultats du modèle sont lus dans l'ordre temporel. La fixture accepte les paramètres publics du contexte, du pack et des contrôles. Les reçus attendus sont séparés du programme opérateur.
