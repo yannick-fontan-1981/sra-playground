@@ -28,3 +28,7 @@ La qualification doit rejouer SNAR depuis L1 sur un seul worker, en mode SIC, sa
 Le rejeu GitHub **46024779478** a vérifié le candidat `817cd8c7b620097b802c3affca60afa55d0f7b2f` et l'arbre `59f0ffee56ca3c4ac2ddb9249aa95554e0a52151` sur Ubuntu24 et Node24. Les cinq premiers parcours conservent leurs commandes et empreintes. Le niveau 6 atteint **28 commandes et 17 000 ms**, pour un total de 162 commandes et un résultat **5/6**.
 
 Le dossier `ci-817cd8c7-46024779478/` contient le manifeste, l'échec brut, le journal, les reçus par niveau et les empreintes. Le reçu d'échec du watchdog ne renseigne pas le champ `mode`, ce qui déclenche la première assertion du contrôle après l'écriture de `result.json`. Le motif opérationnel reste `level_wall_time_budget`. Le mode SIC et le worker unique sont fixés dans la commande archivée.
+
+## Deuxième candidat
+
+La sérialisation canonique de lignes entières déjà validées réutilise un rendu décimal direct et conserve le décompte de tous les nœuds. L'encodage des fragments évite les entrées de cache pour les enveloppes scalaires courtes. Pour 16 000 lignes inédites de 64 valeurs, quatre comparaisons locales alternant l'ordre des versions ont produit **115/78/93/79 ms** avec l'ancien encodeur et **61/57/67/65 ms** avec le nouveau. L'empreinte du texte encodé est identique dans les huit mesures, `aa2ad316acbfae68c7294f6d8fad6b05d4a5d4529453b90ba61725df34678039`. Ce cas synthétique mesure la sérialisation de lignes seule.

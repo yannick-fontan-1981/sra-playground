@@ -249,6 +249,18 @@ export function appendImmutableJsonArray<T extends JsonValue>(base: readonly T[]
   return result;
 }
 
+/** Direct decimal rendering for dense owned arrays in the portable number domain. */
+export function denseIntegerText(values: readonly unknown[]): string | null {
+  if (values.length < 32) return null;
+  const fields = new Array<string>(values.length);
+  for (let index = 0; index < fields.length; index++) {
+    const value = values[index];
+    if (!Number.isSafeInteger(value) || Object.is(value, -0)) return null;
+    fields[index] = String(value);
+  }
+  return fields.join(',');
+}
+
 /** Python json.dumps(ensure_ascii=False, sort_keys=True, separators=(',', ':')) on the portable domain. */
 export function canonical(value: unknown): string {
   const ancestors = new WeakSet<object>();
@@ -289,7 +301,15 @@ export function canonical(value: unknown): string {
       // Ingress already validated shape, keys and strings and owns every
       // descendant. Numbers still need the narrower portable-number check.
       if (Array.isArray(item)) {
-        encoded = `[${item.map(child).join(',')}]`;
+        const fields = denseIntegerText(item);
+        if (fields !== null) {
+          // A flat integer row has no nested or escaped values. Count every
+          // member against the same budget before joining its canonical text.
+          nodes += item.length;
+          if (nodes > MAX_JSON_NODES || depth === MAX_DEPTH) throw new TypeError('JSON size/nesting limit exceeded');
+          height = 1;
+          encoded = `[${fields}]`;
+        } else encoded = `[${item.map(child).join(',')}]`;
       } else {
         const record = item as JsonObject;
         const keys = Object.keys(record);

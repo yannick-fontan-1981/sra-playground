@@ -80,6 +80,17 @@ test('cached immutable subtrees retain their actual nesting depth', () => {
   assert.doesNotThrow(() => canonical({ small: immutableJson([1, 2]) }));
 });
 
+test('dense canonical integer rows retain exact bytes and the same nesting limit', () => {
+  const numbers = Array.from({ length: 64 }, (_, index) => Number.MIN_SAFE_INTEGER + index);
+  const row = immutableJson(numbers);
+  assert.equal(canonical(row), JSON.stringify(numbers));
+  assert.equal(canonical(row), canonical(numbers));
+  let nested: unknown = row;
+  for (let depth = 0; depth < 127; depth++) nested = immutableJson([nested]);
+  assert.doesNotThrow(() => canonical(nested));
+  assert.throws(() => canonical(immutableJson([nested])), /size\/nesting/);
+});
+
 test('cached scalars and tree encodings preserve Python Unicode code-point order', () => {
   const names = ['10', '2', '0', '', '__proto__', 'a', 'z', 'é', '漢', '\ue000', '\u{10000}', '\u{1f600}', 'a\u{10000}', 'a\ue000'];
   const expected = [...names].sort((a, b) => {
