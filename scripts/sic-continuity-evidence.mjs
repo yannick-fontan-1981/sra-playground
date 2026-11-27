@@ -48,3 +48,48 @@ export function orientedContinuityEvidence(before, after) {
     faceBefore: before?.face ?? null, faceAfter: after?.face ?? null,
     faceValueBefore: before?.faceValue ?? null, faceValueAfter: after?.faceValue ?? null };
 }
+
+const queueOwners = new Set(['sic_queued_placement', 'sic_place_after_observed_queue_controls']);
+const queueRoles = new Set(['translate', 'reorder', 'receive']);
+const nonnegativeInteger = value => Number.isSafeInteger(value) && value >= 0 ? value : null;
+const references = value => Array.isArray(value) && value.every(ref => typeof ref === 'string' && ref.length > 0) ? [...value] : [];
+
+// Copy the learned role before dispatch. Later acquisition must not rewrite
+// which relation, evidence or public score authorized this particular ticket.
+export function captureQueuedControl(proposal, ticket) {
+  try {
+    if (!queueOwners.has(proposal?.kind) || !ticket
+      || proposal.actions?.[ticket.actionIndex]?.action_ref !== ticket.actionRef) return null;
+    const model = proposal.model, control = model?.controls?.[ticket.actionRef];
+    return { actionRef: ticket.actionRef, role: queueRoles.has(control?.kind) ? control.kind : null,
+      levelEpoch: nonnegativeInteger(proposal.binding?.level_epoch),
+      acquisitionEpoch: nonnegativeInteger(control?.acquisition_epoch),
+      beforeRef: typeof ticket.observationRef === 'string' ? ticket.observationRef : null,
+      learnedEvidence: references(control?.evidence), scoreBefore: nonnegativeInteger(ticket.levelsCompleted) };
+  } catch {
+    return null;
+  }
+}
+
+// The owner state is sampled only after service.advance has reconciled the
+// actual prefix. Stale or absent revalidation remains visible, never inferred.
+export function completeQueuedControl(capture, readOwnerState, continuityReturn, levelsCompleted) {
+  if (!capture) return null;
+  try {
+    const ownerState = continuityReturn?.sealCount === 1
+      ? typeof readOwnerState === 'function' ? readOwnerState() : readOwnerState : null;
+    const control = ownerState?.controls?.[capture.actionRef];
+    const returned = continuityReturn?.outcome;
+    return { ...capture,
+      afterRef: typeof returned?.observation_ref === 'string' ? returned.observation_ref : null,
+      scoreAfter: nonnegativeInteger(levelsCompleted),
+      acquisition: ownerState && control ? {
+        epoch: nonnegativeInteger(ownerState.epoch), kind: queueRoles.has(control.kind) ? control.kind : null,
+        revalidatedEpoch: nonnegativeInteger(control.revalidated_epoch),
+        transition: typeof ownerState.last_transition === 'string' ? ownerState.last_transition : null,
+        evidence: references(control.evidence),
+      } : null };
+  } catch {
+    return null;
+  }
+}

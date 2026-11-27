@@ -3,7 +3,8 @@ import {publicLesson} from './sic-study-public-lesson.mjs';
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { sourceInterface } from './sic-study-source-interface.mjs';
 import { fromSourceFork } from './sic-study-source-fork.mjs';
-import { bindContinuityPlan, collectContinuityReturn, observeOrientedContinuity, orientedContinuityEvidence } from './sic-continuity-evidence.mjs';
+import { bindContinuityPlan, collectContinuityReturn, observeOrientedContinuity, orientedContinuityEvidence,
+  captureQueuedControl, completeQueuedControl } from './sic-continuity-evidence.mjs';
 import { appendFile, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -115,8 +116,12 @@ async function run(code, games) {
         };
   const cursorAudit = process.env.SIC_STUDY_CURSOR_OFFERS ? [] : null;
   const boundaryAudit = process.env.SIC_STUDY_BOUNDARY_LAWS ? [] : null;
+  let continuityOwners;
   const service = new V6AgentService(async(recovery) => {
     const backend=await createNativeV6Runtime(declarations,{recovery});
+    if (process.env.SIC_STUDY_CONTINUITY === '1') continuityOwners = new Map(backend.families
+      .filter(family => ['sic_queued_placement', 'sic_place_after_observed_queue_controls'].includes(family.id))
+      .map(family => [family.id, family]));
     if (cursorAudit || boundaryAudit) {
       const family = backend.families.find(f => f.id === 'sic_test_prepared_effects');
       const original = family.proposeInGroup.bind(family);
@@ -142,18 +147,23 @@ async function run(code, games) {
   });
   // Count only commands acknowledged by the native service after dispatch.
   const executedTickets = process.env.SIC_STUDY_CONTINUITY === '1' ? [] : null;
-  let pendingTicket, pendingPlan, dispatchedActorPlan, dispatchedOriented;
+  let pendingTicket, pendingPlan, dispatchedActorPlan, dispatchedOriented, dispatchedQueued;
   const transport = { async request(operation) {
     const result = await service.handle(operation);
     if (executedTickets) {
       if (operation.type === 'advance') {
         if (!pendingTicket || operation.ticketId !== pendingTicket.id) throw Error('Continuity ticket mismatch');
         const {level,decisionRevision,actionIndex,actionRef} = pendingTicket;
+        const returned = collectContinuityReturn(pendingTicket, pendingPlan, result.snapshot.trace);
+        const queued = dispatchedQueued !== undefined ? completeQueuedControl(dispatchedQueued,
+          () => continuityOwners?.get(pendingPlan?.family)?.state()?.state ?? null, returned, result.snapshot.levelsCompleted) : undefined;
         executedTickets.push({level,decisionRevision,actionIndex,action:actionRef,...(actionRef==='ACTION6'?{data:pendingTicket.data}:{}),resets,
-          ...collectContinuityReturn(pendingTicket, pendingPlan, result.snapshot.trace),
-          ...(dispatchedActorPlan?{actorPlan:dispatchedActorPlan}:{}), ...(dispatchedOriented!==undefined?{oriented:dispatchedOriented}:{})});
+          ...returned,
+          ...(dispatchedActorPlan?{actorPlan:dispatchedActorPlan}:{}), ...(dispatchedOriented!==undefined?{oriented:dispatchedOriented}:{}),
+          ...(queued !== undefined ? {queued} : {})});
         dispatchedActorPlan = undefined;
         dispatchedOriented = undefined;
+        dispatchedQueued = undefined;
       }
       pendingTicket = result.ticket;
       pendingPlan = bindContinuityPlan(pendingTicket, result.snapshot.trace, pendingPlan);
@@ -248,6 +258,8 @@ async function run(code, games) {
       const orientedProposal = executedTickets && ['sic_oriented_delivery','sic_verify_oriented_delivery','sic_learn_oriented_delivery'].includes(pendingPlan?.family)
         ? agent.snapshot.proposal : null;
       const ownBefore = orientedProposal ? observeOrientedContinuity(previous.frame, orientedProposal, orientedScene) : null;
+      if (executedTickets && continuityOwners?.has(pendingPlan?.family))
+        dispatchedQueued = captureQueuedControl(agent.snapshot.proposal, pendingTicket);
       if (executedTickets && plan?.family==='sic_observed_actor_composition') dispatchedActorPlan={strategy:plan.strategy,subjects:plan.need?.subjects??[],evidence:plan.need?.evidence??[]};
       const frameSeal=plan?.frameForecast?hash(plan.frameForecast):null;
       const terminalContactSeal=plan?.terminalContactForecast?hash(plan.terminalContactForecast):null;
