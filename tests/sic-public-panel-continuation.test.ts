@@ -6,7 +6,7 @@ import type { NativeCommand, NativeFamily, NativePoint } from '../src/logos-engi
 import type { GameObservation } from '../src/runtime/browser-games.ts';
 import { toV6PublicObservation, type V6Ticket } from '../src/runtime/v6-agent-protocol.ts';
 import { V6AgentService } from '../src/runtime/v6-agent-service.ts';
-import { createSicPublicInputExploration, observedPressureRecoveryGroup } from '../src/sic/public-input-exploration.ts';
+import { createSicPublicInputExploration, continueObservedPanelGroup, observedPressureRecoveryGroup } from '../src/sic/public-input-exploration.ts';
 import { learnPatternAccessId } from '../src/sic/framed-contact.ts';
 import { preparedEffectsId } from '../src/sic/test-prepared-effects.ts';
 import { planningGroupsWithExperiments } from '../src/sic/experiment-selection-groups.ts';
@@ -98,8 +98,8 @@ function witnessSource(actions: NativeCommand[]) {
   return { family, get complete() { return calls === actions.length; } };
 }
 
-async function acquiredPanel(varied = false, uncertain?: Uncertain) {
-  const room = panelRoom(varied, uncertain), learner = witnessSource(room.training), family = createSicPublicInputExploration(true);
+async function acquiredPanel(varied = false, uncertain?: Uncertain, knownMechanism = false) {
+  const room = panelRoom(varied, uncertain), learner = witnessSource(knownMechanism ? [...room.training, room.training[2]!] : room.training), family = createSicPublicInputExploration(true);
   const calls: { group: string; proposed: boolean }[] = [];
   const propose = family.proposeInGroup!.bind(family);
   family.proposeInGroup = async (group, ...args) => {
@@ -109,7 +109,9 @@ async function acquiredPanel(varied = false, uncertain?: Uncertain) {
   };
   const fallback: NativeFamily = {
     id: preparedEffectsId,
-    proposeInSubquestion(_group, _entry, ...args) { return this.propose(...args); },
+    proposeInSubquestion(group, _entry, ...args) {
+      return group === observedPressureRecoveryGroup ? null : this.propose(...args);
+    },
     propose(observation) {
       if (!learner.complete) return null;
       const action = { action_ref: 'ACTION2', data: {} };
@@ -121,7 +123,7 @@ async function acquiredPanel(varied = false, uncertain?: Uncertain) {
     record: () => ({ events: [] }), state: () => ({}), restore() {},
   };
   const families = [family, learner.family, fallback];
-  const groups = planningGroupsWithExperiments(standalonePlanningGroups).map(group => {
+  const groups = planningGroupsWithExperiments(standalonePlanningGroups, false, false).map(group => {
     const entries = group.families.flatMap((id, index) => families.some(item => item.id === id)
       ? [{ id, entry: group.entryPoints?.[index] ?? null }] : []);
     return { ...group, families: entries.map(item => item.id), entryPoints: entries.map(item => item.entry) };
@@ -159,7 +161,7 @@ for (const varied of [false, true]) test('native panel interaction reuses foreig
   const run = await acquiredPanel(varied);
   try {
     assert.equal(run.result.snapshot.proposal?.kind, run.family.id);
-    assert.equal(run.calls.at(-1)?.group, observedPressureRecoveryGroup);
+    assert.equal(run.calls.at(-1)?.group, continueObservedPanelGroup);
     assert.ok(run.result.snapshot.proposal?.panelApproach);
     const proof = structuredClone(run.family.state());
     const controls = proof.panelWalker as { controls: Record<string, { evidence: string }> };
@@ -190,7 +192,7 @@ function sessionScope(ref: string) { return ref.split(':epoch:')[0]! + ':epoch:'
 for (const uncertain of ['missing_actor', 'ambiguous_actor', 'missing_control'] as const) test('native acquired panel priority refuses ' + uncertain, async () => {
   const run = await acquiredPanel(false, uncertain);
   try {
-    assert.ok(run.calls.some(call => call.group === observedPressureRecoveryGroup && !call.proposed));
+    assert.ok(run.calls.some(call => call.group === continueObservedPanelGroup && !call.proposed));
     assert.equal(run.result.snapshot.proposal?.kind, preparedEffectsId);
     assert.ok(run.family.state().panelWalker, 'Previously measured directions remain documented');
   } finally { run.runtime.close('test_complete'); }
@@ -223,10 +225,12 @@ test('a foreign, future or previous-epoch panel proof cannot establish current p
       const state = structuredClone(learned) as any;
       for (const control of Object.values(state.panelWalker.controls) as any[]) control.evidence = proof;
       run.family.restore(state);
-      assert.equal(await run.family.proposeInGroup!(observedPressureRecoveryGroup, observation, rows, inputs, 30), null);
+      assert.equal(await run.family.proposeInGroup!(continueObservedPanelGroup, observation, rows, inputs, 30), null);
     }
     run.family.restore(learned);
-    assert.ok(await run.family.proposeInGroup!(observedPressureRecoveryGroup, observation, rows, inputs, 30));
+    assert.ok(await run.family.proposeInGroup!(continueObservedPanelGroup, observation, rows, inputs, 30));
+    assert.equal(await run.family.proposeInSubquestion!('place_incoming_groups', 'unknown-entry', observation, rows, inputs, 30), null);
+    assert.ok(await run.family.proposeInSubquestion!('place_incoming_groups', continueObservedPanelGroup, observation, rows, inputs, 30));
   } finally { run.runtime.close('test_complete'); }
 });
 
@@ -252,6 +256,24 @@ test('an unmeasured direction at a landing remains an ordinary experiment withou
     assert.equal((ordinary.sicSrcDecision as any).situation.stage, 'calibrate_at_landing');
     assert.equal(learned.panelWalker.controls[ordinary.actions[0]!.action_ref], undefined);
     assert.equal(ordinary.panelContinuation, undefined);
-    assert.equal(await run.family.proposeInGroup!(observedPressureRecoveryGroup, observation, rows, inputs, 1), null);
+    assert.equal(await run.family.proposeInGroup!(continueObservedPanelGroup, observation, rows, inputs, 1), null);
+  } finally { run.runtime.close('test_complete'); }
+});
+
+
+test('an already bound mechanism retains priority over a competing panel approach in the native group order', async () => {
+  const run = await acquiredPanel(false, undefined, true);
+  try {
+    assert.ok(run.family.state().panelWalker, 'The public panel controls have already been acquired');
+    assert.ok((run.family.state().panelEffects as unknown[]).length, 'A public panel effect has been measured');
+    assert.equal(run.result.snapshot.proposal?.kind, learnPatternAccessId,
+      'The current bound mechanism is consulted before the alternative public-panel approach');
+    assert.equal(run.result.ticket?.actionRef, 'ACTION6');
+    await run.advance();
+    assert.equal(run.issued.length, 4, 'The competing mechanism contact was actually executed');
+    assert.equal(run.outcomes.at(-1)?.matched, true);
+    assert.equal(run.seals.at(-1)?.acquired_actions, 1);
+    assert.equal(run.result.snapshot.proposal?.kind, run.family.id,
+      'The acquired panel interaction becomes available when the earlier mechanism has no next step');
   } finally { run.runtime.close('test_complete'); }
 });

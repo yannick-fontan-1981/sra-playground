@@ -19,3 +19,12 @@ Deux scénarios natifs indépendants changent les formes des contrôles, les pig
 Les fichiers comprimés et leurs sommes figurent dans le manifeste. Les scripts de capture sont des instruments de diagnostic hors production ; aucun code de jeu, numéro de niveau, pigment absolu, coordonnée fixe ou parcours de référence ne décide du comportement de production. Le rejeu strict, le contrôle complet de continuité, la fusion et le viewer restent à effectuer à ce checkpoint.
 
 La capture de frontière conserve toutes les commandes, tous les plans et tous les rasters publics avant/après. Les instantanés dérivés répétés des familles et des entités géométriques sont omis de cette projection ; le manifeste conserve l’empreinte du brut original et la première grille fautive est aussi archivée avec son état complet.
+
+
+## Contre-exemple de priorité sur le premier candidat complet
+
+Le candidat local `ca1d84e4` / distant `403a8ffa` termine seulement **4/6** : au L5 il atteint 215 commandes sur 215, sous le plafond de temps inchangé. Les quatre premiers préfixes sont identiques au bilan de départ. Les 363 premières commandes suivent le même parcours ; à la commande globale **364** (L5, geste 177), l'approche de panneau choisit `ACTION1` à la place du clic de support distant déjà lié. Ce déplacement ne modifie pas le terrain, puis le rôle de support perd sa continuité. Le contre-exemple complet et la scène publique antérieure sont archivés dans `specialist-priority-counterexample/`.
+
+La continuation de panneau reçoit donc une entrée dédiée **après les mécanismes spécialisés et avant les essais indépendants**, au bout du dernier groupe existant. Elle n'est plus dans la priorité de pression. Le nombre de groupes du moteur reste inchangé ; l'adaptateur refuse toute autre clé de sous-question. Le garde et les preuves du panneau restent ceux du premier candidat.
+
+Un nouveau test natif met en concurrence une interaction de panneau acquise et un mécanisme déjà lié : son contact est réellement exécuté et acquis avant de rendre la main à l'approche du panneau. Les fixtures utilisent désormais explicitement l'ordre du pack SIC complet. Les **54 tests** incluant le runtime complet passent ; après fermeture de l'adaptateur, les **31 tests ciblés** et TypeScript passent. Le second passage chronologique complet reste à exécuter ; cette correction de priorité n'est pas encore qualifiée comme victoire.
