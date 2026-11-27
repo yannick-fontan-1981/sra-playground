@@ -7,6 +7,12 @@ export type DirectionalMotion = { readonly command: string; readonly family: str
   readonly levelEpoch: number; readonly translations: readonly ComponentTranslation[] };
 export type ComponentTranslation = { readonly from: NativeBox; readonly to: NativeBox; readonly displacement: NativePoint; readonly area: number; readonly color: number };
 
+export function singleStepDisplacement(from: NativePoint, to: NativePoint, stepSize: number): NativePoint | null {
+  const dx = to[0] - from[0], dy = to[1] - from[1];
+  const onOneAxis = (dx !== 0) !== (dy !== 0);
+  return onOneAxis && Math.abs(dx) + Math.abs(dy) === stepSize ? [dx, dy] : null;
+}
+
 /** Parts nested in the footprint can express the same motion. Conflicting
  * translations inside the footprint leave the command effect unresolved. */
 export function motionIntoFootprint(receipt: DirectionalMotion, [left, top, right, bottom]: NativeBox): NativePoint | null {

@@ -12,6 +12,16 @@ type Fact = 'currentObservation' | 'objectiveDependsOnEffect' | 'subjectBound' |
   | 'commandAvailable' | 'alreadyTried' | 'accessCanBeSought';
 type Facts = Readonly<Partial<Record<Fact, StrategyFact>>>;
 
+export interface ControlTrialContext {
+  readonly observationRef: string;
+  readonly availableActions: readonly string[];
+  readonly objectiveSupported: boolean;
+  readonly subjectBound: boolean;
+  readonly effectKnown: boolean;
+  readonly triedInContext: boolean;
+  readonly evidence: readonly string[];
+}
+
 export const controlEffectNextGraph = compileStrategyGraph({
   id: 'next-primitive-for-control-effect',
   version: 1,
@@ -52,3 +62,16 @@ export function chooseControlEffectPrimitive<Plan>(facts: Facts, offers: Partial
 }
 
 function unavailable(): null { return null; }
+
+/** Qualify the family's prepared offer. The caller owns the subject, trial history and execution. */
+export function qualifyControlTrial<Offer>(offer: Offer, action: string, offeredAt: unknown, context: ControlTrialContext) {
+  const current = offeredAt === context.observationRef && context.evidence.includes(context.observationRef);
+  const evidence: [string, ...string[]] = [context.observationRef, ...context.evidence.filter(ref => ref !== context.observationRef)];
+  const fact = (value: boolean): StrategyFact => current ? { value, evidence } : { value: 'unknown' };
+  const assessment = chooseControlEffectPrimitive({
+    currentObservation: fact(true), objectiveDependsOnEffect: fact(context.objectiveSupported), subjectBound: fact(context.subjectBound),
+    commandAvailable: fact(context.availableActions.includes(action)), effectKnown: fact(context.effectKnown),
+    alreadyTried: fact(context.triedInContext),
+  }, { P05: () => offer });
+  return assessment.entries.find(entry => entry.id === 'P05')!;
+}
