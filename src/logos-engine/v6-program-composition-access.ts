@@ -193,6 +193,14 @@ export function respondentProgramQuestion(observation: R, rows: NativeRows, mode
       purpose: why, preconditions: facts, evidence, outcome_guard: { path: ['value'], contains: ref } } };
 }
 
+/** Independent producers used at the point their family has prepared an edit,
+ * an executable program plan, or a respondent experiment. */
+export const defaultProgramOffers = Object.freeze({
+  editCollection: markedCollectionQuestion,
+  composeProgram: packageObservedProgram,
+  probeRespondents: respondentProgramQuestion,
+});
+
 /** Source search clocks are seconds; only the common native wrapper converts ms. */
 function searchOptions(config: R, maxPrefix: number, layout?: R): ProgramSearchOptions {
   const now: () => number = config.now ?? (() => performance.now() / 1000);
@@ -202,7 +210,8 @@ function searchOptions(config: R, maxPrefix: number, layout?: R): ProgramSearchO
 }
 
 /** ProgramCompositionAccess.program_question, before respondent specialization. */
-export function programCompositionQuestion(memory: Memory, observation: R, rows: NativeRows, maxPrefix: number, config: R): R | null {
+export function programCompositionQuestion(memory: Memory, observation: R, rows: NativeRows, maxPrefix: number, config: R,
+  offers = defaultProgramOffers): R | null {
   if (!memory.compositionModels.length || memory.compositionRefutedEpochs.has(observation.level_epoch)) return null;
   const model = memory.compositionModels.at(-1)!, continuation = memory.compositionContinuation;
   if (truth(continuation) && continuation!.epoch === observation.level_epoch && continuation!.frame_digest === identity(rows)) {
@@ -210,7 +219,7 @@ export function programCompositionQuestion(memory: Memory, observation: R, rows:
     const turn = continuation!.turns[0], plan = { ...continuation, model, mode: 'execute', turns: continuation!.turns,
       frame_digest: identity(rows), observation_ref: observation.observation_ref, score: observation.levels_completed,
       steps: [{ mode: 'execute', before_word: continuation!.word, after_word: continuation!.word, action: { action_ref: model.command_ref }, turn }] };
-    return packageObservedProgram(observation, plan, 'Continue the previously composed program after its entire expected public projection was matched; no new path search.');
+    return offers.composeProgram(observation, plan, 'Continue the previously composed program after its entire expected public projection was matched; no new path search.');
   }
   const layout = questionProgramEditor(rows, model, observation, config);
   if (!layout) return null;
@@ -228,14 +237,14 @@ export function programCompositionQuestion(memory: Memory, observation: R, rows:
     const plan = { model, mode: 'bind_single_member', epoch: observation.level_epoch, score: observation.levels_completed,
       frame_digest: identity(rows), observation_ref: observation.observation_ref, layout,
       steps: [{ mode: 'insert', before_word: [], after_word: [label], action }], word: [label], turns: [], own_base: null, targets: [] };
-    return packageObservedProgram(observation, plan, 'Insert one phase-observed label to bind the currently empty collection to its visible bearer, before constructing a word. No execution is included in this binding probe.');
+    return offers.composeProgram(observation, plan, 'Insert one phase-observed label to bind the currently empty collection to its visible bearer, before constructing a word. No execution is included in this binding probe.');
   }
   const objects = programWorld(rows, model), owners = objects.filter(object => equal(object.word, existing));
   if (owners.length !== 1) return null;
   const owner = owners[0]!, targets = objects.filter(object => object !== owner);
   if (!targets.length) return null;
   if (targets.some(object => (object.word as number[]).some(label => label !== model.interaction.label))) {
-    const proposal = respondentProgramQuestion(observation, rows, model, layout, owner);
+    const proposal = offers.probeRespondents(observation, rows, model, layout, owner);
     return proposal && proposal.actions.length <= maxPrefix ? proposal : null;
   }
   const field = programSurface(rows, model, objects, owner.base);
@@ -254,11 +263,12 @@ export function programCompositionQuestion(memory: Memory, observation: R, rows:
   const plan = { model, mode: 'construct_and_execute', epoch: observation.level_epoch, score: observation.levels_completed,
     frame_digest: identity(rows), observation_ref: observation.observation_ref, layout, steps, word: current, turns: selected.prediction.turns,
     own_base: owner.base, targets, target_counts: targets.map(target => target.word.length), field, search_nodes: found.nodes, search_scope: found.scope };
-  return packageObservedProgram(observation, plan, 'Construct a prefix-preserving word whose conditional phase model reaches the earlier score-associated reduction. Verify each edit and the complete returned projection; cancel on discrepancy, including a global collection rewrite.');
+  return offers.composeProgram(observation, plan, 'Construct a prefix-preserving word whose conditional phase model reaches the earlier score-associated reduction. Verify each edit and the complete returned projection; cancel on discrepancy, including a global collection rewrite.');
 }
 
 /** Source ProgramRespondentAccess.program_question on the common retained state. */
-export function observedProgramQuestion(memory: Memory, observation: R, rows: NativeRows, maxPrefix: number, config: R): R | null {
+export function observedProgramQuestion(memory: Memory, observation: R, rows: NativeRows, maxPrefix: number, config: R,
+  offers = defaultProgramOffers): R | null {
   const continuation = memory.compositionContinuation;
   if (truth(continuation) && truth(continuation!.respondent_predictions)) {
     if (truth(continuation!.current_program_access) && config.native_current_program_access !== true) return null;
@@ -266,10 +276,10 @@ export function observedProgramQuestion(memory: Memory, observation: R, rows: Na
     const model = memory.compositionModels.at(-1)!;
     const plan = { ...continuation, model, mode: 'execute', observation_ref: observation.observation_ref, score: observation.levels_completed,
       steps: [{ mode: 'execute', before_word: continuation!.word, after_word: continuation!.word, action: { action_ref: model.command_ref } }], turns: [] };
-    return packageObservedProgram(observation, plan, 'Continue the retained composition under the still compatible respondent hypotheses; do not recompute its path after a matched return.');
+    return offers.composeProgram(observation, plan, 'Continue the retained composition under the still compatible respondent hypotheses; do not recompute its path after a matched return.');
   }
   const models = memory.respondentModels.filter(model => model.epoch === observation.level_epoch);
-  if (!models.length || !memory.compositionModels.length) return programCompositionQuestion(memory, observation, rows, maxPrefix, config);
+  if (!models.length || !memory.compositionModels.length) return programCompositionQuestion(memory, observation, rows, maxPrefix, config, offers);
   const model = memory.compositionModels.at(-1)!, learned = models.at(-1)!, layout = questionProgramEditor(rows, model, observation, config);
   if (!layout) return null;
   const word = colors(layout.members), objects = programWorld(rows, model), owners = objects.filter(object => equal(object.word, word));
@@ -318,7 +328,7 @@ export function observedProgramQuestion(memory: Memory, observation: R, rows: Na
   const why = access
     ? 'Recompose toward an appearance-matched input-bearing support, then revalidate the actual controls before any later UI payload. A stationary extension refusal applies only to its exact context; member count is a conservative search hypothesis, not a universal capacity.'
     : 'Compose phase-observed operators with publicly ordered respondents. Keep both word-end reductions and both interaction scopes; require the chosen word to achieve the conditional reduction under all four models. Verify edits and every full return; only official score establishes completion.';
-  return packageObservedProgram(observation, plan, why);
+  return offers.composeProgram(observation, plan, why);
 }
 
 function markedBefore(proposal: R, index: number, rows: NativeRows, meta: R): R {

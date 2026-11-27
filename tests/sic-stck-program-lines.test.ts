@@ -3,6 +3,8 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { gunzipSync } from 'node:zlib';
 import { sourceBackend } from '../scripts/sic-study-source-games.mjs';
+import { defaultProgramOffers } from '../src/logos-engine/v6-program-composition-access.ts';
+import { SharedSeriesConstraint } from '../src/logos-engine/v6-shared-series.ts';
 import { OccurrenceRecallAccess } from '../src/logos-engine/v6-occurrence-recall.ts';
 import { createNativeV6Runtime } from '../src/logos-engine/v6-native-runtime.ts';
 import { V6AgentService } from '../src/runtime/v6-agent-service.ts';
@@ -103,6 +105,12 @@ for (const swapped of [false, true]) {
       }
       if (turn === 10) assert.deepEqual([plan.mode, plan.own_base, outcome.matched, outcome.reason], ['execute', [44, 21], null, 'official_boundary_or_terminal']);
       if (turn === 12) {
+        const observed = { level_epoch: plan.epoch, levels_completed: plan.score, observation_ref: plan.observation_ref,
+          available_action_refs: observation(11).availableActionIds.map(id => 'ACTION' + id) };
+        const board = swapped ? swapOperatorLabels(observation(11)).frame : observation(11).frame;
+        const ask = (layout: Row) => defaultProgramOffers.probeRespondents(observed, board, plan.model, layout, plan.owner_before);
+        assert.equal(ask(plan.layout)?.kind, probe);
+        assert.equal(ask({ ...plan.layout, controls: plan.layout.controls.filter((c: Row) => c.color !== plan.insert_control.color) }), null);
         assert.deepEqual([p.kind, index, plan.prepared_word, plan.expected_final_own_base, plan.candidates[0].object.base, outcome.reason],
           [probe, 0, [11, 9].map(label), [38, 37], [38, 13], 'return_operator_inserted']);
       }
@@ -166,3 +174,37 @@ test('58 retains witnessed movement with an incomplete animation and cannot esta
     [[[11, 8], [0], false], [[11, 9], [], false]]);
   assert.equal(receipt?.evidence.at(-1), outcome.observation_ref);
 });
+
+for (const [turn, kind, provider, alternateFamily, alternateKind, alternateAction, alternateData] of [
+  [1, edit, 'editCollection', 'observed_frontier', 'experiment', 'ACTION5', {}],
+  [4, program, 'composeProgram', 'animated_contact', 'measured_animated_contact', 'ACTION6', { x: 33, y: 24 }],
+  [12, probe, 'probeRespondents', 'containment', 'containment_and_contact', 'ACTION5', {}],
+] as const) {
+  test('STCK releases an independently selected alternative after withdrawing ' + kind, async t => {
+    const run = SharedSeriesConstraint.prototype.programPropose;
+    let removed = 0;
+    t.mock.method(SharedSeriesConstraint.prototype, 'programPropose', function (this: SharedSeriesConstraint,
+      ...[observation, rows, inputs, remaining, deadline, now]: Parameters<typeof run>) {
+      if (observation.revision !== turn) return run.call(this, observation, rows, inputs, remaining, deadline, now);
+      const withdraw = <T extends unknown[]>(name: keyof typeof defaultProgramOffers, original: (...args: T) => Row | null) =>
+        (...args: T) => {
+          const offer = original(...args);
+          if (provider !== name || offer?.kind !== kind) return offer;
+          removed++;
+          return null;
+        };
+      const offers = {
+        editCollection: withdraw('editCollection', defaultProgramOffers.editCollection),
+        composeProgram: withdraw('composeProgram', defaultProgramOffers.composeProgram),
+        probeRespondents: withdraw('probeRespondents', defaultProgramOffers.probeRespondents),
+      };
+      return run.call(this, observation, rows, inputs, remaining, deadline, now, offers);
+    });
+    const game = await start();
+    for (let i = 1; i < turn; i++) { await game.decision(); await game.advance(); }
+    const next = await game.decision();
+    assert.ok(removed > 0);
+    assert.deepEqual([next.kind, next.family, next.proposal?.kind, next.command?.actionRef, next.command?.data],
+      ['action', alternateFamily, alternateKind, alternateAction, alternateData]);
+  });
+}
