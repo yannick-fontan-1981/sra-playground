@@ -19,4 +19,6 @@ Le [strict 46038060497](https://github.com/yannick-fontan-1981/sra-playground/ac
 
 WA30 a exécuté 65 commandes au L9 avant le verdict `level_wall_time_budget` à 51 002 ms pour un plafond de 51 000 ms. Le dernier ticket est horodaté à 49 315 ms. Les huit niveaux précédents conservent les parcours de 26, 59, 76, 48, 113, 48, 42 et 135 commandes. Les dix jobs d’exécution ont produit leurs reçus et l’agrégateur a rejeté la couverture incomplète de WA30. La recomposition locale à partir des dix parties reproduit exactement le verdict et les octets de l’agrégat.
 
-L’[index des reçus](receipt-index.json) associe l’agrégat, les parties et le journal de validation à leurs empreintes SHA-256. La [première validation](../pr144-ed7d394d/README.md) reste archivée sous son propre SHA.
+Le [workflow de continuité 46038060558](https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46038060558) a été annulé après l’arrivée de la tête suivante. Les 19 cohortes disponibles couvrent 132 niveaux. Leurs manifestes et leurs contrats individuels ont été revalidés. Six cohortes ont été annulées et le contrôle final a échoué parce que le périmètre était incomplet.
+
+L’[index des reçus](receipt-index.json) associe l’agrégat, les parties, les cohortes disponibles et les journaux d’échec à leurs empreintes SHA-256. La [première validation](../pr144-ed7d394d/README.md) reste archivée sous son propre SHA.

@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "bbb2ca84eeb97b61db50ba5867fa849501524438",
+  "runId": "46038060558",
+  "name": "passage-walking",
+  "cohort": "source:PORT",
+  "codes": [
+    "PORT"
+  ],
+  "start": 1,
+  "end": 6,
+  "cap": 32,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "passage-walking.jsonl",
+  "sha256": "0a0ce4f108d6263ec314b8e6df7746fc4796b144fa81248d11c06f1c8392f940"
+}
