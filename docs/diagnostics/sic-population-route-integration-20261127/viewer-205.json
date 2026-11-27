@@ -1,0 +1,155 @@
+{
+  "schema": "sic.published-viewer-verification.v1",
+  "source": {
+    "branch": "main",
+    "sha": "d558c9d8ec199a02bae4de4c414a8540039b1c15",
+    "tree": "c7b231d3686dd5f032f86b5b137bb785092a394f",
+    "pullRequest": 137,
+    "workBranch": "fix/sic-27-population-route-integration-20261127",
+    "localHead": "8ec6a8c91979695441e21b06c9595ec4f37e2624",
+    "pushedHead": "0a87f48af56a7d3ad72983b9fa15cfbeb4621cee"
+  },
+  "publication": {
+    "version": 205,
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_393cb924e49881918ef996d55620d167",
+    "deploymentId": "appgprj_6adbc388d79081918581b93b919d7258~appgdep_1091ae8bc038819188870a642088df9f",
+    "status": "succeeded",
+    "source": "d558c9d8ec199a02bae4de4c414a8540039b1c15",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "archive": {
+      "archive_format": "tar",
+      "content_hash": "sha256:4b8326b5bc8cee42ea717055f77f6cdb255a771d52450af901e54e72caedd79e",
+      "size_bytes": 34928640,
+      "file_count": 75
+    },
+    "githubSiteDivergence": false
+  },
+  "ci": {
+    "run": 45939151516,
+    "successfulJobs": 18,
+    "finalJob": 140312247119,
+    "command": "npm run test:sic-continuity -- continuity/*.jsonl",
+    "protectedLevels": 108,
+    "protectedGames": 18,
+    "cohorts": 16
+  },
+  "viewer": {
+    "environment": "local managed preview of the exact published source",
+    "baseUrl": "http://127.0.0.1:4173/",
+    "mode": "SIC",
+    "startLevel": 1,
+    "sessionsPerGame": 1,
+    "controls": "Run to next level",
+    "resets": 0,
+    "intermediateNewSessions": 0,
+    "timedQualification": false,
+    "observedOnUtc": "2026-11-27",
+    "recordedAt": "2026-11-27T04:49:53.160464+00:00",
+    "initialStatus": "Ready to run from level 1.",
+    "initialCommands": 0,
+    "initialSolvedLevels": 0,
+    "initialCompletedPlans": 0
+  },
+  "games": [
+    {
+      "code": "ESCT",
+      "officialMessage": "The game reports WIN.",
+      "levels": 6,
+      "target": 6,
+      "commands": 118,
+      "cumulativeCommands": [
+        16,
+        33,
+        54,
+        76,
+        93,
+        118
+      ],
+      "commandsByLevel": [
+        16,
+        17,
+        21,
+        22,
+        17,
+        25
+      ],
+      "cumulativeCompletedPlans": [
+        15,
+        32,
+        50,
+        72,
+        89,
+        109
+      ],
+      "completedPlans": 109,
+      "observedUrl": "http://127.0.0.1:4173/?game=ESCT&level=6"
+    },
+    {
+      "code": "VOIS",
+      "officialMessage": "The game reports WIN.",
+      "levels": 6,
+      "target": 6,
+      "commands": 196,
+      "cumulativeCommands": [
+        14,
+        32,
+        66,
+        89,
+        125,
+        196
+      ],
+      "commandsByLevel": [
+        14,
+        18,
+        34,
+        23,
+        36,
+        71
+      ],
+      "cumulativeCompletedPlans": [
+        9,
+        21,
+        33,
+        40,
+        50,
+        66
+      ],
+      "completedPlans": 66,
+      "observedUrl": "http://127.0.0.1:4173/?game=VOIS&level=6"
+    },
+    {
+      "code": "PORT",
+      "officialMessage": "The game reports WIN.",
+      "levels": 6,
+      "target": 6,
+      "commands": 116,
+      "cumulativeCommands": [
+        16,
+        34,
+        60,
+        79,
+        98,
+        116
+      ],
+      "commandsByLevel": [
+        16,
+        18,
+        26,
+        19,
+        19,
+        18
+      ],
+      "cumulativeCompletedPlans": [
+        6,
+        12,
+        21,
+        29,
+        38,
+        51
+      ],
+      "completedPlans": 51,
+      "observedUrl": "http://127.0.0.1:4173/?game=PORT&level=6"
+    }
+  ],
+  "qualification": "Official WIN from level 1 in one SIC session per game through visible controls on the exact published source in the local managed viewer. This is not a timed benchmark or a hosted-browser replay. The unchanged-budget native results are archived separately. The final 107-game campaign remains outstanding."
+}

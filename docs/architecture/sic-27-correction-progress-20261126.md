@@ -207,3 +207,20 @@ La source locale `7443033e17f166777a811ea7de05524407ec5330`, sauvegardée sur Gi
 Le score L6 arrive à **16,245 s / 18 s pour ESCT**, **17,816 s / 27 s pour VOIS** et **9,040 s / 12 s pour PORT**. Les collecteurs indépendants mesurent les retours physiques de chaque commande ; leur rapprochement avec le contrôle complet de continuité porte la cible à 108 niveaux protégés. Les bruts sont archivés dans `docs/diagnostics/sic-population-route-integration-20261127/`. La fusion, la publication et les trois parcours du viewer restent à effectuer à ce checkpoint. Le nombre de jeux livrés demeure donc 13 sur 27.
 
 SNAR a progressé à 4/6 dans sa branche isolée, puis s'arrête au niveau 5 sous le plafond de 28 secondes. Ce candidat reste partiel. LS20 a livré une première contradiction de garde au deuxième retour d'une série, tandis que DC22 fait l'objet d'une capture de ses premières compositions de panneau ; aucun nouveau verdict complet n'est annoncé pour ces jeux.
+
+
+### Routes, placements et passages publiés en version 205
+
+PR137 est fusionnée sur `main` au commit **`d558c9d8ec199a02bae4de4c414a8540039b1c15`**, arbre `c7b231d3686dd5f032f86b5b137bb785092a394f`. La branche `fix/sic-27-population-route-integration-20261127` est sauvegardée sur GitHub sous `0a87f48af56a7d3ad72983b9fa15cfbeb4621cee`, de même arbre que le commit local `8ec6a8c91979695441e21b06c9595ec4f37e2624`. Les **18 jobs** de la CI 45939151516 passent, dont `npm run test:sic-continuity -- continuity/*.jsonl` (job 140312247119). Le contrat protège **108 niveaux, 18 jeux et 16 cohortes**, sans modifier les seuils des 90 niveaux précédents.
+
+La version Site **205** porte exactement le SHA intégré ; aucune divergence GitHub/Site. Le viewer local servant cette source publiée reproduit les trois victoires officielles depuis L1, dans une seule session SIC par jeu, par le bouton `Run to next level`, sans reset ni nouvelle session intermédiaire :
+
+| Jeu | Commandes par niveau | Total | Plans terminés |
+|---|---|---:|---:|
+| ESCT | 16, 17, 21, 22, 17, 25 | 118 | 109 |
+| VOIS | 14, 18, 34, 23, 36, 71 | 196 | 66 |
+| PORT | 16, 18, 26, 19, 19, 18 | 116 | 51 |
+
+Les trois interfaces affichent `The game reports WIN.`. L'archive `docs/diagnostics/sic-population-route-integration-20261127/viewer-205.json` conserve les compteurs et la provenance. Ces vérifications visibles ne sont ni des mesures chronométrées ni des rejeux hébergés ; la qualification native des mêmes parcours reste archivée séparément.
+
+**16 des 27 jeux de départ sont corrigés, fusionnés, publiés et confirmés dans le viewer** : UPST, CWSE, CRAF, SB26, CASC, CLRS, MIND, FOGW, TRCP, GRIL, RSWP, LKEY, COLM, ESCT, VOIS et PORT. Les onze jeux encore à terminer sont **CGWL, DC22, ETAG, GRAV, LF52, LS20, SK48, SNAR, SPOR, WA30 et WEAV**. Le nouveau total global sera établi par la campagne complète de 107 jeux sur une seule révision finale.
