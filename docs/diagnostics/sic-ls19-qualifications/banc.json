@@ -1,0 +1,292 @@
+{
+  "game": "LS19",
+  "frozen": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "frozenReceiptSHA256": "66a19e230742b9981d8c995fb4fa14002e8c7c27827ef28f0f538cf2d2b57055",
+  "historicalSource": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+  "contract90": "13ebd79de759b1052e1b261d9c6c3f5b2205d7f9",
+  "candidate90": "975d9d809ba1cb41dd8c63414586cb95498018b1",
+  "contract91": "68efddd2d009ace4f4b898cc82c4bb7941e815ae",
+  "candidate91": "14db9cd82a345752030531e9db37fb7c0ea6df45",
+  "queueUTC": {
+    "line90": "2026-11-27T21:41:36Z",
+    "line91": "2026-11-27T21:50:46Z"
+  },
+  "firstPrefixRunUTC": {
+    "line90": "2026-11-27T21:43:08Z",
+    "line91": "2026-11-27T21:54:32Z"
+  },
+  "strict": {
+    "13ebd79de759b1052e1b261d9c6c3f5b2205d7f9": {
+      "runId": "46072741568",
+      "workflow": "962e9df2593c2b563a1fe75cbd2229734c57de85",
+      "traceSHA256": "7ec30f06246a364b6eb92ff978837053652bbe95868478fcaebdacac0d8c3c48",
+      "receiptSHA256": "d98cf9c0900b059ecb376ab42b3a6ef066dd78742c9dd624f3e4eb46212eba2c",
+      "comparison": {
+        "equal": true,
+        "game": "LS19",
+        "events": 2593,
+        "decisions": 332
+      },
+      "audit": {
+        "category": "complete",
+        "issues": [],
+        "scored": 8,
+        "reconciled": 8,
+        "scoreDeadlineOverruns": [],
+        "recoveries": {
+          "reset": 0,
+          "undo": 0
+        },
+        "reason": "target_levels_completed"
+      },
+      "trajectory": "04353a68c6e193db09d36d861d7dcf6bfe6c6dd8e92cf61b53f8316b84f2ee3c",
+      "actionsPerLevel": [
+        5,
+        31,
+        42,
+        65,
+        30,
+        47,
+        58,
+        54
+      ],
+      "issuedFamilies": {
+        "sic_framed_contact": 331,
+        "sic_verify_coupled_route": 1
+      }
+    },
+    "975d9d809ba1cb41dd8c63414586cb95498018b1": {
+      "runId": "46072741568",
+      "workflow": "962e9df2593c2b563a1fe75cbd2229734c57de85",
+      "traceSHA256": "7ec30f06246a364b6eb92ff978837053652bbe95868478fcaebdacac0d8c3c48",
+      "receiptSHA256": "20121ad2a46e41d41e02ec1fbd32ec685705826be1925baddce0a2e55fbace18",
+      "comparison": {
+        "equal": true,
+        "game": "LS19",
+        "events": 2593,
+        "decisions": 332
+      },
+      "audit": {
+        "category": "complete",
+        "issues": [],
+        "scored": 8,
+        "reconciled": 8,
+        "scoreDeadlineOverruns": [],
+        "recoveries": {
+          "reset": 0,
+          "undo": 0
+        },
+        "reason": "target_levels_completed"
+      },
+      "trajectory": "04353a68c6e193db09d36d861d7dcf6bfe6c6dd8e92cf61b53f8316b84f2ee3c",
+      "actionsPerLevel": [
+        5,
+        31,
+        42,
+        65,
+        30,
+        47,
+        58,
+        54
+      ],
+      "issuedFamilies": {
+        "sic_framed_contact": 331,
+        "sic_verify_coupled_route": 1
+      }
+    },
+    "14db9cd82a345752030531e9db37fb7c0ea6df45": {
+      "runId": "46073418260",
+      "workflow": "a5349acc904046f73ed8e42313bfac94b716c3fb",
+      "traceSHA256": "7ec30f06246a364b6eb92ff978837053652bbe95868478fcaebdacac0d8c3c48",
+      "receiptSHA256": "6d1c5e4b05cd3ea59cf176cf66b4d3eb810d943946e8666e059dda9a9fe3d975",
+      "comparison": {
+        "equal": true,
+        "game": "LS19",
+        "events": 2593,
+        "decisions": 332,
+        "method": "verified-parent-trace-sha256",
+        "parentRun": "46072741568"
+      },
+      "audit": {
+        "category": "complete",
+        "issues": [],
+        "scored": 8,
+        "reconciled": 8,
+        "scoreDeadlineOverruns": [],
+        "recoveries": {
+          "reset": 0,
+          "undo": 0
+        },
+        "reason": "target_levels_completed"
+      },
+      "trajectory": "04353a68c6e193db09d36d861d7dcf6bfe6c6dd8e92cf61b53f8316b84f2ee3c",
+      "actionsPerLevel": [
+        5,
+        31,
+        42,
+        65,
+        30,
+        47,
+        58,
+        54
+      ],
+      "issuedFamilies": {
+        "sic_framed_contact": 331,
+        "sic_verify_coupled_route": 1
+      }
+    }
+  },
+  "L1": {
+    "13ebd79de759b1052e1b261d9c6c3f5b2205d7f9": {
+      "traceSHA256": "d87381f396859802e813fc0af63b0ce2b5b370f6fb5a45e0c263da684a55f831",
+      "receiptSHA256": "da3c58465cdd6bdeefc52f3092001b2cd6661e8755c79280164bd232a2c1e5a3",
+      "prefixHash": "873ad01cc34d5b61e4b7435c6da535142bb5a7c785a4a97d88d548b252313c6c",
+      "comparison": {
+        "equal": true,
+        "game": "LS19",
+        "events": 48,
+        "decisions": 5
+      }
+    },
+    "975d9d809ba1cb41dd8c63414586cb95498018b1": {
+      "traceSHA256": "d87381f396859802e813fc0af63b0ce2b5b370f6fb5a45e0c263da684a55f831",
+      "receiptSHA256": "3d3cd8a764745342e4289e5656241859900e29b67143a6675c14a00af5253700",
+      "prefixHash": "873ad01cc34d5b61e4b7435c6da535142bb5a7c785a4a97d88d548b252313c6c",
+      "comparison": {
+        "equal": true,
+        "game": "LS19",
+        "events": 48,
+        "decisions": 5
+      }
+    },
+    "14db9cd82a345752030531e9db37fb7c0ea6df45": {
+      "traceSHA256": "d87381f396859802e813fc0af63b0ce2b5b370f6fb5a45e0c263da684a55f831",
+      "receiptSHA256": "c196930ff3caf6f4e6da3dff99a08ee05d6db37c8d83e23dbec1c06e06796620",
+      "prefixHash": "873ad01cc34d5b61e4b7435c6da535142bb5a7c785a4a97d88d548b252313c6c",
+      "comparison": {
+        "equal": true,
+        "game": "LS19",
+        "events": 48,
+        "decisions": 5
+      }
+    }
+  },
+  "inventoryAllGamesHistoricalCounts": {
+    "line90": 43,
+    "line91": 3
+  },
+  "operator": {
+    "line90": "331f4076240b192674e01ab10ea6c9fd4ae96ec0",
+    "line91": "20cd12136a5d0ae16f271a94e88d49f45709f467"
+  },
+  "newLS19Inventory": {
+    "sources": [
+      "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+      "13ebd79de759b1052e1b261d9c6c3f5b2205d7f9",
+      "975d9d809ba1cb41dd8c63414586cb95498018b1",
+      "14db9cd82a345752030531e9db37fb7c0ea6df45"
+    ],
+    "actions": 16,
+    "observed": 16,
+    "traceSHA256": "c8a0eeea6289a7c43f55534a76a2deb37f660059bac66e5f83a1e141b4e5b85c",
+    "matchingTurns": [
+      [
+        3,
+        "approach_view_edge",
+        1,
+        true
+      ],
+      [
+        4,
+        "approach_view_edge",
+        1,
+        true
+      ],
+      [
+        5,
+        "approach_view_edge",
+        1,
+        true
+      ],
+      [
+        6,
+        "approach_view_edge",
+        1,
+        false
+      ],
+      [
+        9,
+        "approach_view_edge",
+        2,
+        true
+      ],
+      [
+        10,
+        "approach_view_edge",
+        2,
+        true
+      ],
+      [
+        11,
+        "approach_view_edge",
+        2,
+        true
+      ],
+      [
+        12,
+        "approach_view_edge",
+        2,
+        false
+      ],
+      [
+        13,
+        "confirm_access_obstruction",
+        2,
+        null
+      ]
+    ],
+    "afterTurn13": {
+      "id": 3
+    },
+    "allReportedFieldsEqual": true
+  },
+  "prefixFixtureSHA256": "f4d567f80d32952357df8af0f5cf5b7c855762c8dc88a993e12648d71140796e",
+  "windowsSupplement": {
+    "comparison": {
+      "equal": false,
+      "event": 569,
+      "game": "LS19",
+      "level": 3,
+      "turn": 41,
+      "kind": "native",
+      "field": "/kind",
+      "before": "native",
+      "after": "stop"
+    },
+    "attempts": [
+      {
+        "label": "parent",
+        "source": "13ebd79de759b1052e1b261d9c6c3f5b2205d7f9",
+        "wonLevels": 3,
+        "actions": 130,
+        "reason": "level_wall_time_budget",
+        "stopLevel": 4,
+        "actionsOnStopLevel": 52,
+        "budgetMs": 18000,
+        "receiptSHA256": "e20ded6b83b94870a7ec8b4992646fbe7f10e044219d08e5378c295a8f746d54"
+      },
+      {
+        "label": "child",
+        "source": "975d9d809ba1cb41dd8c63414586cb95498018b1",
+        "wonLevels": 2,
+        "actions": 77,
+        "reason": "level_wall_time_budget",
+        "stopLevel": 3,
+        "actionsOnStopLevel": 41,
+        "budgetMs": 14000,
+        "receiptSHA256": "396005f330daf41ed474af24c0f5f20fc18470159faa82899167edcfcebd7ccc"
+      }
+    ]
+  },
+  "archiveSHA256": "0bdde850bd115f4f0b7d638f2c650baec6a34fa2acc49ceec9f227e61e841868"
+}
