@@ -1,12 +1,12 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { blockedRouteStep, rememberRouteRefusal, type RouteRefusals } from './route-refusals.ts';
 import { sicNeedId } from './need-identity.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
-import { emptySurfaceMemory, measureSurface, planAcrossSurfaces, rememberSurface, rememberSurfaceStep,
+import { emptySurfaceMemory, measureSurface, observedSurfacePassage, planAcrossSurfaces, rememberSurface, rememberSurfaceStep,
   sameSurfaceAddress, surfaceDirections, surfacePoint,
   type SurfaceMemory, type SurfacePlan, type SurfaceRoles, type SurfaceView } from './observed-surfaces.ts';
 
@@ -157,6 +157,25 @@ export function createSicSwitchedSurface(family = switchedSurfaceId, transferObs
   let witness: SurfaceWitness | null = null;
   let mapped: LearnedSurfaces | null = null;
   let decide: NativeProgramHandle | undefined;
+  function retainPublicPassage(before: NativeObservation, after: NativeObservation, command: NativeCommand,
+    first: NativeRows, second: NativeRows): boolean {
+    if (!witness || witness.epoch !== before.level_epoch || witness.score !== before.levels_completed
+      || before.level_epoch !== after.level_epoch || before.levels_completed !== after.levels_completed
+      || before.state !== after.state || after.revision <= before.revision
+      || before.available_action_refs.includes('ACTION6') || after.available_action_refs.includes('ACTION6')
+      || !directions.every(([ref]) => before.available_action_refs.includes(ref) && after.available_action_refs.includes(ref))) return false;
+    const scope = before.observation_ref.split(':epoch:', 1)[0]!;
+    if (scope !== after.observation_ref.split(':epoch:', 1)[0] || !witness.refs.length
+      || witness.refs.some(ref => ref.split(':epoch:', 1)[0] !== scope)) return false;
+    const view = measureSurface(first, witness.roles), next = measureSurface(second, witness.roles);
+    const plan = view && next && observedSurfacePassage(view, next, command.action_ref);
+    if (!view || !next || !plan) return false;
+    const prior = mapped?.epoch === before.level_epoch ? mapped : null;
+    const memory = rememberSurface(prior?.memory ?? emptySurfaceMemory(), view);
+    mapped = { epoch: before.level_epoch, memory: rememberSurfaceStep(memory, view, next, plan),
+      refs: [...new Set([...(prior?.refs ?? witness.refs), before.observation_ref, after.observation_ref])].slice(-8) };
+    return true;
+  }
   function rememberCrossing(before: NativeObservation, after: NativeObservation, first: NativeRows, second: NativeRows, scene: Scene) {
     if (!scene.peer) return;
     const next = sceneFor(second, scene.model, before.level_epoch);
@@ -170,6 +189,7 @@ export function createSicSwitchedSurface(family = switchedSurfaceId, transferObs
   return {
     id: family,
     observePublicOutcome(before, after, command, first, second) {
+      if (retainPublicPassage(before, after, command, first, second)) return;
       if (!learns || !transferObservedSurface || before.level_epoch !== after.level_epoch || before.frame_hash === after.frame_hash
         || before.available_action_refs.includes('ACTION6') || !directions.every(([ref]) => before.available_action_refs.includes(ref))
         || !directions.some(([ref]) => ref === command.action_ref)

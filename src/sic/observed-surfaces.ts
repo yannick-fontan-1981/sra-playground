@@ -62,6 +62,25 @@ export function rememberSurface(memory: SurfaceMemory, { address, surface }: Sur
   return { ...memory, floors: { ...memory.floors, [address.floor]: { gates, free: [...free], goal } } };
 }
 
+/** Attribute a public return to one visibly paired passage, independently of its issuing family. */
+export function observedSurfacePassage(before: SurfaceView, after: SurfaceView, command: string): SurfacePlan | null {
+  const direction = directions.find(index => surfaceDirections[index][0] === command);
+  if (direction === undefined || before.address.floor === after.address.floor) return null;
+  const [, dx, dy] = surfaceDirections[direction], origin = before.address.cell;
+  const approach: NativePoint = [origin[0] + dx, origin[1] + dy];
+  const originGate = before.surface.gates[key(origin)];
+  const candidates: NativePoint[] = [];
+  if ((originGate === undefined || originGate === direction)
+    && before.surface.gates[key(approach)] === opposite[direction]
+    && key(after.address.cell) === key(approach)
+    && after.surface.gates[key(approach)] === direction) candidates.push(approach);
+  if (originGate !== undefined && opposite[originGate] === direction
+    && key(after.address.cell) === key(origin)
+    && after.surface.gates[key(origin)] === direction) candidates.push(origin);
+  if (candidates.length !== 1) return null;
+  return { direction, expected: after.address, focus: { floor: before.address.floor, cell: candidates[0]! }, kind: 'linked' };
+}
+
 export function rememberSurfaceStep(memory: SurfaceMemory, before: SurfaceView, after: SurfaceView,
   plan: SurfacePlan): SurfaceMemory {
   const from = before.address, target = after.address, id = stepKey(from, plan.direction);
