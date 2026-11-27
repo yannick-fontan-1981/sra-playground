@@ -2,8 +2,9 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
 import { NativeV6Runtime } from '../src/logos-engine/v6-native-runtime.ts';
-import type { NativePoint, NativeProgramRegistry } from '../src/logos-engine/v6-native-types.ts';
+import type { NativeFamily, NativePoint, NativeProgramRegistry } from '../src/logos-engine/v6-native-types.ts';
 import { createSicVerifyOrientedDelivery } from '../src/sic/oriented-delivery.ts';
+import { preparedEffectsId } from '../src/sic/test-prepared-effects.ts';
 import { V6AgentService } from '../src/runtime/v6-agent-service.ts';
 import { toV6PublicObservation } from '../src/runtime/v6-agent-protocol.ts';
 import type { GameObservation } from '../src/runtime/browser-games.ts';
@@ -498,4 +499,96 @@ for (const variant of ['ordinary', 'cooperative', 'ambiguous-owner', 'contradict
     assert.equal(result.snapshot.trace.findLast(event => event.kind === 'sealed_prefix')?.acquired_actions, 2);
     assert.equal((room.family.state().state as Record<string, any>).count, state.count + 2);
     assert.deepEqual((room.family.state().state as Record<string, any>).contactAppearance, room.contact);
+  });
+
+for (const scenario of ['divided', 'rotated', 'unlearned-shell', 'ambiguous-peer', 'changed-receiver'] as const)
+  test('a directional ticket reassociates visible divided cargo after peer attachment: ' + scenario, async () => {
+    const rotated = scenario === 'rotated';
+    const room = await witnessedRoom(rotated);
+    const prior = room.learned;
+    assert.ok(prior.transportCouplings.some((role: { shell: number; sources: string[] }) => role.shell === room.peerShell && role.sources.length === 2));
+    const { pitch, phase, core, background } = prior.geometry;
+    const bodyInk = rotated ? 7 : 15, faceInk = rotated ? 11 : 0;
+    const receiver: NativePoint[] = [[2, 3], [2, 4], [10, 3], [10, 4]];
+    const paint = (rows: number[][], [x, y]: NativePoint, ink: (dx: number, dy: number) => number) => {
+      for (let dy = 0; dy < pitch; dy++) for (let dx = 0; dx < pitch; dx++) {
+        rows[phase[1] + y * pitch + dy]![phase[0] + x * pitch + dx] = ink(dx, dy);
+      }
+    };
+    function frame(pose: NativePoint, face: NativePoint, attached: boolean) {
+      const rows = Array.from({ length: 64 }, () => Array<number>(64).fill(background));
+      const axis = rotated ? 1 : 0, divider = room.at([7, 0])[axis];
+      const size = Math.floor((64 - phase[1 - axis]) / pitch);
+      for (let v = 0; v < size; v++) {
+        paint(rows, rotated ? [v, divider] : [divider, v], (x, y) => (rotated ? y : x) === 0 ? 6 : background);
+      }
+      const visibleTargets = (attached && scenario === 'changed-receiver' ? receiver.slice(1) : receiver).map(room.at);
+      for (const site of visibleTargets) paint(rows, site, (x, y) => {
+        const neighbor = (dx: number, dy: number) => visibleTargets.some(target => target[0] === site[0] + dx && target[1] === site[1] + dy);
+        const edge = x === 0 && !neighbor(-1, 0) || x === pitch - 1 && !neighbor(1, 0)
+          || y === 0 && !neighbor(0, -1) || y === pitch - 1 && !neighbor(0, 1);
+        return edge ? core : 3;
+      });
+      const direction = room.vector(face);
+      paint(rows, room.at(pose), (x, y) => (direction[0] === 1 ? x === pitch - 1 : direction[0] === -1 ? x === 0
+        : direction[1] === 1 ? y === pitch - 1 : y === 0) ? faceInk : prior.color);
+      const crate = (shell: number) => (x: number, y: number) => x === 0 || y === 0 || x === pitch - 1 || y === pitch - 1 ? shell : core;
+      for (const site of [[5, 5], [3, 5]] as NativePoint[]) paint(rows, room.at(site), crate(room.shell));
+      paint(rows, room.at([10, 8]), crate(attached ? scenario === 'unlearned-shell' ? 10 : room.peerShell : room.shell));
+      paint(rows, room.at([11, 8]), () => bodyInk);
+      if (scenario === 'ambiguous-peer') paint(rows, room.at([10, 7]), () => bodyInk);
+      return toV6PublicObservation({ ...room.packet(rows), level: 2, levelCount: 3, levelsCompleted: 1 });
+    }
+
+    let demonstrated = 0;
+    const observationSource: NativeFamily = {
+      id: preparedEffectsId,
+      propose(observation) {
+        if (demonstrated === 2) return null;
+        const action = { action_ref: room.command, data: {} };
+        return { status: 'proposed', kind: this.id, actions: [action], steps: [{ action }],
+          sicLocalDecision: { strategy: 'observe_public_input' }, binding: { observation_ref: observation.observation_ref } };
+      },
+      before: (proposal, _index, _packet, observation) =>
+        ({ admitted: proposal.binding?.observation_ref === observation.observation_ref, reason: 'public_direction_bound' }),
+      after: () => ({ matched: true, seal_prefix: true, reason: 'public_direction_returned' }),
+      record: () => { demonstrated++; return { events: [] }; },
+      state: () => ({ demonstrated }), restore(state) { demonstrated = Number(state.demonstrated); },
+    };
+    const sessionId = 'divided-cargo-' + scenario;
+    const service = new V6AgentService(() => new NativeV6Runtime({ families: [observationSource, room.family],
+      sourceDigest: 'rebind-divided-cargo', maxPointOccurrences: 250 }));
+    let result = await service.handle({ type: 'init', sessionId, sequence: 0,
+      observation: toV6PublicObservation({ ...room.packet(room.frame(2)), levelCount: 3 }),
+      budgets: { targetLevels: 3, levelActionCaps: [40, 40, 40] } });
+    assert.ok(result.ticket);
+    result = await service.handle({ type: 'advance', sessionId, sequence: 1, ticketId: result.ticket.id, executionMs: 1,
+      observation: { ...frame([3, 6], [1, 0], false), stepIndex: 1 } });
+    assert.equal(result.kind, 'boundary');
+    result = await service.handle({ type: 'resume', sessionId, sequence: 1 });
+    assert.ok(result.ticket);
+    assert.equal(result.ticket.actionRef, room.command);
+    result = await service.handle({ type: 'advance', sessionId, sequence: 2, ticketId: result.ticket.id, executionMs: 1,
+      observation: { ...frame([4, 6], [1, 0], true), stepIndex: 2 } });
+    const directionReturn = result.snapshot.trace.findLast(event => event.kind === 'actual_outcome');
+    assert.equal(directionReturn?.matched, true);
+    assert.equal(result.kind, 'boundary');
+    result = await service.handle({ type: 'resume', sessionId, sequence: 2 });
+    if (scenario !== 'divided' && scenario !== 'rotated') {
+      assert.equal(result.ticket, null);
+      assert.equal((room.family.state().state as Record<string, any>).epoch, 1);
+      return;
+    }
+    assert.ok(result.ticket, result.snapshot.reason);
+    const nextProposal = result.snapshot.proposal as Record<string, any>;
+    assert.equal(result.snapshot.trace.findLast(event => event.kind === 'sic_native_plan')?.family, room.family.id);
+    assert.ok(nextProposal.route_refs.includes(directionReturn?.observation_ref));
+    assert.ok(prior.transportCouplings[0].sources.every((ref: string) => nextProposal.route_refs.includes(ref)));
+    const commands: Record<string, NativePoint> = { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0], ...prior.free };
+    const direction = room.inverseVector(commands[result.ticket.actionRef]!);
+    result = await service.handle({ type: 'advance', sessionId, sequence: 3, ticketId: result.ticket.id, executionMs: 1,
+      observation: { ...frame([4 + direction[0], 6 + direction[1]], direction, true), stepIndex: 3 } });
+    assert.equal(result.snapshot.trace.findLast(event => event.kind === 'actual_outcome')?.matched, true);
+    assert.equal((room.family.state().state as Record<string, any>).epoch, 2);
+    assert.equal((room.family.state().state as Record<string, any>).geometry.initial_boxes.length, 3);
   });

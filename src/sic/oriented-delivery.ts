@@ -1,6 +1,6 @@
 import { orientedCouplingInitial, orientedCouplingScene, orientedCouplingTile } from '../logos-engine/v6-oriented-coupling.ts';
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
@@ -281,6 +281,48 @@ function couplingReturns(before: NativeObservation, after: NativeObservation, lo
     if (positions(coupled).filter(other => distance(owner.pose, other) === 1 && coupled.boxes[key(other)] === role.shell).length !== 1) return [];
     return [{ carrier: owner.carrier, pose: owner.position, box, shell, attached, sources: [after.observation_ref] }];
   });
+}
+
+function rebindDividedCargo(current: Geometry, rows: NativeRows, observation: NativeObservation, previous: State, execution?: NativeExecution) {
+  if (!previous.transportCouplings?.length) return null;
+  const receipt = execution?.readPriorDirectionalScene?.((earlier, before) => {
+    const geometry = orientedCouplingInitial(earlier, true) as Geometry | null;
+    if (!geometry || geometry.initial_boxes.length <= current.initial_boxes.length
+      || geometry.pitch !== current.pitch || !same(geometry.phase, current.phase)
+      || geometry.background !== current.background || geometry.core !== current.core || geometry.rest_shell !== current.rest_shell
+      || geometry.targets.length !== current.targets.length || !geometry.targets.every((site, index) => same(site, current.targets[index]!))) return null;
+    const colors = [...new Set(rows.flat())].filter(ink => ![geometry.background, geometry.core, geometry.rest_shell].includes(ink));
+    const actors = colors.flatMap(color => {
+      const old = orientedCouplingScene(earlier, geometry, color) as Scene | null;
+      const next = orientedCouplingScene(rows, geometry, color) as Scene | null;
+      return old && next ? [{ color, old, next }] : [];
+    });
+    if (actors.length !== 1) return null;
+    const { color, old, next } = actors[0]!, movement = sub(next.pose, old.pose);
+    if (!same(movement, next.face) || sceneHeld(old) || sceneHeld(next)) return null;
+    const local = { ...previous, geometry, color, held: null };
+    const oldGeometry = previous.geometry, insetFill = oldGeometry.insetFill;
+    if (insetFill !== undefined && geometry.pitch === oldGeometry.pitch && same(geometry.phase, oldGeometry.phase)
+      && geometry.core === oldGeometry.core && geometry.rest_shell === oldGeometry.rest_shell
+      && geometry.background === oldGeometry.background && visibleReceiverFill(earlier, local, old) === insetFill
+      && visibleReceiverFill(rows, local, next) === insetFill) {
+      local.geometry = { ...geometry, insetFill };
+    }
+    const couplings = couplingReturns(before, observation, local, old, next);
+    const shells = { ...old.boxes };
+    const resting = new Set(geometry.initial_boxes.map(key));
+    for (const { box, shell, attached } of couplings) {
+      shells[key(box)] = shell;
+      if (attached) resting.delete(key(box));
+      else resting.add(key(box));
+    }
+    if (!Object.entries(shells).every(([site, shell]) => next.boxes[site] === shell)
+      || resting.size !== current.initial_boxes.length || !current.initial_boxes.every(site => resting.has(key(site)))) return null;
+    return { geometry, color, movement };
+  });
+  if (!receipt || receipt.levelEpoch !== observation.level_epoch || receipt.afterRef !== observation.observation_ref
+    || !same(previous.free[receipt.command] ?? null, receipt.scene.movement)) return null;
+  return { ...receipt.scene, refs: [receipt.beforeRef, receipt.afterRef] };
 }
 
 function shortest(start: Move, fixed: Set<string>, floor: Set<string>, vectors: Readonly<Record<string, NativePoint>>,
@@ -891,7 +933,9 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const receipt = learns ? execution?.readPriorDirectionalScene?.(earlier => orientedCouplingInitial(earlier) as Geometry | null) : null;
       if (learns && (!receipt || receipt.afterRef !== observation.observation_ref)) return null;
       const ordinary = prior?.geometry ?? receipt?.scene ?? orientedCouplingInitial(rows) as Geometry | null;
-      const dividedGeometry = !ordinary && previous ? orientedCouplingInitial(rows, true) as Geometry | null : null;
+      const measuredDivided = !ordinary && previous ? orientedCouplingInitial(rows, true) as Geometry | null : null;
+      const rebound = measuredDivided && previous ? rebindDividedCargo(measuredDivided, rows, observation, previous, execution) : null;
+      const dividedGeometry = rebound?.geometry ?? measuredDivided;
       const divided = !!dividedGeometry;
       const corridor = !prior && ordinary && previous ? recoverInsetFromVisibleCorridor(rows, ordinary, previous) : null;
       const expanded = parallelReceiverGeometry(rows, dividedGeometry, previous);
@@ -901,7 +945,8 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       if (!geometry || !parallel && !divided && !prior?.sectorNetwork
         && (geometry.targets.length > 12 || geometry.initial_boxes.length > 6)) return null;
       const inset = geometry.insetFill !== undefined;
-      const possible = prior ? [prior.color] : [...new Set(rows.flat())].filter(value => ![geometry.core, geometry.background, geometry.rest_shell].includes(value));
+      const possible = prior ? [prior.color] : rebound ? [rebound.color]
+        : [...new Set(rows.flat())].filter(value => ![geometry.core, geometry.background, geometry.rest_shell].includes(value));
       const scenes = possible.flatMap(color => {
         const scene = orientedCouplingScene(rows, geometry, color) as Scene | null;
         return scene ? [{ color, scene }] : [];
@@ -917,7 +962,7 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const initial: State = prior ?? { epoch: observation.level_epoch, geometry, color, held: null,
         invitation: shellChanges.length ? ahead : null, free: receipt && delta ? { [receipt.command]: delta } : {}, loaded: {},
         tried: priorScene ? [JSON.stringify([priorScene.scene.pose, priorScene.scene.face, priorScene.scene.boxes, null, priorScene.command])] : [],
-        refs: receipt ? [receipt.beforeRef, receipt.afterRef] : [], count: receipt ? 1 : 0 };
+        refs: receipt ? [receipt.beforeRef, receipt.afterRef] : rebound?.refs ?? [], count: receipt ? 1 : 0 };
       const carrierEvidence = prior?.sharedEvidence ? prior : previous;
       const relay = prior?.relay ?? (carrierEvidence && !divided && !inset && !parallel && !prior?.sectorNetwork
         ? measureRelay(rows, observation, initial, scene, carrierEvidence) : null);
