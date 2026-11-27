@@ -1,0 +1,10 @@
+{
+  "scope": "owner-only diagnostic from the archived official L8 return",
+  "sourceBefore": "6f508a618d313b2790163dad75a049534d3f5381",
+  "commands": 66,
+  "sharedTrajectorySHA256": "b178530b0ee404407ea888546486a34f23f7f648aacfc97c5e6540f8d3908e87",
+  "continuedBefore": 7,
+  "continuedAfter": 19,
+  "firstReturn": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:9:revision:548:frame:42b5730d4a15b47e",
+  "lastReturn": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:9:revision:614:frame:be83aab95e79fe28"
+}

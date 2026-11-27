@@ -501,11 +501,18 @@ for (const variant of ['ordinary', 'cooperative', 'ambiguous-owner', 'contradict
     assert.deepEqual((room.family.state().state as Record<string, any>).contactAppearance, room.contact);
   });
 
-for (const scenario of ['divided', 'rotated', 'unlearned-shell', 'ambiguous-peer', 'changed-receiver'] as const)
+for (const scenario of ['divided', 'rotated', 'unlearned-shell', 'ambiguous-peer', 'changed-receiver',
+  'interception-boundary', 'rotated-interception-boundary'] as const)
   test('a directional ticket reassociates visible divided cargo after peer attachment: ' + scenario, async () => {
-    const rotated = scenario === 'rotated';
+    const rotated = scenario === 'rotated' || scenario === 'rotated-interception-boundary';
+    const boundary = scenario === 'interception-boundary' || scenario === 'rotated-interception-boundary';
     const room = await witnessedRoom(rotated);
     const prior = room.learned;
+    const interferenceInk = rotated ? 6 : 2;
+    if (boundary) room.family.restore({ state: { ...prior,
+      free: { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0], ...prior.free },
+      parallel: { ink: interferenceInk, ref: prior.sharedEvidence, returns: {}, probes: {}, approach: [], waits: {} },
+    } });
     assert.ok(prior.transportCouplings.some((role: { shell: number; sources: string[] }) => role.shell === room.peerShell && role.sources.length === 2));
     const { pitch, phase, core, background } = prior.geometry;
     const bodyInk = rotated ? 7 : 15, faceInk = rotated ? 11 : 0;
@@ -533,10 +540,11 @@ for (const scenario of ['divided', 'rotated', 'unlearned-shell', 'ambiguous-peer
       paint(rows, room.at(pose), (x, y) => (direction[0] === 1 ? x === pitch - 1 : direction[0] === -1 ? x === 0
         : direction[1] === 1 ? y === pitch - 1 : y === 0) ? faceInk : prior.color);
       const crate = (shell: number) => (x: number, y: number) => x === 0 || y === 0 || x === pitch - 1 || y === pitch - 1 ? shell : core;
-      for (const site of [[5, 5], [3, 5]] as NativePoint[]) paint(rows, room.at(site), crate(room.shell));
+      for (const site of [boundary ? [6, 4] : [5, 5], [3, 5]] as NativePoint[]) paint(rows, room.at(site), crate(room.shell));
       paint(rows, room.at([10, 8]), crate(attached ? scenario === 'unlearned-shell' ? 10 : room.peerShell : room.shell));
       paint(rows, room.at([11, 8]), () => bodyInk);
       if (scenario === 'ambiguous-peer') paint(rows, room.at([10, 7]), () => bodyInk);
+      if (boundary) paint(rows, room.at([11, 4]), () => interferenceInk);
       return toV6PublicObservation({ ...room.packet(rows), level: 2, levelCount: 3, levelsCompleted: 1 });
     }
 
@@ -574,7 +582,7 @@ for (const scenario of ['divided', 'rotated', 'unlearned-shell', 'ambiguous-peer
     assert.equal(directionReturn?.matched, true);
     assert.equal(result.kind, 'boundary');
     result = await service.handle({ type: 'resume', sessionId, sequence: 2 });
-    if (scenario !== 'divided' && scenario !== 'rotated') {
+    if (scenario !== 'divided' && scenario !== 'rotated' && !boundary) {
       assert.equal(result.ticket, null);
       assert.equal((room.family.state().state as Record<string, any>).epoch, 1);
       return;
@@ -582,6 +590,7 @@ for (const scenario of ['divided', 'rotated', 'unlearned-shell', 'ambiguous-peer
     assert.ok(result.ticket, result.snapshot.reason);
     const nextProposal = result.snapshot.proposal as Record<string, any>;
     assert.equal(result.snapshot.trace.findLast(event => event.kind === 'sic_native_plan')?.family, room.family.id);
+    if (boundary) assert.ok(nextProposal.actions.length > 1);
     assert.ok(nextProposal.route_refs.includes(directionReturn?.observation_ref));
     assert.ok(prior.transportCouplings[0].sources.every((ref: string) => nextProposal.route_refs.includes(ref)));
     const commands: Record<string, NativePoint> = { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0], ...prior.free };
@@ -589,6 +598,10 @@ for (const scenario of ['divided', 'rotated', 'unlearned-shell', 'ambiguous-peer
     result = await service.handle({ type: 'advance', sessionId, sequence: 3, ticketId: result.ticket.id, executionMs: 1,
       observation: { ...frame([4 + direction[0], 6 + direction[1]], direction, true), stepIndex: 3 } });
     assert.equal(result.snapshot.trace.findLast(event => event.kind === 'actual_outcome')?.matched, true);
+    if (boundary) {
+      assert.equal(result.ticket, null, 'The approached interference must take back the decision before a second ticket');
+      assert.equal(result.snapshot.trace.findLast(event => event.kind === 'sealed_prefix')?.acquired_actions, 1);
+    }
     assert.equal((room.family.state().state as Record<string, any>).epoch, 2);
     assert.equal((room.family.state().state as Record<string, any>).geometry.initial_boxes.length, 3);
   });

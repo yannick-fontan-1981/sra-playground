@@ -40,7 +40,8 @@ type Step = { input: string; intent: Intent; prediction: Move | null; target: Na
 type WalkStep = { input: string; before: Scene; after: Scene; cargoBefore: NativePoint | null; cargoAfter: NativePoint | null;
   withdrawnContact?: NativePoint };
 type PeerGuard = { landings: { point: NativePoint; pixels: number[] | null }[][]; floorSamples: string[]; protectedCells: NativePoint[] };
-type Proposal = NativeProposal & { local: State; scene: Scene; step: Step; needId: string; attempt: string; walk?: WalkStep[]; peerGuard?: PeerGuard };
+type Proposal = NativeProposal & { local: State; scene: Scene; step: Step; needId: string; attempt: string; walk?: WalkStep[]; peerGuard?: PeerGuard;
+  sectorWalk?: true };
 
 const labels = { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0] } as const;
 const sectorInterceptionRange = 8;
@@ -328,14 +329,16 @@ function rebindDividedCargo(current: Geometry, rows: NativeRows, observation: Na
 function shortest(start: Move, fixed: Set<string>, floor: Set<string>, vectors: Readonly<Record<string, NativePoint>>,
   accepts: (state: Move) => boolean, cargoFloor = floor): { step: Step | null; end: Move; length: number } | null {
   const moves = Object.entries(vectors);
+  const identity = ({ pose, face, cargo }: Move) => key(pose) + '|' + key(face) + '|' + (cargo ? key(cargo) : '');
+  const occupiable = (point: NativePoint, surface: Set<string>) => {
+    const cell = key(point);
+    return surface.has(cell) && !fixed.has(cell);
+  };
   const queue: { state: Move; step: Motion | null; parent: number; length: number }[] =
     [{ state: start, step: null, parent: -1, length: 0 }];
-  const visited = new Set<string>();
+  const discovered = new Set([identity(start)]);
   for (let index = 0; index < queue.length; index++) {
     const { state, length } = queue[index]!;
-    const identity = JSON.stringify([state.pose, state.face, state.cargo]);
-    if (visited.has(identity)) continue;
-    visited.add(identity);
     if (accepts(state)) {
       const route: Motion[] = [];
       for (let entry = queue[index]!; entry.step; entry = queue[entry.parent]!) route.push(entry.step);
@@ -343,13 +346,14 @@ function shortest(start: Move, fixed: Set<string>, floor: Set<string>, vectors: 
       const step: Step | null = route[0] ? { ...route[0], intent: 'motion', target: null, route } : null;
       return { step, end: state, length };
     }
-    if (visited.size >= 2048) return null;
+    if (index + 1 >= 2048) return null;
     for (const [input, delta] of moves) {
       const pose = add(state.pose, delta), face = state.cargo ? state.face : delta;
       const cargo = state.cargo ? add(state.cargo, delta) : null;
-      const occupiable = (q: NativePoint, surface: Set<string>) => surface.has(key(q)) && !fixed.has(key(q));
       const prediction = occupiable(pose, floor) && (!cargo || occupiable(cargo, cargoFloor)) ? { pose, face, cargo } : { ...state, face };
-      if (same(prediction.pose, state.pose) && same(prediction.face, state.face)) continue;
+      const next = identity(prediction);
+      if (discovered.has(next)) continue;
+      discovered.add(next);
       queue.push({ state: prediction, step: { input, prediction }, parent: index, length: length + 1 });
     }
   }
@@ -1077,17 +1081,25 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const peer = relay ? externalCarriers(observation, local).get(relay.carrier) : null;
       const exclusive = !local.sharedEvidence || (inset && !!local.interceptionRef && !blockers.length);
       const settledParallel = !parallel || !carrierForms(rows, geometry, parallel.ink).length;
+      const sending = local.sectorNetwork?.sending;
+      const sectorWalk = !!local.interference && !exclusive && sending && step.route
+        && (!carrier || distance(carrier.point, scene.pose) > sectorInterceptionRange)
+        && step.route.every(({ prediction }) => sending.includes(key(prediction.pose)));
       const prefix = known && settledParallel && !step.intercept && !step.waitForTransport
-        && (exclusive || local.sharedEvidence) && (!local.interference || exclusive)
+        && (exclusive || local.sharedEvidence) && (!local.interference || exclusive || sectorWalk)
         ? walkPrefix(step, scene, local, remaining, observation) : [];
       const cooperative = !exclusive || handsOff;
       let walk = prefix.length > 1 || cooperative && prefix.length ? prefix : undefined;
-      const peerGuard = walk && cooperative ? guardPeerRoute(rows, local, scene, step, walk) : undefined;
+      let peerGuard = walk && cooperative ? guardPeerRoute(rows, local, scene, step, walk) : undefined;
       if (peerGuard) {
-        const blocked = peerGuard.landings.findIndex(landings => landings.some(({ pixels }) =>
-          pixels ? pixels.length !== geometry.pitch ** 2 : !peerGuard.floorSamples.length));
-        if (blocked === 0) return null;
-        if (blocked > 0) {
+        const { landings, floorSamples } = peerGuard;
+        const blocked = landings.findIndex(sites => sites.some(({ pixels }) =>
+          pixels ? pixels.length !== geometry.pitch ** 2 : !floorSamples.length));
+        if (blocked === 0) {
+          if (!sectorWalk) return null;
+          walk = undefined;
+          peerGuard = undefined;
+        } else if (blocked > 0) {
           walk = walk!.slice(0, blocked);
           peerGuard.landings = peerGuard.landings.slice(0, blocked);
         }
@@ -1096,6 +1108,7 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       return { status: 'proposed', kind: family, actions,
         steps: actions.map((action, index) => ({ action, expected_after: walk?.[index]?.after ?? prediction })),
         ...(walk ? { walk } : {}), ...(peerGuard ? { peerGuard } : {}),
+        ...(sectorWalk && peerGuard ? { sectorWalk: true } : {}),
         local, scene, step, needId: need.id, attempt: unique(step),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
@@ -1147,15 +1160,19 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const walk = proposal.walk?.[index];
       if (walk) {
         const { local } = proposal;
-        let matched = false;
+        let matched = false, interceptionReached = false;
         if (before.state === after.state && (!local.parallel || !carrierForms(second, local.geometry, local.parallel.ink).length)) {
           const actual = orientedCouplingScene(second, local.geometry, local.color) as Scene | null;
           const old = walk.withdrawnContact || proposal.peerGuard
             ? orientedCouplingScene(first, local.geometry, local.color) as Scene | null : null;
           matched = (!walk.withdrawnContact || returnedContactShell(walk, local, before, after, old, actual) === local.geometry.rest_shell)
             && (proposal.peerGuard ? peerRouteReturn(proposal, walk, before, after, old, actual) : matchesScene(actual, walk.after));
+          if (matched && actual && proposal.sectorWalk && local.interference) {
+            const forms = carrierForms(second, local.geometry, local.interference.ink);
+            interceptionReached = forms.length === 1 && distance(forms[0]!.point, actual.pose) <= sectorInterceptionRange;
+          }
         }
-        return { matched, seal_prefix: !matched || index + 1 === proposal.actions.length,
+        return { matched, seal_prefix: !matched || interceptionReached || index + 1 === proposal.actions.length,
           reason: matched ? 'carrier_and_parts_followed_declared_route' : 'carrier_or_parts_diverged' };
       }
       const parallel = proposal.local.parallel;
