@@ -1,0 +1,98 @@
+{
+  "départs": {
+    "gel": 7,
+    "extraction": 8,
+    "correctif": 8
+  },
+  "changementsDeSujetParSHA": 3,
+  "ticketsCatalogueParSHA": 16,
+  "ticketsParcoursProlongéParSHA": 32,
+  "premierTicketDifférent": 18,
+  "casL": {
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021": {
+      "auRetourT17": {
+        "ticket": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:17",
+        "position": true,
+        "scellé": false
+      },
+      "ticket18": {
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:18",
+        "action": "ACTION4",
+        "index": 1,
+        "longueur": 8,
+        "préparé": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:17:frame:566adb081a50f24c",
+        "sujet": "8081538d1e0e8aa003d8a2bc35d49b899e71e80b872ed77efa61a1298bdb26d5"
+      },
+      "ticket19": {
+        "index": 2,
+        "longueur": 8,
+        "sujet": "8081538d1e0e8aa003d8a2bc35d49b899e71e80b872ed77efa61a1298bdb26d5"
+      }
+    },
+    "e2e5b52fe4476f169c1ab1988d23a5f5368e305c": {
+      "auRetourT17": {
+        "ticket": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:17",
+        "position": true,
+        "scellé": false
+      },
+      "ticket18": {
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:18",
+        "action": "ACTION4",
+        "index": 1,
+        "longueur": 8,
+        "préparé": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:17:frame:566adb081a50f24c",
+        "sujet": "8081538d1e0e8aa003d8a2bc35d49b899e71e80b872ed77efa61a1298bdb26d5"
+      },
+      "ticket19": {
+        "index": 2,
+        "longueur": 8,
+        "sujet": "8081538d1e0e8aa003d8a2bc35d49b899e71e80b872ed77efa61a1298bdb26d5"
+      }
+    },
+    "21fd159e8339ee464a5b7bee0824b93ccefe9995": {
+      "auRetourT17": {
+        "ticket": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:17",
+        "position": true,
+        "scellé": true
+      },
+      "ticket18": {
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:18",
+        "action": "ACTION4",
+        "index": 0,
+        "longueur": 1,
+        "préparé": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:18:frame:e69232484a9140d7",
+        "sujet": "0c273d661a8d05353a9f29b7970aaf18c528ff435ed31fbcfbdb7685d505741f"
+      },
+      "ticket19": {
+        "index": 0,
+        "longueur": 8,
+        "sujet": "0c273d661a8d05353a9f29b7970aaf18c528ff435ed31fbcfbdb7685d505741f"
+      }
+    }
+  },
+  "empreintes": {
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021": {
+      "historique": "f595b263981e0703fc9aa0281cf9c75361639ac43fa1a64808a13cb5ce3019b4",
+      "catalogue": "9a8dbeddb40616eed3c454c43bbac83c56ed3f0b11d15c0a9d49613eab7d122a",
+      "développement": "38009ff74c9d83214f3a50538ff4f907c067162ae5d354226d4188a8df4c09f5",
+      "réserve": "241453810506bec84ea669e3ec406358093ee398ce5cfb86fbfb11e7fc72c506",
+      "témoin": "7176b996cf7cb2f9cc7e01d56d521d3a00b9dfd47711c1617d7d8895b8e445b3"
+    },
+    "e2e5b52fe4476f169c1ab1988d23a5f5368e305c": {
+      "historique": "f595b263981e0703fc9aa0281cf9c75361639ac43fa1a64808a13cb5ce3019b4",
+      "catalogue": "9a8dbeddb40616eed3c454c43bbac83c56ed3f0b11d15c0a9d49613eab7d122a",
+      "développement": "38009ff74c9d83214f3a50538ff4f907c067162ae5d354226d4188a8df4c09f5",
+      "réserve": "241453810506bec84ea669e3ec406358093ee398ce5cfb86fbfb11e7fc72c506",
+      "témoin": "7176b996cf7cb2f9cc7e01d56d521d3a00b9dfd47711c1617d7d8895b8e445b3",
+      "extraction": "1c2d572d9bf3746444f84902a1a131df6bef531dfd07dbc5de5ec2a8fc3857d6"
+    },
+    "21fd159e8339ee464a5b7bee0824b93ccefe9995": {
+      "historique": "f595b263981e0703fc9aa0281cf9c75361639ac43fa1a64808a13cb5ce3019b4",
+      "catalogue": "9a8dbeddb40616eed3c454c43bbac83c56ed3f0b11d15c0a9d49613eab7d122a",
+      "développement": "2d034b029042575c543deab6ed7452f2e3c4a4cea75100326294054008956c78",
+      "réserve": "597f0f8a1393464c55c45c4d401b2a7169bb5acfc7eef4eb06434c151a07d136",
+      "témoin": "7071227671aead9818a4a8d1a58966898341f332b63e62267df9ece51f52822f",
+      "extraction": "1c2d572d9bf3746444f84902a1a131df6bef531dfd07dbc5de5ec2a8fc3857d6"
+    }
+  }
+}
