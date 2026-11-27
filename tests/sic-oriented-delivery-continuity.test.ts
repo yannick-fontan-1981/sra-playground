@@ -13,6 +13,7 @@ async function witnessedRoom(rotated = false) {
   const background = rotated ? 2 : 1, core = rotated ? 10 : 9, shell = rotated ? 8 : 4;
   const actor = rotated ? 12 : 14, faceInk = rotated ? 11 : 0, carrier = rotated ? 7 : 15;
   const peerShell = rotated ? 13 : 5;
+  const interferingInk = rotated ? 3 : 10;
   const at = ([x, y]: NativePoint): NativePoint => rotated ? [10 - y, x + 1] : [x, y];
   const direction: NativePoint = rotated ? [0, 1] : [1, 0];
   const command = rotated ? 'ACTION1' : 'ACTION4';
@@ -24,7 +25,7 @@ async function witnessedRoom(rotated = false) {
     for (let y = 0; y < pitch; y++) for (let x = 0; x < pitch; x++)
       rows[phase[1] + v * pitch + y]![phase[0] + u * pitch + x] = pixels(x, y);
   };
-  function frame(tick: number, options: { blocked?: boolean; ambiguous?: boolean; lostCargo?: boolean; unpairedShift?: boolean; targetTaken?: boolean; secondOwner?: boolean } = {}) {
+  function frame(tick: number, options: { blocked?: boolean; ambiguous?: boolean; lostCargo?: boolean; unpairedShift?: boolean; targetTaken?: boolean; secondOwner?: boolean; interference?: boolean; distantCargo?: boolean; duplicatePeer?: boolean } = {}) {
     const rows = Array.from({ length: 64 }, () => Array<number>(64).fill(background));
     const receiverTiles: NativePoint[] = [[8, 2], [9, 2], [9, 5], [10, 5]];
     for (const site of receiverTiles) paint(rows, site, (x, y) => {
@@ -36,12 +37,17 @@ async function witnessedRoom(rotated = false) {
     const own = (x: number, y: number) => (rotated ? y === pitch - 1 : x === pitch - 1) ? faceInk : actor;
     const part = (ink: number) => (x: number, y: number) => x === 0 || y === 0 || x === pitch - 1 || y === pitch - 1 ? ink : core;
     paint(rows, [tick, 2], own);
-    paint(rows, [tick + 1, 2], part(options.lostCargo ? shell : faceInk));
+    paint(rows, options.distantCargo ? [7, 2] : [tick + 1, 2], part(options.lostCargo || options.distantCargo ? shell : faceInk));
     paint(rows, [2 + tick - Number(!!options.unpairedShift), 5], () => carrier);
     paint(rows, options.targetTaken ? [8, 2] : [3 + tick, 5], part(peerShell));
+    if (options.duplicatePeer) {
+      paint(rows, [12 - tick, 8], () => carrier);
+      paint(rows, [13 - tick, 8], part(peerShell));
+    }
     if (options.blocked) paint(rows, [tick + 2, 2], () => rotated ? 0 : 6);
     if (options.secondOwner) paint(rows, [3 + tick, 6], () => rotated ? 0 : 6);
     if (options.ambiguous) paint(rows, [0, 8], own);
+    if (options.interference) paint(rows, [0, 9], () => interferingInk);
     return rows;
   }
   const packet = (rows: number[][]): GameObservation => ({ gameCode: 'PUBLIC', frame: rows, frames: [rows], state: 'NOT_FINISHED',
@@ -66,13 +72,22 @@ async function witnessedRoom(rotated = false) {
   assert.deepEqual(learned.loaded[command], direction, 'The carried translation must be acquired from its public return');
   assert.ok(learned.sharedEvidence && learned.transportCarriers.length === 1,
     'Two joint movements must establish the other carrier before its crate can vary during a route');
-  return { family, frame, packet, observe, command, direction, at, learned };
+  return { family, frame, packet, observe, command, direction, at, learned, interferingInk };
 }
 
-for (const rotated of [false, true]) test('native tickets continue witnessed transport while a separate carrier moves' + (rotated ? ' with rotated cells, recoloring and remapped controls' : ''), async () => {
+async function settledParallelRoom(rotated = false) {
   const room = await witnessedRoom(rotated);
+  room.family.restore({ state: { ...room.learned, count: 71,
+    parallel: { ink: room.interferingInk, ref: 'previous-interfering-carrier-removal', returns: {}, probes: {}, approach: [], waits: {} } } });
+  return room;
+}
+
+for (const parallel of [false, true]) for (const rotated of [false, true]) test('native tickets continue witnessed transport while a separate carrier moves'
+  + (parallel ? ' after the interfering forms disappear beyond the ordinary local horizon' : '')
+  + (rotated ? ' with rotated cells, recoloring and remapped controls' : ''), async () => {
+  const room = await (parallel ? settledParallelRoom(rotated) : witnessedRoom(rotated));
   const service = new V6AgentService(() => new NativeV6Runtime({ families: [room.family], sourceDigest: 'observed-cooperative-translation', maxPointOccurrences: 250 }));
-  const sessionId = 'cooperative-route-' + rotated;
+  const sessionId = 'cooperative-route-' + parallel + '-' + rotated;
   let result = await service.handle({ type: 'init', sessionId, sequence: 0,
     observation: toV6PublicObservation(room.packet(room.frame(2))), budgets: { targetLevels: 2, levelActionCaps: [40, 40] } });
   const tickets = [];
@@ -94,14 +109,50 @@ for (const rotated of [false, true]) test('native tickets continue witnessed tra
   const state = room.family.state().state as Record<string, any>;
   assert.deepEqual(state.held, room.at([8, 2]));
   assert.deepEqual(state.transports[0].box, room.at([10, 5]), 'Acquire the actual other-carrier positions in order');
+  if (parallel) {
+    assert.equal(state.count, 76, 'Acquire every executed movement after the parallel local count has passed 70');
+    assert.equal(state.refs.length, 6);
+    assert.equal(new Set(state.refs).size, 6, 'Retain the ordered distinct actual returns');
+    assert.deepEqual(state.loaded, room.learned.loaded, 'Reuse the loaded effect without relearning it');
+    assert.deepEqual(state.transportCarriers, room.learned.transportCarriers, 'Keep the independently witnessed peer identity');
+    assert.deepEqual(state.parallel.approach, []);
+  }
   assert.equal(state.sharedEvidence, room.learned.sharedEvidence, 'Keep the original transport proof');
 });
 
-for (const condition of ['blocked', 'ambiguous', 'lostCargo', 'unpairedShift', 'targetTaken'] as const)
-  test('a cooperative route closes on ' + condition + ' without issuing a second ticket', async () => {
-    const room = await witnessedRoom();
+for (const rotated of [false, true]) test('independently matched carriers retain the learned transport role outside a sector layout'
+  + (rotated ? ' with rotated geometry and remapped commands' : ''), async () => {
+  const room = await settledParallelRoom(rotated);
+  room.family.restore({ state: { ...room.family.state().state as Record<string, any>,
+    geometry: { ...room.learned.geometry, initial_boxes: [...room.learned.geometry.initial_boxes, room.at([11, 8])] } } });
+  const service = new V6AgentService(() => new NativeV6Runtime({ families: [room.family], sourceDigest: 'unique-observed-carrier-pairs', maxPointOccurrences: 250 }));
+  const sessionId = 'paired-peer-route-' + rotated;
+  let result = await service.handle({ type: 'init', sessionId, sequence: 0,
+    observation: toV6PublicObservation(room.packet(room.frame(2, { duplicatePeer: true }))), budgets: { targetLevels: 2, levelActionCaps: [40, 40] } });
+  assert.ok(result.ticket, JSON.stringify({ reason: result.snapshot.reason, message: result.snapshot.message, trace: result.snapshot.trace }));
+  const indices: number[] = [];
+  while (result.ticket) {
+    const ticket = result.ticket;
+    indices.push(ticket.actionIndex);
+    assert.ok(indices.length <= 16);
+    result = await service.handle({ type: 'advance', sessionId, sequence: indices.length, ticketId: ticket.id, executionMs: 1,
+      observation: toV6PublicObservation(room.packet(room.frame(2 + indices.length, { duplicatePeer: true })), indices.length) });
+  }
+  assert.deepEqual(indices, [0, 1, 2, 3, 4]);
+  const state = room.family.state().state as Record<string, any>;
+  assert.equal(state.sectorNetwork, undefined);
+  assert.deepEqual(state.transports.map((item: any) => item.box).sort(), [room.at([10, 5]), room.at([6, 8])].sort());
+  assert.ok(state.transports.every((item: any) => item.sources.length === 2));
+  assert.equal(result.snapshot.trace.findLast(event => event.kind === 'sealed_prefix')?.acquired_actions, 5);
+});
+
+for (const parallel of [false, true])
+  for (const condition of (parallel ? ['blocked', 'ambiguous', 'lostCargo', 'unpairedShift', 'targetTaken', 'interference'] as const
+    : ['blocked', 'ambiguous', 'lostCargo', 'unpairedShift', 'targetTaken'] as const))
+  test((parallel ? 'a settled parallel' : 'a cooperative') + ' route closes on ' + condition + ' without issuing a second ticket', async () => {
+    const room = await (parallel ? settledParallelRoom() : witnessedRoom());
     const service = new V6AgentService(() => new NativeV6Runtime({ families: [room.family], sourceDigest: 'cooperative-route-refutation', maxPointOccurrences: 250 }));
-    const sessionId = 'cooperative-stop-' + condition;
+    const sessionId = 'cooperative-stop-' + parallel + '-' + condition;
     const first = await service.handle({ type: 'init', sessionId, sequence: 0,
       observation: toV6PublicObservation(room.packet(room.frame(2))), budgets: { targetLevels: 2, levelActionCaps: [40, 40] } });
     assert.ok(first.ticket);
@@ -116,6 +167,36 @@ for (const condition of ['blocked', 'ambiguous', 'lostCargo', 'unpairedShift', '
       assert.equal(trace.findLast(event => event.kind === 'before_guard')?.admitted, false);
     } else assert.equal(trace.findLast(event => event.kind === 'actual_outcome')?.matched, false);
   });
+
+test('a settled parallel route uses the remaining action budget beyond its ordinary local horizon', async () => {
+  const room = await settledParallelRoom();
+  const rows = room.frame(2), observation = await room.observe(rows, 4);
+  const proposal = await room.family.propose(observation, rows, [], 3);
+  assert.ok(proposal);
+  assert.equal(proposal.actions.length, 3);
+  assert.ok(proposal.actions.every(action => action.action_ref === room.command));
+});
+
+test('a retained last-part approach is consumed once per actual return and stays unitary', async () => {
+  const room = await settledParallelRoom();
+  const state = room.family.state().state as Record<string, any>;
+  const approach = [3, 4, 5].map(x => ({ input: room.command,
+    prediction: { pose: room.at([x, 2]), face: room.direction, cargo: null } }));
+  room.family.restore({ state: { ...state, held: null, parallel: { ...state.parallel, approach } } });
+  for (let tick = 2; tick < 4; tick++) {
+    const first = room.frame(tick, { distantCargo: true, targetTaken: true });
+    const second = room.frame(tick + 1, { distantCargo: true, targetTaken: true });
+    const before = await room.observe(first, tick + 2), after = await room.observe(second, tick + 3);
+    const proposal = await room.family.propose(before, first, [], 20);
+    assert.ok(proposal);
+    assert.equal(proposal.actions.length, 1);
+    assert.equal(proposal.actions[0]?.action_ref, room.command);
+    assert.equal((room.family.state().state as Record<string, any>).parallel.approach.length, 5 - tick,
+      'Preparing an unexecuted command must not consume the retained approach');
+    await room.family.record(before, after, proposal.actions[0]!, first, second, proposal, 0, []);
+    assert.deepEqual((room.family.state().state as Record<string, any>).parallel.approach, approach.slice(tick - 1));
+  }
+});
 
 
 test('an acquired passage does not authorize a newly occupied landing already present before planning', async () => {
