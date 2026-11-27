@@ -51,3 +51,13 @@ Site 210 and GitHub main use `4313d7ce41505cece5f397dc8125b430697176ed`. The sam
 | ETAG | Published Site 210 | 6/6 | 274 |
 
 The per-game receipts retain the visible counter and the UTC observation time at every level transition. The original GRAV and CGWL viewer receipts are above.
+
+## Final two corrections
+
+SNAR won 6/6 in 163 actions on both the private Site 211 and the local build of `53480b31192831f15a5d0550eb72a3e699c43911`. PR143 passed all 28 checks, including 168 protected levels.
+
+WA30 won 9/9 in 613 actions on both the private Site 212 and port 4173. Each run began at level 1 in SIC with zero actions, then used only **Run to next level** within one session. Both served the exact main commit `0fe417b2e91bb8ca15573e82b79b7081157aeb37`. Both used the bundle `/assets/index-B8P9XO58.js` and displayed `The game reports WIN.`. The Site retained its owner-only access policy.
+
+PR144 passed all 38 checks on the same Git tree. The strict campaign confirmed all ten games and the continuity gate validated 170 levels across 26 games and 25 cohorts. The successful and failed qualification receipts remain on [the PR144 audit branch](https://github.com/yannick-fontan-1981/sra-playground/tree/39236e89787f786900c62bd497bd115c00a999d3/docs/diagnostics/sic-10-integration-20261127).
+
+All 27 corrections from the original campaign are qualified and integrated. The qualification record combines multiple revisions. The original complete campaign remains the recorded 80/107 result for a single revision.

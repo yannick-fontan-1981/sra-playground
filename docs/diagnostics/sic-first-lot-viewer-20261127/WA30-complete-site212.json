@@ -1,0 +1,163 @@
+{
+  "game": "WA30",
+  "source": "0fe417b2e91bb8ca15573e82b79b7081157aeb37",
+  "sourceTree": "359b57d62ee36110cfb349496eabe13d4ebfb13a",
+  "pullRequest": 144,
+  "siteVersion": 212,
+  "deployment": "appgprj_6adbc388d79081918581b93b919d7258~appgdep_bed1d0a6bbbc81918aeead96311ffd25",
+  "publishedVersion": "appgprj_6adbc388d79081918581b93b919d7258~appgver_2d431da46ba48191a9637887723e1a85",
+  "deploymentStatus": "succeeded/ready",
+  "bundle": "/assets/index-B8P9XO58.js",
+  "planning": "SIC",
+  "startLevel": 1,
+  "initialActions": 0,
+  "control": "Run to next level",
+  "sessionsPerSurface": 1,
+  "resets": 0,
+  "undos": 0,
+  "verdict": "The game reports WIN.",
+  "levelsSolved": 9,
+  "totalActions": 613,
+  "replays": [
+    {
+      "surface": "local",
+      "start": "http://127.0.0.1:4173/?game=WA30&level=1",
+      "finish": "http://127.0.0.1:4173/?game=WA30&level=9",
+      "levels": [
+        {
+          "level": 1,
+          "actions": 26,
+          "cumulativeActions": 26,
+          "completedPlans": 21,
+          "observedAt": "2026-11-27T17:55:50.607Z"
+        },
+        {
+          "level": 2,
+          "actions": 59,
+          "cumulativeActions": 85,
+          "completedPlans": 58,
+          "observedAt": "2026-11-27T17:56:26.870Z"
+        },
+        {
+          "level": 3,
+          "actions": 76,
+          "cumulativeActions": 161,
+          "completedPlans": 107,
+          "observedAt": "2026-11-27T17:56:48.289Z"
+        },
+        {
+          "level": 4,
+          "actions": 48,
+          "cumulativeActions": 209,
+          "completedPlans": 148,
+          "observedAt": "2026-11-27T17:57:17.594Z"
+        },
+        {
+          "level": 5,
+          "actions": 113,
+          "cumulativeActions": 322,
+          "completedPlans": 193,
+          "observedAt": "2026-11-27T17:57:46.351Z"
+        },
+        {
+          "level": 6,
+          "actions": 48,
+          "cumulativeActions": 370,
+          "completedPlans": 216,
+          "observedAt": "2026-11-27T17:58:00.286Z"
+        },
+        {
+          "level": 7,
+          "actions": 42,
+          "cumulativeActions": 412,
+          "completedPlans": 237,
+          "observedAt": "2026-11-27T17:58:14.383Z"
+        },
+        {
+          "level": 8,
+          "actions": 135,
+          "cumulativeActions": 547,
+          "completedPlans": 316,
+          "observedAt": "2026-11-27T17:59:16.798Z"
+        },
+        {
+          "level": 9,
+          "actions": 66,
+          "cumulativeActions": 613,
+          "completedPlans": 361,
+          "observedAt": "2026-11-27T17:59:58.991Z"
+        }
+      ]
+    },
+    {
+      "surface": "published",
+      "start": "https://sra-playground.yannick-fontan.chatgpt.site/?game=WA30&level=1",
+      "finish": "https://sra-playground.yannick-fontan.chatgpt.site/?game=WA30&level=9",
+      "levels": [
+        {
+          "level": 1,
+          "actions": 26,
+          "cumulativeActions": 26,
+          "completedPlans": 21,
+          "observedAt": "2026-11-27T17:57:32.759Z"
+        },
+        {
+          "level": 2,
+          "actions": 59,
+          "cumulativeActions": 85,
+          "completedPlans": 58,
+          "observedAt": "2026-11-27T17:57:52.003Z"
+        },
+        {
+          "level": 3,
+          "actions": 76,
+          "cumulativeActions": 161,
+          "completedPlans": 107,
+          "observedAt": "2026-11-27T17:58:16.041Z"
+        },
+        {
+          "level": 4,
+          "actions": 48,
+          "cumulativeActions": 209,
+          "completedPlans": 148,
+          "observedAt": "2026-11-27T17:58:36.330Z"
+        },
+        {
+          "level": 5,
+          "actions": 113,
+          "cumulativeActions": 322,
+          "completedPlans": 193,
+          "observedAt": "2026-11-27T17:59:08.543Z"
+        },
+        {
+          "level": 6,
+          "actions": 48,
+          "cumulativeActions": 370,
+          "completedPlans": 216,
+          "observedAt": "2026-11-27T17:59:23.744Z"
+        },
+        {
+          "level": 7,
+          "actions": 42,
+          "cumulativeActions": 412,
+          "completedPlans": 237,
+          "observedAt": "2026-11-27T17:59:37.361Z"
+        },
+        {
+          "level": 8,
+          "actions": 135,
+          "cumulativeActions": 547,
+          "completedPlans": 316,
+          "observedAt": "2026-11-27T18:00:33.644Z"
+        },
+        {
+          "level": 9,
+          "actions": 66,
+          "cumulativeActions": 613,
+          "completedPlans": 361,
+          "observedAt": "2026-11-27T18:01:08.264Z"
+        }
+      ]
+    }
+  ]
+}
