@@ -1,0 +1,284 @@
+{
+  "schema": "sic.queue-continuity.v1",
+  "game": "COLM",
+  "sourceCommit": "b653fada3b29ce085eb80a7a04bbdc6598913a69",
+  "sourceTree": "2491aae984acb46645a0299f59154af75851b127",
+  "sourceHashes": {
+    "src/sic/queued-placement.ts": "c3a41e15a9b556472cc6ddc9fe70f7c620c34eb155bc2d4889b79d231418839b",
+    "src/logos-engine/v6-queued-field-models.ts": "1df4892fc12d56065d551e96f1477680f3b532223d592aea8ccfdddc757dfb14",
+    "src/logos-engine/v6-queued-field-search.ts": "48c541067445cdb69708ecae9f8620f30bc98e6242c153d42f59be514876e509",
+    "src/sic/standalone-families.ts": "d2a35cbfb948b9ca8cefd6555418b7f1fd9d015cbbfc0df72d3877e56197b267",
+    "src/sic/experiment-selection-groups.ts": "a6f12252eeb361c3a0961818c996740410f79122d1d8160cac6f7ed0a9a67010",
+    "src/logos-engine/v6-native-runtime.ts": "ae5b257903e8e8dbe73a1fda0c4673efffbfcefadff99ad74f3936fc81471722",
+    "src/runtime/v6-agent-service.ts": "05333b7d65fc24d7ab3df6ea94733984836e21a05cfa49f5dc278f7d2a5c71d2",
+    "scripts/check-sic-chronological.mjs": "2cb80e62a41e1269f1a2a0dd9e9de20a32504b70724c167abaac1a8b9bae3111",
+    "scripts/compare-source100.mjs": "aa73d931ebd78e725df4c786163c403f85b106a1af520938c7d7b87ac390a01a",
+    "scripts/sic-continuity-evidence.mjs": "9b43fc59c7a7f0e6eed87abf4e45078abd0c3462df2b5849c527c269a7b14de5",
+    "scripts/verify-sic-continuity.mjs": "7196c79ac11263b1be5e4a0a2baf6aef09740def6561eec03a5932ef8b1ccd6b",
+    "scripts/sic-replay-budgets.mjs": "308ae1c2d28a21dc7f2e3d06c83e601877d5388db2723148b5900d58c5a89931",
+    "docs/architecture/sic-replay-reference-levels-20261126.json": "67ae5216b80e87bbb2243138fde7970ea5c725a5f832f1b72aa8b0780e270854",
+    "docs/architecture/sic-v8-level6-campaign-7bb9f152.json": "18cafd4d8b6a9a29c18f5e07ab1d1e63b74e53b1c0fc605f6dbbd390aae7efcc"
+  },
+  "sourceUnchangedDuringRuns": true,
+  "strictResultSha256": "6cce111fdf577ceccc7fc7cba6cc2f4c727e40f0b589cddcfbdea15f85da4396",
+  "collectorResultSha256": "0e3699ad9b8526727066105e0594c276e58a19d6df805e31231b251b274c828b",
+  "samePublicCommandReturnTrajectory": true,
+  "publicTrajectorySha256": "96fa4f9de4fa3bdd962b528ee2cd5b87cb45f32b373cc4545c3aa208986102db",
+  "levelsWon": 6,
+  "commands": 103,
+  "acquiredRecords": 103,
+  "reset": 0,
+  "undo": 0,
+  "decisions": 46,
+  "continued": 57,
+  "preparedReceives": 29,
+  "knownReceives": 32,
+  "currentReacquisitions": 26,
+  "officialReceiveScores": 6,
+  "perLevel": [
+    {
+      "level": 1,
+      "commands": 17,
+      "budget": {
+        "actions": 22,
+        "activeTimeMs": 20000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=COLM; level=1; won=true",
+        "timeBasis": "measured"
+      },
+      "scoredMs": 5623,
+      "activeMs": 5761,
+      "settlementMs": 337,
+      "prefixHash": "1dbbb65241430c64134960b0a70ad39aac6906237a00cf441772360bd4d40fb5",
+      "acquiredRecordsCumulative": 17,
+      "decisions": 10,
+      "continued": 7,
+      "preparedReceives": 4,
+      "preparations": {
+        "reorder": 3,
+        "translate": 4
+      },
+      "seriesLengths": [
+        2,
+        2,
+        4,
+        3
+      ],
+      "knownReceives": 5,
+      "currentReacquisitions": 4,
+      "officialReceiveScores": 1
+    },
+    {
+      "level": 2,
+      "commands": 17,
+      "budget": {
+        "actions": 34,
+        "activeTimeMs": 24000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=COLM; level=2; won=true",
+        "timeBasis": "measured"
+      },
+      "scoredMs": 3364,
+      "activeMs": 3542,
+      "settlementMs": 355,
+      "prefixHash": "3a21567cf91b8d8a1c6a94df5cd577bb3c5801afb93a5b2e1d2fb53443215e11",
+      "acquiredRecordsCumulative": 34,
+      "decisions": 6,
+      "continued": 11,
+      "preparedReceives": 5,
+      "preparations": {
+        "reorder": 7,
+        "translate": 4
+      },
+      "seriesLengths": [
+        3,
+        4,
+        2,
+        4,
+        3
+      ],
+      "knownReceives": 6,
+      "currentReacquisitions": 5,
+      "officialReceiveScores": 1
+    },
+    {
+      "level": 3,
+      "commands": 20,
+      "budget": {
+        "actions": 63,
+        "activeTimeMs": 43000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=COLM; level=3; won=true",
+        "timeBasis": "measured"
+      },
+      "scoredMs": 4783,
+      "activeMs": 5047,
+      "settlementMs": 487,
+      "prefixHash": "f4a179f6ffd60f9684251aac6eb5c15efef2356e20f3962d1de077759102a63c",
+      "acquiredRecordsCumulative": 54,
+      "decisions": 11,
+      "continued": 9,
+      "preparedReceives": 5,
+      "preparations": {
+        "reorder": 2,
+        "translate": 7
+      },
+      "seriesLengths": [
+        3,
+        4,
+        3,
+        2,
+        2
+      ],
+      "knownReceives": 6,
+      "currentReacquisitions": 5,
+      "officialReceiveScores": 1
+    },
+    {
+      "level": 4,
+      "commands": 23,
+      "budget": {
+        "actions": 32,
+        "activeTimeMs": 19000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=COLM; level=4; won=true",
+        "timeBasis": "measured"
+      },
+      "scoredMs": 5397,
+      "activeMs": 5954,
+      "settlementMs": 859,
+      "prefixHash": "249e94f0a855eab804a0baf2e3935fba761980f23af96869cf27544c4bff6a1c",
+      "acquiredRecordsCumulative": 77,
+      "decisions": 10,
+      "continued": 13,
+      "preparedReceives": 6,
+      "preparations": {
+        "reorder": 6,
+        "translate": 7
+      },
+      "seriesLengths": [
+        2,
+        4,
+        3,
+        3,
+        3,
+        4
+      ],
+      "knownReceives": 6,
+      "currentReacquisitions": 5,
+      "officialReceiveScores": 1
+    },
+    {
+      "level": 5,
+      "commands": 10,
+      "budget": {
+        "actions": 69,
+        "activeTimeMs": 43000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=COLM; level=5; won=true",
+        "timeBasis": "measured"
+      },
+      "scoredMs": 2053,
+      "activeMs": 2455,
+      "settlementMs": 519,
+      "prefixHash": "a0eb2a2cf3ef824002c964fb4d0b055196532f3ff27d0339202e5c6c8a8d41ed",
+      "acquiredRecordsCumulative": 87,
+      "decisions": 3,
+      "continued": 7,
+      "preparedReceives": 3,
+      "preparations": {
+        "reorder": 5,
+        "translate": 2
+      },
+      "seriesLengths": [
+        4,
+        4,
+        2
+      ],
+      "knownReceives": 3,
+      "currentReacquisitions": 2,
+      "officialReceiveScores": 1
+    },
+    {
+      "level": 6,
+      "commands": 16,
+      "budget": {
+        "actions": 26,
+        "activeTimeMs": 13000,
+        "source": "docs/architecture/sic-v8-validation.md :: COLM niveau 6, planifier sur toute la file visible",
+        "timeBasis": "measured"
+      },
+      "scoredMs": 4390,
+      "activeMs": 4838,
+      "settlementMs": 642,
+      "prefixHash": "96fa4f9de4fa3bdd962b528ee2cd5b87cb45f32b373cc4545c3aa208986102db",
+      "acquiredRecordsCumulative": 103,
+      "decisions": 6,
+      "continued": 10,
+      "preparedReceives": 6,
+      "preparations": {
+        "reorder": 4,
+        "translate": 6
+      },
+      "seriesLengths": [
+        3,
+        3,
+        3,
+        2,
+        2,
+        3
+      ],
+      "knownReceives": 6,
+      "currentReacquisitions": 5,
+      "officialReceiveScores": 1
+    }
+  ],
+  "validation": {
+    "observedAt": "2026-11-27T03:03:46.644463+00:00",
+    "baseCommit": "b653fada3b29ce085eb80a7a04bbdc6598913a69",
+    "testsExitCode": 0,
+    "tests": 42,
+    "passed": 42,
+    "failed": 0,
+    "typecheckExitCode": 0,
+    "realCollectorCheckRunPassed": true,
+    "realCollectorLevels": 6,
+    "fullIntegratedGate": "Pending CI on final integrated SHA",
+    "gateSha256": "290671d7b57fc3421b2a3f2263876602a34de8eeb1a165b8402d7b1eef206ec8",
+    "testsCommand": [
+      "node",
+      "--test",
+      "tests/sic-queue-continuity-contract.test.mjs",
+      "tests/sic-queue-continuity-evidence.test.mjs",
+      "tests/sic-profile-continuity-contract.test.mjs",
+      "tests/sic-continuity-contract.test.mjs",
+      "tests/sic-continuity-evidence.test.mjs",
+      "tests/sic-queued-control-transfer.test.ts"
+    ],
+    "typecheckCommand": [
+      "npm",
+      "run",
+      "typecheck"
+    ]
+  },
+  "gateFilesSha256": {
+    "scripts/verify-sic-continuity.mjs": "290671d7b57fc3421b2a3f2263876602a34de8eeb1a165b8402d7b1eef206ec8",
+    ".github/workflows/sic-continuity.yml": "3a6f6e863975d4904077bd1e61a59908da092d41d9a72540b16023c7c91f93d7",
+    "tests/sic-queue-continuity-contract.test.mjs": "397cd145f752c8647e2fc84d0534953d10fa8b7869392cc7d14a59b9696c19b6",
+    "tests/fixtures/sic-queue-continuity-public.json.gz": "aae8231f267e28a0636963d0db63ebc692009196fada7556dad0f6ed3af85b4f"
+  },
+  "continuityCoverage": {
+    "games": 15,
+    "levels": 90,
+    "cohorts": 13,
+    "previousGames": 14,
+    "previousLevels": 84,
+    "previousThresholdsUnchanged": true
+  },
+  "limitations": [
+    "The full 90-level gate must run on the final integrated SHA in CI.",
+    "The published Site COLM replay remains a separate delivery check.",
+    "Official boundary receipts are not counted as current owner reacquisition.",
+    "Collector wall time is not used as strict timing qualification."
+  ],
+  "archive": {
+    "file": "public-evidence.tar.gz",
+    "bytes": 24642,
+    "sha256": "0c3da740362b7e45d55e04d9f726322dc8d2226ab3f68297de0e53ac76e741fe"
+  }
+}

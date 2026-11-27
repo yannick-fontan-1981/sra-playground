@@ -72,11 +72,13 @@ export function createSicQueuedPlacement(family = queuedPlacementId): NativeFami
       // Several visible colors lie outside the active group. A plan for only
       // that group can miss preparations for cascades of those other colors.
       const outsideGroup = visibleInks?.filter(ink => !scene.mark.values.includes(ink)).length ?? 0;
-      if (!local && outsideGroup >= 2 && state?.epoch === observation.level_epoch - 1
-        && observation.levels_completed > state.levelsCompleted
-        && equal(state.observedInks, visibleInks)) {
+      // The input effects can transfer even when a longer queue horizon is
+      // unnecessary. Revalidate each retained effect against the current field.
+      if (!local && state?.epoch === observation.level_epoch - 1
+        && observation.levels_completed > state.levelsCompleted) {
         const portable = portableQueueHypothesis(state, scene, observation);
-        if (portable) local = { ...portable, wholeQueue: true };
+        if (portable) local = { ...portable,
+          wholeQueue: outsideGroup >= 2 && equal(state.observedInks, visibleInks) };
       }
       const controls = local?.controls ?? {};
       const laws = Object.values(controls) as { kind: string; delta?: number; permutations?: number[][] }[];
@@ -125,7 +127,7 @@ export function createSicQueuedPlacement(family = queuedPlacementId): NativeFami
       if (strategy === 'prepare_queued_group' && local && plan) {
         for (const planned of plan.actions.slice(1, Math.min(remaining, 16))) {
           if (!preparation || !available.includes(planned.action_ref)) break;
-          if (horizon && controls[planned.action_ref]?.kind === 'receive') {
+          if (controls[planned.action_ref]?.kind === 'receive') {
             actions.push({ action_ref: planned.action_ref, data: {} });
             preparations.push(null);
             break;

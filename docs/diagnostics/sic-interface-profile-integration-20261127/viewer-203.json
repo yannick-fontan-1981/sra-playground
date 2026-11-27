@@ -1,0 +1,127 @@
+{
+  "schema": "sic.published-viewer-verification.v1",
+  "source": {
+    "branch": "main",
+    "sha": "c97797426f619db16de5b29738a8d4209c78ebca",
+    "tree": "487bf0c739ba57dccfbb7cb9255e8eb6b0a4b3ce",
+    "pullRequest": 135,
+    "workBranch": "fix/sic-27-interface-profiles-20261127",
+    "localHead": "fe822410b2d544553d6b8b2536c3af45cfb9e10f",
+    "pushedHead": "f52dca20974a95a07f43ad5a38f71a3a8d36800d"
+  },
+  "publication": {
+    "version": 203,
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_11d43647087c8191a3e2d14d6bad3cbf",
+    "deploymentId": "appgprj_6adbc388d79081918581b93b919d7258~appgdep_a074c776ae1481918a267873d3c53649",
+    "status": "succeeded",
+    "source": "c97797426f619db16de5b29738a8d4209c78ebca",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "archive": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000007484820eaa871324d44c8640",
+      "content_hash": "sha256:3d5fb6c4294dadebbe8b3ac437c37c83b6d0d326b907ea1b119fef823fc447b7",
+      "size_bytes": 34928640,
+      "file_count": 75
+    },
+    "githubSiteDivergence": false
+  },
+  "ci": {
+    "run": 45928738911,
+    "successfulJobs": 14,
+    "finalJob": 140278610260,
+    "command": "npm run test:sic-continuity",
+    "protectedLevels": 84,
+    "protectedGames": 14,
+    "cohorts": 12
+  },
+  "viewer": {
+    "environment": "local managed preview of the exact published source",
+    "baseUrl": "http://127.0.0.1:4173/",
+    "mode": "SIC",
+    "startLevel": 1,
+    "sessionsPerGame": 1,
+    "controls": "Run to next level",
+    "resets": 0,
+    "intermediateNewSessions": 0,
+    "timedQualification": false,
+    "observedAt": "2026-11-27T02:54:22.866Z"
+  },
+  "games": [
+    {
+      "code": "GRIL",
+      "officialMessage": "The game reports WIN.",
+      "levels": 6,
+      "target": 6,
+      "commands": 74,
+      "cumulativeCommands": [
+        5,
+        10,
+        18,
+        26,
+        39,
+        74
+      ],
+      "commandsByLevel": [
+        5,
+        5,
+        8,
+        8,
+        13,
+        35
+      ],
+      "completedPlans": 74,
+      "observedUrl": "http://127.0.0.1:4173/?game=GRIL&level=6"
+    },
+    {
+      "code": "RSWP",
+      "officialMessage": "The game reports WIN.",
+      "levels": 6,
+      "target": 6,
+      "commands": 110,
+      "cumulativeCommands": [
+        3,
+        11,
+        19,
+        30,
+        60,
+        110
+      ],
+      "commandsByLevel": [
+        3,
+        8,
+        8,
+        11,
+        30,
+        50
+      ],
+      "completedPlans": 110,
+      "observedUrl": "http://127.0.0.1:4173/?game=RSWP&level=6"
+    },
+    {
+      "code": "LKEY",
+      "officialMessage": "The game reports WIN.",
+      "levels": 6,
+      "target": 6,
+      "commands": 119,
+      "cumulativeCommands": [
+        8,
+        16,
+        36,
+        65,
+        89,
+        119
+      ],
+      "commandsByLevel": [
+        8,
+        8,
+        20,
+        29,
+        24,
+        30
+      ],
+      "completedPlans": 41,
+      "observedUrl": "http://127.0.0.1:4173/?game=LKEY&level=6"
+    }
+  ],
+  "qualification": "The three games report official WIN from level 1 in one SIC session each through the visible controls. This verifies the delivered source in the local viewer, not a timed benchmark or a hosted-browser replay. Strict unchanged-budget results are archived separately. The final 107-game campaign remains outstanding."
+}
