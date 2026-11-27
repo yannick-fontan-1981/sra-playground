@@ -8,6 +8,8 @@ import type { NativeCommand, NativeFamily, NativePoint, NativeRecord, NativeRows
 import { V6AgentService } from '../src/runtime/v6-agent-service.ts';
 import { evidencedPlanGroup, transferredPreviewGroup } from '../src/sic/experiment-arbitration.ts';
 import { createPreparedEffects } from '../src/sic/test-prepared-effects.ts';
+import { defaultRecoveryPack } from '../src/sic/active-recovery.ts';
+import { createSicPivotCargo } from '../src/sic/pivot-cargo.ts';
 import { acceptPreviewCarry, carryPreviewBindings, checkWitnessedPreview, newPreviewLearning,
   observePreviewBindings, offerWitnessedPreview, visualLayout } from '../src/sic/witnessed-preview-transfer.ts';
 
@@ -161,7 +163,7 @@ test('an absent interface or ambiguous actor leaves the inherited fact open with
   }
 });
 
-test('an unchanged command refutes every proposed arrival on the same public frame without erasing another learned role', async () => {
+test('an unchanged command refutes duplicate bindings of the same identified interface without erasing another learned role', async () => {
   const v = variants[0]!, sample = await acquire(v, 'same-command-refutation');
   const learning = acceptPreviewCarry(carryPreviewBindings(sample.family.state!().previewLearning,
     sample.after, sample.current), sample.current);
@@ -189,6 +191,87 @@ test('an unchanged command refutes every proposed arrival on the same public fra
   assert.equal(nextLevel.frame_hash, still.frame_hash);
   assert.ok(offerWitnessedPreview(learning, nextLevel, visualLayout(nextLevel, sample.currentRows),
     new Set(nextLevel.available_action_refs), 'another-attested-association'), 'An identical raster in another level does not inherit a command refutation');
+});
+
+for (const [index, v] of variants.entries()) test('a stationary return without an acquired interface only refutes its own association, variant ' + index, async () => {
+  const sample = await acquire(v, 'unscoped-stationary-' + index);
+  const plainRows = raster(v, v.old, v.oldTarget, false), plain = await sample.observe(plainRows, 1, 1);
+  const learning = newPreviewLearning();
+  const command = v.command === 'ACTION6' ? 'ACTION6:' + v.oldTarget.join(',') : v.command;
+  observePreviewBindings(learning, plain, sample.after, visualLayout(plain, plainRows),
+    visualLayout(sample.after, sample.afterRows), command);
+  const currentRows = raster(v, v.current, v.target, false), current = await sample.observe(currentRows, 2, 3);
+  const retained = acceptPreviewCarry(carryPreviewBindings(learning, sample.after, current), current);
+  const layout = visualLayout(current, currentRows), available = new Set(current.available_action_refs);
+  const offer = offerWitnessedPreview(retained, current, layout, available)!;
+  assert.ok(offer);
+  assert.equal(offer.witness.interface, undefined);
+  retained.bindings['independent-unmarked-association'] = structuredClone(retained.bindings[offer.key]!);
+  const proof = structuredClone(retained.bindings[offer.key]);
+  const still = await sample.observe(currentRows, 2, 4);
+  assert.equal(checkWitnessedPreview(retained, offer, current, still, layout,
+    visualLayout(still, currentRows), offer.command).status, 'contradicted');
+  assert.equal(offerWitnessedPreview(retained, still, layout, available, offer.key), null);
+  assert.ok(offerWitnessedPreview(retained, still, layout, available, 'independent-unmarked-association'));
+  assert.equal(Object.keys(retained.refutedCommands ?? {}).length, 0);
+  assert.deepEqual(retained.bindings[offer.key], proof);
+});
+
+test('refuting one identified interface does not refute a second interface using the same directional input', async () => {
+  const first = { ...variants[0]!, command: 'ACTION2' },
+    second = { ...variants[1]!, current: [37, 24] as NativePoint, target: [50, 18] as NativePoint };
+  const learning = newPreviewLearning();
+  for (const v of [first, second]) {
+    const sample = await acquire(v, 'separate-interface');
+    observePreviewBindings(learning, sample.before, sample.after, visualLayout(sample.before, sample.beforeRows),
+      visualLayout(sample.after, sample.afterRows), v.command);
+  }
+  const rows = raster(first, first.current, first.target, true), other = raster(second, second.current, second.target, true);
+  for (let y = 0; y < rows.length; y++) for (let x = 0; x < rows[y]!.length; x++) if (other[y]![x]) rows[y]![x] = other[y]![x]!;
+  const current = await measureNativeObservation({ ...packet(rows, 2, first.command), frame_hash: await publicFrameHash(rows) }, 3, 'separate-interface');
+  const layout = visualLayout(current, rows), available = new Set(current.available_action_refs);
+  const offers = Object.keys(learning.bindings).map(key => offerWitnessedPreview(learning, current, layout, available, key)).filter(value => value !== null);
+  assert.equal(offers.length, 2);
+  assert.equal(offers[0]!.command, offers[1]!.command);
+  const still = { ...current, revision: 4, observation_ref: current.observation_ref.replace('revision:3:', 'revision:4:') };
+  assert.equal(checkWitnessedPreview(learning, offers[0]!, current, still, layout, layout, offers[0]!.command).status, 'contradicted');
+  assert.ok(offerWitnessedPreview(learning, still, layout, available, offers[1]!.key));
+});
+
+test('the public cargo snapshot retains distinct negative controls before its acquired transport continues', async () => {
+  const captured = JSON.parse(gunzipSync(readFileSync(new URL('./fixtures/sic-preview-cargo-refutation-public.json.gz', import.meta.url))).toString());
+  assert.deepEqual(captured.publicBefore.frame, captured.firstObservedReturn.frame);
+  const prepared = createPreparedEffects(undefined, defaultRecoveryPack), cargo = createSicPivotCargo();
+  prepared.restore!(captured.familyStatesBefore.sic_test_prepared_effects);
+  cargo.restore!(captured.familyStatesBefore.sic_pivot_cargo);
+  const rows = captured.publicBefore.frame;
+  const observation = (offset: number) => measureNativeObservation({ frame_rows: rows,
+    frame_hash: '', level: captured.publicBefore.level, levels_completed: captured.publicBefore.levelsCompleted,
+    state: captured.publicBefore.state, available_action_refs: captured.publicBefore.availableActionIds.map((id: number) => 'ACTION' + id),
+  }, captured.revision + offset, captured.scope);
+  let current = await observation(0);
+  const inputs = current.available_action_refs.map(action_ref => ({ action_ref, data: {} }));
+  assert.equal((await cargo.propose(current, rows, inputs, 128))?.actions[0]?.action_ref, 'ACTION3',
+    'The acquired cargo control is already available before either stationary experiment');
+  const associations: string[] = [];
+  for (let offset = 1; offset <= 2; offset++) {
+    const proposal = await prepared.proposeInGroup!(evidencedPlanGroup, current, rows, inputs, 128 - offset);
+    assert.ok(proposal);
+    assert.equal(proposal.actions[0]!.action_ref, 'ACTION1');
+    const forecast = proposal.experiment.witnessedPreview!;
+    assert.equal(forecast.witness.interface, undefined);
+    associations.push(forecast.key);
+    const returned = await observation(offset);
+    const receipt = await prepared.record(current, returned, proposal.actions[0]!, rows, rows, proposal, 0);
+    assert.equal(receipt?.events[0]?.result, 'preview_contradicted');
+    current = returned;
+  }
+  assert.equal(new Set(associations).size, 2);
+  assert.equal(Object.keys(prepared.state!().previewLearning.refutedCommands ?? {}).length, 0);
+  assert.equal(await prepared.proposeInGroup!(evidencedPlanGroup, current, rows, inputs, 126), null);
+  assert.equal((await cargo.propose(current, rows, inputs, 126))?.actions[0]?.action_ref, 'ACTION3');
+  assert.ok(await prepared.proposeInGroup!(transferredPreviewGroup, current, rows, inputs, 126),
+    'The next untested association remains available after the specialist groups');
 });
 
 test('a measured success without the earlier interface revises that precondition while keeping both proofs', async () => {
