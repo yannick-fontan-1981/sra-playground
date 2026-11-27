@@ -3,6 +3,15 @@ import { continuityObservation, requireExecutedPrefix } from './sic-continuity-c
 import { gridOwner } from './sic-grid-continuity.mjs';
 
 export const gridCeilings = [21,29,28,44,42,35];
+// Actual tickets from the combined-source SNAR collection, run 46028362277.
+export const gridContinuity = [
+  { actions: 16, continued: 6, walks: 6, holds: 0, exits: 0, terrain: 0 },
+  { actions: 24, continued: 6, walks: 6, holds: 0, exits: 0, terrain: 0 },
+  { actions: 23, continued: 7, walks: 7, holds: 0, exits: 0, terrain: 0 },
+  { actions: 36, continued: 8, walks: 8, holds: 0, exits: 0, terrain: 2 },
+  { actions: 35, continued: 4, walks: 3, holds: 0, exits: 0, terrain: 1 },
+  { actions: 29, continued: 11, walks: 8, holds: 2, exits: 1, terrain: 7 },
+];
 const delta = (action, columns) => ({ ACTION1:-columns,ACTION2:columns,ACTION3:-1,ACTION4:1 })[action];
 const position = value => value && value.actorCount === 1 && Number.isSafeInteger(value.actor);
 
@@ -102,4 +111,20 @@ export function measureGridContinuity(run, issued, groups) {
         continued, confirmedExit, terrainUnderPatrols });
   }
   return physical;
+}
+
+export function requireGridContinuity(level, run, issued, groups) {
+  const expected = gridContinuity[level - 1];
+  assert.ok(expected, 'Missing qualified grid level');
+  assert.ok(issued.length <= gridCeilings[level - 1] && issued.every(ticket => ticket.resets === 0),
+    'SNAR exceeded its original chronological ceiling or reset');
+  assert.ok(issued.length - groups.size >= expected.continued, 'SNAR lost its executed grid continuity');
+  const effects = measureGridContinuity(run, issued, groups);
+  const count = (kind, field) => effects.filter(effect => kind === null || effect.kind === kind)
+    .reduce((total, effect) => total + effect[field], 0);
+  assert.ok(count('known grid walk', 'continued') >= expected.walks, 'SNAR lost physically confirmed known walks');
+  assert.ok(count('stationary hold', 'continued') >= expected.holds, 'SNAR lost its physically confirmed stationary hold');
+  assert.ok(count('probe with known exit', 'confirmedExit') >= expected.exits, 'SNAR lost the guarded official exit');
+  assert.ok(count(null, 'terrainUnderPatrols') >= expected.terrain, 'SNAR lost preserved terrain under measured patrols');
+  return effects;
 }

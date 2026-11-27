@@ -3,6 +3,8 @@ import { readFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import test from 'node:test';
 import { captureGridContinuity, observeGridReturn, completeGridContinuity } from '../scripts/sic-grid-continuity.mjs';
+import { checkRun } from '../scripts/verify-sic-continuity.mjs';
+import { gridContinuity } from '../scripts/sic-grid-continuity-contract.mjs';
 const fixture=JSON.parse(gunzipSync(readFileSync(new URL('./fixtures/sic-patrol-terrain-public.json.gz',import.meta.url))));
 const ticket={actionIndex:0,actionRef:fixture.proposal.actions[0].action_ref,
   observationRef:fixture.proposal.binding.observation_ref,levelsCompleted:fixture.walk[0].before.levelsCompleted};
@@ -31,4 +33,30 @@ test('passive grid observation preserves an official boundary without inventing 
  const captured=captureGridContinuity(fixture.proposal,ticket,fixture.walk[0].before.frame);
  const observed=observeGridReturn(captured,[],ticket.levelsCompleted+1);
  assert.equal(observed.boundary,true);assert.equal(observed.after,null);
+});
+
+const realReceipt = () => JSON.parse(gunzipSync(readFileSync(new URL(
+  '../docs/diagnostics/sic-timed-grid-continuity-20261127/ci-339f31bf-46028362277/receipt.jsonl.gz',
+  import.meta.url))).toString());
+
+test('the six measured chronological levels satisfy the shared grid gate', () => {
+  const run = realReceipt();
+  assert.deepEqual(run.levels.map(level => level.actions), gridContinuity.map(level => level.actions));
+  assert.equal(checkRun(run).length, 6);
+});
+
+test('the grid gate detects a changed public exit despite the official result', () => {
+  const run = realReceipt();
+  const first = run.executedTickets.find(ticket => ticket.grid?.experimental);
+  first.grid.after.exitSignature = 'different visible exit';
+  assert.throws(() => checkRun(run), /does not follow its preceding physical return/);
+});
+
+test('the grid gate detects terrain contradicted by reconciliation under a patrol', () => {
+  const run = realReceipt();
+  const acquired = run.executedTickets.find(ticket => ticket.grid?.acquisition && ticket.outcome?.matched === true && !ticket.grid.boundary
+    && Object.keys(ticket.grid.terrainBeforePatrols ?? {}).length);
+  const [cell, prior] = Object.entries(acquired.grid.terrainBeforePatrols)[0];
+  acquired.grid.acquisition.terrainUnderPatrols[cell] = prior === 'wall' ? 'free' : 'wall';
+  assert.throws(() => checkRun(run), /preserve their independently known terrain/);
 });
