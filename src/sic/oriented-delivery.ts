@@ -201,15 +201,19 @@ function peerShell(local: State, scene: Scene, box: NativePoint, carrier: string
   return roles.length === 1 ? roles[0]!.shell : value;
 }
 
+function uncontestedContact(box: NativePoint, local: State, ...observations: NativeObservation[]): boolean {
+  return observations.every(observation => ![...carrierPositions(observation, local).values()]
+    .some(poses => poses.some(pose => distance(pose, box) === 1)));
+}
+
 function recordContactAppearance(before: NativeObservation, after: NativeObservation, local: State, next: State,
   old: Scene, scene: Scene, step: Step): void {
   const released = local.releasedContact;
   delete next.releasedContact;
-  const unowned = (box: NativePoint) => ![...carrierPositions(before, local).values(), ...carrierPositions(after, local).values()]
-    .flat().some(pose => distance(pose, box) === 1);
   if (released && released.sources.at(-1) === before.observation_ref && step.intent === 'motion' && !local.held
     && same(released.point, add(old.pose, old.face)) && !same(released.point, add(scene.pose, scene.face))
-    && old.boxes[key(released.point)] === released.ink && Object.hasOwn(scene.boxes, key(released.point)) && unowned(released.point)) {
+    && old.boxes[key(released.point)] === released.ink && Object.hasOwn(scene.boxes, key(released.point))
+    && uncontestedContact(released.point, local, before, after)) {
     if (scene.boxes[key(released.point)] === local.geometry.rest_shell) {
       next.contactAppearance = { ink: released.ink, core: local.geometry.core, restShell: local.geometry.rest_shell,
         sources: [...released.sources, after.observation_ref] };
@@ -218,7 +222,7 @@ function recordContactAppearance(before: NativeObservation, after: NativeObserva
   const held = sceneHeld(old), ink = held && scene.boxes[key(held)];
   if (step.intent === 'release' && held && same(held, local.held) && !sceneHeld(scene)
     && same(old.pose, scene.pose) && same(old.face, scene.face) && typeof ink === 'number'
-    && ink !== local.geometry.rest_shell && ink !== scene.face_value && unowned(held)) {
+    && ink !== local.geometry.rest_shell && ink !== scene.face_value && uncontestedContact(held, local, before, after)) {
     next.releasedContact = { point: held, ink, sources: [before.observation_ref, after.observation_ref] };
   }
 }
@@ -722,7 +726,7 @@ function walkPrefix(step: Step, initial: Scene, local: State, remaining: number,
   const contact = knownContactAppearance(local), front = add(initial.pose, initial.face);
   const withdrawable = !cargo && contact && initial.boxes[key(front)] === contact.ink
     && !routeSubjects(local, step).some(site => same(site, front))
-    && ![...carrierPositions(observation, local).values()].flat().some(pose => distance(pose, front) === 1) ? front : null;
+    && uncontestedContact(front, local, observation) ? front : null;
   const limit = local.passage || local.parallel ? remaining : (local.relay || local.sectorNetwork ? 120 : 70) - local.count;
   for (const { input, prediction } of step.route?.slice(0, Math.max(0, Math.min(remaining, maximumCommittedActions, limit))) ?? []) {
     const known = (cargo ? local.loaded : local.free)[input];
@@ -753,17 +757,14 @@ function matchesScene(actual: Scene | null, predicted: Scene): boolean {
     && Object.entries(predicted.boxes).every(([position, value]) => actual.boxes[position] === value);
 }
 
-function contactWithdrawalMatches(walk: WalkStep, local: State, before: NativeObservation, after: NativeObservation,
-  first: NativeRows, second: NativeRows): boolean {
+function returnedContactShell(walk: WalkStep, local: State, before: NativeObservation, after: NativeObservation,
+  old: Scene | null, actual: Scene | null): number | undefined {
   const box = walk.withdrawnContact;
-  if (!box) return true;
-  const contact = knownContactAppearance(local), old = orientedCouplingScene(first, local.geometry, local.color) as Scene | null;
-  const actual = orientedCouplingScene(second, local.geometry, local.color) as Scene | null;
-  return !!contact && !!old && !!actual && !walk.cargoBefore && !walk.cargoAfter
-    && same(box, add(old.pose, old.face)) && !same(box, add(actual.pose, actual.face))
-    && old.boxes[key(box)] === contact.ink && actual.boxes[key(box)] === contact.restShell
-    && ![...carrierPositions(before, local).values(), ...carrierPositions(after, local).values()]
-      .flat().some(pose => distance(pose, box) === 1);
+  const contact = knownContactAppearance(local);
+  if (!box || !contact || !old || !actual || sceneHeld(old) || sceneHeld(actual)
+    || !same(box, add(old.pose, old.face)) || same(box, add(actual.pose, actual.face))
+    || old.boxes[key(box)] !== contact.ink || !uncontestedContact(box, local, before, after)) return undefined;
+  return actual.boxes[key(box)];
 }
 
 function receiverEdge(g: Geometry, [x, y]: NativePoint, dx: number, dy: number): boolean {
@@ -826,10 +827,8 @@ function protectedRouteCells(actual: Scene, predicted: Scene, guard: PeerGuard):
 }
 
 function peerRouteReturn(proposal: Proposal, walk: WalkStep, before: NativeObservation, after: NativeObservation,
-  first: NativeRows, second: NativeRows): boolean {
+  old: Scene | null, actual: Scene | null): boolean {
   const { local, peerGuard } = proposal;
-  const old = orientedCouplingScene(first, local.geometry, local.color) as Scene | null;
-  const actual = orientedCouplingScene(second, local.geometry, local.color) as Scene | null;
   if (!peerGuard || !matchesOwnRoute(old, walk.before, walk.cargoBefore)
     || !matchesOwnRoute(actual, walk.after, walk.cargoAfter) || !protectedRouteCells(actual, walk.after, peerGuard)) return false;
   const expected = { ...old.boxes };
@@ -1103,11 +1102,14 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const walk = proposal.walk?.[index];
       if (walk) {
         const { local } = proposal;
-        const matched = before.state === after.state
-          && (!local.parallel || !carrierForms(second, local.geometry, local.parallel.ink).length)
-          && contactWithdrawalMatches(walk, local, before, after, first, second)
-          && (proposal.peerGuard ? peerRouteReturn(proposal, walk, before, after, first, second)
-            : matchesScene(orientedCouplingScene(second, local.geometry, local.color) as Scene | null, walk.after));
+        let matched = false;
+        if (before.state === after.state && (!local.parallel || !carrierForms(second, local.geometry, local.parallel.ink).length)) {
+          const actual = orientedCouplingScene(second, local.geometry, local.color) as Scene | null;
+          const old = walk.withdrawnContact || proposal.peerGuard
+            ? orientedCouplingScene(first, local.geometry, local.color) as Scene | null : null;
+          matched = (!walk.withdrawnContact || returnedContactShell(walk, local, before, after, old, actual) === local.geometry.rest_shell)
+            && (proposal.peerGuard ? peerRouteReturn(proposal, walk, before, after, old, actual) : matchesScene(actual, walk.after));
+        }
         return { matched, seal_prefix: !matched || index + 1 === proposal.actions.length,
           reason: matched ? 'carrier_and_parts_followed_declared_route' : 'carrier_or_parts_diverged' };
       }
@@ -1185,6 +1187,10 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const next: State = { ...local, count: local.count + 1, invitation: null, refs: [...local.refs.slice(-5), after.observation_ref],
         tried: [...local.tried, index === 0 ? proposal.attempt : JSON.stringify([old.pose, old.face, old.boxes, local.held, action.action_ref])] };
       recordContactAppearance(before, after, local, next, old, scene, step);
+      if (walk?.withdrawnContact) {
+        const shell = returnedContactShell(walk, local, before, after, old, scene);
+        if (shell !== undefined && shell !== local.geometry.rest_shell) delete next.contactAppearance;
+      }
       if (local.transports?.length || external.transports.length || attachments.length) next.transports = [...external.transports, ...attachments];
       const confirmedCarriers = external.transports.filter(item => item.sources.length >= 2);
       if (confirmedCarriers.length) {
