@@ -20,6 +20,7 @@ type Witness = { epoch: number; mark: number; normal: number; background: number
   outlet: NativeBox; refs: [string, string]; concurrentDelivery?: true; control?: OutletControl };
 type Flow = { sources: NativeBox[]; used: number[]; pending?: { chamber: Chamber; waits: number } };
 type Proposal = NativeProposal & { changedRegion: NativeBox; concurrentRegion?: NativeBox; attempt: string; needId: string;
+  sicSituationCard: NativeRecord & { strategy: keyof typeof markedCompartmentStrategies };
   flow?: Flow; source?: number; startBatch?: true; startProcess?: Chamber; delivery?: true; wait?: true; release?: OutletRelease };
 
 const boxKey = (box: NativeBox) => box.join(',');
