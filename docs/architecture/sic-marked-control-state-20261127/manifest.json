@@ -1,6 +1,6 @@
 {
   "recordedAt": "2026-11-27T04:50:50.592992+00:00",
-  "status": "candidate_saved_pending_targeted_test_receipt_and_strict_replay",
+  "status": "candidate_saved_targeted_tests_passed_pending_strict_replay",
   "candidate": {
     "local": "aebdb01a9f45436b4d7e1210db4f57e19a1c30fd",
     "remote": "e447b19328e3e31f1eb19e4e1fd8bf3f7616c676",
@@ -189,8 +189,16 @@
         "failures": "Two new native fixtures used a non-SIC source-family ID, so passive SIC observation was correctly ineligible."
       },
       "fixtureCorrection": "Use the prepared-effects SIC family ID for the source fixture. Production unchanged after that correction.",
-      "subsequentRun": "process_completed_output_truncated_receipt_unavailable",
-      "finalResult": null
+      "subsequentRun": "process_completed_output_truncated_receipt_unavailable_then_recaptured",
+      "finalResult": {
+        "passed": 21,
+        "failed": 0,
+        "total": 21,
+        "exitCode": 0,
+        "durationMs": 1981.205522,
+        "sourceLocal": "aebdb01a9f45436b4d7e1210db4f57e19a1c30fd",
+        "log": "targeted-tests.txt"
+      }
     },
     "strictCandidate": null,
     "integration": false,
@@ -232,6 +240,10 @@
       "sha256": "d5b66a8e70b9d68b8306eb85867cac6d551fb3f91028344d197cc29741b0c60c",
       "uncompressedBytes": 4961,
       "uncompressedSha256": "89910dd5eae59a56c01743317040e7b3c0190c478d3c42790e442d8485493f8a"
+    },
+    "targeted-tests.txt": {
+      "bytes": 2403,
+      "sha256": "3e8045540b57f616ecc2197d62171956779c0d8a1e344962da62531b4521597a"
     }
   }
 }
