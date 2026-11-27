@@ -1,0 +1,70 @@
+{
+  "game": "LS20",
+  "siteVersion": 210,
+  "source": "4313d7ce41505cece5f397dc8125b430697176ed",
+  "surface": "local",
+  "bundle": "/assets/index-5nnSgotL.js",
+  "start": "http://127.0.0.1:4173/?game=LS20&level=1",
+  "finish": "http://127.0.0.1:4173/?game=LS20&level=7",
+  "planning": "SIC",
+  "startLevel": 1,
+  "initialActions": 0,
+  "control": "Run to next level",
+  "sessions": 1,
+  "resets": 0,
+  "undos": 0,
+  "verdict": "The game reports WIN.",
+  "levelsSolved": 7,
+  "totalActions": 393,
+  "levels": [
+    {
+      "level": 1,
+      "actions": 15,
+      "cumulativeActions": 15,
+      "completedPlans": 6,
+      "observedAt": "2026-11-27T15:17:21.364Z"
+    },
+    {
+      "level": 2,
+      "actions": 45,
+      "cumulativeActions": 60,
+      "completedPlans": 23,
+      "observedAt": "2026-11-27T15:18:00.011Z"
+    },
+    {
+      "level": 3,
+      "actions": 41,
+      "cumulativeActions": 101,
+      "completedPlans": 44,
+      "observedAt": "2026-11-27T15:18:17.962Z"
+    },
+    {
+      "level": 4,
+      "actions": 43,
+      "cumulativeActions": 144,
+      "completedPlans": 69,
+      "observedAt": "2026-11-27T15:18:40.612Z"
+    },
+    {
+      "level": 5,
+      "actions": 48,
+      "cumulativeActions": 192,
+      "completedPlans": 102,
+      "observedAt": "2026-11-27T15:19:47.664Z"
+    },
+    {
+      "level": 6,
+      "actions": 94,
+      "cumulativeActions": 286,
+      "completedPlans": 159,
+      "observedAt": "2026-11-27T15:21:39.161Z"
+    },
+    {
+      "level": 7,
+      "actions": 107,
+      "cumulativeActions": 393,
+      "completedPlans": 266,
+      "observedAt": "2026-11-27T15:23:08.161Z"
+    }
+  ]
+}
