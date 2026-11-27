@@ -1,0 +1,189 @@
+{
+  "schema": "sic.integration-receipts.v1",
+  "testedSource": "76890212a43864fd31c4c206e1dabdd54b15b56e",
+  "tree": "b80a6217733a7f0ce8d17bb8042929c956dbc10d",
+  "strictRunId": 46028142470,
+  "event": "workflow_dispatch",
+  "conclusion": "success",
+  "artifacts": [
+    {
+      "id": 15214731218,
+      "name": "sic-strict-76890212a43864fd31c4c206e1dabdd54b15b56e",
+      "sha256": "a2a9d3d0122e7f5e5880ddb1295cfc3715ed2d3af9b8b12039c0d618357d6f3e"
+    }
+  ],
+  "games": [
+    {
+      "code": "CGWL",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 167,
+      "commandsByLevel": [
+        15,
+        16,
+        15,
+        18,
+        61,
+        42
+      ]
+    },
+    {
+      "code": "DC22",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 630,
+      "commandsByLevel": [
+        22,
+        44,
+        45,
+        76,
+        185,
+        258
+      ]
+    },
+    {
+      "code": "ETAG",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 274,
+      "commandsByLevel": [
+        7,
+        35,
+        40,
+        46,
+        66,
+        80
+      ]
+    },
+    {
+      "code": "GRAV",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 80,
+      "commandsByLevel": [
+        11,
+        32,
+        6,
+        8,
+        13,
+        10
+      ]
+    },
+    {
+      "code": "LF52",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 10,
+      "levels": 10,
+      "actions": 713,
+      "commandsByLevel": [
+        8,
+        40,
+        46,
+        54,
+        99,
+        91,
+        148,
+        68,
+        112,
+        47
+      ]
+    },
+    {
+      "code": "SK48",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 8,
+      "levels": 8,
+      "actions": 348,
+      "commandsByLevel": [
+        19,
+        39,
+        33,
+        33,
+        33,
+        69,
+        80,
+        42
+      ]
+    },
+    {
+      "code": "SNAR",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 163,
+      "commandsByLevel": [
+        16,
+        24,
+        23,
+        36,
+        35,
+        29
+      ]
+    },
+    {
+      "code": "SPOR",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 121,
+      "commandsByLevel": [
+        14,
+        14,
+        17,
+        17,
+        29,
+        30
+      ]
+    },
+    {
+      "code": "WEAV",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "target": 6,
+      "levels": 6,
+      "actions": 199,
+      "commandsByLevel": [
+        27,
+        28,
+        24,
+        40,
+        40,
+        40
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "strict/manifest.json",
+      "rawSha256": "39a940a4423ff2d45fff8979f53e3f22509ee53a49e9ae95560424dbbb6b5268",
+      "rawBytes": 1126
+    },
+    {
+      "path": "strict/source.sha",
+      "rawSha256": "0f99c9788b0a214dc1b2659002a6c95c3290d07ec794d778fe56a16ea156398d",
+      "rawBytes": 41
+    },
+    {
+      "path": "strict/strict.jsonl.gz",
+      "rawSha256": "d12962191a9d942ea38082e4e8204a2f3c0b203cfe6e54c794104d45230de7d1",
+      "rawBytes": 460602
+    },
+    {
+      "path": "strict/strict.jsonl.levels.gz",
+      "rawSha256": "bf80dac676530af31c4ddaaf89e6096fbacfdacca9926a04161235129aa830e6",
+      "rawBytes": 39115
+    }
+  ]
+}
