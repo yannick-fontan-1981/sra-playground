@@ -18,6 +18,12 @@ La capture supplémentaire prouve également la continuité réelle du premier c
 
 La prochaine capture est bornée au premier retour L5, pour déterminer si la réassociation y est encore perdue et quelle preuve manque avant toute extension.
 
+## Limite suivante et erreur séparée du banc
+
+Une capture bornée depuis L1 reproduit les quatre scores, puis s’arrête après le premier geste L5 (global97). Ce geste preview ACTION1 déplace réellement l’acteur de136 à121. La géométrie héritée se reconnaît avant et après, avec les pads et la porte visibles. L’observateur conserve volontairement le rôle antérieur parce que la reconnaissance complète fonctionne encore. Les deux propositions calculées hors exécution contiennent chacune une seule commande vers une case encore inconnue ; elles ne prouvent pas une série de deux gestes déjà justifiée. Cette capture ne localise donc pas la perte suivante et ne qualifie aucun niveau supplémentaire.
+
+Un deuxième wrapper devait conserver les groupes et s’arrêter avant le premier ticket cavity, au plus huit gestes L5. Il échoue par `RangeError: Maximum call stack size exceeded`. La cause est dans le banc : `canDispatch` lit `agent.snapshot`, dont le getter rappelle `canDispatch`. Cette récursion apparaît à l’arrivée au L5, avant conservation de sa capture. Le brut `instrumentation-error.jsonl.gz` et le wrapper exact sont conservés séparément ; cet arrêt n’est pas un verdict du jeu. Le dernier verdict strict reste **4/6**, et aucune production n’a changé. Le diagnostic ultérieur est différé pendant l’enquête d’un autre jeu.
+
 ## Premier checkpoint : clôture après une découverte
 
 Le correctif est sauvegardé et testé, mais **SNAR reste à 3/6 niveaux**. Le strict corrigé s’arrête au L4 après 31 commandes à 24,002 s, sous les plafonds inchangés de 44 commandes et 24 s. L1–3 gagnent en 16/21/23 ; leurs empreintes complètes sont identiques au témoin de campagne. Aucune victoire supplémentaire n’est attribuée à ce checkpoint.

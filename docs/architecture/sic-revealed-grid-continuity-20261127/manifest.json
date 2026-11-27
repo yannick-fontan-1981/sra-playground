@@ -248,10 +248,55 @@
       "sha256": "74d03c4e10973efcf3c8ecee117c6836e69d351e6124a0c0d91e96df902db269",
       "uncompressedBytes": 14127,
       "uncompressedSha256": "0ad0671a12cb1021bf9a580db6dbe3497998c9eeb4c67e342229460e64a26acb"
+    },
+    "next-boundary-first-return.json.gz": {
+      "bytes": 28214,
+      "sha256": "d58cce888aaefc135999012c7d43ca1162977e1aaa13dff11d48cac785ef2dac",
+      "uncompressedBytes": 976122,
+      "uncompressedSha256": "9065394552404702868ab47f1f5af22130b88be8e08cf635890fdfe4798f4378"
+    },
+    "next-boundary-diagnostic.jsonl.gz": {
+      "bytes": 2862,
+      "sha256": "5d94c119a1b1fad818fbf9d079a2734f3bddf63c1d1d01aa6c8d9712dde7d314",
+      "uncompressedBytes": 19608,
+      "uncompressedSha256": "bba53e061e51c8961fbf5e5d7f748815df6365ff9128a8c7577813ecdbc1e4d3"
+    },
+    "instrumentation-error.jsonl.gz": {
+      "bytes": 845,
+      "sha256": "502ff1a0ce27e6849e1950147b0c93f9d592e5aac8a36d53c119117fa0cee4f1",
+      "uncompressedBytes": 2064,
+      "uncompressedSha256": "be5ece368ee62a5f25dfbd81417b023c6bf09a77e633c15ad8ffe09a417bbde8"
+    },
+    "instrumentation-error-wrapper.mjs.gz": {
+      "bytes": 5896,
+      "sha256": "6287f7c3dcb1a7a6300419de11447402694580f46c2bd7f7787850698748cdde",
+      "uncompressedBytes": 17517,
+      "uncompressedSha256": "5b0aa0a1b998b7c2fc7477aed2b9eb6baae769358be7fb63574e4a7737557ab0"
     }
   },
   "previousCheckpoint": "checkpoint-3-levels.json",
   "qualifiedRaw": "reassociated-native.jsonl.gz",
   "qualifiedLevels": "reassociated-native.levels.jsonl.gz",
-  "nextMissingMeasure": "First foreign return at L5, before any extension to special mechanisms"
+  "nextMissingMeasure": "First later L5 return or admission where inherited navigation becomes unavailable; first L5 return alone remains recognizable. Deferred while another game is investigated.",
+  "nextBoundaryDiagnostic": {
+    "raw": "next-boundary-diagnostic.jsonl.gz",
+    "publicSamples": "next-boundary-first-return.json.gz",
+    "report": "next-boundary-report.json",
+    "fromLevel": 1,
+    "targetLevel": 5,
+    "targetDiagnosticActionCap": 1,
+    "firstFourPrefixesMatchQualified": true,
+    "qualification": false,
+    "result": "First L5 return remains recognizable; first later loss is not localized."
+  },
+  "instrumentationError": {
+    "raw": "instrumentation-error.jsonl.gz",
+    "wrapper": "instrumentation-error-wrapper.mjs.gz",
+    "status": "harness_error",
+    "message": "RangeError: Maximum call stack size exceeded",
+    "qualification": false,
+    "gameVerdict": null,
+    "cause": "The diagnostic host canDispatch callback read agent.snapshot, whose getter invokes host.canDispatch. Recursive instrumentation was reached at L5 arrival; no production source changed and no L5 capture was saved.",
+    "firstCompletedLevels": 3
+  }
 }
