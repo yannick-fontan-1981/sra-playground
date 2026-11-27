@@ -605,8 +605,13 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
       const matched = choice.kind === 'pulse' ? next.charges < local.last.charges
         && (!!doorChanged || Object.keys(next.memory).length > Object.keys(local.last.memory).length)
         : choice.kind === 'move' && !probeLanding ? next.position === choice.target : null;
-      const terrainChanged = proposal.walk && Object.entries(next.memory).some(([cell, value]) => prior.memory[Number(cell)] !== value);
-      return { matched, seal_prefix: !matched || !!terrainChanged || index + 1 >= proposal.actions.length, reason: choice.kind === 'pulse' ? 'check_revealed_cells' : choice.kind === 'move'
+      // A newly uncovered cell need not change an already observed route. Contradictions
+      // and hazards still close the prefix; acquisition remains deferred to record.
+      const terrainContradicted = proposal.walk && Object.entries(next.memory).some(([cell, value]) =>
+        prior.memory[Number(cell)] !== undefined && prior.memory[Number(cell)] !== value);
+      const routeChanged = proposal.walk?.slice(index + 1).some(leg => next.memory[leg.target] !== 'free'
+        || next.risk.includes(leg.target) || next.sentryRisk?.includes(leg.target) || hazardOnNextMove(next, leg.target));
+      return { matched, seal_prefix: !matched || !!terrainContradicted || !!routeChanged || index + 1 >= proposal.actions.length, reason: choice.kind === 'pulse' ? 'check_revealed_cells' : choice.kind === 'move'
         ? probeLanding ? 'check_directional_marker_landing' : matched ? 'observed_grid_step' : 'grid_step_contradicted' : 'observe_obstacle_phase' };
     },
     record(before, after, _action, _first, second, proposal, index, frames) {
