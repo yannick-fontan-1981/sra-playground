@@ -1,0 +1,59 @@
+name: SIC axial displacement decision pairs
+on:
+  push:
+    branches:
+      - audit/sic-axial-a5a90c33-temoins
+      - audit/sic-axial-a5a90c33-proteges
+permissions:
+  contents: read
+jobs:
+  pair:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        game: ${{ fromJSON(github.ref_name == 'audit/sic-axial-a5a90c33-temoins' && '["G50T","FOGW"]' || '["AS66","HOLE","PORT","DC22"]') }}
+    name: Parent and child / ${{ matrix.game }}
+    env:
+      GAME: ${{ matrix.game }}
+      CHILD: a5a90c3349ea49bba8e40055444cea2026bee962
+      PARENT: 3c2d6bcfd4a7d7abf28650e2f8ffed3d3510c3b4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: bench
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/
+            /docs/diagnostics/sic-qualification-3c2d6bcf/
+            /docs/architecture/sic-replay-reference-levels-20261126.json
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.CHILD }}
+          path: engine
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.3
+      - name: Compare chronological decisions and verify call witnesses
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C engine rev-parse "$CHILD^")" = "$PARENT"
+          tool=bench/scripts/sic-compare-displacement-revisions.py
+          git -C engine checkout --detach "$PARENT"
+          python3 "$tool" record "$GAME" results --checkout engine --label A
+          git -C engine checkout --detach "$CHILD"
+          python3 "$tool" record "$GAME" results --checkout engine --label B
+          python3 "$tool" compare "$GAME" results
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: axial-${{ matrix.game }}
+          path: |
+            results/*.receipt
+            results/*.source.json
+            results/*.calls.json
+            results/pair.json
+          retention-days: 14
