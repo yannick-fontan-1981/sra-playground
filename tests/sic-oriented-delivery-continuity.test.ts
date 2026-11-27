@@ -639,7 +639,9 @@ for (const scenario of ['ordinary', 'rotated', 'changed-target', 'unmatched-peer
       budgets: { targetLevels: 2, levelActionCaps: [2, 40] } });
     assert.ok(result.ticket, result.snapshot.reason);
     assert.equal(result.ticket.actionRef, rotated ? 'ACTION3' : 'ACTION2');
-    assert.equal((result.snapshot.proposal as Record<string, any>).actions.length, 2);
+    const proposal = result.snapshot.proposal as Record<string, any>;
+    assert.equal(proposal.actions.length, 2);
+    for (const step of proposal.steps) assert.deepEqual(Object.keys(step.expected_after).sort(), ['cargo', 'face', 'pose']);
     result = await service.handle({ type: 'advance', sessionId, sequence: 1, ticketId: result.ticket.id, executionMs: 1, observation: frame(1) });
     assert.equal(result.snapshot.trace.findLast(event => event.kind === 'actual_outcome')?.matched, true);
     if (scenario !== 'ordinary' && scenario !== 'rotated') {

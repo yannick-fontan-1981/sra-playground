@@ -1202,7 +1202,12 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       }
       const actions = walk?.map(step => ({ action_ref: step.input, data: {} })) ?? [action];
       return { status: 'proposed', kind: family, actions,
-        steps: actions.map((action, index) => ({ action, expected_after: walk?.[index]?.after ?? prediction })),
+        steps: actions.map((action, index) => {
+          const destination = walk?.[index]?.after;
+          const expected_after = deliveryWait && destination
+            ? { pose: destination.pose, face: destination.face, cargo: null } : destination ?? prediction;
+          return { action, expected_after };
+        }),
         ...(walk ? { walk } : {}), ...(peerGuard ? { peerGuard } : {}),
         ...(sectorWalk && peerGuard ? { sectorWalk: true } : {}),
         ...(deliveryWait ? { deliveryWait: true } : {}),
