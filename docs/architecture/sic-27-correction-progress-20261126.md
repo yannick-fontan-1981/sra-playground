@@ -53,6 +53,14 @@ Le retour public 15 d'UPST établit une ouverture et une alimentation. Le retour
 - TypeScript et sept tests ciblés réussis, dont deux transferts natifs avec variations de formes, palettes et ports, et des cas ambigu/contradictoire.
 - Rejeu des observations archivées : l'essai attendu est proposé à la décision 19. Rejeu réel L1→6, contrôle complet de continuité, intégration et publication encore à faire.
 
+Premier rejeu réel sur cet arbre : L1 gagné en 19 commandes (score 8,429 s), L2 gagné en 4 commandes (score 2,071 s), puis arrêt L3 à 19 commandes sans changement de raster. Le clic gagnant L2 a été exécuté par une autre famille ; la capture suivante montre que le modèle conserve `completed: 1`. Le jeu reste incomplet et la frontière publique de progression fait l'objet du lot suivant.
+
+### Sélection avec déplacements de population déjà acquis
+
+VOIS conserve bien ses quatre déplacements à la victoire L1, mais l'admission de la stratégie acquise exigeait un pion déjà sélectionné. Son premier clic L2 revenait donc à une stratégie sans calibration. Le correctif admet cette sélection lorsque la scène mesurée peut réutiliser le témoin de déplacement ; les gardes de sélection et de mouvement restent actifs.
+
+Le premier rejeu depuis L1 sur `5d2e49f4` gagne les cinq premiers niveaux en **14, 18, 34, 23 et 36 commandes**. Il s'arrête au L6 sur son plafond de temps, après 47 commandes. Les dernières commandes sont des effets transférés `witnessedPreview` : le lot d'interface doit être testé conjointement avant de conclure. Neuf tests ciblés passent, avec deux parcours natifs L1→L2 variant la taille, la palette, les positions et les commandes, une sélection absente/ambiguë et un déplacement contradictoire.
+
 ### Conditions des effets transférés
 
 Les captures CRAF et SB26 reproduisent exactement les commandes initiales de la campagne. Un dépôt appris avec une sélection visible est réutilisé alors que ce repère est absent. Des gestes identiques sans effet sont ensuite répétés pour plusieurs associations. Le correctif doit conserver les interfaces source/cible observées, retenir la réfutation du geste et laisser les rôles spécialisés acquis traiter leur domaine.
