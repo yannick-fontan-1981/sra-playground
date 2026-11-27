@@ -5,10 +5,30 @@ import { compareUnicode } from './canonical.ts';
 import { pythonEqual as same, pythonTruthy as truth } from './v6-operations.ts';
 import type { NativeRows, NativePublicObservation } from './v6-native-types.ts';
 import { selectViewStrategy, viewStrategies, viewStrategyGraph, type ViewNeedSituation, type ViewStrategy } from '../sic/view-strategy.ts';
+import { projectViewEdge, selectViewEdgeAccess, type ViewEdgeProjection, type ViewPoint, type ViewShiftHypothesis } from '../sic/view-edge-access.ts';
 type R = Record<string, any>;
-type P = readonly [number, number];
+type P = ViewPoint;
 type Cells = Map<string, P>;
 type ViewOffer = { actions: R[]; steps: R[]; details: R; reason: string };
+type ViewCommand = { action_ref: string };
+type ViewActor = { signature: string; position: P };
+interface EdgeStep {
+  action: ViewCommand;
+  expected_before: { level_epoch: number | null; frame_hash: string | null };
+  expected_poses_before: Record<string, P>;
+  expected_after: Record<string, P>;
+  entry_texture_witnessed: boolean;
+}
+interface EdgeTrajectory {
+  projection: ViewEdgeProjection;
+  command: ViewCommand;
+  actors: ViewActor[];
+  vector: P;
+  steps: EdgeStep[];
+  rule: string;
+  seen: boolean;
+  rule_refs: string[];
+}
 const key = (value: unknown) => JSON.stringify(value);
 const copy = <T>(value: T): T => structuredClone(value);
 const cmp = (a: P, b: P) => a[0] - b[0] || a[1] - b[1];
@@ -83,12 +103,12 @@ export class ViewFrontier {
     return [...new Set<string>([...(this.block?.refs ?? []), ...(this.reveals.length ? [this.reveals.at(-1)!.source] : [])])];
   }
 
-  static async movement(rule: R, obs: R): Promise<readonly [R, R[], P, Cells] | null> {
+  static async movement(rule: R, obs: R): Promise<readonly [ViewCommand, ViewActor[], P, Cells] | null> {
     const action = rule.conditions?.action ?? {};
     if (!truth(action.action_ref) || truth(action.data)) return null;
     const command = { action_ref: action.action_ref }, prediction = await applyEmpiricalRule(rule, obs as any, command);
     if (prediction.status !== 'prediction') return null;
-    const refs = uniqueViewEntities(obs), actors: R[] = [], vectors: Cells = new Map(); let cells: Cells = new Map();
+    const refs = uniqueViewEntities(obs), actors: ViewActor[] = [], vectors: Cells = new Map(); let cells: Cells = new Map();
     for (const variable of prediction.predicted_entities) {
       const sig = variable.entity.signature, prev = prediction.position_context[variable.variable], dst = variable.entity.position;
       const vector: P = [dst[0] - prev[0], dst[1] - prev[1]]; if (!vector[0] && !vector[1]) continue;
@@ -174,42 +194,45 @@ export class ViewFrontier {
       }
       this.block = null;
     }
-    const candidates: R[] = [];
+    const candidates: EdgeTrajectory[] = [];
     for (const rule of rules) {
       if (rule.status !== 'mechanism_acquired') continue;
       const move = await ViewFrontier.movement(rule, obs); if (!move) continue;
       const [command, actors, vector, cells] = move, [dx, dy] = vector;
       if (!obs.available_action_refs.includes(command.action_ref)) continue;
-      const axis = dx ? 0 : 1, sign = vector[axis] > 0 ? 1 : -1, limit = axis === 0 ? width : height;
-      const front = (sign > 0 ? Math.max : Math.min)(...[...cells.values()].map(p => p[axis])), gap = sign > 0 ? limit - 1 - front : front;
-      const stepsToEdge = 1 + Math.floor(gap / Math.abs(vector[axis]));
       const observedOffsets = this.offsetSet(command.action_ref), offsets = observedOffsets.size ? observedOffsets : cellsOf([[-dx || 0, -dy || 0]]);
-      const alternatives = points(offsets).map(([sx, sy]) => ({ hypothetical_bulk_offset: [sx, sy], unseen_viewport_pixels_if_realized: difference(viewRectangle([this.origin[0] - sx, this.origin[1] - sy], width, height), this.coverage).size }));
-      const area = Math.max(...alternatives.map(a => a.unseen_viewport_pixels_if_realized)); if (area <= 0) continue;
+      const alternatives = points(offsets).map(([sx, sy]): ViewShiftHypothesis => ({
+        hypothetical_bulk_offset: [sx, sy],
+        unseen_viewport_pixels_if_realized: difference(viewRectangle([this.origin[0] - sx, this.origin[1] - sy], width, height), this.coverage).size,
+      }));
+      const projection = projectViewEdge(vector, cells.values(), width, height, alternatives);
+      if (!projection) continue;
       const pathKey = viewMotionKey(command.action_ref, actors.map(a => a.signature), vector, cells), pathString = key(pathKey);
       if ((this.accessTrials.get(key([pathKey, this.origin, points(cells)])) ?? 0) >= 2) continue;
-      const steps: R[] = [];
-      for (let k = 0; k < Math.min(16, remaining, stepsToEdge); k++) {
+      const steps: EdgeStep[] = [];
+      for (let k = 0; k < Math.min(16, remaining, projection.cost); k++) {
         const currentCells = shiftedViewCells(cells, [k * dx, k * dy]), destination = shiftedViewCells(currentCells, vector), entry = difference(destination, currentCells);
         let known: boolean;
         if (!entry.size || [...entry.values()].some(([x, y]) => x < 0 || x >= width || y < 0 || y >= height)) { if (steps.length) break; known = false; }
         else { const signature = points(entry).map(([x, y]) => rows[y]![x]!); known = this.footprintSet(pathString).has(key(signature)); }
-        const prior: R = Object.fromEntries(actors.map(a => [a.signature, [a.position[0] + k * dx, a.position[1] + k * dy]]));
-        const after = Object.fromEntries(Object.entries(prior).map(([sig, p]) => [sig, [p[0] + dx, p[1] + dy]]));
+        const prior = Object.fromEntries(actors.map(a => [a.signature, [a.position[0] + k * dx, a.position[1] + k * dy] as P] as const));
+        const after = Object.fromEntries(Object.entries(prior).map(([sig, p]) => [sig, [p[0] + dx, p[1] + dy] as P] as const));
         steps.push({ action: command, expected_before: { level_epoch: this.epoch, frame_hash: k === 0 ? obs.frame_hash : null }, expected_poses_before: prior, expected_after: after, entry_texture_witnessed: known });
         if (!known) break;
       }
-      if (steps.length) candidates.push({ area, cost: stepsToEdge, command, actors, vector, steps, alternatives, rule: rule.rule_id, seen: !!this.offsetSet(command.action_ref).size, rule_refs: (rule.evidence_refs ?? []).slice(-3) });
+      if (steps.length) candidates.push({ projection, command, actors, vector, steps, rule: rule.rule_id, seen: !!observedOffsets.size, rule_refs: (rule.evidence_refs ?? []).slice(-3) });
     }
-    if (!candidates.length) return null;
-    this.engaged = true; candidates.sort((a, b) => b.area - a.area || a.cost - b.cost || compareUnicode(a.command.action_ref, b.command.action_ref) || compareUnicode(a.rule, b.rule));
-    const best = candidates[0]!, ties = candidates.filter(c => c.area === best.area && c.cost === best.cost).map(c => ({ action_ref: c.command.action_ref, vector: [...c.vector], rule: c.rule }));
+    const access = selectViewEdgeAccess(candidates);
+    if (!access) return null;
+    this.engaged = true;
+    const best = access.selected;
+    const ties = access.tied.map(c => ({ action_ref: c.command.action_ref, vector: [...c.vector], rule: c.rule }));
     const evidence = [best.rule, ...best.rule_refs, ...points(this.offsetSet(best.command.action_ref)).map(t => this.offsetSource.get(key([best.command.action_ref, t]))!)];
     offers.approach_view_edge = { actions: best.steps.map(() => best.command), steps: best.steps, details: {
       evidence_refs: evidence,
-      receiver_poses: best.actors, access_vector: [...best.vector], steps_to_projected_screen_edge: best.cost, conditional_new_viewport_pixels: best.area,
-      view_shift_previously_seen_for_input: best.seen, camera_hypotheses: best.alternatives, tied_accesses: ties,
-      other_accesses: candidates.slice(1).map(c => ({ input: c.command.action_ref, area: c.area, steps: c.cost })), unmodeled_inputs: obs.available_action_refs.filter((a: string) => !candidates.some(c => c.command.action_ref === a)),
+      receiver_poses: best.actors, access_vector: [...best.vector], steps_to_projected_screen_edge: best.projection.cost, conditional_new_viewport_pixels: best.projection.area,
+      view_shift_previously_seen_for_input: best.seen, camera_hypotheses: best.projection.alternatives, tied_accesses: ties,
+      other_accesses: access.ordered.slice(1).map(c => ({ input: c.command.action_ref, area: c.projection.area, steps: c.projection.cost })), unmodeled_inputs: obs.available_action_refs.filter((a: string) => !candidates.some(c => c.command.action_ref === a)),
       newest_visible_candidates: this.reveals.length ? this.reveals[this.reveals.length - 1]!.new_signature_count : 0,
       retained_visible_hypotheses: [...this.visibleHypotheses].filter(([sig]) => Object.hasOwn(current, sig)).slice(0, 8).map(([sig, ref]) => ({ source_ref: ref, signature: sig, current_entity_ref: current[sig].id, terminal_role: 'unestablished' })),
       qualification: 'projected access and potential screen area; unknown terrain, physical traversability and terminal role',

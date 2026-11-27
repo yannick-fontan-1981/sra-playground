@@ -19,12 +19,34 @@ La ligne 90 peut être proposée à l’intégration quand les mesures de bord, 
 
 Le test historique contrôle aussi l’empreinte du plan complet du tour 3, de l’agenda, du reçu de libération, du garde et du retour immédiat, calculée sur le moteur de l’inventaire. Le test de service préexistant fournit le scénario où la vue s’agrandit effectivement. [Contre-épreuve et préfixe LS19](../../tests/sic-view-edge-ls19.test.ts) · [Autre scénario de vue](../../tests/v6-caller-integration.test.ts#L92)
 
+## Composition candidate
+
+Le contrat et les assertions historiques ont été figés au commit `13ebd79de759b1052e1b261d9c6c3f5b2205d7f9`, directement sur le gel. Le commit suivant de la branche `refactor/sic-ls19-ligne-90` porte l’extraction. Le choix de haut niveau était déjà composé dans `selectViewStrategy`. Le maillon encore local était le passage des trajectoires mesurées à l’offre de bord retenue. [Contrat avant modification](https://github.com/yannick-fontan-1981/sra-playground/blob/13ebd79de759b1052e1b261d9c6c3f5b2205d7f9/docs/architecture/sic-ls19-ligne-90.md)
+
+| Responsabilité | Entrée, décision et sortie effectivement consommée |
+|---|---|
+| Produire les faits | `ViewFrontier.movement` rattache une règle acquise aux porteurs uniques de l’observation et écarte un déplacement ambigu. La famille mesure l’empreinte, les textures traversables déjà observées et les surfaces nouvelles pour les hypothèses de caméra. Les décalages connus ou le décalage opposé au mouvement restent des hypothèses locales. [Producteur](../../src/logos-engine/v6-view-frontier.ts#L106) |
+| Projeter puis comparer les accès | `projectViewEdge` reçoit le vecteur, l’empreinte, les dimensions et les hypothèses de gain. Il rend le nombre de pas jusqu’au franchissement du bord et la plus grande surface conditionnelle. Sans projection exploitable, il rend `null`. La famille prépare le préfixe borné et ses poses. `selectViewEdgeAccess` ordonne les offres préparées par gain décroissant, coût croissant, identifiant de commande puis de règle. Il rend l’offre originale avec ses pas et ses preuves, ainsi que l’ordre et les ex æquo pour le reçu. La production consomme le résultat même lorsqu’une seule offre est disponible, comme au tour 3. [Contrats typés et opérateurs](../../src/sic/view-edge-access.ts) · [Trajectoires et consommation](../../src/logos-engine/v6-view-frontier.ts#L208) |
+| Choisir la prochaine stratégie | Le choix d’accès P07 utilise le graphe de vue existant. P15 intervient dans le classement des accès admissibles lorsqu’il y a concurrence. Après sélection d’une trajectoire, la famille offre ses actions et ses références sous `approach_view_edge`. Une obstruction encore liée produit en priorité son offre propre et évite le calcul de trajectoire. Les deux offres simultanées du test de contre-épreuve sont construites. Le tour 13 réel n’en présente qu’une. [Graphe](../../src/sic/view-strategy.ts#L25) · [Offres réellement soumises](../../src/logos-engine/v6-view-frontier.ts#L135) |
+| Autoriser et interpréter | L’agenda choisit le plan. Le garde lie chaque pas au niveau, à l’observation de départ, à la disponibilité de la commande et aux poses attendues. Le runtime libère le ticket. La famille enregistre poses et décalage observés, puis la couverture réellement acquise. Elle lie le retour de fin de préfixe au sous-objectif de ce plan. [Garde et acquisition](../../src/logos-engine/v6-view-frontier.ts#L242) · [Rejeu par le service](../../tests/sic-view-edge-ls19.test.ts) |
+
+Le besoin conserve son identité dans la portée du segment quand ses preuves changent. Un nouveau plan peut recevoir un autre sous-objectif. Les comparaisons de transfert portent sur ces deux identités séparément. Les tests construits changent le gain, le coût, l’obstruction ou la présence de preuve. La fixture publique indépendante `viewport-three-prefixes` exerce une autre commande et une expansion réelle. La qualification du cas réservé par SIC 3, le verdict du Banc et l’intégration sur `main` ont chacun leur propre état.
+
 ## Rejeu pour le Banc
 
-Avec Node 24.22.3, dans un checkout de la branche depuis sa racine, cette commande rejoue le tour 3, sa clôture, l’obstruction et le scénario de transfert.
+Avec Node 24.22.3, les trois suites ci-dessous passent **32/32** sur le candidat et le contrôle TypeScript du dépôt réussit. Le rejeu avec le vrai jeu a également retrouvé les 13 tickets et les 14 observations du préfixe historique. Ces résultats qualifient la branche candidate sur ces entrées. Pour reproduire les suites, partir de sa racine.
 
 ```powershell
-node --test --test-name-pattern='LS19 historical edge approach|same directional offers|live service releases a SIC view|view-access shadow' tests/sic-view-edge-ls19.test.ts tests/v6-caller-integration.test.ts tests/v6-view-frontier.test.ts
+node --test tests/sic-view-edge-ls19.test.ts tests/v6-caller-integration.test.ts tests/v6-view-frontier.test.ts
+```
+
+Pour jouer contre le **vrai moteur LS19** depuis la ligne de commande, préparer les actifs du dépôt puis lancer le même service. L’hôte applique uniquement le ticket émis. Il compare chaque observation publique rendue, images intermédiaires comprises, à la fixture historique et transmet le paquet réel au solveur.
+
+```powershell
+node scripts/prepare-python.mjs
+$env:SIC_LS19_GAME_ROOT = (Resolve-Path .).Path
+node --test --test-name-pattern='LS19 historical edge approach' tests/sic-view-edge-ls19.test.ts
+Remove-Item Env:SIC_LS19_GAME_ROOT
 ```
 
 Pour refaire l’exemple depuis un jeu neuf, lancer le serveur de développement du dépôt avec les actifs Pyodide installés, puis ouvrir `/tests/sic-qualification.html?strategy-inventory&games=LS19&actions=16` et lancer la comparaison. Au tour 3, rechercher le tuple `view / approach_view_edge / public_view_frontier` avec `ACTION1` et le résultat confirmé. Pour l’A/B comparer, avec la même session et les mêmes budgets, les commandes publiques, la garde à chaque index et le rattachement du retour final à l’objectif. Conserver séparément le verdict indépendant et le SHA d’intégration sur `main`.

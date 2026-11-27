@@ -5,7 +5,10 @@ import test from 'node:test';
 import { gunzipSync } from 'node:zlib';
 import { createNativeV6Runtime } from '../src/logos-engine/v6-native-runtime.ts';
 import { V6AgentService } from '../src/runtime/v6-agent-service.ts';
+import { toV6PublicObservation, type V6Command } from '../src/runtime/v6-agent-protocol.ts';
+import { sourceBackend } from '../scripts/sic-study-source-games.mjs';
 import { readNativeResolution } from '../src/sic/native-resolution.ts';
+import { projectViewEdge, selectViewEdgeAccess, type ViewPoint } from '../src/sic/view-edge-access.ts';
 import { selectViewStrategy, type ViewNeedSituation } from '../src/sic/view-strategy.ts';
 
 const source = new URL('../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/', import.meta.url);
@@ -17,8 +20,20 @@ const declarations = {
 test('LS19 historical edge approach releases ACTION1 and closes its own objective after the fourth step', async () => {
   const capture = JSON.parse(gunzipSync(readFileSync(new URL('./fixtures/sic-view-edge-ls19-l1.json.gz', import.meta.url))).toString());
   const { sessionId, budgets, observations, commands } = capture;
+  const gameRoot = process.env.SIC_LS19_GAME_ROOT;
+  const game = gameRoot ? await sourceBackend(gameRoot) : null;
+  function input(sequence: number, command?: V6Command) {
+    if (!game) return observations[sequence];
+    const board = game.dispatch(command
+      ? { type: 'action', actionId: Number(command.actionRef.slice(6)), data: command.data }
+      : { type: 'load', code: 'LS19', level: 1 });
+    const packet = toV6PublicObservation(board, sequence);
+    const { palette, ...historical } = packet;
+    assert.deepEqual(historical, observations[sequence], `public game return ${sequence}`);
+    return packet;
+  }
   const service = new V6AgentService(recovery => createNativeV6Runtime(declarations, { recovery, now: () => 0 }));
-  let result = await service.handle({ type: 'init', sessionId, sequence: 0, budgets, observation: observations[0] });
+  let result = await service.handle({ type: 'init', sessionId, sequence: 0, budgets, observation: input(0) });
   let firstObjective: string | undefined, secondObjective: string | undefined;
   assert.equal(commands.length, 13);
   for (let index = 0; index < commands.length; index++) {
@@ -68,7 +83,7 @@ test('LS19 historical edge approach releases ACTION1 and closes its own objectiv
       assert.notEqual(decision.objective.id, secondObjective);
     }
     result = await service.handle({ type: 'advance', sessionId, sequence: turn, ticketId: result.ticket!.id,
-      observation: observations[turn], executionMs: 0 });
+      observation: input(turn, result.command!), executionMs: 0 });
     const outcome = readNativeResolution({ ...result.snapshot, sessionId, sequence: turn, phase: result.phase })?.outcome;
     if (turn >= 3 && turn <= 5) {
       assert.deepEqual([outcome?.matched, outcome?.reason, outcome?.viewOutcome], [true, 'screen_pose_matched', undefined]);
@@ -105,4 +120,38 @@ test('the same directional offers switch to obstruction or stay pending when the
   assert.ok(stopped.need.evidence.includes('stopped-at-boundary'));
   assert.equal(selectViewStrategy({ ...current, edgeAccess: null }, planners).selected, null);
   assert.deepEqual(called, ['edge', 'obstruction']);
+});
+
+test('edge projection uses the leading footprint and conditional gain on a different rectangular view', () => {
+  const footprint: ViewPoint[] = [[2, 3], [5, 7]];
+  const shifts = [
+    { hypothetical_bulk_offset: [0, 1] as const, unseen_viewport_pixels_if_realized: 0 },
+    { hypothetical_bulk_offset: [0, 2] as const, unseen_viewport_pixels_if_realized: 12 },
+  ];
+  const measure = (motion: ViewPoint) => projectViewEdge(motion, footprint, 13, 20, shifts);
+  assert.deepEqual([measure([2, 0])?.cost, measure([-2, 0])?.cost, measure([0, 3])?.cost, measure([0, -3])?.cost], [4, 2, 5, 2]);
+  assert.deepEqual(measure([0, -3]), { area: 12, cost: 2, alternatives: shifts });
+  assert.equal(measure([0, 0]), null);
+  assert.equal(measure([1, 1]), null);
+  assert.equal(projectViewEdge([0, -3], [], 13, 20, shifts), null);
+  assert.equal(projectViewEdge([0, -3], footprint, 13, 20, []), null);
+  assert.equal(projectViewEdge([0, -3], footprint, 13, 20, shifts.slice(0, 1)), null);
+});
+
+test('prepared edge offers change order with gain and distance and retain equal measurements', () => {
+  const offer = (action: string, rule: string, gain: number, distance: number) => {
+    const shift = { hypothetical_bulk_offset: [0, 1] as const, unseen_viewport_pixels_if_realized: gain };
+    const projection = projectViewEdge([0, -1], [[4, distance - 1]], 32, 16, [shift]);
+    assert.ok(projection);
+    return { command: { action_ref: action }, rule, projection };
+  };
+  const near = offer('ACTION1', 'measured', 16, 1), far = offer('ACTION2', 'measured', 32, 5);
+  assert.equal(selectViewEdgeAccess([near, far])?.selected, far);
+  const covered = offer('ACTION2', 'measured', 16, 5);
+  assert.equal(selectViewEdgeAccess([covered, near])?.selected, near);
+  const other = offer('ACTION2', 'earlier', 16, 1), tied = offer('ACTION1', 'alternative', 16, 1);
+  assert.deepEqual(selectViewEdgeAccess([other, covered, near, tied]), {
+    selected: tied, ordered: [tied, near, other, covered], tied: [tied, near, other],
+  });
+  assert.equal(selectViewEdgeAccess([]), null);
 });
