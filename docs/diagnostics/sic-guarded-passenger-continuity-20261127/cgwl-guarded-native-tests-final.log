@@ -1,0 +1,16 @@
+✔ a passenger already on the receiving bank can be required for the return trip (18.44822ms)
+✔ native passenger transport retains known walks before distinct pickup, crossing and release contacts (1051.702369ms)
+✔ native passenger transport retains known walks before distinct pickup, crossing and release contacts with other shapes, palette, positions, stride and commands (813.033158ms)
+✔ native passenger series stops on a contradictory blocked (39.717623ms)
+✔ native passenger series stops on a contradictory missing (31.022366ms)
+✔ native passenger series stops on a contradictory ambiguous (46.618177ms)
+✔ native passenger series stops on a contradictory passenger (29.27864ms)
+✔ a passenger continuation requires its actual preceding observation and cannot acquire twice through repeated guards (38.148027ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3442.493828
