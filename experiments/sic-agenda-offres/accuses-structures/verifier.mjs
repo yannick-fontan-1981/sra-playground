@@ -58,6 +58,10 @@ for (const [label,kind] of [['verrou local','refused'],['compte rendu incomplet'
   assert.equal(r.state,undefined);
 }
 assert.equal(request(vocab,['toucher','U'])('quelconque').kind,'ambiguous');
+const touch = request(vocab,['toucher','T'])('traité');
+assert.equal(touch.kind,'confirmed');
+assert.equal(touch.coverage,'unknown');
+assert.equal(touch.state,undefined);
 const absent = structuredClone(samples.B.card);
 delete absent.receipts;
 assert.equal(request(absent,p)('poste indexé').kind,'undeclared');
