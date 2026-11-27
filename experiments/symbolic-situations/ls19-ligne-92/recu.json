@@ -1,0 +1,37 @@
+{
+  "départsParSHA": 8,
+  "dansLeJeu": 2,
+  "construits": 6,
+  "reçusFalsifiésRejetésParSHA": 3,
+  "empreintes": {
+    "jeu": "7eab12c3d4e7f908872b9ed7f56600e7837b26877a1829538921a697e539b1c7",
+    "historique": "09587cfb1c85ee0338fd5e7e30fbebd0b49666b641dfb92654af1ea4914be9b6",
+    "réserve": "08bf318f2576a394715f7c2a15968027cd924b72fcfb0ecfa6c6dd8bdb8df2e8"
+  },
+  "mesures": {
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021": {
+      "famille": "view_continuity",
+      "question": "Q_779c7e6fe44602f2b143",
+      "besoin": "sic-need:1d553a7a33e1fc6718c808889a1510b196c28d63977dfd7efda835f5e0f43149",
+      "retour": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:15:frame:8f49bd977620acf2",
+      "suivante": "Q_c84b2a436850df62152b",
+      "suivanteBesoin": "sic-need:8648aa7ef0ee051174a5d5bd3f800b6e50f3ff35fc254e847af51953773f59ad",
+      "commandesConstruites": [
+        "ACTION4",
+        "ACTION1"
+      ]
+    },
+    "b56ea7526d8b518296351ea6e6a58124ae82f3ce": {
+      "famille": "view_continuity",
+      "question": "Q_779c7e6fe44602f2b143",
+      "besoin": "sic-need:1d553a7a33e1fc6718c808889a1510b196c28d63977dfd7efda835f5e0f43149",
+      "retour": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:15:frame:8f49bd977620acf2",
+      "suivante": "Q_c84b2a436850df62152b",
+      "suivanteBesoin": "sic-need:8648aa7ef0ee051174a5d5bd3f800b6e50f3ff35fc254e847af51953773f59ad",
+      "commandesConstruites": [
+        "ACTION4",
+        "ACTION1"
+      ]
+    }
+  }
+}
