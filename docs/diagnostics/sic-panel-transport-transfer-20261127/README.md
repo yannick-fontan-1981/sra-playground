@@ -1,5 +1,34 @@
 # RSWP — priorité du transport déjà observé
 
+## Qualification native
+
+Le candidat gagne **6 niveaux sur 6 en 110 commandes** dans une session SIC
+depuis le niveau 1, avec les six budgets archivés inchangés. Les 110 commandes
+sont autorisées par SIC et acquises ; aucun reset, undo ou dépassement n'est
+relevé. La session se réconcilie avec `target_levels_completed`. Le miroir
+`.levels` est identique au résultat principal. Les trois premiers préfixes
+publics sont identiques à ceux de la référence.
+
+| Niveau | Commandes / plafond | Score observé / plafond |
+| --- | ---: | ---: |
+| 1 | 3 / 8 | 2,318 s / 9 s |
+| 2 | 8 / 13 | 3,457 s / 12 s |
+| 3 | 8 / 13 | 3,246 s / 12 s |
+| 4 | 11 / 16 | 3,739 s / 14 s |
+| 5 | 30 / 36 | 12,941 s / 35 s |
+| 6 | 50 / 60 | 31,114 s / 50 s |
+
+Le premier geste réel du niveau 4 prépare maintenant le panneau au point
+`(45,17)` ; les deux préparations suivantes précèdent l'application. Les trois
+attentes de la capture ont disparu. Toutes les décisions restent unitaires ;
+ce lot ne revendique aucune nouvelle série de plusieurs commandes.
+
+Source effectivement mesurée : local
+`c87a647303b9f2c0f1e9a751bfee6deef29a8a44`, distant
+`5dd9c8a86b911cd1640dac041add27a18bb57d92`, arbre
+`816d119942c46e25dcbbd726232da0d9be678af1`. Ce commit ajoute seulement la
+première archive à la correction testée fonctionnellement.
+
 ## Première décision problématique
 
 La référence `4a546a13` gagne **4 niveaux sur 6**, puis s'arrête au niveau 5
@@ -47,15 +76,16 @@ Les faits antérieurs restent conservés.
 Le retour positif de ce premier clic dans le test réemploie la configuration
 publique capturée après les trois attentes : il s'agit d'une construction
 fonctionnelle déclarée, pas d'une mesure chronométrée ni du premier clic réel.
-Le candidat n'a pas encore de rejeu strict dans cette version de l'archive.
-La continuité complète et le viewer restent à vérifier lors de l'intégration.
+Le premier clic réel et le strict complet sont désormais vérifiés par la mesure
+décrite plus haut. La continuité complète et le viewer restent à vérifier lors de l'intégration.
 Aucun nouveau bilan complet des 107 jeux n'est annoncé.
 
 ## Sources
 
 `report.json` décrit les compteurs, le rôle et ses conditions. `manifest.json`
 donne les empreintes stockées et décompressées. Le résultat de référence et
-la capture publique bornée sont archivés. La capture conserve toutes les
+la capture publique bornée et les bruts du strict complet sont archivés. Le
+manifeste du strict fixe sa source, son runner et ses références. La capture conserve toutes les
 grilles et animations, commandes, propositions, retours natifs et états du
 rôle ; elle omet les entités géométriques recalculables, les mémoires sans
 rapport et les traces globales dupliquées. L'empreinte du fichier original
