@@ -121,7 +121,7 @@ function changeRequest(packet: V6PublicObservation, background: number) {
   return changed;
 }
 
-test('FOGW historical continuation when a different visible request replaces the old one during a wait', async () => {
+test('FOGW seals the old request, remeasures the new one and preserves the physical return and wait cost', async () => {
   const game = await start(true);
   for (let turn = 1; turn <= 16; turn++) { await game.ticket(); await game.advance(); }
   const old = await game.ticket(), packet = changeRequest(fixture.observations[17], old.plan.scene.background);
@@ -132,10 +132,37 @@ test('FOGW historical continuation when a different visible request replaces the
   assert.notEqual(scene.counterparts[0].request_shape, old.plan.scene.counterparts[0].request_shape);
   const meta = { epoch: old.plan.epoch, score: old.plan.score, observation_ref: 'fresh', available: ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'] };
   assert.equal(receptionServiceBefore(old.proposal, 0, fixture.observations[16].frame, meta).admitted, false);
-  assert.equal(receptionServiceBefore(old.proposal, 1, packet.frame, meta).admitted, true);
+  assert.equal(receptionServiceBefore(old.proposal, 1, packet.frame, meta).admitted, false);
+  const visible = fixture.observations[17].frame;
+  const current = measureReceptionService(visible, old.plan.scene)!;
+  assert.notDeepEqual(current.counterparts[0].body_bbox, old.plan.scene.counterparts[0].body_bbox);
+  assert.equal(receptionServiceBefore(old.proposal, 1, visible, meta).admitted, true, 'moving counterpart');
+  const occluded = structuredClone(visible);
+  for (const { body_bbox: [left, top, right, bottom] } of current.counterparts) {
+    for (let y = top; y <= bottom; y++) for (let x = left; x <= right; x++) occluded[y][x] = current.background;
+  }
+  assert.deepEqual(measureReceptionService(occluded, old.plan.scene)!.counterparts, old.plan.scene.counterparts);
+  assert.equal(receptionServiceBefore(old.proposal, 1, occluded, meta).admitted, true, 'counterpart behind fog');
+  const alteredSupport = structuredClone(visible), target = old.plan.scene.target;
+  for (const [dx, dy] of target.mask) alteredSupport[target.bbox[1] + dy][target.bbox[0] + dx] = 2;
+  assert.notEqual(measureReceptionService(alteredSupport, old.plan.scene)?.layout, old.plan.scene.layout);
+  assert.equal(receptionServiceBefore(old.proposal, 1, alteredSupport, meta).admitted, false);
+  const hidden = structuredClone(fixture.observations[17].frame), [x, y] = old.plan.actor.anchor;
+  for (let j = 57; j < 61; j++) for (let i = 24; i < 28; i++) hidden[j][i] = 3;
+  assert.equal(receptionServiceBefore(old.proposal, 1, hidden, meta).admitted, true, 'no visible contrary request');
+  hidden[y][x] = hidden[y][x + 1];
+  assert.equal(receptionServiceBefore(old.proposal, 1, hidden, meta).admitted, false, 'carrier no longer identified');
   const outcome = await game.advance(packet), next = await game.ticket();
-  assert.deepEqual([outcome.matched, next.command.actionRef, next.index, next.plan.observation_ref, next.plan.steps.length],
-    [true, 'ACTION4', 1, old.plan.observation_ref, 8]);
+  assert.deepEqual([outcome.matched, outcome.reason, next.command.actionRef, next.index, next.plan.observation_ref, next.plan.steps.length],
+    [true, 'reception_subject_changed', 'ACTION4', 0, outcome.observation_ref, 1]);
+  assert.notEqual(next.plan.observation_ref, old.plan.observation_ref);
+  assert.deepEqual([next.plan.scene.counterparts[0].request_shape, next.plan.steps[0].stationary_confirmed, next.plan.memory.wait_spent],
+    [scene.counterparts[0].request_shape, false, 2]);
+  const sameRequest = { ...packet, stepIndex: fixture.observations[18].stepIndex };
+  assert.equal((await game.advance(sameRequest)).matched, true);
+  const renewed = await game.ticket();
+  assert.deepEqual([renewed.index, renewed.command.actionRef, renewed.plan.steps.length, renewed.plan.steps[0].stationary_confirmed,
+    renewed.plan.scene.counterparts[0].request_shape, renewed.plan.memory.wait_spent], [0, 'ACTION4', 8, true, scene.counterparts[0].request_shape, 3]);
 });
 
 test('FOGW consumes a replacement offer to remeasure before waiting at the same support', async t => {

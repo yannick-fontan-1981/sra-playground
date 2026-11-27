@@ -38,3 +38,29 @@ Le témoin de capture provient de l’animation de l’environnement. `FogHidden
 ## Frontière de l’offre
 
 Le gel choisit déjà une commande mesurée qui sortirait de la grille depuis le support. Il essaie une fois puis peut attendre en série après un retour immobile. L’extraction rend cette proposition substituable via `ReceptionServiceMemory.offerStationaryObservation` avec la position du porteur, le support, les cellules accessibles, les mouvements connus et les confirmations stationnaires. Elle rend une commande et un indicateur de confirmation, ou aucune offre. L’appelant garde la recherche du chemin, le budget cumulatif, le nombre de tickets, les refus et l’acquisition. Dans le vrai service, fournir une offre de remesure unitaire sur les mêmes entrées de T17 produit une nouvelle sélection à T18. La caractérisation du gel est `9303451a` (arbre `src` identique au gel).
+
+## Correctif de portée et contre-épreuve
+
+L’extraction à parité est `e2e5b52fe4476f169c1ab1988d23a5f5368e305c`. Son parent de caractérisation est `9303451a`. Sur l’observation construite au retour T17, les deux versions laissent partir l’indice 1 du plan de la croix. Le correctif se compare à `e2e5b52f` et applique le critère enregistré à `001b9e89` avant l’extraction.
+
+| Après le même `ACTION4` de T17 | Géométrie et preuve | Retour, dépense et décision suivante sur le correctif |
+|---|---|---|
+| Croix toujours demandée | Même support et même emplacement de demande. Le mobile est passé de (42,26) à (46,26). | Position conforme. L’ancien plan peut libérer l’indice 1. La garde tolère aussi que le brouillard masque le mobile et que le dernier rapprochement soit retenu. |
+| Nouveau L demandé et visible sur le plateau | Même porteur, même support et même commande admissible. La silhouette associée à la case de l’afficheur a changé. | Position conforme, `reception_subject_changed`, préfixe clos. L’attente dépensée compte toujours. La révision 18 autorise `ACTION4` pour le L, indice 0, un seul pas, mesure encore à faire. Un nouveau retour immobile pour ce L autorise huit pas à la sélection suivante. Les dépenses passent de 1 à 2 puis 3. |
+| Porteur introuvable, support modifié ou référence initiale périmée | Variantes contrôlées du même plateau. La dernière commande émise garde sa forme. | La garde refuse le prochain pas du plan présenté. |
+
+`sameReceptionSubject` compare le support (`layout`), la silhouette et la case de la première demande effectivement associée, celle que le budget débite. Les coordonnées du corps mobile ne font pas partie de l’identité. La garde de retour distingue la projection physique et la permission de continuer. La proposition et l’acquisition révoquent la confirmation stationnaire périmée, tout en conservant le coût déjà débité. La contre-épreuve synthétique utilise le service réel et des pixels construits. Le contact des deux niveaux est, lui, rejoué dans le jeu. La reconnaissance des demandes isolées sans corps correspondant garde la sémantique de rétention de `measureReceptionService`. La couverture se limite à la demande effectivement associée.
+
+## Reproduire et décider
+
+Utiliser Node 24, les dépendances du dépôt et un checkout préparé contenant `public/vendor/pyodide` et `public/python`. Depuis le checkout du SHA testé, ce bloc PowerShell rejoue le jeu puis vérifie les projections archivées des 98 rasters, les contrats de budget, l’acquisition et le typage. La variable peut désigner un second checkout qui fournit les seuls actifs du jeu. Avec la variable absente, les assertions du service utilisent les observations publiques compressées du lot.
+
+```powershell
+$env:SIC_RECEIVER_GAME_ROOT = (Resolve-Path .).Path
+node --test tests/sic-reception-fogw-line61.test.ts tests/v6-reception-service-*.test.ts tests/v5-reception-wait-contracts.test.ts
+node node_modules/typescript/bin/tsc --noEmit
+```
+
+Les quatre cas de `sic-reception-fogw-line61.test.ts` contrôlent le préfixe historique, les captures des deux niveaux, la substitution d’offre et le premier écart à commande identique. Le fichier contient un seul départ réel en L1. L2 est atteint depuis ce départ. Les deux prolongements construits sont le retrait de la confirmation et le remplacement de la demande au retour T17. Pour la comparaison native nominale, utiliser L1, le pack par défaut, 64 actions par session et 600 par niveau. Comparer les 16 premiers tickets du catalogue, puis les 32 libérations, les 32 retours de garde et les 33 paquets publics jusqu’à l’entrée en L3. Seule la contre-épreuve de changement de demande doit distinguer le correctif de son parent. [Fixture](../../tests/fixtures/sic-reception-fogw-public.json.gz) · [Point d’entrée natif et assertions](../../tests/sic-reception-fogw-line61.test.ts)
+
+**Verdict local du 27 novembre 2026 à 20 h 06 min 44 s UTC−3.** Depuis le démarrage du lot à 19 h 47 min 37 s, 19 min 07 s se sont écoulées, dont 28,74 s pour le premier rejeu sur le gel et 85,41 s pour la dernière suite. Les 171 tests passent et TypeScript termine sans erreur. Entre l’historique `8ce7ee35` et le gel, les 16 libérations, 16 retours et 17 observations publiques concordent (palette facultative omise). Entre le gel et chacun des deux SHA de branche, les 32 libérations et retours, les commandes et les 33 observations publiques du prolongement sont identiques. Seul le correctif satisfait le critère préenregistré sur le L. Le verdict local et les qualifications indépendantes du Banc et de l’opérateur ont chacun leur portée.
