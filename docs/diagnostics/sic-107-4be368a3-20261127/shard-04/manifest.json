@@ -1,0 +1,41 @@
+{
+  "schema": "sic.full-campaign-shard.v1",
+  "source": "4be368a365a6347fb551bb4c73dd5756413bb34e",
+  "tree": "dcaf029b1f31ae15d9a1be62b705e93ce58d4ca1",
+  "workflowSha": "abab3da60767b520ede320033e8091a0c0ee8414",
+  "runId": "46051058377",
+  "runAttempt": "1",
+  "shard": "04",
+  "games": [
+    "BP35",
+    "SERI",
+    "GARE"
+  ],
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "nodeVersion": "v24.22.3",
+  "runnerOS": "Linux",
+  "runnerArch": "X64",
+  "environment": {
+    "SIC_REPLAY_REFERENCES": "docs/architecture/sic-replay-reference-levels-20261126.json"
+  },
+  "argv": [
+    "node",
+    "scripts/check-sic-chronological.mjs",
+    "BP35,SERI,GARE",
+    "auto",
+    "replay/results.jsonl",
+    "1",
+    "sic"
+  ],
+  "sourceHashes": {
+    "scripts/check-sic-chronological.mjs": "2cb80e62a41e1269f1a2a0dd9e9de20a32504b70724c167abaac1a8b9bae3111",
+    "scripts/sic-replay-watchdog.mjs": "469e7a78e3a473df8ee6255828ab68d1ca3f08c8b075b40e022b06ef69495c5e",
+    "scripts/sic-replay-budgets.mjs": "308ae1c2d28a21dc7f2e3d06c83e601877d5388db2723148b5900d58c5a89931",
+    "src/games/catalog.ts": "4851ae10899b20cb85281d25ae6db3dc7b31645377b2a77885bceb8223bc499d",
+    "docs/architecture/sic-replay-reference-levels-20261126.json": "67ae5216b80e87bbb2243138fde7970ea5c725a5f832f1b72aa8b0780e270854",
+    "docs/architecture/sic-v8-level6-campaign-7bb9f152.json": "18cafd4d8b6a9a29c18f5e07ab1d1e63b74e53b1c0fc605f6dbbd390aae7efcc",
+    "package-lock.json": "93bc180b1ecf92e7976bb54bcb3a0aef1d3e96d65c41ee300676207832cd274e"
+  },
+  "startedAt": "2026-11-27T18:42:00.735Z"
+}

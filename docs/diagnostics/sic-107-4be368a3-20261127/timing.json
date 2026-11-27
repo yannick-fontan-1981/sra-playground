@@ -1,0 +1,375 @@
+{
+  "run": {
+    "createdAt": "2026-11-27T18:39:08Z",
+    "startedAt": "2026-11-27T18:39:08Z",
+    "updatedAt": "2026-11-27T18:53:39Z",
+    "conclusion": "success"
+  },
+  "runWallSeconds": 871.0,
+  "lastJobCompletedAt": "2026-11-27T18:53:38Z",
+  "runStartToLastJobSeconds": 870.0,
+  "firstReplayStepStartedAt": "2026-11-27T18:41:02Z",
+  "lastReplayStepCompletedAt": "2026-11-27T18:53:18Z",
+  "replayWindowSeconds": 736.0,
+  "peakSimultaneousShardJobs": 16,
+  "peakSimultaneousReplaySteps": 14,
+  "sumShardJobSeconds": 7969.0,
+  "sumReplayStepSeconds": 6269.0,
+  "firstComplementaryLocalLaunch": null,
+  "localLaunchToLastGithubReplaySeconds": null,
+  "localLaunchToLastGithubJobSeconds": null,
+  "shards": [
+    {
+      "name": "Strict 107 / 01",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:42:20Z",
+      "completedAt": "2026-11-27T18:51:09Z",
+      "seconds": 529.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:43:26Z",
+        "completedAt": "2026-11-27T18:51:05Z",
+        "seconds": 459.0
+      }
+    },
+    {
+      "name": "Strict 107 / 02",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:40:10Z",
+      "completedAt": "2026-11-27T18:46:47Z",
+      "seconds": 397.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:41:24Z",
+        "completedAt": "2026-11-27T18:46:42Z",
+        "seconds": 318.0
+      }
+    },
+    {
+      "name": "Strict 107 / 03",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:44:51Z",
+      "completedAt": "2026-11-27T18:51:26Z",
+      "seconds": 395.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:45:41Z",
+        "completedAt": "2026-11-27T18:51:23Z",
+        "seconds": 342.0
+      }
+    },
+    {
+      "name": "Strict 107 / 04",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:40:56Z",
+      "completedAt": "2026-11-27T18:45:36Z",
+      "seconds": 280.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:42:02Z",
+        "completedAt": "2026-11-27T18:45:31Z",
+        "seconds": 209.0
+      }
+    },
+    {
+      "name": "Strict 107 / 05",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:46:03Z",
+      "completedAt": "2026-11-27T18:49:54Z",
+      "seconds": 231.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:46:55Z",
+        "completedAt": "2026-11-27T18:49:51Z",
+        "seconds": 176.0
+      }
+    },
+    {
+      "name": "Strict 107 / 06",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:40:11Z",
+      "completedAt": "2026-11-27T18:46:23Z",
+      "seconds": 372.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:41:57Z",
+        "completedAt": "2026-11-27T18:46:17Z",
+        "seconds": 260.0
+      }
+    },
+    {
+      "name": "Strict 107 / 07",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:41:09Z",
+      "completedAt": "2026-11-27T18:46:24Z",
+      "seconds": 315.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:42:13Z",
+        "completedAt": "2026-11-27T18:46:22Z",
+        "seconds": 249.0
+      }
+    },
+    {
+      "name": "Strict 107 / 08",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:41:40Z",
+      "completedAt": "2026-11-27T18:46:00Z",
+      "seconds": 260.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:42:52Z",
+        "completedAt": "2026-11-27T18:45:56Z",
+        "seconds": 184.0
+      }
+    },
+    {
+      "name": "Strict 107 / 09",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:40:10Z",
+      "completedAt": "2026-11-27T18:44:49Z",
+      "seconds": 279.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:41:07Z",
+        "completedAt": "2026-11-27T18:44:46Z",
+        "seconds": 219.0
+      }
+    },
+    {
+      "name": "Strict 107 / 10",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:45:40Z",
+      "completedAt": "2026-11-27T18:51:02Z",
+      "seconds": 322.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:46:46Z",
+        "completedAt": "2026-11-27T18:50:58Z",
+        "seconds": 252.0
+      }
+    },
+    {
+      "name": "Strict 107 / 11",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:46:29Z",
+      "completedAt": "2026-11-27T18:53:07Z",
+      "seconds": 398.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:47:36Z",
+        "completedAt": "2026-11-27T18:53:04Z",
+        "seconds": 328.0
+      }
+    },
+    {
+      "name": "Strict 107 / 12",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:40:10Z",
+      "completedAt": "2026-11-27T18:44:00Z",
+      "seconds": 230.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:41:02Z",
+        "completedAt": "2026-11-27T18:43:56Z",
+        "seconds": 174.0
+      }
+    },
+    {
+      "name": "Strict 107 / 13",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:40:10Z",
+      "completedAt": "2026-11-27T18:45:37Z",
+      "seconds": 327.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:41:30Z",
+        "completedAt": "2026-11-27T18:45:32Z",
+        "seconds": 242.0
+      }
+    },
+    {
+      "name": "Strict 107 / 14",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:44:56Z",
+      "completedAt": "2026-11-27T18:50:35Z",
+      "seconds": 339.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:45:48Z",
+        "completedAt": "2026-11-27T18:50:33Z",
+        "seconds": 285.0
+      }
+    },
+    {
+      "name": "Strict 107 / 15",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:47:35Z",
+      "completedAt": "2026-11-27T18:53:20Z",
+      "seconds": 345.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:48:33Z",
+        "completedAt": "2026-11-27T18:53:18Z",
+        "seconds": 285.0
+      }
+    },
+    {
+      "name": "Strict 107 / 16",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:44:51Z",
+      "completedAt": "2026-11-27T18:50:36Z",
+      "seconds": 345.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:46:04Z",
+        "completedAt": "2026-11-27T18:50:34Z",
+        "seconds": 270.0
+      }
+    },
+    {
+      "name": "Strict 107 / 17",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:44:04Z",
+      "completedAt": "2026-11-27T18:49:15Z",
+      "seconds": 311.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:45:15Z",
+        "completedAt": "2026-11-27T18:49:11Z",
+        "seconds": 236.0
+      }
+    },
+    {
+      "name": "Strict 107 / 18",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:45:05Z",
+      "completedAt": "2026-11-27T18:49:56Z",
+      "seconds": 291.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:46:12Z",
+        "completedAt": "2026-11-27T18:49:52Z",
+        "seconds": 220.0
+      }
+    },
+    {
+      "name": "Strict 107 / 19",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:40:10Z",
+      "completedAt": "2026-11-27T18:44:54Z",
+      "seconds": 284.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:41:17Z",
+        "completedAt": "2026-11-27T18:44:49Z",
+        "seconds": 212.0
+      }
+    },
+    {
+      "name": "Strict 107 / 20",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:41:47Z",
+      "completedAt": "2026-11-27T18:46:21Z",
+      "seconds": 274.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:42:50Z",
+        "completedAt": "2026-11-27T18:46:16Z",
+        "seconds": 206.0
+      }
+    },
+    {
+      "name": "Strict 107 / 21",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:43:14Z",
+      "completedAt": "2026-11-27T18:49:15Z",
+      "seconds": 361.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:44:22Z",
+        "completedAt": "2026-11-27T18:49:10Z",
+        "seconds": 288.0
+      }
+    },
+    {
+      "name": "Strict 107 / 22",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:43:55Z",
+      "completedAt": "2026-11-27T18:51:32Z",
+      "seconds": 457.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:45:12Z",
+        "completedAt": "2026-11-27T18:51:28Z",
+        "seconds": 376.0
+      }
+    },
+    {
+      "name": "Strict 107 / 23",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:46:26Z",
+      "completedAt": "2026-11-27T18:51:54Z",
+      "seconds": 328.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:47:31Z",
+        "completedAt": "2026-11-27T18:51:50Z",
+        "seconds": 259.0
+      }
+    },
+    {
+      "name": "Strict 107 / 24",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:44:04Z",
+      "completedAt": "2026-11-27T18:49:03Z",
+      "seconds": 299.0,
+      "replay": {
+        "name": "Replay this shard sequentially",
+        "conclusion": "success",
+        "startedAt": "2026-11-27T18:45:18Z",
+        "completedAt": "2026-11-27T18:48:58Z",
+        "seconds": 220.0
+      }
+    }
+  ],
+  "otherJobs": [
+    {
+      "name": "Freeze the 107-game matrix",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:39:11Z",
+      "completedAt": "2026-11-27T18:40:07Z",
+      "seconds": 56.0
+    },
+    {
+      "name": "Classify all 107 game results and preserve receipts",
+      "conclusion": "success",
+      "startedAt": "2026-11-27T18:53:23Z",
+      "completedAt": "2026-11-27T18:53:38Z",
+      "seconds": 15.0
+    }
+  ]
+}

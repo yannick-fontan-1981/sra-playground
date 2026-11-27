@@ -1,0 +1,1639 @@
+{
+  "summary": {
+    "source": "4be368a365a6347fb551bb4c73dd5756413bb34e",
+    "sourceTree": "dcaf029b1f31ae15d9a1be62b705e93ce58d4ca1",
+    "runId": 46051058377,
+    "workflowSha": "abab3da60767b520ede320033e8091a0c0ee8414",
+    "referenceSHA256": "67ae5216b80e87bbb2243138fde7970ea5c725a5f832f1b72aa8b0780e270854",
+    "verifiedShards": 24,
+    "expectedGames": 107,
+    "expectedLevels": 692,
+    "receipts": 107,
+    "missing": [],
+    "categories": {
+      "complete": 107
+    },
+    "publicLevelsScored": 692,
+    "levelsReconciled": 692,
+    "gamesReconciledWithoutRecovery": 105,
+    "gamesWithScoreDeadlineOverrun": [],
+    "recoveries": {
+      "knownGames": 107,
+      "unknownGames": 0,
+      "knownResets": 2,
+      "knownUndos": 0
+    },
+    "invalid": {}
+  },
+  "games": {
+    "LF52": {
+      "category": "complete",
+      "issues": [],
+      "scored": 10,
+      "reconciled": 10,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "DC22": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "WA30": {
+      "category": "complete",
+      "issues": [],
+      "scored": 9,
+      "reconciled": 9,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "FOGW": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "BP35": {
+      "category": "complete",
+      "issues": [],
+      "scored": 9,
+      "reconciled": 9,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SERI": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "GARE": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "G50T": {
+      "category": "complete",
+      "issues": [],
+      "scored": 7,
+      "reconciled": 7,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "EVAS": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SYME": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "AMZE": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SS07": {
+      "category": "complete",
+      "issues": [],
+      "scored": 8,
+      "reconciled": 8,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "HOLE": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "CLRS": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "CATL": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "RE86": {
+      "category": "complete",
+      "issues": [],
+      "scored": 8,
+      "reconciled": 8,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SNAR": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "GLOB": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "ONDE": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SS01": {
+      "category": "complete",
+      "issues": [],
+      "scored": 8,
+      "reconciled": 8,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 1,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SS05": {
+      "category": "complete",
+      "issues": [],
+      "scored": 8,
+      "reconciled": 8,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "ZIPP": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "FT09": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "ETAG": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SMLP": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "CAVA": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "MEMO": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "VOIS": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SS02": {
+      "category": "complete",
+      "issues": [],
+      "scored": 8,
+      "reconciled": 8,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "REGN": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "CASC": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "DAME": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "GRIL": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SS06": {
+      "category": "complete",
+      "issues": [],
+      "scored": 8,
+      "reconciled": 8,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "TEQU": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "HPDL": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "GMAP": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "ESCT": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "ELAS": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "LKEY": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "TN36": {
+      "category": "complete",
+      "issues": [],
+      "scored": 7,
+      "reconciled": 7,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "ISOS": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "DNOI": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "TRCP": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "TRIA": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SELE": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "VALV": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "LOGI": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SS03": {
+      "category": "complete",
+      "issues": [],
+      "scored": 8,
+      "reconciled": 8,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "LIFE": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "PRTL": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "KATA": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "THER": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "LS20": {
+      "category": "complete",
+      "issues": [],
+      "scored": 7,
+      "reconciled": 7,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "M0R0": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SU15": {
+      "category": "complete",
+      "issues": [],
+      "scored": 9,
+      "reconciled": 9,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SP80": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "COLM": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "POLA": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "RECR": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "CGWL": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "VC33": {
+      "category": "complete",
+      "issues": [],
+      "scored": 7,
+      "reconciled": 7,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "PIPE": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "STCK": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "MIND": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "KA59": {
+      "category": "complete",
+      "issues": [],
+      "scored": 7,
+      "reconciled": 7,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SK48": {
+      "category": "complete",
+      "issues": [],
+      "scored": 8,
+      "reconciled": 8,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "GIGO": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "FITE": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SKBN": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "GABA": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "PORT": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "FUIT": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "R11L": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "UPST": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SS04": {
+      "category": "complete",
+      "issues": [],
+      "scored": 8,
+      "reconciled": 8,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 1,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "CRAF": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "AR25": {
+      "category": "complete",
+      "issues": [],
+      "scored": 8,
+      "reconciled": 8,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "GRAV": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "GORI": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "REWI": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "LS19": {
+      "category": "complete",
+      "issues": [],
+      "scored": 8,
+      "reconciled": 8,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SB26": {
+      "category": "complete",
+      "issues": [],
+      "scored": 8,
+      "reconciled": 8,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SC25": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "COMB": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "MOTO": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "CN04": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "KEYD": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "LP85": {
+      "category": "complete",
+      "issues": [],
+      "scored": 8,
+      "reconciled": 8,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "DICO": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "WEAV": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SEQN": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "TU93": {
+      "category": "complete",
+      "issues": [],
+      "scored": 9,
+      "reconciled": 9,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "CATR": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "CWSE": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "RSWP": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "HANO": {
+      "category": "complete",
+      "issues": [],
+      "scored": 4,
+      "reconciled": 4,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "S5I5": {
+      "category": "complete",
+      "issues": [],
+      "scored": 8,
+      "reconciled": 8,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "AS66": {
+      "category": "complete",
+      "issues": [],
+      "scored": 9,
+      "reconciled": 9,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "CD82": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "KLOT": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SPOR": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SIGN": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "SWCH": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "TR87": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "CONN": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    },
+    "TICT": {
+      "category": "complete",
+      "issues": [],
+      "scored": 6,
+      "reconciled": 6,
+      "scoreDeadlineOverruns": [],
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "reason": "target_levels_completed"
+    }
+  },
+  "artifacts": [
+    {
+      "shard": "01",
+      "directory": "sic-107-4be368a3-shard-01",
+      "codes": [
+        "LF52"
+      ],
+      "resultsSHA256": "a24b94b0c8dc96fd892f841d6a46520187ae3b1afa31621412c3417f93657245",
+      "levelsSHA256": "d48666936e2de40ef8fcb946dbd0ad84d6a1f111be050ebf785072bd4483bb88",
+      "logSHA256": "c0a40ecd342dd06cc3d7a3a8e7de8eed51763b1e50bc4b9318693976c710b1b9"
+    },
+    {
+      "shard": "02",
+      "directory": "sic-107-4be368a3-shard-02",
+      "codes": [
+        "DC22"
+      ],
+      "resultsSHA256": "62a7a08146261ffe3965601585aa9bd95704409e730cd5cbed5e1e93bdb64c78",
+      "levelsSHA256": "1a03443db33c78fb3556b9b355fd53058ed59bccb99a3183f0366ae9bd471dd8",
+      "logSHA256": "df46459654703667f8ad7fb9d746e6f75cf097a9d47b38bcf93ea0bbcef8e272"
+    },
+    {
+      "shard": "03",
+      "directory": "sic-107-4be368a3-shard-03",
+      "codes": [
+        "WA30",
+        "FOGW"
+      ],
+      "resultsSHA256": "ca30215e9e6abd24b3a796cd915262a42cf75de8a33f2952b3cfbc23a8b20dcf",
+      "levelsSHA256": "f0e4fc7fc915775227f6fa6eea6f45884d26d19da7f30a25512e8057a4739258",
+      "logSHA256": "acdaded66ff10f39271a56b85646ded55bbf8557e61d829c9bbc72867c73cbd0"
+    },
+    {
+      "shard": "04",
+      "directory": "sic-107-4be368a3-shard-04",
+      "codes": [
+        "BP35",
+        "SERI",
+        "GARE"
+      ],
+      "resultsSHA256": "54c83df2a4fd93a6cf2f2fb62cd6b76dea747e81489310ef17a6d2dd10867805",
+      "levelsSHA256": "fec11ba1d9da8d67851480a6ae2078fd9e37d092016326c93316b948c33f9edf",
+      "logSHA256": "cf5a58bb5ee8294fcdc24093d5bc3921119d145e7dd994726dce2a312eb94bb0"
+    },
+    {
+      "shard": "05",
+      "directory": "sic-107-4be368a3-shard-05",
+      "codes": [
+        "G50T",
+        "EVAS",
+        "SYME",
+        "AMZE"
+      ],
+      "resultsSHA256": "ad722183e6d8031e1fea6b084373579b561eac08fae3d6dd3553910117a7e7a1",
+      "levelsSHA256": "0ce2a595af8844abe47d57561a3b01ef4745a2310489953e0f96cfd4e86dd171",
+      "logSHA256": "9c8c74d124280496d92718d67b30f422f16d7e67ecedb772e270c5b2ad71d84e"
+    },
+    {
+      "shard": "06",
+      "directory": "sic-107-4be368a3-shard-06",
+      "codes": [
+        "SS07",
+        "HOLE",
+        "CLRS",
+        "CATL"
+      ],
+      "resultsSHA256": "14847b9d22aa59f11ddb07e22b9a8fffc6235feced389b15c67261dbab2e4910",
+      "levelsSHA256": "dd0e1643a9f215e22c19d4814dd2697e75a8712955e92d14a17f45d15baae467",
+      "logSHA256": "1e33316ea5bba4f14484005fa6369fa790b2769aa6e56b0e1d907026f387cde3"
+    },
+    {
+      "shard": "07",
+      "directory": "sic-107-4be368a3-shard-07",
+      "codes": [
+        "RE86",
+        "SNAR",
+        "GLOB",
+        "ONDE"
+      ],
+      "resultsSHA256": "62029ca8b5b0c4acb353e57222deaef0cbcb546fa16c989cd414171662056913",
+      "levelsSHA256": "5838c3d102b67971fa79e1abc9462da1a8609b5c2ea774c3ddd4de4ac6dc23b7",
+      "logSHA256": "ad2d5b186552514eb2214b15cc15d375954138379ed64cb29bdab6764847b71e"
+    },
+    {
+      "shard": "08",
+      "directory": "sic-107-4be368a3-shard-08",
+      "codes": [
+        "SS01",
+        "SS05",
+        "ZIPP",
+        "FT09"
+      ],
+      "resultsSHA256": "2ba35389ed2ea649e4b864ed60c1f1fcfc0895db6b687ec4ba38a345768549d3",
+      "levelsSHA256": "3cbba5b877c3f4ba97c0923208aa7a3a5c7a23d5ea77e2f2bb920606b900048b",
+      "logSHA256": "8212aa0c2eb1adadf44e3955aa3cbac5800e8ce9e0138f6d314493cc786f88ac"
+    },
+    {
+      "shard": "09",
+      "directory": "sic-107-4be368a3-shard-09",
+      "codes": [
+        "ETAG",
+        "SMLP",
+        "CAVA",
+        "MEMO",
+        "VOIS"
+      ],
+      "resultsSHA256": "95d0e60ecd412c4d311e1f51416e101d0829c9d9098de90c5a5aa8a6896cb4b3",
+      "levelsSHA256": "61394dd313eb8394b0ba992d21d2e56b34b4207bd4e81daaeed8740109f768f3",
+      "logSHA256": "d025d55363e33307f1bac412abfabdf551c304c2107075f35c2e50b595551510"
+    },
+    {
+      "shard": "10",
+      "directory": "sic-107-4be368a3-shard-10",
+      "codes": [
+        "SS02",
+        "REGN",
+        "CASC",
+        "DAME",
+        "GRIL"
+      ],
+      "resultsSHA256": "68221b0059511f81bf695977682528670a90582fd5912fedb5f84344801dea19",
+      "levelsSHA256": "b60fb652f997ea81fc0558d0f22d5967b8220e33220eaeb3ffb0cf03d4a2d776",
+      "logSHA256": "a306b2ebee28260082a84af2c8b5aad2d59fac50fcda1747675333fe2131cf2d"
+    },
+    {
+      "shard": "11",
+      "directory": "sic-107-4be368a3-shard-11",
+      "codes": [
+        "SS06",
+        "TEQU",
+        "HPDL",
+        "GMAP",
+        "ESCT"
+      ],
+      "resultsSHA256": "627768347372c866c8eaefded4d0d8e1b17dae1f80aebad5b34cac430413de26",
+      "levelsSHA256": "0a47725f08d8ea09a54704de1f3f296ed5cc4a3b3bff196ffb0c14c2f46bc88d",
+      "logSHA256": "56c7cebff9abe58c7bd6b08122ba7f0fac4c69dc1b5be726700e79a4d9da5c3f"
+    },
+    {
+      "shard": "12",
+      "directory": "sic-107-4be368a3-shard-12",
+      "codes": [
+        "ELAS",
+        "LKEY",
+        "TN36",
+        "ISOS",
+        "DNOI"
+      ],
+      "resultsSHA256": "46031b5e0a70faab1f2ec77a515699286ee2be6cf2d2e47736af6fc9f34e0d1c",
+      "levelsSHA256": "68458c4a70ed050934349f545b5d3dae1ec4080fe282a54ab8ad3f0bd2e66962",
+      "logSHA256": "c65b4107f3d4037c3da3f941f247ee2f646fc5a33ad0976f7d36b2cf524a9e6a"
+    },
+    {
+      "shard": "13",
+      "directory": "sic-107-4be368a3-shard-13",
+      "codes": [
+        "TRCP",
+        "TRIA",
+        "SELE",
+        "VALV",
+        "LOGI"
+      ],
+      "resultsSHA256": "e5da7d5f71f032a015e6072a21b5b3c341495cc5cdfc88310c0d4c7705585892",
+      "levelsSHA256": "161c8c875630ca310c28c14334ab7f14db21f84835152057958083a076132ff5",
+      "logSHA256": "52c4689c49fce162a6bfc1e7ece0e0630cb0f44182c338d939a7c5759fe04626"
+    },
+    {
+      "shard": "14",
+      "directory": "sic-107-4be368a3-shard-14",
+      "codes": [
+        "SS03",
+        "LIFE",
+        "PRTL",
+        "KATA",
+        "THER"
+      ],
+      "resultsSHA256": "81aec2544f5f4f9295dd774c939c518965a1cdad6676ba82eae1ddd88c9a1be0",
+      "levelsSHA256": "d2f136cb9cdc5fe328ca5eb69fb05ebb08e1d033a74b3116d6264fdb62ab4ac8",
+      "logSHA256": "21cd1eecf6b1f0ccad7b291d5f7100dfc184f03f56a4b20129d3505393b7c0b2"
+    },
+    {
+      "shard": "15",
+      "directory": "sic-107-4be368a3-shard-15",
+      "codes": [
+        "LS20",
+        "M0R0",
+        "SU15",
+        "SP80",
+        "COLM",
+        "POLA"
+      ],
+      "resultsSHA256": "6dc385a84daee168f82434135ac559cce1088d7dd44f8bae0d7c62c6743f80a5",
+      "levelsSHA256": "fc7a59f67879e0f08ae458b1ef0b37bb1474849226b4edbcd4153aec952eac79",
+      "logSHA256": "37f8925c184367eb0ffc920545a0b3ded9b5116e6c7c2c88f5eaf83b6210b000"
+    },
+    {
+      "shard": "16",
+      "directory": "sic-107-4be368a3-shard-16",
+      "codes": [
+        "RECR",
+        "CGWL",
+        "VC33",
+        "PIPE",
+        "STCK",
+        "MIND"
+      ],
+      "resultsSHA256": "a9a086afa3b5b16e2cbb188f29e822f9da8b779baab7b14a325bb9c84ff78a7a",
+      "levelsSHA256": "1fdce84be44ce7cf82c3785b0b14e032eecf163fda81a394f20c85fe06192a30",
+      "logSHA256": "13d7944fe244290e1f4337a7e7802b4d70b2b83edec8b07be7055ff74fe1177b"
+    },
+    {
+      "shard": "17",
+      "directory": "sic-107-4be368a3-shard-17",
+      "codes": [
+        "KA59",
+        "SK48",
+        "GIGO",
+        "FITE",
+        "SKBN"
+      ],
+      "resultsSHA256": "407845103e1a2774b680cac31f5e0fe1327f22e2088cdf6cfc4619eda049dbc7",
+      "levelsSHA256": "2e270df128f0bf827f7e924221ba2c9c2debdfc8950f206eec6716133dbcb7ea",
+      "logSHA256": "9ca1c3c554689cdec2fb3573bbd96fec9535e4afae6af4fbb3e16376edc3157f"
+    },
+    {
+      "shard": "18",
+      "directory": "sic-107-4be368a3-shard-18",
+      "codes": [
+        "GABA",
+        "PORT",
+        "FUIT",
+        "R11L",
+        "UPST"
+      ],
+      "resultsSHA256": "0e367cec6282fce803b93bf0604831e77a767fb77a91e70b1c145b2bcdcd175f",
+      "levelsSHA256": "07194bfdee45bd73e97e7e032cca655288deb4a669f1ce6f0e7b55f9a6ca1430",
+      "logSHA256": "a4847941a39d2a3ecc33098e5bbec6cd23c0516daa23e594f0fbdd9901c74e17"
+    },
+    {
+      "shard": "19",
+      "directory": "sic-107-4be368a3-shard-19",
+      "codes": [
+        "SS04",
+        "CRAF",
+        "AR25",
+        "GRAV",
+        "GORI",
+        "REWI"
+      ],
+      "resultsSHA256": "7da86aa1c63b9c5126a758f65e232dff4ca119fbeb2abef6a80664ed5e0a8fa3",
+      "levelsSHA256": "1eb3fbcaa0242ccaf5220c746808e5bca2cf3299b64dcfd1aacbe997900febf2",
+      "logSHA256": "7c4100cbb3126667b6c92a504c7790f969ca68362bb033670e38937e19a5e310"
+    },
+    {
+      "shard": "20",
+      "directory": "sic-107-4be368a3-shard-20",
+      "codes": [
+        "LS19",
+        "SB26",
+        "SC25",
+        "COMB",
+        "MOTO"
+      ],
+      "resultsSHA256": "155fab8017a346fe59b98cc8e617fe0bff474a6cc5cd3780999216387519d9c6",
+      "levelsSHA256": "44a1e651f9e6e264de658d4d4c815a00872556ebd87d7d8678d4d35e0baa64e8",
+      "logSHA256": "1ed6f6fb8351a9a7572929eb8baaa0e0f0e1157a6bf8430cf0379f68ef5daba4"
+    },
+    {
+      "shard": "21",
+      "directory": "sic-107-4be368a3-shard-21",
+      "codes": [
+        "CN04",
+        "KEYD",
+        "LP85",
+        "DICO",
+        "WEAV",
+        "SEQN"
+      ],
+      "resultsSHA256": "0d3ce9989c7813ac60d91af2e901b2e6acf81d2369fcf4caced39abf59220937",
+      "levelsSHA256": "27971267870341177751d6afb5a9c3f3a271268c20aecfcf2163f63badf064bd",
+      "logSHA256": "38936bdbf63f71b63833b065e815bfc042cd9b9ddeaede9f21200ff42f0e33cb"
+    },
+    {
+      "shard": "22",
+      "directory": "sic-107-4be368a3-shard-22",
+      "codes": [
+        "TU93",
+        "CATR",
+        "CWSE",
+        "RSWP",
+        "HANO"
+      ],
+      "resultsSHA256": "c3203f109660468cd96481dd310b124bbe057cb42dc9ada99e763bf90065e0ef",
+      "levelsSHA256": "2a6885d72c39aa221691b204e717ac9a3dbd66da075939d74863333beda96fd6",
+      "logSHA256": "798dfaf6e16218cdd4f58a62b8b912f4b528ce81e6c7b9993c90e35e5a2e0ccc"
+    },
+    {
+      "shard": "23",
+      "directory": "sic-107-4be368a3-shard-23",
+      "codes": [
+        "S5I5",
+        "AS66",
+        "CD82",
+        "KLOT",
+        "SPOR"
+      ],
+      "resultsSHA256": "6ab8230abd87c2058512db8cfaafe2581e31cbf050e3284289fd0e0697dfb33f",
+      "levelsSHA256": "29809be5c27c5590d42a8db720a9a4236fc9a0c109315c2a5e910cc0daa9a08b",
+      "logSHA256": "a7c1e3d3c8888516c9a931364660c7f88a2ae679ea587495769c82cd7bdf5907"
+    },
+    {
+      "shard": "24",
+      "directory": "sic-107-4be368a3-shard-24",
+      "codes": [
+        "SIGN",
+        "SWCH",
+        "TR87",
+        "CONN",
+        "TICT"
+      ],
+      "resultsSHA256": "d6642ce846bc5e524401fd93eb4f7afb04dc15630d36c0098bc0ad55cf03d3fc",
+      "levelsSHA256": "b4421880c5b980ef5289bfd5d0482490d105b80b4cc0264a4cb6c9e24f958121",
+      "logSHA256": "58c872704aba38be2a8515339dc54dadb3ea2251346f7087893664c07a5f045e"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "previousSource": "0fe417b2e91bb8ca15573e82b79b7081157aeb37",
+  "previousArchive": "fca904de931a4c0a299635c54570779d8f4add3e",
+  "previousComplete": 105,
+  "previousLevelsScored": 689,
+  "source": "4be368a365a6347fb551bb4c73dd5756413bb34e",
+  "changes": [
+    {
+      "code": "HOLE",
+      "target": 6,
+      "previous": {
+        "category": "incomplete",
+        "levels": 4,
+        "reason": "level_action_budget",
+        "actions": 54
+      },
+      "current": {
+        "category": "complete",
+        "levels": 6,
+        "reason": "target_levels_completed",
+        "actions": 78
+      }
+    },
+    {
+      "code": "SNAR",
+      "target": 6,
+      "previous": {
+        "category": "incomplete",
+        "levels": 5,
+        "reason": "level_wall_time_budget",
+        "actions": 161
+      },
+      "current": {
+        "category": "complete",
+        "levels": 6,
+        "reason": "target_levels_completed",
+        "actions": 163
+      }
+    }
+  ]
+}
