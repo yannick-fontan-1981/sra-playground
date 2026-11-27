@@ -1,6 +1,8 @@
 {
   "schema": "sic.source-evidence-checkpoint.v1",
   "baseCommit": "0a87f48af56a7d3ad72983b9fa15cfbeb4621cee",
+  "qualifiedLocal": "d9a296b130ef5aca7996ffd110a41d13e8c601f6",
+  "qualifiedCanonical": "667ddb2af8a3f1414a868075af24d4263d68c796",
   "files": [
     {
       "path": "src/sic/crossing-rows.ts",
@@ -28,9 +30,9 @@
     },
     {
       "path": "docs/diagnostics/sic-crossing-transfer-20261127/README.md",
-      "bytes": 3871,
-      "sha256": "fb671af7b6c56c7241113af82a2b98d2a539d71c596f0804bb2072345cf42a5e",
-      "gitBlob": "0f669e7325286a7aa5da625dd6dc688021119655"
+      "bytes": 5339,
+      "sha256": "c8c234d0a557f08d6c18434f4b9c3858fc549b75270af733e3b881dbcc041bd4",
+      "gitBlob": "ea1e690a7f8ed4aabc3764e6ad78baced3086c97"
     },
     {
       "path": "docs/diagnostics/sic-crossing-transfer-20261127/baseline-public.json.gz",
@@ -46,9 +48,45 @@
     },
     {
       "path": "docs/diagnostics/sic-crossing-transfer-20261127/diagnostic-report.json",
-      "bytes": 2565,
-      "sha256": "6fec3b14c0d4df0cf5031a538c821e4af956afd1876d0c142e09b924f85e4fa9",
-      "gitBlob": "b21f016eb3db4e4788835c91c54a25502358f5ab"
+      "bytes": 2774,
+      "sha256": "31a566f9ddcb383fa822d15fe76957034f16c61530fca3f2ece5c6ddbe92226c",
+      "gitBlob": "dcd613555825d58a3b79d041aff91da6a41e4ae1"
+    },
+    {
+      "path": "docs/diagnostics/sic-crossing-transfer-20261127/strict-end.json",
+      "bytes": 1661,
+      "sha256": "56444fc0f4d6b57fbe98b85c6be5c71a2e11500a2076173c517d2b43dddb0ef5",
+      "gitBlob": "f57f142b604946cfa4a85f720832e6d20bc7d588"
+    },
+    {
+      "path": "docs/diagnostics/sic-crossing-transfer-20261127/strict-levels.jsonl.gz",
+      "bytes": 769,
+      "sha256": "f3ac19fe02a2319976608f2119c5b2391cbb7e8b936abb2fb5745ba8252bd382",
+      "gitBlob": "96337d681b16ccfd7b9406391318dfd2af435bb0"
+    },
+    {
+      "path": "docs/diagnostics/sic-crossing-transfer-20261127/strict-manifest.json",
+      "bytes": 2204,
+      "sha256": "4c486461689f7d5506756ff454898178fcf700c5a63da7dbc534fbd40b5c013e",
+      "gitBlob": "49ec5f8426b79a52db01448fd3f3985d31be7e77"
+    },
+    {
+      "path": "docs/diagnostics/sic-crossing-transfer-20261127/strict-report.json",
+      "bytes": 2661,
+      "sha256": "6d73db4e283817c819eb89f6890931e2f985adf60227d3f5912d999936ce981e",
+      "gitBlob": "cf0e01c79f859f90a18b4f53e0b2f5f1e3ec0a05"
+    },
+    {
+      "path": "docs/diagnostics/sic-crossing-transfer-20261127/strict-results.jsonl.gz",
+      "bytes": 2693,
+      "sha256": "0ffdfb5b44694adc0b778bb0388981c1a2e8a0723979fd3aa957537f8daf9e44",
+      "gitBlob": "69e2c040d77718738e37d8a80ad2bc4d960892f6"
+    },
+    {
+      "path": "docs/diagnostics/sic-crossing-transfer-20261127/strict.log",
+      "bytes": 318,
+      "sha256": "b005c68d27ab631e9bd9d57b8621ea868de88cc23946c9a2b32765ddaf559637",
+      "gitBlob": "e6e58e6808dbe8a3b59c19e547e00031dd67232f"
     },
     {
       "path": "docs/diagnostics/sic-crossing-transfer-20261127/targeted-tests.log",

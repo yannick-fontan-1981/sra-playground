@@ -62,8 +62,19 @@
       "exitCode": 0
     },
     "review": "Independent read-only review by compositions: no concrete blocker found.",
-    "strictReplay": "pending",
+    "strictReplay": {
+      "report": "strict-report.json",
+      "levelsWon": 2,
+      "targetLevels": 6,
+      "complete": false
+    },
     "fullContinuity": "pending",
     "viewer": "pending"
-  }
+  },
+  "captureLimit": 67,
+  "effectiveRunCaps": [
+    33,
+    34
+  ],
+  "planningBudgetsUnchanged": true
 }

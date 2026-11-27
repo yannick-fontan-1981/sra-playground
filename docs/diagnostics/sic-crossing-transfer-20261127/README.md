@@ -61,5 +61,30 @@ preuves étrangères, l’époque, le score et la référence périmée.
 Les 7 tests ciblés passent et le contrôle TypeScript se termine avec le code 0.
 Les journaux et les empreintes des fichiers concernés sont conservés dans ce lot.
 
-La qualification stricte depuis le niveau 1, la continuité complète, l’intégration
-et la vérification dans le viewer restent à effectuer pour ce lot.
+## Rejeu strict du candidat
+
+Le runner standard a rejoué le commit local `d9a296b1`, identique par son arbre
+au commit GitHub `667ddb2a`, depuis le niveau 1 en une session SIC et un worker.
+Le jeu reste **incomplet : 2 niveaux gagnés sur 6**, en 84 commandes exécutées,
+autorisées par SIC et réconciliées. Aucun reset ni undo n’a été utilisé.
+
+| Niveau | Commandes | Plafond commandes | Score mesuré | Plafond temps | Résultat |
+| --- | ---: | ---: | ---: | ---: | --- |
+| 1 | 27 | 33 | 6 399 ms | 16 000 ms | Gagné, préfixe identique au témoin |
+| 2 | 28 | 34 | 8 157 ms | 18 000 ms | Gagné |
+| 3 | 29 | 29 | absent | 18 000 ms | Arrêt au plafond de commandes |
+
+Les niveaux 4 à 6 ne sont pas atteints. La première différence avec le témoin
+est exactement la commande globale 32, celle du diagnostic. Le troisième niveau
+perd de nouveau la priorité après une sélection de pastille alternative ; aucune
+cause supplémentaire n’est qualifiée sans sa capture publique.
+
+`strict-report.json` résume le résultat ; les bruts, le miroir des niveaux, les
+empreintes de source et le reçu de fin sont archivés. Le miroir correspond
+exactement aux trois niveaux du résultat. La source est restée propre et inchangée.
+La capture initiale utilisait une borne totale de 67 commandes, supérieure au
+budget nécessaire à chaque appel : les plafonds transmis au planificateur étaient
+bien 33 puis 34, sans réduction de `remaining`.
+
+La continuité complète, l’intégration et la vérification dans le viewer restent
+à effectuer pour ce lot. Il ne fait pas partie des jeux entièrement corrigés.
