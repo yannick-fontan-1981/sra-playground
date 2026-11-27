@@ -1,0 +1,373 @@
+{
+  "schema": "sic.observed-route-transfer.qualification.v1",
+  "code": "ESCT",
+  "qualification": "incomplete_five_of_six",
+  "source": {
+    "local": "6a7a4dfee703f0c710d84c0c32f2205162370650",
+    "remote": "11634ac48179bed4ab75e7c4b741d36e87549075",
+    "tree": "98bc812f2b253a54247bd281c45e153a57dfead3",
+    "parent": "f38b03c52e92483c11e915a759323ba6aebc223c",
+    "branch": "fix/sic-27-observed-route-20261127"
+  },
+  "baseline": {
+    "source": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+    "levels": 1,
+    "actions": 38,
+    "reason": "level_action_budget",
+    "firstLevelPrefixUnchanged": true
+  },
+  "firstDecision": {
+    "source": "ee9dad5f8773fed3ed507ad3c575181deae5f754",
+    "globalIndex": 17,
+    "level": 2,
+    "levelAction": 1,
+    "command": {
+      "id": 4
+    },
+    "family": "sic_test_prepared_effects",
+    "role": {
+      "state": null,
+      "roles": {
+        "actor": 6,
+        "carrier": 14,
+        "epoch": 2,
+        "pitch": 4,
+        "refs": [
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:1:revision:12:frame:8c366aed812389de",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:1:revision:13:frame:95ccb79014235ba3",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:1:revision:14:frame:2f632b03fbf31506",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:1:revision:15:frame:9a52b36e608dc3d2",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:1:revision:16:frame:f9cdfdfaf6b7a8a9",
+          "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:2:revision:17:frame:e31515a354ead4c7"
+        ],
+        "score": 1,
+        "wall": 3
+      }
+    },
+    "fixture": "../../../tests/fixtures/sic-observed-route-public.json.gz",
+    "qualification": "Existing public capture; first sixteen returns acquire the role natively in tests. The alternate first directional return in the test is a constructed functional return, not a live timing qualification."
+  },
+  "tests": {
+    "command": "node --experimental-strip-types --test tests/sic-observed-route-transfer.test.ts tests/sic-outline-service.test.ts",
+    "passed": 8,
+    "failed": 0,
+    "durationMs": 7582.355153,
+    "typecheck": "npm run typecheck: exit 0",
+    "independentReview": "favorable, /root/wa30_continuity, read-only"
+  },
+  "run": {
+    "mode": "sic",
+    "startLevel": 1,
+    "targetLevels": 6,
+    "workers": 1,
+    "status": "stopped",
+    "reason": "level_wall_time_budget",
+    "levels": 5,
+    "commands": 118,
+    "sicAuthority": 118,
+    "expectedBudgets": [
+      {
+        "actions": 21,
+        "activeTimeMs": 14000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=1; won=true",
+        "timeBasis": "measured"
+      },
+      {
+        "actions": 22,
+        "activeTimeMs": 12000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=2; won=true",
+        "timeBasis": "measured"
+      },
+      {
+        "actions": 26,
+        "activeTimeMs": 15000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=3; won=true",
+        "timeBasis": "measured"
+      },
+      {
+        "actions": 27,
+        "activeTimeMs": 16000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=4; won=true",
+        "timeBasis": "measured"
+      },
+      {
+        "actions": 22,
+        "activeTimeMs": 14000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=5; won=true",
+        "timeBasis": "measured"
+      },
+      {
+        "actions": 30,
+        "activeTimeMs": 18000,
+        "source": "docs/architecture/sic-v8-validation.md :: ESCT niveau 6, libérer le rail occupé avant l'interception",
+        "timeBasis": "measured"
+      }
+    ],
+    "budgetsExact": true,
+    "levelMirrorExact": true,
+    "mirroredLevels": 6,
+    "levelStats": [
+      {
+        "level": 1,
+        "won": true,
+        "activeMs": 5738,
+        "budget": {
+          "actions": 21,
+          "activeTimeMs": 14000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=1; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 16,
+        "ms": 6061,
+        "gameMs": 160,
+        "costs": {
+          "init": {
+            "ms": 1095,
+            "count": 1
+          },
+          "advance": {
+            "ms": 3179,
+            "count": 16
+          },
+          "resume": {
+            "ms": 1424,
+            "count": 14
+          }
+        },
+        "graph": "b60d2db34a38af6e9f668ab0f01cd73a6aaa76c70d1ee743f23f19ae9cb2077d",
+        "deltas": 3782,
+        "acquiredRecords": 16,
+        "nodes": 608,
+        "traceEvents": 92,
+        "prefixHash": "9861fc98ec4274351a8b2e035076a5356bd18a012440ce37a5933a6800e8357e",
+        "scoredMs": 5882,
+        "settlementMs": 179
+      },
+      {
+        "level": 2,
+        "won": true,
+        "activeMs": 5838,
+        "budget": {
+          "actions": 22,
+          "activeTimeMs": 12000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=2; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 17,
+        "ms": 6158,
+        "gameMs": 177,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 4229,
+            "count": 17
+          },
+          "resume": {
+            "ms": 1532,
+            "count": 17
+          }
+        },
+        "graph": "919646e3019dc5f2b2945d8c3f7e671138051e32c0ef130ef6dfbd8324b6f143",
+        "deltas": 7663,
+        "acquiredRecords": 33,
+        "nodes": 886,
+        "traceEvents": 128,
+        "prefixHash": "aa17dde1be31cda1c70095f977a29e0816ac7101981a9b72f17249bda1edebd8",
+        "scoredMs": 5919,
+        "settlementMs": 240
+      },
+      {
+        "level": 3,
+        "won": true,
+        "activeMs": 10251,
+        "budget": {
+          "actions": 26,
+          "activeTimeMs": 15000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=3; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 21,
+        "ms": 10652,
+        "gameMs": 198,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 7592,
+            "count": 21
+          },
+          "resume": {
+            "ms": 2592,
+            "count": 21
+          }
+        },
+        "graph": "dc3228291ed8e5d63cbc83e20aac301a2361874245e9511e06dfa3d9d8883246",
+        "deltas": 12537,
+        "acquiredRecords": 54,
+        "nodes": 1309,
+        "traceEvents": 128,
+        "prefixHash": "96583f36a5010d8e7a1ac71aa8625b263d15bd950f113c8ccaa75e1ef1c17a1b",
+        "scoredMs": 10244,
+        "settlementMs": 408
+      },
+      {
+        "level": 4,
+        "won": true,
+        "activeMs": 13291,
+        "budget": {
+          "actions": 27,
+          "activeTimeMs": 16000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=4; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 22,
+        "ms": 13717,
+        "gameMs": 207,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 9860,
+            "count": 22
+          },
+          "resume": {
+            "ms": 3366,
+            "count": 22
+          }
+        },
+        "graph": "6fd2b2959c6c8c99918bf2c47f5b08e099bc0350ddc8728ba7f43f65ef1bde87",
+        "deltas": 17762,
+        "acquiredRecords": 76,
+        "nodes": 1871,
+        "traceEvents": 128,
+        "prefixHash": "56225454e20ebe7ba19d59de8ef77bfbe66d6039b170cec77908573a6e04681d",
+        "scoredMs": 13215,
+        "settlementMs": 502
+      },
+      {
+        "level": 5,
+        "won": true,
+        "activeMs": 10640,
+        "budget": {
+          "actions": 22,
+          "activeTimeMs": 14000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=5; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 17,
+        "ms": 10981,
+        "gameMs": 169,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 7626,
+            "count": 17
+          },
+          "resume": {
+            "ms": 2956,
+            "count": 17
+          }
+        },
+        "graph": "c2c60a82ff9b10861b07b4fb84b085efb2c3392a07ec340c35e743a960c4db6a",
+        "deltas": 21770,
+        "acquiredRecords": 93,
+        "nodes": 2276,
+        "traceEvents": 128,
+        "prefixHash": "dbbc34afa6e7e28d81068cb69b5ddd15ca9b2441223b92d576ccf0edfc4cfaa2",
+        "scoredMs": 10508,
+        "settlementMs": 474
+      },
+      {
+        "level": 6,
+        "won": false,
+        "actions": 25,
+        "ms": 18001,
+        "budget": {
+          "actions": 30,
+          "activeTimeMs": 18000,
+          "source": "docs/architecture/sic-v8-validation.md :: ESCT niveau 6, libérer le rail occupé avant l'interception",
+          "timeBasis": "measured"
+        }
+      }
+    ],
+    "recentCommands": [
+      {
+        "id": 1,
+        "family": "sic_test_prepared_effects",
+        "strategy": "investigateContactFrontier",
+        "index": 111,
+        "elapsedMs": 11960
+      },
+      {
+        "id": 2,
+        "family": "sic_intervene_on_observed_route",
+        "strategy": "P07",
+        "index": 112,
+        "elapsedMs": 12747
+      },
+      {
+        "id": 2,
+        "family": "sic_test_prepared_effects",
+        "strategy": "investigateContactFrontier",
+        "index": 113,
+        "elapsedMs": 13520
+      },
+      {
+        "id": 4,
+        "family": "sic_intervene_on_observed_route",
+        "strategy": "P07",
+        "index": 114,
+        "elapsedMs": 14227
+      },
+      {
+        "id": 4,
+        "family": "sic_intervene_on_observed_route",
+        "strategy": "P07",
+        "index": 115,
+        "elapsedMs": 14946
+      },
+      {
+        "id": 2,
+        "family": "sic_intervene_on_observed_route",
+        "strategy": "P07",
+        "index": 116,
+        "elapsedMs": 15773
+      },
+      {
+        "id": 4,
+        "family": "sic_intervene_on_observed_route",
+        "strategy": "P07",
+        "index": 117,
+        "elapsedMs": 16577
+      },
+      {
+        "id": 4,
+        "family": "sic_intervene_on_observed_route",
+        "strategy": "P07",
+        "index": 118,
+        "elapsedMs": 17366
+      }
+    ],
+    "scoredLevelsAcquiredRecords": 93,
+    "allExecutedAcquiredRecords": null,
+    "recoveries": null,
+    "undo": null,
+    "detailedEffects": null,
+    "executedSeries": null,
+    "limitations": [
+      "Hard watchdog stopped the child on level 6; final reconciliation, detailed effects, all executed acquisitions and recovery counters were not returned.",
+      "The mirror contains the same five scored and reconciled levels and one failed watchdog summary as levelStats.",
+      "No new multi-command continuity contract or delivered-viewer victory is claimed."
+    ]
+  }
+}

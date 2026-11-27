@@ -1,0 +1,55 @@
+{
+  "schema": "sic.observed-route-transfer.archive.v1",
+  "codeSource": "11634ac48179bed4ab75e7c4b741d36e87549075",
+  "codeTree": "98bc812f2b253a54247bd281c45e153a57dfead3",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 5687,
+      "sha256": "34095796aeb6e71f82a80e5f214e9cc6d626850764bf3a869a65bf6682cb1ae2"
+    },
+    {
+      "path": "baseline.jsonl.gz",
+      "bytes": 1849,
+      "sha256": "73cc7ca4b500f3804ea03df77f38553a4e62d74178f2e2ec6c272d7485adb99e",
+      "decodedBytes": 10784,
+      "decodedSha256": "335d23b7254907b444e1b78a6058e5913d955ceae52d0166d8ab46775e3cffa6"
+    },
+    {
+      "path": "first-decision.public.json.gz",
+      "bytes": 6884,
+      "sha256": "e1dc6afa102b82df941a5db3a8263b20251bf82a765a701b58c219aaff531b5a",
+      "decodedBytes": 221614,
+      "decodedSha256": "5aaef72412b3d38f97c89a858d3d6d18594d1968c97596eae465489a1536e194"
+    },
+    {
+      "path": "report.json",
+      "bytes": 11686,
+      "sha256": "14b13e2bd92125b5987611f28521f95c4e06d1871e2c5b0eeb355b6b9ef0d8ff"
+    },
+    {
+      "path": "strict-results.jsonl.gz",
+      "bytes": 1390,
+      "sha256": "5299dce9298a368b00f477598ee1deec45e8b93be69e6131150957e52bf62243",
+      "decodedBytes": 4458,
+      "decodedSha256": "2ee744293667a657ff51df84b826704408c3f1af6a2e9337457048e4f3a3ec02"
+    },
+    {
+      "path": "strict-results.levels.jsonl.gz",
+      "bytes": 1150,
+      "sha256": "eba5dacaa83befea3815843655739e62b664a6010aee47fe7729ca27caf6dc09",
+      "decodedBytes": 3621,
+      "decodedSha256": "b063313ebf35c63c61aee4ec638f2f8b47c7739f5e6135cc8eb30ace1dd08be3"
+    },
+    {
+      "path": "strict-run.execution-end.json",
+      "bytes": 69,
+      "sha256": "c9f32d1a15abfe63f8dd89ad5fb70f4c07c44c8b82205238162856d27c29e59f"
+    },
+    {
+      "path": "strict-run.manifest.json",
+      "bytes": 1272,
+      "sha256": "bfd823297ea29c63d06967209e3ce6b8e4f4caae94cab88addab2d925c80ae90"
+    }
+  ]
+}
