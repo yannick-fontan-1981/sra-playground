@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { exportCard } from '../export.mjs';
+import { exportCard, serialize } from '../export.mjs';
 import { parseCard as parseDial } from '../../cards.mjs';
 import * as dial from '../../enumerate.mjs';
 import { parseCard as parseResource } from '../../ressource/cards.mjs';
@@ -15,7 +15,8 @@ const engines = {
 
 export function makeCase(family, id, text) {
   const engine = engines[family];
-  return { family, id, message: exportCard(text), worlds: engine.worlds(engine.parse(text)), dynamics: engine.dynamics };
+  const message = JSON.parse(serialize(exportCard(text)));
+  return { family, id, message, worlds: engine.worlds(engine.parse(text)), dynamics: engine.dynamics };
 }
 
 export function development() {

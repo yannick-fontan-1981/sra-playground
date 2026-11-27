@@ -22,7 +22,7 @@ export function bundle(solver) {
 export const fingerprints = files => Object.fromEntries([...files].map(([name, bytes]) =>
   [name, createHash('sha256').update(bytes).digest('hex')]));
 
-export function launch(files) {
+export function launch(files, program = entry) {
   if (Number(process.versions.node.split('.')[0]) < 24) throw new Error('Exécuter l’opérateur avec Node 24 ou ultérieur');
   const folder = mkdtempSync(join(tmpdir(), 'partie-'));
   try {
@@ -31,7 +31,7 @@ export function launch(files) {
       mkdirSync(dirname(file), { recursive: true });
       writeFileSync(file, bytes);
     }
-    const proc = spawn(process.execPath, ['--permission', '--allow-fs-read=' + folder, entry],
+    const proc = spawn(process.execPath, ['--permission', '--allow-fs-read=' + folder, program],
       { cwd: folder, env: {}, windowsHide: true, stdio: ['pipe', 'pipe', 'pipe'] });
     const closed = new Promise(resolve => proc.once('close', resolve));
     let error = '', buffered = '';

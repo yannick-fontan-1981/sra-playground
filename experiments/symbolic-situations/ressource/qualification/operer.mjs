@@ -7,8 +7,8 @@ import { parseCard } from '../cards.mjs';
 import { initialState, step, worlds } from '../world.mjs';
 import { agenda, bundle, fingerprints, launch } from './solveur.mjs';
 
-export async function episode(files, card, world, dynamics = { initialState, step }) {
-  const solver = launch(files);
+export async function episode(files, card, world, dynamics = { initialState, step }, program) {
+  const solver = launch(files, program);
   const turns = [];
   let first = null, last;
   let input = { fiche: card };
