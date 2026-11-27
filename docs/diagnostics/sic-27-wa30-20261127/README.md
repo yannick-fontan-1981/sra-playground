@@ -106,3 +106,9 @@ Le préfixe réemploie la relation lorsque la caisse immobile se trouve devant l
 `node docs/diagnostics/sic-27-wa30-20261127/probe-contact-withdrawal.mjs` vérifie les empreintes des images 349 et 350 et reconstruit la proposition de neuf commandes avec le programme SIC et les références d’acquisition 296–298. Le premier retour réel est reconnu. Le garde de la commande suivante est admis sur ce retour. Le diagnostic s’arrête à ce garde.
 
 Deux scénarios natifs exécutent l’acquisition, puis deux commandes de retrait et de continuation. Ils varient la maille, la palette, l’orientation, la commande et la présence d’un pair. Les refus couvrent un propriétaire concurrent, l’indication qui persiste après retrait et l’occupation d’une cible protégée. Dans les deux succès, les deux commandes sont réconciliées une fois dans l’ordre. Les 55 tests ciblés et TypeScript passent. Ce candidat attend sa qualification stricte de L1 à L9 avec les limites d’origine.
+
+## Premier rejeu strict avec retrait connu
+
+Le [run GitHub 46024175969](https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46024175969) a testé le commit figé `90fb06f44016a1a60ecacf888086de1a69873783` avec Ubuntu 24.04, Node 24, un worker et les plafonds d’origine. Il gagne 8 niveaux en 547 commandes. Les commandes par niveau sont 26, 59, 76, 48, 113, 48, 42 et 135. Le L6 marque en 17 143 ms sous 21 000 ms et le L8 en 90 786 ms sous 103 000 ms.
+
+Le L9 s’arrête à 41 commandes sous 51 000 ms, pour 588 commandes cumulées. Les huit dernières commandes documentées passent par l’accès aux cavités puis l’exploration des entrées. Les reçus bruts, les plafonds et leurs empreintes sont conservés dans `github-46024175969/`. WA30 reste à qualifier. La prochaine investigation porte sur la première décision du L9 où un rôle de livraison devrait être admis.
