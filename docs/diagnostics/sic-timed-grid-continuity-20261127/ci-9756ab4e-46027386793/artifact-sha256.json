@@ -1,0 +1,10 @@
+{
+  "expected-source.sha": "6c1bdeb1159e3a30abd16714319191e0b060b37e749492c91d656243b0e4c2d3",
+  "manifest.json": "127dfc6baa003d06a65dbc3a201985e8ad8a06b20b0b61bcae54aacfd033786b",
+  "result.json": "47956824d3f52348a3ad11afab4519c4e5450db4c7ccc2a2e8832a98c9157df2",
+  "source.sha256": "de0b93948dadc7a26240c0d3d1e96c65464b29026a8cf439bfb15dd2a3b15f8b",
+  "source.txt": "798a19024a4dc241799c44dd2c7d13c59c89a358e788ebe7746c40bdea6fe36e",
+  "strict.jsonl": "c1a262151397db3906d26361fb49bbaa12cac46fed1511d87daa96b0d1269194",
+  "strict.jsonl.levels": "ff5c3462bd05e5f08dc523674ed517f948cd7bb8f0a23db4eb486b64a90f9c4a",
+  "strict.log": "c6a9b6b6a4a72b96e328839c20aa57e661e45f6aa97fbdb329f93b2e081ed231"
+}
