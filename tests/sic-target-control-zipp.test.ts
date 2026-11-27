@@ -63,6 +63,7 @@ async function historicalPrefix(live: boolean) {
 
 test('ZIPP L2 historical ACTION2 replicates one measured translation and then releases a different frontier question', async t => {
   const frontier = t.mock.method(ObservedFrontier.prototype, 'propose');
+  const acquire = t.mock.method(NativeCallerCoordinator.prototype, 'acquireControlForTarget');
   const game = await historicalPrefix(true);
   const { proposal, command, guard, release } = await game.ticket();
   const ac = proposal.question.control_acquisition;
@@ -86,6 +87,10 @@ test('ZIPP L2 historical ACTION2 replicates one measured translation and then re
     [current, 'ACTION2', outcome.observation_ref, [11, 43, 17, 49], [11, 43, 17, 49]]);
   assert.deepEqual([outcome.family, outcome.matched], [release.family, null]);
   const next = await game.ticket();
+  const attempt = acquire.mock.calls.findLast(c => c.arguments[0].observation_ref === after.ref)!;
+  assert.equal(attempt.arguments[3]!.measured_facts.pair_ref, pair);
+  assert.equal(await attempt.result, null);
+  assert.equal(game.history().filter(([, action]) => action === 'ACTION2').length, 2);
   assert.deepEqual([next.release.family, next.release.strategy, next.command, next.guard.admitted],
     ['observed_frontier', 'test_local_input', { actionRef: 'ACTION6', data: { x: 14, y: 10 } }, true]);
   await game.advance();

@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';
 import test from 'node:test';
-import { contextualTranslationExposures } from '../src/logos-engine/v6-contextual-translation.ts';
+import { contextualTranslationExposures, offerTranslationReplication } from '../src/logos-engine/v6-contextual-translation.ts';
 import { Snapshot, registered } from '../src/logos-engine/v6-composition-memory.ts';
 import { geometricComponents } from '../src/logos-engine/v6-native-observer.ts';
 
@@ -50,4 +50,25 @@ for (const sample of fixture.cases) test(`original contextual exposure parity: $
   // Snapshots and admission data are immutable. Calling the source measurement
   // twice must not retain an acquired control or change witness selection.
   assert.deepEqual(await contextualTranslationExposures(history, current, sample.commands), sample.expected);
+});
+
+test('single-trial replication needs a registered displacement of a presently bound role from another origin', () => {
+  const before = scenes['base:before']!, after = scenes['base:arrival']!, current = scenes['base:current']!;
+  const trials = [[before, after]] as const;
+  const subject = Object.keys(before.roles).find(id => before.roles[id]![0] === 3 && before.roles[id]![1] === 3)!;
+  assert.deepEqual(offerTranslationReplication(trials, current), {
+    evidence: [current.ref, before.ref, after.ref], expected_motion: { [subject]: [1, 0] },
+  });
+  assert.equal(offerTranslationReplication([], current), null);
+  assert.equal(offerTranslationReplication([...trials, ...trials], current), null);
+  assert.equal(offerTranslationReplication(trials, before), null);
+  const packet = fixture.scenes['base:current'];
+  const ambiguous = Snapshot.fromPublic({ ...packet.observation, entities: packet.observation.entities.map((e: Record<string, any>) =>
+    e.signature === subject ? { ...e, identity_ambiguous: true } : e) }, packet.rows);
+  assert.ok(registered(after, ambiguous));
+  assert.equal(offerTranslationReplication(trials, ambiguous), null);
+  const otherEpoch = new Snapshot(current.rows, current.roles, current.epoch + 1, current.score, 'next-epoch', current.frame_hash);
+  assert.equal(offerTranslationReplication(trials, otherEpoch), null);
+  const alone = new Snapshot(current.rows, { [subject]: current.roles[subject]! }, current.epoch, current.score, 'no-anchors', current.frame_hash);
+  assert.equal(offerTranslationReplication(trials, alone), null);
 });
