@@ -1,0 +1,225 @@
+{
+  "source": "8fd38588ee11d7b051eadc7812def30f36b4f29b",
+  "scope": "Windows Node CPU diagnostic; original SIC budgets, one worker",
+  "node": "v24.22.3",
+  "run": {
+    "levels": 8,
+    "actions": 603,
+    "authority": 603,
+    "reason": "level_wall_time_budget",
+    "lastLevel": {
+      "level": 9,
+      "won": false,
+      "actions": 56,
+      "ms": 51013,
+      "budget": {
+        "actions": 80,
+        "activeTimeMs": 51000,
+        "source": "docs/architecture/sic-v8-validation.md :: WA30 niveau 9 — Combiner les relais, les livraisons locales et la coopération",
+        "timeBasis": "measured"
+      }
+    },
+    "receiptSHA256": "98dcb1c0d60769e253ba145ad85ae67445b7be3b4a120a3f624429e50a140e4a"
+  },
+  "profileSHA256": {
+    "l9-01.cpuprofile": "e48999f16103caa420bf4f29decb58fe20f20de72964870df51a3ab0ff69e212",
+    "l9-02.cpuprofile": "0a3e19b8233ddc0d8a49f9d273690ee5668b1b4622549760a5d92af3abb37c5e",
+    "l9-03.cpuprofile": "1e84870bfaeb55ec135cda080a84d1db3cc92f1e825c54845297127c7f98a21b",
+    "l9-04.cpuprofile": "9e1b180cba852765a9f59f8f46d7d36b2ddd326c916cfaaf8507a8366193da28",
+    "l9-05.cpuprofile": "ec812607d0bb0b5d904c26ca2bdfe022f66e7404af6fd33d3d71c4a664e6a3e3",
+    "l9-06.cpuprofile": "1b709bbc45722b62565f1302e8741814a06486de72dad28b7277815cb32aa9ab",
+    "l9-07.cpuprofile": "412a5c695e59b5e87937dbe5e6f9b9ec73526c59521b450ba91cc9b8f100d57e"
+  },
+  "profile": {
+    "chunks": 7,
+    "sampledMs": 51580,
+    "self": [
+      [
+        "visit@src/logos-engine/v6-native-owned.ts",
+        7707
+      ],
+      [
+        "post@node:inspector",
+        6522
+      ],
+      [
+        "(garbage collector)@(runtime)",
+        5106
+      ],
+      [
+        "encode@src/logos-engine/canonical.ts",
+        2851
+      ],
+      [
+        "set@src/logos-engine/bounded-weak-cache.ts",
+        2523
+      ],
+      [
+        "(idle)@(runtime)",
+        1934
+      ],
+      [
+        "has@src/logos-engine/sharded-weak-set.ts",
+        1844
+      ],
+      [
+        "sha256Bytes@src/logos-engine/v6-hash.ts",
+        1794
+      ],
+      [
+        "updateImmutableJsonRecord@src/logos-engine/canonical.ts",
+        1757
+      ],
+      [
+        "encodedCanonical@src/logos-engine/v6-native-state-graph.ts",
+        1492
+      ],
+      [
+        "structuredClone@node:internal/worker/js_transferable",
+        1382
+      ],
+      [
+        "canonical@src/logos-engine/canonical.ts",
+        915
+      ],
+      [
+        "freezeHydrated@src/logos-engine/v6-native-state-graph.ts",
+        789
+      ],
+      [
+        "visitRaw@src/logos-engine/v6-native-state-graph.ts",
+        764
+      ]
+    ],
+    "files": [
+      [
+        "src/logos-engine/canonical.ts",
+        9119
+      ],
+      [
+        "src/logos-engine/v6-native-owned.ts",
+        8594
+      ],
+      [
+        "(runtime)",
+        7675
+      ],
+      [
+        "node:inspector",
+        6522
+      ],
+      [
+        "src/logos-engine/v6-native-state-graph.ts",
+        5035
+      ],
+      [
+        "src/logos-engine/bounded-weak-cache.ts",
+        2759
+      ],
+      [
+        "src/logos-engine/sharded-weak-set.ts",
+        2356
+      ],
+      [
+        "src/logos-engine/v6-hash.ts",
+        1815
+      ],
+      [
+        "node:internal/worker/js_transferable",
+        1382
+      ],
+      [
+        "src/logos-engine/v6-native-authority.ts",
+        1000
+      ],
+      [
+        "src/sic/observed-field-carry.ts",
+        972
+      ],
+      [
+        "src/logos-engine/v6-transition-learning.ts",
+        713
+      ]
+    ],
+    "owner": [
+      [
+        "propose@src/sic/oriented-delivery.ts",
+        335
+      ],
+      [
+        "proposeInGroup@src/sic/oriented-delivery.ts",
+        307
+      ],
+      [
+        "after@src/sic/oriented-delivery.ts",
+        195
+      ],
+      [
+        "routeNodes@src/sic/oriented-delivery.ts",
+        186
+      ],
+      [
+        "shortest@src/sic/oriented-delivery.ts",
+        178
+      ],
+      [
+        "planDelivery@src/sic/oriented-delivery.ts",
+        170
+      ],
+      [
+        "key@src/sic/oriented-delivery.ts",
+        97
+      ],
+      [
+        "carrierForms@src/sic/oriented-delivery.ts",
+        81
+      ],
+      [
+        "record@src/sic/oriented-delivery.ts",
+        61
+      ]
+    ],
+    "common": [
+      [
+        "commit@src/logos-engine/v6-knowledge-store.ts",
+        14713
+      ],
+      [
+        "seal@src/logos-engine/v6-native-runtime.ts",
+        11668
+      ],
+      [
+        "splitNativeState@src/logos-engine/v6-native-state-graph.ts",
+        8307
+      ],
+      [
+        "visit@src/logos-engine/v6-native-owned.ts",
+        8251
+      ],
+      [
+        "retainNativeJson@src/logos-engine/v6-native-owned.ts",
+        8250
+      ],
+      [
+        "canonical@src/logos-engine/canonical.ts",
+        7345
+      ],
+      [
+        "persistFamilies@src/logos-engine/v6-native-runtime.ts",
+        7104
+      ],
+      [
+        "restoreFamilies@src/logos-engine/v6-native-runtime.ts",
+        7045
+      ],
+      [
+        "anonymous:2409@src/logos-engine/v6-native-runtime.ts",
+        6861
+      ],
+      [
+        "familyCheckpoint@src/logos-engine/v6-native-runtime.ts",
+        6855
+      ]
+    ]
+  }
+}
