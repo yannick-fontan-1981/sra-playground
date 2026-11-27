@@ -1,0 +1,59 @@
+{
+  "format": "sra.public/1",
+  "goal": {"command":["valider"],"criterion":"minimax_actions","source":[3,17]},
+  "observations": [
+    {"ref":["dial"],"status":"known","value":"Xa590eb","source":[11]},
+    {"ref":["mark","X1e08a6"],"status":"known","value":null,"source":[7]},
+    {"ref":["mark","Xa53fb1"],"status":"known","value":null,"source":[7]},
+    {"ref":["available_stamp","X05a98b"],"status":"known","value":true,"source":[7]},
+    {"ref":["available_stamp","X59de43"],"status":"known","value":true,"source":[7]},
+    {"ref":["available_stamp","Xe87c5a"],"status":"known","value":true,"source":[7]},
+    {"ref":["required_stamp","Xa129d7"],"status":"known","value":"X05a98b","source":[9]},
+    {"ref":["required_stamp","Xa590eb"],"status":"known","value":"X59de43","source":[10]}
+  ],
+  "domains": [
+    {"ref":["dial"],"values":["Xa129d7","Xa590eb"],"stableWhen":true,"source":[8]}
+  ],
+  "commands": [
+    {"command":["marquer","X1e08a6","X05a98b"],"source":[7,15]},
+    {"command":["marquer","X1e08a6","X59de43"],"source":[7,15]},
+    {"command":["marquer","X1e08a6","Xe87c5a"],"source":[7,15]},
+    {"command":["marquer","Xa53fb1","X05a98b"],"source":[7,15]},
+    {"command":["marquer","Xa53fb1","X59de43"],"source":[7,15]},
+    {"command":["marquer","Xa53fb1","Xe87c5a"],"source":[7,15]},
+    {"command":["lire"],"source":[16]},
+    {"command":["valider"],"source":[17]}
+  ],
+  "rules": [
+    {"command":["marquer","X1e08a6","X05a98b"],"requires":{"all":[{"eq":[["mark","X1e08a6"],null]},{"any":[{"eq":[["mark","Xa53fb1"],null]},{"eq":[["mark","Xa53fb1"],"X05a98b"]}]}]},"source":[7,15]},
+    {"command":["marquer","X1e08a6","X05a98b"],"effect":{"set":[["mark","X1e08a6"],"X05a98b"]},"source":[7,15]},
+    {"command":["marquer","X1e08a6","X59de43"],"requires":{"all":[{"eq":[["mark","X1e08a6"],null]},{"any":[{"eq":[["mark","Xa53fb1"],null]},{"eq":[["mark","Xa53fb1"],"X59de43"]}]}]},"source":[7,15]},
+    {"command":["marquer","X1e08a6","X59de43"],"effect":{"set":[["mark","X1e08a6"],"X59de43"]},"source":[7,15]},
+    {"command":["marquer","X1e08a6","Xe87c5a"],"requires":{"all":[{"eq":[["mark","X1e08a6"],null]},{"any":[{"eq":[["mark","Xa53fb1"],null]},{"eq":[["mark","Xa53fb1"],"Xe87c5a"]}]}]},"source":[7,15]},
+    {"command":["marquer","X1e08a6","Xe87c5a"],"effect":{"set":[["mark","X1e08a6"],"Xe87c5a"]},"source":[7,15]},
+    {"command":["marquer","Xa53fb1","X05a98b"],"requires":{"all":[{"eq":[["mark","Xa53fb1"],null]},{"any":[{"eq":[["mark","X1e08a6"],null]},{"eq":[["mark","X1e08a6"],"X05a98b"]}]}]},"source":[7,15]},
+    {"command":["marquer","Xa53fb1","X05a98b"],"effect":{"set":[["mark","Xa53fb1"],"X05a98b"]},"source":[7,15]},
+    {"command":["marquer","Xa53fb1","X59de43"],"requires":{"all":[{"eq":[["mark","Xa53fb1"],null]},{"any":[{"eq":[["mark","X1e08a6"],null]},{"eq":[["mark","X1e08a6"],"X59de43"]}]}]},"source":[7,15]},
+    {"command":["marquer","Xa53fb1","X59de43"],"effect":{"set":[["mark","Xa53fb1"],"X59de43"]},"source":[7,15]},
+    {"command":["marquer","Xa53fb1","Xe87c5a"],"requires":{"all":[{"eq":[["mark","Xa53fb1"],null]},{"any":[{"eq":[["mark","X1e08a6"],null]},{"eq":[["mark","X1e08a6"],"Xe87c5a"]}]}]},"source":[7,15]},
+    {"command":["marquer","Xa53fb1","Xe87c5a"],"effect":{"set":[["mark","Xa53fb1"],"Xe87c5a"]},"source":[7,15]},
+    {"command":["lire"],"maxUses":1,"source":[16]},
+    {"command":["lire"],"effect":{"reveal":["dial"]},"source":[16]},
+    {"command":["lire"],"effect":{"keep":["dial"]},"source":[16]},
+    {"command":["lire"],"effect":{"keep":["mark","X1e08a6"]},"source":[7,16]},
+    {"command":["lire"],"effect":{"keep":["mark","Xa53fb1"]},"source":[7,16]},
+    {"command":["valider"],"when":{"any":[{"all":[{"eq":[["dial"],"Xa129d7"]},{"eq":[["mark","X1e08a6"],{"ref":["required_stamp","Xa129d7"]}]},{"eq":[["mark","Xa53fb1"],{"ref":["required_stamp","Xa129d7"]}]}]},{"all":[{"eq":[["dial"],"Xa590eb"]},{"eq":[["mark","X1e08a6"],{"ref":["required_stamp","Xa590eb"]}]},{"eq":[["mark","Xa53fb1"],{"ref":["required_stamp","Xa590eb"]}]}]}]},"effect":{"end":"success"},"source":[7,8,17]},
+    {"command":["valider"],"when":{"not":{"any":[{"all":[{"eq":[["dial"],"Xa129d7"]},{"eq":[["mark","X1e08a6"],{"ref":["required_stamp","Xa129d7"]}]},{"eq":[["mark","Xa53fb1"],{"ref":["required_stamp","Xa129d7"]}]}]},{"all":[{"eq":[["dial"],"Xa590eb"]},{"eq":[["mark","X1e08a6"],{"ref":["required_stamp","Xa590eb"]}]},{"eq":[["mark","Xa53fb1"],{"ref":["required_stamp","Xa590eb"]}]}]}]}},"effect":{"end":"failure"},"source":[7,8,17]}
+  ],
+  "sources": {
+    "3": "**But.** Obtenir une validation en un minimum d’actions. Le plan doit réussir dans chaque monde compatible avec les observations. On compte les actions dans le pire cas.",
+    "7": "- Les deux cases X1e08a6 et Xa53fb1 sont vierges. Les tampons disponibles sont X05a98b, X59de43, Xe87c5a.",
+    "8": "- Le cadran désigne une seule sortie, Xa129d7 ou Xa590eb, qui reste fixe pendant la partie.",
+    "9": "- La sortie Xa129d7 exige le tampon X05a98b sur les deux cases.",
+    "10": "- La sortie Xa590eb exige le tampon X59de43 sur les deux cases.",
+    "11": "- Le cadran indique Xa590eb.",
+    "15": "- `marquer CASE TAMPON` marque une case vierge. Le premier marquage engage ce tampon pour tous les marquages suivants. Une marque est définitive.",
+    "16": "- `lire` révèle la sortie désignée, une seule fois par partie, sans changer le cadran ni les marques.",
+    "17": "- `valider` termine la partie. La validation réussit si les deux cases portent le tampon exigé par la sortie désignée. Tout autre résultat est un échec."
+  }
+}

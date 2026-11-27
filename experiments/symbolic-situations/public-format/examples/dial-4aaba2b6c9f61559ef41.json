@@ -1,0 +1,66 @@
+{
+  "format": "sra.public/1",
+  "goal": {"command":["valider"],"criterion":"minimax_actions","source":[3,17]},
+  "observations": [
+    {"ref":["dial"],"status":"known","value":"X4c94cf","source":[11]},
+    {"ref":["mark","X022d46"],"status":"known","value":null,"source":[7]},
+    {"ref":["mark","Xfc26f3"],"status":"known","value":null,"source":[7]},
+    {"ref":["available_stamp","X03a3e1"],"status":"known","value":true,"source":[7]},
+    {"ref":["available_stamp","X3463fd"],"status":"known","value":true,"source":[7]},
+    {"ref":["available_stamp","X82259e"],"status":"known","value":true,"source":[7]},
+    {"ref":["available_stamp","Xa16dcd"],"status":"known","value":true,"source":[7]},
+    {"ref":["required_stamp","X4c94cf"],"status":"known","value":"X03a3e1","source":[9]},
+    {"ref":["required_stamp","X6e9ba2"],"status":"known","value":"Xa16dcd","source":[10]}
+  ],
+  "domains": [
+    {"ref":["dial"],"values":["X4c94cf","X6e9ba2"],"stableWhen":true,"source":[8]}
+  ],
+  "commands": [
+    {"command":["marquer","X022d46","X03a3e1"],"source":[7,15]},
+    {"command":["marquer","X022d46","X3463fd"],"source":[7,15]},
+    {"command":["marquer","X022d46","X82259e"],"source":[7,15]},
+    {"command":["marquer","X022d46","Xa16dcd"],"source":[7,15]},
+    {"command":["marquer","Xfc26f3","X03a3e1"],"source":[7,15]},
+    {"command":["marquer","Xfc26f3","X3463fd"],"source":[7,15]},
+    {"command":["marquer","Xfc26f3","X82259e"],"source":[7,15]},
+    {"command":["marquer","Xfc26f3","Xa16dcd"],"source":[7,15]},
+    {"command":["lire"],"source":[16]},
+    {"command":["valider"],"source":[17]}
+  ],
+  "rules": [
+    {"command":["marquer","X022d46","X03a3e1"],"requires":{"all":[{"eq":[["mark","X022d46"],null]},{"any":[{"eq":[["mark","Xfc26f3"],null]},{"eq":[["mark","Xfc26f3"],"X03a3e1"]}]}]},"source":[7,15]},
+    {"command":["marquer","X022d46","X03a3e1"],"effect":{"set":[["mark","X022d46"],"X03a3e1"]},"source":[7,15]},
+    {"command":["marquer","X022d46","X3463fd"],"requires":{"all":[{"eq":[["mark","X022d46"],null]},{"any":[{"eq":[["mark","Xfc26f3"],null]},{"eq":[["mark","Xfc26f3"],"X3463fd"]}]}]},"source":[7,15]},
+    {"command":["marquer","X022d46","X3463fd"],"effect":{"set":[["mark","X022d46"],"X3463fd"]},"source":[7,15]},
+    {"command":["marquer","X022d46","X82259e"],"requires":{"all":[{"eq":[["mark","X022d46"],null]},{"any":[{"eq":[["mark","Xfc26f3"],null]},{"eq":[["mark","Xfc26f3"],"X82259e"]}]}]},"source":[7,15]},
+    {"command":["marquer","X022d46","X82259e"],"effect":{"set":[["mark","X022d46"],"X82259e"]},"source":[7,15]},
+    {"command":["marquer","X022d46","Xa16dcd"],"requires":{"all":[{"eq":[["mark","X022d46"],null]},{"any":[{"eq":[["mark","Xfc26f3"],null]},{"eq":[["mark","Xfc26f3"],"Xa16dcd"]}]}]},"source":[7,15]},
+    {"command":["marquer","X022d46","Xa16dcd"],"effect":{"set":[["mark","X022d46"],"Xa16dcd"]},"source":[7,15]},
+    {"command":["marquer","Xfc26f3","X03a3e1"],"requires":{"all":[{"eq":[["mark","Xfc26f3"],null]},{"any":[{"eq":[["mark","X022d46"],null]},{"eq":[["mark","X022d46"],"X03a3e1"]}]}]},"source":[7,15]},
+    {"command":["marquer","Xfc26f3","X03a3e1"],"effect":{"set":[["mark","Xfc26f3"],"X03a3e1"]},"source":[7,15]},
+    {"command":["marquer","Xfc26f3","X3463fd"],"requires":{"all":[{"eq":[["mark","Xfc26f3"],null]},{"any":[{"eq":[["mark","X022d46"],null]},{"eq":[["mark","X022d46"],"X3463fd"]}]}]},"source":[7,15]},
+    {"command":["marquer","Xfc26f3","X3463fd"],"effect":{"set":[["mark","Xfc26f3"],"X3463fd"]},"source":[7,15]},
+    {"command":["marquer","Xfc26f3","X82259e"],"requires":{"all":[{"eq":[["mark","Xfc26f3"],null]},{"any":[{"eq":[["mark","X022d46"],null]},{"eq":[["mark","X022d46"],"X82259e"]}]}]},"source":[7,15]},
+    {"command":["marquer","Xfc26f3","X82259e"],"effect":{"set":[["mark","Xfc26f3"],"X82259e"]},"source":[7,15]},
+    {"command":["marquer","Xfc26f3","Xa16dcd"],"requires":{"all":[{"eq":[["mark","Xfc26f3"],null]},{"any":[{"eq":[["mark","X022d46"],null]},{"eq":[["mark","X022d46"],"Xa16dcd"]}]}]},"source":[7,15]},
+    {"command":["marquer","Xfc26f3","Xa16dcd"],"effect":{"set":[["mark","Xfc26f3"],"Xa16dcd"]},"source":[7,15]},
+    {"command":["lire"],"maxUses":1,"source":[16]},
+    {"command":["lire"],"effect":{"reveal":["dial"]},"source":[16]},
+    {"command":["lire"],"effect":{"keep":["dial"]},"source":[16]},
+    {"command":["lire"],"effect":{"keep":["mark","X022d46"]},"source":[7,16]},
+    {"command":["lire"],"effect":{"keep":["mark","Xfc26f3"]},"source":[7,16]},
+    {"command":["valider"],"when":{"any":[{"all":[{"eq":[["dial"],"X4c94cf"]},{"eq":[["mark","X022d46"],{"ref":["required_stamp","X4c94cf"]}]},{"eq":[["mark","Xfc26f3"],{"ref":["required_stamp","X4c94cf"]}]}]},{"all":[{"eq":[["dial"],"X6e9ba2"]},{"eq":[["mark","X022d46"],{"ref":["required_stamp","X6e9ba2"]}]},{"eq":[["mark","Xfc26f3"],{"ref":["required_stamp","X6e9ba2"]}]}]}]},"effect":{"end":"success"},"source":[7,8,17]},
+    {"command":["valider"],"when":{"not":{"any":[{"all":[{"eq":[["dial"],"X4c94cf"]},{"eq":[["mark","X022d46"],{"ref":["required_stamp","X4c94cf"]}]},{"eq":[["mark","Xfc26f3"],{"ref":["required_stamp","X4c94cf"]}]}]},{"all":[{"eq":[["dial"],"X6e9ba2"]},{"eq":[["mark","X022d46"],{"ref":["required_stamp","X6e9ba2"]}]},{"eq":[["mark","Xfc26f3"],{"ref":["required_stamp","X6e9ba2"]}]}]}]}},"effect":{"end":"failure"},"source":[7,8,17]}
+  ],
+  "sources": {
+    "3": "**But.** Obtenir une validation en un minimum d’actions. Le plan doit réussir dans chaque monde compatible avec les observations. On compte les actions dans le pire cas.",
+    "7": "- Les deux cases X022d46 et Xfc26f3 sont vierges. Les tampons disponibles sont X03a3e1, X3463fd, X82259e, Xa16dcd.",
+    "8": "- Le cadran désigne une seule sortie, X4c94cf ou X6e9ba2, qui reste fixe pendant la partie.",
+    "9": "- La sortie X4c94cf exige le tampon X03a3e1 sur les deux cases.",
+    "10": "- La sortie X6e9ba2 exige le tampon Xa16dcd sur les deux cases.",
+    "11": "- Le cadran indique X4c94cf.",
+    "15": "- `marquer CASE TAMPON` marque une case vierge. Le premier marquage engage ce tampon pour tous les marquages suivants. Une marque est définitive.",
+    "16": "- `lire` révèle la sortie désignée, une seule fois par partie, sans changer le cadran ni les marques.",
+    "17": "- `valider` termine la partie. La validation réussit si les deux cases portent le tampon exigé par la sortie désignée. Tout autre résultat est un échec."
+  }
+}

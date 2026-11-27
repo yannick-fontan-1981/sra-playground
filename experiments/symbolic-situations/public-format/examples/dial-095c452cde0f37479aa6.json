@@ -1,0 +1,59 @@
+{
+  "format": "sra.public/1",
+  "goal": {"command":["valider"],"criterion":"minimax_actions","source":[3,17]},
+  "observations": [
+    {"ref":["dial"],"status":"unknown","source":[11]},
+    {"ref":["mark","X236241"],"status":"known","value":null,"source":[7]},
+    {"ref":["mark","X69a10e"],"status":"known","value":null,"source":[7]},
+    {"ref":["available_stamp","X15971a"],"status":"known","value":true,"source":[7]},
+    {"ref":["available_stamp","X439b6a"],"status":"known","value":true,"source":[7]},
+    {"ref":["available_stamp","Xf03131"],"status":"known","value":true,"source":[7]},
+    {"ref":["required_stamp","X63e6cc"],"status":"known","value":"X15971a","source":[9]},
+    {"ref":["required_stamp","Xf996dd"],"status":"known","value":"Xf03131","source":[10]}
+  ],
+  "domains": [
+    {"ref":["dial"],"values":["X63e6cc","Xf996dd"],"stableWhen":true,"source":[8]}
+  ],
+  "commands": [
+    {"command":["marquer","X236241","X15971a"],"source":[7,15]},
+    {"command":["marquer","X236241","X439b6a"],"source":[7,15]},
+    {"command":["marquer","X236241","Xf03131"],"source":[7,15]},
+    {"command":["marquer","X69a10e","X15971a"],"source":[7,15]},
+    {"command":["marquer","X69a10e","X439b6a"],"source":[7,15]},
+    {"command":["marquer","X69a10e","Xf03131"],"source":[7,15]},
+    {"command":["lire"],"source":[16]},
+    {"command":["valider"],"source":[17]}
+  ],
+  "rules": [
+    {"command":["marquer","X236241","X15971a"],"requires":{"all":[{"eq":[["mark","X236241"],null]},{"any":[{"eq":[["mark","X69a10e"],null]},{"eq":[["mark","X69a10e"],"X15971a"]}]}]},"source":[7,15]},
+    {"command":["marquer","X236241","X15971a"],"effect":{"set":[["mark","X236241"],"X15971a"]},"source":[7,15]},
+    {"command":["marquer","X236241","X439b6a"],"requires":{"all":[{"eq":[["mark","X236241"],null]},{"any":[{"eq":[["mark","X69a10e"],null]},{"eq":[["mark","X69a10e"],"X439b6a"]}]}]},"source":[7,15]},
+    {"command":["marquer","X236241","X439b6a"],"effect":{"set":[["mark","X236241"],"X439b6a"]},"source":[7,15]},
+    {"command":["marquer","X236241","Xf03131"],"requires":{"all":[{"eq":[["mark","X236241"],null]},{"any":[{"eq":[["mark","X69a10e"],null]},{"eq":[["mark","X69a10e"],"Xf03131"]}]}]},"source":[7,15]},
+    {"command":["marquer","X236241","Xf03131"],"effect":{"set":[["mark","X236241"],"Xf03131"]},"source":[7,15]},
+    {"command":["marquer","X69a10e","X15971a"],"requires":{"all":[{"eq":[["mark","X69a10e"],null]},{"any":[{"eq":[["mark","X236241"],null]},{"eq":[["mark","X236241"],"X15971a"]}]}]},"source":[7,15]},
+    {"command":["marquer","X69a10e","X15971a"],"effect":{"set":[["mark","X69a10e"],"X15971a"]},"source":[7,15]},
+    {"command":["marquer","X69a10e","X439b6a"],"requires":{"all":[{"eq":[["mark","X69a10e"],null]},{"any":[{"eq":[["mark","X236241"],null]},{"eq":[["mark","X236241"],"X439b6a"]}]}]},"source":[7,15]},
+    {"command":["marquer","X69a10e","X439b6a"],"effect":{"set":[["mark","X69a10e"],"X439b6a"]},"source":[7,15]},
+    {"command":["marquer","X69a10e","Xf03131"],"requires":{"all":[{"eq":[["mark","X69a10e"],null]},{"any":[{"eq":[["mark","X236241"],null]},{"eq":[["mark","X236241"],"Xf03131"]}]}]},"source":[7,15]},
+    {"command":["marquer","X69a10e","Xf03131"],"effect":{"set":[["mark","X69a10e"],"Xf03131"]},"source":[7,15]},
+    {"command":["lire"],"maxUses":1,"source":[16]},
+    {"command":["lire"],"effect":{"reveal":["dial"]},"source":[16]},
+    {"command":["lire"],"effect":{"keep":["dial"]},"source":[16]},
+    {"command":["lire"],"effect":{"keep":["mark","X236241"]},"source":[7,16]},
+    {"command":["lire"],"effect":{"keep":["mark","X69a10e"]},"source":[7,16]},
+    {"command":["valider"],"when":{"any":[{"all":[{"eq":[["dial"],"X63e6cc"]},{"eq":[["mark","X236241"],{"ref":["required_stamp","X63e6cc"]}]},{"eq":[["mark","X69a10e"],{"ref":["required_stamp","X63e6cc"]}]}]},{"all":[{"eq":[["dial"],"Xf996dd"]},{"eq":[["mark","X236241"],{"ref":["required_stamp","Xf996dd"]}]},{"eq":[["mark","X69a10e"],{"ref":["required_stamp","Xf996dd"]}]}]}]},"effect":{"end":"success"},"source":[7,8,17]},
+    {"command":["valider"],"when":{"not":{"any":[{"all":[{"eq":[["dial"],"X63e6cc"]},{"eq":[["mark","X236241"],{"ref":["required_stamp","X63e6cc"]}]},{"eq":[["mark","X69a10e"],{"ref":["required_stamp","X63e6cc"]}]}]},{"all":[{"eq":[["dial"],"Xf996dd"]},{"eq":[["mark","X236241"],{"ref":["required_stamp","Xf996dd"]}]},{"eq":[["mark","X69a10e"],{"ref":["required_stamp","Xf996dd"]}]}]}]}},"effect":{"end":"failure"},"source":[7,8,17]}
+  ],
+  "sources": {
+    "3": "**But.** Obtenir une validation en un minimum d’actions. Le plan doit réussir dans chaque monde compatible avec les observations. On compte les actions dans le pire cas.",
+    "7": "- Les deux cases X236241 et X69a10e sont vierges. Les tampons disponibles sont X15971a, X439b6a, Xf03131.",
+    "8": "- Le cadran désigne une seule sortie, X63e6cc ou Xf996dd, qui reste fixe pendant la partie.",
+    "9": "- La sortie X63e6cc exige le tampon X15971a sur les deux cases.",
+    "10": "- La sortie Xf996dd exige le tampon Xf03131 sur les deux cases.",
+    "11": "- La position initiale du cadran est inconnue.",
+    "15": "- `marquer CASE TAMPON` marque une case vierge. Le premier marquage engage ce tampon pour tous les marquages suivants. Une marque est définitive.",
+    "16": "- `lire` révèle la sortie désignée, une seule fois par partie, sans changer le cadran ni les marques.",
+    "17": "- `valider` termine la partie. La validation réussit si les deux cases portent le tampon exigé par la sortie désignée. Tout autre résultat est un échec."
+  }
+}

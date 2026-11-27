@@ -1,0 +1,64 @@
+{
+  "format": "sra.public/1",
+  "goal": {"command":["sceller","J679fb3"],"criterion":"minimax_actions","maintain":[{"eq":[["flap_open","J4cdc9a"],true]}],"source":[3,28]},
+  "observations": [
+    {"ref":["held","J4cdc9a"],"status":"known","value":true,"source":[7]},
+    {"ref":["flap_open","J4cdc9a"],"status":"known","value":true,"source":[7]},
+    {"ref":["locked","J4cdc9a"],"status":"known","value":false,"source":[7]},
+    {"ref":["receiver_open","J679fb3"],"status":"known","value":true,"source":[7]},
+    {"ref":["indexed","J679fb3"],"status":"known","value":false,"source":[7]},
+    {"ref":["purged","J4cdc9a"],"status":"known","value":true,"source":[3,8]},
+    {"ref":["archive","J4cdc9a"],"status":"known","value":"Jbbd6ad","source":[3,9]},
+    {"ref":["effort","J4cdc9a"],"status":"known","value":"Jbc2cd1","source":[3,10]}
+  ],
+  "domains": [
+    {"ref":["effort","J4cdc9a"],"values":["Jbbd6ad","Jbc2cd1"],"stableWhen":{"eq":[["purged","J4cdc9a"],true]},"source":[3,14]}
+  ],
+  "commands": [
+    {"command":["purger","J4cdc9a"],"source":[23]},
+    {"command":["sonder","J4cdc9a"],"source":[24]},
+    {"command":["bloquer","J4cdc9a"],"source":[25]},
+    {"command":["retirer","J4cdc9a"],"source":[26]},
+    {"command":["indexer","J679fb3"],"source":[27]},
+    {"command":["sceller","J679fb3"],"source":[28]}
+  ],
+  "rules": [
+    {"command":["purger","J4cdc9a"],"requires":{"all":[{"eq":[["purged","J4cdc9a"],false]},{"eq":[["held","J4cdc9a"],true]}]},"source":[23]},
+    {"command":["purger","J4cdc9a"],"effect":{"set":[["purged","J4cdc9a"],true]},"source":[23]},
+    {"command":["sonder","J4cdc9a"],"requires":{"eq":[["purged","J4cdc9a"],true]},"source":[24]},
+    {"command":["sonder","J4cdc9a"],"maxUses":1,"source":[24]},
+    {"command":["sonder","J4cdc9a"],"effect":{"reveal":["effort","J4cdc9a"]},"source":[24]},
+    {"command":["bloquer","J4cdc9a"],"requires":{"all":[{"eq":[["locked","J4cdc9a"],false]},{"eq":[["purged","J4cdc9a"],true]}]},"source":[25]},
+    {"command":["bloquer","J4cdc9a"],"when":{"all":[{"eq":[["effort","J4cdc9a"],"Jbc2cd1"]},{"eq":[["held","J4cdc9a"],true]}]},"effect":{"end":"failure"},"source":[3,17,19,25]},
+    {"command":["bloquer","J4cdc9a"],"when":{"not":{"all":[{"eq":[["effort","J4cdc9a"],"Jbc2cd1"]},{"eq":[["held","J4cdc9a"],true]}]}},"effect":{"set":[["locked","J4cdc9a"],true]},"source":[17,19,25]},
+    {"command":["bloquer","J4cdc9a"],"when":{"not":{"all":[{"eq":[["effort","J4cdc9a"],"Jbc2cd1"]},{"eq":[["held","J4cdc9a"],true]}]}},"effect":{"set":[["flap_open","J4cdc9a"],true]},"source":[17,19,25]},
+    {"command":["retirer","J4cdc9a"],"maxUses":1,"source":[26]},
+    {"command":["retirer","J4cdc9a"],"when":{"eq":[["purged","J4cdc9a"],false]},"effect":{"set":[["flap_open","J4cdc9a"],false]},"source":[26]},
+    {"command":["retirer","J4cdc9a"],"when":{"eq":[["purged","J4cdc9a"],false]},"effect":{"end":"failure"},"source":[3,26]},
+    {"command":["retirer","J4cdc9a"],"when":{"all":[{"eq":[["purged","J4cdc9a"],true]},{"all":[{"eq":[["effort","J4cdc9a"],"Jbbd6ad"]},{"eq":[["locked","J4cdc9a"],false]}]}]},"effect":{"set":[["flap_open","J4cdc9a"],false]},"source":[14,16,26]},
+    {"command":["retirer","J4cdc9a"],"when":{"all":[{"eq":[["purged","J4cdc9a"],true]},{"all":[{"eq":[["effort","J4cdc9a"],"Jbbd6ad"]},{"eq":[["locked","J4cdc9a"],false]}]}]},"effect":{"end":"failure"},"source":[3,14,16,19,26]},
+    {"command":["retirer","J4cdc9a"],"when":{"all":[{"eq":[["purged","J4cdc9a"],true]},{"not":{"all":[{"eq":[["effort","J4cdc9a"],"Jbbd6ad"]},{"eq":[["locked","J4cdc9a"],false]}]}}]},"effect":{"set":[["held","J4cdc9a"],false]},"source":[14,16,19,26]},
+    {"command":["indexer","J679fb3"],"requires":{"eq":[["held","J4cdc9a"],false]},"source":[3,27]},
+    {"command":["indexer","J679fb3"],"maxUses":1,"source":[27]},
+    {"command":["indexer","J679fb3"],"effect":{"set":[["indexed","J679fb3"],true]},"source":[27]},
+    {"command":["sceller","J679fb3"],"successRequires":{"all":[{"eq":[["held","J4cdc9a"],false]},{"eq":[["locked","J4cdc9a"],true]},{"eq":[["purged","J4cdc9a"],true]},{"eq":[["indexed","J679fb3"],true]}]},"source":[3,28]},
+    {"command":["sceller","J679fb3"],"effect":{"end":"unspecified"},"source":[28]}
+  ],
+  "sources": {
+    "3": "Scelle le poste J679fb3 en gardant le clapet de J4cdc9a ouvert. Donne des actions qui garantissent la réussite avec le moins de gestes dans le pire cas. Chaque commande coûte un geste.",
+    "7": "- La poignée unique se trouve sur J4cdc9a. Le clapet est ouvert et sa butée est libre. Le poste J679fb3 est ouvert et reste à indexer.",
+    "8": "- Purge du cycle en cours terminée.",
+    "9": "- Relevé archivé du cycle précédent Jbbd6ad. L’effort peut changer entre cycles.",
+    "10": "- Mesure certifiée du cycle en cours Jbc2cd1.",
+    "14": "Après la purge, l’effort reste fixe et la sonde renvoie Jbbd6ad ou Jbc2cd1.",
+    "16": "- Avec le relevé Jbbd6ad, retirer la poignée quand la butée est libre laisse retomber le clapet.",
+    "17": "- Avec le relevé Jbc2cd1, bloquer la butée quand la poignée est en place coince la poignée.",
+    "19": "Ces incidents terminent la partie. Hors de ces deux conditions, le retrait libère la poignée et le blocage immobilise le clapet ouvert.",
+    "23": "- `purger J4cdc9a` termine la purge si elle reste à faire et si la poignée tient le clapet.",
+    "24": "- `sonder J4cdc9a` donne le relevé du cycle en cours, une fois par partie après la purge.",
+    "25": "- `bloquer J4cdc9a` engage la butée libre après la purge.",
+    "26": "- `retirer J4cdc9a` retire la poignée une fois. La retirer avant la fin de la purge ferme le clapet et termine la partie.",
+    "27": "- `indexer J679fb3` règle le poste aval avec la poignée libérée, une fois.",
+    "28": "- `sceller J679fb3` termine la partie. Il faut la poignée libérée, la butée bloquée, la purge terminée et le poste aval indexé."
+  }
+}
