@@ -1,0 +1,130 @@
+{
+  "format": "sra.public/1",
+  "goal": {
+    "command": [
+      "valider"
+    ],
+    "criterion": "minimax_actions",
+    "source": [
+      4
+    ]
+  },
+  "observations": [
+    {
+      "ref": [
+        "indexed",
+        "P"
+      ],
+      "status": "known",
+      "value": false,
+      "source": [
+        3
+      ]
+    }
+  ],
+  "domains": [],
+  "commands": [
+    {
+      "command": [
+        "valider"
+      ],
+      "source": [
+        1,
+        4
+      ]
+    },
+    {
+      "command": [
+        "caler",
+        "P"
+      ],
+      "source": [
+        2
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "command": [
+        "valider"
+      ],
+      "when": {
+        "eq": [
+          [
+            "indexed",
+            "P"
+          ],
+          false
+        ]
+      },
+      "effect": {
+        "end": "failure"
+      },
+      "source": [
+        1
+      ]
+    },
+    {
+      "command": [
+        "valider"
+      ],
+      "when": {
+        "eq": [
+          [
+            "indexed",
+            "P"
+          ],
+          true
+        ]
+      },
+      "effect": {
+        "end": "success"
+      },
+      "source": [
+        1
+      ]
+    },
+    {
+      "command": [
+        "caler",
+        "P"
+      ],
+      "effect": {
+        "set": [
+          [
+            "indexed",
+            "P"
+          ],
+          true
+        ]
+      },
+      "source": [
+        2
+      ]
+    },
+    {
+      "command": [
+        "caler",
+        "P"
+      ],
+      "requires": {
+        "eq": [
+          [
+            "indexed",
+            "P"
+          ],
+          false
+        ]
+      },
+      "source": [
+        2
+      ]
+    }
+  ],
+  "sources": {
+    "1": "valider termine sur succès si P est indexé, sur échec sinon.",
+    "2": "La commande caler P renvoie exactement « calage enregistré ». Elle est disponible si P est non indexé et indexe P.",
+    "3": "Le poste P est initialement non indexé.",
+    "4": "Atteindre succès par valider, en minimisant le nombre de commandes dans le pire cas."
+  }
+}
