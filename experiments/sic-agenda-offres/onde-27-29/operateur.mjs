@@ -1,0 +1,13 @@
+import { parseArgs } from 'node:util';
+import { writeFile } from 'node:fs/promises';
+import { readCard } from './fiche.mjs';
+import { resolve } from 'node:path';
+import { play } from './parcours.mjs';
+import { inspect } from './variations.mjs';
+import { withEngine } from './moteurs.mjs';
+const {values}=parseArgs({options:{fiche:{type:'string'},pyodide:{type:'string'},recu:{type:'string'},moteur:{type:'string',default:'candidat'}}});
+if(!values.pyodide || !values.fiche) throw Error('Fiche et chemin Pyodide requis.');
+const card=await readCard(values.fiche);
+const report=await withEngine(values.moteur,engine=>play(card,resolve(values.pyodide),engine,card.variations?inspect:null));
+if(values.recu) await writeFile(values.recu,JSON.stringify(report,null,2)+'\n');
+console.log(report.steps.map(s=>[s.turn,s.level,s.pre.kind,s.command,s.pre.mode,s.after.reason].join(' ')).join('\n'));

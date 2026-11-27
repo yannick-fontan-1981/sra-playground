@@ -84,11 +84,43 @@ export function periodicTargetDomain(scene:R):{proof:R;targets:number[][]}|null 
 }
 const inputDigest=(p:R):string=>digest([p.binding,p.actions,p.steps.map((s:R)=>Object.fromEntries(Object.entries(s).filter(([k])=>k!=='point_binding')))]);
 
+export interface PeriodicQuestionOffer {
+  kind: 'initial_input' | 'collective_channel' | 'individual_channel';
+  key: string;
+  observationRef: string;
+  command: { action_ref: string; data?: { x: number; y: number } };
+  unknownTracks: number[];
+}
+export type PeriodicQuestionSelector = (offers: readonly PeriodicQuestionOffer[]) => number | null;
+
 export class PeriodicSums implements NativeFamily<any> {
  readonly id='periodic_sums';readonly config:R;
  individual:R={};collective:R={};refs:string[]=[];selection=false;passed:R[]=[];tried=new Set<string>();events:R[]=[];last_result:R|null=null;
  bootstrap_attempts=new Set<string>();authorizations:R={};
- constructor(config:R){this.config=config;}
+ readonly selectQuestion: PeriodicQuestionSelector;
+ constructor(config:R, selectQuestion: PeriodicQuestionSelector = () => 0){this.config=config;this.selectQuestion=selectQuestion;}
+ private question(offers: PeriodicQuestionOffer[]): PeriodicQuestionOffer | undefined {
+   if (!offers.length) return undefined;
+   const index = this.selectQuestion(copy(offers));
+   return index === null ? undefined : offers[index];
+ }
+ private channelQuestions(scene:R, obs:R): PeriodicQuestionOffer[] {
+   const offers: PeriodicQuestionOffer[] = [];
+   for (const control of [...scene.controls].sort((a,b)=>compare(a.point,b.point))) {
+     const key = digest([obs.level_epoch,scene.layout,control.shape,'channel']);
+     const law = this.collective[control.shape] ?? {};
+     const unknownTracks = scene.tracks.filter((track:R)=>!Object.hasOwn(law,String(track.color))).map((track:R)=>track.color);
+     if (!this.tried.has(key) && unknownTracks.length) offers.push({kind:'collective_channel',key,observationRef:obs.observation_ref,unknownTracks,
+       command:{action_ref:'ACTION6',data:{x:control.point[0],y:control.point[1]}}});
+   }
+   for (const action of obs.available_action_refs) {
+     if (!['ACTION3','ACTION4'].includes(action) || Object.hasOwn(this.individual,action)) continue;
+     const key = digest([obs.level_epoch,scene.layout,action,'individual']);
+     if (!this.tried.has(key)) offers.push({kind:'individual_channel',key,observationRef:obs.observation_ref,
+       command:{action_ref:action},unknownTracks:scene.tracks.map((t:R)=>t.color)});
+   }
+   return offers;
+ }
  state():R{return copy({individual:this.individual,collective:this.collective,refs:this.refs,selection:this.selection,passed:this.passed,events:this.events,last_result:this.last_result,authorizations:this.authorizations,tried:[...this.tried].sort(),bootstrap_attempts:[...this.bootstrap_attempts].sort()});}
  restore(state:R):void{const s=copy(state);for(const k of ['individual','collective','refs','selection','passed','events','last_result','authorizations'])(this as any)[k]=s[k];this.tried=new Set(s.tried);this.bootstrap_attempts=new Set(s.bootstrap_attempts);}
  targets(scene:R,_obs:R):Set<string>|null{const r=periodicTargetDomain(scene);if(r===null)return null;this.last_result=r.proof;return r.proof.status==='COMPLETE'?new Set(r.targets.map(v=>JSON.stringify(v))):null;}
@@ -105,8 +137,9 @@ export class PeriodicSums implements NativeFamily<any> {
  private async measuredProposal(obs:R,rows:NativeRows,_inputs:readonly any[],remaining:number):Promise<R|null>{
   if(!this.config.enabled||!this.refs.length||remaining<1)return null;const scene=measurePeriodicSums(rows);if(!scene||scene.selected===null)return null;
   const targets=this.targets(scene,obs);if(targets===null)return null;let route=this.search(scene,targets,remaining),question='',mode='joint_phase_target';
-  if(!route){for(const c of [...scene.controls].sort((a:R,b:R)=>compare(a.point,b.point))){const key=digest([obs.level_epoch,scene.layout,c.shape,'channel']);if(!this.tried.has(key)&&!scene.tracks.every((t:R)=>Object.hasOwn(this.collective[c.shape]??{},String(t.color)))){route=[{action_ref:'ACTION6',data:{x:c.point[0],y:c.point[1]},probe:true}];question=key;break;}}
-   if(!route)for(const action of obs.available_action_refs)if(['ACTION3','ACTION4'].includes(action)&&!Object.hasOwn(this.individual,action)){const key=digest([obs.level_epoch,scene.layout,action,'individual']);if(!this.tried.has(key)){route=[{action_ref:action,probe:true}];question=key;break;}}
+  if(!route){
+   const selected=this.question(this.channelQuestions(scene,obs));
+   if(selected){route=[{...selected.command,probe:true}];question=selected.key;}
    mode='channel_question';
   }if(!route)return null;
   const profiles:number[][]=scene.tracks.map((t:R)=>[...t.profile]),steps:R[]=[],actions:R[]=[];let selected=scene.selected;
@@ -124,9 +157,15 @@ export class PeriodicSums implements NativeFamily<any> {
  async propose(obs:R,rows:NativeRows,inputs:readonly any[],remaining:number):Promise<any>{
   let p=await this.measuredProposal(obs,rows,inputs,remaining);
   if(p===null&&this.config.enabled&&!this.refs.length&&remaining>=1){const scene=measurePeriodicSums(rows),rule=this.config.initial_control_question;if(!rule.enabled||!scene||scene.selected===null||!scene.detectors.some((d:R)=>d.total!==d.target))return null;
-   const available=new Set(inputs.filter(v=>!v.data||!Object.keys(v.data).length).map(v=>v.action_ref));let chosen:[string,string]|null=null;
-   for(const action of rule.ordered_input_hypotheses){const key=digest([obs.level_epoch,scene.layout,scene.tracks.map((t:R)=>t.profile),scene.selected,action,'initial_selected_strip_response']);if(available.has(action)&&!this.bootstrap_attempts.has(key)){chosen=[action,key];break;}}
-   if(!chosen)return null;const [action,key]=chosen,command={action_ref:action},why=rule.meaning,ref='C_profiles_initial_'+key.slice(0,16),evidence=[obs.observation_ref],facts={periodic_strips_measured:true,stack_contributions_match:true,current_focus_bound:true,sampled_target_residual_present:true,input_effect_is_unknown:true,phase_preimages_computed:false},plan={periodic_sums:true,mode:'initial_control_question',frame_hash:obs.frame_hash,layout:scene.layout,question_key:key,hypotheses:[rule.input_hypothesis],passed:[]},step={action:command,expected_before:{profiles:scene.tracks.map((t:R)=>t.profile),selected:scene.selected},expected_after:null,probe:true};
+   const available=new Set(inputs.filter(v=>!v.data||!Object.keys(v.data).length).map(v=>v.action_ref));
+   const offers:PeriodicQuestionOffer[]=[];
+   for(const action of rule.ordered_input_hypotheses){
+     const key=digest([obs.level_epoch,scene.layout,scene.tracks.map((t:R)=>t.profile),scene.selected,action,'initial_selected_strip_response']);
+     if(available.has(action)&&!this.bootstrap_attempts.has(key)) offers.push({kind:'initial_input',key,observationRef:obs.observation_ref,
+       command:{action_ref:action},unknownTracks:scene.tracks.map((t:R)=>t.color)});
+   }
+   const chosen=this.question(offers);
+   if(!chosen)return null;const {command,key}=chosen,why=rule.meaning,ref='C_profiles_initial_'+key.slice(0,16),evidence=[obs.observation_ref],facts={periodic_strips_measured:true,stack_contributions_match:true,current_focus_bound:true,sampled_target_residual_present:true,input_effect_is_unknown:true,phase_preimages_computed:false},plan={periodic_sums:true,mode:'initial_control_question',frame_hash:obs.frame_hash,layout:scene.layout,question_key:key,hypotheses:[rule.input_hypothesis],passed:[]},step={action:command,expected_before:{profiles:scene.tracks.map((t:R)=>t.profile),selected:scene.selected},expected_after:null,probe:true};
    p=this.package(obs,scene,'periodic_sum_initial_control_question',plan,[command],[step],facts,ref,'information_question',why,evidence);
   }
   if(p){const token=inputDigest(p);p.support_plan.input_binding_ref=token;this.authorizations[token]=inputDigest(p);p.bundle_template.frozen_support_plan=copy(p.support_plan);}return p;
