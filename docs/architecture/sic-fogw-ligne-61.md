@@ -12,3 +12,11 @@ Le lot part du gel `d0e7527ca8033bd805a6d7a8bb021eff62e87021`. Le témoin est `p
 | Second contexte | Éprouver la décision d’attendre avec un vrai second contexte de jeu ou une situation publique contrôlée. Changer uniquement la preuve qui justifie la préparation et constater quelle offre est encore consommable. |
 
 La carte vectorielle de `createSicReceptionAccess` relève du mode SIC exclusif. Son emploi dans ce parcours doit être établi par la chaîne native avant de lui attribuer un résultat.
+
+### Premier écart préenregistré, hors du parcours historique
+
+Après le retour de T17, la variante remplace la croix demandée dans l’afficheur par un L de trois pixels et rend visible un seul L correspondant en (28,26). Le support reste (50,26), son dessin et le porteur sont inchangés. L’offre préparée à la révision 17 cible la croix `8081538d…`. La scène actuelle distingue le L `0c273d66…`. Sur le gel, le service conserve la projection de position vraie, maintient le préfixe de huit actions et libère `…:native:18`, `ACTION4`, indice 1, pour la croix. L’arrêt de la commande n’est plus une preuve d’attente pour cet ancien sujet.
+
+**Extraction à parité.** Rendre appelable l’offre d’observation du récepteur déjà placé. Garder le choix de commande sortante, l’essai unitaire ou répété, le budget, le traitement d’une absence d’offre et les refus actuels. Les témoins historiques et cette continuation construite doivent être identiques au gel sur ce premier SHA.
+
+**Correctif distinct.** Le retour T17 doit conserver le verdict physique sur la position et fermer la continuation de l’ancienne demande. À la prochaine sélection, seul un plan lié à la révision 18 et à la demande actuelle peut être autorisé. L’ancienne autorisation de huit attentes ne vaut plus pour le L. Une première mesure unitaire reste possible à la même position et peut garder la commande `ACTION4`. La disparition temporaire du mobile avec demande retenue, son mouvement sur le plateau et la recoloration ordinaire du porteur ne suffisent pas à révoquer la préparation.
