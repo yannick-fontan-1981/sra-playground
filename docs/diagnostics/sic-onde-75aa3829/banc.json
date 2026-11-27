@@ -1,0 +1,153 @@
+{
+  "sources": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "candidat": "75aa3829ddf9d7e4561c6c92297ad1bb8d2ac5ef"
+  },
+  "sourceTrees": {
+    "historique": "1952c70d83743a00548613d75566a7b43d98293f",
+    "gel": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+    "candidat": "d1758b3d684d4a87120e17e9c6ce5e6f93ee549b"
+  },
+  "conditions": {
+    "startLevel": 1,
+    "mode": "catalogue, ouverture active",
+    "actionsPerLevel": 600,
+    "globalBudget": 16,
+    "wideControlBudget": 64,
+    "seedArgument": "omitted"
+  },
+  "positions": {
+    "28": [
+      1
+    ],
+    "29": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10,
+      11,
+      12,
+      13
+    ],
+    "27": [
+      7,
+      14
+    ]
+  },
+  "nominal16SHA256": "7a4db7cb964c704023b41dff29da5fbbb10971c00490a1873a576b6919d38247",
+  "reports": {
+    "historique-historique.json": {
+      "source": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+      "card": "historique",
+      "count": 9,
+      "sha256": "0465b2ea85bdc10a9d9e831bdde612fff04bccc693274b219dbb26ef4b70f2a1"
+    },
+    "historique-catalogue16.json": {
+      "source": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+      "card": "catalogue16",
+      "count": 16,
+      "sha256": "1d39b6558cb7fa88b13cf40be26849ae513731b747b25ef187f8bb8955155b49"
+    },
+    "gel-historique.json": {
+      "source": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "card": "historique",
+      "count": 9,
+      "sha256": "0465b2ea85bdc10a9d9e831bdde612fff04bccc693274b219dbb26ef4b70f2a1"
+    },
+    "gel-autre-sonde.json": {
+      "source": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "card": "autre-sonde",
+      "count": 3,
+      "sha256": "18496382ffd335150217b4ba5e184513c5b37d2a0f8a60cefadc6e73c17b63f8"
+    },
+    "gel-autre-canal.json": {
+      "source": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "card": "autre-canal",
+      "count": 8,
+      "sha256": "9314d5e5aa306cdf3b59f4df853a63b1d24a75c496946bc01798cc4371285a1e"
+    },
+    "gel-preimage.json": {
+      "source": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "card": "preimage",
+      "count": 3,
+      "sha256": "78775b34620b53baa4c61b69c11dd042910703ba00abc6e43512a73c231a8327"
+    },
+    "gel-ordre-initial.json": {
+      "source": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "card": "ordre-initial",
+      "count": 3,
+      "sha256": "ea74452d0ad3a8b3f38e7dc29eb0285665557c7f3551b462c1091c2fa87d0b1b"
+    },
+    "gel-palette.json": {
+      "source": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "card": "palette",
+      "count": 8,
+      "sha256": "9d10165d7743f291721a967a1a4e83d2ceb4d1b6b0773d270c31368060b717af"
+    },
+    "gel-budget.json": {
+      "source": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "card": "budget",
+      "count": 7,
+      "sha256": "c385948e0a6a5c4a85ac102b10bf0a846467cf0c5a02608120de2e3289a052b2"
+    },
+    "gel-catalogue16.json": {
+      "source": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "card": "catalogue16",
+      "count": 16,
+      "sha256": "1d39b6558cb7fa88b13cf40be26849ae513731b747b25ef187f8bb8955155b49"
+    },
+    "candidat-historique.json": {
+      "source": "75aa3829ddf9d7e4561c6c92297ad1bb8d2ac5ef",
+      "card": "historique",
+      "count": 9,
+      "sha256": "283dd0ab51b64ed66224dc4328441ccedc55407449bdfe9b33b4166473ce6d81"
+    },
+    "candidat-autre-sonde.json": {
+      "source": "75aa3829ddf9d7e4561c6c92297ad1bb8d2ac5ef",
+      "card": "autre-sonde",
+      "count": 3,
+      "sha256": "852921d1a19c4c1adddf939684a072a62cbd51ebca3ac541e2745a7a56ff7ab0"
+    },
+    "candidat-autre-canal.json": {
+      "source": "75aa3829ddf9d7e4561c6c92297ad1bb8d2ac5ef",
+      "card": "autre-canal",
+      "count": 8,
+      "sha256": "f81d8874aafdb4609f8554635673341eeee18b74047f8b1ef3c1f3be516bb152"
+    },
+    "candidat-preimage.json": {
+      "source": "75aa3829ddf9d7e4561c6c92297ad1bb8d2ac5ef",
+      "card": "preimage",
+      "count": 3,
+      "sha256": "896ceb35d64f5c39e22458802596926f2ce9e984eac7adee52abbb0fd356f79a"
+    },
+    "candidat-ordre-initial.json": {
+      "source": "75aa3829ddf9d7e4561c6c92297ad1bb8d2ac5ef",
+      "card": "ordre-initial",
+      "count": 3,
+      "sha256": "393186ffecf3cfd386f8243dad2e75c1ada5a490dea1c4ee1a3185f8754ac520"
+    },
+    "candidat-palette.json": {
+      "source": "75aa3829ddf9d7e4561c6c92297ad1bb8d2ac5ef",
+      "card": "palette",
+      "count": 8,
+      "sha256": "3566ef70964291dbce218c5bca8f6a985da2954bca2f75955c75cc7529247ddb"
+    },
+    "candidat-budget.json": {
+      "source": "75aa3829ddf9d7e4561c6c92297ad1bb8d2ac5ef",
+      "card": "budget",
+      "count": 7,
+      "sha256": "84bc159e9ee9fda8ca0f02c320f69cce51802158dfaa68fab4bcda1fe274e6e5"
+    },
+    "candidat-catalogue16.json": {
+      "source": "75aa3829ddf9d7e4561c6c92297ad1bb8d2ac5ef",
+      "card": "catalogue16",
+      "count": 16,
+      "sha256": "48aa68e90b94c51524eddbbc85ceb6e486024f596b75003eb725052b95210cd4"
+    }
+  },
+  "archiveSHA256": "8cffc59c02e37d575297d9d42e2b07d2e3cf0ed57ea12fd34fbe100c83ba5c7b"
+}
