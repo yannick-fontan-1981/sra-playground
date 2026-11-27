@@ -1,0 +1,64 @@
+{
+  "candidate": "08fa10a6b9986e7028551fbfc9d9e16eb83726b7",
+  "historical": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+  "freeze": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "preRegistered": "d9760e9c13fbae68b8425ee8fab5266ed4b42afd",
+  "srcTreeOnFreezeAndCandidate": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "paths": {
+    "historique": {
+      "steps": 19,
+      "completed": 1,
+      "T12": false,
+      "T13": {
+        "selection": [
+          [
+            "revise_rooted_contact",
+            "selected"
+          ],
+          [
+            "reposition_root_before_contact",
+            "lower_priority"
+          ]
+        ],
+        "ticket": {
+          "id": "contact-qualification:native:13",
+          "command": "ACTION3",
+          "index": 0,
+          "level": 1,
+          "frame": "f8828ab792ad8a19"
+        },
+        "matched": true,
+        "beforeChoice": "b0a9599754be2bc601e27de4c22572a6a9c182d767740a2912dcea6a1069b518"
+      },
+      "canonicalReceiptSHA256": "d00580315f91427f3e552c1f736bb49b37092a399bb01684eee1161fbecfb466"
+    },
+    "reposition": {
+      "steps": 21,
+      "completed": 1,
+      "T12": false,
+      "T13": {
+        "selection": [
+          [
+            "reposition_root_before_contact",
+            "selected"
+          ],
+          [
+            "revise_rooted_contact",
+            "lower_priority"
+          ]
+        ],
+        "ticket": {
+          "id": "contact-qualification:native:13",
+          "command": "ACTION1",
+          "index": 0,
+          "level": 1,
+          "frame": "f8828ab792ad8a19"
+        },
+        "matched": true,
+        "beforeChoice": "b0a9599754be2bc601e27de4c22572a6a9c182d767740a2912dcea6a1069b518"
+      },
+      "canonicalReceiptSHA256": "c0db5ad5e264b8ca5d6d314df4309d06cc747dd69fce3ed64f3eaa11697fbfa9"
+    }
+  },
+  "archiveSHA256": "2fd53390b95ed32c2ec5dda7d9e027756ab42aa9acad66f91b54e4d18304b4ef"
+}
