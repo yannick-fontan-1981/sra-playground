@@ -3,6 +3,9 @@ import { continuityObservation, requireExecutedPrefix } from './sic-continuity-c
 import { workshopPhaseOwners } from './sic-workshop-phase-continuity.mjs';
 
 export const workshopPhaseCeilings = [20, 54, 50, 52, 58, 113, 129];
+// Actual [commands, continued phase walks] in the chronological collector
+// de683d72 / GitHub 2d0a2542, 2026-11-27; no phase walk is inferred at L7.
+export const workshopPhaseContinuity = [[15, 0], [45, 0], [41, 0], [43, 0], [48, 0], [94, 37], [107, 0]];
 const moves = { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0] };
 const point = value => Array.isArray(value) && value.length === 2 && Array.from(value).every(Number.isSafeInteger);
 const snapshot = value => Array.isArray(value) && value.length === 3 && Array.from(value).every(point);
@@ -64,7 +67,19 @@ export function measureWorkshopPhaseContinuity(run, issued, groups) {
       assert.deepEqual(p.actorAfter, p.expectedTo, 'LS20 workshop did not reach its declared landing');
       assert.deepEqual(p.actorAfter, p.actorBefore.map((value, axis) => value + move[axis] * p.pitch),
         'LS20 workshop is not one actual lattice step');
-      assert.deepEqual(p.stationsBefore, first.cycle[index % first.cycle.length], 'LS20 workshop started from a different station phase');
+      const expectedBefore = first.cycle[index % first.cycle.length];
+      assert.ok(Array.isArray(p.stationsBefore) && p.stationsBefore.length === 3,
+        'LS20 workshop lost its observed starting station roles');
+      const hidden = Array.from(p.stationsBefore).flatMap((position, role) => position === null ? [role] : []);
+      // The carrier may completely cover one station when leaving a contact.
+      // Preserve that missing measurement; only the subsequent, fully visible
+      // returns count as continuous phase walking. Never fill it from the cycle.
+      assert.ok(!hidden.length || index === 0 && hidden.length === 1
+        && JSON.stringify(expectedBefore[hidden[0]]) === JSON.stringify(p.actorBefore),
+      'LS20 workshop lost a station outside the initial actor occlusion');
+      for (const [role, position] of Array.from(p.stationsBefore).entries()) {
+        if (position !== null) assert.deepEqual(position, expectedBefore[role], 'LS20 workshop started from a different station phase');
+      }
       assert.deepEqual(p.stationsAfter, first.cycle[(index + 1) % first.cycle.length], 'LS20 workshop returned a different station phase');
       assert.ok(digest(p.glyphBefore) && p.glyphAfter === p.glyphBefore
         && Number.isSafeInteger(p.reserveBefore) && p.reserveBefore >= 0 && Number.isSafeInteger(p.reserveAfter) && p.reserveAfter >= 0
