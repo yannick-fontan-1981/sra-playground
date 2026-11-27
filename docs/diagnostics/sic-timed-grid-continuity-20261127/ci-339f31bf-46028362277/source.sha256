@@ -1,0 +1,4 @@
+8a2d08701313f5a8d6e80182abb1a1b46f05c7d086521a3d5606153d056e9d5f  scripts/compare-source100.mjs
+6f8768341c8ec139ed06b38da705ab3113463d3a300f806803ede3fe924924e1  scripts/sic-grid-continuity.mjs
+56c14279a13e369e694b64ecd1962977728d0f00704ec8c6fb04a3595ed3d6e9  scripts/sic-grid-continuity-contract.mjs
+08cd8ceb5b08f53d5a79e86bfff04fe2272ce37408f7aa825224ba46492b559d  src/sic/navigate-revealed-grid.ts

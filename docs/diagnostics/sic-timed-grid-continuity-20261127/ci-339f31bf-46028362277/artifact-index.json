@@ -1,0 +1,37 @@
+{
+  "collection.log": {
+    "artifactName": "collection.log",
+    "sha256": "c4615b2d394d31f705bbb7d69e6eba98235bcdedfc75276549fe271fdb2d09d8",
+    "archivedSha256": "c4615b2d394d31f705bbb7d69e6eba98235bcdedfc75276549fe271fdb2d09d8"
+  },
+  "command.txt": {
+    "artifactName": "command.txt",
+    "sha256": "4d12ea8b21637a3ed2e2537db5edb70c9970548837bf5143b83c178e056159b5",
+    "archivedSha256": "4d12ea8b21637a3ed2e2537db5edb70c9970548837bf5143b83c178e056159b5"
+  },
+  "expected-source.sha": {
+    "artifactName": "expected-source.sha",
+    "sha256": "3bec032660844b128e2fc283f886808707bf78f992af57dbe7539747bae959c5",
+    "archivedSha256": "3bec032660844b128e2fc283f886808707bf78f992af57dbe7539747bae959c5"
+  },
+  "receipt.jsonl.gz": {
+    "artifactName": "receipt.jsonl",
+    "sha256": "1121d3b8d8d04414224e28092773adcc5827c82c4433d341d764f08e2a80bf60",
+    "archivedSha256": "a8df8827e8217a73f2396c01413cd26830e8ff41b9ee1af6c9d4d7550d6cbe55"
+  },
+  "source.sha256": {
+    "artifactName": "source.sha256",
+    "sha256": "36b6a88767c8b1c44cf1415e8af451eb211adfc15d1a22333c52f85d684b312a",
+    "archivedSha256": "36b6a88767c8b1c44cf1415e8af451eb211adfc15d1a22333c52f85d684b312a"
+  },
+  "source.txt": {
+    "artifactName": "source.txt",
+    "sha256": "99ceb103de9d4906ec45bf2a8b0621ad290272863c55311ddcd56c5277f44769",
+    "archivedSha256": "99ceb103de9d4906ec45bf2a8b0621ad290272863c55311ddcd56c5277f44769"
+  },
+  "tracked-status.txt": {
+    "artifactName": "tracked-status.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archivedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
