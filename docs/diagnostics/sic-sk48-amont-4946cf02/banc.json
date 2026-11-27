@@ -1,0 +1,291 @@
+{
+  "sources": {
+    "candidat": "4946cf0297734b9464fc52256af6fb27846f3bad",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "parent": "08fa10a6b9986e7028551fbfc9d9e16eb83726b7",
+    "operateur": "5804fc7d73c6b7655d97bca777aed9fb6475acef"
+  },
+  "publicCardsCommit": "366f84d027f9d91d06b322aa94260ba7324283c5",
+  "reserveCardSHA256": {
+    "direct": "bcf849922fd7430edd0ab8a225eb404f0c45a41594c35dcb636cdf850ae283a7",
+    "reposition": "743bb6c952a1c64d739c1e5856a47f8bc4194c28939a77eb8cd1bff6a0754ff4",
+    "contraire": "0118074b48da66ffc56f51bce460a210b9bfa67336e20dbee5c500a0dfdd2ce3",
+    "contraire-reposition": "61a502e823ae1438bf0afab51702380c486776f973cf045b6d632433aae479f2"
+  },
+  "groups": {
+    "developpement-enfant": {
+      "source": "4946cf0297734b9464fc52256af6fb27846f3bad",
+      "groupSHA256": "78f0149e9c682a2891e831701491f45d8c70dd50ba04cf30d4d18765323a6b9a",
+      "results": [
+        {
+          "negative": false,
+          "alternate": false,
+          "steps": 13,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "recovery": "ACTION3",
+          "recoveryMatched": true,
+          "completed": 0
+        },
+        {
+          "negative": false,
+          "alternate": true,
+          "steps": 13,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "recovery": "ACTION1",
+          "recoveryMatched": true,
+          "completed": 0
+        },
+        {
+          "negative": true,
+          "alternate": false,
+          "steps": 12,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "completed": 0
+        },
+        {
+          "negative": true,
+          "alternate": true,
+          "steps": 12,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "completed": 0
+        }
+      ]
+    },
+    "developpement-parent": {
+      "source": "08fa10a6b9986e7028551fbfc9d9e16eb83726b7",
+      "groupSHA256": "9a4fbfea86741fb4d16041a6f8d5718538a290de38af42d63dd6cf1f4ee9287d",
+      "results": [
+        {
+          "negative": false,
+          "alternate": false,
+          "steps": 4,
+          "first": "ACTION1",
+          "completed": 0
+        },
+        {
+          "negative": false,
+          "alternate": true,
+          "steps": 4,
+          "first": "ACTION1",
+          "completed": 0
+        },
+        {
+          "negative": true,
+          "alternate": false,
+          "steps": 4,
+          "first": "ACTION1",
+          "completed": 0
+        },
+        {
+          "negative": true,
+          "alternate": true,
+          "steps": 4,
+          "first": "ACTION1",
+          "completed": 0
+        }
+      ]
+    },
+    "historique-enfant": {
+      "source": "4946cf0297734b9464fc52256af6fb27846f3bad",
+      "groupSHA256": "d0352dc8f9d6bcf341288cc60677463d7f72fe97a5dc43c76d2c5592c8601fd0",
+      "results": [
+        {
+          "negative": false,
+          "alternate": false,
+          "steps": 19,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "recovery": "ACTION3",
+          "recoveryMatched": true,
+          "completed": 1
+        },
+        {
+          "negative": false,
+          "alternate": true,
+          "steps": 21,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "recovery": "ACTION1",
+          "recoveryMatched": true,
+          "completed": 1
+        }
+      ]
+    },
+    "historique-parent": {
+      "source": "08fa10a6b9986e7028551fbfc9d9e16eb83726b7",
+      "groupSHA256": "d0352dc8f9d6bcf341288cc60677463d7f72fe97a5dc43c76d2c5592c8601fd0",
+      "results": [
+        {
+          "negative": false,
+          "alternate": false,
+          "steps": 19,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "recovery": "ACTION3",
+          "recoveryMatched": true,
+          "completed": 1
+        },
+        {
+          "negative": false,
+          "alternate": true,
+          "steps": 21,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "recovery": "ACTION1",
+          "recoveryMatched": true,
+          "completed": 1
+        }
+      ]
+    },
+    "independant-enfant": {
+      "source": "4946cf0297734b9464fc52256af6fb27846f3bad",
+      "groupSHA256": "5667aecba3050407242d2d9b228100afd2ed0630cf36bb57a411d99b4ddf3b23",
+      "results": [
+        {
+          "negative": false,
+          "alternate": false,
+          "steps": 19,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "recovery": "ACTION3",
+          "recoveryMatched": true,
+          "completed": 1
+        },
+        {
+          "negative": false,
+          "alternate": true,
+          "steps": 21,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "recovery": "ACTION1",
+          "recoveryMatched": true,
+          "completed": 1
+        }
+      ]
+    },
+    "independant-parent": {
+      "source": "08fa10a6b9986e7028551fbfc9d9e16eb83726b7",
+      "groupSHA256": "5667aecba3050407242d2d9b228100afd2ed0630cf36bb57a411d99b4ddf3b23",
+      "results": [
+        {
+          "negative": false,
+          "alternate": false,
+          "steps": 19,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "recovery": "ACTION3",
+          "recoveryMatched": true,
+          "completed": 1
+        },
+        {
+          "negative": false,
+          "alternate": true,
+          "steps": 21,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "recovery": "ACTION1",
+          "recoveryMatched": true,
+          "completed": 1
+        }
+      ]
+    },
+    "reserve-enfant": {
+      "source": "4946cf0297734b9464fc52256af6fb27846f3bad",
+      "groupSHA256": "f10926709aa9b59fd421b5b741e9402d7b85b5d69b5f0a4543b8694ab0bfa875",
+      "results": [
+        {
+          "negative": false,
+          "alternate": false,
+          "steps": 13,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "recovery": "ACTION3",
+          "recoveryMatched": true,
+          "completed": 0
+        },
+        {
+          "negative": false,
+          "alternate": true,
+          "steps": 13,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "recovery": "ACTION1",
+          "recoveryMatched": true,
+          "completed": 0
+        },
+        {
+          "negative": true,
+          "alternate": false,
+          "steps": 12,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "completed": 0
+        },
+        {
+          "negative": true,
+          "alternate": true,
+          "steps": 12,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "completed": 0
+        }
+      ]
+    },
+    "reserve-parent": {
+      "source": "08fa10a6b9986e7028551fbfc9d9e16eb83726b7",
+      "groupSHA256": "f10926709aa9b59fd421b5b741e9402d7b85b5d69b5f0a4543b8694ab0bfa875",
+      "results": [
+        {
+          "negative": false,
+          "alternate": false,
+          "steps": 13,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "recovery": "ACTION3",
+          "recoveryMatched": true,
+          "completed": 0
+        },
+        {
+          "negative": false,
+          "alternate": true,
+          "steps": 13,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "recovery": "ACTION1",
+          "recoveryMatched": true,
+          "completed": 0
+        },
+        {
+          "negative": true,
+          "alternate": false,
+          "steps": 12,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "completed": 0
+        },
+        {
+          "negative": true,
+          "alternate": true,
+          "steps": 12,
+          "first": "ACTION1",
+          "afterCalibration": "ACTION1",
+          "completed": 0
+        }
+      ]
+    }
+  },
+  "geometry": {
+    "twiceCompatible": [
+      "compatible_unordered",
+      "compatible_unordered"
+    ],
+    "inversion": "incompatible",
+    "opaqueSearch": 282,
+    "plansSansSupport": 0
+  },
+  "archiveSHA256": "c4f6c8788e0263666e332812635cfeb61c14612ce30c307acfb1ac082f6b0d1a"
+}
