@@ -41,14 +41,34 @@ test('the missing-control decision relies on the need and current evidence acros
   const witness = missingControlWitness(first, 'ACTION1', ref);
   assert.equal(witness?.need, 'establish_control_effect_for_current_objective');
   assert.equal(witness?.agenda?.result, 'selected');
-  assert.equal(evaluateMissingControl(first, 'ACTION1', { ...situation, evidence: [] }).applicability, 'undetermined');
-  assert.equal(evaluateMissingControl(first, 'ACTION1', { ...situation, effectKnown: true }).applicability, 'inapplicable');
+  assert.equal(witness?.action, 'ACTION1');
+  assert.equal(witness?.observationRef, ref);
+  assert.deepEqual(witness?.evidence, situation.evidence);
+  assert.deepEqual(witness?.agenda?.evidence, situation.evidence);
+  assert.equal(missingControlWitness(first, 'ACTION2', ref), undefined);
+  assert.equal(missingControlWitness(first, 'ACTION1', 'next-observation'), undefined);
   assert.deepEqual(missingControlWitness(second, 'ACTION1', ref), witness);
-  for (const changes of [{ objectiveSupported: false }, { effectKnown: true }, { triedInContext: true },
-    { availableActions: [] }, { evidence: ['stale'] }, { observationRef: 'stale' }]) {
+  const series = { ...first, actions: [...first.actions, ...second.actions] };
+  bindMissingControlTrial(series, situation);
+  assert.equal(missingControlWitness(series, 'ACTION1', ref), undefined);
+  for (const [changes, applicability] of [
+    [{ objectiveSupported: false }, 'inapplicable'],
+    [{ subjectBound: false }, 'inapplicable'],
+    [{ effectKnown: true }, 'inapplicable'],
+    [{ triedInContext: true }, 'inapplicable'],
+    [{ availableActions: [] }, 'inapplicable'],
+    [{ evidence: [] }, 'undetermined'],
+    [{ evidence: ['stale'] }, 'undetermined'],
+    [{ observationRef: 'stale', evidence: ['stale', 'retained-objective'] }, 'undetermined'],
+  ] as const) {
     const rejected = proposal('unrelated-first');
-    bindMissingControlTrial(rejected, { ...situation, ...changes });
-    assert.equal(missingControlWitness(rejected, 'ACTION1', ref), undefined);
+    const context = { ...situation, ...changes };
+    const entry = evaluateMissingControl(rejected, 'ACTION1', context);
+    assert.equal(entry.applicability, applicability);
+    assert.equal(entry.result, 'skipped');
+    assert.deepEqual(entry.evidence, applicability === 'inapplicable' ? situation.evidence : undefined);
+    bindMissingControlTrial(rejected, context);
+    assert.equal(missingControlWitness(rejected, 'ACTION1', context.observationRef), undefined);
   }
 });
 import { explainDecision, orientationAfter, strategyEpisodes, strategyLinks, strategyOutcome } from '../src/sic/decision-configurations.ts';

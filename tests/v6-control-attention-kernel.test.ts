@@ -90,6 +90,10 @@ test('real morphology, common strategy and WHY/ACT acquire unused control then r
   assert.equal(proposal.strategy_receipt.selected, 'acquire_control_for_target');
   assert.equal(proposal.question.control_acquisition.experiment, 'replicate_translation');
   assert.equal(proposal.question.control_acquisition.action_ref, command!.actionRef);
+  const replicationReceipt = (result.snapshot.trace as R[]).find(event => event.kind === 'sic_native_plan'
+    && event.observationRef === proposal.binding.observation_ref);
+  assert.ok(replicationReceipt);
+  assert.equal(replicationReceipt.missingControl, undefined);
   assert.ok(Object.values(proposal.question.control_acquisition.expected_motion).some(value => JSON.stringify(value) === '[2,0]'));
   assert.notEqual(proposal.morphology.measured_facts.observation_ref, initialDecision.measured_facts.observation_ref,
     'The retained result is measured for the new choice, rather than restored as a historical decision');

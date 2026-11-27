@@ -4,6 +4,7 @@ import { NativeV6Runtime } from '../src/logos-engine/v6-native-runtime.ts';
 import { V6AgentService } from '../src/runtime/v6-agent-service.ts';
 import { toV6PublicObservation, type V6Ticket } from '../src/runtime/v6-agent-protocol.ts';
 import { createSicPairedPassage, pairedPassageId } from '../src/sic/paired-passage.ts';
+import type { AgendaEntry } from '../src/sic/strategy-agenda.ts';
 import { pairedPassageRoom, type PassageChange } from './helpers/sic-paired-passage-room.ts';
 import { nativeAfterPublicBoundaries } from './helpers/sic-native-public-boundaries.ts';
 
@@ -32,7 +33,14 @@ for (const variant of [false, true]) test('native known walking approaches a rew
   const run = await start(variant), previous = structuredClone(run.family.state().previous);
   assert.ok(previous.outlet?.refs.length >= 2 && previous.visitedInk !== undefined);
   const proposal = run.reply.snapshot.proposal!;
+  const firstWalk = run.reply.ticket!;
+  assert.equal(firstWalk.actionRef, run.room.forward);
+  assert.equal(firstWalk.actionIndex, 0);
   assert.equal(proposal.sicSituationCard?.strategy, 'P07');
+  const unofferedProbe = proposal.sicSituationCard?.agenda.find((entry: AgendaEntry) => entry.id === 'P05');
+  assert.equal(unofferedProbe?.applicability, 'inapplicable');
+  assert.equal(unofferedProbe?.result, 'skipped');
+  assert.ok(unofferedProbe?.evidence?.includes(firstWalk.observationRef));
   assert.equal(proposal.actions.length, 2);
   assert.ok(proposal.actions.every(action => action.action_ref === run.room.forward));
   assert.equal(proposal.route.steps.length, 3);
@@ -40,11 +48,26 @@ for (const variant of [false, true]) test('native known walking approaches a rew
   assert.ok(proposal.sicSituationCard?.evidence.includes(previous.ref));
   await run.next();
   assert.equal(run.reply.ticket?.actionIndex, 1);
+  assert.equal(run.reply.ticket?.actionRef, firstWalk.actionRef);
+  assert.equal(run.reply.ticket?.decisionRevision, firstWalk.decisionRevision);
+  assert.equal(run.reply.snapshot.proposal?.sicSituationCard?.strategy, 'P07');
   assert.equal(run.room.rewired, false);
   await run.next();
   assert.equal(run.reply.ticket?.actionIndex, 0);
+  const contact = run.reply.ticket!;
+  assert.equal(contact.actionRef, firstWalk.actionRef);
+  assert.ok(contact.decisionRevision > firstWalk.decisionRevision);
   assert.equal(run.reply.snapshot.proposal?.actions.length, 1);
   assert.equal(run.reply.snapshot.proposal?.sicSituationCard?.strategy, 'P05');
+  assert.deepEqual(run.reply.snapshot.proposal?.steps[0].expected_after, proposal.route.switchTest);
+  const contactProbe = run.reply.snapshot.proposal?.sicSituationCard?.agenda.find((entry: AgendaEntry) => entry.id === 'P05');
+  assert.equal(contactProbe?.applicability, 'applicable');
+  assert.equal(contactProbe?.result, 'selected');
+  assert.ok(contactProbe?.evidence?.includes(contact.observationRef));
+  const contactReceipt = run.reply.snapshot.trace.find(event => event.kind === 'sic_native_plan'
+    && event.observationRef === contact.observationRef);
+  assert.equal(contactReceipt?.strategy, 'P05');
+  assert.equal(contactReceipt.missingControl, undefined);
   await run.next();
   assert.equal(run.room.rewired, true);
   assert.ok(run.reply.snapshot.trace.some(event => event.kind === 'actual_outcome'
