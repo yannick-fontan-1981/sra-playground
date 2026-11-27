@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "e7122a5887418212ca9a10ab39933e106d68f0c4",
+  "runId": "46040162938",
+  "name": "observed-openings",
+  "cohort": "source:ESCT",
+  "codes": [
+    "ESCT"
+  ],
+  "start": 1,
+  "end": 6,
+  "cap": 30,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "observed-openings.jsonl",
+  "sha256": "3115d2504bea35bcc8eab56ae3db264e12fdad5e03b4efc0270fffca3c9af1af"
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "e7122a5887418212ca9a10ab39933e106d68f0c4",
+  "runId": "46040162938",
+  "name": "workshop-phase",
+  "cohort": "source:LS20",
+  "codes": [
+    "LS20"
+  ],
+  "start": 1,
+  "end": 7,
+  "cap": 129,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "workshop-phase.jsonl",
+  "sha256": "79a6bd3ff4b415e70cd686c528184021f893877e414e5f425210e76b08feb80a"
+}

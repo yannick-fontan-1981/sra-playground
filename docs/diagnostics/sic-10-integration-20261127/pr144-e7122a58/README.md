@@ -19,4 +19,6 @@ Le [strict 46040162842](https://github.com/yannick-fontan-1981/sra-playground/ac
 
 WA30 a exécuté 60 commandes au L9 avant le verdict `level_wall_time_budget` à 51 000 ms. Les tickets globaux 601 à 607 sont horodatés entre 50 794 et 50 934 ms. Les huit premiers niveaux conservent les parcours de 26, 59, 76, 48, 113, 48, 42 et 135 commandes. La recomposition locale à partir des dix parties reproduit exactement le verdict et les octets de l’agrégat.
 
+Les 27 contrôles du [workflow de continuité 46040162938](https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46040162938) ont réussi sur le même arbre. La vérification des manifestes et `npm run test:sic-continuity` ont validé 170 niveaux, 26 jeux et 25 cohortes sur les reçus téléchargés. La collecte physique WA30 couvre neuf niveaux en 613 commandes, avec 56 continuations au L8 et 21 au L9.
+
 L’[index des reçus](receipt-index.json) conserve ces pièces et leurs empreintes. Les [première](../pr144-ed7d394d/README.md) et [deuxième](../pr144-bbb2ca84/README.md) validations sont conservées sous leurs propres SHA.

@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "e7122a5887418212ca9a10ab39933e106d68f0c4",
+  "runId": "46040162938",
+  "name": "carrier-preparation",
+  "cohort": "source:LF52",
+  "codes": [
+    "LF52"
+  ],
+  "start": 1,
+  "end": 10,
+  "cap": 178,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "carrier-preparation.jsonl",
+  "sha256": "44b3c8174d64166eb180298bffafdb068c5049eb22cfad4fe85a779cbbe05a4a"
+}

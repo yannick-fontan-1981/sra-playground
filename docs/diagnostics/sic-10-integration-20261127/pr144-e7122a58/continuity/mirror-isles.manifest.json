@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "e7122a5887418212ca9a10ab39933e106d68f0c4",
+  "runId": "46040162938",
+  "name": "mirror-isles",
+  "cohort": "SS01",
+  "codes": [
+    "SS01"
+  ],
+  "start": 1,
+  "end": 8,
+  "cap": 120,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "mirror-isles.jsonl",
+  "sha256": "de5fff9a533277e29aed1b9a86316da781f719f49f340d48a048e350565f62de"
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "e7122a5887418212ca9a10ab39933e106d68f0c4",
+  "runId": "46040162938",
+  "name": "crossing-rows",
+  "cohort": "source:WEAV",
+  "codes": [
+    "WEAV"
+  ],
+  "start": 1,
+  "end": 6,
+  "cap": 48,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "crossing-rows.jsonl",
+  "sha256": "0a4c5f532abf00e9f2ed8ab8601e11f9a4b6dffadc28ca8fb39cb49e10a3bdca"
+}

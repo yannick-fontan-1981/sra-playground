@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "e7122a5887418212ca9a10ab39933e106d68f0c4",
+  "runId": "46040162938",
+  "name": "destination-set",
+  "cohort": "SS07",
+  "codes": [
+    "SS07"
+  ],
+  "start": 1,
+  "end": 8,
+  "cap": 180,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "destination-set.jsonl",
+  "sha256": "5a54e84b2a323c9d520eeb91f6758a9e64fe297a98a06fa614123f583fe593e4"
+}
