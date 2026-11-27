@@ -113,10 +113,11 @@ def strict_witnesses(path):
                 missing.append([event["level"], event["turn"]])
             if event["kind"] == "decision":
                 proposal = value.get("proposal") or {}
+                if proposal.get("kind") not in PAIRED:
+                    continue
                 route = proposal.get("route") or {}
                 steps = route.get("steps") or []
-                if (proposal.get("kind") in PAIRED and route.get("switchTest") and steps
-                        and steps[0].get("point") == route["switchTest"]):
+                if route.get("switchTest") and steps and steps[0].get("point") == route["switchTest"]:
                     contact.append([event["level"], event["turn"]])
     return missing, contact
 

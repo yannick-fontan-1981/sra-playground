@@ -15,7 +15,7 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from sic_qualification_reference import (
-    AUDIT, FROZEN, RUN, SOURCE, WORKFLOW, archive_file, frozen_campaign, inventory, verified_campaign,
+    AUDIT, FROZEN, RUN, SOURCE, WORKFLOW, archive_file, frozen_campaign, inventory, strict_witnesses, verified_campaign,
 )
 
 bench = runpy.run_path(str(ROOT / "scripts/sic-qualification-progressive.py"))
@@ -37,6 +37,20 @@ class ProgressiveQualification(unittest.TestCase):
         self.assertIn("à fournir", catalog[0]["strictA"])
         with self.assertRaises(ValueError):
             bench["pick"](catalog, "PORT,PORT")
+
+    def test_contact_witness_uses_only_paired_passage_geometry(self):
+        point = [43, 23]
+        proposals = [
+            {"kind": "sic_remote_support_route", "route": [point]},
+            {"kind": "sic_paired_passage", "route": {"switchTest": point, "steps": [{"point": [11, 11]}]}},
+            {"kind": "sic_paired_passage", "route": {"switchTest": point, "steps": [{"point": point}]}},
+        ]
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "events.jsonl"
+            events = [{"kind": "decision", "level": 4, "turn": turn, "value": {"proposal": proposal}}
+                      for turn, proposal in enumerate(proposals, 1)]
+            path.write_text("\n".join(json.dumps(event) for event in events), encoding="utf8")
+            self.assertEqual(strict_witnesses(path), ([], [[4, 3]]))
 
     def test_compare_at_available_resolution(self):
         port = self.rows["PORT"][0]
