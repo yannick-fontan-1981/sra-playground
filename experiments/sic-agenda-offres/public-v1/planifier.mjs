@@ -29,7 +29,73 @@ const stable = (domain, facts) => domain.stableWhen === true ||
   (!!domain.stableWhen && truth(domain.stableWhen, facts) === true);
 const stateKey = ({ facts, uses }) => key([[...facts].sort(), [...uses].sort()]);
 
+const maxValuesPerProof = 8;
+const maxTrialsPerDecision = 64;
+
+function proofSearch() {
+  return { cache: new Map(), metrics: { trials: 0, proved: 0, incomplete: 0, bounded: 0, cacheHits: 0 } };
+}
+
+function unknownRefs(expr, facts, refs) {
+  if (expr.eq) {
+    const [left, right] = expr.eq;
+    for (const ref of right?.ref ? [left, right.ref] : [left]) {
+      const id = key(ref);
+      if (!facts.has(id)) refs.add(id);
+    }
+  } else {
+    for (const term of expr.all ?? expr.any ?? [expr.not]) unknownRefs(term, facts, refs);
+  }
+}
+
+// Une seule inconnue finie. Chaque hypothèse doit faire réussir la projection
+// terminale entière, y compris ses autres effets, conditions et invariants.
+function commonTerminal(model, state, id, rules, search) {
+  const stateId = stateKey(state);
+  if (search.cache.has(stateId)) {
+    search.metrics.cacheHits++;
+    return search.cache.get(stateId);
+  }
+  const refs = new Set();
+  for (const rule of rules) {
+    if (rule.when && truth(rule.when, state.facts) === undefined) unknownRefs(rule.when, state.facts, refs);
+  }
+  const [ref] = refs;
+  const domain = refs.size === 1 && model.domains.get(ref);
+  const unproved = cause => ({ reason: 'effet conditionnel indéterminé', proof: { kind: 'unproved', cause } });
+  let result;
+  if (!domain || !stable(domain, state.facts)) {
+    search.metrics.incomplete++;
+    result = unproved('domaine unique et stable non établi');
+  } else if (domain.values.length > maxValuesPerProof ||
+    search.metrics.trials + domain.values.length > maxTrialsPerDecision) {
+    search.metrics.bounded++;
+    result = unproved('budget de vérification insuffisant pour le domaine entier');
+  } else {
+    const values = [];
+    for (const value of domain.values) {
+      const hypothetical = { facts: new Map(state.facts).set(ref, value), uses: state.uses };
+      search.metrics.trials++;
+      if (projectOnce(model, hypothetical, id).end !== 'success') break;
+      values.push(value);
+    }
+    if (values.length === domain.values.length) {
+      search.metrics.proved++;
+      result = { end: 'success', proof: { kind: 'all-public-values', ref: domain.ref, values, source: domain.source } };
+    } else {
+      search.metrics.incomplete++;
+      result = unproved('une valeur publique ne conduit pas au succès explicite');
+    }
+  }
+  search.cache.set(stateId, result);
+  return result;
+}
+
 export function project(model, state, id) {
+  return projectOnce(model, state, id, proofSearch());
+}
+
+function projectOnce(model, state, id, search) {
   const rules = model.rules.get(id);
   const stop = reason => ({ reason });
   for (const rule of rules) {
@@ -43,7 +109,10 @@ export function project(model, state, id) {
   const sets = new Map(), keeps = new Set(), reveals = new Set(), ends = new Set();
   for (const rule of rules.filter(r => r.effect)) {
     const applies = rule.when ? truth(rule.when, state.facts) : true;
-    if (applies === undefined) return stop('effet conditionnel indéterminé');
+    if (applies === undefined) {
+      if (search && id === key(model.goal.command)) return commonTerminal(model, state, id, rules, search);
+      return stop('effet conditionnel indéterminé');
+    }
     if (!applies) continue;
     const effect = rule.effect;
     if (effect.end) ends.add(effect.end);
@@ -87,11 +156,13 @@ export function decide(model, state, evidence = [], horizon = 10) {
   if (!Number.isSafeInteger(horizon) || horizon < 1) throw new Error('Horizon invalide');
   const costs = new Map(), memo = new Map(), ids = [...model.commands.keys()].sort();
   let acceptAttempt = false;
-  const transitions = new Map(ids.map(id => [id, project(model, state, id)]));
+  const search = proofSearch();
+  const transition = (s, id) => projectOnce(model, s, id, search);
+  const transitions = new Map(ids.map(id => [id, transition(state, id)]));
   function reachable(s, depth) {
     if (!depth) return false;
     const cacheKey = key([stateKey(s), depth]);
-    if (!memo.has(cacheKey)) memo.set(cacheKey, ids.some(id => canFinish(project(model, s, id), depth)));
+    if (!memo.has(cacheKey)) memo.set(cacheKey, ids.some(id => canFinish(transition(s, id), depth)));
     return memo.get(cacheKey);
   }
   function canFinish(t, depth) {
@@ -126,6 +197,7 @@ export function decide(model, state, evidence = [], horizon = 10) {
     qualification: !chosen ? 'indéterminé' : acceptAttempt ? 'tentative terminale sous conditions nécessaires' : 'succès décrit par les règles',
     reason: chosen ? decision.reason : 'aucune continuation justifiée dans l’horizon ' + horizon,
     finalists: [...costs.keys()].map(JSON.parse), tie: decision.tie, evidence: decision.evidence,
+    commonProofs: search.metrics,
     candidates: ids.map(id => ({ command: model.commands.get(id).command, reason: transitions.get(id).reason ??
       (costs.has(id) ? 'continuation minimale' : 'aucune continuation aussi courte établie') })) };
 }
