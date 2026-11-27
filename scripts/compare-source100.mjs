@@ -16,6 +16,7 @@ import { crossingOwners, captureCrossingContinuity, observeCrossingContinuityRet
 import { supportSelectionOwner, captureSupportSelection, observeSupportSelectionReturn, completeSupportSelection } from './sic-support-selection-continuity.mjs';
 import { carrierPreparationOwner, captureCarrierPreparation, observeCarrierPreparationReturn, completeCarrierPreparation } from './sic-carrier-preparation-continuity.mjs';
 import { surfaceOwners, captureSurfaceContinuity, observeSurfaceReturn, completeSurfaceContinuity } from './sic-surface-continuity.mjs';
+import { gridOwner, captureGridContinuity, observeGridReturn, completeGridContinuity } from './sic-grid-continuity.mjs';
 import { appendFile, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -138,7 +139,8 @@ async function run(code, games) {
       .filter(family => queuedOwners.has(family.id) || populationOwners.has(family.id)
         || passageOwners.has(family.id) || workshopPhaseOwners.has(family.id) || family.id === openingOwner
         || family.id === matchingEdgeOwner || family.id === publicPanelOwner || passengerOwners.has(family.id) || crossingOwners.has(family.id)
-        || family.id === supportSelectionOwner || family.id === carrierPreparationOwner || surfaceOwners.has(family.id))
+        || family.id === supportSelectionOwner || family.id === carrierPreparationOwner || surfaceOwners.has(family.id)
+        || family.id === gridOwner)
       .map(family => [family.id, family]));
     if (cursorAudit || boundaryAudit) {
       const family = backend.families.find(f => f.id === 'sic_test_prepared_effects');
@@ -166,6 +168,7 @@ async function run(code, games) {
   // Count only commands acknowledged by the native service after dispatch.
   const executedTickets = process.env.SIC_STUDY_CONTINUITY === '1' ? [] : null;
   let pendingTicket, pendingPlan, dispatchedActorPlan, dispatchedOriented, dispatchedQueued, dispatchedOpening, dispatchedPopulation, dispatchedPassage, dispatchedWorkshop, dispatchedEdge, dispatchedPanel, dispatchedPassenger, dispatchedCrossing, dispatchedSupportSelection, dispatchedCarrier, dispatchedSurface;
+  let dispatchedGrid;
   const transport = { async request(operation) {
     const result = await service.handle(operation);
     if (executedTickets) {
@@ -197,13 +200,16 @@ async function run(code, games) {
           () => continuityOwners?.get(pendingPlan?.family)?.state() ?? null, returned, result.snapshot.levelsCompleted) : undefined;
         const surface = dispatchedSurface !== undefined ? completeSurfaceContinuity(dispatchedSurface,
           () => continuityOwners?.get(pendingPlan?.family)?.state() ?? null, returned, result.snapshot.levelsCompleted) : undefined;
+        const grid = dispatchedGrid !== undefined ? completeGridContinuity(dispatchedGrid,
+          () => continuityOwners?.get(gridOwner)?.state() ?? null, returned) : undefined;
         executedTickets.push({level,decisionRevision,actionIndex,action:actionRef,...(actionRef==='ACTION6'?{data:pendingTicket.data}:{}),resets,
           ...returned,
           ...(dispatchedActorPlan?{actorPlan:dispatchedActorPlan}:{}), ...(dispatchedOriented!==undefined?{oriented:dispatchedOriented}:{}),
           ...(queued !== undefined ? {queued} : {}), ...(opening !== undefined ? {opening} : {}),
           ...(population !== undefined ? {population} : {}), ...(passage !== undefined ? {passage} : {}),
           ...(workshop !== undefined ? {workshop} : {}), ...(edge !== undefined ? {edge} : {}), ...(panel !== undefined ? {panel} : {}), ...(passenger !== undefined ? {passenger} : {}), ...(crossing !== undefined ? {crossing} : {}),
-          ...(supportSelection !== undefined ? {supportSelection} : {}), ...(carrierPreparation !== undefined ? {carrierPreparation} : {}), ...(surface !== undefined ? {surface} : {})});
+          ...(supportSelection !== undefined ? {supportSelection} : {}), ...(carrierPreparation !== undefined ? {carrierPreparation} : {}),
+          ...(surface !== undefined ? {surface} : {}), ...(grid !== undefined ? {grid} : {})});
         dispatchedActorPlan = undefined;
         dispatchedOriented = undefined;
         dispatchedQueued = undefined;
@@ -218,6 +224,7 @@ async function run(code, games) {
         dispatchedSupportSelection = undefined;
         dispatchedCarrier = undefined;
         dispatchedSurface = undefined;
+        dispatchedGrid = undefined;
       }
       pendingTicket = result.ticket;
       pendingPlan = bindContinuityPlan(pendingTicket, result.snapshot.trace, pendingPlan);
@@ -342,6 +349,8 @@ async function run(code, games) {
       if (executedTickets && surfaceOwners.has(pendingPlan?.family))
         dispatchedSurface = captureSurfaceContinuity(agent.snapshot.proposal, pendingTicket, previous.frame,
           () => continuityOwners?.get(pendingPlan.family)?.state() ?? null);
+      if (executedTickets && pendingPlan?.family === gridOwner)
+        dispatchedGrid = captureGridContinuity(agent.snapshot.proposal, pendingTicket, previous.frame);
       if (executedTickets && plan?.family==='sic_observed_actor_composition') dispatchedActorPlan={strategy:plan.strategy,subjects:plan.need?.subjects??[],evidence:plan.need?.evidence??[]};
       const frameSeal=plan?.frameForecast?hash(plan.frameForecast):null;
       const terminalContactSeal=plan?.terminalContactForecast?hash(plan.terminalContactForecast):null;
@@ -401,6 +410,8 @@ async function run(code, games) {
       if (dispatchedSurface !== undefined)
         dispatchedSurface = observeSurfaceReturn(dispatchedSurface,
           board.level === previous.level && board.levelsCompleted === previous.levelsCompleted ? board.frame : null);
+      if (dispatchedGrid !== undefined)
+        dispatchedGrid = observeGridReturn(dispatchedGrid, board.frame, board.levelsCompleted);
       issued++;
       if (process.env.SIC_STUDY_PROGRESS === '1' && issued % 100 === 0)
         console.log(JSON.stringify({ code, level:board.level, issued, seconds:Math.round(process.uptime()) }));
