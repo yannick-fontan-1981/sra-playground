@@ -1,0 +1,8 @@
+{"game":"WEAV","target":6,"status":"started"}
+{"progress":0,"level":1}
+{"progress":25,"level":1}
+{"game":"WEAV","level":1,"won":true,"totalCommands":27}
+{"progress":50,"level":2}
+{"game":"WEAV","level":2,"won":true,"totalCommands":55}
+{"progress":75,"level":3}
+{"game":"WEAV","level":3,"won":false,"totalCommands":84}

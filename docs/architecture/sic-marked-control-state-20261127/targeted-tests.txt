@@ -1,0 +1,29 @@
+✔ retain the compartment clicked for official progress while other inputs are highlighted (58.949263ms)
+✔ native outlet control keeps its identity when repeated pockets change their contents and readiness (144.850723ms)
+✔ native outlet control keeps its identity when repeated pockets change their contents and readiness with another palette, pocket shape, position and clicked offset (201.101468ms)
+✔ compound outlet rebinding refuses ambiguous-control and preserves its independent witness (38.106577ms)
+✔ compound outlet rebinding refuses changed-process-cavity and preserves its independent witness (29.342793ms)
+✔ compound outlet rebinding refuses changed-frame and preserves its independent witness (26.360328ms)
+✔ compound outlet rebinding refuses mixed-pocket and preserves its independent witness (23.081087ms)
+✔ compound outlet rebinding refuses invalid-pocket-border and preserves its independent witness (28.661576ms)
+✔ a compound control with no measured outlet role cannot authorize a recalled release (4.24067ms)
+✔ a partial background loss does not confirm the acquired complete outlet release (21.72277ms)
+✔ native outlet transfer binds the observed remote actuator instead of moving the click onto its effect (219.042181ms)
+✔ native outlet transfer binds the observed remote actuator instead of moving the click onto its effect with changed shape, palette, positions and click (196.793222ms)
+✔ remote outlet acquisition rejects missing animation evidence (9.226432ms)
+✔ remote outlet acquisition rejects ambiguous animation evidence (14.041527ms)
+✔ remote outlet acquisition rejects unchanged animation evidence (19.861045ms)
+✔ remote outlet acquisition rejects wrong-pigment animation evidence (15.389789ms)
+✔ remote outlet acquisition rejects new-context-only animation evidence (10.184184ms)
+✔ a changed actuator or a contradictory release does not erase the independently witnessed output (56.632141ms)
+✔ moving material within the outlet does not confirm a release (26.509082ms)
+✔ an unmatched outlet actuator leaves another independently ready input available (60.694771ms)
+✔ an unmatched outlet actuator leaves another independently ready input available after shape, palette, position and click changes (50.143684ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1981.205522

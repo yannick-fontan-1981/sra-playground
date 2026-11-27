@@ -7,6 +7,7 @@ import {fieldGroup} from './compose-field-relations.ts';
 import { continueMarkedField, learnMarkedLatticeId, verifyMarkedLatticeId } from './marked-lattice.ts';
 import { catalogueComparisonId, continueCatalogueViewsGroup } from './catalogue-comparison.ts';
 import { continuePanelChainGroup, verifyPanelConfigurationId } from './panel-matching.ts';
+import { continueCrossingRowsGroup, learnCrossingRowsId, verifyCrossingRowsId } from './crossing-rows.ts';
 
 export function planningGroupsWithExperiments(groups: readonly NativeSelectionGroup[], prioritizeCoverage = false, withdrawPrimaryFamily = true): NativeSelectionGroup[] {
   const projected = { id: projectedPublicEffectsGroup, families: [compositionFamily,publicInputExplorationId], entryPoints:[fieldGroup,null] };
@@ -21,6 +22,7 @@ export function planningGroupsWithExperiments(groups: readonly NativeSelectionGr
       entries.push({ id: verifyMarkedLatticeId, entry: continueMarkedField }, { id: learnMarkedLatticeId, entry: continueMarkedField });
       entries.push({ id: catalogueComparisonId, entry: continueCatalogueViewsGroup });
       entries.push({ id: verifyPanelConfigurationId, entry: continuePanelChainGroup });
+      entries.push({ id: verifyCrossingRowsId, entry: continueCrossingRowsGroup }, { id: learnCrossingRowsId, entry: continueCrossingRowsGroup });
       entries.push({ id: preparedEffectsId, entry: evidencedPlanGroup }, {id:compositionFamily,entry:followCompositionGroup});
     } else {
       // A transferred relation with changed geometry still needs a local test.

@@ -1,0 +1,550 @@
+{
+  "ordinal": 46,
+  "selected": {
+    "action": {
+      "id": 5
+    },
+    "kind": "sic_test_prepared_effects",
+    "strategy": "witnessedPreview"
+  },
+  "roleState": {
+    "witness": {
+      "background": 5,
+      "chambers": [
+        [
+          1,
+          17,
+          10,
+          28
+        ],
+        [
+          1,
+          32,
+          10,
+          43
+        ],
+        [
+          7,
+          48,
+          12,
+          57
+        ],
+        [
+          16,
+          23,
+          23,
+          37
+        ],
+        [
+          16,
+          48,
+          23,
+          57
+        ],
+        [
+          25,
+          20,
+          28,
+          37
+        ],
+        [
+          25,
+          44,
+          28,
+          60
+        ],
+        [
+          34,
+          48,
+          41,
+          60
+        ],
+        [
+          43,
+          44,
+          46,
+          57
+        ],
+        [
+          50,
+          23,
+          57,
+          37
+        ],
+        [
+          54,
+          44,
+          60,
+          57
+        ],
+        [
+          59,
+          20,
+          62,
+          37
+        ]
+      ],
+      "control": {
+        "box": [
+          50,
+          23,
+          57,
+          37
+        ],
+        "offset": [
+          3,
+          7
+        ],
+        "pattern": [
+          [
+            3,
+            3,
+            3,
+            3,
+            5,
+            5,
+            5,
+            5
+          ],
+          [
+            3,
+            5,
+            5,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          [
+            3,
+            3,
+            3,
+            3,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            5,
+            5,
+            5,
+            5,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            5,
+            5,
+            5,
+            5,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            3,
+            3,
+            3,
+            3,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            3,
+            5,
+            5,
+            3,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            3,
+            3,
+            3,
+            3,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            5,
+            5,
+            5,
+            5,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            5,
+            5,
+            5,
+            5,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            3,
+            3,
+            3,
+            3,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            3,
+            5,
+            5,
+            3,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            3,
+            3,
+            3,
+            3,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            5,
+            5,
+            5,
+            5,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            5,
+            5,
+            5,
+            5,
+            3,
+            3,
+            3,
+            3
+          ]
+        ]
+      },
+      "epoch": 4,
+      "mark": 0,
+      "normal": 3,
+      "outlet": [
+        59,
+        20,
+        62,
+        37
+      ],
+      "refs": [
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:3:revision:45:frame:02d92b1747e8c9d9",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:46:frame:54beb3d7559a8d9f"
+      ],
+      "wins": 3
+    },
+    "attempted": []
+  },
+  "roleOffers": [],
+  "offline": null,
+  "fallback": null,
+  "scene": {
+    "mark": 0,
+    "normal": 3,
+    "background": 5,
+    "frames": [
+      {
+        "box": [
+          5,
+          17,
+          10,
+          28
+        ],
+        "border": 0,
+        "filled": 32,
+        "contents": [
+          [
+            12,
+            32
+          ]
+        ]
+      },
+      {
+        "box": [
+          5,
+          32,
+          10,
+          43
+        ],
+        "border": 0,
+        "filled": 32,
+        "contents": [
+          [
+            6,
+            32
+          ]
+        ]
+      },
+      {
+        "box": [
+          6,
+          20,
+          9,
+          27
+        ],
+        "border": 12,
+        "filled": 0,
+        "contents": []
+      },
+      {
+        "box": [
+          6,
+          35,
+          9,
+          42
+        ],
+        "border": 6,
+        "filled": 0,
+        "contents": []
+      },
+      {
+        "box": [
+          7,
+          48,
+          12,
+          57
+        ],
+        "border": 0,
+        "filled": 32,
+        "contents": [
+          [
+            13,
+            32
+          ]
+        ]
+      },
+      {
+        "box": [
+          8,
+          49,
+          11,
+          56
+        ],
+        "border": 13,
+        "filled": 0,
+        "contents": []
+      },
+      {
+        "box": [
+          16,
+          23,
+          23,
+          37
+        ],
+        "border": 3,
+        "filled": 0,
+        "contents": []
+      },
+      {
+        "box": [
+          16,
+          48,
+          23,
+          57
+        ],
+        "border": 3,
+        "filled": 0,
+        "contents": []
+      },
+      {
+        "box": [
+          25,
+          20,
+          28,
+          37
+        ],
+        "border": 3,
+        "filled": 0,
+        "contents": []
+      },
+      {
+        "box": [
+          25,
+          44,
+          28,
+          60
+        ],
+        "border": 3,
+        "filled": 0,
+        "contents": []
+      },
+      {
+        "box": [
+          34,
+          48,
+          41,
+          57
+        ],
+        "border": 3,
+        "filled": 9,
+        "contents": [
+          [
+            0,
+            7
+          ],
+          [
+            9,
+            2
+          ]
+        ]
+      },
+      {
+        "box": [
+          43,
+          44,
+          46,
+          57
+        ],
+        "border": 3,
+        "filled": 0,
+        "contents": []
+      },
+      {
+        "box": [
+          54,
+          24,
+          57,
+          37
+        ],
+        "border": 3,
+        "filled": 0,
+        "contents": []
+      },
+      {
+        "box": [
+          54,
+          44,
+          60,
+          57
+        ],
+        "border": 3,
+        "filled": 10,
+        "contents": [
+          [
+            0,
+            10
+          ]
+        ]
+      },
+      {
+        "box": [
+          59,
+          20,
+          62,
+          37
+        ],
+        "border": 0,
+        "filled": 14,
+        "contents": [
+          [
+            14,
+            14
+          ]
+        ]
+      }
+    ],
+    "marked": [
+      [
+        5,
+        17,
+        10,
+        28
+      ],
+      [
+        5,
+        32,
+        10,
+        43
+      ],
+      [
+        7,
+        48,
+        12,
+        57
+      ],
+      [
+        59,
+        20,
+        62,
+        37
+      ]
+    ]
+  },
+  "afterCorrection": {
+    "role": "An unavailable outlet actuator does not invalidate another independently ready input",
+    "productionDecision": {
+      "action": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 9,
+          "y": 52
+        }
+      },
+      "strategy": "use_marked_compartment",
+      "evidence": [
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:46:frame:54beb3d7559a8d9f",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:3:revision:45:frame:02d92b1747e8c9d9"
+      ]
+    },
+    "fallbackDecision": {
+      "box": [
+        7,
+        48,
+        12,
+        57
+      ],
+      "border": 0,
+      "closed": true,
+      "filled": 32,
+      "contents": [
+        [
+          13,
+          32
+        ]
+      ],
+      "point": [
+        9,
+        52
+      ],
+      "local": "9a8b9f4c1404f977c50c7a7bfed571df1aa0de605f0d95a0c4284a762e495f4c",
+      "region": [
+        0,
+        48,
+        12,
+        57
+      ],
+      "shape": "30c23d59b42e718fd2a52218f7825e404e6344ab0f6112db24b8ce28aae0fdfa"
+    },
+    "qualification": "Offline public observation only; no new game run"
+  }
+}

@@ -1,7 +1,7 @@
 import { crossedPrefixCell, crossedPrefixGeometry, crossedPrefixMeasureControls, crossedPrefixReferencePresent, crossedPrefixSlot,
   type CrossedPrefixController, type CrossedPrefixLayout } from '../logos-engine/v6-crossed-prefix-observation.ts';
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 import { maximumCommittedActions } from './plan-step.ts';
@@ -9,6 +9,7 @@ import { maximumCommittedActions } from './plan-step.ts';
 export const crossingRowsId = 'sic_crossing_rows';
 export const verifyCrossingRowsId = 'sic_verify_crossing_rows';
 export const learnCrossingRowsId = 'sic_learn_crossing_rows';
+export const continueCrossingRowsGroup = 'continue_observed_crossing_rows';
 export const crossingRowsStrategies = {
   select_aligned_prefix: 'Select the row or column that can contribute to the pattern',
   test_prefix_advance: 'Test a command for advancing the selected row or column',
@@ -18,7 +19,8 @@ type State = { epoch: number; layout: CrossedPrefixLayout; progress: Record<stri
   commands: Record<string, string>; axisCommands: [string[], string[]]; crossed: boolean; tried: string[]; stopped: boolean; evidence: string[];
   pairs?: CrossingPair[]; transferred?: boolean; pattern?: SwatchPattern };
 type CrossingPair = { commands: [string, string]; owner: 0 | 1; proof: string };
-type Acquired = { axes: [string[], string[]]; pairs: CrossingPair[]; layout: CrossedPrefixLayout };
+type Acquired = { axes: [string[], string[]]; pairs: CrossingPair[]; layout: CrossedPrefixLayout;
+  boundary?: { scope: string; epoch: number; completed: number; evidence: [string, string] } };
 type Swatch = { point: CrossedPrefixController['point']; color: number };
 type SwatchPattern = { choices: Record<string, Swatch>; pairs: CrossingPair[][] };
 type Choice = { controller: CrossedPrefixController; action: NativeCommand; cell: NativePoint; selecting: boolean; crossing: boolean;
@@ -27,6 +29,7 @@ type Proposal = NativeProposal & { local: State; choice: Choice; needId: string;
   route?: Choice[]; cursor?: number };
 const key = (value: unknown) => JSON.stringify(value);
 const equal = (a: unknown, b: unknown) => key(a) === key(b);
+const sourceScope = (observation: NativeObservation) => observation.observation_ref.split(':epoch:')[0]!;
 const painted = (rows: NativeRows, layout: CrossedPrefixLayout, cell: NativePoint) => {
   const pixels = crossedPrefixSlot(rows, layout, cell);
   return pixels[Math.floor(pixels.length / 2)]?.[Math.floor((pixels[0]?.length ?? 0) / 2)];
@@ -99,10 +102,28 @@ export function createSicVerifyCrossingRows(family = verifyCrossingRowsId, trans
   let state: State | null = null;
   let acquired: Acquired | null = null;
   let decide: NativeProgramHandle | undefined;
+  const currentCrossing = (observation: NativeObservation, rows: NativeRows) => {
+    const boundary = acquired?.boundary;
+    if (!state?.transferred || state.stopped || state.epoch !== observation.level_epoch
+      || state.evidence.at(-1) !== observation.observation_ref || !Object.values(state.progress).some(count => count > 0)
+      || boundary?.scope !== sourceScope(observation) || boundary.epoch !== observation.level_epoch
+      || boundary.completed !== observation.levels_completed || !state.pairs?.length
+      || !crossedPrefixReferencePresent(rows, state.layout)) return false;
+    const controls = crossedPrefixMeasureControls(rows, state.layout), selectedKey = state.selected;
+    const selected = state.layout.controllers.find(control => control.key === selectedKey);
+    const expected = selected && (state.pattern?.choices[selected.key] ?? selected);
+    return !!controls && !!selected && !!expected && state.axisCommands[selected.axis].some(command => observation.available_action_refs.includes(command))
+      && controls.some(control => control.key === selected.key
+      && control.color === expected.color && equal(control.point, expected.point));
+  };
   return {
     id: family,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async proposeInSubquestion(_group, entry, ...args) {
+      if (entry === continueCrossingRowsGroup && !currentCrossing(args[0], args[1])) return null;
+      return this.propose(...args);
     },
     controlledClickRegions(observation, rows) {
       if (!state || state.epoch !== observation.level_epoch || !Object.values(state.progress).some(count => count > 0)) return [];
@@ -193,7 +214,9 @@ export function createSicVerifyCrossingRows(family = verifyCrossingRowsId, trans
         && (!!composed || (local.transferred ? preferred.includes(action.action_ref) : !crossing || local.crossed));
       const selectedPair = composed ?? applicable.find(pair => matchingOwner(pair) && pair.commands[controller.axis] === action.action_ref);
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref,
-        ...new Set([...local.evidence, ...(selectedPair ? [selectedPair.proof] : [])].filter(value => value !== ref))];
+        ...new Set([...local.evidence, ...(local.transferred ? acquired?.boundary?.evidence ?? [] : []),
+          ...(local.transferred ? local.pairs?.map(pair => pair.proof) ?? [] : []),
+          ...(selectedPair ? [selectedPair.proof] : [])].filter(value => value !== ref))];
       const mode = execution?.reasoningMode ?? (measured ? 'solving' : 'exploration');
       const facts = { routeSupported: measured, eligibleProbe: !measured, knownInteraction: false, mode };
       const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
@@ -274,7 +297,9 @@ export function createSicVerifyCrossingRows(family = verifyCrossingRowsId, trans
       const local = index > 0 ? state ?? proposal.local : proposal.local;
       const choice = proposal.route?.[index] ?? proposal.choice, { controller } = choice;
       if (after.levels_completed > before.levels_completed) {
-        if (local.pairs?.length) acquired = { axes: local.axisCommands, pairs: local.pairs, layout: local.layout };
+        if (local.pairs?.length) acquired = { axes: local.axisCommands, pairs: local.pairs, layout: local.layout,
+          boundary: { scope: sourceScope(after), epoch: after.level_epoch, completed: after.levels_completed,
+            evidence: [before.observation_ref, after.observation_ref] } };
         return { events: [] };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
