@@ -1,0 +1,26 @@
+{
+  "game": "SPOR",
+  "siteVersion": 209,
+  "source": "052d82dec4e92f4eef5fa90ab0c2a7fd3a5125da",
+  "surface": "published",
+  "start": "https://sra-playground.yannick-fontan.chatgpt.site/?game=SPOR&level=1",
+  "finish": "https://sra-playground.yannick-fontan.chatgpt.site/?game=SPOR&level=6",
+  "planning": "SIC",
+  "startLevel": 1,
+  "initialActions": 0,
+  "control": "Run to next level",
+  "sessions": 1,
+  "resets": 0,
+  "undos": 0,
+  "verdict": "The game reports WIN.",
+  "levelsSolved": 6,
+  "totalActions": 121,
+  "levels": [
+    {"level": 1, "actions": 14, "cumulativeActions": 14, "completedPlans": 14, "observedAt": "2026-11-27T15:15:04.572Z"},
+    {"level": 2, "actions": 14, "cumulativeActions": 28, "completedPlans": 28, "observedAt": "2026-11-27T15:15:56.219Z"},
+    {"level": 3, "actions": 17, "cumulativeActions": 45, "completedPlans": 45, "observedAt": "2026-11-27T15:16:52.035Z"},
+    {"level": 4, "actions": 17, "cumulativeActions": 62, "completedPlans": 62, "observedAt": "2026-11-27T15:17:20.031Z"},
+    {"level": 5, "actions": 29, "cumulativeActions": 91, "completedPlans": 91, "observedAt": "2026-11-27T15:18:02.506Z"},
+    {"level": 6, "actions": 30, "cumulativeActions": 121, "completedPlans": 121, "observedAt": "2026-11-27T15:18:55.398Z"}
+  ]
+}
