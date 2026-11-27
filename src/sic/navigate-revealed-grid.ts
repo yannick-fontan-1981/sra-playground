@@ -24,7 +24,7 @@ type RailClock = { turn: number; rails: Record<string, RailTrack>; crossed: numb
   gateGoal?: number; gateEntry?: { gate: number; from: number } };
 type Timing = { start: number; patrols: number[][]; walls: number[][]; scannedPads: number[]; pendingPad?: number;
   clock?: RailClock };
-type State = { epoch: number; grid: Grid; last: Reading; previousObstacle: number | null; motions?: Motion[]; refs: string[]; consecutiveWaits: number; timing?: Timing };
+type State = { epoch: number; score?: number; grid: Grid; last: Reading; previousObstacle: number | null; motions?: Motion[]; refs: string[]; consecutiveWaits: number; timing?: Timing };
 type Choice = { action: NativeCommand; kind: 'pulse' | 'wait' | 'move'; target: number; uncertain: boolean; entry?: number };
 type Walk = { action: string; target: number; entry?: number };
 type Proposal = NativeProposal & { local: State; choice: Choice; walk?: Walk[]; needId: string };
@@ -69,6 +69,16 @@ function measureMechanisms(rows: NativeRows, marks: readonly Part[], grid: Grid)
   return { pads, doors };
 }
 
+function visibleLattice(rows: NativeRows, grid: Pick<Grid, 'box' | 'pitch' | 'columns' | 'size' | 'tint' | 'base'>): boolean {
+  let aligned = 0;
+  for (let cell = 0; cell < grid.size; cell++) {
+    const x = grid.box[0] + cell % grid.columns * grid.pitch;
+    const y = grid.box[1] + Math.floor(cell / grid.columns) * grid.pitch;
+    if (rows[y]?.[x] === grid.tint && rows[y]?.[x + 1] === grid.base) aligned++;
+  }
+  return aligned >= grid.size * 0.8;
+}
+
 function measure(rows: NativeRows, inherited?: Grid): Grid | null {
   const parts = geometricComponents(rows), candidates: Grid[] = [];
   const outlines = parts.filter(p => width(p.bbox) >= 24 && height(p.bbox) >= 24
@@ -83,8 +93,7 @@ function measure(rows: NativeRows, inherited?: Grid): Grid | null {
     for (let pitch = 4; pitch <= 9; pitch++) {
       if (width(box) % pitch || height(box) % pitch) continue;
       const columns = width(box) / pitch, size = columns * height(box) / pitch;
-      const dots = Array.from({ length: size }, (_, i) => [x + i % columns * pitch, y + Math.floor(i / columns) * pitch] as const);
-      if (dots.filter(([a, b]) => rows[b]?.[a] === tint && rows[b]?.[a + 1] === base).length < size * 0.8) continue;
+      if (!visibleLattice(rows, { box, pitch, columns, size, tint, base })) continue;
       const squareFrames: Part[] = parts.filter(p => inside(p) && width(p.bbox) === pitch && height(p.bbox) === pitch
         && (p.bbox[0] - x) % pitch === 0 && (p.bbox[1] - y) % pitch === 0 && p.color !== base && p.color !== tint && !p.rectangular);
       if (squareFrames.length < 2) continue;
@@ -464,7 +473,7 @@ export function projectRecalledNavigation(transfer: NavigationAcquisition, previ
   if (!grid || grid.actor !== transfer.grid.actor || grid.tint !== transfer.grid.tint || grid.mechanisms) return null;
   const last = read(rows, grid, previous?.last);
   if (!last) return null;
-  const local: State = previous ? { ...previous, last } : { epoch: observation.level_epoch, grid, last, previousObstacle: null,
+  const local: State = previous ? { ...previous, last } : { epoch: observation.level_epoch, score: observation.levels_completed, grid, last, previousObstacle: null,
     refs: transfer.pulse ? [transfer.pulse, transfer.movement] : [transfer.movement], consecutiveWaits: 0 };
   const path = route(last, grid), choice = choose(local, path);
   if (!choice) return null;
@@ -511,7 +520,7 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
       if (timing) last.nextHazards = [...new Set(timing.clock
         ? [...forecastTracks(timing.patrols), ...scheduledRailHazards(rows, grid, timing.clock)]
         : forecastTracks([...timing.walls, ...timing.patrols]))];
-      const local: State = prior ? { ...prior, last } : { epoch: observation.level_epoch, grid, last, previousObstacle: null,
+      const local: State = prior ? { ...prior, last } : { epoch: observation.level_epoch, score: observation.levels_completed, grid, last, previousObstacle: null,
         refs: !normal && inherited ? inherited.refs : [], consecutiveWaits: 0, ...(timing ? { timing } : {}) };
       const clock = timing?.clock;
       const door = clock ? clock.gateGoal ?? (last.charges
@@ -573,6 +582,38 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } },
       };
+    },
+    observePublicOutcome(before, after, command, first, second) {
+      const inherited = state;
+      const scope = before.observation_ref.split(':epoch:', 1)[0]!;
+      if (!inherited || inherited.epoch !== before.level_epoch - 1 || inherited.score === undefined
+        || inherited.score + 1 !== before.levels_completed || before.level_epoch !== after.level_epoch
+        || before.levels_completed !== after.levels_completed || before.state !== after.state || after.revision <= before.revision
+        || !after.observation_ref.startsWith(scope + ':epoch:') || inherited.refs.length < 2
+        || !inherited.refs.every(ref => ref.startsWith(scope + ':epoch:'))) return;
+      const direction = directions.find(([action]) => action === command.action_ref);
+      if (!direction || !before.available_action_refs.includes(command.action_ref)) return;
+      const grid = measure(first, inherited.grid);
+      // This recovery concerns ordinary lattice movement; mechanisms retain their own acquisition path.
+      if (!grid || grid.mechanisms || !visibleLattice(second, grid)
+        || measure(second) || measure(second, inherited.grid)) return;
+      const [left, top, right, bottom] = tile(grid, grid.goal);
+      for (let y = top; y <= bottom; y++) for (let x = left; x <= right; x++) {
+        if (first[y]?.[x] !== second[y]?.[x]) return;
+      }
+      const previous = read(first, grid), next = previous && read(second, grid, previous);
+      if (!previous || !next) return;
+      const [, dx, dy] = direction, [x, y] = coordinate(previous.position, grid);
+      const target = (y + dy) * grid.columns + x + dx;
+      if (x + dx < 0 || x + dx >= grid.columns || target < 0 || target >= grid.size) return;
+      const moved = next.position === target;
+      const blocked = next.position === previous.position && previous.memory[target] === undefined && next.memory[target] === 'wall';
+      if ((!moved && !blocked) || next.charges !== previous.charges
+        || Object.entries(previous.memory).some(([cell, value]) => next.memory[Number(cell)] !== value)) return;
+      state = { epoch: after.level_epoch, score: after.levels_completed, grid, last: next,
+        previousObstacle: next.obstacle !== previous.obstacle ? previous.obstacle : null,
+        ...(grid.actorPixels ? { motions: track(previous, next, grid) } : {}),
+        refs: [...inherited.refs.slice(-3), before.observation_ref, after.observation_ref], consecutiveWaits: 0 };
     },
     before(proposal, index, packet, current) {
       if (index > 0 && proposal.walk) {
@@ -646,7 +687,7 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
         ? clock.visits : [...clock.visits.slice(-31), next.position];
       const scans = !clock || reset ? [] : choice.kind === 'pulse' && next.charges < local.last.charges
         ? [...clock.scans, local.last.position] : clock.scans;
-      state = { ...local, last: next, previousObstacle: next.obstacle !== local.last.obstacle ? local.last.obstacle : local.previousObstacle,
+      state = { ...local, score: after.levels_completed, last: next, previousObstacle: next.obstacle !== local.last.obstacle ? local.last.obstacle : local.previousObstacle,
         ...(local.grid.actorPixels ? { motions: track(local.last, next, local.grid, local.motions) } : {}),
         ...(timing ? { timing: { start: timing.start, patrols: updateTracks(reset ? [] : timing.patrols, next.sentries ?? [], local.grid),
           walls: updateTracks(reset ? [] : timing.walls, next.obstacles, local.grid),
