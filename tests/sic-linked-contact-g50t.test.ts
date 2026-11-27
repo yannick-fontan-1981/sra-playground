@@ -39,7 +39,7 @@ test('G50T native binding, access and remote contact remain distinct from L1 thr
   const service = new V6AgentService(() => runtime), sessionId = fixture.sessionId;
   let result = await service.handle({ type: 'init', sessionId, sequence: 0, budgets: fixture.budgets, observation: input(0) });
   let contactRef: string | undefined;
-  for (let turn = 1; turn <= 10; turn++) {
+  for (let turn = 1; turn <= 16; turn++) {
     if (result.kind === 'boundary') result = await service.handle({ type: 'resume', sessionId, sequence: turn - 1 });
     assert.equal(result.kind, 'action');
     const command = result.command!, trace = result.snapshot.trace as readonly Row[];
@@ -48,7 +48,10 @@ test('G50T native binding, access and remote contact remain distinct from L1 thr
     assert.equal(command.actionRef, 'ACTION' + fixture.commands[turn - 1].id);
     assert.equal(guard.admitted, true);
     if (turn < 3) assert.equal(release.family, 'observed_frontier');
-    else {
+    else if (turn > 10) {
+      assert.deepEqual([release.family, proposal.kind, plan.mode, release.missingControl],
+        ['linked_temporal_preparation', 'linked_contact_experiment', turn === 11 ? 'phase' : 'access', undefined]);
+    } else {
       assert.deepEqual([release.family, release.authority, proposal.kind, plan.primary, plan.site, plan.mode, guard.reason],
         ['linked_temporal_preparation', 'native', 'linked_contact_experiment', carrier, [38, 8], binding ? 'binding' : 'access', 'linked_contact_receiver_bound']);
       const step = proposal.steps[guard.index];
@@ -69,7 +72,7 @@ test('G50T native binding, access and remote contact remain distinct from L1 thr
       }
     }
     result = await service.handle({ type: 'advance', sessionId, sequence: turn, ticketId: result.ticket!.id, observation: input(turn, command), executionMs: 0 });
-    if (turn < 3) continue;
+    if (turn < 3 || turn > 10) continue;
     const outcome = (result.snapshot.trace as readonly Row[]).findLast(e => e.kind === 'actual_outcome')!;
     assert.deepEqual([outcome.family, outcome.reason, outcome.matched], [release.family, 'linked_contact_conditional_response', binding ? null : true]);
     // The three access steps enter shared memory together when the prefix is sealed at turn eight.

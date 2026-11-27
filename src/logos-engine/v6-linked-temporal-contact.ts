@@ -8,7 +8,8 @@ import { temporalAdd as add, temporalClone as clone, temporalCompare as compare,
   type TemporalSize as Size, type LinkedTemporalWork } from './v6-linked-temporal-common.ts';
 import type { LinkedTemporalPhaseRelations } from './v6-linked-temporal-phase.ts';
 import type { NativeRows, NativeBeforeResult, NativeAfterResult } from './v6-native-types.ts';
-import { bindMissingControlTrial, unmeasuredControls } from '../sic/missing-control-strategy.ts';
+import { bindMissingControlTrial } from '../sic/missing-control-strategy.ts';
+import { selectLinkedContactStep } from '../sic/linked-contact-step.ts';
 
 export interface LinkedContactPolicy extends R { enabled: boolean }
 export const LINKED_CONTACT_SOURCE_POLICY: Readonly<LinkedContactPolicy> = Object.freeze({
@@ -289,15 +290,17 @@ export class LinkedTemporalContact {
       }
     }
     if (!route?.length) return null;
-    const [origin, dest, vector] = route[0]!, action = byVector.get(pkey(vector));
-    if (action === undefined) {
-      const unresolved = unmeasuredControls(available, available, ref => this.vectors.has(ref) || this.tested.has(key([position, ref]))).next().value;
-      if (unresolved === undefined) return null;
-      const proposal = this.bundle(observation, unresolved, position, null, 'Measure an unresolved input needed by the visible access path.', 'binding');
+    const [origin, dest, vector] = route[0]!;
+    const offer = selectLinkedContactStep(byVector.get(pkey(vector)), available,
+      ref => this.vectors.has(ref) || this.tested.has(key([position, ref])));
+    if (!offer) return null;
+    const action = offer.action;
+    if (offer.mode === 'binding') {
+      const proposal = this.bundle(observation, action, position, null, 'Measure an unresolved input needed by the visible access path.', 'binding');
       bindMissingControlTrial(proposal as Parameters<typeof bindMissingControlTrial>[0], {
         observationRef: observation.observation_ref, availableActions: available,
-        objectiveSupported: route.length > 0, subjectBound: this.body !== null && this.selected !== null, effectKnown: this.vectors.has(unresolved),
-        triedInContext: this.tested.has(key([position, unresolved])), evidence: proposal.question.hypothesis_refs,
+        objectiveSupported: route.length > 0, subjectBound: this.body !== null && this.selected !== null, effectKnown: this.vectors.has(action),
+        triedInContext: this.tested.has(key([position, action])), evidence: proposal.question.hypothesis_refs,
       });
       return proposal;
     }

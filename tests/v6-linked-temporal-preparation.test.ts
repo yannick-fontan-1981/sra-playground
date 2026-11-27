@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { LinkedTemporalPreparation, LINKED_CONTACT_SOURCE_POLICY, LINKED_TEMPORAL_NATIVE_SEARCH_BOUNDS } from '../src/logos-engine/v6-linked-temporal-preparation.ts';
+import { selectLinkedContactStep } from '../src/sic/linked-contact-step.ts';
 import { LinkedTemporalContact, linkedOpenEnclosures, linkedNodes, linkedPhaseSlots } from '../src/logos-engine/v6-linked-temporal-contact.ts';
 import { LinkedTemporalPhaseRelations, LinkedTemporalPhaseTransfer } from '../src/logos-engine/v6-linked-temporal-phase.ts';
 import { temporalDigest, temporalPatch, temporalBytePatch } from '../src/logos-engine/v6-linked-temporal-common.ts';
@@ -204,4 +205,14 @@ test('entry without changed remote pixels records a negative comparison and clos
   assert.deepEqual([effect.before_ref, effect.after_ref, effect.pixels, effect.exclusive_cause_established],
     [current.observation.observation_ref, entered.observation.observation_ref, [], false]);
   assert.equal(contact.propose(family.phase, entered.observation, entered.rows, inputs, 40), null);
+});
+
+test('contact step accepts a measured available action or the first unused local trial', () => {
+  const available = ['ACTION4', 'ACTION2', 'ACTION1'];
+  assert.deepEqual(selectLinkedContactStep('ACTION1', available, () => assert.fail('access already has a bound command')),
+    { mode: 'access', action: 'ACTION1' });
+  const tried = new Set(['ACTION4']);
+  assert.deepEqual(selectLinkedContactStep(undefined, available, action => tried.has(action)), { mode: 'binding', action: 'ACTION2' });
+  assert.deepEqual(selectLinkedContactStep('ACTION5', available, action => tried.has(action)), { mode: 'binding', action: 'ACTION2' });
+  assert.equal(selectLinkedContactStep(undefined, available, () => true), null);
 });
