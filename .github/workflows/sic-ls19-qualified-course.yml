@@ -1,0 +1,57 @@
+name: SIC line 90 qualified LS19 course
+on:
+  push:
+    branches: [audit/sic-ls19-975d9d80]
+permissions:
+  contents: read
+jobs:
+  ls19:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: bench
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/
+            /docs/architecture/sic-replay-reference-levels-20261126.json
+      - uses: actions/checkout@v4
+        with:
+          ref: 975d9d809ba1cb41dd8c63414586cb95498018b1
+          path: engine
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.3
+      - name: Play the complete frozen course from level one on both engines
+        working-directory: engine
+        shell: bash
+        run: |
+          set -euo pipefail
+          parent=13ebd79de759b1052e1b261d9c6c3f5b2205d7f9
+          child=975d9d809ba1cb41dd8c63414586cb95498018b1
+          test "$(git rev-parse "$child^")" = "$parent"
+          mkdir "$GITHUB_WORKSPACE/results"
+          export SIC_REPLAY_REFERENCES="$GITHUB_WORKSPACE/bench/docs/architecture/sic-replay-reference-levels-20261126.json"
+          for revision in "$parent" "$child"; do
+            git checkout --detach "$revision"
+            test "$(git rev-parse HEAD)" = "$revision"
+            node scripts/prepare-python.mjs
+            out="$GITHUB_WORKSPACE/results/$revision"
+            export SIC_DECISION_TRACE="$out.jsonl"
+            node "$GITHUB_WORKSPACE/bench/scripts/check-sic-chronological.mjs" LS19 auto "$out.receipt" 1 sic
+            sha256sum "$out.jsonl" | cut -d' ' -f1 > "$out.trace.sha256"
+          done
+          cd "$GITHUB_WORKSPACE/results"
+          node ../bench/scripts/compare-sic-decisions.mjs "$parent.jsonl" "$child.jsonl" > comparison.json
+          python3 -c 'import glob,json; rows=[json.load(open(f)) for f in glob.glob("*.receipt")]; assert len(rows)==2 and all(r["reason"]=="target_levels_completed" and r["levels"]==8 and r["authority"]==r["actions"] for r in rows)'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ls19-course
+          path: |
+            results/*.receipt
+            results/*.trace.sha256
+            results/comparison.json
+          retention-days: 14
