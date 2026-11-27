@@ -1,0 +1,261 @@
+{
+  "recordedAt": "2026-11-27T02:05:35.315019+00:00",
+  "source": {
+    "local": "98a0d69a15030a75e32eec68608fe6b2b5dd69cc",
+    "remote": "287d5fe6ef01d14c7ce7014ce0f695953c9a6788",
+    "tree": "886debcaf507d64e7c86320b55d8ac9f73a78aa0",
+    "branch": "fix/sic-27-marked-alternatives-20261127"
+  },
+  "codeOnly": {
+    "local": "98a0d69a15030a75e32eec68608fe6b2b5dd69cc",
+    "remote": "287d5fe6ef01d14c7ce7014ce0f695953c9a6788",
+    "files": [
+      "src/sic/marked-compartment-flow.ts",
+      "tests/sic-marked-outlet-transfer.test.ts"
+    ],
+    "requiresOutletAcquisition": {
+      "local": "ddd9a1598e561db131117b72cb8b996000a215a7",
+      "remote": "a78529ccbec3d09b4ce9b2b2d64213e4fc139b89"
+    }
+  },
+  "publicCaptureSource": {
+    "local": "c409eb8266a765e799abbd2cbf9ed22d446dde11",
+    "remote": "1c58dab1cfa26ec2e2b83bdc7fa048a581420f85"
+  },
+  "startLevel": 1,
+  "target": 6,
+  "wonLevels": 3,
+  "actions": 67,
+  "authority": 67,
+  "acquiredRecords": 67,
+  "reason": "level_action_budget",
+  "usage": {
+    "sic_public_input_exploration": 14,
+    "sic_test_prepared_effects": 5,
+    "sic_follow_observed_compartment_readiness": 48
+  },
+  "levels": [
+    {
+      "level": 1,
+      "won": true,
+      "activeMs": 7557,
+      "budget": {
+        "actions": 23,
+        "activeTimeMs": 26000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SPOR; level=1; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 14,
+      "ms": 8027,
+      "gameMs": 260,
+      "costs": {
+        "init": {
+          "ms": 1268,
+          "count": 1
+        },
+        "advance": {
+          "ms": 3438,
+          "count": 14
+        },
+        "resume": {
+          "ms": 2773,
+          "count": 13
+        }
+      },
+      "graph": "ef4e36d2b7a9cba1968fd92c45ff29ebbef29211c048fd85f5922850350c1282",
+      "deltas": 3553,
+      "acquiredRecords": 14,
+      "nodes": 579,
+      "traceEvents": 86,
+      "prefixHash": "e00e189c359a7ae72c9f5a38f69c53daac3ef3b6c48b73eca423d6783531e8e1",
+      "scoredMs": 7467,
+      "settlementMs": 560
+    },
+    {
+      "level": 2,
+      "won": true,
+      "activeMs": 5974,
+      "budget": {
+        "actions": 18,
+        "activeTimeMs": 14000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SPOR; level=2; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 14,
+      "ms": 6921,
+      "gameMs": 506,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 4935,
+          "count": 14
+        },
+        "resume": {
+          "ms": 833,
+          "count": 14
+        }
+      },
+      "graph": "697a360d0eb0b9a350f197a03af0bb33fdf54887e05e365ee8e7ec9370492c69",
+      "deltas": 6739,
+      "acquiredRecords": 28,
+      "nodes": 785,
+      "traceEvents": 128,
+      "prefixHash": "edf66eb6bdc7fb0cf05a3dce7ba2b9e6c1cca952392592c0b6833b4a6ed11658",
+      "scoredMs": 6223,
+      "settlementMs": 699
+    },
+    {
+      "level": 3,
+      "won": true,
+      "activeMs": 8294,
+      "budget": {
+        "actions": 21,
+        "activeTimeMs": 17000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SPOR; level=3; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 17,
+      "ms": 9547,
+      "gameMs": 621,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 6717,
+          "count": 17
+        },
+        "resume": {
+          "ms": 1352,
+          "count": 17
+        }
+      },
+      "graph": "c01c1fa7821ff99b23272321c9648b5539247655ad33c11ccb4c1a18a1647df5",
+      "deltas": 10640,
+      "acquiredRecords": 45,
+      "nodes": 1067,
+      "traceEvents": 128,
+      "prefixHash": "c0b37ff9e0c7e44d6ac98272db3698f89cac5b5d28f079426483e9e68928e197",
+      "scoredMs": 8876,
+      "settlementMs": 670
+    },
+    {
+      "level": 4,
+      "won": false,
+      "activeMs": 11390,
+      "budget": {
+        "actions": 22,
+        "activeTimeMs": 18000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SPOR; level=4; won=true",
+        "timeBasis": "measured"
+      },
+      "actions": 22,
+      "ms": 13124,
+      "gameMs": 833,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 8923,
+          "count": 22
+        },
+        "resume": {
+          "ms": 2206,
+          "count": 22
+        }
+      },
+      "graph": "c0dbc2ec98a5e24c803398b17fd7b36bc37e4d47cb919e559a6694c18f70b03b",
+      "deltas": 15702,
+      "acquiredRecords": 67,
+      "nodes": 1445,
+      "traceEvents": 128,
+      "prefixHash": "8ed1ee829a9b3f87c17e88c0182074a3d24269271d058f4cce9c453423a319d0"
+    }
+  ],
+  "budgets": "Unchanged archived action and time caps; level 4 remains 22 commands / 18000 ms.",
+  "comparison": {
+    "priorSourceLocal": "ddd9a1598e561db131117b72cb8b996000a215a7",
+    "priorSourceRemote": "a78529ccbec3d09b4ce9b2b2d64213e4fc139b89",
+    "prefixes": [
+      {
+        "level": 1,
+        "identical": true
+      },
+      {
+        "level": 2,
+        "identical": true
+      },
+      {
+        "level": 3,
+        "identical": true
+      },
+      {
+        "level": 4,
+        "identical": false
+      }
+    ],
+    "firstChangedCommand": 47,
+    "wonLevelsBefore": 3,
+    "wonLevelsAfter": 3,
+    "note": "The first three complete trajectories remain identical. At level 4 command 2 an admissible marked input replaces public exploration; no additional level is won."
+  },
+  "model": {
+    "role": "Use independently admitted ready inputs when the highest-ranked outlet control is currently unavailable.",
+    "conditions": "Keep the existing ranking and all outlet-control guards, then choose the first candidate that passes those guards.",
+    "refutation": "Changed or ambiguous output controls stay refused. A refused candidate is not marked attempted or consumed; its independent witness is retained.",
+    "publicEvidence": "The captured level-4 proposal was null despite three other ready inputs, because the unavailable highest-ranked output terminated candidate search. Offline replay now proposes a ready input; native command 47 actually uses it."
+  },
+  "remainingFailure": {
+    "level": 4,
+    "commands": 22,
+    "deliveryAtLevelCommand": 20,
+    "officialScoreAfterDelivery": false,
+    "finalCommands": "Public ACTION5 then a click with no pixel change.",
+    "firstMissingMeasurement": "Capture public grids, actual control and material population for the level-4 delivery at command 20 and the first following proposal; a local material decrease is not yet proof of official completion."
+  },
+  "qualification": {
+    "nativeReplay": "Three levels won in one session from level 1; this is a checkpoint, not a complete SPOR victory.",
+    "series": "All commands are unitary; no new multi-command continuity claimed.",
+    "tests": "12 targeted tests and typecheck pass; two native transfer cases exercise admitted alternatives while retaining the output witness.",
+    "review": "Independent read-only review favorable.",
+    "globalGate": "Not claimed for this partial checkpoint.",
+    "ui": "No delivered UI qualification claimed."
+  },
+  "timingNote": "Source frozen; no other native game or heavy test was scheduled concurrently. No comparative speed claim is made.",
+  "files": {
+    "spor-native.jsonl.gz": {
+      "bytes": 2542,
+      "sha256": "34e821eb9e339f061aba10123f3478758fbdfc35dbe71fc3f13b9251c03ee014",
+      "uncompressedBytes": 18661,
+      "uncompressedSha256": "3f78724eedc3592a1c8e1be0e06ec519af5c3faee9e274cc717961350821fa25"
+    },
+    "spor-native.levels.jsonl.gz": {
+      "bytes": 921,
+      "sha256": "db31ca2f1d57a93421b91e56184bc75fa2c6eabbc43452f50be0c9ff8f36920d",
+      "uncompressedBytes": 2653,
+      "uncompressedSha256": "f72b22c9671121c94643ab4573fb4345db43bc747b8cc876a0311ed3e21f824d"
+    },
+    "prior-checkpoint-native.jsonl.gz": {
+      "bytes": 2497,
+      "sha256": "bade6ba36350a305a91280c20a947969ff65d9f3e82129d371938bb8625b3d34",
+      "uncompressedBytes": 18722,
+      "uncompressedSha256": "6efdc956b9a0fbe4ffe4bceb2f2bc792de906e3791da50e1220f83ff9d49eda0"
+    },
+    "public-first-refusal.json": {
+      "bytes": 8387,
+      "sha256": "dd885ec3bb9238c30ea762d1bee57b32e18ef197185693bd77152508873ea175"
+    },
+    "public-boundary-capture.json.gz": {
+      "bytes": 121944,
+      "sha256": "ef8591237f914cec4c2cc27c98fd1837b9c4ddc3354ac43dc53303ff536e7f76",
+      "uncompressedBytes": 1950897,
+      "uncompressedSha256": "ea11ce9aee39ba6be8b3890f3732c0442492106c6cfb024d0ff2dcbf36436a35"
+    }
+  }
+}
