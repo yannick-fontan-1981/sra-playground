@@ -146,7 +146,7 @@ function gesture(command: string, p: Body, r: Body): Gesture | null {
 }
 const keyOf = (p: string, r: string, g: Gesture) => JSON.stringify([p, r, g.op, g.point ?? null]);
 const contextKey = (k: string, from: XY, to: XY) => JSON.stringify([k, from, to]);
-const commandContext = (o: NativeObservation, command: string) => JSON.stringify([o.frame_hash, command]);
+const commandContext = (o: NativeObservation, command: string) => JSON.stringify([o.level_epoch, o.frame_hash, command]);
 
 // A small enclosing part can distinguish a selected source from the same
 // unselected shape. Retain its observed role, never its absolute position.
@@ -357,7 +357,11 @@ function visibleReadings(
     for (const mark of markers) {
       if (covers(subject, mark.at) || subjects.some((v) => v !== subject && covers(v, mark.at))) continue;
       const indicatorInterface = localInterface(layout, mark);
-      const prior = b.witnesses.findLast(witness => compatibleInterface(witness, subjectInterface, indicatorInterface));
+      let prior: PreviewWitness | undefined;
+      for (let i = b.witnesses.length - 1; i >= 0; i--) {
+        const witness = b.witnesses[i]!;
+        if (compatibleInterface(witness, subjectInterface, indicatorInterface)) { prior = witness; break; }
+      }
       if (!prior) continue;
       const target = b.gesture.point === 'subject' ? subject : mark;
       const command = b.gesture.point

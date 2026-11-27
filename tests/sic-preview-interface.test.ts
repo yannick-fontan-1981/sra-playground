@@ -185,6 +185,10 @@ test('an unchanged command refutes every proposed arrival on the same public fra
   const changed = await sample.observe(changedRows, 2, 5);
   assert.ok(offerWitnessedPreview(learning, changed, visualLayout(changed, changedRows),
     new Set(changed.available_action_refs), 'another-attested-association'), 'A changed public context remains a new question');
+  const nextLevel = await sample.observe(sample.currentRows, 3, 6);
+  assert.equal(nextLevel.frame_hash, still.frame_hash);
+  assert.ok(offerWitnessedPreview(learning, nextLevel, visualLayout(nextLevel, sample.currentRows),
+    new Set(nextLevel.available_action_refs), 'another-attested-association'), 'An identical raster in another level does not inherit a command refutation');
 });
 
 test('a measured success without the earlier interface revises that precondition while keeping both proofs', async () => {
