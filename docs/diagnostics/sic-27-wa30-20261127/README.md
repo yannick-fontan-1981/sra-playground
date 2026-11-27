@@ -1,5 +1,11 @@
 # WA30 : routes continues après disparition des porteurs perturbateurs
 
+## Nouvelle tentative stricte : sept niveaux, puis délai au niveau 8
+
+Le candidat `71a6680b` repart du L1 avec un seul SIC, un seul worker et les références originales inchangées. Il conserve exactement les sept premiers comptes : 26, 59, 76, 48, 113, 48 et 42 commandes. Le niveau 8 atteint cette fois 110 commandes avant le watchdog à 103 001 ms, pour un total de 522 commandes. Le plafond reste 166 commandes et 103 000 ms. Le candidat reste donc non qualifié ; le niveau 9 n’est pas atteint.
+
+La capture passive incrémentale conserve 47 retours contradictoires publics, même après l’arrêt du processus. À partir de la commande 62 du niveau 8, les refus sur les apparences identiques ont disparu. Les fermetures restantes concernent notamment des changements réels de couplage hors sujet aux commandes 62, 70, 74, 89 et 96, puis la poursuite de pièces nouvellement attachées ou transportées aux commandes 100–105. Les premières preuves d’un nouveau transport ne suffisent actuellement pas à réserver sa pièce, même quand le rôle du porteur a déjà été acquis. Les images, propositions, états publics et retours sont archivés dans `wa30-strict-bd2c45e5.jsonl.public.jsonl.gz` ; `wa30-remaining-closures.json.gz` donne leur classement. Les gardes de cible restent fermés tant que cette association n’est pas justifiée.
+
 ## Verdict
 
 Le correctif de source `966122137dc5fb4009a265e0f7ace243f79c2bab` reste **non qualifié pour intégration**. Le rejeu strict depuis le niveau 1 vise neuf niveaux et en gagne sept. Le niveau 8 s’arrête à **98 commandes et 103 003 ms**, à l’échéance du plafond inchangé de 103 000 ms et avant sa limite de 166 commandes. Il n’y a pas de victoire sur ce niveau ; le niveau 9 n’est pas atteint.

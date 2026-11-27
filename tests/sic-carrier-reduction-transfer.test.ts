@@ -19,7 +19,7 @@ const same = (first: NativePoint, second: NativePoint) => key(first) === key(sec
 // of the production planner. The first room teaches reduction through actual
 // native clicks; the second teaches the input relation; the third moves the
 // instances and adds a carried auxiliary while a competing preview is ready.
-function publicRooms(varied: boolean) {
+function publicRooms(varied: boolean, revealAfterMove = false) {
   const unit = varied ? 4 : 3, pitch = unit + 2, phase: NativePoint = varied ? [2, 1] : [1, 2];
   const ink = (value: number) => varied ? (value * 5 + 3) % 16 : value;
   const at = ([x, y]: NativePoint): NativePoint => varied ? [y + 1, x] : [x, y];
@@ -27,12 +27,13 @@ function publicRooms(varied: boolean) {
   const controls: Record<string, NativePoint> = varied
     ? { ACTION1: vector([-1, 0]), ACTION2: vector([0, -1]), ACTION3: vector([0, 1]), ACTION4: vector([1, 0]) }
     : { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0] };
-  let level = 1, completed = 0, selected: NativePoint | null = null;
+  let level = 1, completed = 0, selected: NativePoint | null = null, shifted = false;
   let pegs: NativePoint[] = [], auxiliaries: NativePoint[] = [], carriers: NativePoint[] = [], floor: NativePoint[] = [], rails: NativePoint[] = [];
   function enter() {
     selected = null;
     const column = level === 2 ? 3 : 2;
     pegs = (level === 1 ? [[1, 2], [2, 2], [4, 2]] : [[column, 5], [column + 1, 3]]).map(point => at(point as NativePoint));
+    if (level === 3 && revealAfterMove) pegs.push([Math.floor((64 - phase[0] - unit) / pitch) + 1, 3]);
     auxiliaries = level === 3 ? [at([6, 5])] : [];
     carriers = level === 1 ? [] : [at([column, 5]), ...auxiliaries.map(point => [...point] as NativePoint)];
     floor = (level === 1 ? [[1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [0, 1], [1, 1], [5, 1], [7, 4]]
@@ -42,36 +43,37 @@ function publicRooms(varied: boolean) {
       Array.from({ length: 6 }, (_, y) => at([x, y + 1])));
   }
   enter();
-  const pixels = ([x, y]: NativePoint): NativePoint => [phase[0] + x * pitch, phase[1] + y * pitch];
+  const pixels = ([x, y]: NativePoint): NativePoint => [phase[0] + (x - Number(shifted)) * pitch, phase[1] + y * pitch];
   function frame(ambiguous = false) {
     const rows = Array.from({ length: 64 }, () => Array<number>(64).fill(ink(0)));
+    const pixel = (x: number, y: number, color: number) => { if (x >= 0 && x < 64 && y >= 0 && y < 64) rows[y]![x] = ink(color); };
     const fill = (point: NativePoint, color: number, token = false) => {
       const [x, y] = pixels(point);
       for (let dy = 0; dy < unit; dy++) for (let dx = 0; dx < unit; dx++) {
         const corner = varied ? (dx === 0 || dx === unit - 1) && (dy === 0 || dy === unit - 1)
           : dx === 0 && dy === 0 || dx === unit - 1 && dy === unit - 1;
-        if (!token || !corner) rows[y + dy]![x + dx] = ink(color);
+        if (!token || !corner) pixel(x + dx, y + dy, color);
       }
     };
     for (const point of floor) fill(point, 3);
     const mid = Math.floor(unit / 2);
     for (const point of rails) {
       const [x, y] = pixels(point);
-      rows[y + mid]![x + mid] = ink(5);
+      pixel(x + mid, y + mid, 5);
       for (const delta of [[0, 1], [1, 0]] as NativePoint[]) {
         if (!rails.some(other => same(other, [point[0] + delta[0], point[1] + delta[1]]))) continue;
-        for (let i = 0; i <= pitch; i++) rows[y + mid + delta[1] * i]![x + mid + delta[0] * i] = ink(5);
+        for (let i = 0; i <= pitch; i++) pixel(x + mid + delta[0] * i, y + mid + delta[1] * i, 5);
       }
     }
     for (const point of carriers) {
       const [x, y] = pixels(point);
       for (let dy = -1; dy <= unit; dy++) for (let dx = -1; dx <= unit; dx++) {
-        if (dy === -1 || dy === unit || dx === -1 || dx === unit) rows[y + dy]![x + dx] = ink(11);
+        if (dy === -1 || dy === unit || dx === -1 || dx === unit) pixel(x + dx, y + dy, 11);
       }
     }
     for (const point of pegs) fill(point, 7, true);
     for (const point of auxiliaries) fill(point, 9, true);
-    if (selected) { const [x, y] = pixels(selected); rows[y]![x] = ink(14); }
+    if (selected) { const [x, y] = pixels(selected); pixel(x, y, 14); }
     if (ambiguous) fill(at([0, 6]), 13, true);
     return rows;
   }
@@ -83,7 +85,7 @@ function publicRooms(varied: boolean) {
   function act(ticket: V6Ticket, contradiction = false) {
     if (contradiction) return;
     if (ticket.actionRef === 'ACTION6') {
-      const point: NativePoint = [Math.floor((Number(ticket.data.x) - phase[0]) / pitch), Math.floor((Number(ticket.data.y) - phase[1]) / pitch)];
+      const point: NativePoint = [Math.floor((Number(ticket.data.x) - phase[0]) / pitch) + Number(shifted), Math.floor((Number(ticket.data.y) - phase[1]) / pitch)];
       if (pegs.some(peg => same(peg, point))) selected = point;
       else if (selected && (floor.some(cell => same(cell, point)) || carriers.some(cell => same(cell, point)))) {
         const mid: NativePoint = [(selected[0] + point[0]) / 2, (selected[1] + point[1]) / 2];
@@ -105,6 +107,7 @@ function publicRooms(varied: boolean) {
         return next;
       });
       selected = null;
+      if (level === 3 && revealAfterMove) shifted = true;
     }
     if (pegs.length === 1) { completed++; if (completed < 3) { level++; enter(); } }
   }
@@ -115,8 +118,8 @@ function publicRooms(varied: boolean) {
   return { packet, act, training, controls, get level() { return level; }, get completed() { return completed; } };
 }
 
-async function start(varied = false, ambiguous = false) {
-  const room = publicRooms(varied), family = createSicObservedCarrierReduction();
+async function start(varied = false, ambiguous = false, revealAfterMove = false) {
+  const room = publicRooms(varied, revealAfterMove), family = createSicObservedCarrierReduction();
   let trained = 0;
   const trainer: NativeFamily = {
     id: 'public_reduction_demonstration',
@@ -234,7 +237,6 @@ test('early carrier continuation requires current evidence and a known input for
       { ...retained.state, refs: retained.state.refs.slice(0, -1) },
       { ...retained.state, epoch: retained.state.epoch - 1 },
       { ...retained.state, stopped: true },
-      { ...retained.state, segment: null },
       { ...retained.state, controls: {} },
     ]) {
       run.family.restore({ ...retained, state });
@@ -244,5 +246,24 @@ test('early carrier continuation requires current evidence and a known input for
     run.family.restore(retained);
     const continued = await run.family.proposeInGroup!(observedPressureRecoveryGroup, observation, rows, inputs, 20);
     assert.equal(continued?.choice.stage, 'move');
+  } finally { run.runtime.close('test_complete'); }
+});
+
+for (const varied of [false, true]) test('a newly revealed piece closes the old route without discarding the current carrier role'
+  + (varied ? ' with changed shape, palette, layout and controls' : ''), async () => {
+  const run = await start(varied, false, true);
+  try {
+    const remembered = structuredClone(run.family.state().recalled);
+    await run.next();
+    const state = run.family.state().state as Record<string, any>;
+    assert.equal(state.segment, undefined, 'The real camera return ends the old local plan');
+    assert.equal(state.stopped, false);
+    assert.equal(state.view.memory.pegs.length, 3, 'Acquire the newly visible third piece');
+    assert.equal(run.result.snapshot.proposal?.kind, run.family.id);
+    assert.equal(run.calls.at(-1)?.group, observedPressureRecoveryGroup);
+    assert.equal(run.result.ticket?.actionRef, varied ? 'ACTION2' : 'ACTION1');
+    assert.deepEqual(run.family.state().recalled, remembered);
+    await run.next();
+    assert.equal(run.result.snapshot.trace.findLast(event => event.kind === 'actual_outcome')?.matched, true);
   } finally { run.runtime.close('test_complete'); }
 });

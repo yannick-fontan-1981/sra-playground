@@ -31,12 +31,13 @@ test('the passive carrier collector counts the actual repeated translation of on
   assert.ok(!Object.hasOwn(tickets[0].carrierPreparation, 'model'), 'Final evidence omits the temporary scan model');
 });
 
-for (const condition of ['offered-only', 'different-decision', 'stale-return', 'unknown-control', 'camera-shift', 'missing-body'] as const)
+for (const condition of ['offered-only', 'different-decision', 'stale-return', 'stale-frame', 'unknown-control', 'camera-shift', 'missing-body'] as const)
   test('carrier continuity refuses ' + condition, () => {
     const tickets = measure();
     if (condition === 'offered-only') tickets[1].outcomeCount = 0;
     if (condition === 'different-decision') tickets[1].planId += ':other';
     if (condition === 'stale-return') tickets[1].carrierPreparation.beforeRef = tickets[0].carrierPreparation.beforeRef;
+    if (condition === 'stale-frame') tickets[1].carrierPreparation.after.frame = tickets[0].carrierPreparation.before.frame;
     if (condition === 'unknown-control') tickets[1].carrierPreparation.control.ref = 'unobserved';
     if (condition === 'camera-shift') tickets[1].outcome.reason = 'tracked_population_preserved_across_camera_shift';
     if (condition === 'missing-body') tickets[1].carrierPreparation.after.carriers = [];

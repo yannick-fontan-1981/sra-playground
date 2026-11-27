@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { reductionScan } from '../src/logos-engine/v6-reduction-transport.ts';
 
 export const carrierPreparationOwner = 'sic_transport_and_reduce_visible_population';
@@ -8,7 +9,8 @@ const has = (values, point) => Array.isArray(values) && values.some(value => sam
 function measure(rows, model) {
   if (!rows) return null;
   const scene = reductionScan(rows, model);
-  return { carriers: points(scene.carriers), pegs: points(scene.pegs), auxiliaries: points(scene.auxiliaries ?? []) };
+  return { carriers: points(scene.carriers), pegs: points(scene.pegs), auxiliaries: points(scene.auxiliaries ?? []),
+    frame: createHash('sha256').update(JSON.stringify(rows)).digest('hex').slice(0, 16) };
 }
 
 // Passive snapshots. The raster, observed model and issued ticket are the only
@@ -55,12 +57,12 @@ function measuredTranslation(ticket) {
     || outcome.reason !== 'carrier_and_population_projection_confirmed'
     || q.afterRef !== outcome.observation_ref || q.beforeRef === q.afterRef
     || q.scoreBefore !== q.scoreAfter || !q.control?.ref || !q.evidence.includes(q.control.ref)) return [];
-  const parsed = ref => typeof ref === 'string' && /^(.*):epoch:(\d+):revision:(\d+):frame:/.exec(ref);
+  const parsed = ref => typeof ref === 'string' && /^(.*):epoch:(\d+):revision:(\d+):frame:([0-9a-f]+)$/.exec(ref);
   const learned = parsed(q.control.ref), before = parsed(q.beforeRef), after = parsed(q.afterRef);
   if (!learned || !before || !after || learned[1] !== before[1] || before[1] !== after[1]
     || Number(learned[2]) > Number(before[2]) || Number(learned[3]) > Number(before[3])
     || Number(before[2]) !== q.levelEpoch || Number(after[2]) !== q.levelEpoch
-    || Number(after[3]) <= Number(before[3])) return [];
+    || Number(after[3]) <= Number(before[3]) || q.before.frame !== before[4] || q.after.frame !== after[4]) return [];
   const vector = q.control.vector;
   if (!Array.isArray(vector) || vector.length !== 2 || !vector.every(Number.isFinite)
     || Math.abs(vector[0]) + Math.abs(vector[1]) !== 1) return [];

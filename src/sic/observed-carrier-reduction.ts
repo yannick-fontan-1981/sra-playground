@@ -213,7 +213,7 @@ export function createSicObservedCarrierReduction(): NativeFamily<Proposal> {
     async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
       if (group !== observedPressureRecoveryGroup) return this.propose(observation, rows, inputs, remaining, execution);
       if (!state || state.epoch !== observation.level_epoch || state.stopped
-        || state.refs.at(-1) !== observation.observation_ref || !state.segment?.path.length) return null;
+        || state.refs.at(-1) !== observation.observation_ref) return null;
       const proposal = await this.propose(observation, rows, inputs, remaining, execution);
       return proposal && proposal.choice.effect && proposal.choice.stage !== 'probe' && !proposal.choice.peerTrial ? proposal : null;
     },
