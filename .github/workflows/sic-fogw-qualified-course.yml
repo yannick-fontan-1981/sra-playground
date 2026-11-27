@@ -1,0 +1,63 @@
+name: SIC qualified FOGW course
+on:
+  push:
+    branches: [audit/sic-fogw-21fd159e]
+permissions:
+  contents: read
+jobs:
+  fogw:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      CHILD: 21fd159e8339ee464a5b7bee0824b93ccefe9995
+      PARENT: e2e5b52fe4476f169c1ab1988d23a5f5368e305c
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: bench
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/
+            /docs/architecture/sic-replay-reference-levels-20261126.json
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.CHILD }}
+          path: engine
+          fetch-depth: 3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.3
+      - name: Play the complete frozen course from level one on both engines
+        working-directory: engine
+        shell: bash
+        run: |
+          set -euo pipefail
+          parent=$PARENT
+          child=$CHILD
+          test "$(git rev-parse "$child^")" = "$parent"
+          mkdir "$GITHUB_WORKSPACE/results"
+          export SIC_REPLAY_REFERENCES="$GITHUB_WORKSPACE/bench/docs/architecture/sic-replay-reference-levels-20261126.json"
+          capture() {
+            local revision=$1
+            git checkout --detach "$revision"
+            test "$(git rev-parse HEAD)" = "$revision"
+            node scripts/prepare-python.mjs
+            out="$GITHUB_WORKSPACE/results/$revision"
+            export SIC_DECISION_TRACE="$out.jsonl"
+            node "$GITHUB_WORKSPACE/bench/scripts/check-sic-chronological.mjs" FOGW auto "$out.receipt" 1 sic
+            sha256sum "$out.jsonl" | cut -d' ' -f1 > "$out.trace.sha256"
+          }
+          capture "$parent"
+          capture "$child"
+          cd "$GITHUB_WORKSPACE/results"
+          node ../bench/scripts/compare-sic-decisions.mjs "$parent.jsonl" "$child.jsonl" > comparison.json
+          python3 -c 'import glob,json; rows=[json.load(open(f)) for f in glob.glob("*.receipt")]; assert len(rows)==2 and all(r["reason"]=="target_levels_completed" and r["levels"]==6 and r["authority"]==r["actions"] for r in rows)'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fogw-course
+          path: |
+            results/*.receipt
+            results/*.trace.sha256
+            results/comparison.json
+          retention-days: 14
