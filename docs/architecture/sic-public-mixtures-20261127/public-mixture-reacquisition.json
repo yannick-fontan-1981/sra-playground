@@ -1,0 +1,58 @@
+{
+  "capture": "trcp-boundary-public-capture.json",
+  "baselineSource": "c70f8027",
+  "role": "An actual channel opening combines two observed source pigments into one measured result",
+  "reuse": "Apply the acquired pigment relation to source assignments in a newly measured channel field",
+  "refutation": "Missing source participation, ambiguous source pair, contradictory pigment or unrelated changed terminal",
+  "acquisitions": [
+    {
+      "ordinal": 37,
+      "level": 2,
+      "baselineRecipes": [],
+      "acquired": [
+        {
+          "from": 8,
+          "other": 11,
+          "result": 12,
+          "before": "observed-public-mixture:epoch:2:revision:37:frame:public-mixture-37",
+          "evidence": "observed-public-mixture:epoch:2:revision:38:frame:public-mixture-38",
+          "control": {
+            "point": [
+              27,
+              36
+            ],
+            "box": [
+              26,
+              35,
+              29,
+              38
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "finalRecipes": [
+    {
+      "from": 8,
+      "other": 11,
+      "result": 12,
+      "before": "observed-public-mixture:epoch:2:revision:37:frame:public-mixture-37",
+      "evidence": "observed-public-mixture:epoch:2:revision:38:frame:public-mixture-38",
+      "control": {
+        "point": [
+          27,
+          36
+        ],
+        "box": [
+          26,
+          35,
+          29,
+          38
+        ]
+      }
+    }
+  ],
+  "firstL3BaselineRecipes": [],
+  "qualification": "Offline replay of public observations only; native replay pending, budgets unchanged"
+}
