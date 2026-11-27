@@ -8,11 +8,11 @@ const marker = 'const agenda = usesAgenda ? selectFrontierStrategy(localQuestion
 
 // L'appel est inséré dans le processus d'expérience, juste avant le résolveur.
 // La sonde ne reçoit que des copies de valeurs déjà calculées.
-export function observeFrontier(receive, root = new URL('../../../', import.meta.url)) {
+export function observeFrontier(receive, root = new URL('../../../', import.meta.url), { includeRanking = false } = {}) {
   const url = new URL('src/logos-engine/v6-observed-frontier.ts', root).href;
-  globalThis[slot] = pre => {
+  globalThis[slot] = (pre, ranking) => {
     const payload = JSON.stringify(pre);
-    receive({ payload, sha256: digest(pre) });
+    receive({ payload, sha256: digest(pre) }, structuredClone(ranking));
   };
   return registerHooks({ load(request, context, next) {
     const loaded = next(request, context);
@@ -28,12 +28,17 @@ export function observeFrontier(receive, root = new URL('../../../', import.meta
         domain: Object.entries(this.nodes[index].actions).map(([key, command]) => ({
           command, tried: this.nodes[index].attempts[key]?.evidence_refs ?? []
         })),
-        routeStatus: localQuestion ? 'unqueried' : route ? 'found' : 'exhausted',
+        routeStatus: access === null ? 'unqueried' : route ? 'found' : 'exhausted',
         remote: questionFields(route?.question),
         path: (route?.path ?? []).map(e => ({
           ref: e.edge_id, source: e.source, target: e.target, action: e.action, witnesses: e.evidence_refs
         }))
-      });
+      }, ${includeRanking ? `{
+        questions: questions.map(q => ({ ref: q.question_ref, priority: q.priority, reason: q.reason,
+          command: q.action, trialsHere: q.input_trials_at_context })),
+        alternatives: ranked ? { leastTried: ranked.leastTried.question_ref,
+          commandOrder: ranked.commandOrder.question_ref, usageGap: ranked.usageGap } : null
+      }` : 'null'});
     }`;
     return { ...loaded, source: source.replace(marker, tap + '\n    ' + marker) };
   } });

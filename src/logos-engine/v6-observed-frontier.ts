@@ -4,6 +4,7 @@ import { canonical, compareUnicode, digest } from './canonical.ts';
 import { pythonEqual as same, pythonTruthy as truth } from './v6-operations.ts';
 import { factConditionHolds } from './v6-drm-projector.ts';
 import type { DrmCondition } from './v6-drm-projector.ts';
+import type { NativeCommand } from './v6-native-types.ts';
 import { predictCandidateRule } from './v6-transition-learning.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
 import { frontierAccessNeed, frontierInformationNeed, frontierStrategyGraph, selectFrontierStrategy } from '../sic/frontier-strategy.ts';
@@ -11,6 +12,29 @@ import { openingClickTargets, openingCuriosityLabel, type OpeningCuriosityMode }
 import { evaluateFrontierLocalRule, defaultFrontierConfiguration, type FrontierConfiguration, type FrontierChoiceEvidence } from '../sic/frontier-configuration.ts';
 
 type R = Record<string, any>;
+/** The frontier stores neutral commands without a data object for plain inputs. */
+type FrontierInput = Pick<NativeCommand, 'action_ref'> & Partial<Pick<NativeCommand, 'data'>>;
+interface LocalTrialDomain {
+  readonly protocol: { readonly level_epoch: number; readonly state: string };
+  readonly actions: Readonly<Record<string, FrontierInput>>;
+  readonly attempts: Readonly<Record<string, { readonly count: number; readonly evidence_refs: readonly string[] }>>;
+}
+export interface LocalTrialQuestion {
+  readonly question_ref: string;
+  readonly context_index: string;
+  readonly action: FrontierInput;
+  readonly reason: string;
+  readonly priority: number;
+  readonly hypothesis_refs: readonly string[];
+  readonly authority_transferred: false;
+  readonly input_trials_at_context: number;
+  readonly candidate_applicability: readonly R[];
+  readonly candidate_applicability_total: number;
+  readonly current_candidate_prediction_admitted: boolean;
+}
+// null means access was never queried. A completed search explicitly returns
+// either a path and its open question, or two nulls for exhaustion.
+type SearchedAccess = readonly [R[], LocalTrialQuestion] | readonly [null, null];
 export const FRONTIER_SCHEMA = 'prototype.observed_frontier.v1';
 const FORBIDDEN = new Set(['game_id', 'game_name', 'planner_name', 'oracle', 'oracle_path', 'winning_route', 'visual_goal']);
 const copy = <T>(value: T): T => structuredClone(value);
@@ -272,8 +296,8 @@ export class ObservedFrontier {
       meaning: 'conditional_question_only_no_acquired_law' };
     this.candidateChecks.set(cacheKey, result); return result;
   }
-  async question(index: string, key: string): Promise<R> {
-    const node = this.nodes[index], action = node.actions[key], epoch = node.protocol.level_epoch;
+  async question(index: string, key: string): Promise<LocalTrialQuestion> {
+    const node: LocalTrialDomain = this.nodes[index], action = node.actions[key]!, epoch = node.protocol.level_epoch;
     const matching = Object.values(this.rules).filter(r => r.action_ref === action.action_ref), checks: R[] = [];
     for (const rule of matching) if (rule.status === 'candidate') checks.push(await this.candidateCheck(index, action, rule));
     const refs = new Set(checks.filter(r => r.admitted).map(r => r.rule_id));
@@ -291,19 +315,19 @@ export class ObservedFrontier {
       candidate_applicability: checks.slice(0, 8), candidate_applicability_total: checks.length, current_candidate_prediction_admitted: !!candidates.length };
   }
   async open(index: string, order: FrontierConfiguration['inputOrder'] = 'least_tried',
-    comparePriority?: (leastTried: R | undefined, commandOrder: R | undefined, usageGap: number) => void): Promise<R[]> {
-    const node = this.nodes[index]; if (terminal(node.protocol.state)) return [];
-    const questions: R[] = [];
+    comparePriority?: (leastTried: LocalTrialQuestion | undefined, commandOrder: LocalTrialQuestion | undefined, usageGap: number) => void): Promise<LocalTrialQuestion[]> {
+    const node: LocalTrialDomain = this.nodes[index]; if (terminal(node.protocol.state)) return [];
+    const questions: LocalTrialQuestion[] = [];
     for (const key of Object.keys(node.actions)) if (!own(node.attempts, key)) questions.push(await this.question(index, key));
-    const counts = new Map<R, number>();
+    const counts = new Map<LocalTrialQuestion, number>();
     if (order === 'least_tried' || comparePriority) {
       for (const q of questions) counts.set(q, this.action_counts[`${node.protocol.level_epoch}:${await frontierActionKey(q.action)}`] ?? 0);
     }
-    const byCommand = (a: R, b: R) => a.priority - b.priority || compareUnicode(canonical(a.action), canonical(b.action));
-    const byUse = (a: R, b: R) => a.priority - b.priority || (counts.get(a) ?? 0) - (counts.get(b) ?? 0) || byCommand(a, b);
+    const byCommand = (a: LocalTrialQuestion, b: LocalTrialQuestion) => a.priority - b.priority || compareUnicode(canonical(a.action), canonical(b.action));
+    const byUse = (a: LocalTrialQuestion, b: LocalTrialQuestion) => a.priority - b.priority || (counts.get(a) ?? 0) - (counts.get(b) ?? 0) || byCommand(a, b);
     const ranked = questions.sort(order === 'least_tried' ? byUse : byCommand);
     if (comparePriority) {
-      const [first] = ranked, alternate = ranked.reduce<R | undefined>((best, current) =>
+      const [first] = ranked, alternate = ranked.reduce<LocalTrialQuestion | undefined>((best, current) =>
         !best || (order === 'least_tried' ? byCommand : byUse)(current, best) < 0 ? current : best, undefined);
       const leastTried = order === 'least_tried' ? first : alternate, commandOrder = order === 'command_order' ? first : alternate;
       comparePriority(leastTried, commandOrder, leastTried && commandOrder ? (counts.get(commandOrder) ?? 0) - (counts.get(leastTried) ?? 0) : 0);
@@ -340,7 +364,7 @@ export class ObservedFrontier {
     return epoch < active.epoch - 1 ? collect(epoch, epoch) : active.bySource;
   }
 
-  async access(start: string, order?: FrontierConfiguration['inputOrder']): Promise<readonly [R[], R] | readonly [null, null]> {
+  async access(start: string, order?: FrontierConfiguration['inputOrder']): Promise<SearchedAccess> {
     const epoch = this.nodes[start].protocol.level_epoch, queue: [string, R[]][] = [[start, []]], seen = new Set([start]); let head = 0;
     const bySource = this.outgoingForEpoch(epoch);
     while (head < queue.length && head < 2048) {
@@ -369,7 +393,7 @@ export class ObservedFrontier {
     const usesConfigurableOrder = usesAgenda && !continuity;
     const order = (usesConfigurableOrder ? options.sic_frontier : undefined)?.inputOrder ?? defaultFrontierConfiguration.inputOrder;
     const comparison: { ranked?: { leastTried: R; commandOrder: R; usageGap: number } } = {};
-    let questions = await this.open(index, order, usesConfigurableOrder ? (leastTried, commandOrder, usageGap) => {
+    let questions: (LocalTrialQuestion & { experiment?: R; control_experiment?: R })[] = await this.open(index, order, usesConfigurableOrder ? (leastTried, commandOrder, usageGap) => {
       if (leastTried && commandOrder) comparison.ranked = { leastTried, commandOrder, usageGap };
     } : undefined);
     if (curiosity !== null) {
@@ -403,7 +427,7 @@ export class ObservedFrontier {
         if (!same(hits, [r.before])) throw new TypeError('Control receiver is stale or ambiguous');
       }
       const q = questions.find(q => same(frontierAction(q.action), frontierAction(bound.action)));
-      if (q) questions = [{ ...q, reason: 'test_control_after_observed_local_change', priority: -1, hypothesis_refs: [control!.rule_ref], control_experiment: copy(control) }, ...questions.filter(other => other !== q)];
+      if (q) questions = [{ ...q, reason: 'test_control_after_observed_local_change', priority: -1, hypothesis_refs: [control!.rule_ref], control_experiment: copy(control!) }, ...questions.filter(other => other !== q)];
     }
     const fixedExperiment = questions[0] && (own(questions[0], 'experiment') || own(questions[0], 'control_experiment'));
     const ranked = comparison.ranked;
@@ -427,7 +451,7 @@ export class ObservedFrontier {
       }
     }
     const localQuestion = options.sic_opening_curiosity === 'active' && opening ? opening.question : normalQuestion;
-    const access = !localQuestion && options.return_episode == null ? await this.access(index, order) : null;
+    const access: SearchedAccess | null = !localQuestion && options.return_episode == null ? await this.access(index, order) : null;
     const route = access?.[0] ? { path: access[0], question: access[1] } : null;
     const agenda = usesAgenda ? selectFrontierStrategy(localQuestion, route, frontierRef(observation)) : null;
     let path: R[], question: R, kind: string;
