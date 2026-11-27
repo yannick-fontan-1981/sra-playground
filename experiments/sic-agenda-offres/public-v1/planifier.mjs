@@ -27,9 +27,46 @@ export function truth(expr, facts) {
 
 const stable = (domain, facts) => domain.stableWhen === true ||
   (!!domain.stableWhen && truth(domain.stableWhen, facts) === true);
-const stateKey = ({ facts, uses }) => key([[...facts].sort(), [...uses].sort()]);
+const stateKey = ({ facts, uses, possible }) => key([[...facts].sort(), [...uses].sort(), [...(possible ?? [])].sort()]);
 
-export function project(model, state, id) {
+function conditionalBudget() {
+  return { cache: new Map(), examined: 0, bounded: 0 };
+}
+
+// Une table publique complète : un sélecteur inconnu, une cible matérielle,
+// des égalités distinctes. Aucun numéro de situation n'entre dans les faits.
+function conditionalWrite(model, state, id, rules, budget) {
+  const cacheKey = key([id, stateKey(state)]);
+  if (budget.cache.has(cacheKey)) return budget.cache.get(cacheKey);
+  const rows = new Map();
+  let driver, target;
+  for (const rule of rules) {
+    const test = rule.when?.eq, write = rule.effect.set;
+    if (!test || !write || test[1]?.ref) return null;
+    const input = key(test[0]), output = key(write[0]);
+    if (driver !== undefined && (input !== driver || output !== target)) return null;
+    if (rows.has(test[1]) && rows.get(test[1]) !== write[1]) return null;
+    driver = input; target = output;
+    rows.set(test[1], write[1]);
+  }
+  const inputDomain = model.domains.get(driver), outputDomain = model.domains.get(target);
+  if (!inputDomain || !stable(inputDomain, state.facts) || !outputDomain) return null;
+  const inputs = state.possible?.get(driver) ?? inputDomain.values;
+  if (inputs.length > 8 || budget.examined + inputs.length > 64) {
+    budget.bounded++;
+    return null;
+  }
+  budget.examined += inputs.length;
+  let assignment = null;
+  if (inputs.every(v => rows.has(v) && outputDomain.values.includes(rows.get(v)))) {
+    const values = new Set(inputs.map(v => rows.get(v)));
+    assignment = { target, values: outputDomain.values.filter(v => values.has(v)) };
+  }
+  budget.cache.set(cacheKey, assignment);
+  return assignment;
+}
+
+export function project(model, state, id, budget = conditionalBudget()) {
   const rules = model.rules.get(id);
   const stop = reason => ({ reason });
   for (const rule of rules) {
@@ -41,9 +78,14 @@ export function project(model, state, id) {
       (value === false ? ' contredite' : ' inconnue'));
   }
   const sets = new Map(), keeps = new Set(), reveals = new Set(), ends = new Set();
+  const conditional = [];
   for (const rule of rules.filter(r => r.effect)) {
     const applies = rule.when ? truth(rule.when, state.facts) : true;
-    if (applies === undefined) return stop('effet conditionnel indéterminé');
+    if (applies === undefined) {
+      if (!rule.effect.set || id === key(model.goal.command)) return stop('effet conditionnel indéterminé');
+      conditional.push(rule);
+      continue;
+    }
     if (!applies) continue;
     const effect = rule.effect;
     if (effect.end) ends.add(effect.end);
@@ -56,11 +98,30 @@ export function project(model, state, id) {
     }
   }
   if (ends.has('failure') || ends.size > 1) return stop('issue défavorable déclarée');
-  const facts = new Map(state.facts), uses = new Map(state.uses);
+  const facts = new Map(state.facts), uses = new Map(state.uses), possible = new Map(state.possible);
   for (const [ref, domain] of model.domains) {
-    if (!stable(domain, state.facts) && !keeps.has(ref)) facts.delete(ref);
+    if (!stable(domain, state.facts) && !keeps.has(ref)) {
+      facts.delete(ref);
+      possible.delete(ref);
+    }
   }
-  for (const [ref, value] of sets) facts.set(ref, value);
+  for (const [ref, value] of sets) { facts.set(ref, value); possible.delete(ref); }
+  if (conditional.length) {
+    if (ends.size || reveals.size) return stop('effet conditionnel associé à une terminaison ou à une lecture');
+    const assignment = conditionalWrite(model, state, id, conditional, budget);
+    if (!assignment) return stop('effet conditionnel indéterminé');
+    const { target, values } = assignment;
+    if (sets.has(target) && values.some(v => sets.get(target) !== v)) return stop('effets simultanés incompatibles');
+    if (keeps.has(target) && values.some(v => state.facts.get(target) !== v)) return stop('conservation incompatible avec une issue');
+    if (values.length === 1) {
+      facts.set(target, values[0]);
+      possible.delete(target);
+    } else {
+      facts.delete(target);
+      possible.set(target, values);
+      if (possible.size > 1) return stop('plusieurs effets non observés');
+    }
+  }
   if (rules.some(r => r.maxUses)) uses.set(id, (uses.get(id) ?? 0) + 1);
   if ((model.goal.maintain ?? []).some(expr => truth(expr, facts) !== true)) return stop('invariant non établi');
   if (ends.size) {
@@ -68,13 +129,14 @@ export function project(model, state, id) {
     return { end: [...ends][0] };
   }
   if (id === key(model.goal.command)) return stop('issue de la commande terminale non décrite');
-  let next = [{ facts, uses, revealed: [] }];
+  let next = [{ facts, uses, possible, revealed: [] }];
   for (const ref of reveals) {
     const domain = model.domains.get(ref);
     if (!domain || !stable(domain, facts)) return stop('domaine ou stabilité de lecture inconnus');
-    const values = facts.has(ref) ? [facts.get(ref)] : domain.values;
+    const values = facts.has(ref) ? [facts.get(ref)] : possible.get(ref) ?? domain.values;
     next = next.flatMap(branch => values.map(value => ({
       facts: new Map(branch.facts).set(ref, value), uses,
+      possible: new Map([...branch.possible].filter(([k]) => k !== ref)),
       revealed: [...branch.revealed, { ref: JSON.parse(ref), value }],
     })));
   }
@@ -86,12 +148,13 @@ export function project(model, state, id) {
 export function decide(model, state, evidence = [], horizon = 10) {
   if (!Number.isSafeInteger(horizon) || horizon < 1) throw new Error('Horizon invalide');
   const costs = new Map(), memo = new Map(), ids = [...model.commands.keys()].sort();
+  const budget = conditionalBudget();
   let acceptAttempt = false;
-  const transitions = new Map(ids.map(id => [id, project(model, state, id)]));
+  const transitions = new Map(ids.map(id => [id, project(model, state, id, budget)]));
   function reachable(s, depth) {
     if (!depth) return false;
     const cacheKey = key([stateKey(s), depth]);
-    if (!memo.has(cacheKey)) memo.set(cacheKey, ids.some(id => canFinish(project(model, s, id), depth)));
+    if (!memo.has(cacheKey)) memo.set(cacheKey, ids.some(id => canFinish(project(model, s, id, budget), depth)));
     return memo.get(cacheKey);
   }
   function canFinish(t, depth) {
@@ -126,6 +189,7 @@ export function decide(model, state, evidence = [], horizon = 10) {
     qualification: !chosen ? 'indéterminé' : acceptAttempt ? 'tentative terminale sous conditions nécessaires' : 'succès décrit par les règles',
     reason: chosen ? decision.reason : 'aucune continuation justifiée dans l’horizon ' + horizon,
     finalists: [...costs.keys()].map(JSON.parse), tie: decision.tie, evidence: decision.evidence,
+    conditionalEffects: { examined: budget.examined, bounded: budget.bounded },
     candidates: ids.map(id => ({ command: model.commands.get(id).command, reason: transitions.get(id).reason ??
       (costs.has(id) ? 'continuation minimale' : 'aucune continuation aussi courte établie') })) };
 }
