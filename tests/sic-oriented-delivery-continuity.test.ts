@@ -605,3 +605,54 @@ for (const scenario of ['divided', 'rotated', 'unlearned-shell', 'ambiguous-peer
     assert.equal((room.family.state().state as Record<string, any>).epoch, 2);
     assert.equal((room.family.state().state as Record<string, any>).geometry.initial_boxes.length, 3);
   });
+
+for (const scenario of ['ordinary', 'rotated', 'changed-target', 'unmatched-peer', 'blocked-landing'] as const)
+  test('a sector retreat continues only after the peer delivery is revalidated: ' + scenario, async () => {
+    const rotated = scenario === 'rotated';
+    const room = await witnessedRoom(rotated);
+    const learned = room.learned;
+    const target = room.at([8, 2]);
+    const receiver = { cells: [5, 6, 7, 8, 9].map(x => room.at([x, 5]).join(',')), targets: [room.at([9, 5])], ports: [] };
+    room.family.restore({ state: { ...learned, held: null,
+      free: { ...learned.free, [rotated ? 'ACTION3' : 'ACTION2']: room.vector([0, 1]) },
+      sectorNetwork: { sending: [target.join(',')], localTargets: [target], receiving: [receiver] },
+    } });
+    const service = new V6AgentService(() => new NativeV6Runtime({ families: [room.family],
+      sourceDigest: 'validated-sector-retreat', maxPointOccurrences: 250 }));
+    const sessionId = 'sector-retreat-' + scenario;
+    const startY = rotated ? 6 : 9;
+    const frame = (index: number) => {
+      const rows = room.frame(2 + index, { ownPose: [0, startY + index], ownFace: [0, 1], ownCargo: [8, 2],
+        ownShell: index === 1 && scenario === 'changed-target' ? room.contactInk : room.shell,
+        ...(index === 1 && scenario === 'unmatched-peer' ? { unpairedShift: true } : {}),
+      });
+      if (index === 1 && scenario === 'blocked-landing') {
+        const { pitch, phase } = learned.geometry;
+        const [u, v] = room.at([0, startY + 2]);
+        for (let y = 0; y < pitch; y++) for (let x = 0; x < pitch; x++) {
+          rows[phase[1] + v * pitch + y]![phase[0] + u * pitch + x] = 6;
+        }
+      }
+      return toV6PublicObservation(room.packet(rows), index);
+    };
+    let result = await service.handle({ type: 'init', sessionId, sequence: 0, observation: frame(0),
+      budgets: { targetLevels: 2, levelActionCaps: [2, 40] } });
+    assert.ok(result.ticket, result.snapshot.reason);
+    assert.equal(result.ticket.actionRef, rotated ? 'ACTION3' : 'ACTION2');
+    assert.equal((result.snapshot.proposal as Record<string, any>).actions.length, 2);
+    result = await service.handle({ type: 'advance', sessionId, sequence: 1, ticketId: result.ticket.id, executionMs: 1, observation: frame(1) });
+    assert.equal(result.snapshot.trace.findLast(event => event.kind === 'actual_outcome')?.matched, true);
+    if (scenario !== 'ordinary' && scenario !== 'rotated') {
+      assert.equal(result.ticket, null);
+      assert.equal(result.snapshot.trace.findLast(event => event.kind === 'sealed_prefix')?.acquired_actions, 1);
+      return;
+    }
+    assert.ok(result.ticket);
+    assert.equal(result.ticket.actionIndex, 1);
+    assert.equal(result.ticket.actionRef, rotated ? 'ACTION3' : 'ACTION2');
+    result = await service.handle({ type: 'advance', sessionId, sequence: 2, ticketId: result.ticket.id, executionMs: 1, observation: frame(2) });
+    assert.equal(result.snapshot.trace.findLast(event => event.kind === 'actual_outcome')?.matched, true);
+    assert.equal(result.snapshot.trace.filter(event => event.kind === 'sealed_prefix').length, 1);
+    assert.equal(result.snapshot.trace.findLast(event => event.kind === 'sealed_prefix')?.acquired_actions, 2);
+    assert.equal((room.family.state().state as Record<string, any>).waits, 2);
+  });

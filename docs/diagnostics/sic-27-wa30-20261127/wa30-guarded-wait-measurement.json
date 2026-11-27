@@ -1,0 +1,24 @@
+{
+  "sourceBefore": "ac7790f07467d5a92812f0b50a5deb58d8fcf83c",
+  "scope": "public owner-only L9 diagnostic",
+  "commands": 66,
+  "trajectorySHA256": "b178530b0ee404407ea888546486a34f23f7f648aacfc97c5e6540f8d3908e87",
+  "continuedBefore": 19,
+  "continuedAfter": 21,
+  "changes": [
+    {
+      "command": 65,
+      "input": "ACTION2",
+      "indexBefore": 0,
+      "indexAfter": 1,
+      "return": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:9:revision:613:frame:61fd3d1407423c49"
+    },
+    {
+      "command": 66,
+      "input": "ACTION2",
+      "indexBefore": 0,
+      "indexAfter": 2,
+      "return": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:9:revision:614:frame:be83aab95e79fe28"
+    }
+  ]
+}

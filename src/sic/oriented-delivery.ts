@@ -41,7 +41,7 @@ type WalkStep = { input: string; before: Scene; after: Scene; cargoBefore: Nativ
   withdrawnContact?: NativePoint };
 type PeerGuard = { landings: { point: NativePoint; pixels: number[] | null }[][]; floorSamples: string[]; protectedCells: NativePoint[] };
 type Proposal = NativeProposal & { local: State; scene: Scene; step: Step; needId: string; attempt: string; walk?: WalkStep[]; peerGuard?: PeerGuard;
-  sectorWalk?: true };
+  sectorWalk?: true; deliveryWait?: true };
 
 const labels = { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0] } as const;
 const sectorInterceptionRange = 8;
@@ -743,14 +743,18 @@ function planRelay(local: State, scene: Scene, rows: NativeRows, commands: Reado
     target: parts.find(site => !geometry.targets.some(goal => same(site, goal))) ?? null, waitForTransport: true };
 }
 
-function planSectorRelay(local: State, scene: Scene, commands: Readonly<Record<string, NativePoint>>): Step | null {
-  const network = local.sectorNetwork!, floor = new Set(network.sending), parts = positions(scene);
-  const held = local.held, current: Move = { pose: scene.pose, face: scene.face, cargo: held };
-  const pendingPorts = network.receiving.flatMap(sector => {
+function pendingSectorPorts(network: SectorNetwork, parts: readonly NativePoint[], held: NativePoint | null) {
+  return network.receiving.flatMap(sector => {
     const cells = new Set([...sector.cells, ...sector.ports.map(port => key(port.cell))]);
     const loaded = parts.filter(part => !same(part, held) && cells.has(key(part))).length;
     return loaded < sector.targets.length ? sector.ports : [];
   });
+}
+
+function planSectorRelay(local: State, scene: Scene, commands: Readonly<Record<string, NativePoint>>): Step | null {
+  const network = local.sectorNetwork!, floor = new Set(network.sending), parts = positions(scene);
+  const held = local.held, current: Move = { pose: scene.pose, face: scene.face, cargo: held };
+  const pendingPorts = pendingSectorPorts(network, parts, held);
   const portsByFace = new Map<string, Set<string>>();
   for (const port of pendingPorts) {
     const direction = key(port.face), cells = portsByFace.get(direction) ?? new Set<string>();
@@ -784,6 +788,46 @@ function planSectorRelay(local: State, scene: Scene, commands: Readonly<Record<s
   const ahead = add(scene.pose, face), pose = floor.has(key(ahead)) && !blocked.includes(key(ahead)) ? ahead : scene.pose;
   return { input, intent: 'motion', prediction: { pose, face, cargo: null },
     target: parts.find(site => !local.geometry.targets.some(goal => same(site, goal))) ?? null, waitForTransport: true };
+}
+
+const deliveryWaitAttempt = (scene: Scene, input: string) => JSON.stringify([scene.pose, scene.face, scene.boxes, null, input]);
+
+function confirmedDeliveryWait(local: State, scene: Scene, rows: NativeRows,
+  commands: Readonly<Record<string, NativePoint>>): Step | null {
+  const network = local.sectorNetwork, localTargets = network?.localTargets;
+  if (!network || !localTargets?.length || local.held || local.interference || sceneHeld(scene)
+    || (local.stalledWaits ?? 0) >= 6 || local.count >= 120) return null;
+  const parts = positions(scene), reserved = reservedTransports(local);
+  const localParts = parts.filter(part => network.sending.includes(key(part)));
+  if (!localParts.length || pendingSectorPorts(network, parts, null).length
+    || localParts.some(part => !localTargets.some(target => same(target, part))
+      && !reserved.some(item => same(item.box, part)))) return null;
+  return allowDelivery(local, scene, rows, commands, reserved, candidate => local.tried.includes(deliveryWaitAttempt(scene, candidate.input)));
+}
+
+function deliveryWaitPrefix(local: State, scene: Scene, rows: NativeRows,
+  commands: Readonly<Record<string, NativePoint>>, input: string, remaining: number): WalkStep[] {
+  const direction = local.free[input];
+  if (!direction || Math.abs(direction[0]) + Math.abs(direction[1]) !== 1) return [];
+  const walk: WalkStep[] = [];
+  const limit = Math.min(remaining, maximumCommittedActions, 120 - local.count);
+  for (let before = scene; walk.length < limit;) {
+    const step = confirmedDeliveryWait(local, before, rows, commands);
+    if (step?.input !== input || !step.prediction || !same(step.prediction.face, direction)
+      || !same(step.prediction.pose, add(before.pose, direction))) break;
+    const after = { ...before, pose: step.prediction.pose, face: direction };
+    walk.push({ input, before, after, cargoBefore: null, cargoAfter: null });
+    before = after;
+  }
+  return walk;
+}
+
+function deliveryWaitProgress(local: State, old: Scene, actual: Scene, before: NativeObservation, after: NativeObservation) {
+  const peerChanged = local.relay
+    ? !same(externalCarriers(before, local).get(local.relay.carrier) ?? null, externalCarriers(after, local).get(local.relay.carrier) ?? null)
+    : JSON.stringify(sectorCarriers(before, local)) !== JSON.stringify(sectorCarriers(after, local));
+  const changedParts = JSON.stringify(old.boxes) !== JSON.stringify(actual.boxes);
+  return { waits: (local.waits ?? 0) + 1, stalledWaits: changedParts || peerChanged ? 0 : (local.stalledWaits ?? 0) + 1 };
 }
 
 function relayMatches(proposal: Proposal, scene: Scene): boolean {
@@ -921,7 +965,13 @@ function peerRouteReturn(proposal: Proposal, walk: WalkStep, before: NativeObser
   if (walk.withdrawnContact) expected[key(walk.withdrawnContact)] = local.geometry.rest_shell;
   if (walk.cargoBefore) delete expected[key(walk.cargoBefore)];
   if (walk.cargoAfter) expected[key(walk.cargoAfter)] = walk.after.boxes[key(walk.cargoAfter)]!;
-  const external = transportReturn(before, after, { ...local, held: walk.cargoBefore }, old, actual);
+  const transportState = { ...local, held: walk.cargoBefore };
+  return peerBoxesMatch(transportState, old, actual, expected, transportReturn(before, after, transportState, old, actual),
+    couplingReturns(before, after, transportState, old, actual));
+}
+
+function peerBoxesMatch(local: State, old: Scene, actual: Scene, expected: Scene['boxes'],
+  external: ReturnType<typeof transportReturn>, couplings: ReturnType<typeof couplingReturns>): boolean {
   for (const shift of external.shifts) {
     const carrier = external.transports.find(item => same(item.box, shift.to));
     if (!carrier || !local.transportCarriers?.includes(carrier.carrier)) return false;
@@ -929,7 +979,7 @@ function peerRouteReturn(proposal: Proposal, walk: WalkStep, before: NativeObser
     delete expected[key(shift.from)];
     expected[key(shift.to)] = actual.boxes[key(shift.to)]!;
   }
-  for (const change of couplingReturns(before, after, { ...local, held: walk.cargoBefore }, old, actual)) {
+  for (const change of couplings) {
     expected[key(change.box)] = change.shell;
   }
   return Object.keys(expected).length === Object.keys(actual.boxes).length
@@ -953,6 +1003,8 @@ function confirmsInterception(proposal: Proposal, rows: NativeRows, scene: Scene
 export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryId): NativeFamily<Proposal> {
   let state: State | null = null;
   let decide: NativeProgramHandle | undefined;
+  // The next guard uses the actual public return. Record reconciles the executed prefix.
+  const deliveryWaitReturns = new WeakMap<Proposal, { index: number; ref: string; state: State }>();
   return {
     id: family,
     async attachPrograms(registry) {
@@ -1130,7 +1182,11 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
         ? walkPrefix(step, scene, local, remaining, observation) : [];
       const cooperative = !exclusive || handsOff;
       let walk = prefix.length > 1 || cooperative && prefix.length ? prefix : undefined;
-      let peerGuard = walk && cooperative ? guardPeerRoute(rows, local, scene, step, walk) : undefined;
+      const waiting = step.waitForTransport && !sectorStep && !timedInterception
+        ? deliveryWaitPrefix(local, scene, rows, commands, step.input, remaining) : [];
+      const deliveryWait = waiting.length > 1;
+      if (deliveryWait) walk = waiting;
+      let peerGuard = walk && cooperative && !deliveryWait ? guardPeerRoute(rows, local, scene, step, walk) : undefined;
       if (peerGuard) {
         const { landings, floorSamples } = peerGuard;
         const blocked = landings.findIndex(sites => sites.some(({ pixels }) =>
@@ -1149,6 +1205,7 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
         steps: actions.map((action, index) => ({ action, expected_after: walk?.[index]?.after ?? prediction })),
         ...(walk ? { walk } : {}), ...(peerGuard ? { peerGuard } : {}),
         ...(sectorWalk && peerGuard ? { sectorWalk: true } : {}),
+        ...(deliveryWait ? { deliveryWait: true } : {}),
         local, scene, step, needId: need.id, attempt: unique(step),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
@@ -1176,6 +1233,12 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
     },
     before(proposal, index, packet, observation) {
       const { local } = proposal, step = proposal.walk?.[index];
+      if (proposal.deliveryWait && index > 0) {
+        const verified = deliveryWaitReturns.get(proposal);
+        const admitted = !!step && verified?.index === index && verified.ref === observation.observation_ref
+          && observation.available_action_refs.includes(step.input);
+        return { admitted, reason: admitted ? 'peer_delivery_and_retreat_revalidated' : 'peer_delivery_premise_changed' };
+      }
       const settledParallel = !step || !local.parallel || !carrierForms(packet.frame_rows, local.geometry, local.parallel.ink).length;
       if (step && proposal.peerGuard) {
         const guard = proposal.peerGuard, actual = orientedCouplingScene(packet.frame_rows, local.geometry, local.color) as Scene | null;
@@ -1200,6 +1263,31 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const walk = proposal.walk?.[index];
       if (walk) {
         const { local } = proposal;
+        if (proposal.deliveryWait) {
+          const prior = deliveryWaitReturns.get(proposal);
+          const basis = index === 0 ? local : prior?.index === index && prior.ref === before.observation_ref ? prior.state : null;
+          const old = orientedCouplingScene(first, local.geometry, local.color) as Scene | null;
+          const actual = orientedCouplingScene(second, local.geometry, local.color) as Scene | null;
+          const matched = before.state === after.state && matchesOwnRoute(old, walk.before, null) && matchesOwnRoute(actual, walk.after, null);
+          let continues = false;
+          const following = proposal.walk?.[index + 1];
+          if (matched && basis && following && old && actual && before.level_epoch === after.level_epoch) {
+            const external = transportReturn(before, after, basis, old, actual);
+            const couplings = couplingReturns(before, after, basis, old, actual);
+            const protectedTargets = basis.sectorNetwork?.localTargets ?? [];
+            if (protectedTargets.every(site => old.boxes[key(site)] === undefined || old.boxes[key(site)] === actual.boxes[key(site)])
+              && peerBoxesMatch(basis, old, actual, { ...old.boxes }, external, couplings)) {
+              const next = { ...basis, count: basis.count + 1, transports: [...external.transports, ...couplings.filter(change => change.attached)],
+                tried: [...basis.tried, deliveryWaitAttempt(old, walk.input)], ...deliveryWaitProgress(basis, old, actual, before, after) };
+              const commands = { ...labels, ...next.free };
+              const choice = confirmedDeliveryWait(next, actual, second, commands);
+              continues = choice?.input === following.input && !!choice.prediction
+                && same(choice.prediction.pose, following.after.pose) && same(choice.prediction.face, following.after.face);
+              if (continues) deliveryWaitReturns.set(proposal, { index: index + 1, ref: after.observation_ref, state: next });
+            }
+          }
+          return { matched, seal_prefix: !continues, reason: matched ? 'observed_parallel_delivery_turn' : 'relay_carrier_prediction_contradicted' };
+        }
         let matched = false, interceptionReached = false;
         if (before.state === after.state && (!local.parallel || !carrierForms(second, local.geometry, local.parallel.ink).length)) {
           const actual = orientedCouplingScene(second, local.geometry, local.color) as Scene | null;
@@ -1274,7 +1362,7 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const local = index > 0 ? state ?? proposal.local : proposal.local;
       const walk = proposal.walk?.[index];
-      const old = proposal.peerGuard ? orientedCouplingScene(first, local.geometry, local.color) as Scene | null
+      const old = proposal.peerGuard || proposal.deliveryWait ? orientedCouplingScene(first, local.geometry, local.color) as Scene | null
         : walk?.before ?? proposal.scene;
       if (!old) return { events: [] };
       const step = walk ? { ...proposal.step, input: walk.input,
@@ -1342,14 +1430,7 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       if (local.relay || local.sectorNetwork || local.passage) {
         const matched = relayMatches({ ...proposal, scene: old, local, step }, scene);
         next.stopped = !local.passage && !matched;
-        if (step.waitForTransport) {
-          const peerChanged = local.relay
-            ? !same(externalCarriers(before, local).get(local.relay.carrier) ?? null, externalCarriers(after, local).get(local.relay.carrier) ?? null)
-            : JSON.stringify(sectorCarriers(before, local)) !== JSON.stringify(sectorCarriers(after, local));
-          const changedParts = JSON.stringify(old.boxes) !== JSON.stringify(scene.boxes);
-          next.waits = (local.waits ?? 0) + 1;
-          next.stalledWaits = changedParts || peerChanged ? 0 : (local.stalledWaits ?? 0) + 1;
-        }
+        if (step.waitForTransport) Object.assign(next, deliveryWaitProgress(local, old, scene, before, after));
         if (step.intent === 'attach' || step.intent === 'release' || local.held) {
           next.held = scene.boxes[key(ahead)] === scene.face_value ? ahead : null;
           if (next.held && moved) next.loaded = { ...local.loaded, [action.action_ref]: delta };
