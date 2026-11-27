@@ -326,27 +326,23 @@ function rebindDividedCargo(current: Geometry, rows: NativeRows, observation: Na
   return { ...receipt.scene, refs: [receipt.beforeRef, receipt.afterRef] };
 }
 
-function shortest(start: Move, fixed: Set<string>, floor: Set<string>, vectors: Readonly<Record<string, NativePoint>>,
-  accepts: (state: Move) => boolean, cargoFloor = floor): { step: Step | null; end: Move; length: number } | null {
+type RouteNode = { state: Move; step: Motion | null; parent: RouteNode | null; length: number };
+const poseAndFace = (pose: NativePoint, face: NativePoint) => key(pose) + '|' + key(face);
+
+function* routeNodes(start: Move, fixed: ReadonlySet<string>, floor: ReadonlySet<string>,
+  vectors: Readonly<Record<string, NativePoint>>, cargoFloor = floor): Generator<RouteNode, void, unknown> {
   const moves = Object.entries(vectors);
-  const identity = ({ pose, face, cargo }: Move) => key(pose) + '|' + key(face) + '|' + (cargo ? key(cargo) : '');
-  const occupiable = (point: NativePoint, surface: Set<string>) => {
+  const identity = ({ pose, face, cargo }: Move) => poseAndFace(pose, face) + '|' + (cargo ? key(cargo) : '');
+  const occupiable = (point: NativePoint, surface: ReadonlySet<string>) => {
     const cell = key(point);
     return surface.has(cell) && !fixed.has(cell);
   };
-  const queue: { state: Move; step: Motion | null; parent: number; length: number }[] =
-    [{ state: start, step: null, parent: -1, length: 0 }];
+  const queue: RouteNode[] = [{ state: start, step: null, parent: null, length: 0 }];
   const discovered = new Set([identity(start)]);
   for (let index = 0; index < queue.length; index++) {
-    const { state, length } = queue[index]!;
-    if (accepts(state)) {
-      const route: Motion[] = [];
-      for (let entry = queue[index]!; entry.step; entry = queue[entry.parent]!) route.push(entry.step);
-      route.reverse();
-      const step: Step | null = route[0] ? { ...route[0], intent: 'motion', target: null, route } : null;
-      return { step, end: state, length };
-    }
-    if (index + 1 >= 2048) return null;
+    const parent = queue[index]!, { state, length } = parent;
+    yield parent;
+    if (index + 1 >= 2048) return;
     for (const [input, delta] of moves) {
       const pose = add(state.pose, delta), face = state.cargo ? state.face : delta;
       const cargo = state.cargo ? add(state.cargo, delta) : null;
@@ -354,10 +350,49 @@ function shortest(start: Move, fixed: Set<string>, floor: Set<string>, vectors: 
       const next = identity(prediction);
       if (discovered.has(next)) continue;
       discovered.add(next);
-      queue.push({ state: prediction, step: { input, prediction }, parent: index, length: length + 1 });
+      queue.push({ state: prediction, step: { input, prediction }, parent, length: length + 1 });
     }
   }
+}
+
+function routeTo(node: RouteNode): { step: Step | null; end: Move; length: number } {
+  const route: Motion[] = [];
+  for (let entry: RouteNode | null = node; entry?.step; entry = entry.parent) route.push(entry.step);
+  route.reverse();
+  const step: Step | null = route[0] ? { ...route[0], intent: 'motion', target: null, route } : null;
+  return { step, end: node.state, length: node.length };
+}
+
+function shortest(start: Move, fixed: ReadonlySet<string>, floor: ReadonlySet<string>, vectors: Readonly<Record<string, NativePoint>>,
+  accepts: (state: Move) => boolean, cargoFloor = floor): ReturnType<typeof routeTo> | null {
+  for (const node of routeNodes(start, fixed, floor, vectors, cargoFloor)) {
+    if (accepts(node.state)) return routeTo(node);
+  }
   return null;
+}
+
+function cargoApproaches(scene: Scene, obstacles: ReadonlySet<string>, floor: ReadonlySet<string>,
+  commands: Readonly<Record<string, NativePoint>>) {
+  // Every unloaded approach sees the same floor and treats every crate as an obstacle.
+  const frontier = routeNodes({ pose: scene.pose, face: scene.face, cargo: null }, obstacles, floor, commands);
+  const visited = new Map<string, RouteNode>(), paths = new Map<string, ReturnType<typeof routeTo>>();
+  return (part: NativePoint, face: NativePoint): ReturnType<typeof routeTo> | null => {
+    const goal = poseAndFace(sub(part, face), face);
+    const path = paths.get(goal);
+    if (path) return path;
+    let node = visited.get(goal);
+    while (!node) {
+      const found = frontier.next();
+      if (found.done) return null;
+      const { pose, face } = found.value.state;
+      const position = poseAndFace(pose, face);
+      visited.set(position, found.value);
+      if (position === goal) node = found.value;
+    }
+    const result = routeTo(node);
+    paths.set(goal, result);
+    return result;
+  };
 }
 
 function deliveryFloor(g: Geometry, scene: Scene, rows: NativeRows) {
@@ -405,6 +440,7 @@ function planDelivery(local: State, scene: Scene, rows: NativeRows, commands: Re
   const goal = new Set(g.targets.map(key));
   const sending = local.sectorNetwork?.localTargets?.length ? new Set(local.sectorNetwork.sending) : null;
   const floor = sending ?? deliveryFloor(g, scene, rows);
+  const approachTo = held ? null : cargoApproaches(scene, new Set([...parts, ...blockers].map(key)), floor, commands);
   const choices: { step: Step; length: number; index: number; target: NativePoint; face: NativePoint }[] = [];
   for (const [index, part] of parts.entries()) {
     if (held ? !same(held, part) : goal.has(key(part)) || reserved.has(key(part))) continue;
@@ -415,9 +451,8 @@ function planDelivery(local: State, scene: Scene, rows: NativeRows, commands: Re
       for (const face of held ? [scene.face] : Object.values(commands)) {
         let start: Move = { pose: scene.pose, face: scene.face, cargo: held };
         let length = 0, opening: Step | null = null;
-        if (!held) {
-          const approach = shortest(start, new Set([...fixed, key(part)]), floor, commands,
-            state => same(state.pose, sub(part, face)) && same(state.face, face));
+        if (approachTo) {
+          const approach = approachTo(part, face);
           if (!approach) continue;
           start = { ...approach.end, cargo: part };
           length = approach.length + 1;
@@ -716,18 +751,23 @@ function planSectorRelay(local: State, scene: Scene, commands: Readonly<Record<s
     const loaded = parts.filter(part => !same(part, held) && cells.has(key(part))).length;
     return loaded < sector.targets.length ? sector.ports : [];
   });
+  const portsByFace = new Map<string, Set<string>>();
+  for (const port of pendingPorts) {
+    const direction = key(port.face), cells = portsByFace.get(direction) ?? new Set<string>();
+    cells.add(key(port.cell));
+    portsByFace.set(direction, cells);
+  }
   const cargoFloor = new Set([...floor, ...pendingPorts.map(port => key(port.cell))]);
+  const approachTo = held ? null : cargoApproaches(scene, new Set(parts.map(key)), floor, commands);
   const choices = (held ? [held] : parts.filter(part => floor.has(key(part)))).flatMap(part => {
     const fixed = new Set(parts.filter(other => !same(part, other)).map(key));
-    const contact = (face: NativePoint) => same(current.face, face) && same(add(current.pose, face), part);
     return (held ? [scene.face] : Object.values(commands)).flatMap(face => {
-      if (!pendingPorts.some(port => same(port.face, face))) return [];
-      const approach = held || contact(face) ? { end: current, length: 0, step: null }
-        : shortest(current, new Set([...fixed, key(part)]), floor, commands,
-          move => same(move.face, face) && same(add(move.pose, face), part));
+      const ports = portsByFace.get(key(face));
+      if (!ports) return [];
+      const approach = approachTo ? approachTo(part, face) : { end: current, length: 0, step: null };
       if (!approach) return [];
       const stage = shortest({ ...approach.end, cargo: part }, fixed, floor, commands,
-        move => pendingPorts.some(port => same(port.face, face) && same(move.cargo, port.cell)), cargoFloor);
+        move => !!move.cargo && ports.has(key(move.cargo)), cargoFloor);
       if (!stage?.end.cargo) return [];
       const step: Step = approach.step ?? (held ? stage.step ?? { input: 'ACTION5', intent: 'release', prediction: null, target: stage.end.cargo }
         : { input: 'ACTION5', intent: 'attach', prediction: null, target: part });

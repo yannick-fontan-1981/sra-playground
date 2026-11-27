@@ -1,0 +1,21 @@
+{
+  "sourceBefore": "01226397e5b868d2d511d4b385f5f8c109cb1374",
+  "scope": "public owner-only L9 diagnostic",
+  "commands": 66,
+  "continued": 19,
+  "trajectoryAndTicketIndexSHA256": "999bae2638dd55f17267103729e11b59d0287c938a9ba60941c39cea3fd1205a",
+  "results": [
+    {
+      "name": "baseline",
+      "searches": 1717,
+      "visited": 323166,
+      "sourceSHA256": "06d169a7eec4ebcac5d9b881207465a9b2e90f002b4ce4a3b28d182e270b0aeb"
+    },
+    {
+      "name": "mutualized",
+      "searches": 799,
+      "visited": 61596,
+      "sourceSHA256": "62a3b4aaed19a581c9086caabda002b6159b9211cd4fec200c50b76b925d20e2"
+    }
+  ]
+}
