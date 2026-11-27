@@ -114,6 +114,66 @@ Les modes changent la préférence **entre offres admissibles**. Les gardes de p
 3. **Activer le classement local uniquement pour le besoin qualifié.** Garder la priorité historique comme départage en cas d’égalité. Vérifier l’ordre d’exécution, les refus, les preuves conservées et les retours sur les parcours protégés. Une nouvelle préférence doit avoir une divergence attendue et un témoin de transfert.
 4. **Ouvrir la composition récursive après cette parité.** Autoriser un fournisseur à demander un sous-objectif typé. Étendre la sélection à un second besoin quand on peut montrer qu’un retour de l’enfant débloque correctement le parent et que les autres offres restent hors du périmètre de concurrence. Répéter ce portage par besoin.
 
+## Organisation parallèle et récursive des lots
+
+Chaque lot porte **une question vérifiable**. Il peut être lancé depuis une révision figée et rendre un résultat exploitable indépendamment de l’outil ou de la fenêtre qui l’a exécuté. Le même contrat s’applique à un chantier entier, à un sous-chantier et à un cas de test isolé.
+
+| Entrée du lot | Retour attendu |
+| --- | --- |
+| Identifiant, parent, objectif et condition de réussite. | Statut du besoin et décision que le résultat permet de prendre. |
+| Révision de référence, cas ou générateur, graine, paramètres et révision du candidat si elle existe. | Révisions et paramètres effectivement utilisés, commandes d’essai et liens vers les preuves. |
+| État de départ, acquis à préserver, hypothèses ouvertes et budget. | Premier écart observé, preuve ou motif d’abstention, et budget consommé. |
+| Interfaces concernées et résultat attendu des éventuels enfants. | Résultats des enfants repris, dépendances restantes et prochaine expérience pertinente. |
+
+- **Paralléliser les questions indépendantes.** Ouvrir en même temps des lots sur la mesure du contrôle, les cas d’accès, les contre-exemples temporels et le rapport de comparaison. Chacun prend la même référence et travaille dans sa branche ou son checkout quand il écrit du code. Les cas indépendants peuvent être répartis entre plusieurs exécuteurs. Chaque comparaison garde la référence et le candidat sur le même cas, avec le même départ, la même graine et le même budget.
+- **Reprendre sans perdre le travail.** Identifier les comparaisons par leurs entrées figées. Conserver leur état et leur résultat hors de la conversation, pour qu’un autre exécuteur puisse reprendre un cas interrompu et qu’un résultat déjà reçu soit compté une seule fois. Agréger les rapports par identifiant de cas, puis comparer les écarts. Le pilote dispose déjà d’une file SQLite reprenable pour ses comparaisons appariées. [Campagne générée du pilote](https://github.com/yannick-fontan-1981/sra-playground/blob/145b8c764477fe913709e999747a0f8db125d060/docs/architecture/sic-strategy-transfer-pilot.md#campagne-générée)
+- **Décomposer quand une preuve manque.** Un lot parent peut lancer plusieurs enfants indépendants et n’attendre que les résultats nécessaires à sa décision. Par exemple, « rendre contrôle → accès transférable » ouvre un enfant pour le cas nominal, un pour les rôles ambigus et un pour les retours contradictoires. Un enfant peut à son tour isoler un contre-exemple. Les descendants héritent des acquis à préserver et disposent d’une part du budget du parent. La décomposition s’arrête sur une preuve, une abstention motivée, un cas déjà traité ou une borne atteinte.
+- **Préserver un seul ordre d’exécution par partie.** Les hypothèses, les offres et les rejeux isolés peuvent être étudiés en parallèle. Sur une partie réelle, l’agenda retient un préfixe justifié et le moteur natif conserve l’autorité sur les commandes et leurs retours.
+
+## Paramétrer la campagne et faire évoluer le design
+
+| Niveau | Réglages à rendre explicites et versionnables |
+| --- | --- |
+| Cas | Départ, mécanismes combinés, visibilité, alphabet de commandes, délais, perturbations et graine. |
+| Recherche | Budget d’actions et de calcul, profondeur, nombre d’offres examinées et conditions de reprise. |
+| Politique d’agenda | Besoins admissibles, ordre des critères selon le mode, traitement des égalités et sélection des fournisseurs. |
+| Design des stratégies | Forme des preuves, conditions de déclenchement, résultats qu’une stratégie peut fournir et règles de création d’un sous-objectif. |
+| Qualification | Parcours protégés, lots réservés, écarts attendus et seuils de couverture ou de coût. |
+
+Les profils de paramètres permettent de varier un choix sans réécrire le moteur. Une proposition qui change le design reçoit sa propre version de contrat. Par exemple, on peut comparer « départager d’abord deux hypothèses » et « rechercher d’abord un accès à partir des effets attestés » au même nœud. Le rapport doit montrer quelles offres étaient admissibles, quelle règle les a départagées et quel retour a confirmé ou contredit le choix. Les deux variantes respectent les mêmes obligations de preuve, de préservation et d’autorisation native.
+
+Chaque profil est associé à sa révision, à ses cas de référence et à une trace de décision lisible. Après un essai, garder le profil précédent comme point de comparaison. Quand la modification change une garde, vérifier aussi les cas qui doivent rester indéterminés ou s’abstenir. Quand elle élargit une composition, vérifier la réutilisation sur un mécanisme réservé.
+
+## Lancer un lot dans une fenêtre ChatGPT ordinaire
+
+Le lancement doit tenir dans **un seul message à copier-coller**. Le message porte le besoin, la référence et la forme du retour. Une fenêtre peut préparer un lot, une autre examiner les contre-exemples, une troisième vérifier un rapport fourni. Chaque retour indique l’identifiant et le parent du lot. Le premier retour est un livrable utile même quand la fenêtre ne dispose que du texte et des pièces qu’on lui donne.
+
+### Message de lancement à copier
+
+~~~text
+Chantier SIC sur les stratégies composables
+Lot : controle-acces / contrat
+Parent : controle-acces
+Référence du code : 4313d7ce41505cece5f397dc8125b430697176ed
+Objectif : définir et éprouver le passage « effet de commande attesté → recherche d’accès ».
+Cas d’appui : AS66 et G50T. Prévoir un cas de transfert distinct, un rôle ambigu et un retour contradictoire.
+À préserver : les commandes et les retours de référence, les motifs de refus et les preuves qui influencent la suite.
+
+Commence ce lot dans cette conversation. Identifie le premier fait qui rend le passage applicable, sa preuve et ce qui pourrait l’infirmer. Propose des cas assez petits pour isoler chaque décision.
+
+Si les sources et le banc sont accessibles, inspecte la révision et exécute les contrôles utiles. Si tu disposes seulement de ce message et des pièces jointes, prépare le contrat, les cas et la procédure de comparaison. Indique précisément les pièces ou exécutions nécessaires à la qualification.
+
+Rends un rapport court avec l’identifiant du lot, la référence utilisée, la décision proposée, les contrôles exécutés avec leurs résultats, les preuves disponibles, le premier écart et le prochain sous-lot éventuel. Distingue clairement une expérience proposée d’une expérience exécutée.
+~~~
+
+Un nouveau sous-lot se lance avec le même message adapté à sa question. Joindre la fiche du parent et le témoin réduit suffit lorsque ces pièces portent les faits nécessaires. Les traces volumineuses restent dans le banc et le chat reçoit les références, le premier écart et les agrégats utiles. La qualification complète s’effectue là où le dépôt et les moteurs de test sont accessibles. Le rapport compact revient ensuite dans la fenêtre d’intégration.
+
+### Épreuve de lancement et de reprise
+
+- Trois fenêtres partent du même contrat et d’une référence commune. L’une prépare le cas nominal, l’autre les contre-exemples, la troisième assemble les critères de qualification à partir de leurs rapports.
+- Une fenêtre qui reçoit seulement le message produit une proposition identifiée et transmissible. Une fenêtre qui reçoit ensuite les pièces ou l’accès reprend le même lot et peut produire un résultat vérifié avec ses preuves.
+- La première campagne appariée est exécutée avec un exécuteur puis plusieurs. Les identifiants, résultats et écarts agrégés concordent. L’interruption d’un exécuteur permet de reprendre les comparaisons restantes sans doublon.
+
 ## Chantiers d’implémentation
 
 1. **Porter le banc de transfert sur une branche issue de `main`.** Exécuter une référence et un candidat sur les mêmes cas. Enregistrer le premier écart de décision avec son observation, son besoin, les offres réelles, la preuve et le retour. Rendre la campagne reproductible et reprenable. Le premier jalon est une comparaison de la référence contre elle-même, sans écart sur les résultats et les décisions protégées.
@@ -132,4 +192,4 @@ Les modes changent la préférence **entre offres admissibles**. Les gardes de p
 
 `codex/sic-transfer-pilot` à `145b8c76` sert de référence expérimentale. Il fournit un contrat d’effets, des campagnes appariées persistantes et des partitions réservées pour les rejeux. Son résultat synthétique porte sur la comparaison avec sa référence gloutonne. L’évaluation de production doit être refaite contre le `main` retenu, qui a poursuivi l’intégration de règles et la qualification des séries natives. Le portage se fait par lots pour attribuer chaque écart au bon changement. [Protocole du pilote à sa révision de référence](https://github.com/yannick-fontan-1981/sra-playground/blob/145b8c764477fe913709e999747a0f8db125d060/docs/architecture/sic-strategy-transfer-pilot.md)
 
-Le **premier livrable** est le banc de comparaison sur une branche issue de `main`, avec la référence figée, un lot réservé et une fiche de première divergence exploitable. Le premier lot moteur aura alors un contrat de décision à comparer, un parcours réel à protéger et une mécanique tenue en réserve pour mesurer le transfert.
+Le **premier livrable** associe le banc de comparaison sur une branche issue de `main`, le message de lancement et le format du rapport de lot. Il comprend une référence figée, un lot réservé et une fiche de première divergence. La reprise depuis une autre fenêtre et la comparaison à un ou plusieurs exécuteurs font partie de l’épreuve de ce livrable. Le premier lot moteur aura alors un contrat de décision à comparer, un parcours réel à protéger et une mécanique tenue en réserve pour mesurer le transfert.
