@@ -16,10 +16,11 @@ function outletFixture(variant = false) {
   const offset = variant ? [1, 3] : [4, 8];
   const shifted = (box: NativeBox, shift: number): NativeBox => [box[0] + shift, box[1], box[2] + shift, box[3]];
   const command = (shift = 0): NativeCommand => ({ action_ref: 'ACTION6', data: { x: control[0] + shift + offset[0]!, y: control[1] + offset[1]! } });
-  function frame(options: { drained?: boolean; shift?: number; ambiguous?: boolean; changedControl?: boolean; wrongPigment?: boolean } = {}) {
+  function frame(options: { drained?: boolean; shift?: number; ambiguous?: boolean; changedControl?: boolean; wrongPigment?: boolean; readyInput?: boolean } = {}) {
     const rows = Array.from({ length: 64 }, () => Array<number>(64).fill(ink(5))), shift = options.shift ?? 0;
     for (const anchor of anchors) {
-      const [l, t, r, b] = shifted(anchor, shift), material = anchor === outlet || options.ambiguous && anchor === peer;
+      const [l, t, r, b] = shifted(anchor, shift), material = anchor === outlet || options.ambiguous && anchor === peer
+        || options.readyInput && anchor === anchors[0];
       for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) {
         if (x === l || x === r || y === t || y === b) rows[y]![x] = ink(material ? 0 : 3);
         else if (material && y >= b - 3 && (!options.drained || options.wrongPigment)) rows[y]![x] = ink(options.wrongPigment ? 13 : 14);
@@ -34,7 +35,7 @@ function outletFixture(variant = false) {
   const packet = (rows: number[][], level: number, frames = [rows]): GameObservation => ({ gameCode: 'PUBLIC', frame: rows, frames,
     level, levelCount: 4, levelsCompleted: level - 1, availableActionIds: [5, 6], state: 'NOT_FINISHED',
     canUndo: false, canSelectLevel: true, defaultFps: 10 });
-  return { frame, observe, packet, command, outlet, control, shifted, ink };
+  return { frame, observe, packet, command, outlet, control, shifted, ink, input: anchors[0]! };
 }
 
 for (const variant of [false, true]) test('native outlet transfer binds the observed remote actuator instead of moving the click onto its effect' + (variant ? ' with changed shape, palette, positions and click' : ''), async () => {
@@ -114,4 +115,31 @@ test('moving material within the outlet does not confirm a release', async () =>
   for (let y = bottom - 4; y <= bottom - 2; y++) for (let x = left + 1; x < right; x++) moved[y]![x] = t.ink(14);
   assert.equal(checkRecalledOutlet(projection, next, moved), false,
     'Lost old pixels are insufficient when the same population remains inside the chamber');
+});
+
+for (const variant of [false, true]) test('an unmatched outlet actuator leaves another independently ready input available' + (variant ? ' after shape, palette, position and click changes' : ''), async () => {
+  const t = outletFixture(variant), first = t.frame(), next = t.frame({ shift: 1, changedControl: true, readyInput: true });
+  const before = await t.observe(first, 1, 1), after = await t.observe(next, 2, 2);
+  const family = createSicMarkedCompartmentFlow();
+  await family.observePublicOutcome!(before, after, t.command(), first, next, [t.frame({ drained: true }), next]);
+  const witness = structuredClone(family.state().witness) as NonNullable<Awaited<ReturnType<typeof acquireMarkedOutlet>>>;
+  assert.ok(witness);
+  const fallback = await projectRecalledOutlet(witness, after, next, []);
+  assert.ok(fallback);
+  assert.deepEqual(fallback.controlBox, t.shifted(t.input, 1));
+  assert.equal(fallback.release, undefined, 'The unmatched remote control is still not authorized');
+  const { service, reply, sequence, sessionId } = await nativeAfterPublicBoundaries(family, t.packet(next, 2), 'available-input-' + variant);
+  assert.ok(reply.ticket);
+  assert.equal(reply.ticket.actionRef, 'ACTION6');
+  assert.deepEqual(reply.ticket.data, { x: fallback.choice.point[0], y: fallback.choice.point[1] });
+  assert.equal(reply.snapshot.proposal?.sicSituationCard?.strategy, 'use_marked_compartment');
+  assert.ok(reply.snapshot.proposal?.route_refs?.includes(before.observation_ref));
+  const returned = structuredClone(next), [l, top, r, bottom] = t.shifted(t.input, 1);
+  for (let y = top + 1; y < bottom; y++) for (let x = l + 1; x < r; x++) returned[y]![x] = t.ink(5);
+  const done = await service.handle({ type: 'advance', sessionId, sequence: sequence + 1, ticketId: reply.ticket.id, executionMs: 1,
+    observation: toV6PublicObservation(t.packet(returned, 2), sequence + 1) });
+  const trace = done.snapshot.trace as Record<string, any>[];
+  assert.equal(trace.findLast(event => event.kind === 'actual_outcome')?.matched, true);
+  assert.equal(trace.findLast(event => event.kind === 'sealed_prefix')?.acquired_actions, 1);
+  assert.deepEqual(family.state().witness, witness, 'The blocked outlet keeps its independent proof for a later compatible control');
 });

@@ -182,7 +182,8 @@ export async function projectRecalledOutlet(witness: Witness, observation: Nativ
   const rank = (chamber: Chamber) => Number(chamber.filled > 0)
     + 4 * Number(chamber.filled > 0 && sameChamberSite(chamber.box, witness.outlet));
   const choice = scene.marked.filter(chamber => !attempted.includes(attemptFor(chamber)))
-    .sort((a, b) => rank(b) - rank(a) || (order ? order(b) - order(a) : 0) || a.box[0] - b.box[0] || a.box[1] - b.box[1])[0];
+    .sort((a, b) => rank(b) - rank(a) || (order ? order(b) - order(a) : 0) || a.box[0] - b.box[0] || a.box[1] - b.box[1])
+    .find(chamber => outletControl(scene, witness, chamber, rows) !== null);
   const selected = choice && outletControl(scene, witness, choice, rows);
   return selected ? { ...selected, outlet: witness.outlet, evidence: witness.refs, region: localRegion(choice!.box, rows),
     attempt: attemptFor(choice!), novelty: !attempted.length && scene.marked.length > 1 } : null;
@@ -223,7 +224,9 @@ export function createSicMarkedCompartmentFlow(): NativeFamily<Proposal> {
         + 2 * Number(sourceAt(chamber) >= 0) + Number(available(chamber));
       const marked = scene.marked.filter(chamber => !attempted.includes(attemptFor(chamber)) && !batching?.used.includes(sourceAt(chamber)))
         .sort((a, b) => rank(b) - rank(a) || (downstream ? downstream(b) - downstream(a) : 0)
-          || a.box[0] - b.box[0] || a.box[1] - b.box[1])[0];
+          || a.box[0] - b.box[0] || a.box[1] - b.box[1])
+        // An unavailable outlet control does not invalidate the other ready inputs.
+        .find(chamber => outletControl(scene, memory, chamber, rows) !== null);
       // A running process may temporarily cover its own highlighted outline.
       const pending = batching?.pending, wait = !marked && pending && pending.waits < 2;
       const choice = marked ?? (wait ? pending.chamber : null);
