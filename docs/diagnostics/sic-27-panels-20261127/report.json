@@ -1,0 +1,748 @@
+{
+  "schema": "sic.panel-roles.cohort.v1",
+  "source": {
+    "localCommit": "79e6cce7d6fd126e29e1baf6263ca266728b4470",
+    "githubCommit": "4612293c174826c1acfcceaa54d7fd2003397780",
+    "tree": "c296191cd767d2be7b39cff1a91fcb81b115dc80",
+    "base": "d258b5b900c9f042b8535f75fee2c976ec5c71a5"
+  },
+  "summary": {
+    "testedGames": 8,
+    "completeAndReconciledGames": 4,
+    "wonLevels": 33,
+    "targetLevels": 50,
+    "commands": 605,
+    "baselineWonLevels": 26,
+    "baselineCommands": 665,
+    "harnessErrors": 0,
+    "scoreDeadlineOverruns": 0,
+    "resets": 0,
+    "undo": 0
+  },
+  "audits": {
+    "oneFirstVerdictPerExpectedGame": true,
+    "targetsMatchBaseline": true,
+    "allCommandsAuthorizedAndAcquired": true,
+    "levelMirrorExactlyEqual": true,
+    "mirroredLevels": 37,
+    "allReachedBudgetsEqualPureModuleOutput": true,
+    "reachedBudgetRecordsIdenticalToBaseline": 34,
+    "scoredLevelsWithMeasuredDeadline": 33,
+    "sourceCleanAtLaunchAndRunEnd": true
+  },
+  "protocol": {
+    "startLevel": 1,
+    "sessionsPerGame": 1,
+    "parallelWorkers": 1,
+    "concurrentGames": 1,
+    "externalRetries": 0,
+    "caps": "unchanged archived references and budget module; full expected budgets included",
+    "processExitCode": 0
+  },
+  "games": [
+    {
+      "code": "CRAF",
+      "targetLevels": 6,
+      "wonLevels": 6,
+      "completeAndReconciled": true,
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "actions": 106,
+      "authority": 106,
+      "acquiredRecords": 106,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 9,
+          "scoredMs": 4616,
+          "settlementMs": 149,
+          "activeMs": 4600,
+          "ms": 4765,
+          "acquiredRecords": 9,
+          "prefixHash": "7c16581499aadaa9539c60d2d6a687e5fd72adc937576a4011ef7380c991a331",
+          "actionCap": 80,
+          "activeTimeCapMs": 90000
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 11,
+          "scoredMs": 4685,
+          "settlementMs": 182,
+          "activeMs": 4641,
+          "ms": 4867,
+          "acquiredRecords": 20,
+          "prefixHash": "a703cec0517ee2962ded618b6f7d9df8215f73fc617d58d5eb549478592e3a68",
+          "actionCap": 80,
+          "activeTimeCapMs": 90000
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 16,
+          "scoredMs": 7614,
+          "settlementMs": 195,
+          "activeMs": 7423,
+          "ms": 7809,
+          "acquiredRecords": 36,
+          "prefixHash": "ef28b1a8cb65763bda159d74ffed05741cdc95251c9c9b8aa80813508c56a10c",
+          "actionCap": 80,
+          "activeTimeCapMs": 90000
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 19,
+          "scoredMs": 9201,
+          "settlementMs": 249,
+          "activeMs": 8993,
+          "ms": 9450,
+          "acquiredRecords": 55,
+          "prefixHash": "8a8648f4279395cb97b26684582a7c278dfa1e7e3c28a39aea3d70a07dfe2eb4",
+          "actionCap": 80,
+          "activeTimeCapMs": 90000
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 24,
+          "scoredMs": 12196,
+          "settlementMs": 304,
+          "activeMs": 11913,
+          "ms": 12500,
+          "acquiredRecords": 79,
+          "prefixHash": "5adef232b5500e842b1ac15433d1ee35a2c63abd9046b2d52ec17c8c44f6b63a",
+          "actionCap": 80,
+          "activeTimeCapMs": 90000
+        },
+        {
+          "level": 6,
+          "won": true,
+          "actions": 27,
+          "scoredMs": 14373,
+          "settlementMs": 262,
+          "activeMs": 13952,
+          "ms": 14636,
+          "acquiredRecords": 106,
+          "prefixHash": "35ede3d950cc656d021d22f93eee9d75aafd29b6cbff327f1c993883bea7da58",
+          "actionCap": 33,
+          "activeTimeCapMs": 324000
+        }
+      ],
+      "baseline": {
+        "source": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+        "wonLevels": 5,
+        "actions": 125,
+        "reason": "level_action_budget"
+      },
+      "sameCommandsAsBaseline": false,
+      "samePhysicalEffectSequenceAsBaseline": false
+    },
+    {
+      "code": "SB26",
+      "targetLevels": 8,
+      "wonLevels": 8,
+      "completeAndReconciled": true,
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "actions": 124,
+      "authority": 124,
+      "acquiredRecords": 124,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 9,
+          "scoredMs": 3095,
+          "settlementMs": 178,
+          "activeMs": 3020,
+          "ms": 3277,
+          "acquiredRecords": 9,
+          "prefixHash": "f8a01c6e6c57dab7a60bd01309dfbef6df4743c5de8c9869ed4ea2dfa4cdb326",
+          "actionCap": 80,
+          "activeTimeCapMs": 90000
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 15,
+          "scoredMs": 4793,
+          "settlementMs": 406,
+          "activeMs": 4532,
+          "ms": 5198,
+          "acquiredRecords": 24,
+          "prefixHash": "6936f8d27b9ebbb066c67bb5c333ae4f66f7fca624596128466c68789916cbb6",
+          "actionCap": 80,
+          "activeTimeCapMs": 90000
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 15,
+          "scoredMs": 5374,
+          "settlementMs": 522,
+          "activeMs": 4979,
+          "ms": 5896,
+          "acquiredRecords": 39,
+          "prefixHash": "65841875e0ff120228107112652f05c342e553f2e2a9d921dd5041ed0f87111a",
+          "actionCap": 80,
+          "activeTimeCapMs": 90000
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 15,
+          "scoredMs": 5677,
+          "settlementMs": 322,
+          "activeMs": 5057,
+          "ms": 5999,
+          "acquiredRecords": 54,
+          "prefixHash": "14dd5cc328147b2b0bdf13b2d7ee26d419c590cb847d28403d883b5bc6db8dbe",
+          "actionCap": 80,
+          "activeTimeCapMs": 90000
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 17,
+          "scoredMs": 6862,
+          "settlementMs": 416,
+          "activeMs": 6300,
+          "ms": 7277,
+          "acquiredRecords": 71,
+          "prefixHash": "2b4fbd9abf98a36cb76087f2381110c7ce59f9879525a5503aa22a1b3f2d868a",
+          "actionCap": 80,
+          "activeTimeCapMs": 90000
+        },
+        {
+          "level": 6,
+          "won": true,
+          "actions": 19,
+          "scoredMs": 8588,
+          "settlementMs": 455,
+          "activeMs": 7824,
+          "ms": 9043,
+          "acquiredRecords": 90,
+          "prefixHash": "31b4c82dc34aedbf0375c4fdfdc8ecc3c5d2ef6159627a8428216a561576a4fa",
+          "actionCap": 80,
+          "activeTimeCapMs": 90000
+        },
+        {
+          "level": 7,
+          "won": true,
+          "actions": 17,
+          "scoredMs": 7756,
+          "settlementMs": 395,
+          "activeMs": 7036,
+          "ms": 8151,
+          "acquiredRecords": 107,
+          "prefixHash": "6a2de5ca3ff5cefa0dbe6444703d01e829e6c66af13a6a527ef9c88f413df6d4",
+          "actionCap": 22,
+          "activeTimeCapMs": 17000
+        },
+        {
+          "level": 8,
+          "won": true,
+          "actions": 17,
+          "scoredMs": 7606,
+          "settlementMs": 534,
+          "activeMs": 7041,
+          "ms": 8140,
+          "acquiredRecords": 124,
+          "prefixHash": "f3277035290297a66c05ed209b7b84e743dc9c06ef151bb27ff3dd5c058dfe8c",
+          "actionCap": 22,
+          "activeTimeCapMs": 17000
+        }
+      ],
+      "baseline": {
+        "source": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+        "wonLevels": 6,
+        "actions": 186,
+        "reason": "level_action_budget"
+      },
+      "sameCommandsAsBaseline": false,
+      "samePhysicalEffectSequenceAsBaseline": false
+    },
+    {
+      "code": "CASC",
+      "targetLevels": 6,
+      "wonLevels": 6,
+      "completeAndReconciled": true,
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "actions": 95,
+      "authority": 95,
+      "acquiredRecords": 95,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 6,
+          "scoredMs": 2864,
+          "settlementMs": 100,
+          "activeMs": 2797,
+          "ms": 2966,
+          "acquiredRecords": 6,
+          "prefixHash": "63fea697ab7a9cf49ec307c8e414721b652088f33255fb132c6a7a600579e1e8",
+          "actionCap": 11,
+          "activeTimeCapMs": 11000
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 14,
+          "scoredMs": 5142,
+          "settlementMs": 156,
+          "activeMs": 5113,
+          "ms": 5297,
+          "acquiredRecords": 20,
+          "prefixHash": "b795352edc9003c7e87d1865d359e5df23f225e8539cdc1736e4aef2e24161d6",
+          "actionCap": 19,
+          "activeTimeCapMs": 16000
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 22,
+          "scoredMs": 10878,
+          "settlementMs": 274,
+          "activeMs": 10811,
+          "ms": 11152,
+          "acquiredRecords": 42,
+          "prefixHash": "b8af04f5713f1bd4f0bbde6b4a647c4060cc373da24eac81d0f7baa5ff7649a6",
+          "actionCap": 27,
+          "activeTimeCapMs": 26000
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 20,
+          "scoredMs": 12117,
+          "settlementMs": 311,
+          "activeMs": 12129,
+          "ms": 12428,
+          "acquiredRecords": 62,
+          "prefixHash": "4c32ba79d154a214812ec65da21f181ef1337fc6d7a81a40f63bc6be75a56844",
+          "actionCap": 25,
+          "activeTimeCapMs": 25000
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 11,
+          "scoredMs": 6153,
+          "settlementMs": 332,
+          "activeMs": 6273,
+          "ms": 6484,
+          "acquiredRecords": 73,
+          "prefixHash": "bb142b72d25bfbf3ca115390f787cf12d309572a075a0dd44962293260efc9cf",
+          "actionCap": 14,
+          "activeTimeCapMs": 14000
+        },
+        {
+          "level": 6,
+          "won": true,
+          "actions": 22,
+          "scoredMs": 15405,
+          "settlementMs": 464,
+          "activeMs": 15524,
+          "ms": 15868,
+          "acquiredRecords": 95,
+          "prefixHash": "d760eeb17cd88c742dcb734046aa5be55463a407446f777ad0d33f4e61c03814",
+          "actionCap": 27,
+          "activeTimeCapMs": 22000
+        }
+      ],
+      "baseline": {
+        "source": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+        "wonLevels": 3,
+        "actions": 69,
+        "reason": "level_action_budget"
+      },
+      "sameCommandsAsBaseline": false,
+      "samePhysicalEffectSequenceAsBaseline": false
+    },
+    {
+      "code": "GRIL",
+      "targetLevels": 6,
+      "wonLevels": 1,
+      "completeAndReconciled": false,
+      "status": "stopped",
+      "reason": "level_action_budget",
+      "actions": 15,
+      "authority": 15,
+      "acquiredRecords": 15,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 5,
+          "scoredMs": 2267,
+          "settlementMs": 83,
+          "activeMs": 2277,
+          "ms": 2351,
+          "acquiredRecords": 5,
+          "prefixHash": "49a513dfb37eaa93918ae558e9f58e8805c02ba465d111877b1c5b9d49e4290e",
+          "actionCap": 10,
+          "activeTimeCapMs": 10000
+        },
+        {
+          "level": 2,
+          "won": false,
+          "actions": 10,
+          "scoredMs": null,
+          "settlementMs": null,
+          "activeMs": 3047,
+          "ms": 3167,
+          "acquiredRecords": 15,
+          "prefixHash": "7723f6810e4813244cd04aacb433d1fcbec877730ecde0e7a5cec8c158e74342",
+          "actionCap": 10,
+          "activeTimeCapMs": 8000
+        }
+      ],
+      "baseline": {
+        "source": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+        "wonLevels": 1,
+        "actions": 15,
+        "reason": "level_action_budget"
+      },
+      "sameCommandsAsBaseline": true,
+      "samePhysicalEffectSequenceAsBaseline": true
+    },
+    {
+      "code": "CLRS",
+      "targetLevels": 6,
+      "wonLevels": 6,
+      "completeAndReconciled": true,
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "actions": 84,
+      "authority": 84,
+      "acquiredRecords": 84,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 8,
+          "scoredMs": 3101,
+          "settlementMs": 97,
+          "activeMs": 3064,
+          "ms": 3201,
+          "acquiredRecords": 8,
+          "prefixHash": "86d909e16abb259b7090e5019dae013e82361b6218c6e4063c52fcd7a21d31e3",
+          "actionCap": 13,
+          "activeTimeCapMs": 12000
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 10,
+          "scoredMs": 2846,
+          "settlementMs": 97,
+          "activeMs": 2777,
+          "ms": 2942,
+          "acquiredRecords": 18,
+          "prefixHash": "b1465032b5d0b1a94dbf34a8fa1cc230b1fd918d7a4be11f363cd88bdf70f8f1",
+          "actionCap": 15,
+          "activeTimeCapMs": 11000
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 13,
+          "scoredMs": 3396,
+          "settlementMs": 100,
+          "activeMs": 3291,
+          "ms": 3496,
+          "acquiredRecords": 31,
+          "prefixHash": "64498f42a9a4757d79fea0503d197ef39286af95f61e5e20f30aa9b01e61f091",
+          "actionCap": 18,
+          "activeTimeCapMs": 13000
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 15,
+          "scoredMs": 4346,
+          "settlementMs": 115,
+          "activeMs": 4215,
+          "ms": 4461,
+          "acquiredRecords": 46,
+          "prefixHash": "2f8508d7caf36aa0f0af745eeef97aea3b3aa6664b592300929ed03856e425c4",
+          "actionCap": 20,
+          "activeTimeCapMs": 15000
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 14,
+          "scoredMs": 4262,
+          "settlementMs": 180,
+          "activeMs": 4191,
+          "ms": 4441,
+          "acquiredRecords": 60,
+          "prefixHash": "58f0269e9d6c7c13e14262ee77314c80c6b95e1f85fdc53a277732649f27068a",
+          "actionCap": 19,
+          "activeTimeCapMs": 15000
+        },
+        {
+          "level": 6,
+          "won": true,
+          "actions": 24,
+          "scoredMs": 8683,
+          "settlementMs": 323,
+          "activeMs": 8535,
+          "ms": 9006,
+          "acquiredRecords": 84,
+          "prefixHash": "4aed1452c9c8ed2fa5d672736b94ccffb12119ad625fb66cfe31d25692ad00ea",
+          "actionCap": 29,
+          "activeTimeCapMs": 23000
+        }
+      ],
+      "baseline": {
+        "source": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+        "wonLevels": 5,
+        "actions": 89,
+        "reason": "level_action_budget"
+      },
+      "sameCommandsAsBaseline": false,
+      "samePhysicalEffectSequenceAsBaseline": false
+    },
+    {
+      "code": "RSWP",
+      "targetLevels": 6,
+      "wonLevels": 4,
+      "completeAndReconciled": false,
+      "status": "stopped",
+      "reason": "level_action_budget",
+      "actions": 69,
+      "authority": 69,
+      "acquiredRecords": 69,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 3,
+          "scoredMs": 1778,
+          "settlementMs": 99,
+          "activeMs": 1794,
+          "ms": 1879,
+          "acquiredRecords": 3,
+          "prefixHash": "53e34526abf02d4311004a9ad726c131b277a7e995f552afc95913845d7fbecf",
+          "actionCap": 8,
+          "activeTimeCapMs": 9000
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 8,
+          "scoredMs": 2857,
+          "settlementMs": 134,
+          "activeMs": 2743,
+          "ms": 2991,
+          "acquiredRecords": 11,
+          "prefixHash": "3e5a439ee548d4ce05185253a0e860ed2241a544b006259151442ad61766d68d",
+          "actionCap": 13,
+          "activeTimeCapMs": 12000
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 8,
+          "scoredMs": 2982,
+          "settlementMs": 123,
+          "activeMs": 2811,
+          "ms": 3105,
+          "acquiredRecords": 19,
+          "prefixHash": "5c8f55ae67b9ab24c3e41cdd500779455ac8a3c3fbbc6631bcabc320cc84ac0d",
+          "actionCap": 13,
+          "activeTimeCapMs": 12000
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 14,
+          "scoredMs": 5418,
+          "settlementMs": 147,
+          "activeMs": 5071,
+          "ms": 5565,
+          "acquiredRecords": 33,
+          "prefixHash": "6b222c82d1fb5ef53c7a1d5cf3ab4abc57c5d2bf0a554078b9336c036d355dbd",
+          "actionCap": 16,
+          "activeTimeCapMs": 14000
+        },
+        {
+          "level": 5,
+          "won": false,
+          "actions": 36,
+          "scoredMs": null,
+          "settlementMs": null,
+          "activeMs": 17488,
+          "ms": 18737,
+          "acquiredRecords": 69,
+          "prefixHash": "4557de9d9c4d02822726d2af17eccbc9d74a8b8a1ef1638de5c9c8a9d2cd1474",
+          "actionCap": 36,
+          "activeTimeCapMs": 35000
+        }
+      ],
+      "baseline": {
+        "source": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+        "wonLevels": 4,
+        "actions": 69,
+        "reason": "level_action_budget"
+      },
+      "sameCommandsAsBaseline": true,
+      "samePhysicalEffectSequenceAsBaseline": true
+    },
+    {
+      "code": "COLM",
+      "targetLevels": 6,
+      "wonLevels": 1,
+      "completeAndReconciled": false,
+      "status": "stopped",
+      "reason": "level_action_budget",
+      "actions": 51,
+      "authority": 51,
+      "acquiredRecords": 51,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 17,
+          "scoredMs": 6249,
+          "settlementMs": 104,
+          "activeMs": 6123,
+          "ms": 6355,
+          "acquiredRecords": 17,
+          "prefixHash": "1dbbb65241430c64134960b0a70ad39aac6906237a00cf441772360bd4d40fb5",
+          "actionCap": 22,
+          "activeTimeCapMs": 20000
+        },
+        {
+          "level": 2,
+          "won": false,
+          "actions": 34,
+          "scoredMs": null,
+          "settlementMs": null,
+          "activeMs": 11212,
+          "ms": 11559,
+          "acquiredRecords": 51,
+          "prefixHash": "9fdcc549b2c2a5fb9ca88756ceccd193472705e647d15971ff313fef9e5c270d",
+          "actionCap": 34,
+          "activeTimeCapMs": 24000
+        }
+      ],
+      "baseline": {
+        "source": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+        "wonLevels": 1,
+        "actions": 51,
+        "reason": "level_action_budget"
+      },
+      "sameCommandsAsBaseline": false,
+      "samePhysicalEffectSequenceAsBaseline": false
+    },
+    {
+      "code": "WEAV",
+      "targetLevels": 6,
+      "wonLevels": 1,
+      "completeAndReconciled": false,
+      "status": "stopped",
+      "reason": "level_action_budget",
+      "actions": 61,
+      "authority": 61,
+      "acquiredRecords": 61,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 27,
+          "scoredMs": 5535,
+          "settlementMs": 315,
+          "activeMs": 5588,
+          "ms": 5852,
+          "acquiredRecords": 27,
+          "prefixHash": "db33112f07ff753fb2ac8ed65958948d68395c7614070387a2293a5ca1fedff8",
+          "actionCap": 33,
+          "activeTimeCapMs": 16000
+        },
+        {
+          "level": 2,
+          "won": false,
+          "actions": 34,
+          "scoredMs": null,
+          "settlementMs": null,
+          "activeMs": 10172,
+          "ms": 10598,
+          "acquiredRecords": 61,
+          "prefixHash": "3de3afdafb16358b67dd7d7eba51e866eb8514d6b55a7d16bbb6f532b1d7d251",
+          "actionCap": 34,
+          "activeTimeCapMs": 18000
+        }
+      ],
+      "baseline": {
+        "source": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+        "wonLevels": 1,
+        "actions": 61,
+        "reason": "level_action_budget"
+      },
+      "sameCommandsAsBaseline": true,
+      "samePhysicalEffectSequenceAsBaseline": true
+    }
+  ],
+  "proofFixture": {
+    "path": "tests/fixtures/sic-preview-transfer-public.json.gz",
+    "sha256": "1702b794a3d1a5752e38618f2bb4084d83a178e3bd8d847a80b753698c71ebeb",
+    "description": "Actual complete public frame packets and commands through the first failed preview: CRAF L3 action1 (global21), SB26 L2 action1 (global10), source d258b5b9. Functional diagnosis only."
+  },
+  "validation": {
+    "targetedTests": 21,
+    "targetedTestFiles": [
+      "tests/sic-preview-interface.test.ts",
+      "tests/sic-witnessed-preview-transfer.test.ts",
+      "tests/sic-experiment-arbitration.test.ts"
+    ],
+    "typecheck": "passed",
+    "fullContinuity": "pending on the integration branch",
+    "viewer": "pending on the integration branch"
+  },
+  "limitations": [
+    "This is an eight-game cohort, not a new 107-game campaign.",
+    "GRIL L2, RSWP L5, COLM L2 and WEAV L2 still stop at their command limits.",
+    "The source excludes the separate VOIS and WA30 corrections.",
+    "Changed-interface preview revalidation moves after specialist roles; compatible evidenced plans retain their existing priority.",
+    "COLM still stops at L2 but changes its path at global command21 (L2 command4): queued placement ACTION4 replaces prepared-effects ACTION3. GRIL, RSWP and WEAV reproduce their baseline commands and physical effects exactly."
+  ]
+}
