@@ -1,0 +1,45 @@
+{
+  "schema": "sic.observed-role-transfer.report.v1",
+  "code": "RSWP",
+  "createdAt": "2026-11-27T01:50:54.913494+00:00",
+  "baseline": {
+    "target": 6,
+    "levels": 4,
+    "actions": 69,
+    "authority": 69,
+    "status": "stopped",
+    "reason": "level_action_budget",
+    "recoveries": {
+      "reset": 0,
+      "undo": 0
+    }
+  },
+  "baselineSource": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+  "diagnostic": {
+    "source": "de736c62d30b2c94e234ddf969e257857526d447",
+    "actions": 23,
+    "levels": 3,
+    "captureLimit": 23,
+    "diagnosticOnly": true,
+    "collectorSha256": "8e295d4c766aedd1a527f7fc79ec815ca9a80104f2b3f14e44f2b2f458c5d0f4",
+    "originalSha256": "f676ae715c97ea0d98f9ef6aa2804c101ec4912a1d17b0487af211297ddd6c38"
+  },
+  "candidate": {
+    "localCommit": "ab6e4df7b2ff6cd26c8d206ed0d7bb76dde2b71e",
+    "remoteCommit": "dcbf1bfab24bc9efac6c8dac13004659dcf43732",
+    "tree": "f8dc57ceb931a7b21dd46c1addf1737e74c599ef",
+    "targetedTests": 12,
+    "typecheck": "passed",
+    "strict": null,
+    "fullContinuity": null,
+    "viewer": null
+  },
+  "limitations": [
+    "A bounded capture is not a timed qualification.",
+    "No complete 107-game campaign was rerun.",
+    "Native transfers use public frames; their constructed variants are functional tests.",
+    "Complete continuity and delivered-viewer verification remain integration requirements."
+  ],
+  "finding": "Global command15 at level3 confirms a shared material transport. After level3 is won at command19, three previews issue ACTION5 on unprepared level4 panels. The material configuration does not change; only8,8,10 pixels change. Command23 finally selects the real panel at(45,17).",
+  "role": "The transport glyph and two public before/after references acquired by observedApplication. The early entry requires distinct same-scope references, matching completion count and retained transport, and an existing chainEdit, chainReturn or workshop proposal. Existing return guards remain authoritative."
+}

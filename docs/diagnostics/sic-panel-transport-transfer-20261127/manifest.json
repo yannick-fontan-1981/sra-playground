@@ -1,0 +1,43 @@
+{
+  "schema": "sic.observed-role-transfer.archive.v1",
+  "code": "RSWP",
+  "createdAt": "2026-11-27T01:50:54.913494+00:00",
+  "candidateSource": {
+    "localCommit": "ab6e4df7b2ff6cd26c8d206ed0d7bb76dde2b71e",
+    "remoteCommit": "dcbf1bfab24bc9efac6c8dac13004659dcf43732",
+    "tree": "f8dc57ceb931a7b21dd46c1addf1737e74c599ef",
+    "targetedTests": 12,
+    "typecheck": "passed",
+    "strict": null,
+    "fullContinuity": null,
+    "viewer": null
+  },
+  "artifacts": [
+    {
+      "path": "first-decision.public.json.gz",
+      "encoding": "gzip",
+      "bytes": 163815,
+      "storedSha256": "fd116c221488437be8e74d8205183667695168e8bf1b34354e357011da95a3a4",
+      "decodedBytes": 5152496,
+      "decodedSha256": "e78159b07fc8509e8b5e51791d5ee3640faa625bde59bbdc393c0d41ced57bac"
+    },
+    {
+      "path": "baseline.jsonl.gz",
+      "encoding": "gzip",
+      "bytes": 2959,
+      "storedSha256": "248c0847874f202ba7abc332f2bc5c8edb83a5b0e9b1739fbbff8406d97710d9",
+      "decodedBytes": 18540,
+      "decodedSha256": "7193198808ffe21420a16bd7ca4e03d971785601a2109d7b76cf04936c697247"
+    },
+    {
+      "path": "report.json",
+      "encoding": "utf-8",
+      "sha256": "f54160c6e98429859f6ca2f529ebe1c386db814d4b777b057d5b913abe6a5e51"
+    },
+    {
+      "path": "README.md",
+      "encoding": "utf-8",
+      "sha256": "767f5bc327c244616f6c93777d7d3d71e5b8e3a525c3abfdd82e7b355b7f7475"
+    }
+  ]
+}
