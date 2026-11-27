@@ -1,0 +1,119 @@
+{
+  "game": "SNAR",
+  "source": "53480b31192831f15a5d0550eb72a3e699c43911",
+  "siteVersion": 211,
+  "deployment": "appgprj_6adbc388d79081918581b93b919d7258~appgdep_2aa57b165f0c81919e30a55ae44bb24f",
+  "publishedVersion": "appgprj_6adbc388d79081918581b93b919d7258~appgver_bfe45addc220819191027decfa372841",
+  "deploymentStatus": "succeeded/ready",
+  "bundle": "/assets/index-BL6uf1E2.js",
+  "planning": "SIC",
+  "startLevel": 1,
+  "initialActions": 0,
+  "control": "Run to next level",
+  "sessionsPerSurface": 1,
+  "resets": 0,
+  "undos": 0,
+  "verdict": "The game reports WIN.",
+  "levelsSolved": 6,
+  "totalActions": 163,
+  "replays": [
+    {
+      "surface": "local",
+      "start": "http://127.0.0.1:4173/?game=SNAR&level=1",
+      "finish": "http://127.0.0.1:4173/?game=SNAR&level=6",
+      "levels": [
+        {
+          "level": 1,
+          "actions": 16,
+          "cumulativeActions": 16,
+          "completedPlans": 10,
+          "observedAt": "2026-11-27T16:22:27.635Z"
+        },
+        {
+          "level": 2,
+          "actions": 24,
+          "cumulativeActions": 40,
+          "completedPlans": 28,
+          "observedAt": "2026-11-27T16:23:09.479Z"
+        },
+        {
+          "level": 3,
+          "actions": 23,
+          "cumulativeActions": 63,
+          "completedPlans": 44,
+          "observedAt": "2026-11-27T16:23:28.005Z"
+        },
+        {
+          "level": 4,
+          "actions": 36,
+          "cumulativeActions": 99,
+          "completedPlans": 72,
+          "observedAt": "2026-11-27T16:24:06.506Z"
+        },
+        {
+          "level": 5,
+          "actions": 35,
+          "cumulativeActions": 134,
+          "completedPlans": 103,
+          "observedAt": "2026-11-27T16:24:45.484Z"
+        },
+        {
+          "level": 6,
+          "actions": 29,
+          "cumulativeActions": 163,
+          "completedPlans": 121,
+          "observedAt": "2026-11-27T16:25:20.202Z"
+        }
+      ]
+    },
+    {
+      "surface": "published",
+      "start": "https://sra-playground.yannick-fontan.chatgpt.site/?game=SNAR&level=1",
+      "finish": "https://sra-playground.yannick-fontan.chatgpt.site/?game=SNAR&level=6",
+      "levels": [
+        {
+          "level": 1,
+          "actions": 16,
+          "cumulativeActions": 16,
+          "completedPlans": 10,
+          "observedAt": "2026-11-27T16:24:20.682Z"
+        },
+        {
+          "level": 2,
+          "actions": 24,
+          "cumulativeActions": 40,
+          "completedPlans": 28,
+          "observedAt": "2026-11-27T16:24:40.610Z"
+        },
+        {
+          "level": 3,
+          "actions": 23,
+          "cumulativeActions": 63,
+          "completedPlans": 44,
+          "observedAt": "2026-11-27T16:24:59.499Z"
+        },
+        {
+          "level": 4,
+          "actions": 36,
+          "cumulativeActions": 99,
+          "completedPlans": 72,
+          "observedAt": "2026-11-27T16:26:25.390Z"
+        },
+        {
+          "level": 5,
+          "actions": 35,
+          "cumulativeActions": 134,
+          "completedPlans": 103,
+          "observedAt": "2026-11-27T16:27:04.688Z"
+        },
+        {
+          "level": 6,
+          "actions": 29,
+          "cumulativeActions": 163,
+          "completedPlans": 121,
+          "observedAt": "2026-11-27T16:27:39.925Z"
+        }
+      ]
+    }
+  ]
+}
