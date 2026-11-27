@@ -1,0 +1,409 @@
+{
+  "schema": "sic.observed-role-transfer.archive.v1",
+  "code": "RSWP",
+  "createdAt": "2026-11-27T01:50:54.913494+00:00",
+  "candidateSource": {
+    "localCommit": "ab6e4df7b2ff6cd26c8d206ed0d7bb76dde2b71e",
+    "remoteCommit": "dcbf1bfab24bc9efac6c8dac13004659dcf43732",
+    "tree": "f8dc57ceb931a7b21dd46c1addf1737e74c599ef",
+    "targetedTests": 12,
+    "typecheck": "passed",
+    "strict": {
+      "source": "c87a647303b9f2c0f1e9a751bfee6deef29a8a44",
+      "remoteCommit": "5dd9c8a86b911cd1640dac041add27a18bb57d92",
+      "tree": "816d119942c46e25dcbbd726232da0d9be678af1",
+      "startedAt": "2026-11-27T02:10:05.441769+00:00",
+      "endedAt": "2026-11-27T02:11:09.620229+00:00",
+      "target": 6,
+      "levels": 6,
+      "actions": 110,
+      "authority": 110,
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "resumes": 109,
+      "series": [],
+      "acquiredRecords": 110,
+      "levelStats": [
+        {
+          "level": 1,
+          "won": true,
+          "activeMs": 2334,
+          "budget": {
+            "actions": 8,
+            "activeTimeMs": 9000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=RSWP; level=1; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 3,
+          "ms": 2426,
+          "gameMs": 104,
+          "costs": {
+            "init": {
+              "ms": 1317,
+              "count": 1
+            },
+            "advance": {
+              "ms": 645,
+              "count": 3
+            },
+            "resume": {
+              "ms": 319,
+              "count": 2
+            }
+          },
+          "graph": "9af4377d93fb228d6f0f18bad85f1488ae8c614a641417f9d68ccc25cf4a2180",
+          "deltas": 1085,
+          "acquiredRecords": 3,
+          "nodes": 453,
+          "traceEvents": 18,
+          "prefixHash": "53e34526abf02d4311004a9ad726c131b277a7e995f552afc95913845d7fbecf",
+          "scoredMs": 2318,
+          "settlementMs": 106
+        },
+        {
+          "level": 2,
+          "won": true,
+          "activeMs": 3329,
+          "budget": {
+            "actions": 13,
+            "activeTimeMs": 12000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=RSWP; level=2; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 8,
+          "ms": 3574,
+          "gameMs": 150,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 1860,
+              "count": 8
+            },
+            "resume": {
+              "ms": 1390,
+              "count": 8
+            }
+          },
+          "graph": "7b8bde7e283e8b20cbc33f753649b062b0d620d24c1dfc06542a0a94d78eabd6",
+          "deltas": 2889,
+          "acquiredRecords": 11,
+          "nodes": 555,
+          "traceEvents": 66,
+          "prefixHash": "3e5a439ee548d4ce05185253a0e860ed2241a544b006259151442ad61766d68d",
+          "scoredMs": 3457,
+          "settlementMs": 117
+        },
+        {
+          "level": 3,
+          "won": true,
+          "activeMs": 3090,
+          "budget": {
+            "actions": 13,
+            "activeTimeMs": 12000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=RSWP; level=3; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 8,
+          "ms": 3383,
+          "gameMs": 219,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 1794,
+              "count": 8
+            },
+            "resume": {
+              "ms": 1168,
+              "count": 8
+            }
+          },
+          "graph": "4af4bbedee672228a363de62961ebd06532d5b1844824aacf6639e55e5e4490a",
+          "deltas": 4696,
+          "acquiredRecords": 19,
+          "nodes": 660,
+          "traceEvents": 114,
+          "prefixHash": "5c8f55ae67b9ab24c3e41cdd500779455ac8a3c3fbbc6631bcabc320cc84ac0d",
+          "scoredMs": 3246,
+          "settlementMs": 137
+        },
+        {
+          "level": 4,
+          "won": true,
+          "activeMs": 3482,
+          "budget": {
+            "actions": 16,
+            "activeTimeMs": 14000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=RSWP; level=4; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 11,
+          "ms": 3937,
+          "gameMs": 283,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 2727,
+              "count": 11
+            },
+            "resume": {
+              "ms": 625,
+              "count": 11
+            }
+          },
+          "graph": "536feda637a7edd092fea0178493de865fa7efbc9148cb856f7e43799aae8ca2",
+          "deltas": 7177,
+          "acquiredRecords": 30,
+          "nodes": 803,
+          "traceEvents": 128,
+          "prefixHash": "565788ba4d9be48b86e7a6c9e4174e3595a3e1bf778c926b2d71d44bf9252d35",
+          "scoredMs": 3739,
+          "settlementMs": 200
+        },
+        {
+          "level": 5,
+          "won": true,
+          "activeMs": 12088,
+          "budget": {
+            "actions": 36,
+            "activeTimeMs": 35000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=RSWP; level=5; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 30,
+          "ms": 13238,
+          "gameMs": 687,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 9119,
+              "count": 30
+            },
+            "resume": {
+              "ms": 2683,
+              "count": 30
+            }
+          },
+          "graph": "520cc275d0c8b84722a713910a6c838ea3ac59780359a46d2d2ea3115201ca28",
+          "deltas": 14063,
+          "acquiredRecords": 60,
+          "nodes": 1306,
+          "traceEvents": 128,
+          "prefixHash": "4b122ce71cbb1ab1aa480931f1af3def7036062e3fa5d01bdeb27ab6dcc56da5",
+          "scoredMs": 12941,
+          "settlementMs": 295
+        },
+        {
+          "level": 6,
+          "won": true,
+          "activeMs": 29773,
+          "budget": {
+            "actions": 60,
+            "activeTimeMs": 50000,
+            "source": "docs/architecture/sic-v8-validation.md :: RSWP niveau 6, planifier le traitement de neuf caisses",
+            "timeBasis": "measured"
+          },
+          "actions": 50,
+          "ms": 31682,
+          "gameMs": 1191,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 20819,
+              "count": 50
+            },
+            "resume": {
+              "ms": 8494,
+              "count": 50
+            }
+          },
+          "graph": "2f8e6c94790f5d3c42c9e55b29a76f244f6bcaff663b11bf1d313f9c60c9b834",
+          "deltas": 25734,
+          "acquiredRecords": 110,
+          "nodes": 2337,
+          "traceEvents": 128,
+          "prefixHash": "4fb20580a611b668663c3bac9fdb83ffb0454a6541c53edb59572be442d5659d",
+          "scoredMs": 31114,
+          "settlementMs": 569
+        }
+      ],
+      "firstCommands": [
+        {
+          "level": 1,
+          "globalCommand": 1,
+          "command": {
+            "id": 6,
+            "data": {
+              "x": 45,
+              "y": 12
+            }
+          },
+          "changedPixels": 32,
+          "family": "sic_verify_matching_panel_configuration",
+          "strategy": "P05",
+          "evidenceCount": 1
+        },
+        {
+          "level": 2,
+          "globalCommand": 4,
+          "command": {
+            "id": 6,
+            "data": {
+              "x": 45,
+              "y": 17
+            }
+          },
+          "changedPixels": 32,
+          "family": "sic_verify_matching_panel_configuration",
+          "strategy": "P05",
+          "evidenceCount": 1
+        },
+        {
+          "level": 3,
+          "globalCommand": 12,
+          "command": {
+            "id": 6,
+            "data": {
+              "x": 60,
+              "y": 22
+            }
+          },
+          "changedPixels": 16,
+          "family": "sic_verify_matching_panel_configuration",
+          "strategy": "P05",
+          "evidenceCount": 1
+        },
+        {
+          "level": 4,
+          "globalCommand": 20,
+          "command": {
+            "id": 6,
+            "data": {
+              "x": 45,
+              "y": 17
+            }
+          },
+          "changedPixels": 32,
+          "family": "sic_verify_matching_panel_configuration",
+          "strategy": "P05",
+          "evidenceCount": 3
+        },
+        {
+          "level": 5,
+          "globalCommand": 31,
+          "command": {
+            "id": 6,
+            "data": {
+              "x": 40,
+              "y": 12
+            }
+          },
+          "changedPixels": 16,
+          "family": "sic_verify_matching_panel_configuration",
+          "strategy": "P05",
+          "evidenceCount": 3
+        },
+        {
+          "level": 6,
+          "globalCommand": 61,
+          "command": {
+            "id": 6,
+            "data": {
+              "x": 40,
+              "y": 12
+            }
+          },
+          "changedPixels": 16,
+          "family": "sic_verify_matching_panel_configuration",
+          "strategy": "P05",
+          "evidenceCount": 3
+        }
+      ],
+      "checks": {
+        "sourceProductionMatchesCandidate": true,
+        "mirroredLevelsExact": true,
+        "allActionsSicAuthorizedAndAcquired": true,
+        "allSixBudgetsMatchFrozenModuleAndArchivedReferences": true,
+        "allScoresWithinDeadline": true,
+        "allCommandsWithinBudget": true,
+        "baselineWonPrefixesStillIdentical": [
+          1,
+          2,
+          3
+        ]
+      }
+    },
+    "fullContinuity": null,
+    "viewer": null
+  },
+  "artifacts": [
+    {
+      "path": "README.md",
+      "bytes": 5160,
+      "encoding": "utf-8",
+      "sha256": "0353f1f31831c16af00e56c212fe1d44f45f61f8917393d6f53bd569a7bd6fcf"
+    },
+    {
+      "path": "baseline.jsonl.gz",
+      "bytes": 2959,
+      "encoding": "gzip",
+      "storedSha256": "248c0847874f202ba7abc332f2bc5c8edb83a5b0e9b1739fbbff8406d97710d9",
+      "decodedBytes": 18540,
+      "decodedSha256": "7193198808ffe21420a16bd7ca4e03d971785601a2109d7b76cf04936c697247"
+    },
+    {
+      "path": "first-decision.public.json.gz",
+      "bytes": 163815,
+      "encoding": "gzip",
+      "storedSha256": "fd116c221488437be8e74d8205183667695168e8bf1b34354e357011da95a3a4",
+      "decodedBytes": 5152496,
+      "decodedSha256": "e78159b07fc8509e8b5e51791d5ee3640faa625bde59bbdc393c0d41ced57bac"
+    },
+    {
+      "path": "report.json",
+      "bytes": 11875,
+      "encoding": "utf-8",
+      "sha256": "997e1818fb8c172f4a5316b3d111a37d6944c6c41b5213ee52253f4dc1d6e90d"
+    },
+    {
+      "path": "strict-results.jsonl.gz",
+      "bytes": 3082,
+      "encoding": "gzip",
+      "storedSha256": "511982d34eedb0844634c7839bdb5ec34f7530f9cdae38ec25e1d6a76807a837",
+      "decodedBytes": 20941,
+      "decodedSha256": "e79f34d311efda97875a19dbcc84dab68ebf217198a2dfdb254b8856cf2741c0"
+    },
+    {
+      "path": "strict-results.jsonl.levels.gz",
+      "bytes": 1262,
+      "encoding": "gzip",
+      "storedSha256": "c429e63b08ee2432012f9cc07cdab947da363ad3c48c56c213a3195dd876b466",
+      "decodedBytes": 3980,
+      "decodedSha256": "73c514f97332be8fece5d44f70d4b640d8099b1050d659d491fe4892f1e5be26"
+    },
+    {
+      "path": "strict-run.manifest.json",
+      "bytes": 1264,
+      "encoding": "utf-8",
+      "sha256": "4e380540dd32f4576d3d1b4a6864dde3783292700a25c287891718015c863f5a"
+    }
+  ]
+}

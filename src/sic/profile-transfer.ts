@@ -8,6 +8,7 @@ import { chooseInteraction, interactionModule } from './observed-interaction-car
 import { describeRankOrder, observeHeightInversion, observeRankOrder, projectHeightInversion, projectRankOrder, resizeRankOrder } from './profile-rank-order.ts';
 import type { HeightInversion, RankOrder } from './profile-rank-order.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 
 export const profileTransferId = 'sic_profile_transfer';
 export const verifyProfileTransferId = 'sic_verify_profile_transfer';
@@ -49,7 +50,9 @@ type Work = { focus: number; held: boolean; profiles: number[][]; acquired: bool
 type Preparation = { phase: Strategy; command: NativeCommand; target: number; projected: Work; tool?: NativeBox; shift?: Shift;
   ordering?: { support: string; probe: boolean; transferred?: RankOrder; compareHeights?: true };
   complement?: string; inversion?: string };
-type Proposal = NativeProposal & { local: State; scene: Scene; strategy: Strategy; target: number; attempt: string; needId: string; preparation?: Preparation };
+type PreparedStep = { scene: Scene; preparation: Preparation };
+type Proposal = NativeProposal & { local: State; scene: Scene; strategy: Strategy; target: number; attempt: string; needId: string;
+  preparation?: Preparation; continuation?: PreparedStep[] };
 const equal = (a: readonly number[], b: readonly number[]) => a.length === b.length && a.every((value, i) => value === b[i]);
 const empty = (epoch = 0): State => ({ epoch, count: 0, tried: [], evidence: [], stopped: false });
 const horizontalBox = ([t, l, b, r]: readonly number[]): NativeBox => [l!, t!, r!, b!];
@@ -158,6 +161,38 @@ export function measureProfileTransfer(observation: NativeObservation, rows: Nat
 export const workshopState = (scene: Scene): Work => ({ focus: scene.focus, held: scene.held,
   profiles: scene.bands.map(band => band.profile.values),
   acquired: scene.bands.map(band => receiverFilled(band.receiver)) });
+
+function profileAttempt(scene: Scene, action: string, local: State) {
+  return JSON.stringify([scene.bands.map(band => [band.profile.values, band.receiver.values]), scene.focus, scene.held, action,
+    ...(local.orders ? [Object.entries(local.orders).map(([support, proof]) => [support, proof.ranks])] : []),
+    ...(local.inversions ? [Object.entries(local.inversions).map(([support, proof]) => [support, proof.ranks])] : [])]);
+}
+
+function preparationProof(step: Preparation, local: State, acquired: ProfileTransferEvidence) {
+  const { ordering, complement, inversion, shift, phase } = step;
+  return ordering ? local.orders?.[ordering.support] : complement ? local.complements?.[complement]
+    : inversion ? local.inversions?.[inversion] : shift ? local.shifts?.[shift] ?? acquired.shifts?.[shift] : local.verified?.[phase];
+}
+
+function preparationSupported(step: Preparation, local: State, acquired: ProfileTransferEvidence) {
+  const { ordering, complement, inversion, shift, command } = step, proof = preparationProof(step, local, acquired);
+  return ordering ? !ordering.probe && proof?.control === command.action_ref
+    : proof?.control === command.action_ref || !shift && !complement && !inversion && acquired.used.includes(command.action_ref);
+}
+
+function projectedScene(scene: Scene, work: Work): Scene {
+  return { ...scene, focus: work.focus, held: work.held, bands: scene.bands.map((band, index) => ({
+    ...band, profile: { ...band.profile, values: work.profiles[index]! },
+    receiver: { ...band.receiver, values: work.acquired[index] ? band.receiver.values.map(() => 0) : band.receiver.values },
+  })) };
+}
+
+function samePreparationScene(expected: Scene, current: Scene | null) {
+  if (!current || JSON.stringify(workshopState(current)) !== JSON.stringify(workshopState(expected))) return false;
+  const interfaceOf = (scene: Scene) => [scene.bands.map(band => [band.profile.box[0], band.profile.box[2],
+    band.receiver.box, band.receiver.values]), scene.tools.map(tool => [tool.band, tool.box, tool.shift, tool.appearance])];
+  return JSON.stringify(interfaceOf(current)) === JSON.stringify(interfaceOf(expected));
+}
 
 function measureDomain(scene: Scene): Domain | null {
   const values = scene.bands.flatMap(({ profile, receiver }) => [...profile.values, ...receiver.values].filter(value => value > 0));
@@ -346,9 +381,7 @@ export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
       const offer = preparation ?? directProfileStep(scene, inputs, target);
       if (!offer?.command) return null;
       const { phase, command } = offer;
-      const attempt = JSON.stringify([bands.map(band => [band.profile.values, band.receiver.values]), focus, held, command.action_ref,
-        ...(local.orders ? [Object.entries(local.orders).map(([support, proof]) => [support, proof.ranks])] : []),
-        ...(local.inversions ? [Object.entries(local.inversions).map(([support, proof]) => [support, proof.ranks])] : [])]);
+      const attempt = profileAttempt(scene, command.action_ref, local);
       if (local.tried.includes(attempt)) return null;
       const shift = preparation?.shift, ordering = preparation?.ordering, complement = preparation?.complement, inversion = preparation?.inversion;
       const orderProof = ordering ? local.orders?.[ordering.support] : undefined;
@@ -356,12 +389,33 @@ export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
         : shift ? local.shifts?.[shift] ?? acquired?.shifts?.[shift] : local.verified?.[phase];
       const reused = ordering ? !ordering.probe && proof?.control === command.action_ref
         : proof?.control === command.action_ref || !shift && !complement && !inversion && !!preparation && !!acquired?.used.includes(command.action_ref);
+      const continuation: PreparedStep[] = [];
+      if (preparation && acquired && reused) {
+        let current = scene, next: Preparation | null = preparation;
+        const attempts = new Set(local.tried);
+        const limit = Math.min(remaining, maximumCommittedActions, Math.max(24, bands.length * 12) - local.count);
+        while (next && continuation.length < limit && preparationSupported(next, local, acquired)) {
+          const key = profileAttempt(current, next.command.action_ref, local);
+          if (attempts.has(key)) break;
+          attempts.add(key);
+          continuation.push({ scene: current, preparation: next });
+          current = projectedScene(current, next.projected);
+          if (next.projected.acquired.every(Boolean) || continuation.length >= limit) break;
+          next = prepareProfile(current, inputs, acquired, remaining - continuation.length, rows.length,
+            domain, local.orders, local.inversions);
+        }
+      }
       const ref = observation.observation_ref;
       const transferredProof = ordering?.transferred && preparation?.tool
         ? scene.tools.find(tool => equal(tool.box, preparation.tool!))?.appearance : undefined;
       const proofRefs = proof?.control === command.action_ref ? orderProof?.observations ?? [proof.evidence]
         : transferredProof ? acquired?.orders?.[transferredProof]?.observations ?? [] : [];
-      const evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence, ...proofRefs,
+      const continuationProofs = acquired ? continuation.flatMap(({ preparation: step }) => {
+        const supported = preparationProof(step, local, acquired);
+        return supported?.control === step.command.action_ref
+          ? step.ordering ? local.orders?.[step.ordering.support]?.observations ?? [] : [supported.evidence] : [];
+      }) : [];
+      const evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence, ...proofRefs, ...continuationProofs,
         ...(preparation && acquired ? acquired.evidence : [])]
         .filter(item => item !== ref))];
       const mode = execution?.reasoningMode ?? (phase === 'test_profile_carry' ? 'exploration' : 'solving');
@@ -382,10 +436,11 @@ export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
       const goal = { kind: 'match_profile_to_receiver', scope: ref.split(':revision:', 1)[0]!, subjects: ['profiles_and_open_receivers'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_fitting_the_profiles' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
-      const id = `profile-transfer:${need.id}`, actions = [command];
+      const id = `profile-transfer:${need.id}`, actions = continuation.length > 1
+        ? continuation.map(step => step.preparation.command) : [command];
       return { status: 'proposed', kind: verifyProfileTransferId, actions, local, scene, strategy: phase, target, attempt, needId: need.id,
-        ...(preparation ? { preparation } : {}),
-        steps: [{ action: command, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+        ...(preparation ? { preparation } : {}), ...(continuation.length > 1 ? { continuation } : {}),
+        steps: actions.map(action => ({ action, expected_after: null })), binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
@@ -399,17 +454,36 @@ export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
+    before(proposal, index, packet, observation) {
+      if (index > 0 && proposal.continuation) {
+        const step = proposal.continuation[index];
+        const current = step && measureProfileTransfer(observation, packet.frame_rows, true, proposal.scene.receiverAnchor);
+        const admitted = proposal.local.epoch === observation.level_epoch && !!step
+          && observation.available_action_refs.includes(step.preparation.command.action_ref)
+          && samePreparationScene(step.scene, current ?? null);
+        return { admitted, reason: admitted ? 'prepared_profile_and_tools_confirmed' : 'prepared_profile_or_tools_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'profile_transfer_bound' : 'profile_transfer_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const matched = observed(proposal, measureProfileTransfer(after, second, false, proposal.scene.receiverAnchor));
-      return { matched, seal_prefix: true, reason: matched ? 'profile_transfer_confirmed' : 'profile_transfer_contradicted' };
+      const step = proposal.continuation?.[index];
+      const expected = step ? { ...proposal, scene: step.scene, preparation: step.preparation,
+        strategy: step.preparation.phase, target: step.preparation.target } : proposal;
+      const matched = observed(expected, measureProfileTransfer(after, second, false, proposal.scene.receiverAnchor));
+      return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length,
+        reason: matched ? 'profile_transfer_confirmed' : 'profile_transfer_contradicted' };
     },
-    record(before, after, command, _first, second, proposal) {
+    record(before, after, command, _first, second, proposal, index) {
+      const step = proposal.continuation?.[index];
+      if (step) {
+        const local = index > 0 && state.epoch === before.level_epoch ? state : proposal.local;
+        proposal = { ...proposal, local, scene: step.scene, preparation: step.preparation,
+          strategy: step.preparation.phase, target: step.preparation.target,
+          attempt: profileAttempt(step.scene, command.action_ref, local) };
+      }
       if (after.levels_completed > before.levels_completed) {
         const toolControl = proposal.local.verified?.test_framed_profile_tool?.control ?? retained?.toolControl;
         const orders = { ...retained?.orders };

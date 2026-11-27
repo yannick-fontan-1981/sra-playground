@@ -39,13 +39,45 @@ const requiredPhysical = {
   7: ['crate', 'position'],
   8: ['crate', 'mirror', 'position'],
 };
-const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SIGN: 'move', GABA: 'move', WA30: 'move', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move', SS06: 'move', SS07: 'move' };
+const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SIGN: 'move', GABA: 'move', LKEY: 'move', WA30: 'move', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move', SS06: 'move', SS07: 'move' };
 const markedFieldContinuity = [[15, 4], [44, 26], [56, 28], [22, 0], [53, 28], [81, 31]];
 const cargoContinuity = [[47, 38], [37, 34], [67, 62], [88, 82], [106, 99], [102, 93]];
 const orientedDeliveryCeilings = [32, 64, 92, 58, 136, 58, 51];
 // Executed [commands, continued commands, same-cargo translation pairs], 2026-11-26.
 const orientedDeliveryContinuity = [[26, 5, 1], [59, 18, 7], [76, 22, 10], [48, 0, 0], [113, 59, 41], [48, 24, 15], [42, 20, 13]];
 const orientedDeliverySeriesLevels = new Set([1, 2, 3, 5, 6, 7]);
+// Actual [commands, continued commands], chronological 165991ec, 2026-11-27.
+// L1 acquires the controls; L2–6 retain preparations, including grip and tools.
+const profileContinuity = [[8, 0], [8, 5], [20, 14], [29, 20], [24, 17], [30, 22]];
+// Existing strict campaign ceilings; the collector uses their maximum, 36.
+const profileCeilings = [13, 13, 24, 34, 29, 36];
+
+function confirmedProfileReturn(ticket) {
+  const outcome = ticket.outcome;
+  return ticket.outcomeCount === 1 && typeof ticket.planId === 'string' && ticket.planId.length > 0
+    && outcome?.sic_plan === ticket.planId && outcome.index === ticket.actionIndex
+    && outcome.family === 'sic_verify_profile_transfer' && outcome.matched === true;
+}
+
+function measuredProfilePreparation(run, issued, groups) {
+  const offset = run.executedTickets.indexOf(issued[0]);
+  const effects = new Map(issued.map((ticket, index) => [ticket, run.steps?.[offset + index]]));
+  const prepared = [];
+  for (const group of groups.values()) {
+    if (group.length < 2 || !group.some(ticket => ticket.action === 'ACTION5')
+      || !group.some(ticket => /^ACTION[1-4]$/.test(ticket.action))
+      || !group.every(ticket => {
+        const effect = effects.get(ticket);
+        return confirmedProfileReturn(ticket) && /^ACTION[1-5]$/.test(ticket.action)
+          && effect?.a === Number(ticket.action.slice(6)) && effect.pixels > 0
+          && effect.family === ticket.outcome.family;
+      })) continue;
+    const first = issued.indexOf(group[0]);
+    prepared.push({ kind: 'profile preparation with grip', first, last: first + group.length - 1 });
+  }
+  assert.ok(prepared.length, 'LKEY lost its confirmed profile preparation series');
+  return prepared;
+}
 
 export function measureOrientedDelivery(issued, groups) {
   const same = (a, b) => Array.isArray(a) && Array.isArray(b) && a.length === 2 && b.length === 2
@@ -972,11 +1004,15 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SIGN: 6, GABA: cargoContinuity.length, WA30: orientedDeliveryCeilings.length, SS02: 8, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 8 };
+  const campaignLengths = { SIGN: 6, GABA: cargoContinuity.length, LKEY: profileContinuity.length, WA30: orientedDeliveryCeilings.length, SS02: 8, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 8 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   if (code === 'WA30') {
     assert.equal(run.start, 1, 'WA30 must start at level one');
     assert.equal(run.initialCompleted, 0, 'WA30 must preserve one chronological session');
+  }
+  if (code === 'LKEY') {
+    assert.equal(run.start, 1, 'LKEY must start at level one');
+    assert.equal(run.initialCompleted, 0, 'LKEY must preserve one chronological session');
   }
   assert.equal(
     tickets.length,
@@ -1022,6 +1058,20 @@ export function checkRun(run) {
         }
         assert.equal(group.at(-1).sealCount, 1, 'WA30 requires exactly one final reconciliation');
       }
+      if (code === 'LKEY') {
+        for (const ticket of group) {
+          assert.equal(ticket.outcomeCount, 1, 'LKEY requires exactly one actual return per ticket');
+          assert.ok(typeof ticket.planId === 'string' && ticket.planId.length > 0
+            && ticket.outcome?.sic_plan === ticket.planId && ticket.outcome.index === ticket.actionIndex,
+          'LKEY actual return lost its executed ticket identity');
+        }
+        for (const ticket of group.slice(0, -1)) {
+          assert.equal(ticket.sealCount, 0, 'LKEY reconciled before its series ended');
+          assert.equal(ticket.outcome.matched, true, 'LKEY continued without a confirmed return');
+          assert.equal(ticket.outcome.seal_prefix, false, 'LKEY continued after its owner closed the prefix');
+        }
+        assert.equal(group.at(-1).sealCount, 1, 'LKEY requires exactly one final reconciliation');
+      }
       if (group.length < 2) continue;
       lengths.push(group.length);
       const clicks = group.filter((t) => t.action === 'ACTION6').length;
@@ -1034,7 +1084,8 @@ export function checkRun(run) {
         continued >= Math.min(issued.length - 1, Math.ceil((minContinued * issued.length) / actions)),
         code + ' L' + row.level + ' lost executed continuity (' + continued + '/' + issued.length + ')',
       );
-    } else if (code !== 'SIGN' && (code !== 'WA30' || orientedDeliverySeriesLevels.has(row.level)))
+    } else if (code !== 'SIGN' && (code !== 'LKEY' || profileContinuity[i][1] > 0)
+      && (code !== 'WA30' || orientedDeliverySeriesLevels.has(row.level)))
       assert.ok(kinds.has(sources[code]), code + ' lost its ' + sources[code] + ' series');
     if (code === 'SIGN') {
       const ceiling = [20, 58, 68, 27, 64, 98][row.level - 1];
@@ -1050,6 +1101,14 @@ export function checkRun(run) {
         'GABA exceeded its verified action ceiling or reset');
       assert.ok(continued >= Math.min(issued.length - 1, Math.ceil(minContinued * issued.length / actions)),
         'GABA L' + row.level + ' lost executed cargo continuity');
+    }
+    if (code === 'LKEY') {
+      const [actions, minimumContinued] = profileContinuity[i];
+      assert.ok(issued.length <= profileCeilings[i] && issued.every(ticket => ticket.resets === 0),
+        'LKEY exceeded its verified action ceiling or reset');
+      const confirmedContinued = issued.filter(ticket => ticket.actionIndex > 0 && confirmedProfileReturn(ticket)).length;
+      assert.ok(confirmedContinued >= Math.min(issued.length - 1, Math.ceil(minimumContinued * issued.length / actions)),
+        'LKEY L' + row.level + ' lost confirmed profile continuity');
     }
     if (code === 'WA30') {
       assert.ok(issued.length <= orientedDeliveryCeilings[i] && issued.every(ticket => ticket.resets === 0),
@@ -1136,6 +1195,7 @@ export function checkRun(run) {
         ['sic_verify_marked_lattice', 'sic_learn_marked_lattice'])
       : code === 'GABA' ? measuredMotionSeries(run, issued, groups, 'cargo transport',
         ['sic_pivot_cargo', 'sic_deliver_cargo_after_observed_motion'], 'ACTION5')
+      : code === 'LKEY' && profileContinuity[i][1] > 0 ? measuredProfilePreparation(run, issued, groups)
       : code === 'WA30' && orientedDeliverySeriesLevels.has(row.level) ? measureOrientedDelivery(issued, groups)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
@@ -1186,6 +1246,7 @@ function main() {
       ['destination-set', 'SS07', '8', '180'],
       ['marked-field', 'source:SIGN', '6', '98'],
       ['cargo-transport', 'source:GABA', String(cargoContinuity.length), '128'],
+      ['profile-preparation', 'source:LKEY', String(profileContinuity.length), String(Math.max(...profileCeilings))],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');
@@ -1201,7 +1262,7 @@ function main() {
       .split(/\r?\n/)
       .map((line) => JSON.parse(line)),
   );
-  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'GABA', 'HANO', 'SIGN', 'SS01', 'SS02', 'SS03', 'SS04', 'SS05', 'SS06', 'SS07', 'WA30']);
+  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'GABA', 'HANO', 'LKEY', 'SIGN', 'SS01', 'SS02', 'SS03', 'SS04', 'SS05', 'SS06', 'SS07', 'WA30']);
   console.table(runs.flatMap(checkRun));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();

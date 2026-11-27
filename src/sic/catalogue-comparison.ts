@@ -10,6 +10,7 @@ import { readSlottedCatalogue, type SlottedCatalogue } from './catalogue-slots.t
 import { chooseJointCatalogue, observeCatalogueSubject, recordJointCatalogue, type JointCatalogue, type JointCatalogueAction } from './joint-catalogue-views.ts';
 
 export const catalogueComparisonId = 'sic_catalogue_comparison';
+export const continueCatalogueViewsGroup = 'continue_observed_catalogue_views';
 export const revealedExampleId = 'sic_resolve_observed_ambiguity';
 export const catalogueComparisonStrategies = {
   seek_distinguishing_view: 'Change the view to distinguish possible shapes',
@@ -30,6 +31,9 @@ type Scene = { field: NativeBox; palette: number; cards: Card[]; controls: Contr
 type State = { epoch: number; field: NativeBox; backgrounds: number[]; submitted: number[]; candidates: Record<string, number[]>;
   views: string[]; tried: string[]; stopped: boolean; evidence: string[] };
 type Choice = { action: NativeCommand; sprite: NativeBox | null; target: number | null };
+type ViewControl = readonly [number, number, number];
+type LearnedViews = { scope: string; epoch: number; completed: number; commands: Record<string, string[]>; evidence: string[];
+  controls?: ViewControl[] };
 type Strategy = keyof typeof catalogueComparisonStrategies;
 type SingleCatalogueProposal = NativeProposal & { local: State; scene: Scene; asked: Choice; attempt: string; strategy: Strategy; needId: string; candidateCount: number };
 type JointProposal = NativeProposal & { joint: JointCatalogue; slotted: SlottedCatalogue; choice: JointCatalogueAction; attempt: string; needId: string };
@@ -40,6 +44,16 @@ const same = (a: unknown, b: unknown) => key(a) === key(b);
 const directions = ['ACTION3', 'ACTION4', 'ACTION1', 'ACTION2'];
 const point = ([x, y]: NativePoint): NativeCommand => ({ action_ref: 'ACTION6', data: { x, y } });
 const catalogueKey = (scene: Scene) => key([scene.geometry_ref, scene.cards.map(card => card.mask), scene.palette]);
+const sourceScope = (observation: NativeObservation) => observation.observation_ref.split(':epoch:')[0]!;
+const viewControls = (scene: Scene): ViewControl[] | null => new Set(scene.controls.map(control => control.palette)).size !== scene.controls.length ? null
+  : scene.controls.map(control => [control.palette, control.bbox[2] - control.bbox[0], control.bbox[3] - control.bbox[1]] as const)
+    .sort((a, b) => a[0] - b[0]);
+const viewInterface = (scene: Scene) => { const controls = viewControls(scene); return controls && key(controls); };
+function viewReturn(first: NativeRows, second: NativeRows, scene: Scene): boolean | null {
+  const returned = measureOccludedCatalogue(second) as Scene | null;
+  if (!returned || !same(catalogueStructure(scene), catalogueStructure(returned))) return false;
+  return exposedCatalogueValues(first, second, scene).length ? true : null;
+}
 
 function fits(rows: NativeRows, scene: Scene, state: State) {
   const prior = state.candidates[catalogueKey(scene)];
@@ -51,6 +65,21 @@ export function createSicCatalogueComparison(family = catalogueComparisonId): Na
   const declarative = family === revealedExampleId;
   let state: State | null = null;
   let joint: JointCatalogue | null = null;
+  let learnedViews: Record<string, LearnedViews> = {};
+  const reusableViews = (observation: NativeObservation, scene: Scene) => {
+    const controls = viewControls(scene);
+    if (!controls) return null;
+    const eligible = (known: LearnedViews | undefined) => known?.scope === sourceScope(observation)
+      && known.completed === observation.levels_completed
+      && (known.epoch === observation.level_epoch || known.epoch === observation.level_epoch - 1);
+    const exact = learnedViews[key(controls)];
+    if (eligible(exact)) return exact;
+    // Additional selectors do not invalidate the unique controls already observed.
+    // Only their acquired commands are retained; a new subject still needs a return.
+    const extensions = Object.values(learnedViews).filter(known => eligible(known) && known.controls?.length
+      && known.controls.every(prior => controls.some(current => same(prior, current))));
+    return extensions.length === 1 ? extensions[0]! : null;
+  };
   let choose: NativeProgramHandle | undefined;
   let verify: NativeProgramHandle | undefined;
   async function offerJoint(observation: NativeObservation, rows: NativeRows, remaining: number): Promise<JointProposal | null> {
@@ -100,6 +129,19 @@ export function createSicCatalogueComparison(family = catalogueComparisonId): Na
       choose = await registry.registerProgram(chooseRevealedExample, revealedExampleOperations, module);
       verify = await registry.registerProgram(checkRevealedExample, revealedExampleOperations, module);
     },
+    proposeInSubquestion(_group, entry, observation, rows, inputs, remaining, execution) {
+      return this.proposeInGroup!(entry, observation, rows, inputs, remaining, execution);
+    },
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group !== continueCatalogueViewsGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      if (!Object.keys(learnedViews).length) return null;
+      const scene = measureOccludedCatalogue(rows) as Scene | null, known = scene && reusableViews(observation, scene);
+      const commands = scene && known?.commands[scene.palette];
+      if (!commands?.some(command => observation.available_action_refs.includes(command))) return null;
+      const proposal = await this.propose(observation, rows, inputs, remaining, execution);
+      return proposal && !isJoint(proposal) && (proposal.strategy !== 'seek_distinguishing_view'
+        || commands.includes(proposal.asked.action.action_ref)) ? proposal : null;
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6') || execution?.signal?.aborted) return null;
       if (declarative && (!choose || (!state && !execution?.readDirectionalView))) return null;
@@ -107,11 +149,12 @@ export function createSicCatalogueComparison(family = catalogueComparisonId): Na
       const scene = measureOccludedCatalogue(rows) as Scene | null;
       if (!scene || scene.cards.length > 8) return declarative ? null : offerJoint(observation, rows, remaining);
       const prior = state?.epoch === observation.level_epoch && same(state.field, scene.field) ? state : null;
+      const known = reusableViews(observation, scene);
       const acquisition = declarative && !prior ? execution?.readDirectionalView?.(scene.field, scene.palette,
         [...scene.cards.map(card => card.bbox), ...scene.controls.map(control => control.bbox)]) : null;
       if (declarative && !prior && !acquisition?.exposed.length) return null;
       const local: State = prior ?? { epoch: observation.level_epoch, field: scene.field, backgrounds: [], submitted: [],
-        candidates: {}, views: [], tried: [], stopped: false, evidence: [] };
+        candidates: {}, views: [...(known?.commands[scene.palette] ?? [])], tried: [], stopped: false, evidence: [...(known?.evidence ?? [])] };
       if (acquisition?.exposed.length) {
         local.backgrounds = [...acquisition.exposed];
         local.views = [acquisition.command];
@@ -193,10 +236,18 @@ export function createSicCatalogueComparison(family = catalogueComparisonId): Na
           ? 'compared_view_contradicted' : 'compared_view_unverified',
           src_check: { workflow: checked.receipt.workflow, hash: checked.receipt.src_hash, ...outcome } };
       }
+      if (proposal.strategy === 'seek_distinguishing_view') {
+        const matched = viewReturn(first, second, proposal.scene);
+        return { matched, seal_prefix: true, reason: matched === true ? 'catalogue_view_effect_observed'
+          : matched === false ? 'catalogue_view_interface_contradicted' : 'catalogue_view_still_ambiguous' };
+      }
       return { matched: null, seal_prefix: true, reason: 'compare_partial_view_and_catalogue' };
     },
     record(before, after, issued, first, second, proposal) {
-      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+      if (before.level_epoch !== after.level_epoch || before.state !== after.state) {
+        this.observePublicOutcome?.(before, after, issued, first, second);
+        return { events: [] };
+      }
       if (isJoint(proposal)) {
         const result = recordJointCatalogue(proposal.joint, proposal.slotted, readSlottedCatalogue(second), first, second,
           proposal.choice, after.observation_ref, proposal.attempt);
@@ -214,6 +265,7 @@ export function createSicCatalogueComparison(family = catalogueComparisonId): Na
       const current = measureOccludedCatalogue(second) as Scene | null;
       const next = { ...local, tried: [...local.tried, proposal.attempt], evidence: [...local.evidence.slice(-4), after.observation_ref] };
       if (!current || !same(scene.field, current.field)) next.stopped = true;
+      else if (strategy === 'seek_distinguishing_view' && viewReturn(first, second, scene) === false) next.stopped = true;
       else if (strategy === 'seek_distinguishing_view' && same(catalogueStructure(scene), catalogueStructure(current))) {
         const exposed = exposedCatalogueValues(first, second, scene);
         if (!same(catalogueFieldPixels(first, scene), catalogueFieldPixels(second, scene))) next.views = [...new Set([...local.views, issued.action_ref])];
@@ -222,12 +274,36 @@ export function createSicCatalogueComparison(family = catalogueComparisonId): Na
       } else if (strategy === 'test_unique_catalogue_match') next.submitted = [...local.submitted, scene.palette];
       else if (strategy === 'change_catalogue_subject' && current.palette !== proposal.asked.target) next.stopped = true;
       state = next;
+      this.observePublicOutcome?.(before, after, issued, first, second);
       return { events: [] };
     },
-    state: () => ({ state, ...(joint ? { joint } : {}) }),
+    observePublicOutcome(before, after, command, first, second) {
+      if (declarative || sourceScope(before) !== sourceScope(after)
+        || !before.available_action_refs.includes('ACTION6')) return;
+      const completion = after.levels_completed === before.levels_completed + 1;
+      if (!completion && (before.level_epoch !== after.level_epoch || before.state !== after.state
+        || !/^ACTION[1-4]$/.test(command.action_ref))) return;
+      const scene = measureOccludedCatalogue(first) as Scene | null, signature = scene && viewInterface(scene);
+      if (!scene || !signature) return;
+      const known = learnedViews[signature];
+      if (completion) {
+        if (known?.scope === sourceScope(before) && known.epoch === before.level_epoch && known.completed === before.levels_completed)
+          learnedViews[signature] = { ...known, completed: after.levels_completed,
+            evidence: [...new Set([...known.evidence, before.observation_ref, after.observation_ref])] };
+        return;
+      }
+      if (viewReturn(first, second, scene) !== true) return;
+      const prior = known?.scope === sourceScope(before) ? known : reusableViews(before, scene);
+      learnedViews[signature] = { scope: sourceScope(before), epoch: before.level_epoch, completed: before.levels_completed,
+        controls: viewControls(scene)!,
+        commands: { ...prior?.commands, [scene.palette]: [...new Set([...(prior?.commands[scene.palette] ?? []), command.action_ref])] },
+        evidence: [...new Set([...(prior?.evidence ?? []), before.observation_ref, after.observation_ref])] };
+    },
+    state: () => ({ state, ...(joint ? { joint } : {}), ...(Object.keys(learnedViews).length ? { learnedViews } : {}) }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       joint = structuredClone((value.joint as JointCatalogue | undefined) ?? null);
+      learnedViews = structuredClone((value.learnedViews as Record<string, LearnedViews> | undefined) ?? {});
     },
   };
 }
