@@ -1,0 +1,66 @@
+name: WA30 ninth-level public diagnosis
+on:
+  push:
+    branches: [diagnostic/wa30-ninth-level-20261127]
+permissions:
+  contents: read
+jobs:
+  public-diagnosis:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      SOURCE_SHA: 90fb06f44016a1a60ecacf888086de1a69873783
+      SIC_REPLAY_REFERENCES: docs/architecture/sic-replay-reference-levels-20261126.json
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 3
+          persist-credentials: false
+      - name: Restore the frozen candidate and retain just the passive observer
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/wa30-diagnostic"
+          cp docs/diagnostics/sic-27-wa30-20261127/capture-level9-public.mjs "$RUNNER_TEMP/wa30-diagnostic/"
+          git checkout --detach "$SOURCE_SHA"
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          test -z "$(git status --porcelain --untracked-files=no)"
+          git rev-parse HEAD HEAD^{tree} > "$RUNNER_TEMP/wa30-diagnostic/source.txt"
+          sha256sum "$SIC_REPLAY_REFERENCES" scripts/check-sic-chronological.mjs \
+            "$RUNNER_TEMP/wa30-diagnostic/capture-level9-public.mjs" > "$RUNNER_TEMP/wa30-diagnostic/source.sha256"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node scripts/prepare-python.mjs
+      - name: Collect public decisions and returns through the ninth level
+        shell: bash
+        run: |
+          export WA30_PROBE_DIRECTORY="$RUNNER_TEMP/wa30-diagnostic"
+          export NODE_OPTIONS="--import=file://$WA30_PROBE_DIRECTORY/capture-level9-public.mjs"
+          node scripts/check-sic-chronological.mjs WA30 9 "$WA30_PROBE_DIRECTORY/diagnostic.jsonl" 1 sic \
+            2>&1 | tee "$WA30_PROBE_DIRECTORY/diagnostic.log"
+      - name: Verify the passive receipt and summarize completion
+        shell: bash
+        run: |
+          sha256sum --check "$RUNNER_TEMP/wa30-diagnostic/source.sha256"
+          test -z "$(git status --porcelain --untracked-files=no)"
+          test -s "$RUNNER_TEMP/wa30-diagnostic/level9-public.jsonl"
+          gzip "$RUNNER_TEMP/wa30-diagnostic/level9-public.jsonl"
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          import { join } from 'node:path';
+          const out = join(process.env.RUNNER_TEMP, 'wa30-diagnostic');
+          const row = JSON.parse(readFileSync(join(out, 'diagnostic.jsonl'), 'utf8'));
+          console.log(JSON.stringify({ levels: row.levels, actions: row.actions, reason: row.reason,
+            scope: 'passive diagnosis' }));
+          NODE
+      - name: Preserve public diagnosis
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wa30-level9-public-${{ env.SOURCE_SHA }}
+          path: ${{ runner.temp }}/wa30-diagnostic/
+          if-no-files-found: error
+          retention-days: 14
