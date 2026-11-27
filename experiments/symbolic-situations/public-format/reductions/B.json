@@ -1,0 +1,22 @@
+{
+  "format": "sra.public/1",
+  "goal": {"command":["valider"],"criterion":"minimax_actions","source":[1]},
+  "observations": [{"ref":["indexed","P"],"status":"known","value":false,"source":[2]}],
+  "domains": [],
+  "commands": [
+    {"command":["indexer","P"],"source":[3]},
+    {"command":["valider"],"source":[1,4]}
+  ],
+  "rules": [
+    {"command":["indexer","P"],"requires":{"eq":[["indexed","P"],false]},"source":[3]},
+    {"command":["indexer","P"],"effect":{"set":[["indexed","P"],true]},"source":[3]},
+    {"command":["valider"],"when":{"eq":[["indexed","P"],true]},"effect":{"end":"success"},"source":[4]},
+    {"command":["valider"],"when":{"eq":[["indexed","P"],false]},"effect":{"end":"failure"},"source":[4]}
+  ],
+  "sources": {
+    "1":"Atteindre succès par valider, en minimisant le nombre de commandes dans le pire cas.",
+    "2":"Le poste P est initialement non indexé.",
+    "3":"indexer P est disponible si P est non indexé. La commande indexe P et renvoie exactement « indexé ».",
+    "4":"valider termine sur succès si P est indexé, sur échec sinon."
+  }
+}
