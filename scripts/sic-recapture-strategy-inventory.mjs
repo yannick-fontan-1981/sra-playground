@@ -9,10 +9,12 @@ import { createHash } from 'node:crypto';
 import { sourceBackend } from './sic-study-source-games.mjs';
 
 const [checkout, output, ...selection] = process.argv.slice(2);
+const curious = selection[0] === '--curious';
+if (curious) selection.shift();
 const offerFilter = selection[0] === '--offer' ? selection.slice(1, 4) : null;
 const codes = offerFilter ? selection.slice(4) : selection;
 if (!checkout || !output || !codes.length || new Set(codes).size !== codes.length) {
-  throw Error('Usage: node scripts/sic-recapture-strategy-inventory.mjs CHECKOUT NEW-REPORT.json [--offer FAMILY STRATEGY PROPOSAL] GAME [GAME ...]');
+  throw Error('Usage: node scripts/sic-recapture-strategy-inventory.mjs CHECKOUT NEW-REPORT.json [--curious] [--offer FAMILY STRATEGY PROPOSAL] GAME [GAME ...]');
 }
 const sha = execFileSync('git', ['rev-parse','HEAD'], { cwd: checkout, encoding: 'utf8' }).trim();
 execFileSync('git', ['diff', '--quiet', 'HEAD', '--', 'src', 'public', 'reference', 'scripts'], { cwd: checkout });
@@ -59,12 +61,14 @@ const runtime = {
 };
 const report = { sha, inventoryBlob: inventory, session, startLevel: 1, seed: 0, maxActions: 16, games: [] };
 if (offerFilter) report.offerFilter = offerFilter;
+if (curious) report.openingCuriosity = 'active';
+const pack = curious ? { ...defaultRecoveryPack, openingCuriosity: 'active' } : defaultRecoveryPack;
 for (const game of codes) {
   const returned = [];
-  const result = await run(runtime, game, 'complete', defaultRecoveryPack, 16, row => returned.push({ ...row }));
+  const result = await run(runtime, game, 'complete', pack, 16, row => returned.push({ ...row }));
   const keys = new Set(returned.map(row => JSON.stringify([row.family, row.strategy, row.entry, row.proposal])));
   const rows = returned.filter(row => {
-    if (offerFilter) return row.family === offerFilter[0] && row.strategy === offerFilter[1] && row.proposal === offerFilter[2];
+    if (offerFilter) return [row.family, row.strategy, row.proposal].every((v, i) => offerFilter[i] === '*' || offerFilter[i] === v);
     if (row.family === 'information_goal') return row.strategy === 'coupled_displays' && row.proposal === 'experiment';
     return row.family === 'view' && row.proposal === 'public_view_frontier'
       && ['approach_view_edge', 'confirm_access_obstruction'].includes(row.strategy);
