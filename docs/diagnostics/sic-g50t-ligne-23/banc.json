@@ -1,0 +1,268 @@
+{
+  "game": "G50T",
+  "harness": "ba04161fbce03f9660e9e73c14ed2c14ef2538d7",
+  "firstObserved": {
+    "family": "observed_frontier",
+    "strategy": "test_local_input",
+    "kind": "experiment",
+    "question": {
+      "id": "Q_36ce889058ea8eda599b",
+      "label": "Observe the effect of the selected untried input",
+      "parent": "G_protocol_completion"
+    },
+    "need": {
+      "kind": "observe_untried_input_effect",
+      "scope": "frontier-qualification:epoch:1",
+      "subjects": [
+        "Q_36ce889058ea8eda599b"
+      ],
+      "parentObjective": "G_protocol_completion",
+      "satisfactionContract": "acquire_the_selected_input_return",
+      "id": "sic-need:3060aa191647fd3afe096ca6d9ac00fecc0e48d570ed6f4a60d2b2a6bdd914aa",
+      "evidence": [
+        "frontier-qualification:epoch:1:revision:1:frame:f79ab0e9d856fdf8"
+      ],
+      "status": "assigned"
+    },
+    "plan": "sic-plan:frontier-qualification:epoch:1:revision:1:frame:f79ab0e9d856fdf8",
+    "preSha256": "9789b4da9ec687e34c49aa444e0b9ab41fddf3ecb329cb7b647357cc8c485f13",
+    "ranking": {
+      "questions": [
+        {
+          "ref": "Q_36ce889058ea8eda599b",
+          "priority": 3,
+          "reason": "unobserved_input_effect_or_unexplained_transition",
+          "command": {
+            "action_ref": "ACTION1"
+          },
+          "trialsHere": 0
+        },
+        {
+          "ref": "Q_407559e98cd1587424e2",
+          "priority": 3,
+          "reason": "unobserved_input_effect_or_unexplained_transition",
+          "command": {
+            "action_ref": "ACTION2"
+          },
+          "trialsHere": 0
+        },
+        {
+          "ref": "Q_3e77e23620bb0df0a132",
+          "priority": 3,
+          "reason": "unobserved_input_effect_or_unexplained_transition",
+          "command": {
+            "action_ref": "ACTION3"
+          },
+          "trialsHere": 0
+        },
+        {
+          "ref": "Q_76c1a3514f7b0c5ebf50",
+          "priority": 3,
+          "reason": "unobserved_input_effect_or_unexplained_transition",
+          "command": {
+            "action_ref": "ACTION4"
+          },
+          "trialsHere": 0
+        },
+        {
+          "ref": "Q_92f288e5fef9312a1dc1",
+          "priority": 3,
+          "reason": "unobserved_input_effect_or_unexplained_transition",
+          "command": {
+            "action_ref": "ACTION5"
+          },
+          "trialsHere": 0
+        }
+      ],
+      "alternatives": {
+        "leastTried": "Q_36ce889058ea8eda599b",
+        "commandOrder": "Q_36ce889058ea8eda599b",
+        "usageGap": 0
+      }
+    },
+    "expectedAfter": null,
+    "predictedEffectUnknown": true,
+    "guard": {
+      "admitted": true,
+      "reason": "current_public_premises_match_provisional_step",
+      "pointBound": true,
+      "family": "observed_frontier",
+      "index": 0,
+      "beforeRelease": true
+    },
+    "release": {
+      "admitted": true,
+      "revision": 1,
+      "nativeGate": true
+    },
+    "ticket": {
+      "id": "frontier-qualification:native:1",
+      "sessionId": "frontier-qualification",
+      "sourceDigest": "1a27410cbada61ee76cbeb9c32eb927cec3201d0fd29cfb53661fdec0be7a146",
+      "observationRef": "frontier-qualification:epoch:1:revision:1:frame:f79ab0e9d856fdf8",
+      "graphChain": "212f10747bea5cfa5bd6530dc38ce2e07a32aebf6923493b43f71984470cdbe3",
+      "nativeExecutionDigest": "417e9ea1c110592ee43adae118a94b35303697a99e0b7f5e5f882187e4b22ba6",
+      "frameHash": "f79ab0e9d856fdf8",
+      "level": 1,
+      "levelsCompleted": 0,
+      "decisionRevision": 1,
+      "actionIndex": 0,
+      "actionRef": "ACTION1",
+      "data": {}
+    }
+  },
+  "return": {
+    "ticket": "frontier-qualification:native:1",
+    "before": "frontier-qualification:epoch:1:revision:1:frame:f79ab0e9d856fdf8",
+    "after": "frontier-qualification:epoch:1:revision:2:frame:f79ab0e9d856fdf8",
+    "plan": "sic-plan:frontier-qualification:epoch:1:revision:1:frame:f79ab0e9d856fdf8",
+    "matched": null,
+    "status": "unknown_effect_observed",
+    "frontier": {
+      "objective": "Q_36ce889058ea8eda599b",
+      "status": "observed",
+      "need": "sic-need:3060aa191647fd3afe096ca6d9ac00fecc0e48d570ed6f4a60d2b2a6bdd914aa"
+    },
+    "need": {
+      "id": "sic-need:3060aa191647fd3afe096ca6d9ac00fecc0e48d570ed6f4a60d2b2a6bdd914aa",
+      "status": "observed",
+      "subjects": [
+        "Q_36ce889058ea8eda599b"
+      ],
+      "evidence": [
+        "frontier-qualification:epoch:1:revision:1:frame:f79ab0e9d856fdf8",
+        "frontier-qualification:epoch:1:revision:2:frame:f79ab0e9d856fdf8"
+      ],
+      "firstPlan": "sic-plan:frontier-qualification:epoch:1:revision:1:frame:f79ab0e9d856fdf8",
+      "latestPlan": "sic-plan:frontier-qualification:epoch:1:revision:1:frame:f79ab0e9d856fdf8"
+    },
+    "transition": {
+      "before": "frontier-qualification:epoch:1:revision:1:frame:f79ab0e9d856fdf8",
+      "after": "frontier-qualification:epoch:1:revision:2:frame:f79ab0e9d856fdf8",
+      "command": {
+        "action_ref": "ACTION1"
+      },
+      "acquisition": "transition:6223f07ff39b8435203b8d3d60dec0be219d809589472be788a9791eac494fc8"
+    },
+    "graphChain": "7fdd3f1ba872972873a14e2c6820955298ef519edb89b3815e6e2393bf509ea9"
+  },
+  "nextObserved": {
+    "family": "observed_frontier",
+    "strategy": "test_local_input",
+    "kind": "experiment",
+    "question": {
+      "id": "Q_407559e98cd1587424e2",
+      "label": "Observe the effect of the selected untried input",
+      "parent": "G_protocol_completion"
+    },
+    "need": {
+      "kind": "observe_untried_input_effect",
+      "scope": "frontier-qualification:epoch:1",
+      "subjects": [
+        "Q_407559e98cd1587424e2"
+      ],
+      "parentObjective": "G_protocol_completion",
+      "satisfactionContract": "acquire_the_selected_input_return",
+      "id": "sic-need:2d6f19fc1db317601f9a66b737f59c4f2f507e942dd8590dd1c6cb3e6da7e55f",
+      "evidence": [
+        "frontier-qualification:epoch:1:revision:2:frame:f79ab0e9d856fdf8"
+      ],
+      "status": "assigned"
+    },
+    "plan": "sic-plan:frontier-qualification:epoch:1:revision:2:frame:f79ab0e9d856fdf8",
+    "preSha256": "6ea2e1dd5868e95da5c682874d66b92089fbf163eb706d30c29f3949cc773d8c",
+    "ranking": {
+      "questions": [
+        {
+          "ref": "Q_407559e98cd1587424e2",
+          "priority": 3,
+          "reason": "unobserved_input_effect_or_unexplained_transition",
+          "command": {
+            "action_ref": "ACTION2"
+          },
+          "trialsHere": 0
+        },
+        {
+          "ref": "Q_3e77e23620bb0df0a132",
+          "priority": 3,
+          "reason": "unobserved_input_effect_or_unexplained_transition",
+          "command": {
+            "action_ref": "ACTION3"
+          },
+          "trialsHere": 0
+        },
+        {
+          "ref": "Q_76c1a3514f7b0c5ebf50",
+          "priority": 3,
+          "reason": "unobserved_input_effect_or_unexplained_transition",
+          "command": {
+            "action_ref": "ACTION4"
+          },
+          "trialsHere": 0
+        },
+        {
+          "ref": "Q_92f288e5fef9312a1dc1",
+          "priority": 3,
+          "reason": "unobserved_input_effect_or_unexplained_transition",
+          "command": {
+            "action_ref": "ACTION5"
+          },
+          "trialsHere": 0
+        }
+      ],
+      "alternatives": {
+        "leastTried": "Q_407559e98cd1587424e2",
+        "commandOrder": "Q_407559e98cd1587424e2",
+        "usageGap": 0
+      }
+    },
+    "expectedAfter": null,
+    "predictedEffectUnknown": true,
+    "guard": {
+      "admitted": true,
+      "reason": "current_public_premises_match_provisional_step",
+      "pointBound": true,
+      "family": "observed_frontier",
+      "index": 0,
+      "beforeRelease": true
+    },
+    "release": {
+      "admitted": true,
+      "revision": 2,
+      "nativeGate": true
+    },
+    "ticket": {
+      "id": "frontier-qualification:native:2",
+      "sessionId": "frontier-qualification",
+      "sourceDigest": "1a27410cbada61ee76cbeb9c32eb927cec3201d0fd29cfb53661fdec0be7a146",
+      "observationRef": "frontier-qualification:epoch:1:revision:2:frame:f79ab0e9d856fdf8",
+      "graphChain": "7241e3a933e3cbc40a9a84f60138e58a5718e35905a22562ebc90e3f35995deb",
+      "nativeExecutionDigest": "417e9ea1c110592ee43adae118a94b35303697a99e0b7f5e5f882187e4b22ba6",
+      "frameHash": "f79ab0e9d856fdf8",
+      "level": 1,
+      "levelsCompleted": 0,
+      "decisionRevision": 2,
+      "actionIndex": 0,
+      "actionRef": "ACTION2",
+      "data": {}
+    }
+  },
+  "hashes": {
+    "8ce7ee3563fa1d5eca1639c6ad03975cfc962460": "140986e00d30e9fcc361f598b6e566f8f0e8222a3852cb467c4e382492490a3a",
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021": "ea777670059f8965bbb3ac2f81e8f7c0f4e5e65da74822265d038527a9953639",
+    "ba04161fbce03f9660e9e73c14ed2c14ef2538d7": "a8e4d1e89c1ddb784a594166ad61fd1b9d314375da6f483b98e68741892fb713"
+  },
+  "allProjectedFieldsEqual": true,
+  "module": "src/logos-engine/v6-observed-frontier.ts",
+  "emission": {
+    "compiler": "5.9.3",
+    "target": "ES2022",
+    "module": "ESNext",
+    "verbatimModuleSyntax": true,
+    "removeComments": true,
+    "bytes": 50967,
+    "sha256": "f5c8da5e1defbfa748db5e2f0806fe040e484842a5d6041e63ab40c5a2b1aabc"
+  },
+  "developmentDigest": "edd9fce36b04b761afe1df0a9459ef68c055e9bcd536e7e02de284724b96ff6b",
+  "archiveSHA256": "6e44964b29cc96d181f1986ad6b67608a4491d7d1c9f47714b89982d04c027c7"
+}
