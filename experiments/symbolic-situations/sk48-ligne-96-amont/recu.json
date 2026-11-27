@@ -1,0 +1,49 @@
+{
+  "sha": "4946cf0297734b9464fc52256af6fb27846f3bad",
+  "groupes": {
+    "historique": {
+      "départs": 2,
+      "contradictionT12": 2,
+      "reprisesConfirmées": 2,
+      "abstentions": 0,
+      "niveauxTerminés": 2,
+      "ticketsCommuns": 40
+    },
+    "développement": {
+      "départs": 4,
+      "contradictionT12": 4,
+      "reprisesConfirmées": 2,
+      "abstentions": 2,
+      "niveauxTerminés": 0,
+      "ticketsCommuns": 16
+    },
+    "réserve": {
+      "départs": 4,
+      "contradictionT12": 4,
+      "reprisesConfirmées": 2,
+      "abstentions": 2,
+      "niveauxTerminés": 0,
+      "ticketsCommuns": 50
+    },
+    "nouvelle": {
+      "départs": 4,
+      "contradictionT12": 4,
+      "reprisesConfirmées": 2,
+      "abstentions": 2,
+      "niveauxTerminés": 0,
+      "ticketsCommuns": 0
+    },
+    "banc": {
+      "départs": 2,
+      "contradictionT12": 2,
+      "reprisesConfirmées": 2,
+      "abstentions": 0,
+      "niveauxTerminés": 2,
+      "ticketsCommuns": 40
+    }
+  },
+  "ordres": {
+    "compatibles": 2,
+    "inversionsRefusées": 4
+  }
+}

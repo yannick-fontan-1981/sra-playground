@@ -1,0 +1,78 @@
+{
+  "historique": [
+    {
+      "fiche": "04be6dd88de398b0953efb444ff3dbf736f33db29f9fe9336bcf1a3262d23c51",
+      "tickets": 19,
+      "préfixe": "44585d3945b140d5dd54ec466cbfe8b695618750834e3baaafa66c6c042568f1",
+      "arrêt": null,
+      "niveaux": 1
+    },
+    {
+      "fiche": "cf17055f3ad9029afe196d1eefead87f1afba1296057c3e41bca6a27f9dcb22f",
+      "tickets": 21,
+      "préfixe": "71cad01b6300946bb15884cf52da4d4efe99b000a7555c6615c1de1c87cf69a6",
+      "arrêt": null,
+      "niveaux": 1
+    }
+  ],
+  "développement": [
+    {
+      "fiche": "31b26eff0bd0044cee24c17dc3002c5f7b814dbd9bd1ee6dd95a13cb40e07965",
+      "tickets": 4,
+      "préfixe": "fd3671fa2f1051936a86384fe903fe4cb5e9d9ddca970bdf78906420ea9bfc13",
+      "arrêt": "frontier_unknown",
+      "niveaux": 0
+    },
+    {
+      "fiche": "9d7284726790c3630050df1d47add828968a4e41bddd73743d86f93886dbc8bc",
+      "tickets": 4,
+      "préfixe": "fd3671fa2f1051936a86384fe903fe4cb5e9d9ddca970bdf78906420ea9bfc13",
+      "arrêt": "frontier_unknown",
+      "niveaux": 0
+    },
+    {
+      "fiche": "7aeebea8e69ea117a7830f831e08657480796a22a0c97be301aca8cb9efdb11d",
+      "tickets": 4,
+      "préfixe": "fd3671fa2f1051936a86384fe903fe4cb5e9d9ddca970bdf78906420ea9bfc13",
+      "arrêt": "frontier_unknown",
+      "niveaux": 0
+    },
+    {
+      "fiche": "74e06f12bce7ecfb14e6ef97a82e729e2c2bac5ffe98b8e6f1cfb532eaf2b2dd",
+      "tickets": 4,
+      "préfixe": "fd3671fa2f1051936a86384fe903fe4cb5e9d9ddca970bdf78906420ea9bfc13",
+      "arrêt": "frontier_unknown",
+      "niveaux": 0
+    }
+  ],
+  "réserve": [
+    {
+      "fiche": "211132261047afd22804441be37814aea955bac98176631a534c734ec38fe24e",
+      "tickets": 13,
+      "préfixe": "e26210aaa07668f43daaad05c54fef3137d383b894e56d46b9c9ef06d4424b94",
+      "arrêt": null,
+      "niveaux": 0
+    },
+    {
+      "fiche": "051da256b8e15daa50b555100d7c5feba8760547af2e7a67f94c9098db6fc661",
+      "tickets": 13,
+      "préfixe": "0bcc77058382189071baff27c5fd573f512efa8284e1964b65e31c1634a32dd5",
+      "arrêt": null,
+      "niveaux": 0
+    },
+    {
+      "fiche": "29660bea909aaa3587ec342349a1abba7f9ad6aaf2580ca40c9d9dc1b36d5de8",
+      "tickets": 12,
+      "préfixe": "669a2262cbf96315d28e7c172fd5e80f075ba686851a5e226e7d6d01841709f4",
+      "arrêt": "frontier_unknown",
+      "niveaux": 0
+    },
+    {
+      "fiche": "c859419a271f28d844c6805a65fdbaf15160501f66234cef0fcb20068d31c533",
+      "tickets": 12,
+      "préfixe": "669a2262cbf96315d28e7c172fd5e80f075ba686851a5e226e7d6d01841709f4",
+      "arrêt": "frontier_unknown",
+      "niveaux": 0
+    }
+  ]
+}
