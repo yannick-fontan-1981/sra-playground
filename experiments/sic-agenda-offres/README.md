@@ -18,6 +18,8 @@ Sous tout système avec Node ≥ 22.18, la commande équivalente est `node exper
 
 Le premier essai croisé réutilise ce cœur avec la fiche publique du cadran et l’opérateur du lot Transfert. Les deux mondes ont rendu `succès` en quatre actions. [Parcours, preuves, adaptation et commande de rejeu](transfert/README.md)
 
+Sur les décisions natives déjà enregistrées de G50T L4, le mode et la réserve sont reconstructibles. Les sélections des tours 11 et 12 restent indéterminées à la coupe précédant les planificateurs. La version annoncée pour l’essai en réserve de Transfert est `475044aa`. [Contrat temporel, contrôles contre les fuites et résultats](observation-native/README.md)
+
 ## Du parcours de SIC à la commande
 
 | Étape sur le SHA figé | Fonctionnement observé |

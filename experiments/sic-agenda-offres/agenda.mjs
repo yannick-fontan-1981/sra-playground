@@ -39,28 +39,34 @@ function sourceTraversal({ groups, mode, remaining, stops, observation }) {
   return { slots, reached, traversalStop, order: order.map(g => g.id), card: ranking.card };
 }
 
-function assess(offer, turn, source) {
-  const key = slot(offer.group, offer.entry);
-  if (!source.slots.has(key)) throw new Error('Entrée source inconnue : ' + key);
-  function check({ fact, expected }) {
-    const witness = turn.facts[fact];
-    if (!witness || witness.value === 'unknown') {
-      return { fact, expected, observed: null, state: 'absente', evidence: [] };
-    }
-    if (typeof witness.value !== 'boolean' || !Array.isArray(witness.evidence) || !witness.evidence.length
-      || !witness.evidence.every(ref => typeof ref === 'string' && ref.trim())) {
-      throw new Error('Un fait connu exige une valeur booléenne et des références : ' + fact);
-    }
-    const state = expected === witness.value ? 'confirmee' : 'contraire';
-    return { fact, expected, observed: witness.value, state, evidence: witness.evidence };
+function checkGuard(facts, { fact, expected }) {
+  const witness = facts[fact];
+  if (!witness || witness.value === 'unknown') {
+    return { fact, expected, observed: null, state: 'absente', evidence: [] };
   }
-  const checks = offer.guards.map(check);
-  const hint = offer.modeFacts[turn.mode];
-  const modeWitness = hint ? check({ fact: hint, expected: true }) : null;
-  const barrier = source.slots.get(key);
+  if (typeof witness.value !== 'boolean' || !Array.isArray(witness.evidence) || !witness.evidence.length
+    || !witness.evidence.every(ref => typeof ref === 'string' && ref.trim())) {
+    throw new Error('Un fait connu exige une valeur booléenne et des références : ' + fact);
+  }
+  const state = expected === witness.value ? 'confirmee' : 'contraire';
+  return { fact, expected, observed: witness.value, state, evidence: witness.evidence };
+}
+
+export function qualifyGuards(guards, facts) {
+  const checks = guards.map(guard => checkGuard(facts, guard));
   const contrary = checks.filter(c => c.state === 'contraire');
   const absent = checks.filter(c => c.state === 'absente');
   const admission = contrary.length ? 'contredite' : absent.length ? 'indeterminee' : 'admissible';
+  return { checks, contrary, absent, admission };
+}
+
+function assess(offer, turn, source) {
+  const key = slot(offer.group, offer.entry);
+  if (!source.slots.has(key)) throw new Error('Entrée source inconnue : ' + key);
+  const { checks, contrary, absent, admission } = qualifyGuards(offer.guards, turn.facts);
+  const hint = offer.modeFacts[turn.mode];
+  const modeWitness = hint ? checkGuard(turn.facts, { fact: hint, expected: true }) : null;
+  const barrier = source.slots.get(key);
   const contribution = offer.contributes.includes(turn.need.target) ? 'directe'
     : offer.contributes.includes(turn.need.fallback) ? 'repli' : 'aucune';
   const resumeWhen = barrier ? barrier.resumeWhen : [...contrary, ...absent].map(requirement).join(' et ');

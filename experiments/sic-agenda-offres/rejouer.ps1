@@ -5,6 +5,9 @@ $replayArgs = $args
 if ($args.Count -gt 0 -and $args[0] -eq 'transfert') {
     $scriptName = 'transfert/operateur.mjs'
     $replayArgs = @($args | Select-Object -Skip 1)
+} elseif ($args.Count -gt 0 -and $args[0] -in @('observation','anti-fuite')) {
+    $scriptName = if ($args[0] -eq 'observation') { 'observation-native/rejouer.mjs' } else { 'observation-native/verifier.mjs' }
+    $replayArgs = @($args | Select-Object -Skip 1)
 }
 foreach ($runtime in (Get-Command node.exe -All)) {
     $version = [version]((& $runtime.Source --version).TrimStart('v'))
