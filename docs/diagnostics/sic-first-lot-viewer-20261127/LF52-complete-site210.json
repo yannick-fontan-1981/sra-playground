@@ -1,0 +1,91 @@
+{
+  "game": "LF52",
+  "siteVersion": 210,
+  "source": "4313d7ce41505cece5f397dc8125b430697176ed",
+  "surface": "local",
+  "bundle": "/assets/index-5nnSgotL.js",
+  "start": "http://127.0.0.1:4173/?game=LF52&level=1",
+  "finish": "http://127.0.0.1:4173/?game=LF52&level=10",
+  "planning": "SIC",
+  "startLevel": 1,
+  "initialActions": 0,
+  "control": "Run to next level",
+  "sessions": 1,
+  "resets": 0,
+  "undos": 0,
+  "verdict": "The game reports WIN.",
+  "levelsSolved": 10,
+  "totalActions": 713,
+  "levels": [
+    {
+      "level": 1,
+      "actions": 8,
+      "cumulativeActions": 8,
+      "completedPlans": 1,
+      "observedAt": "2026-11-27T15:16:52.341Z"
+    },
+    {
+      "level": 2,
+      "actions": 40,
+      "cumulativeActions": 48,
+      "completedPlans": 41,
+      "observedAt": "2026-11-27T15:17:20.352Z"
+    },
+    {
+      "level": 3,
+      "actions": 46,
+      "cumulativeActions": 94,
+      "completedPlans": 87,
+      "observedAt": "2026-11-27T15:17:59.078Z"
+    },
+    {
+      "level": 4,
+      "actions": 54,
+      "cumulativeActions": 148,
+      "completedPlans": 141,
+      "observedAt": "2026-11-27T15:18:51.625Z"
+    },
+    {
+      "level": 5,
+      "actions": 99,
+      "cumulativeActions": 247,
+      "completedPlans": 202,
+      "observedAt": "2026-11-27T15:20:55.186Z"
+    },
+    {
+      "level": 6,
+      "actions": 91,
+      "cumulativeActions": 338,
+      "completedPlans": 275,
+      "observedAt": "2026-11-27T15:22:18.315Z"
+    },
+    {
+      "level": 7,
+      "actions": 148,
+      "cumulativeActions": 486,
+      "completedPlans": 336,
+      "observedAt": "2026-11-27T15:24:08.590Z"
+    },
+    {
+      "level": 8,
+      "actions": 68,
+      "cumulativeActions": 554,
+      "completedPlans": 390,
+      "observedAt": "2026-11-27T15:25:54.142Z"
+    },
+    {
+      "level": 9,
+      "actions": 112,
+      "cumulativeActions": 666,
+      "completedPlans": 502,
+      "observedAt": "2026-11-27T15:28:48.529Z"
+    },
+    {
+      "level": 10,
+      "actions": 47,
+      "cumulativeActions": 713,
+      "completedPlans": 536,
+      "observedAt": "2026-11-27T15:30:28.247Z"
+    }
+  ]
+}

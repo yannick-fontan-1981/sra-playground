@@ -33,3 +33,21 @@ The live CUA cloud Chrome tab was marked for handoff and its browser activity cl
 A fresh Codex process may not inherit this cloud browser session. The URL alone does not contain learned reasoning state. If the preserved session is unavailable, run SPOR afresh from level1 in one continuous SIC session and keep this receipt as an explicitly partial earlier attempt. DC22, WEAV and LS20 still need complete viewer campaigns from level1. Source and published version must be reverified before claiming any later viewer result belongs to this frozen source.
 
 Expected strict totals, for comparison only: SPOR6/6=121 actions `[14,14,17,17,29,30]`; DC226/6=630 `[22,44,45,76,185,258]`; WEAV6/6=199 `[27,28,24,40,40,40]`; LS20 has seven levels. Record actual observed counters and WIN, do not substitute these expectations for receipts.
+
+## Completed viewer replays after resumption
+
+The earlier SPOR tab was unavailable in Codex desktop. A fresh session started at L1 on the published Site 209 and won all six levels in 121 actions. The earlier partial receipt remains the record of its own session.
+
+Site 210 and GitHub main use `4313d7ce41505cece5f397dc8125b430697176ed`. The same production build served locally on port 4173 and on the private Site 210. Both surfaces loaded `/assets/index-5nnSgotL.js`. Each row began at L1 with zero actions in SIC and used only **Run to next level** within a single session. All final panels displayed `The game reports WIN.`.
+
+| Game | Viewer | Levels | Actions |
+| --- | --- | ---: | ---: |
+| SPOR | Published Site 209 | 6/6 | 121 |
+| DC22 | Local build of Site 210 | 6/6 | 630 |
+| WEAV | Local build of Site 210 | 6/6 | 199 |
+| LS20 | Local build of Site 210 | 7/7 | 393 |
+| LF52 | Local build of Site 210 | 10/10 | 713 |
+| SK48 | Published Site 210 | 8/8 | 348 |
+| ETAG | Published Site 210 | 6/6 | 274 |
+
+The per-game receipts retain the visible counter and the UTC observation time at every level transition. The original GRAV and CGWL viewer receipts are above.
