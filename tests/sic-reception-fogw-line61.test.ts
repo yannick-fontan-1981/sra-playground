@@ -137,3 +137,24 @@ test('FOGW historical continuation when a different visible request replaces the
   assert.deepEqual([outcome.matched, next.command.actionRef, next.index, next.plan.observation_ref, next.plan.steps.length],
     [true, 'ACTION4', 1, old.plan.observation_ref, 8]);
 });
+
+test('FOGW consumes a replacement offer to remeasure before waiting at the same support', async t => {
+  const select = ReceptionServiceMemory.prototype.offerStationaryObservation;
+  let replaced = 0;
+  t.mock.method(ReceptionServiceMemory.prototype, 'offerStationaryObservation', function (this: ReceptionServiceMemory, ...args: Parameters<typeof select>) {
+    const offered = select.apply(this, args);
+    if (!offered?.confirmed) return offered;
+    replaced++;
+    return { ...offered, confirmed: false };
+  });
+  const game = await start(true);
+  for (let turn = 1; turn <= 16; turn++) { await game.ticket(); await game.advance(); }
+  const held = await game.ticket();
+  assert.ok(replaced > 0);
+  assert.deepEqual([held.command.actionRef, held.plan.kind, held.plan.steps.length, held.plan.steps[0].stationary_confirmed],
+    ['ACTION4', 'reception_observation', 1, false]);
+  assert.equal((await game.advance()).matched, true);
+  const next = await game.ticket();
+  assert.equal(next.index, 0);
+  assert.notEqual(next.plan.observation_ref, held.plan.observation_ref);
+});

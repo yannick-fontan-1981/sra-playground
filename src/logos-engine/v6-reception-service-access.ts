@@ -62,6 +62,16 @@ export class ReceptionServiceMemory {
     this.version++; this.receptionMemory = owned.memory; this.receptionEvents.push(owned);
   }
 
+  offerStationaryObservation(actor: readonly number[] | null, target: readonly number[], cells: readonly (readonly number[])[],
+    moves: Readonly<Record<string, readonly number[]>>, stationary?: Readonly<Record<string, readonly number[]>>): { command: string; confirmed: boolean } | null {
+    if (!equal(actor, target)) return null;
+    const outward = Object.entries(moves).filter(([, delta]) => !cells.some(cell =>
+      equal([target[0]! + delta[0]!, target[1]! + delta[1]!], cell))).map(([name]) => name).sort(compareUnicode);
+    if (!outward.length) return null;
+    const command = outward[0]!;
+    return { command, confirmed: equal(stationary?.[command] ?? null, target) };
+  }
+
   /** Null delegates to RootedLine; explicit source refusals remain blocking. */
   propose(observation: R, rows: NativeRows, inputs: readonly R[], limit: number, config: R): R | null {
     const cfg = config.reception_service_question;
@@ -89,28 +99,25 @@ export class ReceptionServiceMemory {
       steps = receptionServicePath(rows, scene, actor.anchor, target, moves, remaining) ?? [];
       if (steps.length) { kind = 'access'; why = cfg.access + ' ' + cfg.preserve_other_contacts; steps = steps.slice(0, Math.min(limit, 16)); }
     }
-    if (actor && equal(actor.anchor, target)) {
-      const outward = Object.entries(moves).filter(([, delta]) => !scene.cells.some((cell: number[]) =>
-        equal([target[0] + delta[0], target[1] + delta[1]], cell))).map(([name]) => name).sort(compareUnicode);
-      if (outward.length) {
-        const command = outward[0]!, confirmed = equal(memory.stationary?.[command] ?? null, target);
-        let count = confirmed ? Math.min(limit, 16, remaining, cfg.wait_batch) : 1;
-        const declaredMaximum = Object.hasOwn(config, 'level_action_cap') ? config.level_action_cap : remaining + memory.wait_spent;
-        if (config.native_reception_wait_budget === true && (!Number.isSafeInteger(declaredMaximum) || declaredMaximum < 0)) {
-          throw new RangeError('Native reception total action budget must be a nonnegative safe integer');
-        }
-        const ledger = normalizeReceptionWaitBudget({ parent_goal_ref: 'G_official_completion', parent_contribution_ref: 'reception_support_experiment',
-          consumer_request_ref: 'shape:' + scene.counterparts[0].request_shape, level_scope_ref: String(observation.level_epoch),
-          restore_epoch: 0, observed_clock: observation.revision,
-          maximum_total_wait_primitives: config.native_reception_wait_budget === true ? Math.min(128, declaredMaximum) : declaredMaximum,
-          spent_wait_primitives: memory.wait_spent, ledger_claim_ref: 'observed_wait:' + memory.wait_spent });
-        if (config.native_reception_wait_budget === true && ledger.spent_wait_primitives >= ledger.maximum_total_wait_primitives) {
-          return { status: 'unknown', reason: 'reception_wait_budget_exhausted', block_unrelated_probe: true };
-        }
-        count = Math.min(count, ledger.maximum_total_wait_primitives - ledger.spent_wait_primitives);
-        steps = Array.from({ length: Math.max(0, count) }, () => ({ action_ref: command, from: [...target], to: [...target], stationary_confirmed: confirmed }));
-        kind = 'reception_observation'; why = cfg.wait;
+    const hold = this.offerStationaryObservation(actor?.anchor ?? null, target, scene.cells, moves, memory.stationary);
+    if (hold) {
+      const { command, confirmed } = hold;
+      let count = confirmed ? Math.min(limit, 16, remaining, cfg.wait_batch) : 1;
+      const declaredMaximum = Object.hasOwn(config, 'level_action_cap') ? config.level_action_cap : remaining + memory.wait_spent;
+      if (config.native_reception_wait_budget === true && (!Number.isSafeInteger(declaredMaximum) || declaredMaximum < 0)) {
+        throw new RangeError('Native reception total action budget must be a nonnegative safe integer');
       }
+      const ledger = normalizeReceptionWaitBudget({ parent_goal_ref: 'G_official_completion', parent_contribution_ref: 'reception_support_experiment',
+        consumer_request_ref: 'shape:' + scene.counterparts[0].request_shape, level_scope_ref: String(observation.level_epoch),
+        restore_epoch: 0, observed_clock: observation.revision,
+        maximum_total_wait_primitives: config.native_reception_wait_budget === true ? Math.min(128, declaredMaximum) : declaredMaximum,
+        spent_wait_primitives: memory.wait_spent, ledger_claim_ref: 'observed_wait:' + memory.wait_spent });
+      if (config.native_reception_wait_budget === true && ledger.spent_wait_primitives >= ledger.maximum_total_wait_primitives) {
+        return { status: 'unknown', reason: 'reception_wait_budget_exhausted', block_unrelated_probe: true };
+      }
+      count = Math.min(count, ledger.maximum_total_wait_primitives - ledger.spent_wait_primitives);
+      steps = Array.from({ length: Math.max(0, count) }, () => ({ action_ref: command, from: [...target], to: [...target], stationary_confirmed: confirmed }));
+      kind = 'reception_observation'; why = cfg.wait;
     }
     if (!steps.length) {
       const probes: string[] = cfg.probe_order.filter((name: string) => allowed.has(name) && !Object.hasOwn(memory.controls, name));
