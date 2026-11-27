@@ -1,0 +1,264 @@
+{
+  "game": "MIND",
+  "sourceCommit": "dc3f51ae712d2f5dc7e795d023c79d51063d647e",
+  "sourceTree": "67685d1f89b0b5472311619b5032fd4f10a781a5",
+  "branch": "fix/sic-27-feedback-20261127",
+  "startingLevel": 1,
+  "targetLevels": 6,
+  "parallelWorkers": 1,
+  "instrumented": false,
+  "levelsWon": 6,
+  "actions": 93,
+  "authority": 93,
+  "reason": "target_levels_completed",
+  "recoveries": {
+    "reset": 0,
+    "undo": 0
+  },
+  "usage": {
+    "sic_verify_ordered_feedback": 93
+  },
+  "totalLevelWallMs": 29182,
+  "levels": [
+    {
+      "level": 1,
+      "won": true,
+      "actions": 8,
+      "actionCap": 13,
+      "scoreMs": 3426,
+      "scoreCapMs": 11000,
+      "settlementMs": 135,
+      "prefixHash": "d2af6be8e55804dace772b7227f902dc86056bea5dedae2a4b1532f3c0c87a50",
+      "budget": {
+        "actions": 13,
+        "activeTimeMs": 11000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MIND; level=1; won=true",
+        "timeBasis": "measured"
+      }
+    },
+    {
+      "level": 2,
+      "won": true,
+      "actions": 8,
+      "actionCap": 13,
+      "scoreMs": 1394,
+      "scoreCapMs": 9000,
+      "settlementMs": 122,
+      "prefixHash": "9f38a5c35f0a01e49e2ba5e2d938847a32885c6318e0ecc8a1aa5b6f5dce854e",
+      "budget": {
+        "actions": 13,
+        "activeTimeMs": 9000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MIND; level=2; won=true",
+        "timeBasis": "measured"
+      }
+    },
+    {
+      "level": 3,
+      "won": true,
+      "actions": 15,
+      "actionCap": 20,
+      "scoreMs": 4236,
+      "scoreCapMs": 15000,
+      "settlementMs": 151,
+      "prefixHash": "87c9e8ea28823f9739418f2da13069e3bf4d7328efbb01da1b368d85dd55962f",
+      "budget": {
+        "actions": 20,
+        "activeTimeMs": 15000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MIND; level=3; won=true",
+        "timeBasis": "measured"
+      }
+    },
+    {
+      "level": 4,
+      "won": true,
+      "actions": 20,
+      "actionCap": 25,
+      "scoreMs": 5898,
+      "scoreCapMs": 18000,
+      "settlementMs": 165,
+      "prefixHash": "a274d547bfcbce2b2f800fd747dfa6e290203a4a76354e31b4050f3ce089efdf",
+      "budget": {
+        "actions": 25,
+        "activeTimeMs": 18000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MIND; level=4; won=true",
+        "timeBasis": "measured"
+      }
+    },
+    {
+      "level": 5,
+      "won": true,
+      "actions": 18,
+      "actionCap": 23,
+      "scoreMs": 5634,
+      "scoreCapMs": 18000,
+      "settlementMs": 205,
+      "prefixHash": "92f4417e31aab2a43dd3f53313cd204c6a36b2f19d5f231a9643c8b80bb47a26",
+      "budget": {
+        "actions": 23,
+        "activeTimeMs": 18000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MIND; level=5; won=true",
+        "timeBasis": "measured"
+      }
+    },
+    {
+      "level": 6,
+      "won": true,
+      "actions": 24,
+      "actionCap": 29,
+      "scoreMs": 7612,
+      "scoreCapMs": 19000,
+      "settlementMs": 206,
+      "prefixHash": "7a9cac0f1e17d2904152b04479b45764a0834dff75c3426db1e90333f2785001",
+      "budget": {
+        "actions": 29,
+        "activeTimeMs": 19000,
+        "source": "docs/architecture/sic-v8-validation.md :: MIND niveau 6, comparer les codes après l'ajout d'une valeur",
+        "timeBasis": "measured"
+      }
+    }
+  ],
+  "baseline": {
+    "sourceCommit": "ee9dad5f8773fed3ed507ad3c575181deae5f754",
+    "levelsWon": 2,
+    "stoppedLevel": 3,
+    "stoppedLevelActions": 6,
+    "reason": "level_wall_time_budget"
+  },
+  "unchangedPublicPrefixes": [
+    1,
+    2
+  ],
+  "diagnostic": {
+    "sourceCommit": "ee9dad5f8773fed3ed507ad3c575181deae5f754",
+    "firstBlockedPlan": 1,
+    "level": 3,
+    "levelActionsBefore": 0,
+    "missedFamily": "sic_verify_ordered_feedback",
+    "selectedBeforeReuse": "sic_test_prepared_effects",
+    "selectedEntry": "continue_or_test_a_witnessed_effect",
+    "selectedGroup": "continue_observed_pressure_recovery",
+    "unproductiveMeasuredFamiliesMs": {
+      "sic_legend_recolor": 5705.992,
+      "sic_match_visible_example": 5521.332
+    },
+    "capturedReproposalAdmitted": true,
+    "timingsIncludeInstrumentation": true
+  },
+  "tests": {
+    "command": "node --test tests/sic-ordered-feedback-transfer.test.ts tests/sic-feedback-partitions.test.ts",
+    "passed": 9,
+    "typecheck": "passed",
+    "independentReview": "favorable"
+  },
+  "continuity": {
+    "continuedGapCount": 0,
+    "boundaryGapCount": 92,
+    "resumes": 92,
+    "limitation": "This change qualifies learned-role admission, not a new multi-command prefix. Global test:sic-continuity and the delivered UI remain pending at this branch checkpoint."
+  },
+  "archive": {
+    "path": "public-evidence.tar.gz",
+    "sha256": "89ced2cb87cf233c5ca782652d36776bfe17e929a2754718f7d57b7b3b122da0",
+    "bytes": 1434320,
+    "files": {
+      "baseline-ee9dad5f/results.jsonl": {
+        "sha256": "8402974c5a4bdcc8e6d9f447a7efaee8d952e1b0403cc0c491e4192f2728d08d",
+        "bytes": 2334
+      },
+      "baseline-ee9dad5f/results.jsonl.levels": {
+        "sha256": "6333f812e8e5213b99b6ca1e2791219b66728a52816ab2b652f381eee4e7826a",
+        "bytes": 1615
+      },
+      "baseline-ee9dad5f/run-end.json": {
+        "sha256": "fd400dd76b1f594e7987485f8bd2440e7606af8f9a1f31b79394ef9db3e76a82",
+        "bytes": 224
+      },
+      "baseline-ee9dad5f/run-manifest.json": {
+        "sha256": "9feb2444089df9ce15d1fe1cb7a18c4bbe65f9007a9de44be05c7b1f92f92c58",
+        "bytes": 1601
+      },
+      "baseline-ee9dad5f/runner.log": {
+        "sha256": "50af8950e36832b0470c490bcf2deea516ea29f0b57fd517ec6cedb56f7f8ea1",
+        "bytes": 182
+      },
+      "diagnostic-ee9dad5f/mind-family-13.jsonl": {
+        "sha256": "568cf3f9d8c22a823760b7449f9dc801e698544ca7cedc722b2800ac02e1aff7",
+        "bytes": 12264112
+      },
+      "diagnostic-ee9dad5f/results.jsonl": {
+        "sha256": "e75b71611da5ab6a0e5a0e4197b0e9d8467794185aa0eeab58b3320d5e1a07bc",
+        "bytes": 2334
+      },
+      "diagnostic-ee9dad5f/results.jsonl.levels": {
+        "sha256": "de57f8ef326e425e6188ec9c3ae37faeda49b25fdb8e54620a63da6d8d046ad2",
+        "bytes": 1615
+      },
+      "diagnostic-ee9dad5f/run-end.json": {
+        "sha256": "7f3b225298855a767fdce7b8c1bdf1cc98e32b8860c0c511c1bb3c5fdf89858f",
+        "bytes": 311
+      },
+      "diagnostic-ee9dad5f/run-manifest.json": {
+        "sha256": "fdc802df407cf09ce2d1e6edb5c79c1b615febfa852e50331b8ee5e774e20a45",
+        "bytes": 2020
+      },
+      "diagnostic-ee9dad5f/runner.log": {
+        "sha256": "b913e19a132d6513ea4824665695cdeb7a8eee90eca8e5a8145b4d8f4042479a",
+        "bytes": 182
+      },
+      "first-entry-a53189de/captured-entry.json": {
+        "sha256": "461db109086341aa9f27f5f931f9b561a5e21d42ac32f1c68473ffa97b16cb85",
+        "bytes": 7117
+      },
+      "first-entry-a53189de/results.jsonl": {
+        "sha256": "9cedb3e0e4b96d725187ba165b298cd7c8adf362d45eebb9d1fa20a7957aeb18",
+        "bytes": 2334
+      },
+      "first-entry-a53189de/results.jsonl.levels": {
+        "sha256": "28ba42de6536bae6e306bf151b6125d4be3e1644e97d8f0cb97f2d25c3c431ed",
+        "bytes": 1615
+      },
+      "first-entry-a53189de/run-end.json": {
+        "sha256": "55a548550afeb1dace7716f09d1ec46bb6bd2d06ce90910c05992ddc0128b961",
+        "bytes": 241
+      },
+      "first-entry-a53189de/run-manifest.json": {
+        "sha256": "d94352cbe34e0d09fd67d93528e9e6b98c6c733618a66c3788f1e8960ffda1d8",
+        "bytes": 1707
+      },
+      "first-entry-a53189de/runner.log": {
+        "sha256": "50af8950e36832b0470c490bcf2deea516ea29f0b57fd517ec6cedb56f7f8ea1",
+        "bytes": 182
+      },
+      "probes/mind-captured-entry-probe.mjs": {
+        "sha256": "db3d9cdc536bffbc41ad65c72cecc8ff35c08b5ff7d2658763c4954189df7675",
+        "bytes": 2430
+      },
+      "probes/mind-family-profile.mjs": {
+        "sha256": "862130c22a76ceaefce33e919d09c5c059daf213d73a218ae8bc8c1db43adbdb",
+        "bytes": 9276
+      },
+      "qualified-dc3f51ae/results.jsonl": {
+        "sha256": "5ff054c2129f2126ae7da50d7034ab1d7169a2838d246a21ec995b1570688f56",
+        "bytes": 17933
+      },
+      "qualified-dc3f51ae/results.jsonl.levels": {
+        "sha256": "9aeaf8d12b2108463970da5411d64faffd2c80e319e9780bbf3f3dd2e75cfd1f",
+        "bytes": 3981
+      },
+      "qualified-dc3f51ae/run-end.json": {
+        "sha256": "551ab8af5e51c5fae7b7ee3f026266a91d83c6306e65d0e3f0fc6e2d1269a5a9",
+        "bytes": 241
+      },
+      "qualified-dc3f51ae/run-manifest.json": {
+        "sha256": "45def7fa51da104dde08e4cb3ca15664adcff38474f2d1e56c78c41b0761e20a",
+        "bytes": 1707
+      },
+      "qualified-dc3f51ae/runner.log": {
+        "sha256": "1c033b48b0f608ba663c24d693d9890abb9e87390f92eb67d988d8e2f6db67b5",
+        "bytes": 484
+      }
+    }
+  },
+  "sourceManifest": "qualified-dc3f51ae/run-manifest.json",
+  "sourceEnd": "qualified-dc3f51ae/run-end.json"
+}
