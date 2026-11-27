@@ -191,3 +191,19 @@ Les trois interfaces affichent `The game reports WIN.`. L’archive `docs/diagno
 | WEAV | 1/6 dans le témoin ; L2 atteint 34 commandes | Premier diagnostic public |
 
 Ces résultats proviennent de révisions différentes et restent un suivi des corrections. Les candidats partiels ne sont pas annoncés comme des jeux corrigés. Les prochaines fusions conservent les seuils de la continuité existante et les budgets de la campagne de départ.
+
+### Préparations de file publiées en version 204
+
+PR136 est fusionnée sur `main` au commit **`0dc7f2eeccdcf29f27564d279750cc5fb1c10e1e`**, arbre `d77d7610fc47e81d3515f065dfed5c69cdd1799e`. La branche de travail `fix/sic-27-queue-integration-20261127` est sauvegardée sur GitHub au commit `51e5bffc9a4670766431633c7b24af094ab5d480` (local `232d24b5b1a3133e9f70787e9e46fde2e623ad65`). Les 15 jobs de la CI 45932306615 passent, dont le contrôle complet de continuité, job 140290343275 : 90 niveaux protégés dans 15 jeux, avec les 84 plafonds antérieurs inchangés.
+
+Le Site **204** porte exactement ce SHA source. Le viewer local servant cette source publiée affiche `The game reports WIN.` pour COLM, depuis L1 en une seule session SIC, sans reset ni nouvelle session intermédiaire : **17, 17, 20, 23, 10 et 16 commandes**, soit **103** et 46 plans terminés. L’archive `docs/diagnostics/sic-queue-continuity-20261127/viewer-204.json` conserve les compteurs et la provenance ; la mesure chronométrée et les 29 réceptions préparées sont archivées séparément.
+
+**Treize des 27 jeux initiaux sont corrigés, fusionnés, publiés et reproduits dans le viewer** : UPST, CWSE, CRAF, SB26, CASC, CLRS, MIND, FOGW, TRCP, GRIL, RSWP, LKEY et COLM. La campagne définitive des 107 jeux sur une même révision reste à exécuter.
+
+### Routes, placements et passages : qualification combinée
+
+La source locale `7443033e17f166777a811ea7de05524407ec5330`, sauvegardée sur GitHub sous `feebe6632e229dd3b544948749e12b72b23b6119`, termine ESCT, VOIS et PORT en **118, 196 et 116 commandes**. Les 18 niveaux sont gagnés sous les plafonds de départ, depuis L1 en une session SIC par jeu, sans reset ni undo. Les 430 commandes sont toutes autorisées et acquises. Les parcours reproduisent les qualifications individuelles.
+
+Le score L6 arrive à **16,245 s / 18 s pour ESCT**, **17,816 s / 27 s pour VOIS** et **9,040 s / 12 s pour PORT**. Les collecteurs indépendants mesurent les retours physiques de chaque commande ; leur rapprochement avec le contrôle complet de continuité porte la cible à 108 niveaux protégés. Les bruts sont archivés dans `docs/diagnostics/sic-population-route-integration-20261127/`. La fusion, la publication et les trois parcours du viewer restent à effectuer à ce checkpoint. Le nombre de jeux livrés demeure donc 13 sur 27.
+
+SNAR a progressé à 4/6 dans sa branche isolée, puis s'arrête au niveau 5 sous le plafond de 28 secondes. Ce candidat reste partiel. LS20 a livré une première contradiction de garde au deuxième retour d'une série, tandis que DC22 fait l'objet d'une capture de ses premières compositions de panneau ; aucun nouveau verdict complet n'est annoncé pour ces jeux.

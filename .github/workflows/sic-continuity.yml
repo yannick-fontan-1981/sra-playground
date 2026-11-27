@@ -39,6 +39,10 @@ jobs:
       - run: node --test tests/sic-profile-transfer-continuity.test.ts tests/sic-profile-rank-order.test.ts tests/sic-profile-continuity-contract.test.mjs
       - run: node --test tests/sic-catalogue-view-transfer.test.ts tests/sic-panel-chain-transfer.test.ts
       - run: node --test tests/sic-queued-control-transfer.test.ts tests/sic-queue-continuity-evidence.test.mjs tests/sic-queue-continuity-contract.test.mjs
+      - run: node --test tests/sic-observed-route-transfer.test.ts tests/sic-observed-route-continuity.test.ts tests/sic-outline-service.test.ts
+      - run: node --test tests/sic-route-opening-evidence.test.mjs tests/sic-route-opening-contract.test.mjs tests/sic-population-continuity-evidence.test.ts
+      - run: node --test tests/sic-population-continuity-contract.test.mjs tests/sic-passage-continuity-evidence.test.mjs tests/sic-passage-continuity-contract.test.mjs
+      - run: node --test tests/sic-paired-passage-continuity.test.ts
 
   cohort-replays:
     name: Continuity / ${{ matrix.name }}
@@ -63,6 +67,9 @@ jobs:
           - { name: cargo-transport, cohort: 'source:GABA', end: 6, cap: 128 }
           - { name: profile-preparation, cohort: 'source:LKEY', end: 6, cap: 36 }
           - { name: queue-receipts, cohort: 'source:COLM', end: 6, cap: 69 }
+          - { name: observed-openings, cohort: 'source:ESCT', end: 6, cap: 30 }
+          - { name: population-preparation, cohort: 'source:VOIS', end: 6, cap: 80 }
+          - { name: passage-walking, cohort: 'source:PORT', end: 6, cap: 32 }
           - { name: native-sources, cohort: 'source:AR25,HANO,DC22', end: 1, cap: 120 }
     env:
       SIC_STUDY_CONTINUITY: '1'
@@ -166,6 +173,9 @@ jobs:
             ['marked-field', 'source:SIGN', 6, 98], ['cargo-transport', 'source:GABA', 6, 128],
             ['profile-preparation', 'source:LKEY', 6, 36],
             ['queue-receipts', 'source:COLM', 6, 69],
+            ['observed-openings', 'source:ESCT', 6, 30],
+            ['population-preparation', 'source:VOIS', 6, 80],
+            ['passage-walking', 'source:PORT', 6, 32],
             ['native-sources', 'source:AR25,HANO,DC22', 1, 120],
           ];
           const { GITHUB_SHA: sha, GITHUB_RUN_ID: runId } = process.env;

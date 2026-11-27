@@ -1,0 +1,26 @@
+✔ native acquired opening preparation executes and reconciles its actual prefix (4374.727282ms)
+✔ native acquired opening preparation executes and reconciles its actual prefix with another palette, carrier shape, positions and commands (3956.472792ms)
+✔ opening preparation respects the remaining budget and requires a completed acquired opening (7.928084ms)
+✔ opening preparation closes when its public premise changes: moved-carrier (5.35321ms)
+✔ opening preparation closes when its public premise changes: new-cue (4.967452ms)
+✔ opening preparation closes when its public premise changes: removed-wall (4.055665ms)
+✔ opening preparation closes when its public premise changes: ambiguous-actor (9.611178ms)
+✔ opening preparation closes when its public premise changes: wrong-actor (4.067713ms)
+✔ opening preparation closes when its public premise changes: rival-cue (4.224848ms)
+✔ the next opening preparation checks command availability and the same public context (5.364497ms)
+✔ native route ownership continues the acquired outline role before a preview (1642.059346ms)
+✔ native route ownership continues the acquired outline role before a preview with changed silhouette, palette, stations and directional commands (1271.674411ms)
+✔ native route continuation refuses duplicate_actor without losing its acquired roles (1037.471003ms)
+✔ native route continuation refuses duplicate_cue without losing its acquired roles (1340.284187ms)
+✔ a contradictory route return suspends early ownership while retaining the older roles (978.609157ms)
+✔ route priority requires current references from the same scope and a matching score (864.217816ms)
+✔ an outlined piece can only approach a frame after its predicted translation is seen (31.387234ms)
+✔ a rival cue drawn over the convoy does not erase either role (7.323524ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 10247.335431

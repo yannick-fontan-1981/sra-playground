@@ -1,0 +1,84 @@
+{
+  "schema": "sic.published-viewer-verification.v1",
+  "source": {
+    "branch": "main",
+    "sha": "0dc7f2eeccdcf29f27564d279750cc5fb1c10e1e",
+    "tree": "d77d7610fc47e81d3515f065dfed5c69cdd1799e",
+    "pullRequest": 136,
+    "workBranch": "fix/sic-27-queue-integration-20261127",
+    "localHead": "232d24b5b1a3133e9f70787e9e46fde2e623ad65",
+    "pushedHead": "51e5bffc9a4670766431633c7b24af094ab5d480"
+  },
+  "publication": {
+    "version": 204,
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_72bb82e4ac3c81918fa2dd216a5e934c",
+    "deploymentId": "appgprj_6adbc388d79081918581b93b919d7258~appgdep_0d09f41eea1881918737e06b38a905fa",
+    "status": "succeeded",
+    "source": "0dc7f2eeccdcf29f27564d279750cc5fb1c10e1e",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "archive": {
+      "archive_format": "tar",
+      "content_hash": "sha256:118c8075af3a41961826b033a8a78cd35006f05a2358d4e18997e121b9a771b8",
+      "size_bytes": 34928640,
+      "file_count": 75
+    },
+    "githubSiteDivergence": false
+  },
+  "ci": {
+    "run": 45932306615,
+    "successfulJobs": 15,
+    "finalJob": 140290343275,
+    "command": "npm run test:sic-continuity",
+    "protectedLevels": 90,
+    "protectedGames": 15,
+    "cohorts": 13
+  },
+  "viewer": {
+    "environment": "local managed preview of the exact published source",
+    "baseUrl": "http://127.0.0.1:4173/",
+    "mode": "SIC",
+    "startLevel": 1,
+    "sessionsPerGame": 1,
+    "controls": "Run to next level",
+    "resets": 0,
+    "intermediateNewSessions": 0,
+    "timedQualification": false,
+    "observedAt": "2026-11-27T03:37:05.574162+00:00"
+  },
+  "games": [
+    {
+      "code": "COLM",
+      "officialMessage": "The game reports WIN.",
+      "levels": 6,
+      "target": 6,
+      "commands": 103,
+      "cumulativeCommands": [
+        17,
+        34,
+        54,
+        77,
+        87,
+        103
+      ],
+      "commandsByLevel": [
+        17,
+        17,
+        20,
+        23,
+        10,
+        16
+      ],
+      "cumulativeCompletedPlans": [
+        10,
+        16,
+        27,
+        37,
+        40,
+        46
+      ],
+      "completedPlans": 46,
+      "observedUrl": "http://127.0.0.1:4173/?game=COLM&level=6"
+    }
+  ],
+  "qualification": "Official WIN from level 1 in one SIC session through visible controls on the exact published source in the local managed viewer. This is not a timed benchmark or a hosted-browser replay. The unchanged-budget native result is archived separately. The final 107-game campaign remains outstanding."
+}

@@ -1,0 +1,52 @@
+{
+  "schema": "sic.observed-opening.collector.v1",
+  "startedAt": "2026-11-27T03:49:40.362086+00:00",
+  "sourceCommit": "a4b9450efc60b9ff9745b505a9c9e2cfa3ea6748",
+  "remoteCommit": "31856be8435d9ad6cdff7c19c19fd9e8d8766efb",
+  "sourceTree": "24d7d62771829e6021efb3e68554434d8160214a",
+  "sourceHashes": {
+    "src/sic/observed-route-intervention.ts": "6891560363a5c63415eba2508bc56bc582b337aa8dcc5f2ff6f62ba6a9d955a4",
+    "src/sic/standalone-families.ts": "f6374d3b1c6e70a42542704edda128ec73deff05c11bb9805fb5812cfab9550a",
+    "src/logos-engine/v6-native-runtime.ts": "ae5b257903e8e8dbe73a1fda0c4673efffbfcefadff99ad74f3936fc81471722",
+    "src/runtime/v6-agent-service.ts": "05333b7d65fc24d7ab3df6ea94733984836e21a05cfa49f5dc278f7d2a5c71d2",
+    "scripts/compare-source100.mjs": "89598736d79850c0e343248b2d59dcbc8c95027c784704e6de705ff1daf95ece",
+    "scripts/sic-continuity-evidence.mjs": "9b43fc59c7a7f0e6eed87abf4e45078abd0c3462df2b5849c527c269a7b14de5",
+    "scripts/sic-route-opening-continuity.mjs": "d16f2961874d85ecb02100ef6e47e89dcd16a2deff3e98cc4f06f3d784d72f7c",
+    "scripts/sic-population-continuity.mjs": "110cba2634f4c76ed1fa3b8f402e21ab9c38c3cbb771aa11b2476e08bbd95ce2",
+    "scripts/sic-continuity-contract.mjs": "a3479f18e0c55167000e7cd700a7ebef4b4b39991091f86b649d67f12cdb4c2b"
+  },
+  "workers": 1,
+  "startLevel": 1,
+  "targetLevels": 6,
+  "game": "ESCT",
+  "cap": 30,
+  "strictActionCeilings": [
+    21,
+    22,
+    26,
+    27,
+    22,
+    30
+  ],
+  "purpose": "Actual native tickets, public pixels and acquired receipts. Strict per-level timing qualification is archived separately.",
+  "command": [
+    "node",
+    "scripts/compare-source100.mjs",
+    ".",
+    ".",
+    "/workspace/scratch/082336907086/sic-27-work/esct-continuity-31856be8/results.jsonl",
+    "source:ESCT",
+    "1",
+    "6",
+    "30"
+  ],
+  "environment": {
+    "SIC_STUDY_CONTINUITY": "1",
+    "SIC_STUDY_WORKERS": "1",
+    "SIC_STUDY_SOLVER": "sic",
+    "SIC_STUDY_RECORD_COMMANDS": "1",
+    "SIC_STUDY_PROGRESS": "1"
+  },
+  "cwd": "/workspace/scratch/082336907086/sic-27-work/observed-route",
+  "cpuMax": null
+}

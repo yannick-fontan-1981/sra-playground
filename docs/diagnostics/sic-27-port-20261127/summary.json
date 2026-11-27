@@ -1,0 +1,160 @@
+{
+  "schema": "sic.passage-continuity-strict.v1",
+  "game": "PORT",
+  "sourceCommit": "1f5f03f08e36ba0f375ebaaa9398bee770bcf485",
+  "sourceTree": "52c64161b653b45555fe7d2c0601a6bb2b85814f",
+  "sourceHashes": {
+    "src/sic/paired-passage.ts": "ce1745b6692d90e3329747f4cca5c03579a8f597c4b154760669a781e179b504",
+    "tests/helpers/sic-paired-passage-room.ts": "85eeafd1f0aa8794699c9a772f5e44ae76d9ec3d9132a7674deaafd98fb339a4",
+    "tests/sic-paired-passage-continuity.test.ts": "8d8f9985d1f3b9b59a94a50374a9012405bdcd1d221c0f8d97480e296e5f5509",
+    "src/sic/standalone-families.ts": "d2a35cbfb948b9ca8cefd6555418b7f1fd9d015cbbfc0df72d3877e56197b267",
+    "src/sic/experiment-selection-groups.ts": "a6f12252eeb361c3a0961818c996740410f79122d1d8160cac6f7ed0a9a67010",
+    "src/logos-engine/v6-native-runtime.ts": "ae5b257903e8e8dbe73a1fda0c4673efffbfcefadff99ad74f3936fc81471722",
+    "src/runtime/v6-agent-service.ts": "05333b7d65fc24d7ab3df6ea94733984836e21a05cfa49f5dc278f7d2a5c71d2",
+    "scripts/check-sic-chronological.mjs": "2cb80e62a41e1269f1a2a0dd9e9de20a32504b70724c167abaac1a8b9bae3111",
+    "scripts/compare-source100.mjs": "aa73d931ebd78e725df4c786163c403f85b106a1af520938c7d7b87ac390a01a",
+    "scripts/sic-continuity-evidence.mjs": "9b43fc59c7a7f0e6eed87abf4e45078abd0c3462df2b5849c527c269a7b14de5",
+    "scripts/verify-sic-continuity.mjs": "290671d7b57fc3421b2a3f2263876602a34de8eeb1a165b8402d7b1eef206ec8",
+    "scripts/sic-replay-budgets.mjs": "308ae1c2d28a21dc7f2e3d06c83e601877d5388db2723148b5900d58c5a89931",
+    "docs/architecture/sic-replay-reference-levels-20261126.json": "67ae5216b80e87bbb2243138fde7970ea5c725a5f832f1b72aa8b0780e270854",
+    "docs/architecture/sic-v8-level6-campaign-7bb9f152.json": "18cafd4d8b6a9a29c18f5e07ab1d1e63b74e53b1c0fc605f6dbbd390aae7efcc"
+  },
+  "sourceUnchangedDuringRun": true,
+  "strictResultSha256": "2044350ab9429e951876ccec5017c024fb7b0ff07129725f78fbffecdbb34803",
+  "publicTrajectorySha256": "6ac0996092896e035f77015d8a6f76a5aaba6857ca936c6af7832723877834e1",
+  "levelsWon": 6,
+  "commands": 116,
+  "acquiredRecords": 116,
+  "reset": 0,
+  "undo": 0,
+  "initialFivePublicPrefixesIdenticalToCampaign": true,
+  "perLevel": [
+    {
+      "level": 1,
+      "actions": 16,
+      "scoredMs": 3730,
+      "activeMs": 4600,
+      "settlementMs": 1061,
+      "budget": {
+        "actions": 21,
+        "activeTimeMs": 12000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=PORT; level=1; won=true",
+        "timeBasis": "measured"
+      },
+      "prefixHash": "e98e2dedd56d2d3ccd3342bdfb540d587d480b26de079f771e319927b6347d0f",
+      "acquiredRecords": 16
+    },
+    {
+      "level": 2,
+      "actions": 18,
+      "scoredMs": 3289,
+      "activeMs": 3893,
+      "settlementMs": 809,
+      "budget": {
+        "actions": 23,
+        "activeTimeMs": 15000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=PORT; level=2; won=true",
+        "timeBasis": "measured"
+      },
+      "prefixHash": "a239c076afa87ac90d72495f49ef5b1dfc7940dc9fe41c06ed47caf77527eb30",
+      "acquiredRecords": 34
+    },
+    {
+      "level": 3,
+      "actions": 26,
+      "scoredMs": 7959,
+      "activeMs": 8369,
+      "settlementMs": 719,
+      "budget": {
+        "actions": 32,
+        "activeTimeMs": 20000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=PORT; level=3; won=true",
+        "timeBasis": "measured"
+      },
+      "prefixHash": "7e97f58690f565a8855015ed27c827650482f4451a384aecaeba030d68082111",
+      "acquiredRecords": 60
+    },
+    {
+      "level": 4,
+      "actions": 19,
+      "scoredMs": 5482,
+      "activeMs": 7063,
+      "settlementMs": 1824,
+      "budget": {
+        "actions": 22,
+        "activeTimeMs": 15000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=PORT; level=4; won=true",
+        "timeBasis": "measured"
+      },
+      "prefixHash": "f344e23b021c3f61d6c675ddde407141e2f7ef317cd1f93fe70fd73045414875",
+      "acquiredRecords": 79
+    },
+    {
+      "level": 5,
+      "actions": 19,
+      "scoredMs": 6080,
+      "activeMs": 7219,
+      "settlementMs": 1390,
+      "budget": {
+        "actions": 22,
+        "activeTimeMs": 14000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=PORT; level=5; won=true",
+        "timeBasis": "measured"
+      },
+      "prefixHash": "95080a9cfa4725b41e802d91c0de44446e849cd2e09d4b4413945a85fbc1927e",
+      "acquiredRecords": 98
+    },
+    {
+      "level": 6,
+      "actions": 18,
+      "scoredMs": 8691,
+      "activeMs": 9493,
+      "settlementMs": 1092,
+      "budget": {
+        "actions": 21,
+        "activeTimeMs": 12000,
+        "source": "docs/architecture/sic-v8-validation.md :: PORT niveau 6, ouvrir les passages encore sans partenaire",
+        "timeBasis": "measured"
+      },
+      "prefixHash": "6ac0996092896e035f77015d8a6f76a5aaba6857ca936c6af7832723877834e1",
+      "acquiredRecords": 116
+    }
+  ],
+  "firstLoss": {
+    "decision": 3,
+    "commandsBefore": 2,
+    "strategy": "P07",
+    "exposed": 1,
+    "computedRoute": 4,
+    "walkBeforeContact": 3,
+    "walkCommands": [
+      "ACTION2",
+      "ACTION2",
+      "ACTION4"
+    ],
+    "switchContact": [
+      35,
+      15
+    ],
+    "firstCrossing": 3,
+    "elapsedMsObserved": 135.781
+  },
+  "validation": {
+    "nativeTests": 11,
+    "nativeTestsPassed": 11,
+    "nativeTestExitCode": 0,
+    "typecheckExitCode": 0,
+    "capturedActualReturnsChecked": 3,
+    "capturedReturnProbeExitCode": 0
+  },
+  "limitations": [
+    "The diagnostic capture includes instrumentation overhead and is not a timing comparison.",
+    "The executed-ticket collector and PORT gate contract remain a separate integration check.",
+    "The full continuity gate and the published Site replay remain to be run on the final integration."
+  ],
+  "archive": {
+    "file": "public-evidence.tar.gz",
+    "bytes": 874244,
+    "sha256": "db892aa0e454a131b0b695383e2d295a569536e2c869653209b82bfe4140fc8b"
+  }
+}
