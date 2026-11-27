@@ -7,6 +7,7 @@ import { bindContinuityPlan, collectContinuityReturn, observeOrientedContinuity,
   captureQueuedControl, completeQueuedControl } from './sic-continuity-evidence.mjs';
 import { captureOpeningControl, measureOpeningReturn, completeOpeningControl, openingOwner } from './sic-route-opening-continuity.mjs';
 import { capturePopulationControl, measurePopulationReturn, completePopulationControl } from './sic-population-continuity.mjs';
+import { passageOwners, capturePassageContinuity, observePassageReturn, completePassageContinuity } from './sic-passage-continuity.mjs';
 import { appendFile, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -126,7 +127,8 @@ async function run(code, games) {
   const service = new V6AgentService(async(recovery) => {
     const backend=await createNativeV6Runtime(declarations,{recovery});
     if (process.env.SIC_STUDY_CONTINUITY === '1') continuityOwners = new Map(backend.families
-      .filter(family => queuedOwners.has(family.id) || populationOwners.has(family.id) || family.id === openingOwner)
+      .filter(family => queuedOwners.has(family.id) || populationOwners.has(family.id)
+        || passageOwners.has(family.id) || family.id === openingOwner)
       .map(family => [family.id, family]));
     if (cursorAudit || boundaryAudit) {
       const family = backend.families.find(f => f.id === 'sic_test_prepared_effects');
@@ -153,7 +155,7 @@ async function run(code, games) {
   });
   // Count only commands acknowledged by the native service after dispatch.
   const executedTickets = process.env.SIC_STUDY_CONTINUITY === '1' ? [] : null;
-  let pendingTicket, pendingPlan, dispatchedActorPlan, dispatchedOriented, dispatchedQueued, dispatchedOpening, dispatchedPopulation;
+  let pendingTicket, pendingPlan, dispatchedActorPlan, dispatchedOriented, dispatchedQueued, dispatchedOpening, dispatchedPopulation, dispatchedPassage;
   const transport = { async request(operation) {
     const result = await service.handle(operation);
     if (executedTickets) {
@@ -167,16 +169,19 @@ async function run(code, games) {
           () => continuityOwners?.get(pendingPlan?.family)?.state() ?? null, returned) : undefined;
         const population = dispatchedPopulation !== undefined ? completePopulationControl(dispatchedPopulation,
           () => continuityOwners?.get(pendingPlan?.family)?.state() ?? null, returned) : undefined;
+        const passage = dispatchedPassage !== undefined ? completePassageContinuity(dispatchedPassage,
+          () => continuityOwners?.get(pendingPlan?.family)?.state() ?? null, returned, result.snapshot.levelsCompleted) : undefined;
         executedTickets.push({level,decisionRevision,actionIndex,action:actionRef,...(actionRef==='ACTION6'?{data:pendingTicket.data}:{}),resets,
           ...returned,
           ...(dispatchedActorPlan?{actorPlan:dispatchedActorPlan}:{}), ...(dispatchedOriented!==undefined?{oriented:dispatchedOriented}:{}),
           ...(queued !== undefined ? {queued} : {}), ...(opening !== undefined ? {opening} : {}),
-          ...(population !== undefined ? {population} : {})});
+          ...(population !== undefined ? {population} : {}), ...(passage !== undefined ? {passage} : {})});
         dispatchedActorPlan = undefined;
         dispatchedOriented = undefined;
         dispatchedQueued = undefined;
         dispatchedOpening = undefined;
         dispatchedPopulation = undefined;
+        dispatchedPassage = undefined;
       }
       pendingTicket = result.ticket;
       pendingPlan = bindContinuityPlan(pendingTicket, result.snapshot.trace, pendingPlan);
@@ -279,6 +284,8 @@ async function run(code, games) {
       const populationProposal = executedTickets && populationOwners.has(pendingPlan?.family) ? agent.snapshot.proposal : null;
       if (populationProposal)
         dispatchedPopulation = capturePopulationControl(populationProposal, pendingTicket, previous.frame, populationScene);
+      if (executedTickets && passageOwners.has(pendingPlan?.family))
+        dispatchedPassage = capturePassageContinuity(agent.snapshot.proposal, pendingTicket, previous.frame);
       if (executedTickets && plan?.family==='sic_observed_actor_composition') dispatchedActorPlan={strategy:plan.strategy,subjects:plan.need?.subjects??[],evidence:plan.need?.evidence??[]};
       const frameSeal=plan?.frameForecast?hash(plan.frameForecast):null;
       const terminalContactSeal=plan?.terminalContactForecast?hash(plan.terminalContactForecast):null;
@@ -312,6 +319,9 @@ async function run(code, games) {
       if (populationProposal)
         dispatchedPopulation = measurePopulationReturn(dispatchedPopulation, board.frame, populationProposal,
           populationScene, board.levelsCompleted);
+      if (dispatchedPassage !== undefined)
+        dispatchedPassage = observePassageReturn(dispatchedPassage,
+          board.level === previous.level && board.levelsCompleted === previous.levelsCompleted ? board.frame : null);
       issued++;
       if (process.env.SIC_STUDY_PROGRESS === '1' && issued % 100 === 0)
         console.log(JSON.stringify({ code, level:board.level, issued, seconds:Math.round(process.uptime()) }));
