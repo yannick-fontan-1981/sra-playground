@@ -3,6 +3,7 @@ import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { publicCompletionFrames } from './observed-role-completion.ts';
+import { observedPressureRecoveryGroup } from './public-input-exploration.ts';
 
 export const markedCompartmentFlowId = 'sic_follow_observed_compartment_readiness';
 export const markedCompartmentStrategies = {
@@ -267,6 +268,16 @@ export function createSicMarkedCompartmentFlow(): NativeFamily<Proposal> {
   let flow: Flow | null = null;
   return {
     id: markedCompartmentFlowId,
+    async proposeInGroup(group, observation, ...args) {
+      if (group !== observedPressureRecoveryGroup) return this.propose(observation, ...args);
+      // Reuse the just-confirmed delivery before an unrelated preview spends
+      // a turn. Other ready inputs still use the ordinary exploration order.
+      if (attempted.length || witness?.epoch !== observation.level_epoch
+        || witness.refs[1] !== observation.observation_ref
+        || !witness.refs.every(ref => ref.split(':epoch:')[0] === observation.observation_ref.split(':epoch:')[0])) return null;
+      const proposal = await this.propose(observation, ...args);
+      return proposal?.sicSituationCard?.strategy === 'deliver_from_confirmed_outlet' ? proposal : null;
+    },
     async observePublicOutcome(before, after, command, first, second, frames = []) {
       const observed = await acquireMarkedOutlet(witness, before, after, command, first, second, frames);
       if (observed === witness) return;

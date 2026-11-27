@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { readFileSync } from 'node:fs';
+import { gunzipSync } from 'node:zlib';
 import { measureNativeObservation, ObservedInputDomain } from '../src/logos-engine/v6-native-observer.ts';
 import { NativeV6Runtime } from '../src/logos-engine/v6-native-runtime.ts';
 import type { NativeBox, NativeFamily } from '../src/logos-engine/v6-native-types.ts';
@@ -8,6 +10,9 @@ import { V6AgentService } from '../src/runtime/v6-agent-service.ts';
 import { toV6PublicObservation } from '../src/runtime/v6-agent-protocol.ts';
 import { acquireMarkedOutlet, createSicMarkedCompartmentFlow, projectRecalledOutlet } from '../src/sic/marked-compartment-flow.ts';
 import { preparedEffectsId } from '../src/sic/test-prepared-effects.ts';
+import { planningGroupsWithExperiments } from '../src/sic/experiment-selection-groups.ts';
+import { standalonePlanningGroups } from '../src/sic/standalone-families.ts';
+import { observedPressureRecoveryGroup } from '../src/sic/public-input-exploration.ts';
 
 function controlFixture(variant = false) {
   const ink = (value: number) => variant ? (value * 5 + 3) % 16 : value;
@@ -61,8 +66,14 @@ for (const variant of [false, true]) test('native outlet control keeps its ident
   const t = controlFixture(variant), family = createSicMarkedCompartmentFlow();
   const source: NativeFamily = {
     id: preparedEffectsId,
+    proposeInSubquestion(_group, _entry, ...args) { return this.propose(...args); },
     async propose(observation, rows) {
-      if (observation.levels_completed !== 0) return null;
+      if (observation.levels_completed !== 0) {
+        const action = { action_ref: 'ACTION5', data: {} };
+        return { status: 'proposed', kind: this.id, actions: [action], steps: [{ action }],
+          binding: { observation_ref: observation.observation_ref, level_epoch: observation.level_epoch },
+          sicLocalDecision: { strategy: 'independent_preview' } };
+      }
       const action = t.command(), point: [number, number] = [action.data.x, action.data.y];
       const point_binding = await ObservedInputDomain.makeLocusWitness(observation, rows, point,
         { reason: 'Declared public outlet boundary fixture', evidence: [observation.observation_ref] });
@@ -74,9 +85,14 @@ for (const variant of [false, true]) test('native outlet control keeps its ident
     after: () => ({ matched: true, seal_prefix: true, reason: 'official_boundary' }),
     record: () => ({ events: [] }), state: () => ({}), restore() {},
   };
+  const groups = planningGroupsWithExperiments(standalonePlanningGroups).map(group => {
+    const entries = group.families.flatMap((id, index) => [family.id, source.id].includes(id)
+      ? [{ id, entry: group.entryPoints?.[index] ?? null }] : []);
+    return { ...group, families: entries.map(item => item.id), entryPoints: entries.map(item => item.entry) };
+  }).filter(group => group.families.length);
   const service = new V6AgentService(() => new NativeV6Runtime({ families: [family, source],
     sourceDigest: 'compound-control-public-transfers', maxPointOccurrences: 100,
-    groups: [{ id: 'observed_outlet', families: [family.id] }, { id: 'public_fixture', families: [source.id] }] }));
+    groups }));
   const sessionId = 'compound-control-' + variant, first = t.frame();
   let reply = await service.handle({ type: 'init', sessionId, sequence: 0,
     observation: toV6PublicObservation(t.packet(first, 1)), budgets: { targetLevels: 2, levelActionCaps: [8, 8] } });
@@ -125,6 +141,7 @@ for (const condition of ['ambiguous-control', 'changed-process-cavity', 'changed
     assert.equal(await projectRecalledOutlet(witness, observation, changed, []), null);
     const family = createSicMarkedCompartmentFlow();
     family.restore!({ witness: structuredClone(witness), attempted: [] });
+    assert.equal(await family.proposeInGroup!(observedPressureRecoveryGroup, observation, changed, [], 8), null);
     assert.equal(await family.propose(observation, changed, [], 8), null);
     assert.deepEqual(family.state().witness, witness);
   });
@@ -142,7 +159,7 @@ test('a partial background loss does not confirm the acquired complete outlet re
   assert.ok(witness);
   const family = createSicMarkedCompartmentFlow();
   family.restore!({ witness: structuredClone(witness), attempted: [] });
-  const proposal = await family.propose(current, next, [], 8);
+  const proposal = await family.proposeInGroup!(observedPressureRecoveryGroup, current, next, [], 8);
   assert.ok(proposal);
   const partial = structuredClone(next);
   partial[t.outlet[1] + 1]![t.outlet[0] + 2] = t.ink(5);
@@ -150,4 +167,38 @@ test('a partial background loss does not confirm the acquired complete outlet re
   assert.equal((await family.after(proposal, 0, current, after, next, partial)).matched, false);
   await family.record(current, after, t.command(1), next, partial, proposal, 0, []);
   assert.deepEqual(family.state().witness, witness);
+  assert.equal(await family.proposeInGroup!(observedPressureRecoveryGroup, after, partial, [], 8), null);
+});
+
+test('early outlet continuation needs the fresh official return and keeps ordinary inputs at their normal priority', async () => {
+  const t = controlFixture(), first = t.frame(), next = t.frame({ shift: 1, ready: true });
+  const before = await t.observe(first, 1, 1), current = await t.observe(next, 2, 2);
+  const witness = await acquireMarkedOutlet(null, before, current, t.command(), first, next, [t.frame({ drained: true }), next]);
+  assert.ok(witness);
+  const family = createSicMarkedCompartmentFlow();
+  for (const changed of [
+    { ...witness, epoch: witness.epoch - 1 },
+    { ...witness, refs: [witness.refs[0], witness.refs[0]] },
+    { ...witness, refs: ['foreign:epoch:1:revision:1:frame:abcd', witness.refs[1]] },
+  ]) {
+    family.restore!({ witness: changed, attempted: [] });
+    assert.equal(await family.proposeInGroup!(observedPressureRecoveryGroup, current, next, [], 8), null);
+    assert.deepEqual(family.state().witness, changed);
+  }
+  const drained = t.frame({ shift: 1, ready: true, drained: true });
+  family.restore!({ witness, attempted: [] });
+  assert.equal(await family.proposeInGroup!(observedPressureRecoveryGroup, current, drained, [], 8), null);
+  assert.ok(await family.propose(current, drained, [], 8), 'Other independently ready compartments remain available in their ordinary group');
+});
+
+test('the first lost public delivery uses the retained control before the preview', async () => {
+  const fixture = JSON.parse(gunzipSync(readFileSync(new URL('./fixtures/sic-ready-outlet-public.json.gz', import.meta.url))).toString());
+  assert.equal(fixture.actual.strategy, 'witnessedPreview');
+  const family = createSicMarkedCompartmentFlow();
+  family.restore!(fixture.memory);
+  const proposal = await family.proposeInGroup!(observedPressureRecoveryGroup, fixture.observation, fixture.rows, [], 30);
+  assert.ok(proposal);
+  assert.equal(proposal.sicSituationCard?.strategy, 'deliver_from_confirmed_outlet');
+  assert.deepEqual(proposal.actions[0], { action_ref: 'ACTION6', data: { x: 53, y: 30 } });
+  assert.ok(fixture.memory.witness.refs.every((ref: string) => proposal.route_refs.includes(ref)));
 });

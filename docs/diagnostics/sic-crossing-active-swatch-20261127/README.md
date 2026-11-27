@@ -17,3 +17,7 @@ L’unicité des contrôles, la commande disponible, le scope, l’époque, le s
 Les 10 tests ciblés passent. Deux scénarios natifs acquièrent les commandes et relations au premier niveau puis résolvent une nouvelle forme nécessitant une couleur alternative. Les palettes, formes, mailles, positions et commandes diffèrent. Les scénarios négatifs couvrent l’ambiguïté, la commande absente, la référence absente et la contradiction. Une contre-épreuve utilise l’observation publique exacte de la première perte et refuse une couleur ou une position modifiée. Le contrôle TypeScript passe.
 
 Le parcours strict complet du nouveau candidat et sa continuité instrumentée restent à exécuter. Ce document ne revendique pas encore une victoire complète.
+
+## Parcours strict du candidat
+
+Le runner standard sur le commit local `24df980e`, identique par son arbre au commit GitHub `e1ef5d26`, gagne les six niveaux en 199 commandes (27, 28, 24, 40, 40, 40). Une seule session SIC et un worker sont utilisés depuis le niveau 1. Aucun reset ni undo ; tous les plafonds originaux de commandes et de temps sont respectés. Les résultats et leurs miroirs de niveaux sont archivés dans `qualification/`. La qualification de continuité, l’intégration et le rejeu dans l’interface livrée restent requis avant livraison.
