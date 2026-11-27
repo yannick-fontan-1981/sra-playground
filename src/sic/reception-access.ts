@@ -149,9 +149,15 @@ export function createSicReceptionAccess(family = receptionAccessId): NativeFami
       if (!scene || scene.counterparts.length !== 1 || scene.cells.length > 196) {
         return !prior ? offerActivation(observation, rows, keys, remaining, mode) : null;
       }
-      let local: State = prior ? { ...prior, scene } : { epoch: observation.level_epoch, count: 0, scene,
-        controls: {}, trials: [], waits: 0, last: null, evidence: [], stopped: false };
       const from = carrier(rows, scene), target = scene.target.anchor, atTarget = equal(from, target);
+      // The completed reception already measured these controls. A simple
+      // receiver is just as eligible to reuse them as an activation sequence,
+      // provided its support interface and the unique current carrier match.
+      const transferred = remembered?.epoch === observation.level_epoch && remembered.pitch === scene.pitch
+        && remembered.supportInk === scene.target.color && from ? remembered : null;
+      let local: State = prior ? { ...prior, scene } : { epoch: observation.level_epoch, count: 0, scene,
+        controls: transferred?.controls ?? {}, trials: [], waits: 0, last: null,
+        evidence: transferred?.evidence ?? [], stopped: false };
       if (family === learnReceptionAccessId && !prior) {
         const receipt = execution?.readDirectionalMotion?.();
         const current = receipt?.afterRef === observation.observation_ref && receipt.levelEpoch === observation.level_epoch && keys.includes(receipt.command);
