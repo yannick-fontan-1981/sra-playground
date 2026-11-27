@@ -30,7 +30,7 @@ function placementRoom(variant: boolean, neighborResponse = false) {
   };
   const degree = ([y, x]: Cell) => bodies.filter(([r, c]) => Math.abs(r - y) + Math.abs(c - x) === 1).length;
   const response = (cell: Cell) => [13, 9, 12, 15, 11][degree(cell)]!;
-  function frame(options: { absentSelection?: boolean; ambiguousSelection?: boolean } = {}) {
+  function frame(options: { absentSelection?: boolean; ambiguousSelection?: boolean; duplicateSelection?: boolean } = {}) {
     const rows = Array.from({ length: 64 }, () => Array<number>(64).fill(ink(0)));
     const square = (y: number, x: number, color: number) => {
       for (let dy = 0; dy < q - 1; dy++) for (let dx = 0; dx < q - 1; dx++) rows[y + dy]![x + dx] = ink(color);
@@ -51,6 +51,10 @@ function placementRoom(variant: boolean, neighborResponse = false) {
       const [r, c] = bodies[selected]!;
       rows[phase + r * q]![phase + c * q] = ink(15);
       if (options.ambiguousSelection) rows[phase + r * q]![phase + c * q + 1] = ink(7);
+      if (options.duplicateSelection) {
+        const [otherRow, otherCol] = bodies.find((_cell, index) => index !== selected)!;
+        rows[phase + otherRow * q]![phase + otherCol * q] = ink(15);
+      }
     }
     return rows;
   }
@@ -199,4 +203,58 @@ test('a contradicted displacement in an inherited neighbor experiment seals only
   const outcome = run.result.snapshot.trace.findLast(event => event.kind === 'actual_outcome');
   assert.equal(outcome?.matched, false);
   assert.ok(!run.result.ticket || run.result.ticket.actionIndex === 0);
+});
+
+async function firstPreparedSelection(variant: boolean) {
+  const run = await start(variant, true);
+  while (!(run.result.ticket?.actionRef === 'ACTION6' && run.result.snapshot.proposal?.route?.length > 1)) {
+    assert.ok(run.tickets.length < 130 && run.room.completed < 2, 'A known selection should expose its measured approach');
+    await run.next();
+  }
+  return run;
+}
+
+for (const variant of [false, true]) test('a confirmed selection continues into its measured movement in one native prefix' + (variant ? ' with different shape, colors, size and controls' : ''), async () => {
+  const run = await firstPreparedSelection(variant), first = run.result.ticket!;
+  const plan = run.result.snapshot.trace.findLast(event => event.kind === 'sic_native_plan')!;
+  assert.ok(run.result.snapshot.proposal!.actions.length <= 16);
+  const saved = structuredClone(run.learn.state());
+  await run.next();
+  assert.equal(run.result.ticket?.decisionRevision, first.decisionRevision);
+  assert.equal(run.result.ticket?.actionIndex, 1);
+  assert.notEqual(run.result.ticket?.actionRef, 'ACTION6');
+  assert.deepEqual(run.learn.state(), saved, 'Learning waits for one reconciliation of the executed prefix');
+  let executed = 1;
+  while (run.result.ticket?.decisionRevision === first.decisionRevision) { await run.next(); executed++; }
+  const returns = run.result.snapshot.trace.filter(event => event.kind === 'actual_outcome' && event.sic_plan === plan.id);
+  assert.equal(returns.length, executed);
+  assert.deepEqual(returns.map(event => event.index), Array.from({ length: executed }, (_, i) => i));
+  const seals = run.result.snapshot.trace.filter(event => event.kind === 'sealed_prefix'
+    && event.family === plan.family && event.revision === first.decisionRevision);
+  assert.equal(seals.length, 1);
+  assert.equal(seals[0]!.acquired_actions, executed);
+  assert.ok(executed >= 2);
+});
+
+for (const failure of ['absentSelection', 'duplicateSelection'] as const) test('a prepared movement is not issued after an ' + failure + ' mark', async () => {
+  const run = await firstPreparedSelection(false), first = run.result.ticket!, controls = structuredClone(run.learn.state().state.controls);
+  await run.next(false, { [failure]: true });
+  assert.ok(!run.result.ticket || run.result.ticket.decisionRevision !== first.decisionRevision);
+  const outcome = run.result.snapshot.trace.findLast(event => event.kind === 'actual_outcome');
+  assert.equal(outcome?.index, 0);
+  assert.equal(outcome?.matched, false);
+  assert.equal(run.result.snapshot.trace.findLast(event => event.kind === 'sealed_prefix')?.acquired_actions, 1);
+  assert.deepEqual(run.learn.state().state.controls, controls);
+});
+
+test('a contradicted movement after selection closes exactly the two actual tickets', async () => {
+  const run = await firstPreparedSelection(true), first = run.result.ticket!;
+  await run.next();
+  const action = run.result.ticket!.actionRef, controls = structuredClone(run.result.snapshot.proposal!.local.controls);
+  await run.next(true);
+  assert.ok(!run.result.ticket || run.result.ticket.decisionRevision !== first.decisionRevision);
+  assert.equal(run.result.snapshot.trace.findLast(event => event.kind === 'actual_outcome')?.matched, false);
+  assert.equal(run.result.snapshot.trace.findLast(event => event.kind === 'sealed_prefix')?.acquired_actions, 2);
+  assert.equal(run.learn.state().state.controls[action], undefined);
+  for (const [command, effect] of Object.entries(controls)) if (command !== action) assert.deepEqual(run.learn.state().state.controls[command], effect);
 });

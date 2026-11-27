@@ -164,5 +164,74 @@
     "strictReplay": "pending",
     "fullContinuity": "pending",
     "viewer": "pending"
+  },
+  "firstStrict": {
+    "source": "dad93b27aadf9d589f7dc4a3921e7a490102ad68",
+    "remote": "043615e53d561ab2cb2002fb06a8dc1418470891",
+    "levels": 5,
+    "target": 6,
+    "actions": 186,
+    "authority": 186,
+    "reason": "level_wall_time_budget",
+    "levels1to5HashesUnchanged": true,
+    "lastLevel": {
+      "level": 6,
+      "won": false,
+      "actions": 61,
+      "ms": 27000,
+      "budget": {
+        "actions": 80,
+        "activeTimeMs": 27000,
+        "source": "docs/architecture/sic-v8-validation.md :: VOIS niveau 6, placer l'appui hors du contour compar\u00e9",
+        "timeBasis": "measured"
+      }
+    },
+    "finalAcquisitions": null,
+    "finalRecoveries": null
+  },
+  "selectionContinuity": {
+    "firstLostPreparation": 37,
+    "level": 3,
+    "oneClickExposed": true,
+    "orderedActions": 30,
+    "knownMarkers": [
+      [
+        1,
+        1,
+        0
+      ]
+    ],
+    "knownControls": {
+      "ACTION1": {
+        "delta": [
+          -1,
+          0
+        ]
+      },
+      "ACTION2": {
+        "delta": [
+          1,
+          0
+        ]
+      },
+      "ACTION3": {
+        "delta": [
+          0,
+          -1
+        ]
+      },
+      "ACTION4": {
+        "delta": [
+          0,
+          1
+        ]
+      }
+    },
+    "nativeVariants": 2,
+    "targetedTests": 21,
+    "typecheck": "passed",
+    "secondStrictReplay": "pending",
+    "fullContinuity": "pending",
+    "viewer": "pending"
   }
 }

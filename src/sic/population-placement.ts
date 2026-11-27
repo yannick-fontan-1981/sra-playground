@@ -96,6 +96,20 @@ function selectionScene(scene: Scene, cell: Cell, first: NativeRows, second: Nat
   return next && next.bodies.every((body, index) => key(body.cell) === key(scene.bodies[index]!.cell)) ? next : null;
 }
 
+function selectedPopulationCell(scene: Scene, rows: NativeRows): Cell | null {
+  const selected = scene.bodies.filter(body => {
+    const [l, t, r, b] = cellBox(scene, body.cell), differences: number[][] = [];
+    for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) {
+      if (rows[y]?.[x] !== body.appearance) differences.push([y - t, x - l, rows[y]![x]!]);
+    }
+    return differences.length === 1
+      ? (scene.observed_marker_overlays ?? []).some(pattern => pattern.every((value, i) => value === differences[0]![i]))
+      : differences.length > 1 && (scene.observed_marker_patterns ?? []).some(pattern =>
+        pattern.length === differences.length && pattern.every((pixel, i) => pixel.every((value, j) => value === differences[i]![j])));
+  });
+  return selected.length === 1 ? selected[0]!.cell : null;
+}
+
 /** Recover a population obscured by a selection mark using only the two sides of a public click. */
 export function measureTransferredPopulationSelection(first: NativeRows, second: NativeRows, point: NativePoint) {
   if (first.length !== second.length || first.some((row, y) => row.length !== second[y]?.length)) return null;
@@ -408,7 +422,18 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
       let route: Choice[] = [];
       const ordered = local.ordered?.[0];
       if (ordered) {
-        if (ordered.command.action_ref === 'ACTION6') pick = ordered;
+        if (ordered.command.action_ref === 'ACTION6') {
+          pick = ordered;
+          // A measured selection can prepare the already known movement of
+          // that same piece. Its actual mark is checked before continuing.
+          if (scene.observed_marker_overlays?.length || scene.observed_marker_patterns?.length) {
+            route.push(ordered);
+            for (const choice of local.ordered!.slice(1)) {
+              if (!choice.expected || !controls[choice.command.action_ref]) break;
+              route.push(choice);
+            }
+          }
+        }
         else if (local.active) {
           move = ordered;
           for (const choice of local.ordered!) {
@@ -481,7 +506,8 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
         parentObjective: parent, satisfactionContract: 'official_progress_after_matching_reference_positions' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `population-placement:${need.id}`;
-      const planned = strategy === 'P07' && route.length > 1 ? route.slice(0, Math.min(remaining, maximumCommittedActions)) : [choice];
+      const planned = route.length > 1 && (strategy === 'P07' || choice === pick)
+        ? route.slice(0, Math.min(remaining, maximumCommittedActions)) : [choice];
       const actions = planned.map(step => step.command);
       const point = [choice.command.data.x, choice.command.data.y] as NativePoint;
       const binding = phase === 'select_unplaced_piece'
@@ -491,7 +517,7 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
           destination:choice.slot,expectedMask:choice.inquiry.mask,reference:scene.reference_digest}}:{}),
         ...(planned.length > 1 ? { route: planned } : {}),
         steps: planned.map(step => ({ action: step.command, expected_after: (step.ordered || planned.length > 1) && step.expected
-          ? cellBox(scene, step.expected) : null, ...(binding ? { point_binding: binding } : {}) })),
+          ? cellBox(scene, step.expected) : null, ...(binding && step.command.action_ref === 'ACTION6' ? { point_binding: binding } : {}) })),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
@@ -526,9 +552,11 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
       if (index > 0 && proposal.route) {
         const current = measureReferencePopulation(packet.frame_rows, proposal.local.scene) as Scene | null;
         const next = proposal.route[index]!;
+        const selected = current && selectedPopulationCell(current, packet.frame_rows);
         const expected = new Set(proposal.local.scene.bodies.map(({ cell }) =>
           key(key(cell) === key(proposal.choice.cell) ? next.cell : cell)));
         const admitted = proposal.local.epoch === observation.level_epoch && !!current
+          && !!selected && key(selected) === key(next.cell)
           && current.bodies.every(({ cell }) => expected.has(key(cell))) && expected.size === current.bodies.length
           && !!next.expected && !expected.has(key(next.expected));
         return { admitted, reason: admitted ? 'population_and_next_cell_confirmed' : 'population_or_reference_changed' };
@@ -539,11 +567,14 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
     after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
-      if (proposal.strategy === 'select_unplaced_piece') {
-        const matched = !!selectionScene(proposal.local.scene, proposal.choice.cell, first, second);
-        return { matched, seal_prefix: true, reason: matched ? 'selection_marker_observed' : 'selection_unconfirmed' };
-      }
       const choice = proposal.route?.[index] ?? proposal.choice;
+      if (choice.command.action_ref === 'ACTION6') {
+        const scene = selectionScene(proposal.local.scene, choice.cell, first, second);
+        const selected = scene && selectedPopulationCell(scene, second);
+        const matched = !!scene && (!proposal.route || !!selected && key(selected) === key(choice.cell));
+        return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length,
+          reason: matched ? 'selection_marker_observed' : 'selection_unconfirmed' };
+      }
       const scene = index > 0 ? measureReferencePopulation(first, proposal.local.scene) as Scene | null : proposal.local.scene;
       const measured = scene && compareMovement(scene, choice.cell, second), expected = choice.expected;
       const matched = !!measured && (!expected || !!measured.destination && key(measured.destination) === key(expected));
@@ -571,9 +602,11 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const evidence = [...local.evidence.slice(-4), after.observation_ref];
       const current = { ...local, frame: after.frame_hash, evidence };
-      if (strategy === 'select_unplaced_piece') {
+      if (choice.command.action_ref === 'ACTION6') {
         const measured = selectionScene(local.scene, choice.cell, first, second);
-        state = { ...current, scene: measured ?? local.scene, selection: choice.cell, active: false, stopped: !measured,
+        const selected = measured && selectedPopulationCell(measured, second);
+        const confirmed = !!measured && (!proposal.route || !!selected && key(selected) === key(choice.cell));
+        state = { ...current, scene: measured ?? local.scene, selection: choice.cell, active: false, stopped: !confirmed,
           ...(measured ? { neighborhood: rememberNeighborhood(measured, local.neighborhood, after.observation_ref) } : {}),
           ...(choice.ordered && measured ? { ordered: local.ordered!.slice(1) } : {}),
           ...(local.assignment ? { assignment: null } : {}) };
