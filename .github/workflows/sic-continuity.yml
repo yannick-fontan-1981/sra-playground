@@ -34,6 +34,7 @@ jobs:
       - run: node --test tests/sic-preview-interface.test.ts tests/sic-experiment-arbitration.test.ts tests/sic-population-control-transfer.test.ts tests/sic-transferred-population-selection.test.ts
       - run: node --test tests/sic-compartment-encounter.test.ts tests/sic-directional-reception-transfer.test.ts
       - run: node --test tests/sic-ordered-feedback-transfer.test.ts tests/sic-feedback-partitions.test.ts
+      - run: node --test tests/sic-profile-transfer-continuity.test.ts tests/sic-profile-rank-order.test.ts tests/sic-profile-continuity-contract.test.mjs
 
   cohort-replays:
     name: Continuity / ${{ matrix.name }}
@@ -56,6 +57,7 @@ jobs:
           - { name: destination-set, cohort: SS07, end: 8, cap: 180 }
           - { name: marked-field, cohort: 'source:SIGN', end: 6, cap: 98 }
           - { name: cargo-transport, cohort: 'source:GABA', end: 6, cap: 128 }
+          - { name: profile-preparation, cohort: 'source:LKEY', end: 6, cap: 36 }
           - { name: native-sources, cohort: 'source:AR25,HANO,DC22', end: 1, cap: 120 }
     env:
       SIC_STUDY_CONTINUITY: '1'
@@ -157,6 +159,7 @@ jobs:
             ['l-axe-violet', 'SS04', 8, 150], ['local-carry', 'SS05', 8, 155],
             ['actor-composition', 'SS06', 8, 125], ['destination-set', 'SS07', 8, 180],
             ['marked-field', 'source:SIGN', 6, 98], ['cargo-transport', 'source:GABA', 6, 128],
+            ['profile-preparation', 'source:LKEY', 6, 36],
             ['native-sources', 'source:AR25,HANO,DC22', 1, 120],
           ];
           const { GITHUB_SHA: sha, GITHUB_RUN_ID: runId } = process.env;
