@@ -736,7 +736,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     if (!fallback) return;
     const services = acquirePanelService(state.panelServiceTransfer, before, after, command, rows, afterRows);
     if (services) state.panelServiceTransfer = services;
-    const compartment = acquireCompartmentReturn(state.compartmentTransfer, before, after, command, rows, afterRows);
+    const compartment = acquireCompartmentReturn(state.compartmentTransfer, before, after, command, rows, afterRows, frames);
     const instruction = acquireInstructionReturn(state.instructionTransfer, before, after, command, rows, afterRows);
     const outlet = after.levels_completed > before.levels_completed
       ? await acquireMarkedOutlet(state.outletWitness ?? null, before, after, command, rows) : null;

@@ -1,0 +1,363 @@
+{
+  "schema": 1,
+  "createdUtc": "2026-11-27T00:24:44.364858+00:00",
+  "source": {
+    "localCommit": "c70f8027e85e2f7f34fc2d5bd46e50832757b0c9",
+    "githubCommit": "55fc7b488e8443b730de3bf17cdc9e4b2d1c6883",
+    "tree": "f0e8e29cf6fa1fb33f38843849675e75321afd7d",
+    "treesEqual": true,
+    "branch": "fix/sic-27-observed-compositions-20261126",
+    "baselineCommit": "4a546a139f9064422c078ef5f40b8c22133c39a8"
+  },
+  "protocol": {
+    "runner": "scripts/check-sic-chronological.mjs",
+    "startLevel": 1,
+    "mode": "sic",
+    "sequential": true,
+    "parallelWorkers": 1,
+    "references": "docs/architecture/sic-replay-reference-levels-20261126.json",
+    "budgetsChanged": false,
+    "commands": [
+      "SIC_REPLAY_REFERENCES=docs/architecture/sic-replay-reference-levels-20261126.json node scripts/check-sic-chronological.mjs UPST 6 upst-native.jsonl 1 sic",
+      "SIC_REPLAY_REFERENCES=docs/architecture/sic-replay-reference-levels-20261126.json node scripts/check-sic-chronological.mjs CWSE 6 cwse-native.jsonl 1 sic"
+    ]
+  },
+  "qualification": {
+    "nativeFunctionalReplay": "passed",
+    "targetedTests": {
+      "passed": 27,
+      "failed": 0
+    },
+    "typecheck": "passed",
+    "independentReview": "favorable, no remaining blocker",
+    "globalContinuityGate": "pending integration",
+    "deliveredUiReplay": "pending delivery",
+    "notes": [
+      "CWSE has no level reference: the unchanged fallback budget is 80 commands and 90000 ms for every level.",
+      "UPST reports no multi-command prefix in this replay; CWSE reports one 2-click prefix. Functional scoring alone does not qualify continuity.",
+      "Initial compartment growth is acquired at L1. An externally executed L2 completion must have a role-specific public animation before transfer to L3.",
+      "Directional controls acquired at L1 and exposure at L2 are retained only after the public old-context terminal configuration is observed."
+    ]
+  },
+  "results": [
+    {
+      "game": "UPST",
+      "target": 6,
+      "levelsWon": 6,
+      "actions": 72,
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "mode": "sic",
+      "parallelWorkers": 1,
+      "authorityCount": 72,
+      "acquiredRecords": 72,
+      "authorityEqualsExecutedActions": true,
+      "acquisitionsEqualExecutedActions": true,
+      "families": {
+        "sic_public_input_exploration": 28,
+        "sic_verify_compartment_growth": 41,
+        "sic_follow_stable_reference": 3
+      },
+      "series": [],
+      "pathKinds": [],
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 19,
+          "budget": {
+            "actions": 36,
+            "activeTimeMs": 38000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=UPST; level=1; won=true",
+            "timeBasis": "measured"
+          },
+          "scoreMs": 8126,
+          "settlementMs": 87,
+          "totalMs": 8213,
+          "activeMs": 7858,
+          "acquisitionsThisLevel": 19,
+          "acquisitionsCumulative": 19,
+          "prefixHash": "b9a472bb8aa301eade8c569bb94842e2c1b6cd6a4892dad50a5096106b932907"
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 4,
+          "budget": {
+            "actions": 9,
+            "activeTimeMs": 11000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=UPST; level=2; won=true",
+            "timeBasis": "measured"
+          },
+          "scoreMs": 2044,
+          "settlementMs": 119,
+          "totalMs": 2163,
+          "activeMs": 1948,
+          "acquisitionsThisLevel": 4,
+          "acquisitionsCumulative": 23,
+          "prefixHash": "b692dc25bfdf15f91f20f35961fdc939a5cf8427827a62fba28b0c38471381fb"
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 11,
+          "budget": {
+            "actions": 19,
+            "activeTimeMs": 21000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=UPST; level=3; won=true",
+            "timeBasis": "measured"
+          },
+          "scoreMs": 4963,
+          "settlementMs": 280,
+          "totalMs": 5243,
+          "activeMs": 4848,
+          "acquisitionsThisLevel": 11,
+          "acquisitionsCumulative": 34,
+          "prefixHash": "386657c5535819ccdb1180e909b4be05a8c91018fd84e8a0c9f74ae1de6b7afc"
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 7,
+          "budget": {
+            "actions": 12,
+            "activeTimeMs": 14000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=UPST; level=4; won=true",
+            "timeBasis": "measured"
+          },
+          "scoreMs": 3296,
+          "settlementMs": 124,
+          "totalMs": 3419,
+          "activeMs": 3150,
+          "acquisitionsThisLevel": 7,
+          "acquisitionsCumulative": 41,
+          "prefixHash": "ebc1b3986db3bc4d9c8d20c08649348049bd0ab39ad8531119918d0823990569"
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 14,
+          "budget": {
+            "actions": 20,
+            "activeTimeMs": 24000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=UPST; level=5; won=true",
+            "timeBasis": "measured"
+          },
+          "scoreMs": 6430,
+          "settlementMs": 162,
+          "totalMs": 6591,
+          "activeMs": 6172,
+          "acquisitionsThisLevel": 14,
+          "acquisitionsCumulative": 55,
+          "prefixHash": "a0b29acd7a7320f062e396ff384f26c13141f7750db2bff745f60743f424c15d"
+        },
+        {
+          "level": 6,
+          "won": true,
+          "actions": 17,
+          "budget": {
+            "actions": 22,
+            "activeTimeMs": 19000,
+            "source": "docs/architecture/sic-v8-validation.md :: UPST niveau 6, retrouver les rangées basses et leurs portes",
+            "timeBasis": "measured"
+          },
+          "scoreMs": 8450,
+          "settlementMs": 170,
+          "totalMs": 8620,
+          "activeMs": 8146,
+          "acquisitionsThisLevel": 17,
+          "acquisitionsCumulative": 72,
+          "prefixHash": "eb53670dec4cedd4802ed4e627590c9d9c71e197d82179fa03bfc0a6acd5f091"
+        }
+      ],
+      "trace": "eb53670dec4cedd4802ed4e627590c9d9c71e197d82179fa03bfc0a6acd5f091"
+    },
+    {
+      "game": "CWSE",
+      "target": 6,
+      "levelsWon": 6,
+      "actions": 195,
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "mode": "sic",
+      "parallelWorkers": 1,
+      "authorityCount": 195,
+      "acquiredRecords": 195,
+      "authorityEqualsExecutedActions": true,
+      "acquisitionsEqualExecutedActions": true,
+      "families": {
+        "sic_directional_reception": 193,
+        "sic_test_prepared_effects": 2
+      },
+      "series": [
+        2
+      ],
+      "pathKinds": [
+        {
+          "length": 2,
+          "type": "click"
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 4,
+          "budget": {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          "scoreMs": 1703,
+          "settlementMs": 231,
+          "totalMs": 1938,
+          "activeMs": 1828,
+          "acquisitionsThisLevel": 4,
+          "acquisitionsCumulative": 4,
+          "prefixHash": "6412510b07fe092c32bb728a4cec22b6cbc452c1d9a9584d5e5d40f72600a7aa"
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 5,
+          "budget": {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          "scoreMs": 1640,
+          "settlementMs": 161,
+          "totalMs": 1802,
+          "activeMs": 1672,
+          "acquisitionsThisLevel": 5,
+          "acquisitionsCumulative": 9,
+          "prefixHash": "5d793ed01565fb2c3d310919a02efbcd6ea2b0a5d491f4454ade7a4d2200359d"
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 40,
+          "budget": {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          "scoreMs": 14026,
+          "settlementMs": 229,
+          "totalMs": 14255,
+          "activeMs": 13425,
+          "acquisitionsThisLevel": 40,
+          "acquisitionsCumulative": 49,
+          "prefixHash": "0488fd4e59319fd39ef616e54c50f718930c89d7c8c4a283f2ef1b074c5f75ca"
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 31,
+          "budget": {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          "scoreMs": 12519,
+          "settlementMs": 277,
+          "totalMs": 12796,
+          "activeMs": 12000,
+          "acquisitionsThisLevel": 31,
+          "acquisitionsCumulative": 80,
+          "prefixHash": "321cec614dc3e53849eecc2c0379679bf1cd4a5e5d13b600abf77dd8fc3a8ef2"
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 36,
+          "budget": {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          "scoreMs": 18900,
+          "settlementMs": 462,
+          "totalMs": 19362,
+          "activeMs": 18439,
+          "acquisitionsThisLevel": 36,
+          "acquisitionsCumulative": 116,
+          "prefixHash": "58e72bf9e74272a24ee1376929c2ac4b51506cd052acdacfda1d3fa2514732dd"
+        },
+        {
+          "level": 6,
+          "won": true,
+          "actions": 79,
+          "budget": {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          "scoreMs": 56096,
+          "settlementMs": 752,
+          "totalMs": 56847,
+          "activeMs": 54439,
+          "acquisitionsThisLevel": 79,
+          "acquisitionsCumulative": 195,
+          "prefixHash": "6c91655b9494547ad9303fcb7e0199842229e8d173816885f4ad25bef53f4682"
+        }
+      ],
+      "trace": "6c91655b9494547ad9303fcb7e0199842229e8d173816885f4ad25bef53f4682"
+    }
+  ],
+  "files": {
+    "upst-native.jsonl.gz": {
+      "source": "upst-strict-c70f8027.jsonl",
+      "gzipBytes": 3048,
+      "gzipSha256": "e77d28f9635c707d7c5129f1648f430b09acbbb24fb7b3aa40c5131125939764",
+      "rawBytes": 16191,
+      "rawSha256": "e0cb285725258f4b2a0b40eb17db3afc2514afe4607c16a333ecb1d22ef5b2b2"
+    },
+    "upst-native.levels.jsonl.gz": {
+      "source": "upst-strict-c70f8027.jsonl.levels",
+      "gzipBytes": 1280,
+      "gzipSha256": "089039aac72e4c4766b1368c052bb96f0ad9cf32f2884bb439a2bcc57a14340d",
+      "rawBytes": 3984,
+      "rawSha256": "a5dcb89282cbffa6493dc3e527c4ca1235207085c777409529205c84b8e3c4d3"
+    },
+    "upst-boundary-public-capture.json.gz": {
+      "source": "upst-boundary-public-capture.json",
+      "gzipBytes": 267629,
+      "gzipSha256": "6bc46c43c32392c4db90e1f0f8c70c01bab451e70e6c698fe1ce9f3a738af1cf",
+      "rawBytes": 5631990,
+      "rawSha256": "9263d37d09e38117c643f454ae0cd1d7dadd4071dc7ef2a54e72b924b7cfde0e"
+    },
+    "cwse-native.jsonl.gz": {
+      "source": "cwse-strict-c70f8027.jsonl",
+      "gzipBytes": 4132,
+      "gzipSha256": "343fd6b7c435659f2c0504fc7ebce472a03e7bf3249610a21e737db61ab86f5c",
+      "rawBytes": 32655,
+      "rawSha256": "a2d27fb08ef750c21b0faac69c7a2095a1d5d20f940d8c7e0c5ca940ee3c9145"
+    },
+    "cwse-native.levels.jsonl.gz": {
+      "source": "cwse-strict-c70f8027.jsonl.levels",
+      "gzipBytes": 1070,
+      "gzipSha256": "a0eef760364daf7ff582a9a0555c35dfe9007157ee8d9e854115cbf076f6497d",
+      "rawBytes": 3194,
+      "rawSha256": "6f16b82d9c18f26016dfa79d6500bb5d3b674cbf6963b95f6be3350c15a05f9c"
+    },
+    "cwse-boundary-public-capture.json.gz": {
+      "source": "cwse-boundary-public-capture.json",
+      "gzipBytes": 168447,
+      "gzipSha256": "097f69011e289c0f34a89e807083409a8da1d129965888e049ee5418c5207a70",
+      "rawBytes": 2595758,
+      "rawSha256": "d8e43ebfaba279614e693ef7ba29b5036b1bdba348e9e0e7cf79ef2e8f5c8abc"
+    },
+    "baseline-native.jsonl.gz": {
+      "source": "baseline-results.jsonl focal UPST/CWSE verdicts",
+      "gzipBytes": 3517,
+      "gzipSha256": "2c156ff1638e6ba2fa664baddc39b18ab23bbf1cc5921dda58beb1ac1f736124",
+      "rawBytes": 29001,
+      "rawSha256": "6533a6913479d6e92181623a8d06d71fc29de7a8663dae2e174546253467fb24"
+    },
+    "public-completion-reacquisition.json": {
+      "bytes": 4769,
+      "sha256": "6daa9b12886cc4f64e0124eee5804e728d678756153c0bda5d912d80c2703a02"
+    }
+  }
+}
