@@ -335,7 +335,12 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
       const transferred = witness?.epoch === epoch && witness.score === observation.levels_completed;
       if (!continuing && !transferred && !(learns && execution?.readPriorClickScene)) return null;
       const proposal = await this.propose(observation, rows, inputs, remaining, execution);
-      return proposal && (proposal.choice.ordered || (learns && proposal.local.selection && proposal.local.evidence.length)) ? proposal : null;
+      // Selection is the first use of a transferred control role. Requiring an
+      // already selected body lets the uncalibrated verifier take this click,
+      // so the retained controls never reach the new level's first movement.
+      const retainedControls = transferred && proposal && Object.keys(proposal.local.controls).length > 0;
+      return proposal && (proposal.choice.ordered || (learns && proposal.local.evidence.length
+        && (proposal.local.selection || retainedControls))) ? proposal : null;
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;

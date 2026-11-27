@@ -1,0 +1,80 @@
+{
+  "startedAt": "2026-11-27T00:06:45.072386+00:00",
+  "sourceCommit": "79e6cce7d6fd126e29e1baf6263ca266728b4470",
+  "sourceTree": "c296191cd767d2be7b39cff1a91fcb81b115dc80",
+  "workingTreeStatus": "",
+  "codes": [
+    "CRAF",
+    "SB26",
+    "CASC",
+    "GRIL",
+    "CLRS",
+    "RSWP",
+    "COLM",
+    "WEAV"
+  ],
+  "target": "auto",
+  "parallelWorkers": 1,
+  "sessions": "one new session from level 1 for each game, no external retry",
+  "sourceFiles": {
+    "scripts/check-sic-chronological.mjs": "2cb80e62a41e1269f1a2a0dd9e9de20a32504b70724c167abaac1a8b9bae3111",
+    "scripts/sic-replay-watchdog.mjs": "469e7a78e3a473df8ee6255828ab68d1ca3f08c8b075b40e022b06ef69495c5e",
+    "scripts/sic-replay-budgets.mjs": "308ae1c2d28a21dc7f2e3d06c83e601877d5388db2723148b5900d58c5a89931",
+    "docs/architecture/sic-replay-reference-levels-20261126.json": "67ae5216b80e87bbb2243138fde7970ea5c725a5f832f1b72aa8b0780e270854",
+    "docs/architecture/sic-v8-level6-campaign-7bb9f152.json": "18cafd4d8b6a9a29c18f5e07ab1d1e63b74e53b1c0fc605f6dbbd390aae7efcc"
+  },
+  "command": "SIC_REPLAY_REFERENCES=docs/architecture/sic-replay-reference-levels-20261126.json node scripts/check-sic-chronological.mjs CRAF,SB26,CASC,GRIL,CLRS,RSWP,COLM,WEAV auto /workspace/scratch/082336907086/sic-27-work/panel-diagnostics/cohort-79e6cce7/results.jsonl 1",
+  "schema": "sic.panel-roles.archive.v1",
+  "completionObservedAt": "2026-11-27T00:14:35.358385+00:00",
+  "processExitCode": 0,
+  "githubEquivalence": {
+    "branch": "fix/sic-27-panel-roles-20261126",
+    "repository": "yannick-fontan-1981/sra-playground",
+    "commits": [
+      {
+        "local": "3d9b49bd4049a43a6285e28fc923e600e26d7e09",
+        "remote": "6dc4c2b1a3cc825798a1f004cfb17f6964261b46",
+        "tree": "4a324402caf58e4e537c5e7b4b555c2c1ec354f5",
+        "parent": "d258b5b900c9f042b8535f75fee2c976ec5c71a5"
+      },
+      {
+        "local": "79e6cce7d6fd126e29e1baf6263ca266728b4470",
+        "remote": "4612293c174826c1acfcceaa54d7fd2003397780",
+        "tree": "c296191cd767d2be7b39cff1a91fcb81b115dc80",
+        "parent": "6dc4c2b1a3cc825798a1f004cfb17f6964261b46"
+      }
+    ],
+    "verification": {
+      "blobCount": 7,
+      "allBlobShasEqual": true,
+      "allTreeShasEqual": true,
+      "branchHeadVerified": true,
+      "metadataNote": "GitHub API assigned author/committer metadata; local and remote commit identifiers differ while trees are identical."
+    }
+  },
+  "baselineRawSha256": "c373b0199b9fb99ffbb229425e274a256377b8a3e6ef42ad07b8133cc166f37c",
+  "artifacts": {
+    "README.md": {
+      "sha256": "74d53845b3c87e570090c45b98395ba3f56ef8b91ad241ec1851ce2b0164e76f",
+      "bytes": 4724
+    },
+    "expected-budgets.json": {
+      "sha256": "5ae8828c9e51933a081e961aa168c8b99a1def741f2473a60ecdc9c6e134f100",
+      "bytes": 10674
+    },
+    "report.json": {
+      "sha256": "02dc30f2ee86d5148e624ceb7a0147836c9dccb4bf5047efb68982af32ccb874",
+      "bytes": 21943
+    },
+    "results.jsonl.gz": {
+      "sha256": "e7734251487a375dc8b4c731cad377f6acc9eedf31af79b8312d7d74663b59dd",
+      "bytes": 16004,
+      "decodedSha256": "3f116eb745a6dabd5bacb6c22808ba7ddef88f3e598ab850f2a83ffed9489f99"
+    },
+    "results.levels.jsonl.gz": {
+      "sha256": "734419d3958d9d41892e623cb0203795d4275d0339f7bef3eaf156a7c68b1cfe",
+      "bytes": 5926,
+      "decodedSha256": "ecb53ab1045f5d977c4f4370f52dcc395a715a2d2d6c46263f2e21b8d6eb6320"
+    }
+  }
+}
