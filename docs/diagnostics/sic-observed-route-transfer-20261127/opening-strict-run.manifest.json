@@ -1,0 +1,32 @@
+{
+  "schema": "sic.observed-role-transfer.run.v1",
+  "startedAt": "2026-11-27T03:26:31.317192+00:00",
+  "code": "ESCT",
+  "source": "e571f2a97c7a5db23d27f40c929ec3765f928498",
+  "remoteCommit": "6617b4b3835062bb44d551143fc248aff8f232bd",
+  "tree": "eb0e7c60164e9dd96abfaa20afdad1f98b4d0b08",
+  "checkout": "/workspace/scratch/082336907086/sic-27-work/observed-route",
+  "mode": "sic",
+  "startLevel": 1,
+  "targetLevels": 6,
+  "workers": 1,
+  "sourceFrozen": true,
+  "command": [
+    "node",
+    "scripts/check-sic-chronological.mjs",
+    "ESCT",
+    "auto",
+    "/workspace/scratch/082336907086/sic-27-work/esct-candidate-6617b4b3/results.jsonl",
+    "1"
+  ],
+  "environment": {
+    "SIC_REPLAY_REFERENCES": "docs/architecture/sic-replay-reference-levels-20261126.json"
+  },
+  "hashes": {
+    "docs/architecture/sic-replay-reference-levels-20261126.json": "67ae5216b80e87bbb2243138fde7970ea5c725a5f832f1b72aa8b0780e270854",
+    "scripts/check-sic-chronological.mjs": "2cb80e62a41e1269f1a2a0dd9e9de20a32504b70724c167abaac1a8b9bae3111",
+    "scripts/sic-replay-budgets.mjs": "308ae1c2d28a21dc7f2e3d06c83e601877d5388db2723148b5900d58c5a89931",
+    "scripts/sic-replay-watchdog.mjs": "469e7a78e3a473df8ee6255828ab68d1ca3f08c8b075b40e022b06ef69495c5e"
+  },
+  "cpuMax": null
+}

@@ -1,0 +1,546 @@
+{
+  "schema": "sic.observed-opening.qualification.v1",
+  "game": "ESCT",
+  "verdict": "complete_reconciled",
+  "completedLevels": 6,
+  "targetLevels": 6,
+  "strict": {
+    "sourceCommit": "e571f2a97c7a5db23d27f40c929ec3765f928498",
+    "remoteCommit": "6617b4b3835062bb44d551143fc248aff8f232bd",
+    "tree": "eb0e7c60164e9dd96abfaa20afdad1f98b4d0b08",
+    "rawSha256": "705156fd9373620939b062d9fc441f5e1363e83ffb6035a099b2bccc31c77ae1",
+    "startLevel": 1,
+    "parallelWorkers": 1,
+    "mode": "sic",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "commands": 118,
+    "authority": 118,
+    "acquiredRecords": 118,
+    "effects": 118,
+    "recoveries": {
+      "reset": 0,
+      "undo": 0
+    },
+    "resumes": 108,
+    "series": [
+      2,
+      4,
+      6
+    ],
+    "timingConformance": "within_archived_score_deadlines",
+    "levelsMirrorExact": true,
+    "levels": [
+      {
+        "level": 1,
+        "won": true,
+        "activeMs": 5770,
+        "budget": {
+          "actions": 21,
+          "activeTimeMs": 14000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=1; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 16,
+        "ms": 6093,
+        "gameMs": 159,
+        "costs": {
+          "init": {
+            "ms": 1129,
+            "count": 1
+          },
+          "advance": {
+            "ms": 3182,
+            "count": 16
+          },
+          "resume": {
+            "ms": 1440,
+            "count": 14
+          }
+        },
+        "graph": "0b11351c92d187a10f75da6217191a49e645fd4f703959dee3aa0e55d42359e2",
+        "deltas": 3782,
+        "acquiredRecords": 16,
+        "nodes": 608,
+        "traceEvents": 92,
+        "prefixHash": "9861fc98ec4274351a8b2e035076a5356bd18a012440ce37a5933a6800e8357e",
+        "scoredMs": 5927,
+        "settlementMs": 165
+      },
+      {
+        "level": 2,
+        "won": true,
+        "activeMs": 5930,
+        "budget": {
+          "actions": 22,
+          "activeTimeMs": 12000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=2; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 17,
+        "ms": 6256,
+        "gameMs": 179,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 4399,
+            "count": 17
+          },
+          "resume": {
+            "ms": 1459,
+            "count": 17
+          }
+        },
+        "graph": "3cbdfe13ba847613bdecc8d51187c695927eb14154cf47505682a4181b251537",
+        "deltas": 7663,
+        "acquiredRecords": 33,
+        "nodes": 886,
+        "traceEvents": 128,
+        "prefixHash": "aa17dde1be31cda1c70095f977a29e0816ac7101981a9b72f17249bda1edebd8",
+        "scoredMs": 6018,
+        "settlementMs": 239
+      },
+      {
+        "level": 3,
+        "won": true,
+        "activeMs": 9391,
+        "budget": {
+          "actions": 26,
+          "activeTimeMs": 15000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=3; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 21,
+        "ms": 9821,
+        "gameMs": 193,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 7053,
+            "count": 21
+          },
+          "resume": {
+            "ms": 2320,
+            "count": 18
+          }
+        },
+        "graph": "45d33924ca3b6a042a381634ce6339477d91ed12ce92b4d2eb0b09f01f549e46",
+        "deltas": 11863,
+        "acquiredRecords": 54,
+        "nodes": 1271,
+        "traceEvents": 128,
+        "prefixHash": "96583f36a5010d8e7a1ac71aa8625b263d15bd950f113c8ccaa75e1ef1c17a1b",
+        "scoredMs": 9322,
+        "settlementMs": 499
+      },
+      {
+        "level": 4,
+        "won": true,
+        "activeMs": 13110,
+        "budget": {
+          "actions": 27,
+          "activeTimeMs": 16000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=4; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 22,
+        "ms": 13621,
+        "gameMs": 212,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 9604,
+            "count": 22
+          },
+          "resume": {
+            "ms": 3436,
+            "count": 22
+          }
+        },
+        "graph": "04dccb3a967f048d822b70216c129c8cd2ecff261356e0cd7da8df98486a2261",
+        "deltas": 17088,
+        "acquiredRecords": 76,
+        "nodes": 1833,
+        "traceEvents": 128,
+        "prefixHash": "56225454e20ebe7ba19d59de8ef77bfbe66d6039b170cec77908573a6e04681d",
+        "scoredMs": 13163,
+        "settlementMs": 457
+      },
+      {
+        "level": 5,
+        "won": true,
+        "activeMs": 10476,
+        "budget": {
+          "actions": 22,
+          "activeTimeMs": 14000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=5; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 17,
+        "ms": 10807,
+        "gameMs": 166,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 7743,
+            "count": 17
+          },
+          "resume": {
+            "ms": 2677,
+            "count": 17
+          }
+        },
+        "graph": "fd3e8a00fc5003e92996d21a7231d161366311c1ef984a7e9490e0708a26895d",
+        "deltas": 21096,
+        "acquiredRecords": 93,
+        "nodes": 2238,
+        "traceEvents": 128,
+        "prefixHash": "dbbc34afa6e7e28d81068cb69b5ddd15ca9b2441223b92d576ccf0edfc4cfaa2",
+        "scoredMs": 10302,
+        "settlementMs": 506
+      },
+      {
+        "level": 6,
+        "won": true,
+        "activeMs": 17464,
+        "budget": {
+          "actions": 30,
+          "activeTimeMs": 18000,
+          "source": "docs/architecture/sic-v8-validation.md :: ESCT niveau 6, libérer le rail occupé avant l'interception",
+          "timeBasis": "measured"
+        },
+        "actions": 25,
+        "ms": 17932,
+        "gameMs": 231,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 13395,
+            "count": 25
+          },
+          "resume": {
+            "ms": 3999,
+            "count": 20
+          }
+        },
+        "graph": "b73a36d50d81cd765022972ab601e098bd47f9dac85d7bd214aad74b5d824797",
+        "deltas": 25953,
+        "acquiredRecords": 118,
+        "nodes": 2857,
+        "traceEvents": 128,
+        "prefixHash": "59f699cae3803de03a511ccd66d05bc71ae5df61e2dcdcfb7e869ab0b8f06ef8",
+        "scoredMs": 17139,
+        "settlementMs": 793
+      }
+    ],
+    "trace": "59f699cae3803de03a511ccd66d05bc71ae5df61e2dcdcfb7e869ab0b8f06ef8"
+  },
+  "continuity": {
+    "sourceCommit": "a4b9450efc60b9ff9745b505a9c9e2cfa3ea6748",
+    "remoteCommit": "31856be8435d9ad6cdff7c19c19fd9e8d8766efb",
+    "tree": "24d7d62771829e6021efb3e68554434d8160214a",
+    "rawSha256": "f9b6bc5c8fb8c689735d8510e36695635e2b6059fd1557f1c5df06846abe12b2",
+    "sourceUnchanged": true,
+    "startLevel": 1,
+    "parallelWorkers": 1,
+    "mode": "sic",
+    "commands": 118,
+    "authority": 118,
+    "resets": 0,
+    "undo": null,
+    "nativeDecisions": 109,
+    "uniqueFinalSeals": 109,
+    "coveredActions": 118,
+    "exactReturns": 118,
+    "trajectoryIdenticalToStrict": true,
+    "trajectory": "59f699cae3803de03a511ccd66d05bc71ae5df61e2dcdcfb7e869ab0b8f06ef8",
+    "chronometricQualification": false,
+    "levels": [
+      {
+        "level": 1,
+        "won": true,
+        "actions": 16,
+        "continued": 1,
+        "series": [
+          2
+        ]
+      },
+      {
+        "level": 2,
+        "won": true,
+        "actions": 17,
+        "continued": 0,
+        "series": []
+      },
+      {
+        "level": 3,
+        "won": true,
+        "actions": 21,
+        "continued": 3,
+        "series": [
+          4
+        ]
+      },
+      {
+        "level": 4,
+        "won": true,
+        "actions": 22,
+        "continued": 0,
+        "series": []
+      },
+      {
+        "level": 5,
+        "won": true,
+        "actions": 17,
+        "continued": 0,
+        "series": []
+      },
+      {
+        "level": 6,
+        "won": true,
+        "actions": 25,
+        "continued": 5,
+        "series": [
+          6
+        ]
+      }
+    ],
+    "openingPreparations": [
+      {
+        "level": 3,
+        "planId": "sic-plan:sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:3:revision:36:frame:220f436a3b2e79cf",
+        "decisionRevision": 36,
+        "commands": [
+          "ACTION1",
+          "ACTION1",
+          "ACTION3",
+          "ACTION5"
+        ],
+        "preparations": 3,
+        "contact": "ACTION5",
+        "target": [
+          4,
+          1
+        ],
+        "carrier": [
+          3,
+          1
+        ],
+        "actorBefore": [
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            4,
+            1
+          ]
+        ],
+        "actorAfter": [
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            4,
+            1
+          ]
+        ],
+        "wallBefore": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "wallAfter": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "recordCountBefore": 2,
+        "recordCountAfter": 6,
+        "acquiredReferences": [
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:3:revision:34:frame:3238e70436af0dfe",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:3:revision:35:frame:ec0441193bf0d447",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:3:revision:36:frame:220f436a3b2e79cf",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:3:revision:37:frame:b2fc9a34872f0c06",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:3:revision:38:frame:4b24222ad2d3c311",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:3:revision:39:frame:6bf3fd284b51fa7b",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:3:revision:40:frame:dc92266b77279dda"
+        ],
+        "retainedRoleReferences": [
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:2:revision:29:frame:4025eed1d5ecb349",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:2:revision:30:frame:4885feb6cae384bf",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:2:revision:31:frame:5657a44d8eedef80",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:2:revision:32:frame:89566d28f2bb4773",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:2:revision:33:frame:3b2ec71d0e98227d",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:3:revision:34:frame:3238e70436af0dfe"
+        ]
+      },
+      {
+        "level": 6,
+        "planId": "sic-plan:sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:6:revision:95:frame:8d501860a741ef95",
+        "decisionRevision": 95,
+        "commands": [
+          "ACTION1",
+          "ACTION1",
+          "ACTION1",
+          "ACTION3",
+          "ACTION3",
+          "ACTION5"
+        ],
+        "preparations": 5,
+        "contact": "ACTION5",
+        "target": [
+          3,
+          1
+        ],
+        "carrier": [
+          2,
+          1
+        ],
+        "actorBefore": [
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "actorAfter": [
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "wallBefore": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "wallAfter": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "recordCountBefore": 1,
+        "recordCountAfter": 7,
+        "acquiredReferences": [
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:6:revision:95:frame:8d501860a741ef95",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:6:revision:96:frame:fcedf65bc6906ff1",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:6:revision:97:frame:6796d9eff4c6c727",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:6:revision:98:frame:0e4ad50590bbcb52",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:6:revision:99:frame:43ed8b002d4bfba8",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:6:revision:100:frame:e39f8eb2b35c495f",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:6:revision:101:frame:cf4ec30dfc399f88"
+        ],
+        "retainedRoleReferences": [
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:5:revision:89:frame:5a56f0f3bddb5f65",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:5:revision:90:frame:cc78bc7c12bc198a",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:5:revision:91:frame:7407f5f32acb1888",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:5:revision:92:frame:a8bf69c6eb5285e6",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:5:revision:93:frame:3f84f78bd91f83ff",
+          "sra-v6-b2d6cc0f-9f1e-4be2-b624-a018a8a7ce6a:epoch:6:revision:94:frame:4da1576c312c39f9"
+        ]
+      }
+    ]
+  },
+  "productionFile": {
+    "path": "src/sic/observed-route-intervention.ts",
+    "sha256": "6891560363a5c63415eba2508bc56bc582b337aa8dcc5f2ff6f62ba6a9d955a4",
+    "strictAndCollectorIdentical": true
+  },
+  "validation": {
+    "nativeTests": 18,
+    "nativeTypecheckExit": 0,
+    "passiveAndContractTests": 63,
+    "independentProductionReview": "favorable",
+    "independentCollectorAndGateReview": "favorable"
+  },
+  "delivery": {
+    "fullContinuityCI": null,
+    "publishedViewer": null,
+    "mainIntegration": null
+  },
+  "limits": [
+    "The collector has distinct source provenance from the strict and is not a timing qualification.",
+    "The standard collector does not expose an undo total; its undo field remains null. The strict explicitly reports zero.",
+    "Synthetic functional successor frames in native transfer tests are distinguished from actual public game returns."
+  ]
+}

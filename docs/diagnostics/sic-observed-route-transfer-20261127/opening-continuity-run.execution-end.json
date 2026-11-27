@@ -1,0 +1,19 @@
+{
+  "observedEndAt": "2026-11-27T03:50:50.447640+00:00",
+  "exitCode": 0,
+  "sourceCommit": "a4b9450efc60b9ff9745b505a9c9e2cfa3ea6748",
+  "clean": true,
+  "sourceHashes": {
+    "src/sic/observed-route-intervention.ts": "6891560363a5c63415eba2508bc56bc582b337aa8dcc5f2ff6f62ba6a9d955a4",
+    "src/sic/standalone-families.ts": "f6374d3b1c6e70a42542704edda128ec73deff05c11bb9805fb5812cfab9550a",
+    "src/logos-engine/v6-native-runtime.ts": "ae5b257903e8e8dbe73a1fda0c4673efffbfcefadff99ad74f3936fc81471722",
+    "src/runtime/v6-agent-service.ts": "05333b7d65fc24d7ab3df6ea94733984836e21a05cfa49f5dc278f7d2a5c71d2",
+    "scripts/compare-source100.mjs": "89598736d79850c0e343248b2d59dcbc8c95027c784704e6de705ff1daf95ece",
+    "scripts/sic-continuity-evidence.mjs": "9b43fc59c7a7f0e6eed87abf4e45078abd0c3462df2b5849c527c269a7b14de5",
+    "scripts/sic-route-opening-continuity.mjs": "d16f2961874d85ecb02100ef6e47e89dcd16a2deff3e98cc4f06f3d784d72f7c",
+    "scripts/sic-population-continuity.mjs": "110cba2634f4c76ed1fa3b8f402e21ab9c38c3cbb771aa11b2476e08bbd95ce2",
+    "scripts/sic-continuity-contract.mjs": "a3479f18e0c55167000e7cd700a7ebef4b4b39991091f86b649d67f12cdb4c2b"
+  },
+  "resultsSha256": "f9b6bc5c8fb8c689735d8510e36695635e2b6059fd1557f1c5df06846abe12b2",
+  "sourceUnchanged": true
+}
