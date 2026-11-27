@@ -1,0 +1,46 @@
+{
+  "schema": "sic.integration-receipts.v1",
+  "pr": 144,
+  "head": "8fd38588ee11d7b051eadc7812def30f36b4f29b",
+  "testedMerge": "e7122a5887418212ca9a10ab39933e106d68f0c4",
+  "tree": "ccacd144970cca821bf884e57bdc812670c04cbb",
+  "strictRunId": 46040162842,
+  "strictGames": [
+    {
+      "code": "WA30",
+      "status": "stopped",
+      "reason": "level_wall_time_budget",
+      "target": 9,
+      "levels": 8,
+      "actions": 607,
+      "commandsByLevel": [
+        26,
+        59,
+        76,
+        48,
+        113,
+        48,
+        42,
+        135,
+        60
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "strict/parts/WA30/source.sha",
+      "rawSha256": "4266fc5e5db3a577d0c3da9523354c35481659ac97d596f559727f1578f2048d",
+      "rawBytes": 41
+    },
+    {
+      "path": "strict/parts/WA30/strict.jsonl.gz",
+      "rawSha256": "5f6e9d321258b76f28c5460866777285c2386ac73967a7313e05ac4187235571",
+      "rawBytes": 6258
+    },
+    {
+      "path": "strict/parts/WA30/strict.jsonl.levels.gz",
+      "rawSha256": "3962b772f31463acd29bd57b28687c579a86a3f512a4671decce611a49e5ea22",
+      "rawBytes": 5551
+    }
+  ]
+}
