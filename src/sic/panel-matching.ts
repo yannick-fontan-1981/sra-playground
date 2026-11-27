@@ -10,6 +10,7 @@ import { matchesWorkshopState, measureWorkshopLayout, measureWorkshopState, next
 
 export const panelMatchingId = 'sic_panel_matching';
 export const verifyPanelConfigurationId = 'sic_verify_matching_panel_configuration';
+export const continuePanelChainGroup = 'continue_observed_panel_transport';
 export const panelMatchingStrategies = {
   select_matching_activity: 'Select the activity whose receiver matches the material',
   test_shared_application: 'Run the prepared activities together',
@@ -18,8 +19,10 @@ type Transfer = RemotePanelServiceChoice & { panel: Panel };
 type Delivery = { panelId: string; material: number; roomMarker: number };
 type State = { epoch: number; symbols: Pattern[]; attempts: string[]; stopped: boolean; evidence: string[];
   verifiedEditRef?: string; verifiedTransferEditRef?: string; transport?: Pattern; lattices?: PanelLattice[];
+  transportProof?: [string, string];
   workshop?: WorkshopLayout; workshopTurn?: WorkshopTurn };
-type LearnedSymbols = { completed: number; symbols: Pattern[]; proof: string; transport?: Pattern; lattices?: PanelLattice[] };
+type LearnedSymbols = { completed: number; symbols: Pattern[]; proof: string; transport?: Pattern;
+  transportProof?: [string, string]; lattices?: PanelLattice[] };
 type ChainEditReturn = { panelId: string; row: number; col?: number; previous: NativeRecord[] };
 type WorkshopAction = { expected: WorkshopState; edit?: { panel: number; row: number; col: number; pause: boolean } };
 type Proposal = NativeProposal & { local: State; symbols: Pattern[]; expected: NativeRecord[] | null; attempt: string; needId: string;
@@ -94,12 +97,26 @@ export function createSicVerifyPanelConfiguration(): NativeFamily<Proposal> {
     async attachPrograms(registry) {
       decide = await registry.registerProgram(choosePreparedConfiguration, {}, await preparedConfigurationModule());
     },
+    proposeInSubquestion(_group, entry, observation, rows, inputs, remaining, execution) {
+      return this.proposeInGroup!(entry, observation, rows, inputs, remaining, execution);
+    },
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group !== continuePanelChainGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      const scope = observation.observation_ref.split(':epoch:')[0]!;
+      if (!retained?.transport?.length || retained.transportProof?.length !== 2 || retained.completed !== observation.levels_completed
+        || retained.transportProof[0] === retained.transportProof[1]
+        || !retained.transportProof.every(ref => ref.startsWith(scope + ':epoch:'))) return null;
+      const proposal = await this.propose(observation, rows, inputs, remaining, execution);
+      return proposal && equal(proposal.local.transport, retained.transport)
+        && (proposal.chainEdit || proposal.chainReturn || proposal.workshopAction) ? proposal : null;
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6') || !observation.available_action_refs.includes('ACTION5')) return null;
       const learned = retained?.completed === observation.levels_completed ? retained : null;
       let local: State = state?.epoch === observation.level_epoch ? state :
         { epoch: observation.level_epoch, symbols: learned?.symbols ?? [], attempts: [], stopped: false,
-          evidence: learned ? [learned.proof] : [], ...(learned?.transport ? { transport: learned.transport } : {}) };
+          evidence: learned ? [...(learned.transportProof ?? []), learned.proof] : [],
+          ...(learned?.transport ? { transport: learned.transport, ...(learned.transportProof ? { transportProof: learned.transportProof } : {}) } : {}) };
       if (local.stopped || !local.workshop && local.attempts.length >= (local.lattices ? 48 : 16)) return null;
       let scene = measurePanelService(rows, local.symbols, local.lattices) as Scene | null;
       if (local.workshop || !scene && learned?.lattices && local.transport) {
@@ -120,7 +137,8 @@ export function createSicVerifyPanelConfiguration(): NativeFamily<Proposal> {
           : { action_ref: 'ACTION5', data: {} };
         const attempt = JSON.stringify([stock, panelServiceProjection(measured), command]);
         if (local.attempts.includes(attempt)) return null;
-        const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(item => item !== ref)];
+        const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref,
+          ...new Set([...local.evidence, ...(local.transportProof ?? [])].filter(item => item !== ref))];
         const mode = execution?.reasoningMode ?? 'solving', reuseEdit = !!point && !!local.verifiedEditRef;
         const facts = preparedConfigurationFacts(mode, { pendingWithKnownEdit: reuseEdit, pendingWithUntestedEdit: !!point && !reuseEdit,
           readyForFirstApplication: !point });
@@ -200,7 +218,7 @@ export function createSicVerifyPanelConfiguration(): NativeFamily<Proposal> {
         ? transportControls[0] : undefined;
       const ref = observation.observation_ref;
       const editRef = destinationEdit || chain?.edit?.parameter ? local.verifiedTransferEditRef : local.verifiedEditRef;
-      const evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence, ...(editRef ? [editRef] : [])]
+      const evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence, ...(local.transportProof ?? []), ...(editRef ? [editRef] : [])]
         .filter(item => item !== ref))];
       const mode = execution?.reasoningMode ?? (point ? 'assimilation' : 'solving');
       const reuseEdit = !!point && !!editRef;
@@ -280,6 +298,7 @@ export function createSicVerifyPanelConfiguration(): NativeFamily<Proposal> {
       if (after.levels_completed > before.levels_completed) {
         retained = { completed: after.levels_completed, symbols: proposal.symbols, proof: after.observation_ref,
           ...(proposal.local.transport ? { transport: proposal.local.transport } : {}),
+          ...(proposal.local.transportProof ? { transportProof: proposal.local.transportProof } : {}),
           ...(proposal.local.lattices ? { lattices: proposal.local.lattices } : {}) };
         return { events: [] };
       }
@@ -300,7 +319,8 @@ export function createSicVerifyPanelConfiguration(): NativeFamily<Proposal> {
       const application = proposal.deliveries || proposal.outputs ? observedApplication(proposal, second) : null;
       state = { ...local, symbols, attempts: [...local.attempts, proposal.attempt],
         ...(verifiedEdit ? proposal.destinationEdit ? { verifiedTransferEditRef: after.observation_ref } : { verifiedEditRef: after.observation_ref } : {}),
-        ...(application && proposal.transport ? { transport: proposal.transport } : {}),
+        ...(application && proposal.transport ? { transport: proposal.transport,
+          transportProof: [before.observation_ref, after.observation_ref] as [string, string] } : {}),
         stopped: chainVerified !== null ? !chainVerified : proposal.expected ? !verifiedEdit
           : application !== null ? !application : before.frame_hash === after.frame_hash,
         evidence: [...local.evidence.slice(-4), after.observation_ref] };

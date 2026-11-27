@@ -14,6 +14,7 @@ import { compositionFamily } from '../src/sic/test-observed-compositions.ts';
 import { preparedEffectsId } from '../src/sic/test-prepared-effects.ts';
 import { continueMarkedField, learnMarkedLatticeId, verifyMarkedLatticeId } from '../src/sic/marked-lattice.ts';
 import { catalogueComparisonId, continueCatalogueViewsGroup } from '../src/sic/catalogue-comparison.ts';
+import { continuePanelChainGroup, verifyPanelConfigurationId } from '../src/sic/panel-matching.ts';
 
 test('return history expires and fresh progress immediately restores precedence', () => {
   const memory = initialMemory(1);
@@ -49,7 +50,7 @@ test('all original fallback entries retain their order and experiments share the
   for (const original of standalonePlanningGroups) {
     const group = groups.find(candidate => candidate.id === original.id)!;
     assert.deepEqual(group.families.filter((id, index) => id !== preparedEffectsId && id !== compositionFamily
-      && group.entryPoints?.[index] !== continueMarkedField && group.entryPoints?.[index] !== continueCatalogueViewsGroup), original.families);
+      && ![continueMarkedField, continueCatalogueViewsGroup, continuePanelChainGroup].includes(group.entryPoints?.[index] ?? '')), original.families);
     if (group.entryPoints) assert.equal(group.families.length, group.entryPoints.length);
   }
   const markerGroup = groups.find(group => group.entryPoints?.includes(continueMarkedField))!;
@@ -58,6 +59,8 @@ test('all original fallback entries retain their order and experiments share the
   assert.ok(markerGroup.entryPoints!.lastIndexOf(continueMarkedField) < markerGroup.families.indexOf(preparedEffectsId));
   assert.equal(markerGroup.families[markerGroup.entryPoints!.indexOf(continueCatalogueViewsGroup)], catalogueComparisonId);
   assert.ok(markerGroup.entryPoints!.indexOf(continueCatalogueViewsGroup) < markerGroup.families.indexOf(preparedEffectsId));
+  assert.equal(markerGroup.families[markerGroup.entryPoints!.indexOf(continuePanelChainGroup)], verifyPanelConfigurationId);
+  assert.ok(markerGroup.entryPoints!.indexOf(continuePanelChainGroup) < markerGroup.families.indexOf(preparedEffectsId));
   const explore = groups.find(group => group.id === 'explore_available_inputs')!;
   assert.ok(explore.families.indexOf(preparedEffectsId) < explore.families.indexOf(publicInputExplorationId));
   assert.ok(explore.families.lastIndexOf(preparedEffectsId) > explore.families.indexOf(publicInputExplorationId));
