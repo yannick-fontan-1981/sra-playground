@@ -1,0 +1,89 @@
+{
+  "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "candidat": "699ac89e70be0e3cd9bceafa16689552576310a0",
+  "chargementsJeu": 1,
+  "gestesNominaux": 16,
+  "observationsJeu": 17,
+  "départsPréenregistrésParSHA": 5,
+  "reproductionsSupplémentairesParSHA": 1,
+  "retraitsSurBranche": 3,
+  "occurrences": {
+    "44": 3,
+    "47": 6,
+    "48": 6
+  },
+  "premierÉcartProvenance": {
+    "ligne": 48,
+    "tour": 11,
+    "présenceRequise": true,
+    "paireAltéréeAdmise": true
+  },
+  "replis": {
+    "2": {
+      "point": [
+        32,
+        50
+      ],
+      "retour": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:63102c58c15e2658",
+      "acquisitions": [
+        "nested_control_response",
+        "envelope_fill_context"
+      ],
+      "suivant": "envelope_fill_experiment",
+      "phase": "repeat",
+      "pointSuivant": [
+        32,
+        50
+      ],
+      "arrêt": null
+    },
+    "5": {
+      "point": [
+        32,
+        50
+      ],
+      "retour": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:295ef69927a324e5",
+      "acquisitions": [
+        "nested_control_response",
+        "envelope_fill_context",
+        "field_service_context"
+      ],
+      "suivant": "field_service_experiment",
+      "phase": "isolate",
+      "pointSuivant": [
+        50,
+        33
+      ],
+      "arrêt": null
+    },
+    "11": {
+      "point": [
+        32,
+        51
+      ],
+      "retour": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:a11b2b9fad91b946",
+      "acquisitions": [
+        "nested_control_response",
+        "envelope_fill_context"
+      ],
+      "suivant": "field_service_transfer_experiment",
+      "phase": "revalidate_source_access",
+      "pointSuivant": [
+        11,
+        35
+      ],
+      "arrêt": null
+    }
+  },
+  "indicateur": {
+    "état": "stopped",
+    "famille": null,
+    "type": null,
+    "point": null
+  },
+  "empreintes": {
+    "public": "7aa70b1497f7e23fc47269b500d3d493134162b0c3128b2c7f2b876a5d75e72c",
+    "réserve": "6c98cbc4fb57497011396eb142640e44b81ba9901461379d7d799ee379ff59a5",
+    "reproduction-48": "57810f0aba77a9e026140262724c218bac0d7d39ec22f3a7c5bec42438d4ee1d"
+  }
+}
