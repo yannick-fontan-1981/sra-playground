@@ -18,23 +18,28 @@ type Change = 'ambiguous' | 'missing_command' | 'contradictory' | 'missing_refer
 // of the row stroke decides which contribution is visible at their overlap.
 // The second target mixes those contributions, so the first target's answer
 // cannot be replayed. The owner must retain the measured commands and pairs.
-function crossingRoom(varied: boolean, change?: Change) {
-  const width = varied ? 3 : 2, height = varied ? 2 : 3, size = varied ? 4 : 5, pitch = size + 2;
+function crossingRoom(varied: boolean, change?: Change, alternatives = false) {
+  const width = varied ? 3 : 2, height = alternatives ? 3 : varied ? 2 : 3, size = varied ? 4 : 5, pitch = size + 2;
   const ink = (value: number) => varied ? (value * 3 + 2) % 16 : value;
-  const background = ink(5), empty = ink(4), cursor = ink(0), colors = [ink(10), ink(14)];
+  const background = ink(5), empty = ink(4), cursor = ink(0), colors = [ink(10), ink(14), ink(12)];
   const primary = varied ? 'ACTION4' : 'ACTION1', alternate = varied ? 'ACTION3' : 'ACTION2';
   const column = varied ? 'ACTION2' : 'ACTION3', opposite = varied ? 'ACTION1' : 'ACTION4';
   const side = varied ? 1 : -1;
   let level = 1, completed = 0, moves = 0, selected: { axis: number; lane: number } | null = null;
   let progress = [Array(height).fill(0), Array(width).fill(0)];
+  const selectedSwatches = new Map<string, number[]>();
   let strokes: (string | null)[][][] = Array.from({ length: 2 }, () => Array.from({ length: height }, () => Array(width).fill(null)));
   const geometry = () => ({ x: (varied ? 11 : 21) + (level > 1 ? 2 : 0), y: (varied ? 27 : 21) + (level > 1 ? 3 : 0) });
-  const color = (axis: number, lane: number) => level === 1 ? colors[(axis + lane) % 2]! : colors[axis]!;
-  const target = (x: number, y: number) => level === 1 ? color(0, y) : colors[(x + y) % 2]!;
-  const point = (axis: number, lane: number, oppositeSide = false): [number, number] => {
+  const swatches = (axis: number, lane: number) => level === 1 ? [colors[(axis + lane) % 2]!]
+    : !alternatives ? [colors[axis]!] : selectedSwatches.get(`${axis}:${lane}`)
+      ?? (axis === 0 ? [colors[0]!, colors[2]!, colors[1]!] : [colors[1]!, colors[0]!, colors[2]!]);
+  const color = (axis: number, lane: number) => swatches(axis, lane)[0]!;
+  const target = (x: number, y: number) => level === 1 ? color(0, y)
+    : alternatives ? colors[[2, 0, 1][y]!]! : colors[(x + y) % 2]!;
+  const point = (axis: number, lane: number, oppositeSide = false, alternative = 0): [number, number] => {
     const { x, y } = geometry(), edge = oppositeSide ? -side : side;
-    return axis === 0 ? [edge < 0 ? x - 4 : x + (width - 1) * pitch + size + 2, y + lane * pitch + Math.floor((size - 1) / 2)]
-      : [x + lane * pitch + Math.floor((size - 1) / 2), edge < 0 ? y - 4 : y + (height - 1) * pitch + size + 2];
+    return axis === 0 ? [(edge < 0 ? x - 4 : x + (width - 1) * pitch + size + 2) + edge * 4 * alternative, y + lane * pitch + Math.floor((size - 1) / 2)]
+      : [x + lane * pitch + Math.floor((size - 1) / 2), (edge < 0 ? y - 4 : y + (height - 1) * pitch + size + 2) + edge * 4 * alternative];
   };
   function packet(stepIndex: number): V6PublicObservation {
     const rows = Array.from({ length: 64 }, () => Array<number>(64).fill(background)), { x, y } = geometry();
@@ -48,7 +53,9 @@ function crossingRoom(varied: boolean, change?: Change) {
       if (!(level === 2 && moves > 0 && change === 'missing_reference')) tile(52 + cx, 3 + cy, 1, 1, target(cx, cy));
     }
     for (let axis = 0; axis < 2; axis++) for (let lane = 0; lane < (axis === 0 ? height : width); lane++) {
-      const [cx, cy] = point(axis, lane); tile(cx - 1, cy - 1, 3, 3, color(axis, lane));
+      for (const [alternative, value] of swatches(axis, lane).entries()) {
+        const [cx, cy] = point(axis, lane, false, alternative); tile(cx - 1, cy - 1, 3, 3, value);
+      }
       if (level === 2 && moves > 0 && change === 'ambiguous') {
         const [ox, oy] = point(axis, lane, true); tile(ox - 1, oy - 1, 3, 3, color(axis, lane));
       }
@@ -73,8 +80,16 @@ function crossingRoom(varied: boolean, change?: Change) {
   function act(ticket: V6Ticket) {
     if (ticket.actionRef === 'ACTION6') {
       const matches = [0, 1].flatMap(axis => Array.from({ length: axis === 0 ? height : width }, (_, lane) => ({ axis, lane })))
-        .filter(({ axis, lane }) => { const [x, y] = point(axis, lane); return Math.abs(Number(ticket.data.x) - x) <= 1 && Math.abs(Number(ticket.data.y) - y) <= 1; });
-      assert.equal(matches.length, 1, 'The ticket selects a unique current line'); selected = matches[0]!;
+        .flatMap(({ axis, lane }) => swatches(axis, lane).map((_, alternative) => ({ axis, lane, alternative })))
+        .filter(({ axis, lane, alternative }) => { const [x, y] = point(axis, lane, false, alternative); return Math.abs(Number(ticket.data.x) - x) <= 1 && Math.abs(Number(ticket.data.y) - y) <= 1; });
+      assert.equal(matches.length, 1, 'The ticket selects a unique current line');
+      const { axis, lane, alternative } = matches[0]!;
+      if (alternative) {
+        const values = [...swatches(axis, lane)];
+        [values[0], values[alternative]] = [values[alternative]!, values[0]!];
+        selectedSwatches.set(`${axis}:${lane}`, values);
+      }
+      selected = { axis, lane };
     } else if (selected && (selected.axis === 0 ? [primary, alternate] : [column, opposite]).includes(ticket.actionRef)) {
       const { axis, lane } = selected, limit = axis === 0 ? width : height, next = progress[axis]![lane]!;
       if (next >= limit) return;
@@ -85,15 +100,15 @@ function crossingRoom(varied: boolean, change?: Change) {
       && strokes[0]!.every((row, y) => row.every((r, x) => (r === primary ? color(0, y) : color(1, x)) === target(x, y)));
     if (finished) {
       completed++;
-      if (completed < 2) { level++; moves = 0; selected = null; progress = [Array(height).fill(0), Array(width).fill(0)];
+      if (completed < 2) { level++; moves = 0; selected = null; selectedSwatches.clear(); progress = [Array(height).fill(0), Array(width).fill(0)];
         strokes = Array.from({ length: 2 }, () => Array.from({ length: height }, () => Array(width).fill(null))); }
     }
   }
   return { packet, act, primary, column, get level() { return level; }, get completed() { return completed; }, get moves() { return moves; } };
 }
 
-async function start(varied = false, change?: Change) {
-  const room = crossingRoom(varied, change), family = createSicVerifyCrossingRows();
+async function start(varied = false, change?: Change, alternatives = false) {
+  const room = crossingRoom(varied, change, alternatives), family = createSicVerifyCrossingRows();
   const calls: { entry: string | null; completed: number; proposed: boolean }[] = [];
   const offer = family.proposeInSubquestion!.bind(family);
   family.proposeInSubquestion = async (group, entry, observation, ...rest) => {
@@ -150,6 +165,22 @@ for (const varied of [false, true]) test('a native crossing role continues befor
   } finally { run.runtime.close('test_complete'); }
 });
 
+for (const varied of [false, true]) test('a selected alternative retains the acquired crossing role at its measured active slot' + (varied ? ' with changed geometry, palette and commands' : ''), async () => {
+  const run = await start(varied, undefined, true);
+  try {
+    const state = run.family.state().state;
+    const controller = state.layout.controllers.find((control: any) => control.key === state.selected);
+    assert.notDeepEqual(state.pattern.choices[state.selected].point, controller.point,
+      'The clicked alternative and the active role occupy different slots');
+    assert.equal(run.reply.snapshot.proposal?.kind, run.family.id);
+    assert.equal(run.calls.at(-1)?.entry, continueCrossingRowsGroup);
+    while (run.room.completed < 2) { assert.ok(run.tickets.length < 100); await run.next(); }
+    assert.equal(run.reply.snapshot.levelsCompleted, 2);
+    assert.ok(run.owners.every(owner => owner === run.family.id));
+    assert.equal(run.returns.flatMap(reply => reply.snapshot.trace).filter(event => event.kind === 'native_acquisition_incomplete').length, 0);
+  } finally { run.runtime.close('test_complete'); }
+});
+
 for (const change of ['ambiguous', 'missing_command', 'contradictory', 'missing_reference'] as const) test('native crossing continuation declines ' + change + ' and retains the prior role', async () => {
   const run = await start(false, change);
   try {
@@ -162,6 +193,28 @@ for (const change of ['ambiguous', 'missing_command', 'contradictory', 'missing_
       assert.equal(run.returns.at(-1)?.snapshot.trace.findLast(event => event.kind === 'actual_outcome')?.matched, false);
     }
   } finally { run.runtime.close('test_complete'); }
+});
+
+test('the public alternative-selection return binds the active slot and rejects a changed colour or position', async () => {
+  const captured = JSON.parse(gunzipSync(await readFile(new URL('./fixtures/sic-crossing-selected-swatch-public.json.gz', import.meta.url))).toString());
+  const family = createSicVerifyCrossingRows();
+  await family.attachPrograms!(new NativeKnowledgeStore('public-selected-swatch', 'captured-reproposal'));
+  family.restore(captured.memory);
+  const offer = (rows = captured.rows) => family.proposeInSubquestion!('continue_observed_pressure_recovery', continueCrossingRowsGroup,
+    captured.observation, rows, [], 24);
+  const proposal = await offer();
+  assert.deepEqual(proposal?.actions, [{ action_ref: 'ACTION1', data: {} }]);
+  assert.equal(captured.actual.family, preparedEffectsId);
+  const selected = captured.memory.state.layout.controllers.find((control: any) => control.key === captured.memory.state.selected);
+  const [x, y] = selected.point;
+  for (const altered of ['colour', 'position']) {
+    const rows = structuredClone(captured.rows);
+    for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) rows[y + dy][x + dx] = captured.memory.state.layout.background;
+    if (altered === 'position') for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) rows[y + dy][x + dx + 1] = captured.memory.state.pattern.choices[selected.key].color;
+    const before = structuredClone(family.state());
+    assert.equal(await offer(rows), null);
+    assert.deepEqual(family.state(), before);
+  }
 });
 
 test('the first public lost crossing proposal reuses its actual official boundary and rejects stale or foreign evidence', async () => {

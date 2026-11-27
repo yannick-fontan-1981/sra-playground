@@ -114,7 +114,10 @@ export function createSicVerifyCrossingRows(family = verifyCrossingRowsId, trans
     const expected = selected && (state.pattern?.choices[selected.key] ?? selected);
     return !!controls && !!selected && !!expected && state.axisCommands[selected.axis].some(command => observation.available_action_refs.includes(command))
       && controls.some(control => control.key === selected.key
-      && control.color === expected.color && equal(control.point, expected.point));
+      // A swatch click can exchange its colour with the active control. Its
+      // clicked position is then an alternative again; the measured active
+      // role still occupies the original control slot.
+      && control.color === expected.color && equal(control.point, selected.point));
   };
   return {
     id: family,
