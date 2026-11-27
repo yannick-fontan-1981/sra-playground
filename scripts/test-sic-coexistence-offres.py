@@ -1,4 +1,4 @@
-"""Replay both ZIPP epochs and the three DICO opening orders on the ten-line assembly."""
+"""Replay both ZIPP epochs and the three DICO opening orders on a qualified combined engine."""
 import argparse
 import json
 from pathlib import Path
@@ -8,7 +8,7 @@ import subprocess
 from zipfile import ZipFile
 
 common = runpy.run_path(str(Path(__file__).with_name("test-sic-coexistence.py")))
-BENCH, SOURCE, git, copy_git = (common[name] for name in ("BENCH", "TEN_LINES", "git", "copy_git"))
+BENCH, git, copy_git = (common[name] for name in ("BENCH", "git", "copy_git"))
 LAB = "experiments/sic-agenda-offres"
 
 
@@ -19,7 +19,8 @@ def main():
     parser.add_argument("--node", default="node")
     args = parser.parse_args()
     engine, out = args.engine.resolve(), args.output.resolve()
-    assert git("-C", str(engine), "rev-parse", "HEAD").decode().strip() == SOURCE
+    source = git("-C", str(engine), "rev-parse", "HEAD").decode().strip()
+    assert source in (common["TEN_LINES"], common["NEXT_ASSEMBLY"])
     git("-C", str(engine), "diff", "--exit-code", "HEAD", "--", "src", "scripts", "public", "reference")
     out.mkdir(parents=True, exist_ok=False)
     with ZipFile(BENCH / "docs/diagnostics/sic-zipp-ligne-1/recus.zip") as archive:
@@ -29,7 +30,7 @@ def main():
                             arm, str(target), "--fixed-clock"], check=True)
             observed = json.loads(target.read_bytes())
             expected = json.loads(archive.read("fixe-" + arm + "-16f3c5e8.json"))
-            assert observed.pop("source") == SOURCE and expected.pop("source").startswith("16f3c5e8")
+            assert observed.pop("source") == source and expected.pop("source").startswith("16f3c5e8")
             if observed != expected:
                 raise ValueError("ZIPP " + arm + " differs in " + str([key for key in observed if observed[key] != expected.get(key)]))
             print("ZIPP", arm, len(observed["commands"]), "tickets conformes", flush=True)

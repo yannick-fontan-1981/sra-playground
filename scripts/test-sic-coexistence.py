@@ -11,6 +11,7 @@ from pathlib import Path
 BENCH = Path(__file__).resolve().parents[1]
 ASSEMBLY = "1afdede0dcdd4a5bb2c7b284b1ead20e1782fe0d"
 TEN_LINES = "8a424aab6ca2e2f6b902cc4b9c89313ed6947b74"
+NEXT_ASSEMBLY = "f27eb1c055d44e852fb90a25c542d0a466eb6c16"
 FRONTIER = "experiments/sic-agenda-offres"
 
 
@@ -42,7 +43,7 @@ def main():
     args = p.parse_args()
     engine, out = args.engine.resolve(), args.output.resolve()
     source_sha = git("-C", str(engine), "rev-parse", "HEAD").decode().strip()
-    assert source_sha in (ASSEMBLY, TEN_LINES)
+    assert source_sha in (ASSEMBLY, TEN_LINES, NEXT_ASSEMBLY)
     git("-C", str(engine), "diff", "--exit-code", "HEAD", "--", "src", "scripts", "reference", "public", "tests")
     overlay = out / "overlay"
     overlay.mkdir(parents=True)
@@ -57,7 +58,7 @@ def main():
         tests.extend(path for path in paths if path.endswith(".test.ts"))
     tests.extend("tests/" + name + ".test.ts" for name in
                  ("v6-view-frontier", "v6-caller-integration", "v6-point-display", "v6-goal-attention", "v6-control-attention-reference"))
-    if source_sha == TEN_LINES:
+    if source_sha in (TEN_LINES, NEXT_ASSEMBLY):
         for revision in ("16f3c5e8", "1a1cc965", "1aaafe36"):
             paths = git("diff", "--name-only", "d0e7527c", revision, "--", "tests").decode().splitlines()
             for path in paths:
