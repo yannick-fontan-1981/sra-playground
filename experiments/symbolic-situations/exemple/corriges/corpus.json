@@ -1,0 +1,455 @@
+{
+  "version": 1,
+  "seed": 107,
+  "cases": [
+    {
+      "id": "c939c746ea676bf167d6",
+      "parentId": null,
+      "transformation": {
+        "kind": "root"
+      },
+      "model": {
+        "stamps": [
+          "X03a3e1",
+          "X82259e",
+          "Xa16dcd"
+        ],
+        "cells": [
+          "X022d46",
+          "Xfc26f3"
+        ],
+        "wiring": {
+          "X4c94cf": "X03a3e1",
+          "X6e9ba2": "Xa16dcd"
+        },
+        "seen": "X4c94cf"
+      },
+      "key": {
+        "prefix": [],
+        "branches": [
+          {
+            "output": "X4c94cf",
+            "stamp": "X03a3e1",
+            "plans": [
+              [
+                "marquer X022d46 X03a3e1",
+                "marquer Xfc26f3 X03a3e1",
+                "valider"
+              ],
+              [
+                "marquer Xfc26f3 X03a3e1",
+                "marquer X022d46 X03a3e1",
+                "valider"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "69a0426a0fc3611f229f",
+      "parentId": "c939c746ea676bf167d6",
+      "transformation": {
+        "kind": "rename",
+        "map": {
+          "X022d46": "X1e08a6",
+          "X03a3e1": "X59de43",
+          "X4c94cf": "Xa590eb",
+          "X6e9ba2": "Xa129d7",
+          "X82259e": "Xe87c5a",
+          "Xa16dcd": "X05a98b",
+          "Xfc26f3": "Xa53fb1"
+        }
+      },
+      "model": {
+        "stamps": [
+          "X05a98b",
+          "X59de43",
+          "Xe87c5a"
+        ],
+        "cells": [
+          "X1e08a6",
+          "Xa53fb1"
+        ],
+        "wiring": {
+          "Xa129d7": "X05a98b",
+          "Xa590eb": "X59de43"
+        },
+        "seen": "Xa590eb"
+      },
+      "key": {
+        "prefix": [],
+        "branches": [
+          {
+            "output": "Xa590eb",
+            "stamp": "X59de43",
+            "plans": [
+              [
+                "marquer X1e08a6 X59de43",
+                "marquer Xa53fb1 X59de43",
+                "valider"
+              ],
+              [
+                "marquer Xa53fb1 X59de43",
+                "marquer X1e08a6 X59de43",
+                "valider"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "4aaba2b6c9f61559ef41",
+      "parentId": "c939c746ea676bf167d6",
+      "transformation": {
+        "kind": "add",
+        "stamp": "X3463fd"
+      },
+      "model": {
+        "stamps": [
+          "X03a3e1",
+          "X3463fd",
+          "X82259e",
+          "Xa16dcd"
+        ],
+        "cells": [
+          "X022d46",
+          "Xfc26f3"
+        ],
+        "wiring": {
+          "X4c94cf": "X03a3e1",
+          "X6e9ba2": "Xa16dcd"
+        },
+        "seen": "X4c94cf"
+      },
+      "key": {
+        "prefix": [],
+        "branches": [
+          {
+            "output": "X4c94cf",
+            "stamp": "X03a3e1",
+            "plans": [
+              [
+                "marquer X022d46 X03a3e1",
+                "marquer Xfc26f3 X03a3e1",
+                "valider"
+              ],
+              [
+                "marquer Xfc26f3 X03a3e1",
+                "marquer X022d46 X03a3e1",
+                "valider"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "65af270b8655e7b65b74",
+      "parentId": "c939c746ea676bf167d6",
+      "transformation": {
+        "kind": "rewire",
+        "output": "X4c94cf",
+        "from": "X03a3e1",
+        "to": "X82259e"
+      },
+      "model": {
+        "stamps": [
+          "X03a3e1",
+          "X82259e",
+          "Xa16dcd"
+        ],
+        "cells": [
+          "X022d46",
+          "Xfc26f3"
+        ],
+        "wiring": {
+          "X4c94cf": "X82259e",
+          "X6e9ba2": "Xa16dcd"
+        },
+        "seen": "X4c94cf"
+      },
+      "key": {
+        "prefix": [],
+        "branches": [
+          {
+            "output": "X4c94cf",
+            "stamp": "X82259e",
+            "plans": [
+              [
+                "marquer X022d46 X82259e",
+                "marquer Xfc26f3 X82259e",
+                "valider"
+              ],
+              [
+                "marquer Xfc26f3 X82259e",
+                "marquer X022d46 X82259e",
+                "valider"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "9fd1072013fd810d513c",
+      "parentId": "c939c746ea676bf167d6",
+      "transformation": {
+        "kind": "mask"
+      },
+      "model": {
+        "stamps": [
+          "X03a3e1",
+          "X82259e",
+          "Xa16dcd"
+        ],
+        "cells": [
+          "X022d46",
+          "Xfc26f3"
+        ],
+        "wiring": {
+          "X4c94cf": "X03a3e1",
+          "X6e9ba2": "Xa16dcd"
+        },
+        "seen": null
+      },
+      "key": {
+        "prefix": [
+          "lire"
+        ],
+        "branches": [
+          {
+            "output": "X4c94cf",
+            "stamp": "X03a3e1",
+            "plans": [
+              [
+                "marquer X022d46 X03a3e1",
+                "marquer Xfc26f3 X03a3e1",
+                "valider"
+              ],
+              [
+                "marquer Xfc26f3 X03a3e1",
+                "marquer X022d46 X03a3e1",
+                "valider"
+              ]
+            ]
+          },
+          {
+            "output": "X6e9ba2",
+            "stamp": "Xa16dcd",
+            "plans": [
+              [
+                "marquer X022d46 Xa16dcd",
+                "marquer Xfc26f3 Xa16dcd",
+                "valider"
+              ],
+              [
+                "marquer Xfc26f3 Xa16dcd",
+                "marquer X022d46 Xa16dcd",
+                "valider"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "4aec850cc8fedaa2e4d3",
+      "parentId": "65af270b8655e7b65b74",
+      "transformation": {
+        "kind": "mask"
+      },
+      "model": {
+        "stamps": [
+          "X03a3e1",
+          "X82259e",
+          "Xa16dcd"
+        ],
+        "cells": [
+          "X022d46",
+          "Xfc26f3"
+        ],
+        "wiring": {
+          "X4c94cf": "X82259e",
+          "X6e9ba2": "Xa16dcd"
+        },
+        "seen": null
+      },
+      "key": {
+        "prefix": [
+          "lire"
+        ],
+        "branches": [
+          {
+            "output": "X4c94cf",
+            "stamp": "X82259e",
+            "plans": [
+              [
+                "marquer X022d46 X82259e",
+                "marquer Xfc26f3 X82259e",
+                "valider"
+              ],
+              [
+                "marquer Xfc26f3 X82259e",
+                "marquer X022d46 X82259e",
+                "valider"
+              ]
+            ]
+          },
+          {
+            "output": "X6e9ba2",
+            "stamp": "Xa16dcd",
+            "plans": [
+              [
+                "marquer X022d46 Xa16dcd",
+                "marquer Xfc26f3 Xa16dcd",
+                "valider"
+              ],
+              [
+                "marquer Xfc26f3 Xa16dcd",
+                "marquer X022d46 Xa16dcd",
+                "valider"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "095c452cde0f37479aa6",
+      "parentId": "4aec850cc8fedaa2e4d3",
+      "transformation": {
+        "kind": "rename",
+        "map": {
+          "X022d46": "X69a10e",
+          "X03a3e1": "X439b6a",
+          "X4c94cf": "Xf996dd",
+          "X6e9ba2": "X63e6cc",
+          "X82259e": "Xf03131",
+          "Xa16dcd": "X15971a",
+          "Xfc26f3": "X236241"
+        }
+      },
+      "model": {
+        "stamps": [
+          "X15971a",
+          "X439b6a",
+          "Xf03131"
+        ],
+        "cells": [
+          "X236241",
+          "X69a10e"
+        ],
+        "wiring": {
+          "X63e6cc": "X15971a",
+          "Xf996dd": "Xf03131"
+        },
+        "seen": null
+      },
+      "key": {
+        "prefix": [
+          "lire"
+        ],
+        "branches": [
+          {
+            "output": "X63e6cc",
+            "stamp": "X15971a",
+            "plans": [
+              [
+                "marquer X236241 X15971a",
+                "marquer X69a10e X15971a",
+                "valider"
+              ],
+              [
+                "marquer X69a10e X15971a",
+                "marquer X236241 X15971a",
+                "valider"
+              ]
+            ]
+          },
+          {
+            "output": "Xf996dd",
+            "stamp": "Xf03131",
+            "plans": [
+              [
+                "marquer X236241 Xf03131",
+                "marquer X69a10e Xf03131",
+                "valider"
+              ],
+              [
+                "marquer X69a10e Xf03131",
+                "marquer X236241 Xf03131",
+                "valider"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "0acd6a0497ae536a216e",
+      "parentId": "095c452cde0f37479aa6",
+      "transformation": {
+        "kind": "add",
+        "stamp": "X939319"
+      },
+      "model": {
+        "stamps": [
+          "X15971a",
+          "X439b6a",
+          "X939319",
+          "Xf03131"
+        ],
+        "cells": [
+          "X236241",
+          "X69a10e"
+        ],
+        "wiring": {
+          "X63e6cc": "X15971a",
+          "Xf996dd": "Xf03131"
+        },
+        "seen": null
+      },
+      "key": {
+        "prefix": [
+          "lire"
+        ],
+        "branches": [
+          {
+            "output": "X63e6cc",
+            "stamp": "X15971a",
+            "plans": [
+              [
+                "marquer X236241 X15971a",
+                "marquer X69a10e X15971a",
+                "valider"
+              ],
+              [
+                "marquer X69a10e X15971a",
+                "marquer X236241 X15971a",
+                "valider"
+              ]
+            ]
+          },
+          {
+            "output": "Xf996dd",
+            "stamp": "Xf03131",
+            "plans": [
+              [
+                "marquer X236241 Xf03131",
+                "marquer X69a10e Xf03131",
+                "valider"
+              ],
+              [
+                "marquer X69a10e Xf03131",
+                "marquer X236241 Xf03131",
+                "valider"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
