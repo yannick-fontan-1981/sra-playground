@@ -160,7 +160,9 @@ export function createSicSwitchedSurface(family = switchedSurfaceId, transferObs
   let decide: NativeProgramHandle | undefined;
   function rememberContinuation(first: SurfaceView, second: SurfaceView, command: string, beforeRef: string, afterRef: string) {
     const sample = observedPassageContinuation(first, second, command);
-    if (sample && !passageEvidence.some(item => item.throughSupport === sample.throughSupport && item.onward === sample.onward))
+    const scope = beforeRef.split(':epoch:', 1)[0]!;
+    if (sample && !passageEvidence.some(item => item.throughSupport === sample.throughSupport && item.onward === sample.onward
+      && item.refs.every(ref => ref.split(':epoch:', 1)[0] === scope)))
       passageEvidence.push({ ...sample, refs: [beforeRef, afterRef] });
   }
   function retainPublicPassage(before: NativeObservation, after: NativeObservation, command: NativeCommand,
