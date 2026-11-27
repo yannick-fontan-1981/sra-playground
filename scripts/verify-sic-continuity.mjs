@@ -59,6 +59,23 @@ function confirmedProfileReturn(ticket) {
     && outcome.family === 'sic_verify_profile_transfer' && outcome.matched === true;
 }
 
+// A final exploratory contact may have matched=null. Every intermediate
+// return must be confirmed, and all actual commands are reconciled once.
+export function requireExecutedPrefix(code, group) {
+  for (const ticket of group) {
+    assert.equal(ticket.outcomeCount, 1, code + ' requires exactly one actual return per ticket');
+    assert.ok(typeof ticket.planId === 'string' && ticket.planId.length > 0
+      && ticket.outcome?.sic_plan === ticket.planId && ticket.outcome.index === ticket.actionIndex,
+    code + ' actual return lost its executed ticket identity');
+  }
+  for (const ticket of group.slice(0, -1)) {
+    assert.equal(ticket.sealCount, 0, code + ' reconciled before its series ended');
+    assert.equal(ticket.outcome.matched, true, code + ' continued without a confirmed return');
+    assert.equal(ticket.outcome.seal_prefix, false, code + ' continued after its owner closed the prefix');
+  }
+  assert.equal(group.at(-1).sealCount, 1, code + ' requires exactly one final reconciliation');
+}
+
 function measuredProfilePreparation(run, issued, groups) {
   const offset = run.executedTickets.indexOf(issued[0]);
   const effects = new Map(issued.map((ticket, index) => [ticket, run.steps?.[offset + index]]));
@@ -1058,20 +1075,7 @@ export function checkRun(run) {
         }
         assert.equal(group.at(-1).sealCount, 1, 'WA30 requires exactly one final reconciliation');
       }
-      if (code === 'LKEY') {
-        for (const ticket of group) {
-          assert.equal(ticket.outcomeCount, 1, 'LKEY requires exactly one actual return per ticket');
-          assert.ok(typeof ticket.planId === 'string' && ticket.planId.length > 0
-            && ticket.outcome?.sic_plan === ticket.planId && ticket.outcome.index === ticket.actionIndex,
-          'LKEY actual return lost its executed ticket identity');
-        }
-        for (const ticket of group.slice(0, -1)) {
-          assert.equal(ticket.sealCount, 0, 'LKEY reconciled before its series ended');
-          assert.equal(ticket.outcome.matched, true, 'LKEY continued without a confirmed return');
-          assert.equal(ticket.outcome.seal_prefix, false, 'LKEY continued after its owner closed the prefix');
-        }
-        assert.equal(group.at(-1).sealCount, 1, 'LKEY requires exactly one final reconciliation');
-      }
+      if (code === 'LKEY') requireExecutedPrefix(code, group);
       if (group.length < 2) continue;
       lengths.push(group.length);
       const clicks = group.filter((t) => t.action === 'ACTION6').length;
