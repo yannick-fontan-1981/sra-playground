@@ -1,0 +1,39 @@
+{
+  "typescript": "5.9.3",
+  "module": "src/logos-engine/v6-coupled-displays.ts",
+  "javascript": "3e96b3612462b00ce9bd133c33fed177f28806de4aa4e954da01ff43d3527117",
+  "empreintesCommunes": {
+    "public": "850a13614c0d744c003ef2ab840baa2a2719e16c994999c1c5ad72aae4da2b3e",
+    "reserve": "73f2e7e5e11fa2e5ef4943b1125843900837a1fe60d6eee1164923541ee64a37",
+    "rewi": "b956d15296a92fc667f215ee20eafc0a95105dbcc8491c933c35be61b842123f"
+  },
+  "révisions": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "src": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+      "reçus": {
+        "public": "e245015f81f0b9cc768d951ded5730e300c224862f3a674bda46fc091eba0d43",
+        "reserve": "04b4a88727c24d668da3c8926a73635d54c3aa4d2787fb583941513ebb71d095",
+        "rewi": "e51f714b18149ce82e2e298a63223e2d01b02f8354bceea2e512b999ba28c9ce"
+      }
+    },
+    {
+      "sha": "7bf3c85a4183baf0dd535ca7c97d055bb6a0b958",
+      "src": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+      "reçus": {
+        "public": "e4562bfb1bc98a20a3033595d7de9db8040cea626a53273a17314af8b899ddf7",
+        "reserve": "7cdb04fe211e250a2d08edf06c1aecb3c1ae820f7073a4c4a4ae8ff6cdcdb351",
+        "rewi": "1de109391752beb6609dd9400a44e363e2df623b5ada9ddfa452232994b7ff3b"
+      }
+    },
+    {
+      "sha": "48472784f1ee59b1117dddb53ef5c9fced929ec8",
+      "src": "0187a7fe110a6ac44354dce686fc10b07223b955",
+      "reçus": {
+        "public": "2b953293e5ba9dd875170c4184b2f2fcc5f4b2dd86bbfcaf67fafd33c2dd88fb",
+        "reserve": "227e6c91e063050308fb37ae6079df3d32ea8bd2922ee22427a6ef9f0dd103bf",
+        "rewi": "af412a069b1763675cc3ff48e4cdb5395669332f7baa799557429e3c8537bea0"
+      }
+    }
+  ]
+}
