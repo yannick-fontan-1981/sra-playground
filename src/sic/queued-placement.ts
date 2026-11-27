@@ -127,7 +127,7 @@ export function createSicQueuedPlacement(family = queuedPlacementId): NativeFami
       if (strategy === 'prepare_queued_group' && local && plan) {
         for (const planned of plan.actions.slice(1, Math.min(remaining, 16))) {
           if (!preparation || !available.includes(planned.action_ref)) break;
-          if (horizon && controls[planned.action_ref]?.kind === 'receive') {
+          if (controls[planned.action_ref]?.kind === 'receive') {
             actions.push({ action_ref: planned.action_ref, data: {} });
             preparations.push(null);
             break;

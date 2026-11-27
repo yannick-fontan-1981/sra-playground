@@ -96,7 +96,47 @@ function scenario(variant: boolean) {
     const scene = sample(fixture.next.frame);
     return render({ ...scene, grid, mark: { ...scene.mark, column, values } }, true);
   };
-  return { geometry, ink, actions, sample, render, packet, acquire, prepared };
+  const received = (rows: number[][]) => {
+    const measured = measureQueuedField(rows, geometry, 3)!, grid: number[][] = structuredClone(measured.grid);
+    const { column, values, rows: activeRows } = measured.mark, empty = measured.empty_appearance_hypothesis;
+    const scene = sample(fixture.next.frame), frames: number[][][] = [];
+    for (const row of activeRows) grid[row]![column] = empty;
+    const occupied = grid.findIndex(row => row[column] !== empty);
+    const landing = (occupied < 0 ? grid.length : occupied) - values.length;
+    assert.ok(landing >= 0);
+    values.forEach((value: number, index: number) => { grid[landing + index]![column] = value; });
+    const phase = () => render({ ...scene, grid, mark: null }, true);
+    frames.push(phase());
+    // Independent fixture mechanics: public equal triples disappear together,
+    // then each column falls. No planner projection or production closure is used.
+    for (;;) {
+      const removed = new Set<string>();
+      for (let y = 0; y < grid.length; y++) for (let x = 0; x < grid[y]!.length; x++) {
+        if (grid[y]![x] === empty) continue;
+        for (const [dx, dy] of [[1, 0], [0, 1], [1, 1], [-1, 1]]) {
+          if ([1, 2].every(step => grid[y + step * dy!]?.[x + step * dx!] === grid[y]![x]))
+            for (let step = 0; step < 3; step++) removed.add([y + step * dy!, x + step * dx!].join(','));
+        }
+      }
+      if (!removed.size) break;
+      for (const cell of removed) { const [y, x] = cell.split(',').map(Number); grid[y!]![x!] = empty; }
+      for (let x = 0; x < grid[0]!.length; x++) {
+        const survivors = grid.map(row => row[x]!).filter(value => value !== empty);
+        const column = [...Array(grid.length - survivors.length).fill(empty), ...survivors];
+        grid.forEach((row, y) => { row[x] = column[y]; });
+      }
+      frames.push(phase());
+    }
+    const nextValues = scene.preview[0]; assert.ok(nextValues);
+    for (const [index, row] of activeRows.entries()) {
+      assert.equal(grid[row]![scene.mark.column], empty);
+      grid[row]![scene.mark.column] = ink(nextValues[index]);
+    }
+    const frame = render({ ...scene, grid, preview: scene.preview.slice(1) }, true);
+    frames.push(frame);
+    return { frame, frames };
+  };
+  return { geometry, ink, actions, sample, render, packet, acquire, prepared, received };
 }
 
 for (const variant of [false, true]) test('native queue reuses compatible controls when all pigments are already in the active group' + (variant ? ' with rectangular tiles, new palette, positions and inputs' : ''), async () => {
@@ -112,22 +152,30 @@ for (const variant of [false, true]) test('native queue reuses compatible contro
   assert.deepEqual(Object.keys(proposal.model.controls).sort(), Object.keys(state.controls).sort());
   assert.ok(proposal.route_refs.some((ref: string) => state.evidence.includes(ref)));
   assert.ok(proposal.model.controls[run.reply.ticket.actionRef]);
+  assert.equal(proposal.actions.at(-1).action_ref, 'ACTION' + s.actions[2],
+    'The prepared reachable receipt remains in the same native prefix');
+  assert.equal(proposal.preparations.at(-1), null, 'The receipt closes the prefix after its actual return');
   let done = run.reply, sequence = run.sequence, currentRows = next.frame as number[][];
-  for (let index = 0; index < proposal.preparations.length; index++) {
+  for (let index = 0; index < proposal.actions.length; index++) {
     assert.ok(done.ticket);
     assert.equal(done.ticket.actionIndex, index);
-    const returned = s.prepared(currentRows, done.ticket.actionRef);
-    currentRows = returned;
+    const receipt = done.ticket.actionRef === 'ACTION' + s.actions[2];
+    const returned = receipt ? s.received(currentRows) : (() => {
+      const frame = s.prepared(currentRows, done.ticket!.actionRef); return { frame, frames: [frame] };
+    })();
+    currentRows = returned.frame;
     sequence++;
     done = await run.service.handle({ type: 'advance', sessionId: run.sessionId, sequence,
       ticketId: done.ticket.id, executionMs: 1,
-      observation: toV6PublicObservation({ ...next, frame: returned, frames: [returned] }, sequence) });
-    assert.equal((done.snapshot.trace as RecordLike[]).findLast(event => event.kind === 'actual_outcome')?.matched, true);
+      observation: toV6PublicObservation({ ...next, ...returned }, sequence) });
+    assert.equal((done.snapshot.trace as RecordLike[]).findLast(event => event.kind === 'actual_outcome')?.matched, receipt ? null : true);
   }
   const trace = done.snapshot.trace as RecordLike[];
   assert.equal(trace.findLast(event => event.kind === 'sealed_prefix')?.acquired_actions, proposal.preparations.length);
   const retained = family.state().state as RecordLike;
   assert.equal(retained.controls[run.reply.ticket.actionRef].revalidated_epoch, 2);
+  assert.equal(retained.controls['ACTION' + s.actions[2]].revalidated_epoch, 2);
+  assert.equal(retained.last_transition, 'received_then_automatic_or_return_unknown');
   for (const [command, law] of Object.entries(state.controls)) if (command !== run.reply.ticket.actionRef)
     assert.equal(retained.controls[command].acquisition_epoch, (law as RecordLike).acquisition_epoch);
 });
