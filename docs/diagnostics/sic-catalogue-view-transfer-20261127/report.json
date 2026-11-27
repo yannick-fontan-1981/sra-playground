@@ -1,0 +1,171 @@
+{
+  "schema": "sic.observed-role-transfer.report.v1",
+  "code": "GRIL",
+  "createdAt": "2026-11-27T01:50:54.913494+00:00",
+  "baseline": {
+    "target": 6,
+    "levels": 1,
+    "actions": 15,
+    "authority": 15,
+    "status": "stopped",
+    "reason": "level_action_budget",
+    "recoveries": {
+      "reset": 0,
+      "undo": 0
+    }
+  },
+  "baselineSource": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+  "diagnostic": {
+    "source": "167a18ad77cc9798aec356e598b9bc5420dfb378",
+    "actions": 11,
+    "levels": 2,
+    "captureLimit": 11,
+    "diagnosticOnly": true,
+    "collectorSha256": "4c313fcbf7933480a726d250d91f38c6acbeb3707044b8bb82d0f9f1ea263694",
+    "originalSha256": "3b886bdac651a248a6a6cc362776f2475f41dff14706b763cb239de2bcf4b03d"
+  },
+  "candidate": {
+    "localCommit": "ecaf0caaae70cf5c552c0dfa8bcbb8a39cddedbd",
+    "remoteCommit": "81c26a8d20c84d81aec1b5ee8ab5054756392878",
+    "tree": "160aa44ebb6683be5e275b5635931cdfafb5fce4",
+    "targetedTests": 16,
+    "typecheck": "passed",
+    "strict": null,
+    "fullContinuity": null,
+    "viewer": null
+  },
+  "limitations": [
+    "A bounded capture is not a timed qualification.",
+    "No complete 107-game campaign was rerun.",
+    "Native transfers use public frames; their constructed variants are functional tests.",
+    "Complete continuity and delivered-viewer verification remain integration requirements."
+  ],
+  "initialStrict": {
+    "source": "167a18ad77cc9798aec356e598b9bc5420dfb378",
+    "remoteCommit": "e46062c80592cf60c24c007221dfc9b34fd8dd86",
+    "tree": "7fab3848478ec5302af03094ccfe3bdf5561122d",
+    "target": 6,
+    "levels": 2,
+    "actions": 23,
+    "authority": 23,
+    "status": "stopped",
+    "reason": "level_action_budget",
+    "recoveries": {
+      "reset": 0,
+      "undo": 0
+    },
+    "levelStats": [
+      {
+        "level": 1,
+        "won": true,
+        "activeMs": 2677,
+        "budget": {
+          "actions": 10,
+          "activeTimeMs": 10000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GRIL; level=1; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 5,
+        "ms": 2749,
+        "gameMs": 26,
+        "costs": {
+          "init": {
+            "ms": 1155,
+            "count": 1
+          },
+          "advance": {
+            "ms": 1216,
+            "count": 5
+          },
+          "resume": {
+            "ms": 320,
+            "count": 4
+          }
+        },
+        "graph": "27ce7c0eca578f7de7b7cd9d1d580910380da5d5799b5f65825045325152db79",
+        "deltas": 1541,
+        "acquiredRecords": 5,
+        "nodes": 485,
+        "traceEvents": 30,
+        "prefixHash": "49a513dfb37eaa93918ae558e9f58e8805c02ba465d111877b1c5b9d49e4290e",
+        "scoredMs": 2639,
+        "settlementMs": 109
+      },
+      {
+        "level": 2,
+        "won": true,
+        "activeMs": 1300,
+        "budget": {
+          "actions": 10,
+          "activeTimeMs": 8000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GRIL; level=2; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 5,
+        "ms": 1361,
+        "gameMs": 21,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 1035,
+            "count": 5
+          },
+          "resume": {
+            "ms": 271,
+            "count": 5
+          }
+        },
+        "graph": "48e76c42dde14774c03b216151e9c03bb28f414ef37807359a254e4cb635399b",
+        "deltas": 2672,
+        "acquiredRecords": 10,
+        "nodes": 555,
+        "traceEvents": 60,
+        "prefixHash": "6ddf5b81c59b00bcc79da29779fa6b006a1d6e7fbf0716b27173ffae46152a60",
+        "scoredMs": 1271,
+        "settlementMs": 91
+      },
+      {
+        "level": 3,
+        "won": false,
+        "activeMs": 4310,
+        "budget": {
+          "actions": 13,
+          "activeTimeMs": 10000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GRIL; level=3; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 13,
+        "ms": 4483,
+        "gameMs": 52,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 2882,
+            "count": 13
+          },
+          "resume": {
+            "ms": 1446,
+            "count": 13
+          }
+        },
+        "graph": "cbfed9fd89deb4038a6edc0daeed2225780ac58190bb55c98d38dd5eadd08c88",
+        "deltas": 5631,
+        "acquiredRecords": 23,
+        "nodes": 756,
+        "traceEvents": 128,
+        "prefixHash": "85ec2fd5f56d7de58837bc9748bc9467453bf9d3869252b2c177d0c24e2d37c4"
+      }
+    ],
+    "mirrorExact": true,
+    "firstLevelPrefixMatchesBaseline": true,
+    "diagnosticPrefixMatchesStrict": true
+  },
+  "finding": "The first candidate wins levels1 and2 in5 commands each. Level3 adds a third selector and moves the two known selectors; exact whole-interface identity declines the learned view. Global command11 becomes a selection preview. The next12 views stay ambiguous and reach the13-command level cap.",
+  "role": "A directional command exposing the selected catalogue subject, confirmed on two independently selected subjects. An exact interface is preferred; otherwise exactly one witnessed selector set must be included in the current interface. Only previously acquired palette-to-command associations are retained."
+}
