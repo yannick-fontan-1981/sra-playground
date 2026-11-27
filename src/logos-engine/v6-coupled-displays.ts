@@ -5,6 +5,33 @@ import type { NativeBox, NativeRows } from './v6-native-types.ts';
 export type CoupledDisplayRecord = Record<string, any>;
 export interface CoupledDisplayObservation extends CoupledDisplayRecord { readonly entities: readonly CoupledDisplayRecord[] }
 export interface CoupledDisplayCommand { readonly action_ref: string; readonly data?: Readonly<Record<string, number>> }
+export type CoupledDisplayEffect = 'unchanged' | 'local_only' | 'coupled' | 'other';
+
+/** The addressed control and the two rows whose values a later observation must compare. */
+export interface CoupledDisplayTrial {
+  readonly level_epoch: number | null;
+  readonly source_score: number;
+  readonly control_index: number;
+  readonly controls: readonly NativeBox[];
+  readonly receivers: readonly NativeBox[];
+  readonly starting_values: readonly (number | null)[];
+  readonly receiver_values: readonly (number | null)[];
+}
+
+export interface CoupledDisplayOffer extends CoupledDisplayTrial {
+  readonly source: 'coupled_displays';
+  readonly action: CoupledDisplayCommand;
+  readonly engaged_parent: boolean;
+  readonly parent_ref: string;
+  readonly observation_ref: string;
+  readonly relations: readonly (readonly [string, string, string])[];
+  readonly predictions: { readonly inert_decoration: 'unchanged'; readonly local_switch: 'local_only'; readonly coupled_switch: 'coupled' };
+  readonly evidence: readonly string[];
+  readonly return_steps: null;
+  readonly risks: readonly string[];
+  readonly question: string;
+}
+
 export interface CoupledDisplayState {
   epoch: number | null;
   controls: NativeBox[];
@@ -62,7 +89,7 @@ export class CoupledDisplays {
   history: CoupledDisplayRecord[] = [];
   scored_schema: CoupledDisplayRecord | null = null;
 
-  offers(observation: CoupledDisplayObservation, rows: NativeRows, inputs: readonly CoupledDisplayCommand[], policy: CoupledDisplayRecord): CoupledDisplayRecord[] {
+  offers(observation: CoupledDisplayObservation, rows: NativeRows, inputs: readonly CoupledDisplayCommand[], policy: CoupledDisplayRecord): CoupledDisplayOffer[] {
     const points = inputs.filter(action => pythonTruthy(action.data) && action.action_ref === 'ACTION6');
     if (!points.length) return [];
     if (!pythonEqual(this.epoch, observation.level_epoch)) {
@@ -123,15 +150,15 @@ export class CoupledDisplays {
       risks: ['A latched control or a dependent receiver may change irreversibly.'], question: policy.question }];
   }
 
-  observe(probe: CoupledDisplayRecord, after: CoupledDisplayObservation, rows: NativeRows): string | null {
+  observe(probe: CoupledDisplayTrial, after: CoupledDisplayObservation, rows: NativeRows): CoupledDisplayEffect | 'boundary' | null {
     if (after.levels_completed > probe.source_score) {
       const size = (box: NativeBox): [number, number] => [box[2] - box[0] + 1, box[3] - box[1] + 1];
-      this.scored_schema = { source_shape: size(probe.controls[0]), receiver_shape: size(probe.receivers[0]), evidence: after.observation_ref }; return 'boundary';
+      this.scored_schema = { source_shape: size(probe.controls[0]!), receiver_shape: size(probe.receivers[0]!), evidence: after.observation_ref }; return 'boundary';
     }
     if (!pythonEqual(after.level_epoch, probe.level_epoch)) return null;
-    const state = (probe.controls as NativeBox[]).map(box => value(rows, box)), lamps = (probe.receivers as NativeBox[]).map(box => value(rows, box));
+    const state = probe.controls.map(box => value(rows, box)), lamps = probe.receivers.map(box => value(rows, box));
     if ([...state, ...lamps].includes(null)) return null;
-    const before: (number | null)[] = probe.starting_values, index = probe.control_index;
+    const before = probe.starting_values, index = probe.control_index;
     const local = before.map((v, i) => pythonEqual(v, state[i]) ? null : i).filter(i => i !== null), remote = !pythonEqual(probe.receiver_values, lamps);
     const effect = local.length === 1 && local[0] === index ? remote ? 'coupled' : 'local_only' : local.length === 0 && !remote ? 'unchanged' : 'other';
     this.history.push({ control: index, state: [...before], new_state: state, result: effect, evidence: after.observation_ref }); return effect;
