@@ -1,0 +1,165 @@
+{
+  "code": "LF52",
+  "mode": "sic",
+  "workers": 1,
+  "levels": 10,
+  "target": 10,
+  "status": "stopped",
+  "reason": "target_levels_completed",
+  "recoveries": {
+    "reset": 0,
+    "undo": 0
+  },
+  "actions": 713,
+  "trace": "d19704a5589bbb009ece09a686749e27eecc63e027cbe3061566c6c34c779e5a",
+  "rows": [
+    {
+      "level": 1,
+      "won": true,
+      "actions": 8,
+      "actionCap": 13,
+      "activeMs": 2586,
+      "timeCap": 8000,
+      "executed": 8,
+      "continued": 7,
+      "series": 1,
+      "longest": 8,
+      "physical": {}
+    },
+    {
+      "level": 2,
+      "won": true,
+      "actions": 40,
+      "actionCap": 48,
+      "activeMs": 12551,
+      "timeCap": 18000,
+      "executed": 40,
+      "continued": 0,
+      "series": 0,
+      "longest": 1,
+      "physical": {}
+    },
+    {
+      "level": 3,
+      "won": true,
+      "actions": 46,
+      "actionCap": 56,
+      "activeMs": 19733,
+      "timeCap": 41000,
+      "executed": 46,
+      "continued": 0,
+      "series": 0,
+      "longest": 1,
+      "physical": {}
+    },
+    {
+      "level": 4,
+      "won": true,
+      "actions": 54,
+      "actionCap": 60,
+      "activeMs": 25056,
+      "timeCap": 44000,
+      "executed": 54,
+      "continued": 0,
+      "series": 0,
+      "longest": 1,
+      "physical": {}
+    },
+    {
+      "level": 5,
+      "won": true,
+      "actions": 99,
+      "actionCap": 119,
+      "activeMs": 72558,
+      "timeCap": 167000,
+      "executed": 99,
+      "continued": 38,
+      "series": 8,
+      "longest": 9,
+      "physical": {
+        "same carrier translation": 29,
+        "same carried piece translation": 3
+      }
+    },
+    {
+      "level": 6,
+      "won": true,
+      "actions": 91,
+      "actionCap": 110,
+      "activeMs": 65137,
+      "timeCap": 76000,
+      "executed": 91,
+      "continued": 18,
+      "series": 6,
+      "longest": 8,
+      "physical": {
+        "same carrier translation": 21,
+        "same carried piece translation": 1,
+        "same carried auxiliary translation": 10
+      }
+    },
+    {
+      "level": 7,
+      "won": true,
+      "actions": 148,
+      "actionCap": 178,
+      "activeMs": 99356,
+      "timeCap": 105000,
+      "executed": 148,
+      "continued": 87,
+      "series": 11,
+      "longest": 13,
+      "physical": {
+        "same carrier translation": 87,
+        "same carried piece translation": 23,
+        "same carried auxiliary translation": 18
+      }
+    },
+    {
+      "level": 8,
+      "won": true,
+      "actions": 68,
+      "actionCap": 82,
+      "activeMs": 98870,
+      "timeCap": 167000,
+      "executed": 68,
+      "continued": 14,
+      "series": 6,
+      "longest": 4,
+      "physical": {
+        "same carrier translation": 6,
+        "same carried piece translation": 2
+      }
+    },
+    {
+      "level": 9,
+      "won": true,
+      "actions": 112,
+      "actionCap": 135,
+      "activeMs": 243263,
+      "timeCap": 302000,
+      "executed": 112,
+      "continued": 0,
+      "series": 0,
+      "longest": 1,
+      "physical": {}
+    },
+    {
+      "level": 10,
+      "won": true,
+      "actions": 47,
+      "actionCap": 57,
+      "activeMs": 108675,
+      "timeCap": 135000,
+      "executed": 47,
+      "continued": 13,
+      "series": 4,
+      "longest": 6,
+      "physical": {
+        "same carrier translation": 17,
+        "same carried piece translation": 4,
+        "same carried auxiliary translation": 1
+      }
+    }
+  ]
+}

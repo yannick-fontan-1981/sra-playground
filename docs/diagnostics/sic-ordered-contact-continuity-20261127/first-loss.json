@@ -1,0 +1,83 @@
+{
+  "source": "e246862b84f8d2d2392a754d2dd7f57eb120095b",
+  "target": 6,
+  "levels": 5,
+  "actions": 218,
+  "perLevel": [
+    {
+      "level": 1,
+      "actions": 19,
+      "won": true
+    },
+    {
+      "level": 2,
+      "actions": 39,
+      "won": true
+    },
+    {
+      "level": 3,
+      "actions": 33,
+      "won": true
+    },
+    {
+      "level": 4,
+      "actions": 33,
+      "won": true
+    },
+    {
+      "level": 5,
+      "actions": 33,
+      "won": true
+    },
+    {
+      "level": 6,
+      "actions": 61,
+      "won": false
+    }
+  ],
+  "prefixComparisons": [
+    {
+      "level": 1,
+      "actions": 19,
+      "baselineActions": 19,
+      "prefixMatches": true
+    },
+    {
+      "level": 2,
+      "actions": 39,
+      "baselineActions": 39,
+      "prefixMatches": true
+    },
+    {
+      "level": 3,
+      "actions": 33,
+      "baselineActions": 33,
+      "prefixMatches": true
+    },
+    {
+      "level": 4,
+      "actions": 33,
+      "baselineActions": 33,
+      "prefixMatches": true
+    },
+    {
+      "level": 5,
+      "actions": 33,
+      "baselineActions": 33,
+      "prefixMatches": true
+    }
+  ],
+  "firstReusableSelection": {
+    "globalCommand": 170,
+    "levelCommand": 13,
+    "earlierSameSelection": 161,
+    "earlierOppositeSelection": 166
+  },
+  "firstForeignPreemption": {
+    "globalCommand": 203,
+    "levelCommand": 46,
+    "family": "sic_test_prepared_effects"
+  },
+  "rawSha256": "42cbcd4438bb96cabe93df83f05a364626b6287766efe14b7644c87b5f18bd8b",
+  "diagnosticOnly": true
+}

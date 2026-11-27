@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "8cd13f7394706c0087c0afa60e802c024701a443",
+  "runId": "46010805381",
+  "name": "guarded-passengers",
+  "cohort": "source:CGWL",
+  "codes": [
+    "CGWL"
+  ],
+  "start": 1,
+  "end": 6,
+  "cap": 74,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "guarded-passengers.jsonl",
+  "sha256": "21a98abc1bca19f55bb633585d1f63ef0ef035bc6399110ab5ee3049bf21b072"
+}

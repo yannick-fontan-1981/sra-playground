@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "8cd13f7394706c0087c0afa60e802c024701a443",
+  "runId": "46010805381",
+  "name": "cargo-transport",
+  "cohort": "source:GABA",
+  "codes": [
+    "GABA"
+  ],
+  "start": 1,
+  "end": 6,
+  "cap": 128,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "cargo-transport.jsonl",
+  "sha256": "5009f0181d1e053bfb118818f01fa16104ce1ebb62c40c37c1e9c898d270fcd0"
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "8cd13f7394706c0087c0afa60e802c024701a443",
+  "runId": "46010805381",
+  "name": "l-axe-violet",
+  "cohort": "SS04",
+  "codes": [
+    "SS04"
+  ],
+  "start": 1,
+  "end": 8,
+  "cap": 150,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "l-axe-violet.jsonl",
+  "sha256": "6fc1fde1be340c9c1888e22ed2e7634861179b2a4ffeaa6f147235719049ae15"
+}

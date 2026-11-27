@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "8cd13f7394706c0087c0afa60e802c024701a443",
+  "runId": "46010805381",
+  "name": "profile-preparation",
+  "cohort": "source:LKEY",
+  "codes": [
+    "LKEY"
+  ],
+  "start": 1,
+  "end": 6,
+  "cap": 36,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "profile-preparation.jsonl",
+  "sha256": "810dedd597b4d90f345e5549f8219fff409f910941ef074febf830dbf4b55986"
+}
