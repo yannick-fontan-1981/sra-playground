@@ -4,6 +4,7 @@ import { sicNeedId } from './need-identity.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 import { motionIntoFootprint } from './observed-translation.ts';
+import { observedPressureRecoveryGroup } from './public-input-exploration.ts';
 import { chooseReceptionActivation, crossingRestoredStart, recordReceptionActivation, startReceptionActivation,
   type ReceptionActivation, type ReceptionActivationStep, type ReceptionMemory } from './reception-activation.ts';
 import { chooseReceptionSequence, receptionSequenceReturn, recordReceptionSequence, startReceptionSequence,
@@ -129,6 +130,24 @@ export function createSicReceptionAccess(family = receptionAccessId): NativeFami
 
   return {
     id: family,
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group !== observedPressureRecoveryGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      if (remembered?.epoch !== observation.level_epoch || !remembered.evidence.length) return null;
+      const proposal = await this.propose(observation, rows, inputs, remaining, execution);
+      if (!proposal) return null;
+      if (isActivation(proposal) || isSequence(proposal)) {
+        const local = isActivation(proposal) ? proposal.activation : proposal.sequence;
+        // A contact return, including a restored start, keeps its measured
+        // preparation ahead of unrelated trials only while that return is current.
+        if (local.evidence.at(-1) !== observation.observation_ref) return null;
+        const actors = receptionServiceCarriers(rows, local.layout);
+        if (local.visible ? actors.length !== 1 || !equal(actors[0]!.anchor, local.at)
+          : actors.length !== 0) return null;
+        return proposal;
+      }
+      return proposal.from && proposal.local.evidence.length && proposal.local.controls[proposal.choice.action]
+        ? proposal : null;
+    },
     propose(observation, rows, _inputs, remaining, execution) {
       const keys = observation.available_action_refs.filter(action => hints[action]);
       if (remaining < 1 || keys.length < 2 || observation.available_action_refs.includes('ACTION6')) return null;
@@ -149,9 +168,15 @@ export function createSicReceptionAccess(family = receptionAccessId): NativeFami
       if (!scene || scene.counterparts.length !== 1 || scene.cells.length > 196) {
         return !prior ? offerActivation(observation, rows, keys, remaining, mode) : null;
       }
-      let local: State = prior ? { ...prior, scene } : { epoch: observation.level_epoch, count: 0, scene,
-        controls: {}, trials: [], waits: 0, last: null, evidence: [], stopped: false };
       const from = carrier(rows, scene), target = scene.target.anchor, atTarget = equal(from, target);
+      // The completed reception already measured these controls. A simple
+      // receiver is just as eligible to reuse them as an activation sequence,
+      // provided its support interface and the unique current carrier match.
+      const transferred = remembered?.epoch === observation.level_epoch && remembered.pitch === scene.pitch
+        && remembered.supportInk === scene.target.color && from ? remembered : null;
+      let local: State = prior ? { ...prior, scene } : { epoch: observation.level_epoch, count: 0, scene,
+        controls: transferred?.controls ?? {}, trials: [], waits: 0, last: null,
+        evidence: transferred?.evidence ?? [], stopped: false };
       if (family === learnReceptionAccessId && !prior) {
         const receipt = execution?.readDirectionalMotion?.();
         const current = receipt?.afterRef === observation.observation_ref && receipt.levelEpoch === observation.level_epoch && keys.includes(receipt.command);
@@ -288,7 +313,14 @@ export function createSicReceptionAccess(family = receptionAccessId): NativeFami
       }
       const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local;
       const from = proposal.route?.[index]?.from ?? proposal.from;
-      if (after.levels_completed > before.levels_completed && equal(from, local.scene.target.anchor)) {
+      const expected = proposal.route?.[index]?.to ?? proposal.choice.expected;
+      const motion = local.controls[issued.action_ref];
+      // Reception can score on the measured arrival itself. The old carrier
+      // may disappear into the completion animation, so bind that official
+      // return to this known displacement and this support, not another score.
+      const arrives = from && motion && equal(expected, local.scene.target.anchor)
+        && equal([from[0] + motion[0], from[1] + motion[1]], local.scene.target.anchor);
+      if (after.levels_completed === before.levels_completed + 1 && (equal(from, local.scene.target.anchor) || arrives)) {
         remembered = { epoch: after.level_epoch, pitch: local.scene.pitch, supportInk: local.scene.target.color,
           controls: { ...(remembered?.pitch === local.scene.pitch ? remembered.controls : {}), ...local.controls },
           evidence: [...local.evidence.slice(-4), before.observation_ref, after.observation_ref] };

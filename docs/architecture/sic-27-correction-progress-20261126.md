@@ -113,3 +113,21 @@ PR133 est fusionnée sur `main` au commit **`8ec8886de88c5d0e69abfc4ac650a804344
 Le viewer local du même code publié a reproduit UPST depuis L1 dans une seule session SIC : message officiel `The game reports WIN.`, six niveaux, **72 commandes**, soit **19, 4, 11, 7, 14 et 17**. Les boutons `Run to next level` ont été utilisés, sans nouvelle session ni reset entre niveaux. Le contrôle CWSE de cette version est en cours à ce checkpoint. Les mesures natives strictes de UPST et CWSE restent archivées séparément et ne constituent pas un nouveau bilan des 107.
 
 Les corrections en préparation restent explicitement incomplètes : FOGW atteint désormais trois niveaux (18, 7, 18 commandes) avant un arrêt L4 ; VOIS a atteint cinq niveaux avant L6 ; WA30 garde son arrêt L8. Le prochain bilan complet conservera un verdict par jeu sur une révision unique.
+
+### Lot commun publié en version 201
+
+PR132 est fusionnée sur `main` au commit `f4e7a3bd760b9bcdbbb15c00f850f055fbeaaaa1`, arbre `0b4662930918e6515d651096d09e63c27b84360b`. Les 13 jobs de la CI 45920939273 réussissent, dont la réconciliation complète `npm run test:sic-continuity` (job 140253616747). La version Site **201** porte exactement ce SHA source.
+
+Le rejeu combiné du même arbre termine CRAF 6/6 (106 commandes), SB26 8/8 (124), CASC 6/6 (95), CLRS 6/6 (84) et MIND 6/6 (93), soit 32 niveaux et 502 commandes SIC. Les plafonds sont inchangés, un seul worker et aucun reset/undo. Les bruts, budgets et empreintes sont archivés dans `docs/diagnostics/sic-27-common-integration-20261127/`.
+
+La version 200 a été reproduite entièrement par le viewer pour UPST (72) et CWSE (195), depuis L1 en une session SIC chacun. La version 201 a déjà été reproduite pour MIND (93), CRAF (106) et CASC (95) ; CLRS et SB26 sont en cours à ce checkpoint. Ce sont les commandes visibles de l'interface locale servant le code publié, et non une nouvelle mesure des plafonds chronométriques.
+
+### Lot suivant : réceptions et mélanges acquis publiquement
+
+FOGW termine le banc strict depuis L1 en 173 commandes : 18, 7, 18, 29, 38 et 63, avec la même limite de temps à chaque niveau. Le rôle de réception transmet ses commandes compatibles, conserve un score sur une arrivée mesurée et reprend après un retour courant avant les previews étrangères. Quatorze tests ciblés passent. Archive : `docs/diagnostics/sic-reception-transfer-20261127/`.
+
+TRCP termine le banc strict en 240 commandes : 24, 30, 37, 46, 54 et 49. La recette d'un mélange réellement observé est acquise même lorsque l'ouverture a été exécutée par une autre famille. Les deux premiers parcours sont identiques au témoin ; le troisième garde le même nombre de commandes mais change de parcours. Les tests varient les formes, couleurs, positions et clics et refusent les participations ambiguës, absentes ou contradictoires. Archive : `docs/architecture/sic-public-mixtures-20261127/`.
+
+L'intégration retient le code TRCP sans le candidat SPOR encore partiel. La source combinée FOGW/TRCP doit passer son propre rejeu et le contrôle complet de continuité avant fusion et publication. Les 22 tests de ces deux rôles passent ensemble ainsi que TypeScript.
+
+VOIS demeure 5/6 sur le dernier passage (L6 : 42 commandes puis 27 secondes). GRIL atteint 2/6 avant une nouvelle interface élargie ; SPOR atteint 3/6 avant un contrôle non réassocié. WA30 reste 7/9. Ces étapes ne sont pas comptées comme jeux complets. Le bilan définitif de 107 jeux reste à exécuter sur une seule révision finale.

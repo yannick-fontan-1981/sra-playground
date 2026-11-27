@@ -1,5 +1,5 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeExecution, NativeFamily, NativeProgramHandle, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativeObservation, NativeProgramHandle, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
@@ -10,8 +10,11 @@ export const verifyChannelAccessId = 'sic_verify_channel_access';
 type Tile = { point: NativePoint; box: NativeBox; color: number; count: number; accents: number[] };
 type Part = ReturnType<typeof geometricComponents>[number];
 type Pair = { color: number; from: Tile; to: Tile; other?: Tile; branches?: Tile[] };
-type Recipe = { from: number; other: number; result: number; evidence: string };
+type Recipe = { from: number; other: number; result: number; evidence: string; before?: string;
+  control?: { point: NativePoint; box: NativeBox } };
 type Layout = { pitch: number; tiles: Tile[]; pairs: Pair[]; closed: number; open: number; reserve: number };
+type PublicMixtures = { pitch: number; closed: number; open: number; tiles: Tile[]; terminals: Tile[];
+  candidates: { from: Tile; other: Tile; result: number }[] };
 type Thread = { pair: Pair; clicks: Tile[]; mergeAt?: Tile };
 type State = { epoch: number; layout: Layout; threads: Thread[]; rejected: string[]; refs: string[]; count: number; stopped?: true };
 type Proposal = NativeProposal & { state: State; tile: Tile; pair: Pair; completes: boolean; needId: string; merging?: true };
@@ -354,6 +357,47 @@ function sourcePigmentChanged(source: Tile, result: number, before: NativeRows, 
   return changed;
 }
 
+function publicMixtures(layouts: readonly Layout[]): PublicMixtures | null {
+  const layout = layouts[0];
+  if (!layout) return null;
+  const candidates = new Map<string, PublicMixtures['candidates'][number]>(), terminals = new Map<string, Tile>();
+  for (const value of layouts) for (const pair of value.pairs) {
+    for (const terminal of terminalsOf(pair)) terminals.set(key(terminal.point), terminal);
+    if (pair.other) candidates.set(JSON.stringify([[key(pair.from.point), key(pair.other.point)].sort(), pair.color]),
+      { from: pair.from, other: pair.other, result: pair.color });
+  }
+  return candidates.size ? { pitch: layout.pitch, closed: layout.closed, open: layout.open, tiles: layout.tiles,
+    terminals: [...terminals.values()], candidates: [...candidates.values()] } : null;
+}
+
+function observeMixture(field: PublicMixtures, command: NativeCommand, before: NativeRows, after: NativeRows) {
+  const { x, y } = command.data;
+  if (command.action_ref !== 'ACTION6' || typeof x !== 'number' || typeof y !== 'number'
+    || !Number.isSafeInteger(x) || !Number.isSafeInteger(y) || before.length !== after.length
+    || before.some((row, index) => row.length !== after[index]?.length)) return null;
+  const controls = field.tiles.filter(tile => tile.color === field.closed && x >= tile.box[0] && x <= tile.box[2]
+    && y >= tile.box[1] && y <= tile.box[3]);
+  if (controls.length !== 1) return null;
+  const control = controls[0]!, first = measureTile(before, ...control.point, field.pitch), returned = measureTile(after, ...control.point, field.pitch);
+  if (first.color !== field.closed || first.count !== field.pitch ** 2 - 1 || returned.count < field.pitch ** 2 - 1) return null;
+  const matches = field.candidates.filter(candidate => {
+    const { from, other, result } = candidate;
+    if (returned.color !== result || ![from, other].every(source => measureTile(before, ...source.point, field.pitch).color === source.color
+      && sourcePigmentChanged(source, result, before, after))) return false;
+    return field.terminals.filter(terminal => key(terminal.point) !== key(from.point) && key(terminal.point) !== key(other.point))
+      .every(terminal => {
+        const receiving = terminal.color === field.open && terminal.accents.length === 1 && terminal.accents[0] === result;
+        for (let row = terminal.box[1]; row <= terminal.box[3]; row++) for (let col = terminal.box[0]; col <= terminal.box[2]; col++) {
+          const previous = before[row]?.[col], current = after[row]?.[col];
+          if (previous === current) continue;
+          if (!receiving || previous !== field.open || current !== result) return false;
+        }
+        return true;
+      });
+  });
+  return matches.length === 1 ? { ...matches[0]!, control: { point: [x, y] as NativePoint, box: control.box } } : null;
+}
+
 function mixConfirmed(pair: Pair, tileColor: number, before: NativeRows, after: NativeRows, pitch: number): boolean {
   return !!pair.other && [pair.from, pair.other].every(source =>
     measureTile(after, ...source.point, pitch).color === pair.color
@@ -409,9 +453,30 @@ export function matchesChannelOpening(before: NativeRows, rows: NativeRows, layo
 export function createSicVerifyChannelAccess(): NativeFamily<Proposal> {
   let memory: State | null = null;
   let recipes: Recipe[] = [];
+  let observedEpoch: number | null = null, observedScope: string | null = null, observed: PublicMixtures | null = null;
   let decide: NativeProgramHandle | undefined;
+  function retainMixture(before: NativeObservation, after: NativeObservation, command: NativeCommand,
+    first: NativeRows, second: NativeRows, ownedLayout?: Layout) {
+    if (!before.available_action_refs.includes('ACTION6') || before.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))) return;
+    const scope = before.observation_ref.split(':epoch:', 1)[0]!;
+    if (observedEpoch !== before.level_epoch || observedScope !== scope) {
+      observedEpoch = before.level_epoch;
+      observedScope = scope;
+      observed = publicMixtures(ownedLayout ? [ownedLayout] : layoutFor(first, []));
+    }
+    if (!observed && ownedLayout) observed = publicMixtures([ownedLayout]);
+    if (!observed || before.level_epoch !== after.level_epoch || before.state !== after.state
+      || before.levels_completed !== after.levels_completed || scope !== after.observation_ref.split(':epoch:', 1)[0]) return;
+    const measured = observeMixture(observed, command, first, second);
+    if (!measured || recipes.some(recipe => recipe.result === measured.result && samePigments(recipe, measured.from.color, measured.other.color))) return;
+    recipes = [...recipes.slice(-11), { from: measured.from.color, other: measured.other.color, result: measured.result,
+      before: before.observation_ref, evidence: after.observation_ref, control: measured.control }];
+  }
   return {
     id: verifyChannelAccessId,
+    observePublicOutcome(before, after, command, first, second) {
+      retainMixture(before, after, command, first, second);
+    },
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
@@ -430,7 +495,8 @@ export function createSicVerifyChannelAccess(): NativeFamily<Proposal> {
       const selected = prior ?? await selectSeparatedLayout(rows, recipes, remaining, execution);
       if (!selected) return null;
       const { layout, threads } = selected;
-      const state = prior ?? { epoch: observation.level_epoch, layout, threads, rejected: [], refs: recipes.slice(-4).map(recipe => recipe.evidence), count: 0 };
+      const state = prior ?? { epoch: observation.level_epoch, layout, threads, rejected: [],
+        refs: recipes.slice(-4).flatMap(recipe => [...(recipe.before ? [recipe.before] : []), recipe.evidence]), count: 0 };
       const nextTile = (thread: Thread) => thread.clicks.find(tile => measureTile(rows, ...tile.point, layout.pitch).color === layout.closed);
       const thread = threads.find(t => nextTile(t));
       const tile = thread && nextTile(thread);
@@ -502,15 +568,20 @@ export function createSicVerifyChannelAccess(): NativeFamily<Proposal> {
         ? 'tile_opened_and_remote_tiles_changed' : matched ? 'tile_opened' : 'tile_did_not_open',
         ...(reached ? { sic_need: { id: proposal.needId, status: 'satisfied' as const } } : {}) };
     },
-    record(before, after, _action, first, second, proposal) {
+    record(before, after, action, first, second, proposal) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { state, tile } = proposal;
+      retainMixture(before, after, action, first, second, state.layout);
       const opened = measureTile(second, ...tile.point, state.layout.pitch).color !== state.layout.closed;
       const separated = separatedReturn(proposal, first, second);
+      // The owned route can already have brought one source into the mixture on
+      // an earlier verified step. Keep that accumulated proof; an unowned
+      // return, by contrast, must identify both participants in the same change.
       if (proposal.merging && opened && separated && proposal.pair.other) {
         const { from, color } = proposal.pair, other = proposal.pair.other.color;
-        const known = recipes.some(recipe => recipe.result === color && samePigments(recipe, from.color, other));
-        if (!known) recipes = [...recipes.slice(-11), { from: from.color, other, result: color, evidence: after.observation_ref }];
+        if (!recipes.some(recipe => recipe.result === color && samePigments(recipe, from.color, other)))
+          recipes = [...recipes.slice(-11), { from: from.color, other, result: color,
+            before: before.observation_ref, evidence: after.observation_ref }];
       }
       memory = { ...state, count: state.count + 1, refs: [...state.refs.slice(-4), after.observation_ref],
         ...(!separated ? { stopped: true as const } : {}),
@@ -519,10 +590,13 @@ export function createSicVerifyChannelAccess(): NativeFamily<Proposal> {
         && endpointReached(second, proposal.pair, state.layout.pitch) && !endpointReached(first, proposal.pair, state.layout.pitch);
       return { events: [], ...(observedBranch ? { reviewEvidence: 'The same circuit filled all its outlets and preserved the neighboring circuits.' } : {}) };
     },
-    state: () => ({ memory, recipes }),
+    state: () => ({ memory, recipes, observedEpoch, observedScope, observed }),
     restore(value: NativeRecord) {
       memory = structuredClone(value.memory as State | null);
       recipes = structuredClone((value.recipes as Recipe[] | undefined) ?? []);
+      observedEpoch = value.observedEpoch as number | null ?? null;
+      observedScope = value.observedScope as string | null ?? null;
+      observed = structuredClone((value.observed as PublicMixtures | null | undefined) ?? null);
     },
   };
 }

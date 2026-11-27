@@ -34,6 +34,8 @@ jobs:
       - run: node --test tests/sic-preview-interface.test.ts tests/sic-experiment-arbitration.test.ts tests/sic-population-control-transfer.test.ts tests/sic-transferred-population-selection.test.ts
       - run: node --test tests/sic-compartment-encounter.test.ts tests/sic-directional-reception-transfer.test.ts
       - run: node --test tests/sic-ordered-feedback-transfer.test.ts tests/sic-feedback-partitions.test.ts
+      - run: node --test tests/sic-channel-mixture-transfer.test.ts
+      - run: node --test tests/sic-reception-control-transfer.test.ts tests/sic-reception-sequence.test.ts
 
   cohort-replays:
     name: Continuity / ${{ matrix.name }}

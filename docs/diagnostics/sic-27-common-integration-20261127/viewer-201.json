@@ -1,0 +1,93 @@
+{
+  "schema": "sic.viewer-validation.v1",
+  "sourceCommit": "f4e7a3bd760b9bcdbbb15c00f850f055fbeaaaa1",
+  "sourceTree": "0b4662930918e6515d651096d09e63c27b84360b",
+  "siteVersion": 201,
+  "interface": "local managed preview of the exact published source",
+  "mode": "sic",
+  "entry": "game selector and Run to next level buttons",
+  "runs": [
+    {
+      "code": "MIND",
+      "start": 1,
+      "initialActions": 0,
+      "initialCompleted": 0,
+      "cumulativeCommands": [
+        8,
+        16,
+        31,
+        51,
+        69,
+        93
+      ],
+      "levelCommands": [
+        8,
+        8,
+        15,
+        20,
+        18,
+        24
+      ],
+      "officialMessage": "The game reports WIN.",
+      "actions": 93,
+      "levelsSolved": 6,
+      "newSessionOrResetDuringRun": false,
+      "validation": "Browser CUA visible controls and rendered session counters"
+    },
+    {
+      "code": "CRAF",
+      "start": 1,
+      "initialActions": 0,
+      "initialCompleted": 0,
+      "cumulativeCommands": [
+        9,
+        20,
+        36,
+        55,
+        79,
+        106
+      ],
+      "levelCommands": [
+        9,
+        11,
+        16,
+        19,
+        24,
+        27
+      ],
+      "officialMessage": "The game reports WIN.",
+      "actions": 106,
+      "levelsSolved": 6,
+      "newSessionOrResetDuringRun": false,
+      "validation": "Browser CUA visible controls and rendered session counters"
+    },
+    {
+      "code": "CASC",
+      "start": 1,
+      "initialActions": 0,
+      "initialCompleted": 0,
+      "cumulativeCommands": [
+        6,
+        20,
+        42,
+        62,
+        73,
+        95
+      ],
+      "levelCommands": [
+        6,
+        14,
+        22,
+        20,
+        11,
+        22
+      ],
+      "officialMessage": "The game reports WIN.",
+      "actions": 95,
+      "levelsSolved": 6,
+      "completedPlans": 94,
+      "newSessionOrResetDuringRun": false,
+      "validation": "Browser CUA visible controls and rendered session counters"
+    }
+  ]
+}
