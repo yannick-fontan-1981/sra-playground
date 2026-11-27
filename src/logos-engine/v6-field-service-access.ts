@@ -157,7 +157,7 @@ export class FieldServiceMemory {
       config.roles, 'measure_envelope_' + phase, [], [observation.observation_ref, ...context.evidence]);
   }
 
-  private proposeFill(observation: R, rows: NativeRows, maxPrefix: number, config: R, base: R | null): R | null {
+  offerEnvelopeFill(observation: R, rows: NativeRows, _maxPrefix: number, config: R): R | null | undefined {
     const cfg = config.envelope_fill_question, context = this.fillContext;
     if (truth(cfg) && truth(context) && context!.epoch === observation.level_epoch && ['repeat', 'contrast', 'repeat_contrast'].includes(context!.phase)) {
       const ctx = context!;
@@ -173,7 +173,7 @@ export class FieldServiceMemory {
       }
       if (truth(target)) return this.fillQuestion(observation, rows, target!, cfg, ctx.phase);
     }
-    return this.proposeNested(observation, rows, maxPrefix, config, base);
+    return undefined;
   }
 
   initializeService(rows: NativeRows): R | null {
@@ -189,8 +189,8 @@ export class FieldServiceMemory {
       evidence: ctx.evidence, hypothesis: 'Isolate the correlated branch without the novel observed content replacement, then measure the previously observed input. Spatial association and usefulness are unconfirmed.', attempts: 0 });
   }
 
-  private proposeField(observation: R, rows: NativeRows, maxPrefix: number, config: R, base: R | null): R | null {
-    if (!truth(config.field_service_question)) return this.proposeFill(observation, rows, maxPrefix, config, base);
+  offerFieldService(observation: R, rows: NativeRows, maxPrefix: number, config: R): R | null | undefined {
+    if (!truth(config.field_service_question)) return undefined;
     let context = this.serviceContext;
     if (!truth(context) && truth(this.fillContext) && this.fillContext!.phase === 'service_choice_required') context = this.initializeService(rows);
     if (truth(context) && context!.epoch === observation.level_epoch && ['isolate', 'serve'].includes(context!.phase)) {
@@ -202,7 +202,7 @@ export class FieldServiceMemory {
       return questionEnvelope(observation, plan, 'C_service_', 'field_service_experiment', 'field_service_plan', cfg.question + ' ' + ctx.hypothesis,
         { current_public_field_and_control_bound: true, previous_field_restoration_observed: true }, cfg.roles, 'conditional_field_' + ctx.phase, evidence, evidence);
     }
-    return this.proposeFill(observation, rows, maxPrefix, config, base);
+    return undefined;
   }
 
   bindTransfer(observation: R, rows: NativeRows, config: R): R | null {
@@ -232,10 +232,8 @@ export class FieldServiceMemory {
       { current_shapes_rebound: true, acquisition_epoch_retained: true, current_point_bound: true }, cfg.roles, phase, evidence, evidence);
   }
 
-  /** Already evaluated inherited proposal is used only if this own chain falls through. */
-  proposeService(observation: R, rows: NativeRows, _inputs: readonly R[], maxPrefix: number, config: R,
-    base: R | null = { status: 'abstained', reason: 'no_recurrent_line_question' }): R | null {
-    if (!truth(config.field_service_transfer)) return this.proposeField(observation, rows, maxPrefix, config, base);
+  offerFieldTransfer(observation: R, rows: NativeRows, _maxPrefix: number, config: R): R | undefined {
+    if (!truth(config.field_service_transfer)) return undefined;
     const model = this.transferModel;
     if (truth(model) && truth(model!.official_boundary_witness) && observation.level_epoch !== model!.acquisition_epoch) {
       const m = model!;
@@ -271,7 +269,18 @@ export class FieldServiceMemory {
       }
       return this.transferQuestion(observation, rows, ctx.forward, ctx, 'revalidate_conditional_service', config);
     }
-    return this.proposeField(observation, rows, maxPrefix, config, base);
+    return undefined;
+  }
+
+  /** Only undefined delegates. Both a null refusal and an explicit abstention
+   * end this source-ordered selection before the inherited question. */
+  proposeService(observation: R, rows: NativeRows, _inputs: readonly R[], maxPrefix: number, config: R,
+    base: R | null = { status: 'abstained', reason: 'no_recurrent_line_question' }): R | null {
+    for (const offer of [this.offerFieldTransfer, this.offerFieldService, this.offerEnvelopeFill]) {
+      const result = offer.call(this, observation, rows, maxPrefix, config);
+      if (result !== undefined) return result;
+    }
+    return this.proposeNested(observation, rows, maxPrefix, config, base);
   }
 
   private recordNested(before: R, command: R, after: R, rows: NativeRows, later: NativeRows, proposal: R): R[] {

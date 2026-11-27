@@ -83,20 +83,35 @@ test('VALV releases the three catalog experiments, acquires their distinct measu
       assert.deepEqual([ctx.repeatable_extent_change, ctx.phase], [false, 'contrast']);
     }
     if (turn === 3) assert.deepEqual([p.kind, plan.phase, plan.selected.point], [fill, 'contrast', [8, 50]]);
-    if (turn === 4) assert.equal(event('envelope_fill_context').context.restored_measured_fields, true);
+    if (turn === 4) {
+      assert.deepEqual(observation(1).frame, observation(3).frame, 'same board as T2, different acquired phase');
+      assert.deepEqual([plan.phase, plan.selected.point], ['repeat_contrast', [8, 50]]);
+      assert.equal(event('envelope_fill_context').context.restored_measured_fields, true);
+    }
     if (turn === 5) {
+      assert.deepEqual(observation(0).frame, observation(4).frame, 'restored board, different acquired need');
       assert.deepEqual([p.kind, plan.phase, plan.selected.point], [field, 'isolate', [50, 33]]);
       const ctx = event('field_service_context').context;
       assert.deepEqual([ctx.field_contents_preserved, ctx.paired_control_orientation_changed, ctx.phase], [true, true, 'serve']);
     }
-    if (turn === 6) assert.deepEqual([p.kind, plan.phase, plan.selected.point], [field, 'serve', [32, 50]]);
+    if (turn === 6) {
+      assert.deepEqual([p.kind, plan.phase, plan.selected.point], [field, 'serve', [32, 50]]);
+      const ctx = event('field_service_context').context;
+      assert.equal(ctx.attempts, 1);
+      assert.equal(ctx.latest_fields[ctx.other_field.id].appearance_digest, ctx.isolated_field_before);
+    }
     if (turn === 10) assert.deepEqual(event('field_service_transfer').model.official_boundary_witness, [plan.observation_ref, outcome.observation_ref]);
     if (turn === 11) {
       assert.deepEqual([p.kind, plan.epoch, plan.phase, plan.selected.point], [transfer, 2, 'revalidate_source_access', [11, 35]]);
       const attempts = event('field_service_transfer').context.attempted_controls;
       assert.deepEqual([attempts.at(-1).point, attempts.at(-1).from, attempts.at(-1).to], [[11, 35], 'horizontal', 'vertical']);
     }
-    if (turn === 12) assert.deepEqual([p.kind, plan.phase, plan.selected.point], [transfer, 'revalidate_conditional_service', [32, 51]]);
+    if (turn === 12) {
+      assert.deepEqual([p.kind, plan.phase, plan.selected.point], [transfer, 'revalidate_conditional_service', [32, 51]]);
+      const ctx = event('field_service_transfer').context, change = ctx.new_field_observations.at(-1);
+      assert.deepEqual([ctx.source_revalidated, ctx.service_count, change.changed_pixels, change.fields.length], [true, 1, 34, 2]);
+      assert.deepEqual(change.evidence, [plan.observation_ref, outcome.observation_ref]);
+    }
   }
   assert.deepEqual([counts.get(fill), counts.get(field), counts.get(transfer)], [3, 6, 6]);
 });
@@ -136,4 +151,68 @@ test('VALV rejects transfer on the same new epoch image without its dated offici
   assert.ok(removed > 0);
   assert.deepEqual([decision.kind, decision.family, decision.proposal.kind, decision.command?.data],
     ['action', 'public_occurrence_recall', 'nested_control_experiment', { x: 32, y: 51 }]);
+});
+
+for (const [turn, kind, provider] of [
+  [2, fill, 'offerEnvelopeFill'], [5, field, 'offerFieldService'], [11, transfer, 'offerFieldTransfer'],
+] as const) {
+  test('VALV continues selection after withdrawal of the actual ' + kind + ' offer', async t => {
+    const original = FieldServiceMemory.prototype[provider];
+    let withdrawn = 0;
+    t.mock.method(FieldServiceMemory.prototype, provider, function (this: FieldServiceMemory, ...args: Parameters<typeof original>) {
+      const offer = original.apply(this, args);
+      if (args[0].revision !== turn || offer?.kind !== kind) return offer;
+      withdrawn++;
+      return undefined;
+    });
+    const game = await start();
+    for (let i = 1; i < turn; i++) { await game.decision(); await game.advance(); }
+    const next = await game.decision();
+    assert.ok(withdrawn > 0);
+    assert.deepEqual([next.kind, next.family, next.proposal.kind, next.command?.data, next.guard?.admitted],
+      ['action', 'public_occurrence_recall', 'nested_control_experiment', { x: 32, y: turn === 11 ? 51 : 50 }, true]);
+    assert.equal(next.proposal.question.reason, 'test_unique_nested_compact_motif');
+  });
+}
+
+for (const [turn, kind, eventKind, refusal] of [
+  [5, field, 'field_service_context', 'field_service_no_effect'],
+  [11, transfer, 'field_service_transfer', 'transferred_service_no_effect'],
+] as const) {
+  test('VALV measures the nonresponse before suspending ' + kind, async t => {
+    const record = FieldServiceMemory.prototype.record;
+    let scoped: Row | undefined;
+    t.mock.method(FieldServiceMemory.prototype, 'record', function (this: FieldServiceMemory, ...args: Parameters<typeof record>) {
+      const events = record.apply(this, args);
+      if (args[0].revision === turn) scoped = events.find(e => e.kind === eventKind);
+      return events;
+    });
+    const game = await start();
+    for (let i = 1; i < turn; i++) { await game.decision(); await game.advance(); }
+    const ticket = await game.decision();
+    assert.equal(ticket.proposal.kind, kind);
+    const outcome = await game.advance({ ...observation(turn - 1), stepIndex: turn });
+    assert.equal(scoped?.stop_reason, refusal);
+    assert.deepEqual(scoped?.evidence, [ticket.proposal.nested_control_plan.observation_ref, outcome.observation_ref]);
+    const next = await game.decision();
+    assert.deepEqual([next.kind, next.command], ['stopped', null]);
+  });
+}
+
+test('within field service a terminal refusal ends selection while an unavailable provider delegates', t => {
+  const memory = new FieldServiceMemory(), rows = observation(0).frame;
+  const base = { status: 'abstained', reason: 'no_recurrent_line_question' };
+  const blocked = { status: 'abstained', reason: 'service_transfer_current_shape_not_bound' };
+  let middle: Row | null = blocked;
+  t.mock.method(memory, 'offerFieldTransfer', () => undefined);
+  t.mock.method(memory, 'offerFieldService', () => middle);
+  const fillOffer = t.mock.method(memory, 'offerEnvelopeFill', () => undefined);
+  const select = () => memory.proposeService({}, rows, [], 1, {}, base);
+  assert.equal(select(), blocked);
+  middle = null;
+  assert.equal(select(), null);
+  assert.equal(fillOffer.mock.callCount(), 0);
+  t.mock.method(memory, 'offerFieldService', () => undefined);
+  assert.equal(select(), base);
+  assert.equal(fillOffer.mock.callCount(), 1);
 });
