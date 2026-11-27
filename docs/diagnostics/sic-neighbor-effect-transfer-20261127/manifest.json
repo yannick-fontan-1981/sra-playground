@@ -1,0 +1,168 @@
+{
+  "schema": "sic.neighbor-effect-transfer-diagnostic.v1",
+  "baselineSource": "fe822410b2d544553d6b8b2536c3af45cfb9e10f",
+  "baselineTree": "487bf0c739ba57dccfbb7cb9255e8eb6b0a4b3ce",
+  "mainEquivalent": "c97797426f619db16de5b29738a8d4209c78ebca",
+  "code": "VOIS",
+  "startLevel": 1,
+  "mode": "sic",
+  "workers": 1,
+  "diagnosticOnly": true,
+  "budgetQualification": false,
+  "capturedCommands": 135,
+  "firstDecision": 126,
+  "firstFiveCommands": [
+    14,
+    18,
+    34,
+    23,
+    36
+  ],
+  "prefixHashes": [
+    "cbba416cc9be373a894c1ee08324922d8c0eb71a7dcad2c551a2593bee83f186",
+    "3f135185cabbc08b0b18ba5be3eeb843689afbfafe442b2acd752d6998899439",
+    "a973efa26aeddc92bbc8f941bc11ec99d561fef31953b7e90eb393425150671f",
+    "490c1ffbfc4fe7b94d5bc4d3893c316e7d838c46351399b9400c9481e751cd19",
+    "6548237e4ed5d62b7b38e01186e22a03ec1e283a8e338deeff1d341ed588cf79"
+  ],
+  "roles": {
+    "knownControls": {
+      "ACTION1": {
+        "delta": [
+          -1,
+          0
+        ]
+      },
+      "ACTION2": {
+        "delta": [
+          1,
+          0
+        ]
+      },
+      "ACTION3": {
+        "delta": [
+          0,
+          -1
+        ]
+      },
+      "ACTION4": {
+        "delta": [
+          0,
+          1
+        ]
+      }
+    },
+    "knownNeighborhoodMasks": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "12",
+      "13",
+      "14"
+    ],
+    "observedNeighborEffect": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:117:frame:09ba56664c3f6f9c",
+    "witnessHasNeighborEffect": false
+  },
+  "counterfactual": [
+    {
+      "zone": [
+        5,
+        5,
+        17,
+        17
+      ],
+      "retainedEffectPlan": null
+    },
+    {
+      "zone": [
+        33,
+        9,
+        53,
+        29
+      ],
+      "retainedEffectPlan": {
+        "support": {
+          "cells": [
+            [
+              4,
+              10
+            ]
+          ],
+          "evidence": [
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:3:revision:56:frame:326e82b4ac9358b9",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:3:revision:62:frame:0dc6391691dc842b",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:3:revision:66:frame:7dd4ca4100a4b83f",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:3:revision:51:frame:2fef7d324241158e",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:3:revision:47:frame:f53908b59a7bb680",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:117:frame:09ba56664c3f6f9c"
+          ],
+          "unknownMasks": [
+            11
+          ]
+        },
+        "orderedLength": 71,
+        "first": {
+          "cell": [
+            0,
+            9
+          ],
+          "slot": [
+            3,
+            9
+          ],
+          "expected": null,
+          "ordered": true,
+          "command": {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 39,
+              "y": 3
+            }
+          }
+        }
+      }
+    }
+  ],
+  "artifact": {
+    "name": "public-evidence.tar.gz",
+    "bytes": 1938845,
+    "sha256": "30ae6c243e2fa00bf00f05f424fcaa2cbde8b8e775af75f76abbe95b9cfd8957"
+  },
+  "members": [
+    {
+      "name": "vois-l6-public-fe822410.json",
+      "bytes": 15185334,
+      "sha256": "cbe5aff7b8cc3619e23cb469eae7e8e74212400aa24f57e6e04e90ba671aae43"
+    },
+    {
+      "name": "vois-l6-plan-diagnosis-fe822410.json",
+      "bytes": 14804,
+      "sha256": "17cd55619db6462587f40480a72808fb9c8938cf34fffe4614f9920949d71f68"
+    },
+    {
+      "name": "capture-population-boundary.mjs",
+      "bytes": 13566,
+      "sha256": "8650ea0bbfa3b0c65db406f13cab0e3886e43c2a2066450bb85c69e3222d49aa"
+    },
+    {
+      "name": "probe-population-plan.mjs",
+      "bytes": 2470,
+      "sha256": "7d34e3829508d8d1de3ac93c01997a9cc7539502027d8ec147816abe8addcc66"
+    }
+  ],
+  "validation": {
+    "targetedTests": 16,
+    "typecheck": "passed",
+    "strictReplay": "pending",
+    "fullContinuity": "pending",
+    "viewer": "pending"
+  }
+}

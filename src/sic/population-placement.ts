@@ -33,7 +33,8 @@ type State = { epoch: number; scene: Scene; selection: Cell | null; active: bool
   tried: string[]; evidence: string[]; frame: string; stopped: boolean; probes?: number; changedNeighbors?: Cell[];
   assignment?: Assignment | null; ordered?: Choice[]; neighborhood?: Neighborhood; neighborEffectRef?: string;
   support?: Support | null; rejectedSupport?: string[]; awaitingMotor?: boolean };
-type PlacementWitness = { epoch: number; score: number; pitch: number; controls: Controls; evidence: string[]; neighborhood?: Neighborhood };
+type PlacementWitness = { epoch: number; score: number; pitch: number; controls: Controls; evidence: string[];
+  neighborhood?: Neighborhood; neighborEffectRef?: string };
 type Choice = { command: NativeCommand; cell: Cell; expected: Cell | null; slot: Cell | null; retainsSlot?: boolean; ordered?: boolean;
   inquiry?: { stationary: Cell; mask: number } };
 type Proposal = NativeProposal & { local: State; choice: Choice; route?: Choice[]; strategy: keyof typeof populationPlacementStrategies; needId: string };
@@ -370,7 +371,8 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
       let local: State = prior ?? { epoch: observation.level_epoch, scene, selection: click?.scene.selection ?? null, active: false,
         controls: transferred?.controls ?? {}, tried: [], evidence: click ? [click.beforeRef, click.afterRef] : transferred?.evidence ?? [],
         frame: observation.frame_hash, stopped: false,
-        ...(transferred?.neighborhood ? { neighborhood: transferred.neighborhood } : {}) };
+        ...(transferred?.neighborhood ? { neighborhood: transferred.neighborhood } : {}),
+        ...(transferred?.neighborEffectRef ? { neighborEffectRef: transferred.neighborEffectRef } : {}) };
       if (local.support && !assessPopulationSupport(scene, local.support.cells, local.neighborhood ?? {}, local.neighborEffectRef)) {
         local = { ...local, support: null, ordered: [] };
       }
@@ -560,7 +562,10 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
         if (local.scene.target.every(([y, x]) => expected.has(key([y, x])))) {
           witness = { epoch: after.level_epoch, score: after.levels_completed, pitch: local.scene.q, controls: local.controls,
             evidence: [...local.evidence.slice(-3), before.observation_ref, after.observation_ref],
-            ...(local.neighborhood ? { neighborhood: local.neighborhood } : {}) };
+            ...(local.neighborhood ? { neighborhood: local.neighborhood } : {}),
+            // Keep the observed dependence without inventing the response to a
+            // new neighborhood. assessPopulationSupport still marks it unknown.
+            ...(local.neighborEffectRef ? { neighborEffectRef: local.neighborEffectRef } : {}) };
         }
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
