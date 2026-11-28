@@ -76,7 +76,31 @@ Le pilote de transfert fournit la méthode de réduction. Regrouper les échecs 
 2. Il assemble une capacité acquise avec une autre. La première peut fournir, prolonger ou faire disparaître une condition de la seconde. Une fois vérifiée, la composition expose ses conditions d’emploi, les effets à préserver, le résultat vérifiable et la preuve, comme une capacité élémentaire. L’agenda peut alors la demander comme sous-but d’un autre plan. Au prochain tour de cette boucle, une troisième capacité est combinée avec le résultat de la seconde étape. Un retour contraire invalide les dépendances qu’il touche et permet de reprendre avec les acquis encore valides.
 3. L’opérateur fige une réserve par structure de dépendance. À départ et plafonds identiques, il compare le répertoire figé et le composeur, puis retire la seule acquisition qui explique le premier écart. Il consigne séparément les ouvertures utilisées, les économies de gestes et les gains de niveaux. L’accès à SS08–SS25 reste réservé à un candidat qui gagne des niveaux supplémentaires sur plusieurs familles tenues à l’écart. [Protocole et résultats du banc](../../../experiments/sic-blind-composition/BILAN.md)
 
-Le dernier contraste source donne un exemple où l’ordre compte. Le contact de SS01 ouvre trois cases que l’actif utilise. Depuis le même préfixe, tester une autre commande avant l’approche modifie le retour de mouvement et fait perdre cette preuve d’ouverture. C’est une raison de tester la condition qui lie les deux étapes et de mesurer son coût. Les deux bras restent à 11 niveaux sur 21 et aucune victoire supplémentaire ne qualifie ce changement. [Contact et retours source](../../../experiments/sic-blind-composition/UNFRAMED-CONTACT.md)
+Le contraste source de SS01 montre que l’ordre compte. Le contact ouvre trois cases que l’actif utilise. Depuis le même préfixe, tester une autre commande avant l’approche modifie le retour de mouvement et fait perdre cette preuve d’ouverture. Le moteur qui déclenche cet essai après le vrai contact gagne dans les deux présentations redessinées, et la campagne passe de 11 à 13 niveaux sur 21. Les deux gains proviennent de la même mécanique. [Contact et retours source](../../../experiments/sic-blind-composition/UNFRAMED-CONTACT.md)
+
+### Corpus de 10 000 situations résolubles par primitive
+
+La cible est de 10 000 situations résolubles pour chacune des quinze primitives. Chaque situation compte pour la primitive dont elle exige une décision observable. Un oracle indépendant du composeur établit l’existence d’une solution sous le plafond. Dans un second contrôle, on retire la preuve ou l’opération de la primitive testée. Les cas où l’inférence n’est plus possible, ainsi que les cas où l’abstention est correcte, restent dans des séries de contraste et ont leurs propres compteurs. Pour le moteur, la preuve de réussite vient du résultat rejoué, de la décision attendue et du coût sous le même plafond.
+
+| Primitive | Variations mécaniques à couvrir |
+| --- | --- |
+| P01 | Cible unique, rivale, cachée, déplacée ou perceptible depuis une autre vue. |
+| P02 | Réemploi exact, changement de rôle, portée réduite et preuve devenue périmée. |
+| P03 | Hypothèses de déplacement, de cause, d’identité ou de règle avec retours discriminants différents. |
+| P04 | Expériences à coûts variés, retour différé, effets irréversibles et choix dont le résultat départage plusieurs hypothèses. |
+| P05 | Effets de commande qui changent avec le sujet, la phase, le terrain ou la ressource. |
+| P06 | Prérequis concurrents, emboîtés ou à revalider avant la reprise du parent. |
+| P07 | Accès direct, contournement, changement de vue, franchissement conditionnel et appui maintenu. |
+| P08 | Objectifs de géométrie, de ressources ou d’ordre avec contraintes qui se combinent. |
+| P09 | Relais, persistance, échéance, ressource, preuve, conjonction et interactions entre eux. |
+| P10 | Conservation d’un acquis, voie de retour, réserve consommable et perte latérale. |
+| P11 | Garde admissible, ticket périmé, retour partiel et incompatibilité qui interrompt le plan. |
+| P12 | Retour compatible, réfutation locale, évolution non attribuable et mise à jour à portée bornée. |
+| P13 | Écart local, objectif déplacé, perte d’un prérequis et reprise par un autre ordre. |
+| P14 | Phase observable ou cachée, délais, file, fenêtre qui expire et retours intermédiaires décisifs. |
+| P15 | Offres équivalentes, dominance, coût d’information, repli et concurrence sous quota. |
+
+Les quotas se répartissent entre familles de dépendances et entre difficultés. Un changement de palette, de nom ou d’ordre d’énumération sert de test d’invariance. Il ne crée pas de situation structurelle supplémentaire. La réserve garde des structures et des graines hors développement. Des lots distincts testent ensuite les compositions de deux à plusieurs capacités et le réemploi d’une composition comme sous-but. Chaque lot publie séparément le nombre de cas qualifiés par l’oracle, les passages autonomes, le premier écart et la régression éventuelle. Une victoire sur un simulateur de composition et une victoire native ont chacune leur mesure.
 
 ## À quoi serviront les autres L2 de Custom 4 après le gel ?
 

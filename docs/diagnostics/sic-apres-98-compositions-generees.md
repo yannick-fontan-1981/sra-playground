@@ -1,5 +1,23 @@
 # Compositions d’effets générées après les 98 démarches
 
+## Corpus P09 de 10 000 situations résolubles
+
+Sur `f44982ce`, le générateur remplit le quota après validation de la faisabilité par un simulateur indépendant du composeur. Il varie les dépendances entre quatre à sept passages, la conservation des appuis, les fenêtres, le stock et les obligations de mesure. Les signatures excluent les noms et l’ordre de présentation des commandes ainsi que les paramètres temporels qui ne régissent aucun effet. Les neuf familles ont 666 à 1 334 cas chacune. Les plans minimaux vont de 5 à 21 gestes. La profondeur des dépendances entre passages va de 1 à 7.
+
+| Partition | Situations résolubles | Procédure gloutonne | Composeur avec rejeu vérifié |
+| --- | ---: | ---: | ---: |
+| Six familles de développement | 8 000 | 5 334 | 8 000 |
+| Trois familles séparées par construction | 2 000 | 667 | 2 000 |
+| Total | 10 000 | 6 001 | 10 000 |
+
+Les 10 000 signatures diffèrent selon la normalisation du générateur. L’audit ne relève aucun plan invalide, écart à l’oracle ni perte d’une réussite gloutonne. La campagne dure 117 secondes. Le rapport a pour SHA-256 `fff59e3fedca3776249b08e2b1c78d73662d07fd6186a7bd731c91b34086d2ac`. Le composeur reçoit les effets déclarés du simulateur. L’acquisition de ces effets à partir de retours publics et les victoires en partie native ont des épreuves séparées.
+
+```powershell
+node scripts/sic-effect-composer-campaign.mjs --count 10000 --seed 261128 --positive-corpus --state "$env:TEMP/sic-P09-positive-f44982ce-10000"
+```
+
+## Premier banc mixte avec contrôles négatifs
+
 Le candidat commun `096bc103fa5ec1af6b141968d39566e20051496e` contient le composeur de réserve de pression `c515ea14` et le classement P05 en mode d’observation `189b96ee`. Ce banc généré exécute le même code de composition que l’appelant de réserve de pression. Il reprend le générateur, le simulateur indépendant et la reprise SQLite du pilote `145b8c76`. [Composeur de réserve de pression](sic-pressure-composer-port.md) · [Observation P05](../architecture/sic-agenda-local-p05-shadow.md)
 
 ## Résultat sur le code commun
