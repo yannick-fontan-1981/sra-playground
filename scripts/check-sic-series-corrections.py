@@ -42,12 +42,15 @@ def comb(r):
     nominal = c["nominal"]["steps"]
     assert len(nominal) == len(g["nominal"]["steps"]) == 16
     assert [s["after"]["packet"] for s in nominal] == [s["after"]["packet"] for s in g["nominal"]["steps"]]
-    for name, arm, index in (("contradiction-n1", "n1", 2), ("contradiction-n2", "n2", 8)):
+    contrasts = (("contradiction-n1", "n1", 2, ["ACTION1", {}]),
+                 ("contradiction-n2", "n2", 8, ["ACTION6", {"x": 45, "y": 20}]))
+    for name, arm, index, fallback in contrasts:
         old, new = g[arm]["steps"][index]["pre"], c["runs"][name]["steps"][index]["pre"]
         assert old["plan"]["compiled"] and new["plan"] is None
         assert old["cut"]["pre"]["hash"] == new["cut"]["pre"]["hash"]
         assert old["cut"]["pre"]["used"]["counterexamples"] == new["cut"]["pre"]["used"]["counterexamples"]
         assert new["cut"]["result"]["reason"] == "factor_product_independence_refuted_in_current_scope"
+        assert new["command"] == fallback
     local = c["runs"]["locale"]["steps"][8]
     plan = local["pre"]["plan"]
     assert plan["compiled"] is None and len(plan["commands"]) == 1
@@ -61,7 +64,8 @@ def comb(r):
     assert other["prior"]["epoch"] == 1 and other["epoch"] == 2 and other["used"] is None
     return {"nominalTickets": len(nominal), "nativePrefixes": 4 + len(c["runs"]) + 3,
             "firstDifferences": [3, 9], "localTurn": 9, "localBefore": plan["local"]["before"],
-            "localAfter": plan["local"]["after"], "scopedRefusals": ["locale-contredite", "ancienne", "etrangere"]}
+            "localAfter": plan["local"]["after"], "scopedRefusals": ["locale-contredite", "ancienne"],
+            "foreignEpochIgnored": True}
 
 
 parser = argparse.ArgumentParser(description=__doc__)

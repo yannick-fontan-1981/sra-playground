@@ -1,0 +1,33 @@
+{
+  "versions": {
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "24e9743683b22b2256104d9f4de2c84abb1a1de3",
+    "attendus": "81f2d53df57ff3f589b39ec613b708da368db6e3"
+  },
+  "nominalTickets": 16,
+  "nativePrefixes": 13,
+  "firstDifferences": [
+    3,
+    9
+  ],
+  "localTurn": 9,
+  "localBefore": [
+    4,
+    4,
+    11
+  ],
+  "localAfter": [
+    4,
+    8,
+    11
+  ],
+  "scopedRefusals": [
+    "locale-contredite",
+    "ancienne"
+  ],
+  "foreignEpochIgnored": true,
+  "tests": 370,
+  "author": "9826a2663375a5c605dbc4e2310ebf4be212a085",
+  "rawSHA256": "7f533488668aa529718bafd6ffb1702352a599344b0ca1df2df92b556b1a5f05",
+  "archiveSHA256": "c4eb4811d4a16e024081fa9e50751b69fb9aa2355da11d0117f563b7c3991c82"
+}
