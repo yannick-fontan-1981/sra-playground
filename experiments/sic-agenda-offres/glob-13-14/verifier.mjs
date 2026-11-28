@@ -11,6 +11,8 @@ import { git,versions,withEngine } from '../moteur-reference.mjs';
 const {values}=parseArgs({options:{pyodide:{type:'string'},recu:{type:'string'},source:{type:'string'},cas:{type:'string'}}});
 const vendor=resolve(values.pyodide);
 const cases=['nominal','image-finale','deplace','commande','reference','inertie','cible','placement','acces','dependance'];
+const cmd=s=>[s.pre.cmd,s.pre.data];
+const pairs=e=>Object.values(e.samples).reduce((count,group)=>count+group.length,0);
 if(values.cas) {
   assert.ok(cases.includes(values.cas));
   const card=await readCard(new URL('public/'+values.cas+'.json',import.meta.url));
@@ -18,8 +20,6 @@ if(values.cas) {
 } else {
   await verify();
 }
-const cmd=s=>[s.pre.cmd,s.pre.data];
-const pairs=e=>Object.values(e.samples).reduce((count,group)=>count+group.length,0);
 function parity(a,b,length,label) {
   assert.ok(a.length>=length&&b.length>=length,label);
   for(let i=0;i<length;i++) assert.equal(digest(a[i]),digest(b[i]),label+' geste '+(i+1));
