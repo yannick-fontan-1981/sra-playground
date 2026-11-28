@@ -1,0 +1,36 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départsService": 4,
+      "gestesService": 36,
+      "départsPhysiquesComplémentaires": 2,
+      "gestesPhysiquesComplémentaires": 16,
+      "testsAuteur": 4
+    },
+    {
+      "sha": "9b41b8ba322fceb2737a99dfa264a4d809055bad",
+      "départsService": 4,
+      "gestesService": 36,
+      "départsPhysiquesComplémentaires": 2,
+      "gestesPhysiquesComplémentaires": 16,
+      "testsAuteur": 4
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "occurrencesCatalogue": 1,
+  "comparaisons": 1749,
+  "fenêtre": [
+    27,
+    18
+  ],
+  "témoinPrécoce": {
+    "gain": 0,
+    "pixels": 0
+  },
+  "gainT9": [
+    2,
+    1
+  ],
+  "retourStationnaire": false
+}
