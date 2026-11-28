@@ -1,0 +1,111 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 9,
+      "gestes": 111,
+      "testsAuteur": 4
+    },
+    {
+      "sha": "14a185d909d3b3cb42fcc8584b841865b8ff6dd0",
+      "départs": 12,
+      "gestes": 149,
+      "testsAuteur": 7
+    }
+  ],
+  "nominal": {
+    "catalogue": 16,
+    "prolongé": 19,
+    "occurrences26Catalogue": 13,
+    "occurrences31Catalogue": 1,
+    "occurrences31Prolongé": 2
+  },
+  "ligne26": {
+    "invitation": [
+      8,
+      9
+    ],
+    "candidatT3": "visible_relation_change_candidate",
+    "translationT4": [
+      0,
+      -1
+    ],
+    "pixels": [
+      12,
+      44
+    ],
+    "retrait": [
+      "observed_frontier",
+      "experiment",
+      "ACTION1",
+      {}
+    ],
+    "suite": [
+      "oriented_coupling",
+      "conditional_oriented_coupling",
+      "ACTION5",
+      {}
+    ],
+    "réserve": {
+      "composantes": [
+        12
+      ],
+      "stationnaire": [
+        "observed_frontier",
+        "experiment",
+        "ACTION1",
+        {}
+      ]
+    }
+  },
+  "ligne31": {
+    "sites": [
+      {
+        "site": [
+          36,
+          29
+        ],
+        "action_ref": "ACTION1"
+      },
+      {
+        "site": [
+          32,
+          33
+        ],
+        "action_ref": "ACTION3"
+      }
+    ],
+    "pixels": [
+      0,
+      44
+    ],
+    "autre": [
+      "pre_score_contact",
+      "observed_effect_access",
+      "ACTION3",
+      {}
+    ],
+    "retrait": [
+      "oriented_coupling",
+      "conditional_oriented_coupling",
+      "ACTION3",
+      {}
+    ],
+    "mêmeRetourPhysique": true,
+    "fausseAttributionRejetée": true,
+    "sansAcquisition": [
+      36,
+      29
+    ],
+    "stationnaireT16": [
+      32,
+      33
+    ],
+    "stationnaireT17": [
+      "oriented_coupling",
+      "conditional_oriented_coupling",
+      "ACTION3",
+      {}
+    ]
+  }
+}
