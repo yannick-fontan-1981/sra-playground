@@ -1,0 +1,7 @@
+# ZIPP · présélection indépendante des lignes 67 et 71
+
+Comparer le moteur gelé `d0e7527ca8033bd805a6d7a8bb021eff62e87021` et le candidat annoncé `421dc6a58d051e8e418db80a98cf1e01755dab40`. Départ N1, catalogue natif de 16 gestes et 600 gestes par niveau. Conserver la même session au changement de niveau. [Critères auteur](https://github.com/yannick-fontan-1981/sra-playground/blob/29430798/docs/architecture/sic-zipp-lignes-67-71.md)
+
+- Ligne 67. À position identique, retirer uniquement le reçu du second pas, sans changer les autres mesures. Distinguer la vocation du ticket, la longueur du préfixe, la prochaine preuve nécessaire et le résultat du vrai geste. Comparer au témoin qui retire un reçu antérieur sans rapport si deux reçus clairement distincts sont accessibles. Essayer un retour stationnaire au premier pas discriminant et vérifier si la famille acquiert encore une extension.
+- Ligne 71. Relever le porteur du contour, la preuve qui autorise ACTION5 et sa garde. Au même ticket, soumettre un contour différent en gardant la référence du reste du contexte. Vérifier le refus. Dater le paquet physique T14, compter ses changements de pixels et lire son effet propre. Le T15 garde une attribution distincte, et une réponse neutre ne prouve pas un effet.
+- Distinguer d’éventuelles preuves partagées et leur consommation dans le service. Décrire chaque verdict avec son dénominateur, le premier écart, la fenêtre historique effectivement parcourue et le délai indépendant. Le verdict de la ligne 1 reste dans son propre lot.
