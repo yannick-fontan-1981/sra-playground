@@ -283,10 +283,17 @@ export class Containment {
     return result;
   }
 
+  chooseCalibration(actions: readonly string[]): string | null {
+    return actions[0] ?? null;
+  }
+
   choices(_observation: ContainmentObservation, inputs: readonly ContainmentCommand[]): ContainmentAction[] {
     const pos = this.positions, plain = inputs.filter(command => !addressed(command)).map(command => command.action_ref).sort();
     const unseen = plain.filter(key => !this.vectors.has(key) && !this.noMoves.has(keyOf([key, pos])));
-    if (unseen.length) return [['calibrate', this.active, { action_ref: unseen[0]! }, null]];
+    if (unseen.length) {
+      const calibration = this.chooseCalibration(unseen);
+      return calibration === null ? [] : [['calibrate', this.active, { action_ref: calibration }, null]];
+    }
     if (this.active === null || !this.vectors.size) return [];
     const all = pos.map((_, i) => i), access = pos.map((_, i) => this.graph(i, pos)), relaxed = pos.map((_, i) => this.graph(i, pos, all));
     const assignmentCost = (assignment: readonly number[]) => [assignment.reduce((sum, j, i) => sum + Number(!relaxed[i]!.has(pointKey(this.goals![j]!))), 0),
