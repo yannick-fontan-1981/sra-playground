@@ -1,0 +1,136 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 8,
+      "gestes": 55
+    },
+    {
+      "sha": "f6ff40f5e6c870ab5f897eaccdd1d43873944c5c",
+      "départs": 8,
+      "gestes": 55
+    }
+  ],
+  "nominal": {
+    "tickets": 16,
+    "containment": 3,
+    "reflected": 13,
+    "niveaux": 0
+  },
+  "ligne8": {
+    "normal": [
+      "containment",
+      "containment_and_contact",
+      "ACTION1",
+      0
+    ],
+    "vecteur": [
+      [
+        "ACTION1",
+        [
+          0,
+          -3
+        ]
+      ]
+    ],
+    "alternative": [
+      "containment",
+      "containment_and_contact",
+      "ACTION2",
+      0
+    ],
+    "autreVecteur": [
+      [
+        "ACTION2",
+        [
+          0,
+          3
+        ]
+      ]
+    ],
+    "retrait": [
+      "observed_frontier",
+      "experiment",
+      "ACTION1",
+      0
+    ],
+    "stationnaire": {
+      "kind": "containment_and_contact",
+      "family": "containment",
+      "action": "ACTION2",
+      "index": 0,
+      "ref": "ar25-qualification:epoch:1:revision:2:frame:dcb73927160522c2"
+    }
+  },
+  "ligne77": {
+    "normal": [
+      "reflected_cover",
+      "conditional_reflected_cover",
+      "ACTION3",
+      0
+    ],
+    "retraitPreuve": [
+      "containment",
+      "containment_and_contact",
+      "ACTION4",
+      0
+    ],
+    "retraitOffre": [
+      "containment",
+      "containment_and_contact",
+      "ACTION4",
+      0
+    ],
+    "reprise": {
+      "avant": [
+        {
+          "direct": [],
+          "reflected": [
+            [
+              17,
+              15
+            ]
+          ]
+        }
+      ],
+      "après": [
+        {
+          "direct": [],
+          "reflected": [
+            [
+              17,
+              15
+            ],
+            [
+              17,
+              16
+            ]
+          ]
+        }
+      ]
+    },
+    "partiel": {
+      "pixels": {
+        "real": 109,
+        "served": 64
+      },
+      "borne": [
+        [
+          15,
+          15
+        ],
+        [
+          24,
+          24
+        ]
+      ],
+      "suite": {
+        "kind": "containment_and_contact",
+        "family": "containment",
+        "action": "ACTION4",
+        "index": 0,
+        "ref": "ar25-qualification:epoch:1:revision:5:frame:c35e4e4d6f2ba0c4"
+      }
+    }
+  }
+}
