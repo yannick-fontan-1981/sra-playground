@@ -1,0 +1,24 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "19ffd927b588257ce54cf1a35c166ce41ecebf5b",
+    "attendus": "a472c396c9305aec2bd26e18d51f7380bad8c626"
+  },
+  "nominalCases": {
+    "9": 15,
+    "56": 1
+  },
+  "qualified": {
+    "9": "frozen"
+  },
+  "limitedEvidence": {
+    "56": "current enclosure, without a retained example in SPOR"
+  },
+  "key9": {
+    "turn1": "spor-qualification:epoch:1:revision:1:frame:ef7046fff5e68e4f",
+    "return1": "spor-qualification:epoch:1:revision:2:frame:9ec85219437aac82",
+    "turn2": "spor-qualification:epoch:1:revision:2:frame:9ec85219437aac82"
+  },
+  "nominalParityDigest": "3301e7b6f798267e938da064359fa88db56cadcb8ec5e7c42f853bfdcc441f2f"
+}
