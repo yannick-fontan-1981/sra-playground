@@ -34,9 +34,13 @@ V6AgentService.prototype.handle = async function (message) {
   }
   if (reply.ticket) {
     const t = reply.ticket, p = snapshot.proposal, plan = p.occluded_catalogue_plan;
+    const proof = plan?.evidence && {
+      candidate: plan.evidence.candidate, backgrounds: plan.evidence.backgrounds, prior_candidate_ids: plan.evidence.prior_candidate_ids,
+      supporting_event_digests: plan.evidence.supporting_event_digests, supporting_observation_refs: plan.evidence.supporting_observation_refs
+    };
     rows.push({ kind: 'ticket', turn: message.sequence + 1, id: t.id, ref: t.observationRef, level: t.level,
       owner: snapshot.lastDecision, offer: p.kind, mode: plan?.mode, action: t.actionRef, point: t.data, palette: plan?.target_palette,
-      key: plan?.trial_key, evidence: plan?.evidence, details: plan?.details, expected: p.steps[t.actionIndex]?.expected_after,
+      key: plan?.trial_key, evidence: proof, details: plan?.details, expected: p.steps[t.actionIndex]?.expected_after,
       guard: snapshot.trace.findLast(e => e.kind === 'before_guard')?.reason });
   }
   return reply;
