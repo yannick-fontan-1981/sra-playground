@@ -156,9 +156,31 @@ for (const epoch of [2, 3]) {
     assert.ok(actualBoundary && substituted);
     const next = await game.decision();
     assert.deepEqual([next.family, next.command.actionRef, next.command.data], ['observed_frontier', 'ACTION6', { x: 10, y: 14 }]);
-    assert.ok(!next.proposal.route_refs.includes(substituted));
+    assert.equal(next.proposal.facet_plan, undefined);
     const out = await game.advance();
     assert.equal(out.family, 'observed_frontier');
     assert.deepEqual([game.observation.level, game.observation.levelsCompleted], [epoch, epoch - 1]);
   });
 }
+
+test('10 does not attach an official gain to a portable method absent from the selected proposal', async t => {
+  const original = NativeFacetExamples.prototype.record;
+  let unattached = false;
+  t.mock.method(NativeFacetExamples.prototype, 'record', function (this: InstanceType<typeof NativeFacetExamples>,
+    ...args: Parameters<typeof original>) {
+    const [before, after, command, first, second, proposal, index] = args;
+    if (before.level_epoch !== 1 || after.level_epoch !== 2) return original.apply(this, args);
+    assert.ok(proposal.facet_plan.method && this.state().portable);
+    const selected = { ...proposal, facet_plan: { ...proposal.facet_plan, method: null } };
+    const event = original.call(this, before, after, command, first, second, selected, index);
+    assert.equal(event.status, 'official_boundary');
+    assert.equal(this.state().portable?.boundary_ref, undefined);
+    unattached = true;
+    return event;
+  });
+  const game = await start();
+  for (let n = 1; n <= 3; n++) { await game.decision(); await game.advance(); }
+  assert.ok(unattached);
+  assert.equal(game.observation.levelsCompleted, 1);
+  assert.equal((await game.decision()).family, 'observed_frontier');
+});
