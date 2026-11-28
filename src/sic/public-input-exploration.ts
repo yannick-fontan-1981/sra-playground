@@ -570,7 +570,8 @@ function panelTestKey(command: string, rows: NativeRows, box: NativeBox | null |
   return `${command}:${rows.slice(top, bottom + 1).map(row => row.slice(left, right + 1).join(',')).join('/')}`;
 }
 
-export function createSicPublicInputExploration(fallback = false, preferShorterCoverage = false): NativeFamily<Proposal> {
+export function createSicPublicInputExploration(fallback = false,
+  options: { preferShorterCoverage?: boolean; allowUnframedContact?: boolean } = {}): NativeFamily<Proposal> {
   let state = initial();
   let decide: NativeProgramHandle | undefined;
   const entryReturns = new WeakMap<EntryProposal, Promise<OrderedEntry>>();
@@ -945,7 +946,7 @@ export function createSicPublicInputExploration(fallback = false, preferShorterC
       const exchange = !panel && !pressure ? chooseExchange(local.exchange, local.travel, rows, remaining) : undefined;
       const exchangeKey = exchange?.command.action_ref;
       const coverage = !panel && !pressure && !exchange && local.coverage?.body
-        ? chooseCoverage(local.coverage, local.travel, rows, remaining, preferShorterCoverage) : undefined;
+        ? chooseCoverage(local.coverage, local.travel, rows, remaining, options.preferShorterCoverage) : undefined;
       const coverageKey = coverage?.command.action_ref;
       const coverageFrontier = coverageKey ? { action: coverageKey, probe: coverageKey, depth: 0, first: null } : null;
       const markTrial = !panel && !pressure && !exchange && !coverage ? chooseAnnotatedMarkContact(local.travel, rows, nonPoint) : undefined;
@@ -957,7 +958,7 @@ export function createSicPublicInputExploration(fallback = false, preferShorterC
         ? chooseSeparationTrial(local.travel, rows, nonPoint, local.separationTests ?? []) : undefined;
       const travel = contactTrial ? { command: contactTrial.command, target: contactTrial.actor.split(',').map(Number) as [number, number],
         purpose: contactTrial.purpose, evidence: contactTrial.evidence, experiment: undefined } : separation
-        ?? (canTravel ? chooseTravelTrial(local.travel, rows, nonPoint, observation.available_action_refs.includes('ACTION6')) : undefined);
+        ?? (canTravel ? chooseTravelTrial(local.travel, rows, nonPoint, observation.available_action_refs.includes('ACTION6'), options.allowUnframedContact) : undefined);
       const fallbackProjection = fallback && (!panel || state.relayTransfer?.witness || state.programWitness || state.outletWitness || state.catalogueTransfer?.witness || state.panelServiceTransfer?.recall) && !pressure
         ? await chooseFallbackProjection(local.fallbackProjection, observation, rows, inputs, remaining, execution, state, !!panel) : undefined;
       const budget = fallbackProjection || state.orderedEntryTransfer?.epoch === observation.level_epoch - 1 || panel || travel || coverage || exchange || markTrial || pressure || joint ? remaining : Math.min(remaining, explorationLimit - local.experiments);
@@ -1273,6 +1274,7 @@ export function createSicPublicInputExploration(fallback = false, preferShorterC
         repeat_transport: 'Repeat the observed remote transport while another object occupies its landing',
         place_object: 'Test whether leaving an object on a marked surface changes access',
         contact: 'Explore a reachable contact using the movement measured so far',
+        test_contact_hypothesis: 'Reach a stable visible feature and test its role',
         switch: 'Test a command from a surface it changed in an earlier return',
         select: 'Test whether a second visible piece can reach a different landing',
       }[travel.purpose] : uncover ? 'Step onto measured ground to uncover the source pattern before selecting a new destination'
@@ -1383,6 +1385,7 @@ export function createSicPublicInputExploration(fallback = false, preferShorterC
             ? 'The last direction changed the board. Test another input before trying its opposite.'
             : label, agenda: decision ? [] : entries, evidence: proof,
           ...(selectedCoverage?.routeImprovement ? { coverageRouteImprovement: { motion: selectedCoverage.motion, ...selectedCoverage.routeImprovement } } : {}),
+          ...(travel?.purpose === 'test_contact_hypothesis' && travelEvidence.length ? { unframedContactHypothesis: true } : {}),
           ...(recalledDirection ? { priorLevelMechanism: 'Test a direction previously observed to change the board',
             newLevelConfiguration: 'The current interface needs a fresh control check' } : {}),
           ...(selectedEntry?.recurring ? { priorLevelMechanism: selectedEntry.recurring } : {}),
@@ -1434,14 +1437,14 @@ export function createSicPublicInputExploration(fallback = false, preferShorterC
       if (state.coverageTransfer?.epoch === before.level_epoch - 1 && state.coverageTransfer.motion === 'push'
         && before.available_action_refs.length === 4 && before.available_action_refs.every(input => /^ACTION[1-4]$/.test(input))) {
         enterEpoch(before.level_epoch);
-        const previous = state.travel, travel = observeTravel(previous, rows, afterRows, command, after.observation_ref);
+        const previous = state.travel, travel = observeTravel(previous, rows, afterRows, command, after.observation_ref, options.allowUnframedContact);
         if (travel) state.travel = travel;
         const access = observePushAccess(state.pushAccess, previous, travel, rows, afterRows, command, after.observation_ref);
         if (access) state.pushAccess = access;
       }
       if ((frames?.length ?? 0) > 1 && /^ACTION[1-4]$/.test(command.action_ref) && before.available_action_refs.includes('ACTION5')) {
         const previous = state.epoch === before.level_epoch ? state.travel : undefined;
-        const tracked = annotateTravelMarks(observeTravel(previous, rows, afterRows, command, after.observation_ref), rows);
+        const tracked = annotateTravelMarks(observeTravel(previous, rows, afterRows, command, after.observation_ref, options.allowUnframedContact), rows);
         if (tracked?.grid.annotatedMarks) {
           enterEpoch(before.level_epoch);
           state.travel = tracked;
@@ -1607,7 +1610,7 @@ export function createSicPublicInputExploration(fallback = false, preferShorterC
       }
       if (!scored && proposal.separationTest && state.travel) {
         const command = proposal.actions[index]!;
-        const returned = observeTravel(state.travel, rows, afterRows, command, after.observation_ref);
+        const returned = observeTravel(state.travel, rows, afterRows, command, after.observation_ref, options.allowUnframedContact);
         const coverage = observeCoverage(state.coverage, state.travel, returned, rows, afterRows, command, after.observation_ref);
         const matched = coverage?.lastPull?.ref === after.observation_ref;
         return { matched, seal_prefix: true, reason: matched ? 'following_object_observed' : 'following_object_unconfirmed' };
@@ -1853,7 +1856,7 @@ export function createSicPublicInputExploration(fallback = false, preferShorterC
             ? state.jointTransfer.measured : undefined), rows, afterRows, command, after.observation_ref, proposal.jointPlan);
           if (joint) state.jointInput = joint;
         }
-        const previous = state.travel, measured = observeTravel(previous, rows, afterRows, command, after.observation_ref);
+        const previous = state.travel, measured = observeTravel(previous, rows, afterRows, command, after.observation_ref, options.allowUnframedContact);
         const travel = before.available_action_refs.includes('ACTION5') ? annotateTravelMarks(measured, rows) : measured;
         if (travel) state.travel = travel;
         if (travel?.grid.annotatedMarks) {

@@ -64,6 +64,37 @@ test('a measured tile displacement gives untried directions a turn after a block
   assert.deepEqual(amongOtherChanges?.moves.ACTION4?.delta, [3, 0]);
 });
 
+test('a stable unframed feature suggests a contact only with current movement evidence', () => {
+  const board = (at: readonly [number, number]) => {
+    const rows = Array.from({ length: 15 }, () => Array<number>(15).fill(3));
+    rows[7]![12] = rows[7]![13] = 11;
+    for (const [x, y] of [[0, 0], [1, 0], [2, 0], [0, 1], [1, 1], [0, 2]]) {
+      rows[at[1] + y!]![at[0] + x!] = 6;
+    }
+    return rows;
+  };
+  const right = { action_ref: 'ACTION4', data: {} };
+  const down = { action_ref: 'ACTION2', data: {} };
+  const inputs = [right, down];
+  const start = board([3, 3]), moved = board([6, 3]), turned = board([6, 6]);
+  assert.equal(observeTravel(undefined, start, moved, right, 'observed-right'), undefined);
+  const first = observeTravel(undefined, start, moved, right, 'observed-right', true);
+  assert.ok(first);
+  assert.equal(chooseTravelTrial(first, moved, inputs, false, true), undefined);
+  const state = observeTravel(first, moved, turned, down, 'observed-down', true);
+  assert.ok(state);
+  assert.equal(chooseTravelTrial(state, turned, inputs, false), undefined);
+  const trial = chooseTravelTrial(state, turned, inputs, false, true);
+  assert.equal(trial?.purpose, 'test_contact_hypothesis');
+  assert.deepEqual(trial?.target, [12, 6]);
+  assert.equal(trial?.command.action_ref, 'ACTION4');
+  assert.ok(trial?.evidence.includes('observed-down'));
+  assert.equal(trial?.approach, undefined);
+  const changed = board([6, 6]);
+  changed[7]![13] = 8;
+  assert.equal(chooseTravelTrial(state, changed, inputs, false, true), undefined);
+});
+
 test('a separated panel gets a turn between movement probes despite unrelated changes in the status strip', async () => {
   const board = (step: number) => Array.from({ length: 18 }, (_, y) => Array.from({ length: 32 }, (_, x) => {
     if (y === 17) return x < step ? 4 : 0;

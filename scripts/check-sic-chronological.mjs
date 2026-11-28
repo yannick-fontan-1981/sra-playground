@@ -81,14 +81,19 @@ async function run(code,requestedTarget,parallelWorkers) {
   const game=request=>games.dispatch(request);
   const preferTransportUndo = process.env.SIC_SOURCE_TRANSPORT_UNDO === '1';
   const preferShorterCoverage = process.env.SIC_SOURCE_SHORTEST_COVERAGE === '1';
+  const allowUnframedContact = process.env.SIC_SOURCE_UNFRAMED_CONTACT === '1';
   const sealedCoverageQualified = process.env.SIC_SEALED_COVERAGE_QUALIFIED === '1';
   if (preferTransportUndo && sourceArm !== 'active') throw new Error('Transport undo requires the active comparison arm.');
   if (preferShorterCoverage && (sourceArm !== 'active'
     || (/^SS(?:0[89]|1\d|2[0-5])$/.test(code) && !sealedCoverageQualified))) {
     throw new Error('The coverage cost comparison requires the active arm and the sealed source qualification.');
   }
+  if (allowUnframedContact && (sourceArm !== 'active' || /^SS(?:0[89]|1\d|2[0-5])$/.test(code))) {
+    throw new Error('Unframed contact hypotheses require an authorized source comparison.');
+  }
   let solver;const service=new V6AgentService(async recovery=>(solver=await createNativeV6Runtime({common,strategy},{recovery,
     ...(preferShorterCoverage ? { preferShorterCoverage: true } : {}),
+    ...(allowUnframedContact ? { allowUnframedContact: true } : {}),
     ...(preferTransportUndo ? { preferTransportUndo: true } : {})})));
   const evidence = process.env.SIC_SOURCE_COMPOSER_EVIDENCE === '1' ? new Map() : null;
   const seenEvidence = new Set();
@@ -141,6 +146,11 @@ async function run(code,requestedTarget,parallelWorkers) {
         const key = JSON.stringify([previous.level, 'compare_coverage_cost', cost.motion, cost.previous, cost.proposed]);
         if (!sourceDecisions.has(key)) sourceDecisions.set(key, { level: previous.level, strategy: 'compare_coverage_cost',
           firstTurn: effects.length + 1, action: action.id, ...cost });
+      }
+      if (card?.unframedContactHypothesis) {
+        const key = JSON.stringify([previous.level, 'test_unframed_contact_hypothesis']);
+        if (!sourceDecisions.has(key)) sourceDecisions.set(key, { level: previous.level, strategy: 'test_unframed_contact_hypothesis',
+          firstTurn: effects.length + 1, action: action.id });
       }
       if (captureRivals) recordRivals(previous, action, board, effects.length + 1);
       const executionMs=performance.now()-issued; let changed=0, left=64, right=-1, top=64, bottom=-1; for(let y=0;y<64;y++) for(let x=0;x<64;x++) if(previous.frame[y][x]!==board.frame[y][x]){changed++; left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);} effects.push([action.id,action.data??null,changed,changed?[left,top,right,bottom]:null,board.frames.length,board.levelsCompleted,agent.snapshot.proposal?.sicSituationCard?.strategy,agent.snapshot.trace.findLast(e=>e.kind==="sic_native_plan")?.family,agent.snapshot.proposal?.sicSituationCard?.situation,agent.snapshot.proposal?.sicSituationCard?.evidence?.length]);
