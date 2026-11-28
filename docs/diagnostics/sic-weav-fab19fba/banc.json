@@ -1,0 +1,52 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "fab19fba7cc5e5ac5cd79da53c81fb3ab23b492a",
+    "attendus": "67012fdde662f489cc17b1ad6cd9c3116e1fc4c0"
+  },
+  "prefixes": 6,
+  "firstAcquisition": {
+    "kind": "crossed_prefix_input",
+    "axis": 0,
+    "action": "ACTION1",
+    "evidence": "weav-43:epoch:1:revision:3:frame:f77cfa340fd7f400",
+    "epoch": 1
+  },
+  "crossingPair": {
+    "kind": "crossed_prefix_pair",
+    "inputs": {
+      "0": "ACTION1",
+      "1": "ACTION3"
+    },
+    "owner": 0,
+    "visible_palette": 14,
+    "evidence": [
+      "weav-43:epoch:1:revision:5:frame:4dc5a0253d70ef39",
+      "weav-43:epoch:1:revision:6:frame:0780a7cbf1f33d44"
+    ],
+    "epoch": 1,
+    "scope": "Observed compatible intersection and visible appearance; prior-epoch use remains experimental."
+  },
+  "sameT7Premises": "weav-43:epoch:1:revision:7:frame:6d03f5cc1567dcf4",
+  "T7": [
+    [
+      "ACTION1",
+      {}
+    ],
+    [
+      "ACTION6",
+      {
+        "x": 28,
+        "y": 61
+      }
+    ]
+  ],
+  "wrongReferenceAtMatchingDigest": {
+    "admitted": false,
+    "reason": "crossed_prefix_context_changed"
+  },
+  "archiveSHA256": "296ab30cfcd7770a6de00108082911e62aa4c6a24a9caf1729280b961f8e1c17",
+  "nativeReceiptSHA256": "7689d18e0b7971bbf0b2418753ce1917f020ac45f0617297b772daa1f7de1d87",
+  "nativeReceiptWithoutQualificationSHA256": "8f90eea95a9163159fa280050398463a0ec1886826edcb9dabb68e0a5bfcb02e"
+}
