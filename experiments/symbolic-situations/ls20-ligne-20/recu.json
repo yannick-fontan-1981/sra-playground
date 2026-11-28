@@ -1,0 +1,43 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 6,
+      "gestes": 72,
+      "testsAuteur": 3
+    },
+    {
+      "sha": "a0af03d0f7c1ebe722b3b7b8bc4db4ba05364025",
+      "départs": 6,
+      "gestes": 72,
+      "testsAuteur": 3
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "occurrencesCatalogue": 10,
+  "témoin": [
+    "ACTION3",
+    [
+      24,
+      45
+    ],
+    [
+      19,
+      45
+    ]
+  ],
+  "contact": {
+    "résidu": [
+      3,
+      0
+    ],
+    "pairConservé": true
+  },
+  "sansSélectif": {
+    "commande": "ACTION4",
+    "nominal": "morphology",
+    "variante": "view",
+    "empreinteIdentique": true
+  },
+  "scoreHorsCatalogue": 1
+}
