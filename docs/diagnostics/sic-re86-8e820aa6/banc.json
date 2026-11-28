@@ -1,0 +1,224 @@
+{
+  "equalScenarios": 3,
+  "catalogueTickets": 16,
+  "owners": [
+    {
+      "owner": 0,
+      "palette": 9,
+      "pixels": 53,
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:86e77cb5586f7c72",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:963cbb4b93ed4e85",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:4f601efbd51a3b6c",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:f1a140180b091241",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:335af69e78600545"
+      ]
+    },
+    {
+      "owner": 1,
+      "palette": 11,
+      "pixels": 45,
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:86e77cb5586f7c72",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:99f45f9bb942d802",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:4f601efbd51a3b6c",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:8:frame:6b1333b805591872",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:335af69e78600545",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:b43545371d5bc48f"
+      ]
+    }
+  ],
+  "actualCovers": [
+    [
+      {
+        "kind": "ticket",
+        "turn": 9,
+        "level": 1,
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:9",
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:b43545371d5bc48f",
+        "owner": "constellation_cover",
+        "action": "ACTION1",
+        "mode": "move",
+        "poses": [
+          [
+            36,
+            45
+          ],
+          [
+            18,
+            24
+          ]
+        ],
+        "active": 0,
+        "selector": "ACTION5",
+        "bodies": 2,
+        "vectors": {
+          "ACTION1": [
+            0,
+            -3
+          ],
+          "ACTION2": [
+            0,
+            3
+          ],
+          "ACTION3": [
+            -3,
+            0
+          ],
+          "ACTION4": [
+            3,
+            0
+          ]
+        },
+        "ownership": true,
+        "forecast": [
+          [
+            36,
+            42
+          ],
+          [
+            18,
+            24
+          ]
+        ],
+        "refs": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:b43545371d5bc48f",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:99f45f9bb942d802",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:4f601efbd51a3b6c",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:8:frame:6b1333b805591872",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:335af69e78600545",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:b43545371d5bc48f"
+        ],
+        "guard": "bind_control_focus_and_registered_composite"
+      },
+      {
+        "kind": "return",
+        "turn": 9,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:10:frame:7169e1fd2ecd5fac",
+        "owner": "constellation_cover",
+        "matched": true,
+        "reason": "compare_frozen_joint_supports",
+        "levels": 0,
+        "records": [],
+        "frame": "7169e1fd2ecd5fac24f21fb87db33c4f3f65b59a89e49b087788c21660bb6057"
+      }
+    ],
+    [
+      {
+        "kind": "ticket",
+        "turn": 9,
+        "level": 1,
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:9",
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:51ef03757b12e095",
+        "owner": "constellation_cover",
+        "action": "ACTION1",
+        "mode": "move",
+        "poses": [
+          [
+            36,
+            45
+          ],
+          [
+            18,
+            30
+          ]
+        ],
+        "active": 0,
+        "selector": "ACTION5",
+        "bodies": 2,
+        "vectors": {
+          "ACTION2": [
+            0,
+            3
+          ],
+          "ACTION1": [
+            0,
+            -3
+          ],
+          "ACTION3": [
+            -3,
+            0
+          ],
+          "ACTION4": [
+            3,
+            0
+          ]
+        },
+        "ownership": true,
+        "forecast": [
+          [
+            36,
+            42
+          ],
+          [
+            18,
+            30
+          ]
+        ],
+        "refs": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:51ef03757b12e095",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:c6cd83654880e6d2",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:4f601efbd51a3b6c",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:8:frame:2fd3841c753729c7",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:335af69e78600545",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:51ef03757b12e095"
+        ],
+        "guard": "bind_control_focus_and_registered_composite"
+      },
+      {
+        "kind": "return",
+        "turn": 9,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:10:frame:a36bd69aa0c3eca2",
+        "owner": "constellation_cover",
+        "matched": true,
+        "reason": "compare_frozen_joint_supports",
+        "levels": 0,
+        "records": [],
+        "frame": "a36bd69aa0c3eca2c7bf7021514a602ae1645811e23f8d6b89f8e02531372688"
+      }
+    ]
+  ],
+  "officialTurns": {
+    "nominal": 26,
+    "alternative": 28
+  },
+  "stationary": [
+    {
+      "kind": "return",
+      "turn": 1,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:86e77cb5586f7c72",
+      "owner": "constellation_cover",
+      "matched": null,
+      "reason": "compare_frozen_joint_supports",
+      "levels": 0,
+      "records": [
+        {
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:86e77cb5586f7c72",
+          "status": "observed_response",
+          "bodies": 0
+        }
+      ],
+      "frame": "86e77cb5586f7c726877e5b5e100f6a5e7904970a02d0be64f15550162ed399f"
+    },
+    {
+      "kind": "ticket",
+      "turn": 2,
+      "level": 1,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:2",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:86e77cb5586f7c72",
+      "owner": "constellation_cover",
+      "action": "ACTION2",
+      "mode": "acquire",
+      "active": null,
+      "selector": null,
+      "bodies": 0,
+      "vectors": {},
+      "ownership": false,
+      "forecast": null,
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:86e77cb5586f7c72"
+      ],
+      "guard": "bind_control_focus_and_registered_composite"
+    }
+  ]
+}
