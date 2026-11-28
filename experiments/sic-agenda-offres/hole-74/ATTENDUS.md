@@ -1,0 +1,5 @@
+# HOLE · ligne 74
+
+Comparer catalogue 8ce7ee35 et gel d0e7527c, L1 depuis l'entrée, pack natif, 600 gestes par niveau et 16 au total. Retrouver le ticket historique N1/T6 ACTION6 public_topological_recolor / topological_recolor. Sceller avant sélection les composantes connexes, la légende, les relations comparées, la méthode du puits et les références qui la fondent. Distinguer choisir un pigment, choisir où le poser, apprendre un changement et franchir le niveau.
+
+Rompre avant le premier choix ciblé la fermeture d'une poche visible avec une variation de support qui laisse la légende fixe. Attendre un changement de relation, puis vérifier si l'offre de cette région est remplacée ou suspendue. Après le vrai retour, construire séparément un stationnaire et un contraste extérieur, en gardant les empreintes physiques. Un pas peut constituer une observation locale acquise sans confirmer le but. Si les garde ou les offres continuent sans cette preuve, retenir le contre-exemple et sa portée. Chercher une autre région dans le même niveau ou une application à une nouvelle partition.
