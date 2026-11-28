@@ -1,0 +1,139 @@
+{
+  "equalScenarios": 4,
+  "assembled": "674b0dd19d693a66687990ab2a4368d981aa8fb9",
+  "firstEdges": [
+    {
+      "source": [
+        0,
+        0
+      ],
+      "target": [
+        1,
+        0
+      ],
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 32,
+          "y": 12
+        }
+      },
+      "before_ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:32f5e9dc5ce9d135",
+      "after_ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:12295065845a3b7e",
+      "frame_digest": "32f5e9dc5ce9d135fc44aeecf95f6e6396bcb5d9a14350a3f8c13a1553c49c4d",
+      "outcome": "local_extension_observed",
+      "outside_support_changed_pixels": 9,
+      "outside_support_effect_role": "unknown"
+    },
+    {
+      "source": [
+        1,
+        0
+      ],
+      "target": [
+        2,
+        0
+      ],
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 48,
+          "y": 12
+        }
+      },
+      "before_ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:12295065845a3b7e",
+      "after_ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:14b7d59384c9c579",
+      "frame_digest": "12295065845a3b7e1d52fb628b2f27ee725b4d5cea6dd6a40a39c9f43c45477a",
+      "outcome": "local_extension_observed",
+      "outside_support_changed_pixels": 9,
+      "outside_support_effect_role": "unknown"
+    }
+  ],
+  "sameT3Command": {
+    "x": 48,
+    "y": 28
+  },
+  "T3Plans": [
+    6,
+    1
+  ],
+  "outlineTicket": {
+    "kind": "ticket",
+    "turn": 14,
+    "level": 2,
+    "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:14",
+    "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:14:frame:d247c339b72c5e8a",
+    "owner": "public_outline_service",
+    "action": "ACTION5",
+    "point": {},
+    "subquestion": "observed_outline_service",
+    "guard": "current_outline_and_sealed_action",
+    "outline": {
+      "bbox": [
+        11,
+        43,
+        17,
+        49
+      ],
+      "exact": true,
+      "observed": false,
+      "expected": null,
+      "meaning": "local_operator_hypothesis",
+      "scope": 2,
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:9:frame:d247c339b72c5e8a",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:10:frame:eef05abae50b9912",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:11:frame:d247c339b72c5e8a",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:d247c339b72c5e8a",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:13:frame:af1daca24c86d0e1"
+      ]
+    },
+    "guards": [
+      {
+        "admitted": false,
+        "reason": "outline_or_command_changed",
+        "frame": "6ad306907548dbd0f67babbea6db395c8fabe1779939a1d5604ba654d80a2f1d"
+      },
+      {
+        "admitted": true,
+        "reason": "current_outline_and_sealed_action",
+        "frame": "d247c339b72c5e8abee5c5138f1c3087aa7f506f8b87a7ea0724e9433b60e334"
+      }
+    ]
+  },
+  "outlineReturn": {
+    "status": "no_visible_local_change",
+    "pixels": 0,
+    "scope": 2,
+    "refs": [
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:14:frame:d247c339b72c5e8a",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:15:frame:d247c339b72c5e8a"
+    ]
+  },
+  "nextT15": {
+    "kind": "ticket",
+    "turn": 15,
+    "level": 2,
+    "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:15",
+    "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:15:frame:d247c339b72c5e8a",
+    "owner": "acquire_control_for_target",
+    "action": "ACTION2",
+    "point": {},
+    "guard": "current_public_premises_match_provisional_step",
+    "guards": []
+  },
+  "assembledT15": {
+    "kind": "ticket",
+    "turn": 15,
+    "level": 2,
+    "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:15",
+    "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:15:frame:d247c339b72c5e8a",
+    "owner": "acquire_control_for_target",
+    "action": "ACTION2",
+    "point": {},
+    "guard": "current_public_premises_match_provisional_step",
+    "guards": []
+  },
+  "archiveSHA256": "0552fd01f35d61232f205ff927825a09fec948b8a2c629cfa06563564182892b",
+  "fullyEqualObservedProjections": true
+}
