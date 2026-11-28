@@ -1,0 +1,96 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "dfc144ce46139e887d0f48fff9ae3ac2d42d3c3d",
+    "attendus": "0e24fac7a3f58fa13b7e1eb9ad4d81d86a072841"
+  },
+  "prefixes": 6,
+  "authorizingMeasure": {
+    "action": "ACTION4",
+    "turn": 1,
+    "signature": {
+      "size": 5,
+      "opposed_distinct_bars": true,
+      "core_side_distinct": true
+    },
+    "source_epoch": 1,
+    "evidence": [
+      "pola-33:epoch:1:revision:4:frame:69059be2a23300fd",
+      "pola-33:epoch:2:revision:5:frame:fc08036af2a997e0",
+      "returned-frame:41f5c2edf8db866d37f7ee1202afa1bdfe3dc5eb315f15bcef1e7a106f04d062"
+    ],
+    "frame_ordinal": 0,
+    "boundary": true,
+    "unknown": [
+      "quantitative_interaction",
+      "wall_transmission",
+      "complete_goal_law"
+    ]
+  },
+  "level2Actions": [
+    [
+      "ACTION4",
+      {}
+    ],
+    [
+      "ACTION3",
+      {}
+    ]
+  ],
+  "level2Observed": [
+    {
+      "action": "ACTION4",
+      "turn": 1,
+      "signature": {
+        "size": 5,
+        "opposed_distinct_bars": true,
+        "core_side_distinct": true
+      },
+      "source_epoch": 2,
+      "evidence": [
+        "pola-33:epoch:2:revision:8:frame:9671f9665b532bf8",
+        "pola-33:epoch:2:revision:9:frame:49c2f76b252a9f51",
+        "returned-frame:49c2f76b252a9f5147117c5406f2904f1631119ed06c16794e48bc8692846573"
+      ],
+      "frame_ordinal": 1,
+      "boundary": false,
+      "unknown": [
+        "quantitative_interaction",
+        "wall_transmission",
+        "complete_goal_law"
+      ]
+    },
+    {
+      "action": "ACTION3",
+      "turn": -1,
+      "signature": {
+        "size": 5,
+        "opposed_distinct_bars": true,
+        "core_side_distinct": true
+      },
+      "source_epoch": 2,
+      "evidence": [
+        "pola-33:epoch:2:revision:8:frame:9671f9665b532bf8",
+        "pola-33:epoch:2:revision:9:frame:836fb122a5ae95af",
+        "returned-frame:836fb122a5ae95af0803e6ff6b0708703badd5aabfc8cd48928293a1adc8216f"
+      ],
+      "frame_ordinal": 1,
+      "boundary": false,
+      "unknown": [
+        "quantitative_interaction",
+        "wall_transmission",
+        "complete_goal_law"
+      ]
+    }
+  ],
+  "scores": [
+    2,
+    2
+  ],
+  "coldContrast": [
+    1,
+    -1
+  ],
+  "archiveSHA256": "3f97f46a9a4ff7da298ffa4f6309e5f5bc0e793db1c81a786a57bc2816d8504f"
+}
