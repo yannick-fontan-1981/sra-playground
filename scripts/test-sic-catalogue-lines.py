@@ -14,6 +14,8 @@ cases = {
              ["docs/migration/native-campaigns-v52/final/gare-public-trace.json.gz", "tests/fixtures/sic-gare-alternate-returns.json.gz"]),
     "LIFE": ("f005be662b0e4b556a0cea3d246381cd98eec7ae", "life-three-lines", "sic-observe-life-material",
              ["docs/migration/native-campaigns-v50/life-public-trace-final.json.gz", "tests/fixtures/sic-life-alternate-returns.json.gz"]),
+    "TN36": ("0da75640d974e9fbe3b44b78b07649344169c470", "tn36-line-5", "sic-observe-tn36-code",
+             ["tests/fixtures/sic-tn36-public-returns.json.gz"]),
     "WA30": ("14a185d909d3b3cb42fcc8584b841865b8ff6dd0", "wa30-contact-lines", "sic-observe-wa30-contacts",
              ["docs/migration/native-campaigns-v54/baseline-wa30/wa30-public-trace.json.gz", "tests/fixtures/sic-wa30-alternate-returns.json.gz"]),
     "TICT": ("e8df1757272cae3da1669b3e7ddb2e7bf65e8e02", "cell-placement-positive-41", "sic-observe-tict-placement",

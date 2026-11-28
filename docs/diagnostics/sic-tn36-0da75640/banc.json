@@ -1,0 +1,837 @@
+{
+  "sameSessions": 3,
+  "catalogueOccurrences": 16,
+  "N1": {
+    "opening": {
+      "kind": "ticket",
+      "turn": 1,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:1",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:3e8702e648bb9755",
+      "level": 1,
+      "owner": "code_program",
+      "action": "ACTION6",
+      "point": {
+        "x": 36,
+        "y": 55
+      },
+      "mode": "execute",
+      "code": [
+        3,
+        0,
+        3,
+        0,
+        0
+      ],
+      "want": [
+        3,
+        0,
+        3,
+        0,
+        0
+      ],
+      "expected": null,
+      "position": [
+        4,
+        1
+      ],
+      "operators": 0,
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:3e8702e648bb9755"
+      ],
+      "guard": "bind_actor_program_bits_and_epoch",
+      "pathCall": {
+        "position": [
+          4,
+          1
+        ],
+        "goal": [
+          4,
+          6
+        ],
+        "count": 5,
+        "effects": [],
+        "tried": [],
+        "candidates": 0,
+        "firstPaths": []
+      }
+    },
+    "acquisition": {
+      "kind": "return",
+      "turn": 1,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:f24a3446b02c98c2",
+      "matched": null,
+      "reason": "compare_edit_or_observe_execution",
+      "frames": 7,
+      "frame": "f24a3446b02c98c27121094c895ca2e13920190943b4c47a102483d057316a2a",
+      "levels": 0,
+      "observations": [
+        {
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:f24a3446b02c98c2",
+          "samples": [
+            {
+              "code": 3,
+              "displacement": [
+                0,
+                1
+              ]
+            },
+            {
+              "code": 3,
+              "displacement": [
+                0,
+                1
+              ]
+            }
+          ],
+          "preserved": null,
+          "status": "execution_measured",
+          "effects": 1,
+          "attempts": 1,
+          "demonstration": []
+        }
+      ]
+    },
+    "pathSearch": {
+      "position": [
+        4,
+        1
+      ],
+      "goal": [
+        4,
+        6
+      ],
+      "count": 5,
+      "effects": [
+        [
+          "3",
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "tried": [],
+      "candidates": 1,
+      "firstPaths": [
+        [
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ]
+    },
+    "learnedExecution": [
+      {
+        "kind": "ticket",
+        "turn": 8,
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:8",
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:8:frame:01c704d4edd645ec",
+        "level": 1,
+        "owner": "code_program",
+        "action": "ACTION6",
+        "point": {
+          "x": 36,
+          "y": 55
+        },
+        "mode": "execute",
+        "code": [
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "want": [
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "expected": null,
+        "position": [
+          4,
+          1
+        ],
+        "operators": 1,
+        "refs": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:9a003d53322a81be",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:3e8702e648bb9755",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:f24a3446b02c98c2"
+        ],
+        "guard": "bind_actor_program_bits_and_epoch"
+      },
+      {
+        "kind": "return",
+        "turn": 8,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:9:frame:b13e4faa55ea51bf",
+        "matched": null,
+        "reason": "official_boundary",
+        "frames": 10,
+        "frame": "b13e4faa55ea51bff9a37a4949731c944bbf4f6ca456aabe8b477fc6694963bf",
+        "levels": 1,
+        "observations": [
+          {
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:894958c948d18e69",
+            "status": "observed_edit",
+            "effects": 1,
+            "attempts": 1,
+            "demonstration": []
+          },
+          {
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:e944f03fcf763a3f",
+            "status": "observed_edit",
+            "effects": 1,
+            "attempts": 1,
+            "demonstration": []
+          },
+          {
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:ac78ec7d85e66d3b",
+            "status": "observed_edit",
+            "effects": 1,
+            "attempts": 1,
+            "demonstration": []
+          },
+          {
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:39f02c997771cebc",
+            "status": "observed_edit",
+            "effects": 1,
+            "attempts": 1,
+            "demonstration": []
+          },
+          {
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:8:frame:01c704d4edd645ec",
+            "status": "observed_edit",
+            "effects": 1,
+            "attempts": 1,
+            "demonstration": []
+          },
+          {
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:9:frame:b13e4faa55ea51bf",
+            "samples": [
+              {
+                "code": 3,
+                "displacement": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "code": 3,
+                "displacement": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "code": 3,
+                "displacement": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "code": 3,
+                "displacement": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "code": 3,
+                "displacement": [
+                  0,
+                  1
+                ]
+              }
+            ],
+            "preserved": null,
+            "status": "official_boundary",
+            "effects": 1,
+            "attempts": 2,
+            "demonstration": []
+          }
+        ]
+      }
+    ]
+  },
+  "N2": {
+    "demonstration": [
+      {
+        "kind": "ticket",
+        "turn": 9,
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:9",
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:9:frame:b13e4faa55ea51bf",
+        "level": 2,
+        "owner": "code_program",
+        "action": "ACTION6",
+        "point": {
+          "x": 21,
+          "y": 55
+        },
+        "mode": "demonstrate",
+        "example": 0,
+        "code": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "want": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "expected": null,
+        "position": [
+          3,
+          5
+        ],
+        "operators": 0,
+        "refs": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:9:frame:b13e4faa55ea51bf"
+        ],
+        "guard": "bind_actor_program_bits_and_epoch",
+        "pathCall": {
+          "position": [
+            3,
+            5
+          ],
+          "goal": [
+            3,
+            1
+          ],
+          "count": 4,
+          "effects": [],
+          "tried": [],
+          "candidates": 0,
+          "firstPaths": []
+        }
+      },
+      {
+        "kind": "return",
+        "turn": 9,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:10:frame:64fc20d64a9035bc",
+        "matched": null,
+        "reason": "compare_edit_or_observe_execution",
+        "frames": 6,
+        "frame": "64fc20d64a9035bc1745ac7d1596167c96d31a2fb7853249d1e2e9113fa23e35",
+        "levels": 1,
+        "observations": [
+          {
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:10:frame:64fc20d64a9035bc",
+            "samples": [
+              {
+                "code": 33,
+                "displacement": [
+                  0,
+                  -1
+                ]
+              },
+              {
+                "code": 33,
+                "displacement": [
+                  0,
+                  -1
+                ]
+              },
+              {
+                "code": 33,
+                "displacement": [
+                  0,
+                  -1
+                ]
+              },
+              {
+                "code": 33,
+                "displacement": [
+                  0,
+                  -1
+                ]
+              }
+            ],
+            "preserved": true,
+            "status": "demonstration_measured",
+            "effects": 1,
+            "attempts": 0,
+            "demonstration": [
+              0
+            ]
+          }
+        ]
+      }
+    ],
+    "pathSearch": {
+      "position": [
+        3,
+        5
+      ],
+      "goal": [
+        3,
+        1
+      ],
+      "count": 4,
+      "effects": [
+        [
+          "33",
+          [
+            0,
+            -1
+          ]
+        ]
+      ],
+      "tried": [
+        0
+      ],
+      "candidates": 1,
+      "firstPaths": [
+        [
+          33,
+          33,
+          33,
+          33
+        ]
+      ]
+    },
+    "learnedExecution": [
+      {
+        "kind": "ticket",
+        "turn": 18,
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:18",
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:18:frame:58bd2ce4ac3f6d52",
+        "level": 2,
+        "owner": "code_program",
+        "action": "ACTION6",
+        "point": {
+          "x": 46,
+          "y": 58
+        },
+        "mode": "execute",
+        "code": [
+          33,
+          33,
+          33,
+          33
+        ],
+        "want": [
+          33,
+          33,
+          33,
+          33
+        ],
+        "expected": null,
+        "position": [
+          3,
+          5
+        ],
+        "operators": 1,
+        "refs": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:11:frame:a505794151f7266e",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:9:frame:b13e4faa55ea51bf",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:10:frame:64fc20d64a9035bc"
+        ],
+        "guard": "bind_actor_program_bits_and_epoch"
+      },
+      {
+        "kind": "return",
+        "turn": 18,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:19:frame:db582f025bc104ee",
+        "matched": null,
+        "reason": "official_boundary",
+        "frames": 9,
+        "frame": "db582f025bc104eede0e1eaffd705d868763b552d152aa546a3a8dbf963550f3",
+        "levels": 2,
+        "observations": [
+          {
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:3e10db780d4c14b7",
+            "status": "observed_edit",
+            "effects": 1,
+            "attempts": 0,
+            "demonstration": [
+              0
+            ]
+          },
+          {
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:13:frame:c415b16b801e7940",
+            "status": "observed_edit",
+            "effects": 1,
+            "attempts": 0,
+            "demonstration": [
+              0
+            ]
+          },
+          {
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:14:frame:3558edb03642a60f",
+            "status": "observed_edit",
+            "effects": 1,
+            "attempts": 0,
+            "demonstration": [
+              0
+            ]
+          },
+          {
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:15:frame:d98efe611ecb8506",
+            "status": "observed_edit",
+            "effects": 1,
+            "attempts": 0,
+            "demonstration": [
+              0
+            ]
+          },
+          {
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:16:frame:2534589ad18fe25f",
+            "status": "observed_edit",
+            "effects": 1,
+            "attempts": 0,
+            "demonstration": [
+              0
+            ]
+          },
+          {
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:17:frame:a3b991a899512a10",
+            "status": "observed_edit",
+            "effects": 1,
+            "attempts": 0,
+            "demonstration": [
+              0
+            ]
+          },
+          {
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:18:frame:58bd2ce4ac3f6d52",
+            "status": "observed_edit",
+            "effects": 1,
+            "attempts": 0,
+            "demonstration": [
+              0
+            ]
+          },
+          {
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:19:frame:db582f025bc104ee",
+            "samples": [
+              {
+                "code": 33,
+                "displacement": [
+                  0,
+                  -1
+                ]
+              },
+              {
+                "code": 33,
+                "displacement": [
+                  0,
+                  -1
+                ]
+              },
+              {
+                "code": 33,
+                "displacement": [
+                  0,
+                  -1
+                ]
+              },
+              {
+                "code": 33,
+                "displacement": [
+                  0,
+                  -1
+                ]
+              }
+            ],
+            "preserved": null,
+            "status": "official_boundary",
+            "effects": 1,
+            "attempts": 1,
+            "demonstration": [
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "finalOnly": [
+    {
+      "kind": "return",
+      "turn": 1,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:f24a3446b02c98c2",
+      "matched": null,
+      "reason": "compare_edit_or_observe_execution",
+      "frames": 1,
+      "frame": "f24a3446b02c98c27121094c895ca2e13920190943b4c47a102483d057316a2a",
+      "levels": 0,
+      "observations": [
+        {
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:f24a3446b02c98c2",
+          "samples": [],
+          "preserved": null,
+          "status": "execution_measured",
+          "effects": 0,
+          "attempts": 1,
+          "demonstration": []
+        }
+      ]
+    },
+    {
+      "kind": "ticket",
+      "turn": 2,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:2",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:f24a3446b02c98c2",
+      "level": 1,
+      "owner": "code_program",
+      "action": "ACTION6",
+      "point": {
+        "x": 21,
+        "y": 42
+      },
+      "mode": "edit",
+      "code": [
+        3,
+        0,
+        3,
+        0,
+        0
+      ],
+      "want": [
+        1,
+        0,
+        3,
+        0,
+        0
+      ],
+      "expected": [
+        1,
+        0,
+        3,
+        0,
+        0
+      ],
+      "position": [
+        4,
+        1
+      ],
+      "operators": 0,
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:f24a3446b02c98c2",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:3e8702e648bb9755"
+      ],
+      "guard": "bind_actor_program_bits_and_epoch",
+      "pathCall": {
+        "position": [
+          4,
+          1
+        ],
+        "goal": [
+          4,
+          6
+        ],
+        "count": 5,
+        "effects": [],
+        "tried": [],
+        "candidates": 0,
+        "firstPaths": []
+      }
+    },
+    {
+      "kind": "return",
+      "turn": 3,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:e740a0b9544b7077",
+      "matched": null,
+      "reason": "compare_edit_or_observe_execution",
+      "frames": 7,
+      "frame": "e740a0b9544b7077e48562e611c4df0f82d50a0fbbf3f9664d50331b229d23fd",
+      "levels": 0,
+      "observations": [
+        {
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:e740a0b9544b7077",
+          "samples": [
+            {
+              "code": 1,
+              "displacement": [
+                1,
+                0
+              ]
+            },
+            {
+              "code": 3,
+              "displacement": [
+                0,
+                1
+              ]
+            }
+          ],
+          "preserved": null,
+          "status": "execution_measured",
+          "effects": 2,
+          "attempts": 2,
+          "demonstration": []
+        }
+      ]
+    }
+  ],
+  "alternateExample": [
+    {
+      "kind": "ticket",
+      "turn": 9,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:9",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:9:frame:b13e4faa55ea51bf",
+      "level": 2,
+      "owner": "code_program",
+      "action": "ACTION6",
+      "point": {
+        "x": 8,
+        "y": 58
+      },
+      "mode": "demonstrate",
+      "example": 1,
+      "code": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "want": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expected": null,
+      "position": [
+        3,
+        5
+      ],
+      "operators": 0,
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:9:frame:b13e4faa55ea51bf"
+      ],
+      "guard": "bind_actor_program_bits_and_epoch",
+      "pathCall": {
+        "position": [
+          3,
+          5
+        ],
+        "goal": [
+          3,
+          1
+        ],
+        "count": 4,
+        "effects": [],
+        "tried": [
+          0
+        ],
+        "candidates": 0,
+        "firstPaths": []
+      }
+    },
+    {
+      "kind": "return",
+      "turn": 9,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:10:frame:6872ac3a940eed74",
+      "matched": null,
+      "reason": "compare_edit_or_observe_execution",
+      "frames": 6,
+      "frame": "6872ac3a940eed740feeaa0f2af3a4c874361537f0d55b2af731f50ecb71fb9c",
+      "levels": 1,
+      "observations": [
+        {
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:10:frame:6872ac3a940eed74",
+          "samples": [],
+          "preserved": true,
+          "status": "demonstration_measured",
+          "effects": 0,
+          "attempts": 0,
+          "demonstration": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "ticket",
+      "turn": 10,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:10",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:10:frame:6872ac3a940eed74",
+      "level": 2,
+      "owner": "code_program",
+      "action": "ACTION6",
+      "point": {
+        "x": 46,
+        "y": 58
+      },
+      "mode": "execute",
+      "code": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "want": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expected": null,
+      "position": [
+        3,
+        5
+      ],
+      "operators": 0,
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:10:frame:6872ac3a940eed74",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:9:frame:b13e4faa55ea51bf"
+      ],
+      "guard": "bind_actor_program_bits_and_epoch",
+      "pathCall": {
+        "position": [
+          3,
+          5
+        ],
+        "goal": [
+          3,
+          1
+        ],
+        "count": 4,
+        "effects": [],
+        "tried": [
+          0,
+          1
+        ],
+        "candidates": 0,
+        "firstPaths": []
+      }
+    },
+    {
+      "kind": "return",
+      "turn": 10,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:11:frame:32016573cfc4ad91",
+      "matched": null,
+      "reason": "compare_edit_or_observe_execution",
+      "frames": 6,
+      "frame": "32016573cfc4ad91c990f7c2f0c28e88df89508bd3fbfe03ce7a59ee878f46ed",
+      "levels": 1,
+      "observations": [
+        {
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:11:frame:32016573cfc4ad91",
+          "samples": [],
+          "preserved": null,
+          "status": "execution_measured",
+          "effects": 0,
+          "attempts": 1,
+          "demonstration": [
+            0,
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "archiveSHA256": "6d7e18c10ae1656dfafa1ab47f68754c71b3cd65659f657219ffdfa6c23a4d16",
+  "startedAt": "2026-11-27T22:17:50.582727-03:00",
+  "qualifiedAt": "2026-11-27T22:21:42.244558-03:00",
+  "elapsedSeconds": 232
+}
