@@ -1,0 +1,113 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 7,
+      "gestes": 48,
+      "testsAuteur": 4
+    },
+    {
+      "sha": "915e0601e3aad82653733ac602909bef2286343d",
+      "départs": 7,
+      "gestes": 48,
+      "testsAuteur": 4
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "nominal": {
+    "40": [
+      4,
+      15
+    ],
+    "54": [
+      2,
+      3,
+      5,
+      7,
+      8,
+      10,
+      12,
+      13,
+      16
+    ],
+    "situations": {
+      "1": {
+        "soumission": {
+          "x": 11,
+          "y": 53
+        },
+        "candidat": 0,
+        "sourceAccès": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:586f549f81987020",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:d13e4aef306241ab"
+        ],
+        "pixelsSoumission": 63,
+        "pixelsAccès": 39,
+        "candidatsAprèsAccès": [
+          2
+        ]
+      },
+      "3": {
+        "soumission": {
+          "x": 54,
+          "y": 53
+        },
+        "candidat": 3,
+        "sourceAccès": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:11:frame:955bc4573e019ffd",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:12:frame:95657b0e61e01c4c"
+        ],
+        "pixelsSoumission": 53,
+        "pixelsAccès": 57,
+        "candidatsAprèsAccès": [
+          0
+        ]
+      }
+    }
+  },
+  "retrait": {
+    "soumissionT3": [
+      "public_occurrence_recall",
+      "occluded_catalogue_experiment",
+      "ACTION6",
+      {
+        "x": 11,
+        "y": 53
+      }
+    ],
+    "accèsT4": [
+      "observed_frontier",
+      "experiment",
+      "ACTION4",
+      {}
+    ],
+    "accèsPériméT15": [
+      "observed_frontier",
+      "experiment",
+      "ACTION4",
+      {}
+    ]
+  },
+  "indépendance40": true,
+  "réserve": {
+    "partiel54": {
+      "pixels": 31,
+      "suite": [
+        "observed_frontier",
+        "experiment",
+        "ACTION4",
+        {}
+      ]
+    },
+    "stationnaire40": {
+      "pixels": 0,
+      "suite": [
+        "observed_frontier",
+        "experiment",
+        "ACTION4",
+        {}
+      ]
+    }
+  },
+  "reçusAltérésRejetés": 3
+}
