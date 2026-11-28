@@ -958,7 +958,7 @@ export function createSicPublicInputExploration(fallback = false,
       const separation = canTravel && fallback && !local.coverage?.motion && observation.available_action_refs.every(input => /^ACTION[1-4]$/.test(input))
         ? chooseSeparationTrial(local.travel, rows, nonPoint, local.separationTests ?? []) : undefined;
       const publicTravel = travelAvailable && (canTravel || options.allowUnframedContact)
-        ? chooseTravelTrial(local.travel, rows, nonPoint, observation.available_action_refs.includes('ACTION6'), options.allowUnframedContact)
+        ? chooseTravelTrial(local.travel, rows, nonPoint, observation.available_action_refs.includes('ACTION6'), options.allowUnframedContact, ref)
         : undefined;
       const groundedContact = publicTravel?.purpose === 'test_contact_hypothesis'
         || publicTravel?.purpose === 'verify_contact_access' || publicTravel?.purpose === 'test_contact_activation'

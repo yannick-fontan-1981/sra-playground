@@ -423,7 +423,7 @@ export function observeTravel(previous: ObservedTravel | undefined, before: Nati
 }
 
 export function chooseTravelTrial(state: ObservedTravel | undefined, rows: NativeRows, inputs: readonly NativeCommand[],
-  canSelect: boolean, allowUnframedContact = false): TravelTrial | undefined {
+  canSelect: boolean, allowUnframedContact = false, observationRef?: string): TravelTrial | undefined {
   if (!state?.actor || state.stalled >= 12) return;
   const { grid, actor, tested, switches } = state, { cells, pieces } = read(rows, grid);
   const framed = frameMarks(rows, grid).filter(cell => !pieces.includes(cell));
@@ -514,7 +514,7 @@ export function chooseTravelTrial(state: ObservedTravel | undefined, rows: Nativ
   const park = (cell: string) => state.completed.includes(cell) || !!cover?.sites[cell];
   const active = park(actor) ? undefined : route(actor);
   const contactReturn = witnessedAccess.length && state.contactAccess;
-  if (contactReturn && contactReturn.origin === actor && contactReturn.evidence[1] === state.refs.at(-1)
+  if (contactReturn && contactReturn.origin === actor && contactReturn.evidence[1] === observationRef
     && !park(actor) && active?.priority !== 3) {
     const controls = inputs.filter(command => !directional(command.action_ref)
       && !Object.hasOwn(tested, trialKey(cells, observedCommandKey(command), actor, start)));
