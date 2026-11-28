@@ -1,0 +1,48 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "candidat": "f6ff40f5e6c870ab5f897eaccdd1d43873944c5c",
+    "attendus": "b70a2957ecf5f4aaace9b89b44dd0490a38206d7"
+  },
+  "nativeRuns": 10,
+  "catalogueDigest": "94910b33c2f9ac806af96d7ff646c8269857dfcab2f479cf9b24e303c2f34e71",
+  "confirmedReflections": 13,
+  "levelCompletion": 0,
+  "rim": [
+    {
+      "goal": [
+        51,
+        45
+      ],
+      "size": 35,
+      "before": [
+        9
+      ],
+      "after": [
+        9
+      ],
+      "unchanged": true
+    }
+  ],
+  "reflectionRoles": {
+    "direct": 5,
+    "image": 4
+  },
+  "retainedCells": [
+    [
+      17,
+      15
+    ]
+  ],
+  "newCoverage": [
+    [
+      17,
+      16
+    ]
+  ],
+  "archiveSHA256": "73e3cde550e9857c6a714b2e745e3ce97ea77b31ce4e9d2f031780c28e66f000",
+  "startedAt": "2026-11-27T22:28:46.302227-03:00",
+  "qualifiedAt": "2026-11-27T22:34:57.433039-03:00",
+  "elapsedSeconds": 371
+}
