@@ -1,0 +1,217 @@
+{
+  "equalScenarios": 3,
+  "catalogue": [
+    16,
+    2
+  ],
+  "firstTarget": {
+    "kind": "ticket",
+    "turn": 1,
+    "level": 1,
+    "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:1",
+    "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:6b968a6e6ad21fd1",
+    "owner": "preview_packing",
+    "action": "ACTION6",
+    "point": {
+      "x": 29,
+      "y": 4
+    },
+    "mode": "select",
+    "chosen": "piece:2",
+    "target": [
+      0,
+      1
+    ],
+    "selected": null,
+    "previewColor": null,
+    "movable": [
+      "piece:2"
+    ],
+    "refs": [
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:6b968a6e6ad21fd1"
+    ],
+    "guard": "current_preview_binding"
+  },
+  "firstAcquisition": {
+    "before": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:6b968a6e6ad21fd1",
+    "after": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:b7f31470f8fb9aab",
+    "selection": true,
+    "selected": "piece:2",
+    "previewColor": 0,
+    "pieces": [
+      {
+        "id": "piece:2",
+        "color": 14,
+        "anchor": [
+          0,
+          5
+        ]
+      }
+    ],
+    "controls": {}
+  },
+  "noPreview": {
+    "before": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:6b968a6e6ad21fd1",
+    "after": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:6b968a6e6ad21fd1",
+    "selection": false,
+    "selected": null,
+    "previewColor": null,
+    "pieces": [
+      {
+        "id": "piece:2",
+        "color": 14,
+        "anchor": [
+          0,
+          5
+        ]
+      }
+    ],
+    "controls": {}
+  },
+  "thirdLevel": {
+    "nominal": {
+      "kind": "ticket",
+      "turn": 18,
+      "level": 3,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:18",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:18:frame:cbc164798c6921de",
+      "owner": "preview_packing",
+      "action": "ACTION2",
+      "point": {},
+      "mode": "edit",
+      "chosen": "piece:2",
+      "target": [
+        2,
+        0
+      ],
+      "expected": [
+        1,
+        6
+      ],
+      "selected": "piece:2",
+      "previewColor": 0,
+      "movable": [
+        "piece:2",
+        "piece:3"
+      ],
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:17:frame:f22405c9db372f3a",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:17:frame:f22405c9db372f3a",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:18:frame:cbc164798c6921de"
+      ],
+      "guard": "current_preview_binding"
+    },
+    "controlsWithdrawn": {
+      "kind": "ticket",
+      "turn": 18,
+      "level": 3,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:18",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:18:frame:cbc164798c6921de",
+      "owner": "preview_packing",
+      "action": "ACTION1",
+      "point": {},
+      "mode": "edit",
+      "chosen": "piece:2",
+      "target": [
+        2,
+        0
+      ],
+      "selected": "piece:2",
+      "previewColor": 0,
+      "movable": [
+        "piece:2",
+        "piece:3"
+      ],
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:17:frame:f22405c9db372f3a",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:17:frame:f22405c9db372f3a",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:18:frame:cbc164798c6921de"
+      ],
+      "guard": "current_preview_binding"
+    },
+    "resumed": {
+      "kind": "ticket",
+      "turn": 19,
+      "level": 3,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:19",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:19:frame:cbc164798c6921de",
+      "owner": "preview_packing",
+      "action": "ACTION2",
+      "point": {},
+      "mode": "edit",
+      "chosen": "piece:2",
+      "target": [
+        2,
+        0
+      ],
+      "expected": [
+        1,
+        6
+      ],
+      "selected": "piece:2",
+      "previewColor": 0,
+      "movable": [
+        "piece:2",
+        "piece:3"
+      ],
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:17:frame:f22405c9db372f3a",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:17:frame:f22405c9db372f3a",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:18:frame:cbc164798c6921de",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:18:frame:cbc164798c6921de",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:19:frame:cbc164798c6921de"
+      ],
+      "guard": "current_preview_binding"
+    }
+  },
+  "nextMember": {
+    "kind": "ticket",
+    "turn": 26,
+    "level": 3,
+    "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:26",
+    "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:26:frame:4408b6ae3a69884a",
+    "owner": "preview_packing",
+    "action": "ACTION6",
+    "point": {
+      "x": 44,
+      "y": 24
+    },
+    "mode": "select",
+    "chosen": "piece:3",
+    "target": [
+      2,
+      1
+    ],
+    "selected": "piece:2",
+    "previewColor": 0,
+    "movable": [
+      "piece:2",
+      "piece:3"
+    ],
+    "refs": [
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:18:frame:cbc164798c6921de",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:19:frame:ce046f7c2325920e",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:19:frame:ce046f7c2325920e",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:20:frame:c8de0de0bf05637e",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:20:frame:c8de0de0bf05637e",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:21:frame:202619536c7876eb",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:21:frame:202619536c7876eb",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:22:frame:9d149e6910418bb6",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:22:frame:9d149e6910418bb6",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:23:frame:4a268b7e5f60c3f1",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:23:frame:4a268b7e5f60c3f1",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:24:frame:7d3796d0f66d32d3",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:24:frame:7d3796d0f66d32d3",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:25:frame:a9613a3754c4cd93",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:25:frame:a9613a3754c4cd93",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:26:frame:4408b6ae3a69884a"
+    ],
+    "guard": "current_preview_binding"
+  },
+  "officialTurns": [
+    8,
+    16,
+    33
+  ],
+  "archiveSHA256": "c937a632741237e152c75da1d92c86f7b38167342d490c61dc6d71d585bb78e7"
+}
