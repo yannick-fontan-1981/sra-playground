@@ -1,0 +1,38 @@
+{
+  "stats": [
+    {
+      "engine": "gel",
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 7,
+      "gestes": 55,
+      "scénariosConstruits": 3
+    },
+    {
+      "engine": "candidat",
+      "sha": "beb11112bc53afdb80d46b843f42d01474254126",
+      "départs": 7,
+      "gestes": 55,
+      "scénariosConstruits": 3
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "occurrences": 15,
+  "déplacementT2": [
+    0,
+    4
+  ],
+  "attacheT12": {
+    "translation": [
+      -1,
+      -6
+    ],
+    "visibles": 20,
+    "occlus": 21
+  },
+  "commandeT13": {
+    "nominale": "ACTION4",
+    "sansAttache": "ACTION5"
+  },
+  "score": 0,
+  "retoursConstruits": 57
+}
