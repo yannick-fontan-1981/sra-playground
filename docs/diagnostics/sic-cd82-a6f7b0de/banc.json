@@ -1,0 +1,25 @@
+{
+  "freeze": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "proof": "a6f7b0de19f013b132ff133b1084be86988b2dc1",
+  "criteria": "ee9574b1",
+  "nominalTickets": 16,
+  "testsPerSHA": 2,
+  "firstDifference": 10,
+  "before": {
+    "command": "ACTION5",
+    "assignments": 1,
+    "pixels": [
+      0,
+      50
+    ]
+  },
+  "withdrawn": {
+    "command": "ACTION1",
+    "assignments": 240,
+    "pixels": [
+      0,
+      0
+    ]
+  },
+  "archiveSHA256": "1a176eb9c322c7ec1680aac7182ca154b0cc3a44e5c30efe8d24f2342996cafc"
+}
