@@ -14,11 +14,13 @@ cases = {
              "native-campaigns-v52/final/gare-public-trace"),
     "LIFE": ("f005be662b0e4b556a0cea3d246381cd98eec7ae", "life-three-lines", "sic-observe-life-material",
              "native-campaigns-v50/life-public-trace-final"),
+    "SP80": ("bb4a99b5ba41531eb70f1dccb6a97a919cefec56", "sp80-two-lines", "sic-observe-sp80-routing", None),
 }
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("revision")
 parser.add_argument("--game", choices=cases, default="GARE")
 parser.add_argument("output", type=Path)
+parser.add_argument("--baseline-only", action="store_true", help="Run the LIFE cases shared with the historical engine")
 parser.add_argument("--game-root", required=True, type=Path)
 parser.add_argument("--node", default="node")
 args = parser.parse_args()
@@ -30,17 +32,20 @@ git("-C", str(args.game_root.resolve()), "diff", "--exit-code", revision, "--", 
 out = args.output.resolve()
 engine = out / revision[:8]
 engine.mkdir(parents=True)
+fixtures = (["tests/fixtures/sic-" + args.game.lower() + "-alternate-returns.json.gz",
+             "docs/migration/" + packets + ".json.gz"] if packets else ["tests/fixtures/sic-sp80-public-returns.json.gz"])
 for rev, paths in [(revision, ["src", "package.json", "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto",
                                "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy"]),
-                   (proof, ["scripts/sic-study-source-games.mjs", test, "tests/fixtures/sic-" + args.game.lower() + "-alternate-returns.json.gz",
-                            "docs/migration/" + packets + ".json.gz"])]:
+                   (proof, ["scripts/sic-study-source-games.mjs", test, *fixtures])]:
     with ZipFile(io.BytesIO(git("archive", "--format=zip", rev, *paths))) as archive:
         archive.extractall(engine)
 mount(args.game_root.resolve() / "public", engine / "public")
 env = {**os.environ, name + "GAME_ROOT": str(engine), name + "ENGINE_ROOT": str(engine),
        name + "RECEIPT": str(out / (revision[:8] + ".json"))}
 options = []
-if args.game == "LIFE" and revision != proof:
+if args.game == "LIFE" and (args.baseline_only or revision in {
+    "8ce7ee3563fa1d5eca1639c6ad03975cfc962460", "d0e7527ca8033bd805a6d7a8bb021eff62e87021"
+}):
     options = ["--test-name-pattern=^(LIFE|2 |68 |69 )"]
 with (out / (revision[:8] + ".log")).open("wb") as log:
     subprocess.run([args.node, "--import", (bench / "scripts" / (observer + ".mjs")).as_uri(), "--test", *options, test],
