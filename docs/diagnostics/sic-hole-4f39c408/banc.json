@@ -1,0 +1,36 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "4f39c40869cdb3c2881d4fef01d3a7eafaf196dd",
+    "attendus": "80cfa04ca2822a949c61f5665c43f6764675e1df"
+  },
+  "nativePrefixes": 5,
+  "tests": 102,
+  "t8": {
+    "command": [
+      "ACTION6",
+      {
+        "x": 43,
+        "y": 11
+      }
+    ],
+    "physical": {
+      "pixels": 92,
+      "regionPixels": 92,
+      "regionPainted9": 92,
+      "edgeActualBefore": 1,
+      "edgeActualAfter": 9,
+      "levels": 0,
+      "state": "NOT_FINISHED"
+    },
+    "presentedChanges": 91,
+    "result": "write_effect_observed",
+    "goalConfirmed": false
+  },
+  "rawSHA256": {
+    "authorProcedure": "b9e082078b17edbb6022e92845a0650f108f9d26fb926bb96e4c1aa60e26621b",
+    "executedAlternate": "b58cd82efcd21ab140aa1f1883a1f2277b0dcfefd3c2ba63c0b6827368a74d80"
+  },
+  "archiveSHA256": "3dd5917f751deb7f61268a01b9de3232f9651633e46fcc87c092734f6a7b2dd9"
+}
