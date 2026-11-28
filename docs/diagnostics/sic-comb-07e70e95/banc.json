@@ -1,0 +1,599 @@
+{
+  "source": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "geometry": "576a05a169027cef7f78b577859cc2a5c8de8a3a3beeff93139d6772e81771ee",
+  "epoch": 1,
+  "naturalNominalCounterexamples": 0,
+  "constructedReturn": {
+    "command": {
+      "action_ref": "ACTION6",
+      "data": {
+        "x": 24,
+        "y": 20
+      }
+    },
+    "changed_factors": [
+      0,
+      1
+    ],
+    "evidence": [
+      "comb-46:epoch:1:revision:1:frame:a188f019a6b99b2b",
+      "comb-46:epoch:1:revision:2:frame:9bb3d39be7655799"
+    ]
+  },
+  "target": {
+    "game": "COMB",
+    "level": 1,
+    "turn": 3,
+    "sameObservation": "comb-46:epoch:1:revision:3:frame:e1e3964db8875990",
+    "before": {
+      "family": "public_occurrence_recall",
+      "command": [
+        "ACTION6",
+        {
+          "x": 24,
+          "y": 20
+        }
+      ],
+      "guard": {
+        "admitted": true,
+        "reason": "current_factor_point_and_values_bound"
+      },
+      "plan": {
+        "step": {
+          "action": {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 24,
+              "y": 20
+            }
+          },
+          "factor": 0,
+          "before_values": [
+            9,
+            8
+          ],
+          "after_values": [
+            4,
+            8
+          ],
+          "relation_observed": false,
+          "expected_after": null,
+          "expected_before": {
+            "level_epoch": 1,
+            "frame_hash": "e1e3964db8875990",
+            "levels_completed": 0,
+            "state": "NOT_FINISHED"
+          },
+          "point_support": {
+            "level_epoch": 1,
+            "observation_ref": "comb-46:epoch:1:revision:3:frame:e1e3964db8875990",
+            "frame_hash": "e1e3964db8875990",
+            "point": [
+              24,
+              20
+            ],
+            "palette_value": 9,
+            "projection_bbox": [
+              24,
+              20,
+              24,
+              20
+            ],
+            "projected_rows_digest": "fcd4b25508885e2873b7596836c49786f5743da58fbe144f18b0e0e8b0fc41ad",
+            "entity_ref": "measured-control-envelope:aae9efa563f7375a493f1cc23e4f85d372d098ec975bd3ae474ba48371af747d",
+            "signature": "678b544ad7875aeab203e6a19c66b436895d145624f098ea6602030c98fd30bd",
+            "scope": "Current measured control locus. Later value is a frozen conditional predecessor prediction, revalidated at dispatch; no stale-coordinate or component-identity authority."
+          },
+          "point_binding": {
+            "level_epoch": 1,
+            "observation_ref": "comb-46:epoch:1:revision:3:frame:e1e3964db8875990",
+            "frame_hash": "e1e3964db8875990",
+            "point": [
+              24,
+              20
+            ],
+            "palette_value": 9,
+            "projection_bbox": [
+              24,
+              20,
+              24,
+              20
+            ],
+            "projected_rows_digest": "fcd4b25508885e2873b7596836c49786f5743da58fbe144f18b0e0e8b0fc41ad",
+            "entity_ref": "measured-control-envelope:aae9efa563f7375a493f1cc23e4f85d372d098ec975bd3ae474ba48371af747d",
+            "signature": "678b544ad7875aeab203e6a19c66b436895d145624f098ea6602030c98fd30bd",
+            "scope": "Current measured control locus. Later value is a frozen conditional predecessor prediction, revalidated at dispatch; no stale-coordinate or component-identity authority."
+          }
+        },
+        "steps": [
+          {
+            "factor": 0,
+            "before_values": [
+              9,
+              8
+            ],
+            "after_values": [
+              4,
+              8
+            ],
+            "relation_observed": false
+          }
+        ],
+        "estimate": {
+          "indices": [
+            0
+          ],
+          "factors": [
+            [
+              "4",
+              "9"
+            ],
+            [
+              "4",
+              "8"
+            ]
+          ],
+          "status": "COMPLETE",
+          "complete": true,
+          "examined": 6,
+          "releases": false,
+          "assumptions": [
+            "measured_catalogue_equals_finite_product",
+            "legend_order_cycle_candidate_constrained_by_effects",
+            "local_effect_independence_remains_conditional",
+            "acceptance_is_experimental_catalogue_goal_not_official_game_verdict",
+            "reserve_counts_emitted_commands_not_unknown_internal_resource",
+            "initial_current_tuple_observed_not_assumed_game_credit"
+          ],
+          "trace": [
+            {
+              "owner_ref": "SRC",
+              "action_ref": "factor:0",
+              "factor_index": 0,
+              "before_tuple": [
+                "9",
+                "8"
+              ],
+              "after_tuple": [
+                "4",
+                "8"
+              ],
+              "new_visit": true,
+              "debit": 1,
+              "reserve_before": 14,
+              "reserve_after": 13,
+              "lifecycle": "accepted",
+              "automatic_pass_already_owned": true,
+              "cost_already_owned": true
+            }
+          ]
+        },
+        "scene": {
+          "ref": "576a05a169027cef7f78b577859cc2a5c8de8a3a3beeff93139d6772e81771ee",
+          "geometry": {
+            "controls": [
+              [
+                19,
+                15,
+                29,
+                25
+              ],
+              [
+                33,
+                15,
+                43,
+                25
+              ]
+            ],
+            "legends": [
+              [
+                [
+                  21,
+                  29,
+                  23,
+                  31
+                ],
+                [
+                  25,
+                  29,
+                  27,
+                  31
+                ]
+              ],
+              [
+                [
+                  35,
+                  29,
+                  37,
+                  31
+                ],
+                [
+                  39,
+                  29,
+                  41,
+                  31
+                ]
+              ]
+            ],
+            "cards": [
+              [
+                12,
+                46,
+                20,
+                48
+              ],
+              [
+                22,
+                46,
+                30,
+                48
+              ],
+              [
+                32,
+                46,
+                40,
+                48
+              ],
+              [
+                42,
+                46,
+                50,
+                48
+              ]
+            ],
+            "offsets": [
+              [
+                3,
+                1
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "controls": [
+            {
+              "point": [
+                24,
+                20
+              ],
+              "values": [
+                4,
+                9
+              ]
+            },
+            {
+              "point": [
+                38,
+                20
+              ],
+              "values": [
+                4,
+                8
+              ]
+            }
+          ],
+          "current": [
+            9,
+            8
+          ],
+          "catalogue": [
+            [
+              4,
+              4
+            ],
+            [
+              9,
+              4
+            ],
+            [
+              4,
+              8
+            ],
+            [
+              9,
+              8
+            ]
+          ]
+        },
+        "purpose": "Use the existing finite product compiler to prepare visits to the remaining measured catalogue configurations. The local cycles and their independence remain conditional; compare each factor projection, close at an unknown edge and reconcile. The compiler's acceptance and reserve describe this experiment, not the unknown game verdict or internal resource law."
+      }
+    },
+    "after": {
+      "family": "public_occurrence_recall",
+      "command": [
+        "ACTION6",
+        {
+          "x": 24,
+          "y": 20
+        }
+      ],
+      "guard": {
+        "admitted": true,
+        "reason": "current_factor_point_and_values_bound"
+      },
+      "plan": {
+        "step": {
+          "action": {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 24,
+              "y": 20
+            }
+          },
+          "factor": 0,
+          "before_values": [
+            9,
+            8
+          ],
+          "after_values": [
+            4,
+            8
+          ],
+          "relation_observed": false,
+          "expected_after": null,
+          "expected_before": {
+            "level_epoch": 1,
+            "frame_hash": "e1e3964db8875990",
+            "levels_completed": 0,
+            "state": "NOT_FINISHED"
+          },
+          "point_support": {
+            "level_epoch": 1,
+            "observation_ref": "comb-46:epoch:1:revision:3:frame:e1e3964db8875990",
+            "frame_hash": "e1e3964db8875990",
+            "point": [
+              24,
+              20
+            ],
+            "palette_value": 9,
+            "projection_bbox": [
+              24,
+              20,
+              24,
+              20
+            ],
+            "projected_rows_digest": "fcd4b25508885e2873b7596836c49786f5743da58fbe144f18b0e0e8b0fc41ad",
+            "entity_ref": "measured-control-envelope:aae9efa563f7375a493f1cc23e4f85d372d098ec975bd3ae474ba48371af747d",
+            "signature": "678b544ad7875aeab203e6a19c66b436895d145624f098ea6602030c98fd30bd",
+            "scope": "Current measured control locus. Later value is a frozen conditional predecessor prediction, revalidated at dispatch; no stale-coordinate or component-identity authority."
+          },
+          "point_binding": {
+            "level_epoch": 1,
+            "observation_ref": "comb-46:epoch:1:revision:3:frame:e1e3964db8875990",
+            "frame_hash": "e1e3964db8875990",
+            "point": [
+              24,
+              20
+            ],
+            "palette_value": 9,
+            "projection_bbox": [
+              24,
+              20,
+              24,
+              20
+            ],
+            "projected_rows_digest": "fcd4b25508885e2873b7596836c49786f5743da58fbe144f18b0e0e8b0fc41ad",
+            "entity_ref": "measured-control-envelope:aae9efa563f7375a493f1cc23e4f85d372d098ec975bd3ae474ba48371af747d",
+            "signature": "678b544ad7875aeab203e6a19c66b436895d145624f098ea6602030c98fd30bd",
+            "scope": "Current measured control locus. Later value is a frozen conditional predecessor prediction, revalidated at dispatch; no stale-coordinate or component-identity authority."
+          }
+        },
+        "steps": [
+          {
+            "factor": 0,
+            "before_values": [
+              9,
+              8
+            ],
+            "after_values": [
+              4,
+              8
+            ],
+            "relation_observed": false
+          }
+        ],
+        "estimate": {
+          "indices": [
+            0
+          ],
+          "factors": [
+            [
+              "4",
+              "9"
+            ],
+            [
+              "4",
+              "8"
+            ]
+          ],
+          "status": "COMPLETE",
+          "complete": true,
+          "examined": 6,
+          "releases": false,
+          "assumptions": [
+            "measured_catalogue_equals_finite_product",
+            "legend_order_cycle_candidate_constrained_by_effects",
+            "local_effect_independence_remains_conditional",
+            "acceptance_is_experimental_catalogue_goal_not_official_game_verdict",
+            "reserve_counts_emitted_commands_not_unknown_internal_resource",
+            "initial_current_tuple_observed_not_assumed_game_credit"
+          ],
+          "trace": [
+            {
+              "owner_ref": "SRC",
+              "action_ref": "factor:0",
+              "factor_index": 0,
+              "before_tuple": [
+                "9",
+                "8"
+              ],
+              "after_tuple": [
+                "4",
+                "8"
+              ],
+              "new_visit": true,
+              "debit": 1,
+              "reserve_before": 14,
+              "reserve_after": 13,
+              "lifecycle": "accepted",
+              "automatic_pass_already_owned": true,
+              "cost_already_owned": true
+            }
+          ]
+        },
+        "scene": {
+          "ref": "576a05a169027cef7f78b577859cc2a5c8de8a3a3beeff93139d6772e81771ee",
+          "geometry": {
+            "controls": [
+              [
+                19,
+                15,
+                29,
+                25
+              ],
+              [
+                33,
+                15,
+                43,
+                25
+              ]
+            ],
+            "legends": [
+              [
+                [
+                  21,
+                  29,
+                  23,
+                  31
+                ],
+                [
+                  25,
+                  29,
+                  27,
+                  31
+                ]
+              ],
+              [
+                [
+                  35,
+                  29,
+                  37,
+                  31
+                ],
+                [
+                  39,
+                  29,
+                  41,
+                  31
+                ]
+              ]
+            ],
+            "cards": [
+              [
+                12,
+                46,
+                20,
+                48
+              ],
+              [
+                22,
+                46,
+                30,
+                48
+              ],
+              [
+                32,
+                46,
+                40,
+                48
+              ],
+              [
+                42,
+                46,
+                50,
+                48
+              ]
+            ],
+            "offsets": [
+              [
+                3,
+                1
+              ],
+              [
+                5,
+                1
+              ]
+            ]
+          },
+          "controls": [
+            {
+              "point": [
+                24,
+                20
+              ],
+              "values": [
+                4,
+                9
+              ]
+            },
+            {
+              "point": [
+                38,
+                20
+              ],
+              "values": [
+                4,
+                8
+              ]
+            }
+          ],
+          "current": [
+            9,
+            8
+          ],
+          "catalogue": [
+            [
+              4,
+              4
+            ],
+            [
+              9,
+              4
+            ],
+            [
+              4,
+              8
+            ],
+            [
+              9,
+              8
+            ]
+          ]
+        },
+        "purpose": "Use the existing finite product compiler to prepare visits to the remaining measured catalogue configurations. The local cycles and their independence remain conditional; compare each factor projection, close at an unknown edge and reconcile. The compiler's acceptance and reserve describe this experiment, not the unknown game verdict or internal resource law."
+      }
+    },
+    "samePhysicalReturn": true,
+    "samePlan": true,
+    "addedEvidence": [
+      "comb-46:epoch:1:revision:2:frame:9bb3d39be7655799"
+    ]
+  },
+  "continued": {
+    "turn": 5,
+    "command": [
+      "ACTION6",
+      {
+        "x": 24,
+        "y": 20
+      }
+    ],
+    "guard": {
+      "admitted": true,
+      "reason": "current_factor_point_and_values_bound"
+    },
+    "edgeCount": 2
+  }
+}
