@@ -1,0 +1,84 @@
+{
+  "versions": {
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "candidat": "be816a3f09e7b36d9393aaead8d835d9dc3850c5"
+  },
+  "equalPrefix": 15,
+  "observation": "frontier-qualification:epoch:3:revision:16:frame:af0bcad41eef9c48",
+  "accessNeed": "sic-need:5eebf844fca41d64b51ef8d5422bc925ad215f83b1b8eb36d3709d95de3209cd",
+  "nominal": {
+    "path": [
+      {
+        "edge": "edge:0fa27e48a85f56a1093c957186dbb50efb80936a601b0a6cdc528c435c016a9b",
+        "witnesses": [
+          "transition:b4b5c2eae6c3a201220681c71d4822638372d8a008a1af28178f814adb81a86b"
+        ],
+        "command": {
+          "action_ref": "ACTION4"
+        }
+      }
+    ],
+    "question": "Q_8b45c6cdc354b85cd0a2"
+  },
+  "alternative": {
+    "path": [
+      {
+        "edge": "edge:0fa27e48a85f56a1093c957186dbb50efb80936a601b0a6cdc528c435c016a9b",
+        "witnesses": [
+          "transition:b4b5c2eae6c3a201220681c71d4822638372d8a008a1af28178f814adb81a86b"
+        ],
+        "command": {
+          "action_ref": "ACTION4"
+        }
+      },
+      {
+        "edge": "edge:c68a04e40df11610d613cfae9d304cb9a264595feb0f815099b2df0c8e710e35",
+        "witnesses": [
+          "transition:afa5a2096ccd2fcd5783ea80c6594c0f9b04eb6f9c920e6a47e31e044e58e765"
+        ],
+        "command": {
+          "action_ref": "ACTION4"
+        }
+      }
+    ],
+    "question": "Q_af0257e2c8ca6ad0386a"
+  },
+  "initialNeed": "sic-need:67b3c891d0a68db37cfb1db09cdbf5afeb382c90d70a428f8cde403cb464fd41",
+  "alternateNeed": "sic-need:9383874cbe81ebb37247f69dad0487e5dfe616bb3494d649da48d77d8d2b93dd",
+  "withdrawal": {
+    "kind": "stopped",
+    "reason": "frontier_frontier_exhausted",
+    "decision": "observed_frontier",
+    "phase": "stopped"
+  },
+  "sha256": {
+    "candidat-nominal.json": "668e33d42b9ca893917f03a4d3182dc96fdf53a9da47d37e2fb302a6c2273902",
+    "candidat-sans-question.json": "ac09a2213296ca405c9a6e2d7fb13ab6b84629072463749e3d88b88df6419128",
+    "candidat-sans-trajet.json": "4a0700d3fdbde9a965ed7fcc382e302a2756c40374de882683c43c41cd30e451",
+    "gel-nominal.json": "bfdb0669264dc987a6bf8efc5e3688b03b83253c09730d9df5a22dd2a932133a",
+    "gel-sans-question.json": "c623c8b91b01a0a3ee74b024ac1c89ab31ae389ae76219eb722bcad5777d9b9d",
+    "gel-sans-trajet.json": "689cbc3775665ea593b242ab8e7579c9585df2399ee099e76e31bc3248559efd",
+    "qualification.json": "5fe8f80203b0a07459934871adeabdd7258e42a7b1fd9f23f02a9235102da478"
+  },
+  "archiveSHA256": "23da69092ac0ed68ac19a38c833a1108c36143fd30a5081e5ab266e9b9fe251e",
+  "verifierMatrix": {
+    "historique": [
+      "catalogue",
+      "lecture",
+      "horloge"
+    ],
+    "gel": [
+      "catalogue",
+      "lecture",
+      "coupe",
+      "reprise",
+      "horloge"
+    ],
+    "candidat": [
+      "catalogue",
+      "lecture",
+      "reprise"
+    ]
+  },
+  "operator": "641f5540"
+}
