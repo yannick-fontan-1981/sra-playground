@@ -1,0 +1,50 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "candidat": "776625f920b200e92c6d0d7a924f618a939b0dcd",
+    "attendus": "7651ad0ef4b3f2e86a4767dde9b18abbe8a3374a",
+    "controleBanc": "47ae8531a54e584bfd13211b988b92a4658fe27e"
+  },
+  "pinnedCandidate": "484f3f0d066b7c00a3e2ad68c983ad556be3a3ac",
+  "matchedToIndependentReference": {
+    "catalogue": 16,
+    "couverture": 19
+  },
+  "line84CatalogueTurns": [
+    5,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13
+  ],
+  "line97CoverageTurns": [
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "line97Agreement": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    false
+  ],
+  "line97Completion": 3,
+  "parity": {
+    "catalogue": "7f6bf4ee43f0f53ebe7ec922d77cc1f8b5ebf8f9f258f34944efa8097017c8fd",
+    "couverture": "3955905786f30077084388bfaf3578255f85e215ce32265f11813cb5ef5c4678"
+  },
+  "archiveSHA256": "e9dc1bc77a02cc68dffc0f071fd9d149b8ae345b5c918fd8fe89b25c9f048b91",
+  "srcTree": "dcdeddf0c7fa0f2ed0a1fab1d869a49a45be4385",
+  "operator": "a1e0f3ae",
+  "startedAt": "2026-11-27T21:57:10.967161-03:00",
+  "qualifiedAt": "2026-11-27T22:07:22.555868-03:00",
+  "elapsedSeconds": 612
+}
