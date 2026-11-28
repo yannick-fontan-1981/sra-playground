@@ -1,0 +1,16 @@
+{
+  "status": "sealed-before-implementation-delivery",
+  "historicalAnchor": "0aef4289e97ce094782dfd03f5a79ace6eae5fd2",
+  "anticipatedParent": "86e0f172",
+  "protocol": { "game": "PORT", "mode": "sic", "startLevel": 1, "target": "auto", "workers": 1, "seed": 0 },
+  "primaryWitness": { "level": 4, "turn": 7, "approachTurn": 6 },
+  "replicationWitness": { "level": 6, "turn": 6 },
+  "governingFamily": "sic_paired_passage",
+  "activeSite": "switchContact",
+  "expectedNativeReturnWithBudget": "passage_connections_rewritten_at_landing",
+  "comparisons": {
+    "one": "same native tickets, command, packet and contact acquisition as unmodified parent, extra local receipt alone",
+    "zero": "native prefix and measured approach unchanged until first prepared contact, local selected=false, no active contact proposal from this site; record the genuine replacement or stop"
+  },
+  "heldOutFromImplementationCommunications": true
+}
