@@ -23,6 +23,7 @@ type History = {
   lastPush?: { ink: number; direction: string; object: Cell };
   obstruction?: { ink: number; stance: Cell; object: Cell };
   projectionInk?: number; relayField?: RelayField; relay?: RelayStep[]; relayChecked: string[]; relayLoads?: number[]; seenChain?: boolean; seenPlate?: boolean;
+  relaySelectionPriced?: boolean;
   motion?: { last: string; visits: string[]; cycle?: string[] };
   recoveredCycles?: string[][];
   triedPlates?: Cell[];
@@ -53,7 +54,8 @@ type ControlTransfer = { source: Cell; destination: Cell; reflector: Cell; mark:
 type Step = { action: NativeCommand; from: Cell; actor: number; to?: Cell; tile?: string; select?: number; contact?: Cell; relay?: RelayStep; expectedActors?: {ink:number;from:Cell;to:Cell}[];
   loads?: { from: Cell[]; to: Cell[]; support?: Cell }; reflectorMove?: { from: Cell; to: Cell }; controlTransfer?: ControlTransfer; platform?: PlatformStep; pressureTrial?:Cell;
   roster?: {ink:number;cell:Cell}[]; probeLanding?:{cell:Cell;glyph:string}; circuitTrial?:number; supportAccess?:Cell; clearLinkedObstruction?:Cell; };
-type Offer = { ink: number; steps: Step[]; kind: string; score: number; test?: string; target?: Cell; destinations?:Cell[] };
+type Offer = { ink: number; steps: Step[]; kind: string; score: number; test?: string; target?: Cell; destinations?:Cell[];
+  relayCommandEstimate?: { moves: number; selections: number } };
 type Proposal = ReturnType<typeof proposed>;
 type Path = { cell: Cell; route: Step[] };
 const cardinal: readonly Point[] = [[0,-1], [0,1], [-1,0], [1,0]];
@@ -1393,7 +1395,7 @@ function relayAgreement(scene:Scene,h:History,expected:RelayState){
   });
 }
 
-async function relayOffer(scene:Scene,h:History,remaining:number,execution?:NativeExecution):Promise<Offer|undefined> {
+async function relayOffer(scene:Scene,h:History,remaining:number,execution?:NativeExecution,preferSelectionCost=false):Promise<Offer|undefined> {
   const field=h.relayField;
   if(!field||!h.trigger&&!field.learnedMobility)return;
   const pose=relayPose(scene,h);
@@ -1403,11 +1405,15 @@ async function relayOffer(scene:Scene,h:History,remaining:number,execution?:Nati
     const fingerprint=JSON.stringify([relayPoseKey(pose),scene.active.ink]);
     if(h.relayChecked.includes(fingerprint)||h.relayChecked.length>=4)return;
     const spare=h.available?.filter(ref=>ref!=='ACTION6'&&!h.directions.some(direction=>direction.action===ref))??[];
+    const priceSelection = preferSelectionCost && h.available?.includes('ACTION6')
+      && h.shape!.inks.every(ink => !!h.selections[ink]);
+    const activeActor = h.shape!.inks.indexOf(scene.active.ink);
     const model:RelayModel={...field,floor:new Set(field.floor),water:new Set(field.water),trigger:h.trigger??(spare.length===1?spare[0]!:'') ,
       controls:h.shape!.inks.map(ink=>observedDirections(h,ink).map(d=>({action:d.action,axis:toAxis(d.axis)}))),
       capacity:h.shape!.inks.map(ink=>h.roles[ink]?.capacity||(field.learnedMobility&&!h.roles[ink]?.pull?1:0)),
       ...(field.learnedMobility?{pull:h.shape!.inks.map(ink=>!!h.roles[ink]?.pull),nearestReflection:true,
-        ...(field.plate===null||field.subjectPatterns||field.platforms?{activeActor:h.shape!.inks.indexOf(scene.active.ink)}:{})}: {})};
+        ...(field.plate===null||field.subjectPatterns||field.platforms?{activeActor}:{})}: {}),
+      ...(priceSelection ? { activeActor } : {})};
     const search={yieldControl:execution?.yieldControl??(async()=>{}),signal:execution?.signal};
     let route:RelayStep[]|undefined;
     delete h.circuitTarget;
@@ -1437,10 +1443,14 @@ async function relayOffer(scene:Scene,h:History,remaining:number,execution?:Nati
     h.relayChecked.push(fingerprint);
     if(!route?.length)return;
     h.relay=route;
+    h.relaySelectionPriced=priceSelection;
   }
   const line=h.relay;
+  const cost = h.relaySelectionPriced ? { relayCommandEstimate: { moves:line.length,
+    selections:line.filter((step,i)=>step.actor!==(i===0?h.shape!.inks.indexOf(scene.active.ink):line[i-1]!.actor)).length } } : {};
   const initial=line[0]!, actor=scene.actors.find(a=>a.ink===h.shape!.inks[initial.actor])!;
   if(scene.active.ink!==actor.ink)return {ink:actor.ink,steps:[actorSwitch(scene,h,actor)],kind:'select_actor_for_relay_plan',score:650,
+    ...cost,
     ...(field.learnedMobility?{destinations:scene.goals}:{})};
   const steps:Step[]=[];
   for(const predicted of line){
@@ -1456,6 +1466,7 @@ async function relayOffer(scene:Scene,h:History,remaining:number,execution?:Nati
   return {ink:actor.ink,steps,kind:h.relayPurpose??(h.circuitTarget!==undefined?'test_linked_control_effect':field.settleSubjectOnControl?'compose_subject_with_linked_control':field.finishAtPlate?'prepare_access_to_test_linked_control'
     :field.learnedMobility?'compose_group_destination_after_access'
     :field.plate===null?'compose_reflection_and_support_access':'compose_reflection_and_linked_gate_access'),score:800,
+    ...cost,
     ...(field.learnedMobility?{destinations:scene.goals}:{})};
 }
 
@@ -1536,13 +1547,14 @@ function proposed(o: NativeObservation, offer: Offer, steps: (Step & { point_bin
     binding:{observation_ref:o.observation_ref,level_epoch:o.level_epoch},
     question:{reason,hypothesis_refs:evidence},route_refs:evidence,
     compositions:[{id,observed:false,open_question:reason,relations:['contributes_to:G_official_completion']}],
-    sicSituationCard:{mode:offer.kind.startsWith('bring_')?'solving':'exploration',strategy:offer.kind,need:reason,situation:reason,evidence},
+    sicSituationCard:{mode:offer.kind.startsWith('bring_')?'solving':'exploration',strategy:offer.kind,need:reason,situation:reason,evidence,
+      ...(offer.relayCommandEstimate?{relayCommandEstimate:offer.relayCommandEstimate}:{})},
     sicLocalDecision:{strategy:offer.kind,objective:{id,label:reason,parent:'G_official_completion'},need:{...goal,id:needId,status:'assigned',evidence}},
     bundle_template:{operation_key:'OP18',composition_ref:id,objective_ref:'G_official_completion',purpose:reason,
       preconditions:{},preserve_refs:[],evidence,actions,outcome_guard:{path:['value'],contains:id}}};
 }
 
-export function createObservedActorComposition(): NativeFamily<Proposal> {
+export function createObservedActorComposition(preferSelectionCost = false): NativeFamily<Proposal> {
   let h=fresh(-1);
   return {
     id:observedActorCompositionId,
@@ -1612,9 +1624,9 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       const chain=learningRelay&&!h.seenChain?frontier.find(offer=>(offer.kind==='test_reachable_chain_composition'||offer.kind==='test_extended_chain_capacity')):undefined;
       const press=learningRelay&&!h.seenPlate?frontier.find(offer=>offer.kind==='test_reachable_pressure_composition'):undefined;
       const paired=scene.goals.length?pairedTransfer(scene,h,o):undefined;
-      const relay=h.relayField?.linkedControls||h.relayField?.platforms?await relayOffer(scene,h,remaining,execution):undefined;
+      const relay=h.relayField?.linkedControls||h.relayField?.platforms?await relayOffer(scene,h,remaining,execution,preferSelectionCost):undefined;
       const planned=await platformOffer(scene,h,o,remaining,execution)??relay??releaseBlockedControl(scene,h)??prepareRelayControls(scene,h,o)
-        ??chain??press??linkedTransport(scene,h,o)??paired??await relayOffer(scene,h,remaining,execution)??arrangeActors(scene,h);
+        ??chain??press??linkedTransport(scene,h,o)??paired??await relayOffer(scene,h,remaining,execution,preferSelectionCost)??arrangeActors(scene,h);
       const direct=planned?undefined:draft(scene,h,o);
       const directed=scene.goals.length&&direct&&direct.score>155?direct:undefined;
       const generic=!planned&&!directed&&h.directions.length>=4?testObservedObjects(scene,h,o,objects):undefined;
