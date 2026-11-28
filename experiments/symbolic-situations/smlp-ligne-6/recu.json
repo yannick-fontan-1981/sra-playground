@@ -1,0 +1,160 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 4,
+      "gestes": 33,
+      "testsAuteur": 3
+    },
+    {
+      "sha": "1e11472a8acfe8d4287cf33e58fe3f629e532fb9",
+      "départs": 4,
+      "gestes": 33,
+      "testsAuteur": 3
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "occurrences": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "mesures": {
+    "1": {
+      "ordres": 24,
+      "base": 4,
+      "arrivées": {
+        "9": 52,
+        "12": 68
+      }
+    },
+    "4": {
+      "ordres": 12,
+      "base": 4,
+      "arrivées": {
+        "9": 84,
+        "12": 148,
+        "15": 68
+      }
+    },
+    "9": {
+      "ordres": 6,
+      "base": 3,
+      "arrivées": {
+        "9": 42,
+        "12": 24,
+        "15": 48
+      }
+    },
+    "11": {
+      "ordres": 3,
+      "base": 3,
+      "arrivées": {
+        "9": 54,
+        "12": 24,
+        "15": 48
+      }
+    }
+  },
+  "plans": {
+    "3": {
+      "question": "coincident_first_arrivals",
+      "total": 24,
+      "ordresPrédits": [
+        [
+          17,
+          17
+        ]
+      ]
+    },
+    "5": {
+      "question": "coincident_first_arrivals",
+      "total": 12,
+      "ordresPrédits": [
+        [
+          17,
+          17,
+          17
+        ]
+      ]
+    },
+    "10": {
+      "question": "route_order_discrimination",
+      "total": 6,
+      "ordresPrédits": [
+        [
+          8,
+          17,
+          16
+        ],
+        [
+          8,
+          18,
+          16
+        ]
+      ]
+    },
+    "12": {
+      "question": "coincident_first_arrivals",
+      "total": 3,
+      "ordresPrédits": [
+        [
+          18,
+          18,
+          18
+        ]
+      ]
+    }
+  },
+  "finOfficielle": [
+    3,
+    7,
+    15
+  ],
+  "finaleSeule": [
+    "observed_frontier",
+    "experiment",
+    "ACTION6",
+    {
+      "x": 10,
+      "y": 32
+    }
+  ],
+  "retraitPriorité": [
+    "observed_frontier",
+    "experiment",
+    "ACTION6",
+    {
+      "x": 10,
+      "y": 18
+    }
+  ],
+  "réserve": {
+    "index": 52,
+    "images": 75,
+    "paquetModifié": true,
+    "arrivé": {
+      "9": 53,
+      "12": 68
+    },
+    "suite": [
+      "configured_arrivals",
+      "configured_first_arrival_composition",
+      "ACTION6",
+      {
+        "x": 32,
+        "y": 26
+      }
+    ]
+  }
+}
