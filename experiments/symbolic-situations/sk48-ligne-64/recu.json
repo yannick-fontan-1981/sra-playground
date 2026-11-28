@@ -1,0 +1,82 @@
+{
+  "gel": {
+    "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "départs": 6,
+    "gestes": 21,
+    "nominal": {
+      "ordre": [
+        "8",
+        "14",
+        "9"
+      ],
+      "commande": "ACTION1",
+      "expansions": 282,
+      "gestesPlan": 11,
+      "statut": null,
+      "confirmation": true
+    },
+    "palette9et14": {
+      "ordre": [
+        "8",
+        "9",
+        "14"
+      ],
+      "commande": null,
+      "expansions": 792,
+      "borne": "bound.max_depth"
+    },
+    "banc8et13": {
+      "ordre": [
+        "13",
+        "14",
+        "9"
+      ],
+      "commande": "ACTION1",
+      "expansions": 282,
+      "gestesPlan": 11,
+      "statut": null,
+      "confirmation": true
+    }
+  },
+  "stations": {
+    "sha": "4946cf0297734b9464fc52256af6fb27846f3bad",
+    "départs": 6,
+    "gestes": 22,
+    "nominal": {
+      "ordre": [
+        "8",
+        "14",
+        "9"
+      ],
+      "commande": "ACTION1",
+      "expansions": 282,
+      "gestesPlan": 11,
+      "statut": "compatible_unordered",
+      "confirmation": true
+    },
+    "palette9et14": {
+      "ordre": [
+        "8",
+        "9",
+        "14"
+      ],
+      "commande": "ACTION1",
+      "expansions": 282,
+      "gestesPlan": 11,
+      "statut": "compatible_unordered",
+      "confirmation": true
+    },
+    "banc8et13": {
+      "ordre": [
+        "13",
+        "14",
+        "9"
+      ],
+      "commande": "ACTION1",
+      "expansions": 282,
+      "gestesPlan": 11,
+      "statut": "compatible_unordered",
+      "confirmation": true
+    }
+  }
+}
