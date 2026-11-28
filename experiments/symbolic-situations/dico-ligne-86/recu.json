@@ -1,0 +1,199 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 7,
+      "gestes": 24
+    },
+    {
+      "sha": "d84d0b938904a9e10a1ab82f8b8f92a0cfec5cdc",
+      "départs": 7,
+      "gestes": 24
+    }
+  ],
+  "candidats": [
+    0,
+    1,
+    4,
+    5
+  ],
+  "portées": {
+    "initiale": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "visée": [
+      0,
+      1,
+      4,
+      5
+    ],
+    "observéeAprèsT3": [
+      0,
+      1,
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "nominal": [
+    {
+      "tour": 1,
+      "choix": [
+        "observed_frontier",
+        "experiment",
+        [
+          "ACTION6",
+          {
+            "x": 1,
+            "y": 3
+          }
+        ]
+      ],
+      "acquisition": "public_subset_feedback",
+      "images": 14
+    },
+    {
+      "tour": 2,
+      "choix": [
+        "subset_diagnosis",
+        "subset_scope_navigation",
+        [
+          "ACTION6",
+          {
+            "x": 6,
+            "y": 3
+          }
+        ]
+      ],
+      "acquisition": "public_subset_feedback",
+      "images": 14
+    },
+    {
+      "tour": 3,
+      "choix": [
+        "subset_diagnosis",
+        "subset_scope_navigation",
+        [
+          "ACTION6",
+          {
+            "x": 16,
+            "y": 3
+          }
+        ]
+      ],
+      "acquisition": "scope_navigation_response",
+      "images": 1
+    },
+    {
+      "tour": 4,
+      "choix": [
+        "subset_diagnosis",
+        "subset_scope_query",
+        [
+          "ACTION6",
+          {
+            "x": 6,
+            "y": 3
+          }
+        ]
+      ],
+      "acquisition": "public_subset_feedback",
+      "images": 9
+    }
+  ],
+  "autre": [
+    [
+      "subset_diagnosis",
+      "subset_scope_navigation",
+      [
+        "ACTION6",
+        {
+          "x": 16,
+          "y": 3
+        }
+      ]
+    ],
+    [
+      "subset_diagnosis",
+      "subset_scope_query",
+      [
+        "ACTION6",
+        {
+          "x": 6,
+          "y": 3
+        }
+      ]
+    ]
+  ],
+  "retrait": [
+    [
+      "observed_frontier",
+      "experiment",
+      [
+        "ACTION6",
+        {
+          "x": 10,
+          "y": 23
+        }
+      ]
+    ],
+    [
+      "subset_diagnosis",
+      "subset_scope_navigation",
+      [
+        "ACTION6",
+        {
+          "x": 6,
+          "y": 3
+        }
+      ]
+    ]
+  ],
+  "stationnaireT2": {
+    "suite": [
+      "ACTION6",
+      {
+        "x": 16,
+        "y": 3
+      }
+    ],
+    "candidats": [
+      0,
+      1,
+      4,
+      5
+    ],
+    "portée": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "réserve": {
+    "images": 1,
+    "intermédiairesDifférentes": 0,
+    "suiteImageT3": "subset_scope_query",
+    "suiteStationnaireT3": "subset_scope_query",
+    "commandeStationnaireT3": [
+      "ACTION6",
+      {
+        "x": 13,
+        "y": 26
+      }
+    ],
+    "fauxReçuRejeté": true
+  }
+}
