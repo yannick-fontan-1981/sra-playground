@@ -1,0 +1,263 @@
+{
+  "engine": "674b0dd19d693a66687990ab2a4368d981aa8fb9",
+  "engineTree": "c0a36ee4250f5b9d252e72b9894801de77f8db98",
+  "lines": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    18,
+    19,
+    20,
+    22,
+    23,
+    25,
+    26,
+    27,
+    28,
+    29,
+    31,
+    32,
+    35,
+    36,
+    39,
+    40,
+    41,
+    42,
+    44,
+    45,
+    47,
+    48,
+    52,
+    54,
+    56,
+    57,
+    58,
+    61,
+    63,
+    64,
+    66,
+    67,
+    68,
+    69,
+    71,
+    75,
+    77,
+    80,
+    81,
+    83,
+    84,
+    86,
+    87,
+    88,
+    90,
+    91,
+    92,
+    96,
+    97,
+    98
+  ],
+  "newProofs": [
+    {
+      "game": "KATA",
+      "line": 32,
+      "sha": "d22d706c8c148da1b6bde090d3c6c53d20c69d50",
+      "src": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+      "source": "identique au gel",
+      "bank": "50d093d7",
+      "operator": "e880603a"
+    },
+    {
+      "game": "TU93",
+      "line": 39,
+      "sha": "49a971c37982154ea175294afffdf83469c1c302",
+      "src": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+      "source": "identique au gel",
+      "bank": "8ba55f4c",
+      "operator": "964c0de2"
+    },
+    {
+      "game": "LS20",
+      "line": 20,
+      "sha": "a0af03d0f7c1ebe722b3b7b8bc4db4ba05364025",
+      "src": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+      "source": "identique au gel",
+      "bank": "4e61003e",
+      "operator": "31e55ed6"
+    },
+    {
+      "game": "CATR",
+      "line": 42,
+      "sha": "9186a49ea207caff1fee6a1386b506739b22d4a3",
+      "src": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+      "source": "identique au gel",
+      "bank": "4e61003e",
+      "operator": "6a25d460"
+    },
+    {
+      "game": "DC22",
+      "line": 88,
+      "sha": "d713024aa7f9b45c8fbd114b86209d36c4efd6ba",
+      "src": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+      "source": "identique au gel",
+      "bank": "40609886",
+      "operator": "634f4065"
+    },
+    {
+      "game": "CWSE",
+      "line": 45,
+      "sha": "71e15295d2fd38996147a524e4b0cd63e2991cc5",
+      "src": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+      "source": "identique au gel",
+      "bank": "f327f2be",
+      "operator": "a5b5c4a0"
+    },
+    {
+      "game": "ELAS",
+      "line": 19,
+      "sha": "280a54b5dd589d192d369b690781de057efaec8c",
+      "src": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+      "source": "identique au gel",
+      "bank": "9b75df31",
+      "operator": "c2260756"
+    },
+    {
+      "game": "HPDL",
+      "line": 75,
+      "sha": "66ce04946bccb531d5a6403ec36a5c2a90bf99a4",
+      "src": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+      "source": "identique au gel",
+      "bank": "c1691d04",
+      "operator": "fe76900b"
+    },
+    {
+      "game": "ZIPP",
+      "line": 67,
+      "sha": "421dc6a58d051e8e418db80a98cf1e01755dab40",
+      "src": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+      "source": "identique au gel",
+      "bank": "1efbe439",
+      "operator": "91fd9583"
+    },
+    {
+      "game": "ZIPP",
+      "line": 71,
+      "sha": "421dc6a58d051e8e418db80a98cf1e01755dab40",
+      "src": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+      "source": "identique au gel",
+      "bank": "1efbe439",
+      "operator": "91fd9583"
+    }
+  ],
+  "executableInputs": {
+    "src": "7ea60eaa1d45349b1a5692fb3adb01a286943eaa",
+    "public/python": "a5ff8c0ba6a25478a74d09b937697e624e40073f",
+    "reference": "f595b1ab6682225707650ad069cad3894c9942f6",
+    "package.json": "113ee6f4cc2daf8d74f37696c9840011332c345e",
+    "package-lock.json": "d283fe05b69fc4409c042196bcf1c4b9da3028d4",
+    "scripts/check-sic-chronological.mjs": "9ed33a5eebe46fd082f1dd9d15280d2ff3b6be4e",
+    "scripts/sic-replay-budgets.mjs": "1d763d437d9675aae6d2c92ba26f9e5a37d31351",
+    "docs/architecture/sic-replay-reference-levels-20261126.json": "aede9b3f2a3d2217e20b2b48f9b5fc0c7b1f2ffe",
+    "docs/architecture/sic-v8-level6-campaign-7bb9f152.json": "894058d1f6f60dbf4bec52e068d909a16b41e77b",
+    "docs/diagnostics/sic-107-4a546a13-20261126/manifest.json": "58c727bd3843f35803bd05ae0432000b2365e9e2"
+  },
+  "results": {
+    "KATA": {
+      "source": "674b0dd19d693a66687990ab2a4368d981aa8fb9",
+      "individualProof": "d22d706c",
+      "sessions": 3,
+      "passed": 3,
+      "skipped": 0,
+      "individualArchiveSHA256": "c937a632741237e152c75da1d92c86f7b38167342d490c61dc6d71d585bb78e7"
+    },
+    "TU93": {
+      "source": "674b0dd19d693a66687990ab2a4368d981aa8fb9",
+      "reference": "49a971c3",
+      "redirectedArms": [
+        "gel"
+      ],
+      "archiveSHA256": "38a961709f09e3714f7708c9ab93798d2be6a46efa1bb654c8b5e8beb63ac41c"
+    },
+    "LS20": {
+      "source": "674b0dd19d693a66687990ab2a4368d981aa8fb9",
+      "individualProof": "a0af03d0",
+      "sessions": 3,
+      "passed": 3,
+      "skipped": 0,
+      "individualArchiveSHA256": "160da06a8446bfb232e238bc6babf3fb4100b3b750fd0db595490912cbb67bf3"
+    },
+    "CATR": {
+      "source": "674b0dd19d693a66687990ab2a4368d981aa8fb9",
+      "reference": "9186a49e",
+      "redirectedArms": [
+        "gel"
+      ],
+      "archiveSHA256": "066ca1050af1c233819d14e6df783fb3e8b435d76dc2899c005ee02561cd346b"
+    },
+    "DC22": {
+      "source": "674b0dd19d693a66687990ab2a4368d981aa8fb9",
+      "individualProof": "d713024a",
+      "sessions": 2,
+      "passed": 2,
+      "skipped": 0,
+      "individualArchiveSHA256": "608943bfd8d3e98e321b1f8d597a670fc3cf2cfa1ee08ca29cf3e390ea16a439"
+    },
+    "CWSE": {
+      "source": "674b0dd19d693a66687990ab2a4368d981aa8fb9",
+      "reference": "71e15295",
+      "redirectedArms": [
+        "gel"
+      ],
+      "archiveSHA256": "0a39cf3a13bfba827bcc089ae119862c3f3ebe7396e34204d487005a55318be0"
+    },
+    "ELAS": {
+      "source": "674b0dd19d693a66687990ab2a4368d981aa8fb9",
+      "individualProof": "280a54b5",
+      "sessions": 2,
+      "passed": 2,
+      "skipped": 0,
+      "individualArchiveSHA256": "be2e4d213214aaee81ad4e9f10124c17b52b4d0e1a7cad8d5a9966ee8858e13c"
+    },
+    "HPDL": {
+      "source": "674b0dd19d693a66687990ab2a4368d981aa8fb9",
+      "reference": "66ce0494",
+      "redirectedArms": [
+        "gel"
+      ],
+      "archiveSHA256": "377386e211cdb51eb703ef5a63559fd9fcb9df4f0bbb45e0d16b0bbc532db34d"
+    },
+    "ZIPP": {
+      "source": "674b0dd19d693a66687990ab2a4368d981aa8fb9",
+      "individual": "421dc6a5",
+      "scenarios": 4,
+      "scopedLines": [
+        67,
+        71
+      ],
+      "allCapturedFieldsEqual": true,
+      "individualArchiveSHA256": "0552fd01f35d61232f205ff927825a09fec948b8a2c629cfa06563564182892b"
+    }
+  },
+  "witnessArchiveSHA256": "62bc44c71bb72e06a6e2a3f20f81901db7ea24cd29c730e88dff73a1e3d1fda0",
+  "campaign": {
+    "run": "46096543568",
+    "workflow": "d4c1203cffef75ab9fed4e0a6de7964c4f02dedb",
+    "candidate": "674b0dd19d693a66687990ab2a4368d981aa8fb9",
+    "reused": true,
+    "archiveSHA256": "b80b9dd195eff9af3bcb6d5b25006b0d444cdc4c693a42b3a7e889aa2c14615f",
+    "games": 107,
+    "actions": 18560,
+    "levels": 692
+  }
+}

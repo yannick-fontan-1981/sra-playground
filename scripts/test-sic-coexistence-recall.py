@@ -1,4 +1,4 @@
-"""Replay the SPOR, MEMO and initial SK48 controls on an exact assembly."""
+"""Replay the sealed native operator controls on an exact assembly."""
 import argparse
 import hashlib
 import json
@@ -13,6 +13,10 @@ proofs = {
     "SPOR": ("19ffd927", "spor-9-56", ("gel",)),
     "MEMO": ("4d9f1a39", "memo-56", ("gel",)),
     "SK48": ("1cf241c7", "sk48-64", ("stations",)),
+    "TU93": ("49a971c3", "tu93-39", ("gel",)),
+    "CATR": ("9186a49e", "catr-42", ("gel",)),
+    "CWSE": ("71e15295", "cwse-45", ("gel",)),
+    "HPDL": ("66ce0494", "hpdl-75", ("gel",)),
 }
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("game", choices=proofs)
@@ -44,7 +48,7 @@ source = source.replace(root, "const root = new URL(" + json.dumps(engine.as_uri
 source = source.replace(gate, "if(" + json.dumps(["candidat", *redirected]) + ".includes(name)) return fn(root);")
 helper.write_text(source, encoding="utf8", newline="\n")
 
-if args.game in {"MEMO", "SK48"}:
+if args.game in {"MEMO", "SK48", "CATR", "CWSE", "HPDL"}:
     verifier = out / entry
     source = verifier.read_text(encoding="utf8")
     expected_tree = "assert.equal(git('rev-parse','HEAD:src'),git('rev-parse','d0e7527c:src'));"
@@ -54,9 +58,16 @@ if args.game in {"MEMO", "SK48"}:
                         encoding="utf8", newline="\n")
 
 receipt = out / "qualification.json"
+extra_args = []
+if args.game == "CWSE":
+    catr_reference = bench / "docs/diagnostics/sic-catr-9186a49e/recus.zip"
+    native_catr = out / "catr-reference.json"
+    with ZipFile(catr_reference) as z:
+        native_catr.write_bytes(z.read("qualification.json"))
+    extra_args = ["--catr", str(native_catr)]
 with (out / "qualification.log").open("wb") as log:
     subprocess.run([args.node, str(out / entry), "--pyodide", str(engine / "public/vendor/pyodide"),
-                    "--recu", str(receipt)], cwd=engine, stdout=log, stderr=subprocess.STDOUT, check=True)
+                    "--recu", str(receipt), *extra_args], cwd=engine, stdout=log, stderr=subprocess.STDOUT, check=True)
 if args.game == "SK48":
     # Apply the independently published alternate palette to the same stations arm.
     source = (out / (lab + "operateur.mjs")).read_text(encoding="utf8")
