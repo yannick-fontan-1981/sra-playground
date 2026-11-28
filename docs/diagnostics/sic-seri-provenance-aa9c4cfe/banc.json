@@ -1,0 +1,61 @@
+{
+  "freeze": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "qualification": "aa9c4cfe2c4ac65d5f1164c7748a8a2c1f677aec",
+  "strict": false,
+  "operator": "4b183536",
+  "earlierBank": "09c4bd56",
+  "firstDifference": {
+    "game": "SERI",
+    "level": 2,
+    "turn": 5,
+    "field": "sequence_plan.continuation_witnesses"
+  },
+  "measured": {
+    "inputs": [
+      {
+        "distinct": 3,
+        "refs": [
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "distinct": 2,
+        "refs": [
+          2,
+          3,
+          3
+        ]
+      },
+      {
+        "distinct": 1,
+        "refs": [
+          3,
+          3
+        ]
+      }
+    ],
+    "witnesses": [
+      [
+        3,
+        4,
+        5
+      ],
+      [
+        3,
+        3,
+        5
+      ],
+      []
+    ],
+    "recall": [
+      true,
+      true,
+      false
+    ],
+    "sameOfficialClick": true,
+    "sameOfficialReturn": true
+  },
+  "archiveSHA256": "29ce03dab18f89a9f5f20571bd1c2ae59027e8b0dce78796ae980773dd8fd1e6"
+}

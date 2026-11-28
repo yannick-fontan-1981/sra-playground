@@ -60,6 +60,7 @@ parser.add_argument("output", type=Path)
 parser.add_argument("--baseline-only", action="store_true", help="Run the LIFE cases shared with the historical engine")
 parser.add_argument("--wrong-receiver", action="store_true", help="Run the KLOT receipt attribution control")
 parser.add_argument("--corrected-receiver", action="store_true", help="Require KLOT's corrected receipt role")
+parser.add_argument("--duplicate-completion", action="store_true", help="Run the SERI duplicate witness control")
 parser.add_argument("--game-root", required=True, type=Path)
 parser.add_argument("--node", default="node")
 args = parser.parse_args()
@@ -111,6 +112,13 @@ if args.wrong_receiver:
     options = ["--test-name-pattern=^82 checks the receipt"]
 elif args.corrected_receiver:
     parser.error("--corrected-receiver requires --wrong-receiver")
+if args.duplicate_completion:
+    if args.game != "SERI":
+        parser.error("--duplicate-completion requires --game SERI")
+    source = engine / test
+    control = (bench / "scripts/sic-seri-duplicate-completion-control.ts").read_text(encoding="utf8")
+    source.write_text(source.read_text(encoding="utf8") + "\n" + control, encoding="utf8", newline="\n")
+    options = ["--test-name-pattern=^93 counts distinct questions"]
 if args.game == "ISOS" and env.get("SIC_ISOS_STALE_BOUNDARY") == "1":
     options = ["--test-name-pattern=^10 distinguishes"]
 if args.game == "LIFE" and (args.baseline_only or revision in {
