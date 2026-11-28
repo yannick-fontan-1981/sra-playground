@@ -3004,7 +3004,7 @@ export async function loadNativeV6Declarations(): Promise<NativeV6Declarations> 
 /** Identifies native declarations/version, not a Python runtime or source binary. */
 export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   options: Pick<NativeV6RuntimeConfiguration, 'now' | 'observeControlTrialShadow' | 'controlTrialAgenda' | 'preferTransportUndo'>
-    & { recovery?: import('../sic/active-recovery.ts').RecoveryPack } = {}): Promise<NativeV6Runtime> {
+    & { recovery?: import('../sic/active-recovery.ts').RecoveryPack; allowAdjacentGoalHypothesis?: boolean } = {}): Promise<NativeV6Runtime> {
   const recovery = compileRecoveryPack(options.recovery);
   const loaded = declarations ?? await loadNativeV6Declarations();
   const symmetry = loaded.strategy.declarations[0]?.configuration.regular_field_correspondence;
@@ -3025,12 +3025,14 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const routeIntervention = createSicObservedRouteIntervention();
     const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 248 : 283,
       ...(options.preferTransportUndo ? { preferTransportUndo: true } : {}),
+      ...(options.allowAdjacentGoalHypothesis ? { allowAdjacentGoalHypothesis: true } : {}),
       groups, symmetry, policy, sequence, support, recovery, compositionPrior, preparationReturns, sourceFieldRelations };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, observeControlTrialShadow: options.observeControlTrialShadow,
       controlTrialAgenda: options.controlTrialAgenda, preferTransportUndo: options.preferTransportUndo, families: [
-      createCompositionTrials(), createPreparedEffects(recovery.informationPreference, recovery), createCursorRoleMemory(), createObservedActorComposition(),
+      createCompositionTrials(), createPreparedEffects(recovery.informationPreference, recovery, options.allowAdjacentGoalHypothesis),
+      createCursorRoleMemory(), createObservedActorComposition(),
       createSicFieldRepair(symmetry), createSicVerifyContactOrder(policy, recovery), createSicVerifyContactOrder(policy, recovery, learnContactOrderId), createSicSupportTransfer(support), createSicLearnSupportMoves(), createSicLearnSupportMoves(learnObservedSupportsId),
       createSicVerifyParallelSymbolPrefixes(), createSicPeriodicProfileAlignment(),
       createSicLearnGridAccess(), createSicMoveMaskedPieces(learnSelectedAccessId), createSicTranslateCoupledPieces(learnContactAccessId),

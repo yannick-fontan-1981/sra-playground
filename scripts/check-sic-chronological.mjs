@@ -80,9 +80,14 @@ async function run(code,requestedTarget,parallelWorkers) {
   const games=createGameDispatcher(loadLegacy);
   const game=request=>games.dispatch(request);
   const preferTransportUndo = process.env.SIC_SOURCE_TRANSPORT_UNDO === '1';
+  const adjacentContact = process.env.SIC_SOURCE_ADJACENT_CONTACT === '1';
   if (preferTransportUndo && sourceArm !== 'active') throw new Error('Transport undo requires the active comparison arm.');
+  if (adjacentContact && (sourceArm !== 'active' || /^SS(?:0[89]|1\d|2[0-5])$/.test(code))) {
+    throw new Error('Adjacent contact trials require an authorized source comparison.');
+  }
   let solver;const service=new V6AgentService(async recovery=>(solver=await createNativeV6Runtime({common,strategy},{recovery,
-    ...(preferTransportUndo ? { preferTransportUndo: true } : {})})));
+    ...(preferTransportUndo ? { preferTransportUndo: true } : {}),
+    ...(adjacentContact ? { allowAdjacentGoalHypothesis: true } : {})})));
   const evidence = process.env.SIC_SOURCE_COMPOSER_EVIDENCE === '1' ? new Map() : null;
   const seenEvidence = new Set();
   const recoveryEvidence = new Map();

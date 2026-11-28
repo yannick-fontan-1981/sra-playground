@@ -484,7 +484,8 @@ function selectEstablishedExperiment(
   o: NativeObservation,
   inputs: readonly NativeCommand[],
   late: boolean,
-  rows?: NativeRows
+  rows?: NativeRows,
+  allowAdjacentGoalHypothesis = false
 ): Experiment | null {
   const retained = Object.keys(m.previewLearning?.bindings ?? {}).length > 0 || !!m.previewLearning?.terminal?.length || !!m.previewLearning?.inheritedPreparations?.length;
   const s = retained ? sceneIndex(m, o) : m.scenes.indexOf(sceneKey(o)),
@@ -516,6 +517,11 @@ function selectEstablishedExperiment(
     if(situated)return situated;
   }
   const read=rows&&m.previewLearning&&!m.occupancy?.active?offerWitnessedPreview(m.previewLearning,o,visualLayout(o,rows),available):null;
+  if (allowAdjacentGoalHypothesis && rows && free && !read && !m.previewLearning?.terminal?.length
+    && !m.territory?.active && !m.occupancy?.active && !m.localProgress?.active && m.recurrences > 0) {
+    const question = offerTerminalContact(m, s, o, rows, available, 'adjacent_hypothesis');
+    if (question) return question;
+  }
   const priorRepeat=read?knownLocalRepeat(m,s,read.command):null;
   const stagnant=priorRepeat??(m.localProgress?.last?.returnScene===s?m.localProgress.last:null);
   if(rows&&m.occupancy&&!m.occupancy.active&&!m.territory?.active){
@@ -871,7 +877,8 @@ export function experimentCommand(x: Experiment) {
   return first.includes(x.phase) ? x.a : x.b;
 }
 export function selectExperiment(
-  m: Memory, o: NativeObservation, inputs: readonly NativeCommand[], late: boolean, rows?: NativeRows, localOpportunity=false, configurationOpportunity=false
+  m: Memory, o: NativeObservation, inputs: readonly NativeCommand[], late: boolean, rows?: NativeRows,
+  localOpportunity = false, configurationOpportunity = false, allowAdjacentGoalHypothesis = false
 ): Experiment | null {
   const local=m.localCapacity;
   function bindLocal(plan:LocalForecast):Experiment {
@@ -887,7 +894,7 @@ export function selectExperiment(
     const revision=proposeLocal(local,o,rows,true);
     if(revision?.revised)return bindLocal(revision);
   }
-  const established = selectEstablishedExperiment(m, o, inputs, late, rows);
+  const established = selectEstablishedExperiment(m, o, inputs, late, rows, allowAdjacentGoalHypothesis);
   if (configurationOpportunity && rows && m.configurations && !m.pending && !m.space.active &&
       !m.equations.active && !m.occupancy?.active && !m.territory?.active && !m.frames?.active &&
       !established?.cue && !established?.mechanism && !established?.witnessedPreview && !established?.terminalContact) {

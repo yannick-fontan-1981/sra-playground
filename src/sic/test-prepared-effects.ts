@@ -112,7 +112,8 @@ const labels: Record<Experiment['phase'], string> = {
 };
 import {completionContacts} from './terminal-contact.ts';
 import {exposedUnderParts} from './controlled-parts.ts';
-export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
+export function createPreparedEffects(informationPreference?: InformationPreference, limits?: {maxDepth:number;maxNodes:number},
+  allowAdjacentGoalHypothesis = false): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
   const recallMotions=comparePreparations && informationPreference?.strategy==='bind_earlier_motions_to_registered_subjects';
@@ -365,7 +366,9 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           cursor.stage==='verify'?'test_whether_the_same_input_moves_the_clicked_body_while_the_old_body_stays':
           cursor.contrast?'compare_which_subject_responds_to_a_witnessed_motor_after_selection':
           'a_distinctive_colored_mark_on_a_homologous_piece_may_identify_the_controlled_cursor',refs:[],cursorTrial:cursor,
-      } : relative ? {phase:'useRelativePlacement',origin:-1,a:relative.op,b:relative.op,rule:'open_a_route_by_changing_a_relative_placement',refs:[],relative} : selectExperiment(workingMemory(),o,available,group===exhaustedGroup,rows,localOpportunity,configurationOpportunity);
+      } : relative ? {phase:'useRelativePlacement',origin:-1,a:relative.op,b:relative.op,rule:'open_a_route_by_changing_a_relative_placement',refs:[],relative} :
+        selectExperiment(workingMemory(),o,available,group===exhaustedGroup,rows,localOpportunity,configurationOpportunity,
+          allowAdjacentGoalHypothesis && group !== evidencedPlanGroup);
       if(!landmark&&!cursor&&group===recurrentExperimentGroup&&!hasExperimentOpportunity(m)&&!experiment?.localCapacity&&!experiment?.configurationTrial)return null;
       if (group === evidencedPlanGroup && revalidatePreview !== requiresPreviewRevalidation(experiment)) return null;
       if (!experiment || (!contactProject && !cooperative && !landmark && !cursor && group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;

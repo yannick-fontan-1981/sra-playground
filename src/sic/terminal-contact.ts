@@ -132,14 +132,15 @@ export function offerTerminalContact(
   o: NativeObservation,
   rows: NativeRows,
   available: Set<string>,
-  mode:boolean|'positioned' = false,
+  mode: boolean | 'positioned' | 'adjacent_hypothesis' = false,
 ): Experiment | null {
   const learn = m.previewLearning,
     layout = visualLayout(o, rows);
   if (!learn) return null;
-  const hypothesize=mode===true,positioned=mode==='positioned';
+  const adjacent = mode === 'adjacent_hypothesis';
+  const hypothesize = mode === true || adjacent, positioned = mode === 'positioned';
   const witnesses=positioned?learn.inheritedPreparations:hypothesize?untestedContacts(learn,layout,available,o.observation_ref):learn.terminal;
-  if (!witnesses?.length) return null;
+  if (!witnesses?.length || (adjacent && witnesses.length !== 1)) return null;
   let winner: { trial: TerminalTrial; score: number } | null = null;
   const attempts = (positioned?learn.preparationAttempts:learn.goalAttempts) ?? {};
   for (const w of witnesses) {
@@ -151,6 +152,7 @@ export function offerTerminalContact(
     if (!body || !motion || !markers || markers.length > 12) continue;
     const p = body.at,
       peers = layout[w.actor]!.filter((z) => z !== body).map((z) => z.at);
+    if (adjacent && motion.sites[p.join()] === undefined) continue;
     const model = spatialControls(motion, available, '', attempts, o.frame_hash, w.actor);
     if (!model) continue;
     const pitch = model.pitch,
@@ -216,6 +218,7 @@ export function offerTerminalContact(
       }
       const route = same(goal,p)&&preparation ? {first:preparation.operation,to:p,n:0,walked:true} : seen.get(goal.join());
       if (!route || (!route.n && !preparation)) continue;
+      if (adjacent && route.n !== 1) continue;
       // A remembered scoring contact locates a candidate destination. A
       // route to it also needs a current witness of the actor's movement.
       if (route.n > 1 && !Object.keys(motion.sites).length) continue;
