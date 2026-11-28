@@ -1,0 +1,38 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "candidat": "d84d0b938904a9e10a1ab82f8b8f92a0cfec5cdc",
+    "attendus": "78a85c235ffb66c3427813d5b6726f799150873c"
+  },
+  "nominalQueryTurn": 4,
+  "substitutedQueryTurn": 3,
+  "physicalPacketT2": "30c6e12515b1ec08929c4197cc93d874ee500ab4dde4e54ae99dfd233b2a33a1",
+  "alteredPresentationT2": "384771a59f486608f8bbe5c834bf1c688d58779883a18bbffc4b0d942fc46772",
+  "firstDivergence": {
+    "game": "DICO",
+    "level": 1,
+    "turn": 2,
+    "before": [
+      "ACTION6",
+      {
+        "x": 6,
+        "y": 3
+      }
+    ],
+    "after": [
+      "ACTION6",
+      {
+        "x": 16,
+        "y": 3
+      }
+    ]
+  },
+  "nominalParityDigest": "3bd64dedba3bcecffea6b45d9f0c9386384a04d375b44d6f7f0af1f239b9ff5a",
+  "permutationDigest": "fb21d3ef85418d53bc8a153de531470017607fafe2db30bc8a695c3463647856",
+  "archiveSHA256": "f3b44bcff1cf2ceb237252557b0cf65f736658e6d764cd70f7348446b21f0615",
+  "startedAt": "2026-11-27T22:20:39.447110-03:00",
+  "qualifiedAt": "2026-11-27T22:23:12.081488-03:00",
+  "elapsedSeconds": 153,
+  "receiptAuthor": "03bfe9f0"
+}
