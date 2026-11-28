@@ -1,4 +1,4 @@
-name: SIC source recovery from witnessed transport loss
+name: SIC source recovery and priority for witnessed continuation
 
 on:
   push:

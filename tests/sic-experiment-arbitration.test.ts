@@ -5,12 +5,12 @@ import { createNativeV6Runtime, NATIVE_V6_REFERENCE_COMMIT } from '../src/logos-
 import { defaultRecoveryPack } from '../src/sic/active-recovery.ts';
 import { recoveryRevision, readRecoveryRevision } from '../src/sic/recovery-pack.ts';
 import { hasExperimentOpportunity, isUnwitnessedDirectionalPreparation,
-  recordReturn, mayPursueWitnessedEffect, transferredPreviewGroup } from '../src/sic/experiment-arbitration.ts';
+  recordReturn, mayPursueWitnessedEffect, recurrentExperimentGroup, transferredPreviewGroup } from '../src/sic/experiment-arbitration.ts';
 import { initialMemory } from '../src/sic/preparation-experiments.ts';
 import { planningGroupsWithExperiments } from '../src/sic/experiment-selection-groups.ts';
 import { standalonePlanningGroups } from '../src/sic/standalone-families.ts';
 import { publicInputExplorationId } from '../src/sic/public-input-exploration.ts';
-import { compositionFamily } from '../src/sic/test-observed-compositions.ts';
+import { compositionFamily, composeAtReturnGroup } from '../src/sic/test-observed-compositions.ts';
 import { preparedEffectsId } from '../src/sic/test-prepared-effects.ts';
 import { continueMarkedField, learnMarkedLatticeId, verifyMarkedLatticeId } from '../src/sic/marked-lattice.ts';
 import { catalogueComparisonId, continueCatalogueViewsGroup } from '../src/sic/catalogue-comparison.ts';
@@ -86,6 +86,21 @@ test('a pack can place a grounded coverage forecast ahead of independent project
   assert.equal(candidate[0]!.entryPoints![0],'test_or_continue_a_grounded_coverage_plan');
   assert.deepEqual(candidate[0]!.families.slice(1),base[0]!.families);
   assert.deepEqual(candidate.slice(1),base.slice(1));
+});
+
+test('a witnessed composition is offered before a new control contrast at the same frontier', () => {
+  const plans = (prioritize: boolean) => planningGroupsWithExperiments(standalonePlanningGroups, false, false, prioritize);
+  const original = plans(false);
+  const candidate = plans(true);
+  const frontier = original.findIndex(group => group.id === 'explore_available_inputs');
+  assert.ok(frontier >= 0);
+  const before = original[frontier]!;
+  const after = candidate[frontier]!;
+  const index = before.entryPoints!.indexOf(recurrentExperimentGroup);
+  assert.deepEqual(before.entryPoints!.slice(index, index + 2), [recurrentExperimentGroup, composeAtReturnGroup]);
+  assert.deepEqual(after.entryPoints!.slice(index, index + 2), [composeAtReturnGroup, recurrentExperimentGroup]);
+  assert.deepEqual(after.families.slice(index, index + 2), [compositionFamily, preparedEffectsId]);
+  assert.deepEqual(candidate.filter((_, i) => i !== frontier), original.filter((_, i) => i !== frontier));
 });
 
 test('both planning modes dispatch the same experimental capabilities and accept the same preferences', async () => {

@@ -3017,7 +3017,10 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const withdrawPrimaryFamily = recovery.solver === 'sic-fallback';
     const preferCoverage = recovery.informationPreference?.mode === 'active'
       && ['prefer_a_verified_coverage_experiment', 'compose_a_sustained_crossing', 'bind_earlier_motions_to_registered_subjects'].includes(recovery.informationPreference.strategy);
-    const groups = planningGroupsWithExperiments(standalonePlanningGroups, preferCoverage, withdrawPrimaryFamily);
+    const prioritizeObservedContinuation = recovery.informationPreference?.mode === 'active'
+      && recovery.informationPreference.strategy === 'motion_contrast';
+    const groups = planningGroupsWithExperiments(standalonePlanningGroups, preferCoverage, withdrawPrimaryFamily,
+      prioritizeObservedContinuation);
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
     const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 248 : 283,

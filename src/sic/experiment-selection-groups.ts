@@ -9,7 +9,8 @@ import { catalogueComparisonId, continueCatalogueViewsGroup } from './catalogue-
 import { continuePanelChainGroup, verifyPanelConfigurationId } from './panel-matching.ts';
 import { continueCrossingRowsGroup, learnCrossingRowsId, verifyCrossingRowsId } from './crossing-rows.ts';
 
-export function planningGroupsWithExperiments(groups: readonly NativeSelectionGroup[], prioritizeCoverage = false, withdrawPrimaryFamily = true): NativeSelectionGroup[] {
+export function planningGroupsWithExperiments(groups: readonly NativeSelectionGroup[], prioritizeCoverage = false, withdrawPrimaryFamily = true,
+  prioritizeObservedContinuation = false): NativeSelectionGroup[] {
   const projected = { id: projectedPublicEffectsGroup, families: [compositionFamily,publicInputExplorationId], entryPoints:[fieldGroup,null] };
   if(prioritizeCoverage){
     projected.families.unshift(preparedEffectsId);
@@ -31,10 +32,11 @@ export function planningGroupsWithExperiments(groups: readonly NativeSelectionGr
       entries.unshift({ id: preparedEffectsId, entry: transferredPreviewGroup });
       const exploration = entries.findIndex(family => family.id === publicInputExplorationId);
       if (exploration < 0) throw Error('Missing public input exploration entry');
+      const continuation = { id: compositionFamily, entry: composeAtReturnGroup };
+      const experiment = { id: preparedEffectsId, entry: recurrentExperimentGroup };
       entries.splice(exploration, 0,
         { id: compositionFamily, entry: fieldGroup },
-        { id: preparedEffectsId, entry: recurrentExperimentGroup },
-        { id: compositionFamily, entry: composeAtReturnGroup },
+        ...(prioritizeObservedContinuation ? [continuation, experiment] : [experiment, continuation]),
         { id: compositionFamily, entry: cycleGroup });
       entries.push({ id: preparedEffectsId, entry: exhaustedGroup }, { id: compositionFamily, entry: exhaustedGroup });
     }
