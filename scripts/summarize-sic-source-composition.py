@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 import sys
 
-GAMES = ("SS01", "SS03", "SS05", "SS06", "SS07", "G50T", "DC22", "COMB", "PORT", "CAVA")
+GAMES = ("GABA", "TEQU", "ESCT", "SNAR", "SKBN", "KEYD", "KLOT", "WEAV", "COLM", "REWI", "SS02", "SS04")
 SOURCE_TREE = "c6be00220e0691619413e9244101f9c6a302c144"
 root, output = [Path(name) for name in sys.argv[1:]]
 sha = os.environ["GITHUB_SHA"]
@@ -57,6 +57,8 @@ for game in GAMES:
             "won": row["levels"], "actions": row["actions"], "reason": row["reason"],
             "levelActions": [level["actions"] for level in row["levelStats"]],
             "families": dict(collections.Counter(effect[7] for effect in effects).most_common(8)),
+            "rivalReturns": row.get("sourceReturnRivals"),
+            "nativeEvidence": row.get("sourceComposerEvidence"),
         }
     result["firstDifference"] = first_difference(fixed.get("effects", []), active.get("effects", []))
     rows.append(result)

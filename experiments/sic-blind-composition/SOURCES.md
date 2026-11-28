@@ -9,3 +9,9 @@ Le témoin de départ est SS01. Au niveau 6, le moteur standard s’est arrêté
 Les jeux SS01, SS03, SS05, SS06, SS07 sont des terrains de développement autorisés. G50T, DC22, COMB, PORT et CAVA sondent des familles de passage, appui, composition de commandes et cavité. Les seuils et l’ordre des commandes n’utilisent aucune donnée des jeux sous scellés.
 
 Le comparateur relève les gains officiels, les commandes et la première divergence du parcours. Un gain de famille doit être rattaché à une hypothèse construite à partir d’un retour réel et à la décision qui la consomme. Les gains dans plusieurs variantes d’une même mécanique ne valent qu’une famille. Une différence de temps mural doit être confirmée avant attribution. Le banc conserve les traces détaillées sous forme de reçus et publie les agrégats.
+
+## Deuxième cohorte source
+
+La préférence active est identique. Les jeux disjoints GABA, TEQU, ESCT, SNAR, SKBN, KEYD, KLOT, WEAV, COLM, REWI, SS02 et SS04 jouent les niveaux 1 à 3 en campagne. Les mécaniques comprennent les changements d’état retardés, les accès sous condition, la réattribution du sujet et les liaisons entre actions. Le reçu retient les références des hypothèses et les cas où une même observation suivie d’une même commande a produit des retours publics différents. Le préfixe précédent sépare les hypothèses lorsqu’il est compatible avec un seul retour mesuré. Une collision conservée ne suffit pas à attribuer une cause.
+
+Cette cohorte est préenregistrée après le premier gain COMB, avec les mêmes plafonds que sa propre référence. Elle sert à déterminer si ce gain se transfère dans des mécaniques distinctes. Aucun résultat de la première cohorte ne change le budget de la seconde.
