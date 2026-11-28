@@ -31,6 +31,7 @@ cases = {
     "ZIPP": ("421dc6a58d051e8e418db80a98cf1e01755dab40", "zipp-lines-67-71", "sic-observe-zipp-trace-outline", []),
     "GIGO": ("b2eef22648f3a511bed0783d938013bae8673a8a", "gigo-line-53", "sic-observe-gigo-control", []),
     "REWI": ("9b41b8ba322fceb2737a99dfa264a4d809055bad", "rewi-line-49", "sic-observe-rewi-window", []),
+    "ISOS": ("5161917eebb0e7f5d2ec6010f61bae1c2eff7b3f", "isos-line-10", "sic-observe-isos-facet", []),
     "MIND": ("860835b1b77ae9cde489230be5c1f83c05237302", "mind-line-12", "sic-observe-mind-feedback",
              ["docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-public-trace.json.gz", "tests/fixtures/sic-mind-alternate-returns.json.gz"]),
     "RE86": ("8e820aa64f321153bb858040d462d7f766178947", "re86-line-7", "sic-observe-re86-ownership",
@@ -76,6 +77,8 @@ mount(args.game_root.resolve() / "public", engine / "public")
 env = {**os.environ, name + "GAME_ROOT": str(engine), name + "ENGINE_ROOT": str(engine),
        name + "RECEIPT": str(out / (revision[:8] + ".json"))}
 options = []
+if args.game == "ISOS" and env.get("SIC_ISOS_STALE_BOUNDARY") == "1":
+    options = ["--test-name-pattern=^10 distinguishes"]
 if args.game == "LIFE" and (args.baseline_only or revision in {
     "8ce7ee3563fa1d5eca1639c6ad03975cfc962460", "d0e7527ca8033bd805a6d7a8bb021eff62e87021"
 }):
