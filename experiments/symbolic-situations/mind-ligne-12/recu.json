@@ -1,0 +1,68 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 4,
+      "gestes": 54,
+      "testsAuteur": 2
+    },
+    {
+      "sha": "860835b1b77ae9cde489230be5c1f83c05237302",
+      "départs": 4,
+      "gestes": 54,
+      "testsAuteur": 2
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "catalogue": 16,
+  "historique": {
+    "soumission": [
+      8,
+      14,
+      9
+    ],
+    "réutilisation": [
+      8,
+      9,
+      14
+    ],
+    "premierClic": {
+      "x": 4,
+      "y": 54
+    },
+    "secondClic": {
+      "x": 10,
+      "y": 54
+    },
+    "scoreT8": 1
+  },
+  "variante": {
+    "séquence": [
+      8,
+      14,
+      9
+    ],
+    "secondClic": {
+      "x": 4,
+      "y": 54
+    },
+    "ambiguïté": 2,
+    "scoreT8": 0,
+    "scoreT12": 1
+  },
+  "N2": {
+    "entrée": 1,
+    "proposition": [
+      14,
+      6,
+      8
+    ],
+    "scoreT16": 2
+  },
+  "réserve": {
+    "imagesRéelles": 1,
+    "imagesServies": 1,
+    "intérieures": 0,
+    "ambiguïté": 2
+  }
+}
