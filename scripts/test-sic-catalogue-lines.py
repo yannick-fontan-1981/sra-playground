@@ -41,6 +41,7 @@ cases = {
     "SERI": ("aa9c4cfe2c4ac65d5f1164c7748a8a2c1f677aec", "seri-line-93", "sic-observe-seri-completions", []),
     "TRIA": ("735b5e7d9fc3d3b426588e4d619187d925d269f0", "tria-line-79", "sic-observe-tria-relations", []),
     "LF52": ("a2bd031cff2fb2ce7c919b2213f0ba5a8b75a36a", "lf52-line-76", "sic-observe-lf52-support", []),
+    "LKEY": ("d67284e820e8d1987da055096732fc257c679f3f", "lkey-line-72", "sic-observe-lkey-workshop", []),
     "SC25": ("6172e2d3579f36af9c0912578f6d58333a298343", "sc25-line-21", "sic-observe-sc25-motif", []),
     "MIND": ("860835b1b77ae9cde489230be5c1f83c05237302", "mind-line-12", "sic-observe-mind-feedback",
              ["docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-public-trace.json.gz", "tests/fixtures/sic-mind-alternate-returns.json.gz"]),

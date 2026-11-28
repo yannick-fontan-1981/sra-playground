@@ -1,0 +1,17 @@
+{
+  "freeze": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "proof": "d67284e820e8d1987da055096732fc257c679f3f",
+  "criteria": "e318098c",
+  "testsPerSHA": 4,
+  "nominalTickets": 16,
+  "workshopTickets": 6,
+  "portableReferencesUsed": 0,
+  "modeObservedAt": 10,
+  "firstAlternativeAt": 11,
+  "fallback": "public_framed_transfer ACTION6",
+  "slotDeltaAt11And14": [
+    -1,
+    1
+  ],
+  "archiveSHA256": "74810a41de04cb1beaf18f7c6dd9c62efa1953843e76241e81ebf394b98b560d"
+}
