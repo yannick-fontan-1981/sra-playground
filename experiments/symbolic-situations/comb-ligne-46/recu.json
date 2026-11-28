@@ -1,0 +1,51 @@
+{
+  "stats": {
+    "versions": 2,
+    "départsParVersion": 9,
+    "gestesParVersion": 45,
+    "catalogue": 16,
+    "famille": 13,
+    "contreExemplesParVersion": 2,
+    "contreExemplesBloquantLePlan": 0
+  },
+  "conflicts": [
+    {
+      "tour": 3,
+      "commande": [
+        "ACTION6",
+        {
+          "x": 24,
+          "y": 20
+        }
+      ],
+      "origine": [
+        "comb-46:epoch:1:revision:1:frame:a188f019a6b99b2b",
+        "comb-46:epoch:1:revision:2:frame:9bb3d39be7655799"
+      ],
+      "epoque": 1,
+      "observations": 2,
+      "observée": false,
+      "admis": true,
+      "premierÉcart": "contre-exemple présent dans le journal, ticket et retour identiques"
+    },
+    {
+      "tour": 9,
+      "commande": [
+        "ACTION6",
+        {
+          "x": 31,
+          "y": 20
+        }
+      ],
+      "origine": [
+        "comb-46:epoch:2:revision:5:frame:4a16d7ff5efd6e6a",
+        "comb-46:epoch:2:revision:6:frame:ae88f1aacffa5af3"
+      ],
+      "epoque": 2,
+      "observations": 5,
+      "observée": true,
+      "admis": true,
+      "premierÉcart": "contre-exemple présent dans le journal, ticket et retour identiques"
+    }
+  ]
+}
