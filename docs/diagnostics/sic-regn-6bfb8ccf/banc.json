@@ -1,0 +1,110 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "candidat": "6bfb8ccf9df3aa8597e74f0fd3f30a5744c55b35",
+    "attendus": "37eb151caaa7d34d35bc6e04fdae77fce22a7277"
+  },
+  "srcTree": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "archiveSHA256": "44a827fbc7bf25337957646e093769d9eb50fda7e980db9d82de23794f195de8",
+  "plans": [
+    {
+      "level": 1,
+      "turn": 3,
+      "access": 1,
+      "edges": [
+        "edge:219edffd544fc8946eabe4c9cf9402ee932a704a40239849e253c57c1bcad843"
+      ],
+      "question": {
+        "question": "Q_ff0507d93b4cedfb1964",
+        "cmd": {
+          "action_ref": "ACTION4"
+        },
+        "context": "observation-index:bb6046b6db659756a6b2b67463ed955fe6077d4d5c8ce5c69f6187e1072191ac",
+        "reason": "contrast_an_untried_continuation_at_the_last_fork_before_observed_return",
+        "refs": [
+          "transition:42413141fccc8a22ebb552e912ceb77ab808376597c905f357a6cda7af6b4a9a",
+          "transition:8ae1c2d5c188d9ddcbd59df3af7ca69284382af6ad3d00593d351f8b1f8399a3"
+        ]
+      },
+      "actions": [
+        {
+          "action_ref": "ACTION3"
+        },
+        {
+          "action_ref": "ACTION4"
+        }
+      ],
+      "episode": [
+        [
+          "regn-qualification:epoch:1:revision:1:frame:47aa13d6af55af3e",
+          "ACTION3",
+          "regn-qualification:epoch:1:revision:2:frame:f73347ff08ba2da9"
+        ],
+        [
+          "regn-qualification:epoch:1:revision:2:frame:f73347ff08ba2da9",
+          "ACTION3",
+          "regn-qualification:epoch:1:revision:3:frame:47aa13d6af55af3e"
+        ]
+      ]
+    },
+    {
+      "level": 2,
+      "turn": 8,
+      "access": 2,
+      "edges": [
+        "edge:0388384122d7564ea153ef3556b3bea20e170369d457700262b3a603f27c166a",
+        "edge:75c0cb32f6e34475765d2573b337003937fca6fdc3678219ac8a43dc26c3a8c8"
+      ],
+      "question": {
+        "question": "Q_b9f0860a784151238c29",
+        "cmd": {
+          "action_ref": "ACTION4"
+        },
+        "context": "observation-index:3b7252ca4954a34c23ea2fe6b9f8c7ccc1bbb7416a21a51824c8254166207509",
+        "reason": "contrast_an_untried_continuation_at_the_last_fork_before_observed_return",
+        "refs": [
+          "transition:c7c2fae547cdbd71d5e29a5ad037c65f284723bb9ad3f113dfd6fff5f36a20e5",
+          "transition:5a200d72a8a3886b102c4592db7b554dab4d23d9e361523f764c5e8a099f9535",
+          "transition:557307751ab5ea86ddecfbb6b6f86ff74b1d5494d86f1c1aeab55b1f030b816e"
+        ]
+      },
+      "actions": [
+        {
+          "action_ref": "ACTION3"
+        },
+        {
+          "action_ref": "ACTION3"
+        },
+        {
+          "action_ref": "ACTION4"
+        }
+      ],
+      "episode": [
+        [
+          "regn-qualification:epoch:2:revision:5:frame:3c24552084e73c3a",
+          "ACTION3",
+          "regn-qualification:epoch:2:revision:6:frame:e55ec336ecab8e04"
+        ],
+        [
+          "regn-qualification:epoch:2:revision:6:frame:e55ec336ecab8e04",
+          "ACTION3",
+          "regn-qualification:epoch:2:revision:7:frame:9ee4d60d685c8c0d"
+        ],
+        [
+          "regn-qualification:epoch:2:revision:7:frame:9ee4d60d685c8c0d",
+          "ACTION3",
+          "regn-qualification:epoch:2:revision:8:frame:3c24552084e73c3a"
+        ]
+      ]
+    }
+  ],
+  "pairedCaptures": [
+    "budget16",
+    "lecture16",
+    "sans-retour",
+    "sans-questions"
+  ],
+  "firstBudgetFamilyDifference": 16,
+  "operator": "93d0af42"
+}
