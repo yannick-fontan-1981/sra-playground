@@ -1,0 +1,64 @@
+{
+  "stats": [
+    {
+      "sha": "5161917eebb0e7f5d2ec6010f61bae1c2eff7b3f",
+      "départs": 5,
+      "gestes": 36,
+      "testsAuteur": {
+        "réussis": 3,
+        "écarts": 3
+      }
+    },
+    {
+      "sha": "640bd882150f8164b2e6a1a7de6b85b16c52711f",
+      "départs": 5,
+      "gestes": 36,
+      "testsAuteur": {
+        "réussis": 6,
+        "écarts": 0
+      }
+    }
+  ],
+  "nominal": 16,
+  "facettes": 12,
+  "gains": 3,
+  "comparaisons": {
+    "référenceÉtrangère": {
+      "premierÉcart": 4,
+      "parent": {
+        "x": 27,
+        "y": 14
+      },
+      "correctif": {
+        "x": 10,
+        "y": 14
+      },
+      "scoreAvant": 1
+    },
+    "ancienneFrontière": {
+      "premierÉcart": 8,
+      "parent": {
+        "x": 33,
+        "y": 23
+      },
+      "correctif": {
+        "x": 10,
+        "y": 14
+      },
+      "scoreAvant": 2
+    },
+    "sansMéthodeSélectionnée": {
+      "premierÉcart": 4,
+      "parent": {
+        "x": 27,
+        "y": 14
+      },
+      "correctif": {
+        "x": 10,
+        "y": 14
+      },
+      "scoreAvant": 1
+    }
+  },
+  "ticketPrécédentRefuséSurLesDeuxSHA": true
+}
