@@ -1,0 +1,59 @@
+{
+  "freeze": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "proof": "88e8abe8389ba9e5809de6aa8e2f911053f14959",
+  "criteria": "17579803",
+  "terrain": "constructed",
+  "sameEpoch": true,
+  "firstMotifDecisionDifference": 8,
+  "withRelation": [
+    0,
+    3
+  ],
+  "withoutRelation": [
+    1,
+    2
+  ],
+  "newSupport": [
+    [
+      9,
+      6
+    ],
+    [
+      10,
+      6
+    ],
+    [
+      11,
+      6
+    ],
+    [
+      12,
+      6
+    ],
+    [
+      13,
+      6
+    ],
+    [
+      14,
+      6
+    ]
+  ],
+  "firstWalkingReturn": {
+    "turn": 10,
+    "action": "ACTION4",
+    "from": [
+      7,
+      5
+    ],
+    "to": [
+      9,
+      5
+    ],
+    "matched": true
+  },
+  "tests": 202,
+  "frozenTests": 1,
+  "officialLevelsInTest": 0,
+  "archiveSHA256": "766bc22e175ac1ee636964aa38ee665375fa54a69fe93298b101458641e8a72c"
+}
