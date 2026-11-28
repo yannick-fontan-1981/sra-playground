@@ -7,7 +7,8 @@ const { SIC_ISOS_ENGINE_ROOT: root, SIC_ISOS_RECEIPT: output } = process.env;
 const load = name => import(pathToFileURL(resolve(root, 'src', name)));
 const { NativeFacetExamples } = await load('logos-engine/v6-facet-examples.ts');
 const { V6AgentService } = await load('runtime/v6-agent-service.ts');
-let acquired;
+let acquired, active = false;
+const direct = [];
 const record = NativeFacetExamples.prototype.record;
 NativeFacetExamples.prototype.record = function (...args) {
   const event = record.apply(this, args);
@@ -18,7 +19,7 @@ NativeFacetExamples.prototype.record = function (...args) {
     substitutedBoundary = { expected: portable.boundary_ref, supplied: args[0].observation_ref };
     this.restore({ ...state, portable: { ...portable, boundary_ref: substitutedBoundary.supplied } });
   }
-  acquired.push({ status: event.status, refs: event.evidence, shift: event.cap_shift,
+  (active ? acquired : direct).push({ status: event.status, refs: event.evidence, shift: event.cap_shift,
     preserved: event.outside_preserved, sides: event.side_changes?.map(side => side.vertical_extension),
     rendered: event.whole_colored_render_matched, boundary: substitutedBoundary?.supplied ?? portable?.boundary_ref,
     substitutedBoundary, upShift: portable?.up_shift });
@@ -28,7 +29,13 @@ const handle = V6AgentService.prototype.handle, sessions = [];
 V6AgentService.prototype.handle = async function (message) {
   if (message.type === 'init') sessions.push([]);
   acquired = [];
-  const reply = await handle.call(this, message);
+  active = true;
+  let reply;
+  try {
+    reply = await handle.call(this, message);
+  } finally {
+    active = false;
+  }
   const rows = sessions.at(-1), snapshot = reply.snapshot;
   if (message.type === 'advance') {
     const o = message.observation, r = snapshot.trace.findLast(e => e.kind === 'actual_outcome');
@@ -47,4 +54,7 @@ V6AgentService.prototype.handle = async function (message) {
   }
   return reply;
 };
-process.on('exit', () => { if (sessions.length) writeFileSync(output, JSON.stringify(sessions) + '\n', { flag: 'wx' }); });
+process.on('exit', () => {
+  if (sessions.length) writeFileSync(output, JSON.stringify(sessions) + '\n', { flag: 'wx' });
+  if (direct.length) writeFileSync(output + '.direct', JSON.stringify(direct) + '\n', { flag: 'wx' });
+});

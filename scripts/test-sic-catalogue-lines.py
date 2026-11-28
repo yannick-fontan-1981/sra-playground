@@ -32,6 +32,7 @@ cases = {
     "GIGO": ("b2eef22648f3a511bed0783d938013bae8673a8a", "gigo-line-53", "sic-observe-gigo-control", []),
     "REWI": ("9b41b8ba322fceb2737a99dfa264a4d809055bad", "rewi-line-49", "sic-observe-rewi-window", []),
     "ISOS": ("5161917eebb0e7f5d2ec6010f61bae1c2eff7b3f", "isos-line-10", "sic-observe-isos-facet", []),
+    "ISOS-PROVENANCE": ("640bd882150f8164b2e6a1a7de6b85b16c52711f", "isos-line-10", "sic-observe-isos-facet", []),
     "LP85": ("80d14be16d5f3d4fa1f84c0c92498902e96a5e3f", "lp85-line-24", "sic-observe-lp85-orbit", []),
     "CN04": ("bfba3acb8de4c3f13fc10651b2aa22490def5070", "cn04-line-30", "sic-observe-cn04-ports", []),
     "MIND": ("860835b1b77ae9cde489230be5c1f83c05237302", "mind-line-12", "sic-observe-mind-feedback",
@@ -57,7 +58,7 @@ parser.add_argument("--node", default="node")
 args = parser.parse_args()
 proof, suite, observer, fixtures = cases[args.game]
 test = "tests/sic-" + suite + ".test.ts"
-name = "SIC_" + {"TICT": "SP80", "ZIPP": "ZIPP_67_71", "REWI": "REWI_49"}.get(args.game, args.game) + "_"
+name = "SIC_" + {"TICT": "SP80", "ZIPP": "ZIPP_67_71", "REWI": "REWI_49", "ISOS-PROVENANCE": "ISOS"}.get(args.game, args.game) + "_"
 revision = git("rev-parse", "--verify", args.revision + "^{commit}").decode().strip()
 git("-C", str(args.game_root.resolve()), "diff", "--exit-code", revision, "--", "public/python")
 out = args.output.resolve()
