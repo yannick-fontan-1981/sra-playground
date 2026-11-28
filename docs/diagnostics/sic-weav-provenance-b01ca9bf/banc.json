@@ -1,0 +1,23 @@
+{
+  "versions": {
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "b01ca9bfde92510eb622a105e1f1470c796dc8e0",
+    "attendus": "fd53da26d4a048feb7b4e99c5c4a4b0a24774f85"
+  },
+  "nominalTickets": 16,
+  "nativePrefixes": 9,
+  "firstDifference": 7,
+  "rejectedAlterations": [
+    "ancienne-reference",
+    "journal-altere",
+    "sans-paire",
+    "sans-recu"
+  ],
+  "staleScopeRejected": true,
+  "newEpochStorageTurn": 28,
+  "newEpochUse": null,
+  "tests": 137,
+  "author": "c110009e",
+  "rawSHA256": "ce3df47cf7694025601ee50653a057241b0fb35c1c5e2a63dab85321e790ba7a",
+  "archiveSHA256": "9ab4636715ab01c4f91bf0e0b5b71304ed98bd072747891e2f11e8ec4a6e6f4c"
+}
