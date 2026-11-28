@@ -1,4 +1,4 @@
-name: SIC source contact using returns from any executing family
+name: SIC witnessed remote access following a native contact
 
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         game: [SS01, SS02, SS03, SS04, SS05, SS06, SS07]
-        style: [line, diagonal]
+        style: [ordinary, line, diagonal]
     env:
       GAME: ${{ matrix.game }}
       SIC_SOURCE_CONTACT_VIEW: ${{ matrix.style }}
@@ -39,6 +39,7 @@ jobs:
         shell: bash
         run: |
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          if [[ "$SIC_SOURCE_CONTACT_VIEW" == ordinary ]]; then unset SIC_SOURCE_CONTACT_VIEW; fi
           mkdir replay
           git rev-parse HEAD HEAD:src > replay/identity
           date -u +%s%3N > replay/start-ms

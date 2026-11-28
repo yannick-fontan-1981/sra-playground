@@ -960,9 +960,10 @@ export function createSicPublicInputExploration(fallback = false,
       const publicTravel = travelAvailable && (canTravel || options.allowUnframedContact)
         ? chooseTravelTrial(local.travel, rows, nonPoint, observation.available_action_refs.includes('ACTION6'), options.allowUnframedContact)
         : undefined;
+      const groundedContact = publicTravel?.purpose === 'test_contact_hypothesis' || publicTravel?.purpose === 'verify_contact_access';
       const travel = contactTrial ? { command: contactTrial.command, target: contactTrial.actor.split(',').map(Number) as [number, number],
         purpose: contactTrial.purpose, evidence: contactTrial.evidence, experiment: undefined } : separation
-        ?? (canTravel || publicTravel?.purpose === 'test_contact_hypothesis' ? publicTravel : undefined);
+        ?? (canTravel || groundedContact ? publicTravel : undefined);
       const fallbackProjection = fallback && (!panel || state.relayTransfer?.witness || state.programWitness || state.outletWitness || state.catalogueTransfer?.witness || state.panelServiceTransfer?.recall) && !pressure
         ? await chooseFallbackProjection(local.fallbackProjection, observation, rows, inputs, remaining, execution, state, !!panel) : undefined;
       const budget = fallbackProjection || state.orderedEntryTransfer?.epoch === observation.level_epoch - 1 || panel || travel || coverage || exchange || markTrial || pressure || joint ? remaining : Math.min(remaining, explorationLimit - local.experiments);
@@ -1279,6 +1280,7 @@ export function createSicPublicInputExploration(fallback = false,
         place_object: 'Test whether leaving an object on a marked surface changes access',
         contact: 'Explore a reachable contact using the movement measured so far',
         test_contact_hypothesis: 'Reach a stable visible feature and test its role',
+        verify_contact_access: 'Test passage through the footing changed by a witnessed contact',
         switch: 'Test a command from a surface it changed in an earlier return',
         select: 'Test whether a second visible piece can reach a different landing',
       }[travel.purpose] : uncover ? 'Step onto measured ground to uncover the source pattern before selecting a new destination'
@@ -1390,6 +1392,7 @@ export function createSicPublicInputExploration(fallback = false,
             : label, agenda: decision ? [] : entries, evidence: proof,
           ...(selectedCoverage?.routeImprovement ? { coverageRouteImprovement: { motion: selectedCoverage.motion, ...selectedCoverage.routeImprovement } } : {}),
           ...(travel?.purpose === 'test_contact_hypothesis' && travelEvidence.length ? { unframedContactHypothesis: true } : {}),
+          ...(travel?.purpose === 'verify_contact_access' && travelEvidence.length ? { witnessedContactAccess: true } : {}),
           ...(recalledDirection ? { priorLevelMechanism: 'Test a direction previously observed to change the board',
             newLevelConfiguration: 'The current interface needs a fresh control check' } : {}),
           ...(selectedEntry?.recurring ? { priorLevelMechanism: selectedEntry.recurring } : {}),

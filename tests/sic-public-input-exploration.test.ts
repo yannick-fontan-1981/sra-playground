@@ -65,9 +65,10 @@ test('a measured tile displacement gives untried directions a turn after a block
 });
 
 test('a stable unframed feature suggests a contact from witnessed returns owned by other families', async () => {
-  const board = (at: readonly [number, number]) => {
+  const board = (at: readonly [number, number], open = false) => {
     const rows = Array.from({ length: 15 }, () => Array<number>(15).fill(3));
     rows[7]![12] = rows[7]![13] = 11;
+    if (!open) for (let y = 9; y < 12; y++) rows[y]!.fill(4, 12, 15);
     for (const [x, y] of [[0, 0], [1, 0], [2, 0], [0, 1], [1, 1], [0, 2]]) {
       rows[at[1] + y!]![at[0] + x!] = 6;
     }
@@ -103,6 +104,19 @@ test('a stable unframed feature suggests a contact from witnessed returns owned 
   assert.equal(proposal?.actions[0]?.action_ref, 'ACTION4');
   assert.equal(proposal?.sicSituationCard?.unframedContactHypothesis, true);
   assert.ok(proposal?.sicSituationCard?.evidence?.includes(observations[1]!.observation_ref));
+
+  const approached = board([9, 6]);
+  const approach = observeTravel(state, turned, approached, right, 'observed-approach', true);
+  const contacted = board([12, 6], true);
+  const access = observeTravel(approach, approached, contacted, right, 'observed-opening', true);
+  const passage = chooseTravelTrial(access, contacted, inputs, false, true);
+  assert.equal(passage?.purpose, 'verify_contact_access');
+  assert.deepEqual(passage?.target, [12, 9]);
+  assert.equal(passage?.command.action_ref, 'ACTION2');
+  assert.ok(passage?.evidence.includes('observed-opening'));
+  const noOpening = board([12, 6]);
+  const control = observeTravel(approach, approached, noOpening, right, 'observed-contact-only', true);
+  assert.notEqual(chooseTravelTrial(control, noOpening, inputs, false, true)?.purpose, 'verify_contact_access');
 });
 
 test('a separated panel gets a turn between movement probes despite unrelated changes in the status strip', async () => {

@@ -12,9 +12,11 @@ type Calibration = { grid: Grid; previous: string[]; next: string[]; destination
 export type ObservedTravel = { grid: Grid; actor: string | null; supports: string[]; visited: string[];
   moves: Record<string, Move>; tested: Record<string, number>; altered: string[]; controls: string[];
   completed: string[]; switches: Record<string, string | null>; pendingSelection?: string; refs: string[]; stalled: number;
-  possibleContacts?: Record<string, { appearance: string; reference: string }> };
+  possibleContacts?: Record<string, { appearance: string; reference: string }>;
+  contactAccess?: { sites: string[]; evidence: [string, string] } };
 export type TravelTrial = { approach?: WalkingStep[]; command: NativeCommand; target: NativePoint; evidence: string[];
-  purpose: 'approach' | 'contact' | 'test_contact_hypothesis' | 'switch' | 'select' | 'approach_object' | 'separate_object'; experiment?: string };
+  purpose: 'approach' | 'contact' | 'test_contact_hypothesis' | 'verify_contact_access'
+    | 'switch' | 'select' | 'approach_object' | 'separate_object'; experiment?: string };
 export type MarkContact = { command: NativeCommand; target: string; expected: string; evidence: string[] };
 
 const key = ([x, y]: NativePoint) => `${x},${y}`;
@@ -111,6 +113,10 @@ export function annotateTravelMarks(travel: ObservedTravel | undefined, rows: Na
   }
   const repeated = [...groups.values()].filter(group => Object.keys(group).length >= 2);
   return repeated.length === 1 ? { ...travel, grid: { ...travel.grid, annotatedMarks: repeated[0]! } } : travel;
+}
+
+function knownFooting(pixels: readonly number[] | undefined, floor: number, supports: readonly string[]) {
+  return !!pixels && (pixels.every(ink => ink === floor) || supports.includes(pixels.join(',')));
 }
 
 function calibrateAmongOtherChanges(before: NativeRows, after: NativeRows, lattices: Iterable<Grid>,
@@ -309,6 +315,9 @@ export function observeTravel(previous: ObservedTravel | undefined, before: Nati
   const altered = action === 'ACTION5' && changed.length >= 2 ? [...new Set([...previous.altered, ...changed])].sort() : previous.altered;
   const supports = new Set(previous.supports), visited = new Set(previous.visited), completed = new Set(previous.completed);
   let possibleContacts = previous.possibleContacts;
+  const stillOpen = previous.contactAccess?.sites.filter(cell => !next.pieces.includes(cell)
+    && !visited.has(cell) && knownFooting(next.cells.get(cell), grid.floor, previous.supports));
+  let contactAccess = previous.contactAccess && stillOpen?.length ? { ...previous.contactAccess, sites: stillOpen } : undefined;
   if (left.length === 1 && entered.length === 1) {
     const from = left[0]!, to = entered[0]!, [x, y] = point(from), [u, v] = point(to);
     const delta: NativePoint = [u - x, v - y];
@@ -320,6 +329,13 @@ export function observeTravel(previous: ObservedTravel | undefined, before: Nati
       if (key(moves[action]!.delta) === key(delta)) {
         supports.add(first.cells.get(to)!.join(','));
         if (witnessPossibleContacts) {
+          const contact = previous.possibleContacts?.[to];
+          if (contact && contact.appearance === first.cells.get(to)?.join(',')) {
+            const opened = changed.filter(cell => !visited.has(cell)
+              && !knownFooting(first.cells.get(cell), grid.floor, previous.supports)
+              && knownFooting(next.cells.get(cell), grid.floor, previous.supports));
+            if (opened.length) contactAccess = { sites: opened, evidence: [contact.reference, ref] };
+          }
           possibleContacts = {};
           for (const [cell, pixels] of next.cells) {
             if (visited.has(cell) || next.pieces.includes(cell) || pixels.includes(grid.ink)) continue;
@@ -363,6 +379,7 @@ export function observeTravel(previous: ObservedTravel | undefined, before: Nati
   return { grid, actor: actor && next.pieces.includes(actor) ? actor : next.pieces.length === 1 ? next.pieces[0]! : null,
     supports: [...supports], visited: [...visited], moves, tested, altered, controls, switches, completed: [...completed],
     ...(possibleContacts ? { possibleContacts } : {}),
+    ...(contactAccess ? { contactAccess } : {}),
     ...(pendingSelection ? { pendingSelection } : {}), refs: [...previous.refs.slice(-5), ref], stalled: gained ? 0 : previous.stalled + 1 };
 }
 
@@ -378,9 +395,13 @@ export function chooseTravelTrial(state: ObservedTravel | undefined, rows: Nativ
   const hypotheses = !framed.length && allowUnframedContact && moves.length >= 2
     ? Object.keys(state.possibleContacts ?? {}).filter(cell => !pieces.includes(cell) && !visited.has(cell)
       && cells.get(cell)?.join(',') === state.possibleContacts![cell]!.appearance) : [];
-  const goals = framed.length ? framed : hypotheses;
+  const witnessedAccess = !framed.length && allowUnframedContact
+    ? (state.contactAccess?.sites ?? []).filter(cell => !pieces.includes(cell) && !visited.has(cell)
+      && knownFooting(cells.get(cell), grid.floor, state.supports)) : [];
+  const goals = framed.length ? framed : [...new Set([...witnessedAccess, ...hypotheses])];
   if (!goals.length) return;
-  const contactOnly = new Set(hypotheses);
+  const access = new Set(witnessedAccess);
+  const contactOnly = new Set(hypotheses.filter(cell => !access.has(cell)));
   const evidence = [...new Set([...state.refs, ...moves.map(move => move.ref)])];
   const start = point(actor);
   const unmeasured = inputs.filter(input => directional(input.action_ref) && !state.moves[input.action_ref]);
@@ -402,11 +423,14 @@ export function chooseTravelTrial(state: ObservedTravel | undefined, rows: Nativ
   function route(origin: string) {
     const open: Path[] = [{ at: origin, first: null, cost: 0 }];
     const costs = new Map([[origin, 0]]);
-    let best: { first: NativeCommand; cell: string; score: number; goal: boolean; path?:Path } | undefined;
+    let best: { first: NativeCommand; cell: string; score: number; goal: boolean; priority: number; path?:Path } | undefined;
     const offer = (first: NativeCommand, cell: string, cost: number, goal: boolean, path?:Path) => {
       const near = Math.min(...goals.map(target => distance(point(cell), point(target)))) / grid.pitch;
       const score = cost + 4 * near - (canTestSwitch(cell) ? 4 : 0);
-      if (!best || goal && !best.goal || goal === best.goal && score < best.score) best = { first, cell, score, goal, path };
+      const priority = access.has(cell) ? 2 : Number(goal);
+      if (!best || priority > best.priority || priority === best.priority && score < best.score) {
+        best = { first, cell, score, goal, priority, path };
+      }
     };
     for (let i = 0; i < open.length; i++) {
       const node = open[i]!;
@@ -458,6 +482,10 @@ export function chooseTravelTrial(state: ObservedTravel | undefined, rows: Nativ
     }
   }
   if (active) {
+    if (access.has(active.cell)) return {
+      command: active.first, target: point(active.cell), purpose: 'verify_contact_access',
+      evidence: [...new Set([...evidence, ...state.contactAccess!.evidence])],
+    };
     if (contactOnly.has(active.cell)) return {
       command: active.first, target: point(active.cell), purpose: 'test_contact_hypothesis',
       evidence: [...new Set([...evidence, state.possibleContacts![active.cell]!.reference])],

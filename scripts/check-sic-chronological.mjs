@@ -166,6 +166,11 @@ async function run(code,requestedTarget,parallelWorkers) {
         if (!sourceDecisions.has(key)) sourceDecisions.set(key, { level: previous.level, strategy: 'test_unframed_contact_hypothesis',
           firstTurn: effects.length + 1, action: action.id });
       }
+      if (card?.witnessedContactAccess) {
+        const key = JSON.stringify([previous.level, 'use_witnessed_contact_access']);
+        if (!sourceDecisions.has(key)) sourceDecisions.set(key, { level: previous.level, strategy: 'use_witnessed_contact_access',
+          firstTurn: effects.length + 1, action: action.id });
+      }
       if (card?.witnessedTransientCycle) {
         const key = JSON.stringify([previous.level, 'use_witnessed_transient_cycle']);
         if (!sourceDecisions.has(key)) sourceDecisions.set(key, { level: previous.level, strategy: 'use_witnessed_transient_cycle',
