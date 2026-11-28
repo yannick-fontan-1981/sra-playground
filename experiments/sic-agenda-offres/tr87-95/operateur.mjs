@@ -20,7 +20,8 @@ export async function play(engine,variant,vendor){
   const cuts=new Map(),records=new Map(),guards=new Map(),hooks=[mock.method(Date,'now',()=>1700000000000)];
   let turn=1,change=null;
   hooks.push(mock.method(family,'propose',async function(obs,rows,inputs,limit){
-    const observed=measureWordBoard(obs,rows),layout=this.epoch===obs.level_epoch?this.scene:await measureWordScene(obs,rows);
+    const observed=typeof measureWordBoard==='function'?measureWordBoard(obs,rows):null;
+    const layout=this.epoch===obs.level_epoch?this.scene:await measureWordScene(obs,rows);
     const pairs=observed&&await Promise.all(observed.table.map(async ([a,b])=>({types:[a.type,b.type],boxes:[a.box,b.box],
       words:[glyphs(await wordGlyphs(rows,a,observed.ink)),glyphs(await wordGlyphs(rows,b,observed.ink))]})));
     const pre={ref:obs.observation_ref,epoch:obs.level_epoch,input:digest(rows),available:obs.available_action_refs,
