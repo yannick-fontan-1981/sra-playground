@@ -1,0 +1,51 @@
+{
+  "equalScenarios": 2,
+  "assembledEqual": true,
+  "sameT3Command": {
+    "x": 5,
+    "y": 32
+  },
+  "T3Plans": [
+    5,
+    1
+  ],
+  "actualArrangement": [
+    2,
+    1,
+    10,
+    15,
+    2,
+    10,
+    1,
+    9,
+    1,
+    15,
+    9,
+    11,
+    9,
+    2,
+    10,
+    15,
+    9,
+    10,
+    2,
+    15
+  ],
+  "T3Observed": [
+    true,
+    null
+  ],
+  "nextLevel": [
+    {
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:16:frame:1177f5eb7fed21e5",
+      "status": "locally_fitted",
+      "matches": 2
+    },
+    {
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:17:frame:2bf08ed2ce3b3db1",
+      "status": "locally_fitted",
+      "matches": 1
+    }
+  ],
+  "archiveSHA256": "d272cc6c66a4a523d9f137f5fa1ff756311af059d5acc319bef5307b97ce1ce9"
+}
