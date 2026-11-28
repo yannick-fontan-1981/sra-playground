@@ -50,9 +50,13 @@ async function run(code,requestedTarget,parallelWorkers) {
   if (sourceArm !== undefined && (mode !== 'sic' || !['fixed', 'active'].includes(sourceArm))) {
     throw new TypeError('The source composer comparison requires a registered arm and strict SIC.');
   }
+  const sourceStrategy = process.env.SIC_SOURCE_COMPOSER_STRATEGY ?? 'bind_earlier_motions_to_registered_subjects';
+  if (sourceArm && !['motion_contrast', 'bind_earlier_motions_to_registered_subjects'].includes(sourceStrategy)) {
+    throw new TypeError('The source composer experiment requires a registered strategy.');
+  }
   const pack={...defaultRecoveryPack,solver:mode,
     ...(sourceArm === 'active' ? { informationPreference: { mode:'active',
-      strategy:'bind_earlier_motions_to_registered_subjects',minimumOutcomes:2 } } : {})};
+      strategy:sourceStrategy,minimumOutcomes:2 } } : {})};
   const captureRivals = process.env.SIC_SOURCE_RETURN_RIVALS === '1';
   if (captureRivals && (!sourceArm || /^SS(?:0[89]|1\d|2[0-5])$/.test(code))) {
     throw new Error('Return hypothesis capture requires an authorized source comparison.');
@@ -75,11 +79,21 @@ async function run(code,requestedTarget,parallelWorkers) {
   }
   const games=createGameDispatcher(loadLegacy);
   const game=request=>games.dispatch(request);
-  let solver;const service=new V6AgentService(async recovery=>(solver=await createNativeV6Runtime({common,strategy},{recovery})));
+  const preferTransportUndo = process.env.SIC_SOURCE_TRANSPORT_UNDO === '1';
+  if (preferTransportUndo && sourceArm !== 'active') throw new Error('Transport undo requires the active comparison arm.');
+  let solver;const service=new V6AgentService(async recovery=>(solver=await createNativeV6Runtime({common,strategy},{recovery,
+    ...(preferTransportUndo ? { preferTransportUndo: true } : {})})));
   const evidence = process.env.SIC_SOURCE_COMPOSER_EVIDENCE === '1' ? new Map() : null;
   const seenEvidence = new Set();
+  const recoveryEvidence = new Map();
   function retainSourceEvidence(response) {
     for (const event of response.snapshot?.trace ?? []) {
+      if (event.kind === 'sic_transport_undo_available' || event.kind === 'action_undo') {
+        const key = JSON.stringify([event.kind, event.observation_ref ?? event.after]);
+        recoveryEvidence.set(key, Object.fromEntries(['kind', 'before', 'after', 'observation_ref',
+          'before_observation_ref', 'cause', 'restoreFrame', 'alternativeLength', 'excludedPush', 'level']
+          .filter(field => event[field] !== undefined).map(field => [field, event[field]])));
+      }
       if (event.kind !== 'sic_preparation_outcome' || !Number.isSafeInteger(event.revision)) continue;
       const occurrence = JSON.stringify([event.epoch, event.revision, event.hypothesis, event.result]);
       if (seenEvidence.has(occurrence)) continue;
@@ -144,7 +158,7 @@ async function run(code,requestedTarget,parallelWorkers) {
     return {code,target,mode,parallelWorkers,...(sourceArm ? { sourceArm } : {}),recoveries,resumes,gaps:{continued:metric(continuedGaps),boundary:metric(boundaryGaps)},series:[...series.values()].filter(n=>n>1),pathKinds:[...series].filter(([,n])=>n>1).map(([id,n])=>({length:n,type:[...pathKinds.get(id)].sort().join("+")})),effects,decisions:Object.fromEntries(decisions),usage:Object.fromEntries(usage),actions:snapshot.actionCount,levels:board.levelsCompleted,reason:snapshot.reason,status:snapshot.status,
       ...(snapshot.status==='error'?{message:snapshot.message}:{}),authority:snapshot.sicActionCoverage?.sicOnly??0,solverFamilies:snapshot.coverage?.registeredFamilies.length,
       levelStats,
-      ...(evidence ? { sourceComposerEvidence: [...evidence.values()] } : {}),
+      ...(evidence ? { sourceComposerEvidence: [...evidence.values()], sourceRecoveryEvidence: [...recoveryEvidence.values()] } : {}),
       ...(captureRivals ? { sourceReturnRivals: [...observedReturns.values()].filter(row => row.targets.size > 1)
         .map(({ level, command, targets }) => {
           const hypotheses = [...targets.values()];

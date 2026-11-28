@@ -11,7 +11,7 @@ import type {
 } from './v6-agent-protocol.ts';
 import type { KnowledgeMemory } from '../logos-engine/kernel.ts';
 import { immutableJson } from '../logos-engine/canonical.ts';
-import { isSicLevelRecovery, sicObservedGameOver, sicObservedMotionCycle, sicObservedWeightShortage, sicObservedUnplannedMaterialLoss } from '../logos-engine/v6-native-types.ts';
+import { isSicLevelRecovery, sicObservedGameOver, sicObservedMotionCycle, sicObservedWeightShortage, sicObservedTransportDeadlock, sicObservedUnplannedMaterialLoss } from '../logos-engine/v6-native-types.ts';
 
 export { BrowserV6WorkerClient } from './v6-agent-client.ts';
 
@@ -378,7 +378,8 @@ export class BrowserV6Agent {
         const acquired = await this.request({ type: 'advance', sessionId, sequence: this.sequence, ticketId: pending.ticket!.id, observation: after, executionMs }, epoch);
         if (!acquired) return;
         const progressed = next.levelsCompleted > expected.levelsCompleted || next.level > expected.level;
-        if (acquired.kind === 'stopped' && (acquired.reason === sicObservedGameOver||acquired.reason===sicObservedUnplannedMaterialLoss)
+        if (acquired.kind === 'stopped' && (acquired.reason === sicObservedGameOver || acquired.reason === sicObservedUnplannedMaterialLoss
+          || acquired.reason === sicObservedTransportDeadlock && this.canUndo(acquired.reason))
           && this.canRecoverLevel(acquired.reason)) {
           if (!this.stopRequested && await this.acquireRecovery(epoch)) continue;
           break;
@@ -439,7 +440,8 @@ export class BrowserV6Agent {
   }
 
   private canUndo(reason:string|null){
-    return reason===sicObservedUnplannedMaterialLoss&&!!this.knowledge.canUndoAction&&!!this.host.undoAction
+    return (reason === sicObservedUnplannedMaterialLoss || reason === sicObservedTransportDeadlock)
+      && !!this.knowledge.canUndoAction && !!this.host.undoAction
       &&(this.host.canUndoAction?.()??this.host.canDispatch());
   }
 
@@ -448,7 +450,8 @@ export class BrowserV6Agent {
     const before=this.observed,sessionId=this.sessionId;
     if(!before||!sessionId||!this.stillCurrent(epoch)||this.stopRequested)return false;
     this.assertFresh(before,epoch,true);
-    this.phase='acting';this.state('acting','Undoing an observed unplanned loss of movable material…');
+    this.phase = 'acting';
+    this.state('acting', 'Undoing the last action to restore the witnessed board…');
     if(!this.stillCurrent(epoch)||this.stopRequested)return false;
     this.assertFresh(before,epoch,true);
     const returned=await this.host.undoAction!();

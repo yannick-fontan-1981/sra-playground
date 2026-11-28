@@ -149,6 +149,22 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     if (borrowed) restoreCopiedMemory(copyNativeValue(m));
     return m;
   }
+  function transportRecovery(entry: typeof m, epoch: number) {
+    const frontier = m.contactFrontier;
+    const proof = frontier?.deadlock;
+    if (!proof) return;
+    const edges = [...new Set([...(frontier.recoveredEdges ?? []), proof.edge])];
+    const restored = structuredClone(entry);
+    const repair = proof.repair;
+    restored.transportRetry = { epoch, edges, ...(repair ? { repair: structuredClone(repair) } : {}) };
+    if (restored.epoch === epoch) {
+      const recovered = restored.contactFrontier ??= newContactMemory();
+      recovered.recoveredEdges = edges;
+      if (repair) recovered.repair = restored.transportRetry.repair;
+      delete recovered.deadlock;
+    }
+    return restored;
+  }
   function enter(o:NativeObservation){
     if(m.epoch===o.level_epoch)return;
     const { previewCarry, localCarry, contactFrontier, transportRetry } = m;
@@ -624,17 +640,11 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         : sicObservedTransportDeadlock;
     },
     stateAfterLevelReset(o, _rows, entry) {
-      if (!m.contactFrontier?.deadlock || !entry) return;
-      const proof = workingMemory().contactFrontier!.deadlock!;
-      const edges = [...new Set([...(m.contactFrontier?.recoveredEdges ?? []), proof.edge])];
-      const restored = structuredClone(entry) as typeof m;
-      restored.transportRetry = { epoch: o.level_epoch, edges, ...(proof.repair ? {repair:proof.repair} : {}) };
-      if (restored.epoch === o.level_epoch) {
-        const frontier = restored.contactFrontier ??= newContactMemory();
-        frontier.recoveredEdges = edges;
-        if (proof.repair) frontier.repair = proof.repair;
-      }
-      return restored;
+      return entry && transportRecovery(entry as typeof m, o.level_epoch);
+    },
+    stateAfterActionUndo(entry) {
+      if (!m.contactFrontier?.deadlock?.repair) return;
+      return transportRecovery(entry as typeof m, m.epoch);
     },
     state: workingMemory,
     restore(value) {

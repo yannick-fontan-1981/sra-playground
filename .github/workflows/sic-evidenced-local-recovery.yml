@@ -1,0 +1,66 @@
+name: SIC source recovery from witnessed transport loss
+
+on:
+  push:
+    branches: [experiment/sic-evidenced-local-recovery]
+    paths: [.github/workflows/sic-evidenced-local-recovery.yml]
+
+permissions:
+  contents: read
+
+jobs:
+  replay:
+    name: Source recovery ${{ matrix.game }} ${{ matrix.arm }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        game: [SS01, SS04, COMB, DC22]
+        arm: [fixed, active]
+        include:
+          - game: SS01
+            arm: active_without_local_recovery
+    env:
+      GAME: ${{ matrix.game }}
+      ARM: ${{ matrix.arm }}
+      SIC_REPLAY_REFERENCES: docs/architecture/sic-replay-reference-levels-20261126.json
+      SIC_SOURCE_COMPOSER_EVIDENCE: '1'
+      SIC_SOURCE_COMPOSER_STRATEGY: motion_contrast
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Prepare exact engine
+        run: |
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          npm ci
+          node scripts/prepare-python.mjs
+      - name: Run from level 1 with the archived source budgets
+        run: |
+          mkdir replay
+          git rev-parse HEAD HEAD:src > replay/identity
+          printf '%s\n' "$GAME" "$ARM" > replay/configuration
+          sha256sum "$SIC_REPLAY_REFERENCES" > replay/budget-input
+          date -u +%s%3N > replay/start-ms
+          if [[ "$ARM" == fixed ]]; then
+            export SIC_SOURCE_COMPOSER_ARM=fixed
+          else
+            export SIC_SOURCE_COMPOSER_ARM=active
+          fi
+          if [[ "$ARM" == active ]]; then export SIC_SOURCE_TRANSPORT_UNDO=1; fi
+          node scripts/check-sic-chronological.mjs "$GAME" 6 replay/result.jsonl 1 sic > replay/replay.log 2>&1
+          date -u +%s%3N > replay/end-ms
+          git diff --exit-code
+          cd replay
+          sha256sum result.jsonl result.jsonl.levels identity configuration budget-input start-ms end-ms > sha256sums
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sic-witnessed-recovery-${{ matrix.game }}-${{ matrix.arm }}
+          path: replay/
+          retention-days: 14

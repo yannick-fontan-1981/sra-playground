@@ -220,7 +220,7 @@ import { retainNativeJson } from './v6-native-owned.ts';
 import type { NativeStoreWrite, StoredNativeProgram } from './v6-knowledge-store.ts';
 import type { DeltaCause, KnowledgeMemory, KnowledgeNode } from './kernel.ts';
 import { hydrateNativeState } from './v6-native-state-graph.ts';
-import { NativeEditRejected, isSicLevelRecovery, sicObservedGameOver, sicObservedUnplannedMaterialLoss } from './v6-native-types.ts';
+import { NativeEditRejected, isSicLevelRecovery, sicObservedGameOver, sicObservedTransportDeadlock, sicObservedUnplannedMaterialLoss } from './v6-native-types.ts';
 import { v6LevelActiveTimeMs } from './v6-time-budget.ts';
 import { NativeCompositionAuthority } from './v6-native-authority.ts';
 import { projectNativeClickReturn, type NativeClickReturn } from './v6-native-click-return.ts';
@@ -344,6 +344,7 @@ export interface NativeV6RuntimeConfiguration {
   sourceDigest: string; families: readonly NativeFamily[]; maxPointOccurrences: number; now?: () => number;
   observeControlTrialShadow?: NativeExecution['observeControlTrialShadow'];
   controlTrialAgenda?: NativeExecution['controlTrialAgenda'];
+  preferTransportUndo?: boolean;
   /** Source DRM groups retain their order even while some implementations are pending. */
   groups?: readonly NativeSelectionGroup[];
   /** Production supplies the original objective policy and enables the real WHY/ACT gate. */
@@ -371,6 +372,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private readonly now: () => number;
   private readonly observeControlTrialShadow?: NativeExecution['observeControlTrialShadow'];
   private readonly controlTrialAgenda?: NativeExecution['controlTrialAgenda'];
+  private readonly preferTransportUndo: boolean;
   private readonly authorityPolicy?: { provided_objective: { definition: string } };
   private authority: NativeCompositionAuthority | null = null;
   private caller: NativeCallerCoordinator | null = null;
@@ -397,7 +399,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private prefix: Prefix | null = null;
   private actions = 0;
   private recoveryCount = 0;
-  private undoCheckpoint: {frameHash:string; families:Map<string,NativeRecord>} | null = null;
+  private undoCheckpoint: {cause: string; frameHash: string; availability: readonly string[]; families: Map<string, NativeRecord>} | null = null;
   private readonly fatalCommands = new Set<string>();
   private levelStart: { level: number; families: readonly KnowledgeNode[] } | null = null;
   private sicFamilyActions = 0;
@@ -459,6 +461,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.sourceDigest = configuration.sourceDigest;
     this.observeControlTrialShadow = configuration.observeControlTrialShadow;
     this.controlTrialAgenda = configuration.controlTrialAgenda && { ...configuration.controlTrialAgenda };
+    this.preferTransportUndo = configuration.preferTransportUndo === true;
     this.callerStrategy = configuration.callerStrategy ? structuredClone(configuration.callerStrategy) : undefined;
     this.sicFrontier = configuration.sicFrontier;
     this.sicView = configuration.sicView;
@@ -1807,10 +1810,16 @@ export class NativeV6Runtime implements NativeV6Backend {
       const common = this.caller && CALLER_PROVIDERS.includes(prefix.family.id as typeof CALLER_PROVIDERS[number]);
       const selectedSupport = this.acquisitionFamilies && Boolean(prefix.proposal.support_plan);
       const selectedFamily = selectedSupport ? this.acquisitionFamilies!.supports : prefix.family;
-      if(!this.caller&&transition.outcome.reason===sicObservedUnplannedMaterialLoss){
-        this.undoCheckpoint={frameHash:transition.first.frame_hash,
-          families:new Map(this.families.map(family=>[family.id,familyCheckpoint(family)]))};
-      }
+      const materialUndo = !this.caller && transition.outcome.reason === sicObservedUnplannedMaterialLoss;
+      const testTransportUndo = this.preferTransportUndo && !this.caller && selectedFamily.id === preparedEffectsId
+        && transition === prefix.witnessed.at(-1) && /^ACTION[1-4]$/.test(transition.command.action_ref)
+        && transition.before.level_epoch === transition.after.level_epoch && transition.after.state === 'NOT_FINISHED';
+      const undo = materialUndo || testTransportUndo ? {
+        cause: materialUndo ? sicObservedUnplannedMaterialLoss : sicObservedTransportDeadlock,
+        frameHash: transition.first.frame_hash, availability: transition.before.available_action_refs,
+        families: new Map(this.families.map(family => [family.id, familyCheckpoint(family)])),
+      } : null;
+      if (materialUndo) this.undoCheckpoint = undo;
       // These bounded selected owners consume the native scheduling argument.
       // Other source adapters retain their exact historical argument lists.
       const record = common ? null : selectedFamily.id === 'branch_routing' && branchAcquisitionBarrier
@@ -1828,6 +1837,15 @@ export class NativeV6Runtime implements NativeV6Backend {
       // immediately: this collection was read only for its cumulative count.
       freeze(structuredClone(record));
       if (selectedFamily.id === preparedEffectsId && record?.events.length) this.note(record.events[0] as R);
+      if (testTransportUndo && undo) {
+        const proof = record?.events.map(event => objectValue(event)).find(event => event.kind === 'sic_control_mobility_lost'
+          && event.before === transition.before.observation_ref && event.after === transition.after.observation_ref
+          && event.restoreFrame === undo.frameHash && Number(event.alternativeLength) > 0);
+        if (proof) {
+          this.undoCheckpoint = undo;
+          this.note({ ...proof, kind: 'sic_transport_undo_available', reason: undo.cause });
+        }
+      }
       if (prefix.sicPlan?.authority === 'sicOnly' && typeof record?.reviewEvidence === 'string') {
         recordedEffects.set(transition.after.observation_ref, record.reviewEvidence);
       }
@@ -2383,7 +2401,8 @@ export class NativeV6Runtime implements NativeV6Backend {
   }
 
   private canUndoCurrentAction():boolean {
-    return this.canResetCurrentLevel()&&this.kind==='stopped'&&this.reason===sicObservedUnplannedMaterialLoss&&!!this.undoCheckpoint;
+    return this.canResetCurrentLevel() && this.kind === 'stopped' && !!this.undoCheckpoint
+      && this.reason === this.undoCheckpoint.cause;
   }
 
   async undoAction(packet:NativePublicObservation,execution:NativeExecution):Promise<NativeRuntimeYield>{
@@ -2391,6 +2410,8 @@ export class NativeV6Runtime implements NativeV6Backend {
     const checkpoint=this.undoCheckpoint,before=this.observation,current=this.current,knowledge=this.knowledge;
     if(!this.canUndoCurrentAction()||!checkpoint||!before||!current||!knowledge
       ||packet.frame_hash!==checkpoint.frameHash||packet.level!==current.level||packet.levels_completed!==current.levels_completed
+      || (checkpoint.cause === sicObservedTransportDeadlock
+        && v6Canonical([...packet.available_action_refs].sort()) !== v6Canonical([...checkpoint.availability].sort()))
       ||packet.step_index!==current.step_index||packet.state!=='NOT_FINISHED')throw new Error('UNDO must restore the observed board before the lost action');
     const next=freeze(structuredClone(packet));
     const measured=freeze(await measureNativeObservation(next,this.actions+this.recoveryCount+2,this.sessionId));
@@ -2399,7 +2420,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       return {id:`family_state:${family.id}`,kind:'family_state',family:family.id,value:family.stateAfterActionUndo?.(entry)??entry};
     });
     const receipt={level:next.level,observation_ref:measured.observation_ref,before_observation_ref:before.observation_ref,
-      action_ref:'UNDO',cause:sicObservedUnplannedMaterialLoss};
+      action_ref:'UNDO',cause:checkpoint.cause};
     writes.push({id:`reasoning:action-undo:${measured.revision}`,kind:'component_state',component:'public_action_undo',
       status:'observed',value:receipt,evidence:[before.observation_ref,measured.observation_ref]});
     this.check(execution);
@@ -2982,7 +3003,7 @@ export async function loadNativeV6Declarations(): Promise<NativeV6Declarations> 
 }
 /** Identifies native declarations/version, not a Python runtime or source binary. */
 export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
-  options: Pick<NativeV6RuntimeConfiguration, 'now' | 'observeControlTrialShadow' | 'controlTrialAgenda'>
+  options: Pick<NativeV6RuntimeConfiguration, 'now' | 'observeControlTrialShadow' | 'controlTrialAgenda' | 'preferTransportUndo'>
     & { recovery?: import('../sic/active-recovery.ts').RecoveryPack } = {}): Promise<NativeV6Runtime> {
   const recovery = compileRecoveryPack(options.recovery);
   const loaded = declarations ?? await loadNativeV6Declarations();
@@ -3000,11 +3021,12 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
     const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 248 : 283,
+      ...(options.preferTransportUndo ? { preferTransportUndo: true } : {}),
       groups, symmetry, policy, sequence, support, recovery, compositionPrior, preparationReturns, sourceFieldRelations };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, observeControlTrialShadow: options.observeControlTrialShadow,
-      controlTrialAgenda: options.controlTrialAgenda, families: [
+      controlTrialAgenda: options.controlTrialAgenda, preferTransportUndo: options.preferTransportUndo, families: [
       createCompositionTrials(), createPreparedEffects(recovery.informationPreference, recovery), createCursorRoleMemory(), createObservedActorComposition(),
       createSicFieldRepair(symmetry), createSicVerifyContactOrder(policy, recovery), createSicVerifyContactOrder(policy, recovery, learnContactOrderId), createSicSupportTransfer(support), createSicLearnSupportMoves(), createSicLearnSupportMoves(learnObservedSupportsId),
       createSicVerifyParallelSymbolPrefixes(), createSicPeriodicProfileAlignment(),

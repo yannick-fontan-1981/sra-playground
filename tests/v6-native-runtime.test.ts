@@ -12,7 +12,8 @@ import { standalonePlanningFamilies } from '../src/sic/standalone-families.ts';
 import type { GameObservation } from '../src/runtime/browser-games.ts';
 import { emptyV6Snapshot, toV6PublicObservation, V6_REFERENCE_COMMIT, v6FrameHash } from '../src/runtime/v6-agent-protocol.ts';
 import type { V6AgentOperation, V6AgentTransport } from '../src/runtime/v6-agent-protocol.ts';
-import { sicObservedGameOver, sicObservedUnplannedMaterialLoss } from '../src/logos-engine/v6-native-types.ts';
+import { sicObservedGameOver, sicObservedTransportDeadlock, sicObservedUnplannedMaterialLoss } from '../src/logos-engine/v6-native-types.ts';
+import { preparedEffectsId } from '../src/sic/test-prepared-effects.ts';
 import type {
   NativeCommand, NativeExecution, NativeFamily, NativeInitialize, NativeOutcome, NativePublicObservation,
   NativeRuntimeSnapshot, NativeRuntimeYield, NativeV6Backend,
@@ -381,6 +382,49 @@ test('SIC undoes only the action that consumed capacity and retains the precedin
   assert.equal(rejected, true);
   assert.equal(next.command?.actionRef, 'ACTION1');
   assert.notEqual(next.ticket?.observationRef, second.ticket?.observationRef);
+});
+
+test('a current transport repair can be rebound by public undo at the same action budget', async () => {
+  for (const evidence of ['disabled', 'stale', 'current']) {
+    let acquired = false, recovered = false;
+    const entry = { ...board(), availableActionIds: [1, 2] };
+    const family: NativeFamily = {
+      id: preparedEffectsId,
+      propose: () => ({ status: 'proposed', kind: preparedEffectsId,
+        actions: [{ action_ref: recovered ? 'ACTION2' : 'ACTION1', data: {} }], steps: [{}] }),
+      before: () => ({ admitted: true, reason: 'current' }),
+      after: () => ({ matched: true, seal_prefix: true, reason: 'witnessed' }),
+      record(before, after) {
+        acquired = true;
+        return { events: [{ kind: 'sic_control_mobility_lost', before: before.observation_ref,
+          after: evidence === 'stale' ? before.observation_ref : after.observation_ref,
+          restoreFrame: before.frame_hash, alternativeLength: 3 }] };
+      },
+      requestedStopReason: () => acquired ? sicObservedTransportDeadlock : null,
+      state: () => ({ acquired, recovered }),
+      restore(value) { acquired = value.acquired === true; recovered = value.recovered === true; },
+      stateAfterActionUndo: checkpoint => ({ ...checkpoint, recovered: true }),
+    };
+    const backend = new NativeV6Runtime({ families: [family], maxPointOccurrences: 250,
+      sourceDigest: 'test-transport-undo', preferTransportUndo: evidence !== 'disabled' });
+    const service = new V6AgentService(() => backend);
+    const start = await service.handle({ ...init(), observation: toV6PublicObservation(entry, 0) });
+    const lost = await service.handle({ type: 'advance', sessionId: start.sessionId, sequence: 1,
+      ticketId: start.ticket!.id, observation: toV6PublicObservation({ ...board(1), availableActionIds: [1, 2] }, 1),
+      executionMs: 1 });
+    assert.equal(lost.snapshot.reason, sicObservedTransportDeadlock);
+    assert.equal(Boolean(lost.snapshot.canUndoAction), evidence === 'current');
+    if (evidence !== 'current') continue;
+    await assert.rejects(backend.undoAction(toV6PublicObservation({ ...entry, availableActionIds: [1] }, 1), {}),
+      /observed board before the lost action/);
+    const undo = await service.handle({ type: 'undo_action', sessionId: start.sessionId, sequence: 1,
+      observation: toV6PublicObservation(entry, 1) });
+    assert.equal(undo.snapshot.actions, 1);
+    const next = await service.handle({ type: 'resume', sessionId: start.sessionId, sequence: 1 });
+    assert.equal(next.command?.actionRef, 'ACTION2');
+    assert.equal(recovered, true);
+    assert.equal(acquired, false);
+  }
 });
 
 test('SIC retains a witnessed fatal command across a same-level reset and authorizes a different command', async () => {
