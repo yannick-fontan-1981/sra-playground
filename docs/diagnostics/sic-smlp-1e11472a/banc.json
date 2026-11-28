@@ -1,0 +1,429 @@
+{
+  "identicalSessions": 3,
+  "catalogueOccurrences": 13,
+  "N1": {
+    "measurement": {
+      "kind": "public_configured_arrival_packet",
+      "before": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:63772d1746311d0c",
+      "after": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:a69e9c93c4ca3988",
+      "tracks": 2,
+      "compatible": 24,
+      "samples": 4,
+      "measured": {
+        "9": {
+          "target": [
+            56,
+            34
+          ],
+          "tick": 52
+        },
+        "12": {
+          "target": [
+            56,
+            34
+          ],
+          "tick": 68
+        }
+      }
+    },
+    "edit": [
+      {
+        "kind": "ticket",
+        "turn": 2,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:a69e9c93c4ca3988",
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:2",
+        "level": 1,
+        "owner": "configured_arrivals",
+        "offer": "configured_first_arrival_composition",
+        "action": "ACTION6",
+        "point": {
+          "x": 32,
+          "y": 26
+        },
+        "index": 0,
+        "target": [
+          56,
+          34
+        ],
+        "latestFit": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:a69e9c93c4ca3988",
+        "refs": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:a69e9c93c4ca3988",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:a69e9c93c4ca3988"
+        ],
+        "proof": null,
+        "guard": "current_network_edits_and_start_poses"
+      },
+      {
+        "kind": "configured_local_rewrite",
+        "before": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:a69e9c93c4ca3988",
+        "after": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:bce8c883896b59f4",
+        "point": [
+          32,
+          26
+        ]
+      }
+    ],
+    "launch": [
+      {
+        "kind": "ticket",
+        "turn": 3,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:bce8c883896b59f4",
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:3",
+        "level": 1,
+        "owner": "configured_arrivals",
+        "offer": "configured_first_arrival_composition",
+        "action": "ACTION5",
+        "point": {},
+        "index": 0,
+        "target": [
+          56,
+          34
+        ],
+        "latestFit": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:a69e9c93c4ca3988",
+        "refs": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:bce8c883896b59f4",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:a69e9c93c4ca3988",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:bce8c883896b59f4"
+        ],
+        "proof": {
+          "question": "coincident_first_arrivals",
+          "policies": 24,
+          "intervals": [
+            [
+              17,
+              17
+            ]
+          ],
+          "routeDomains": [
+            "COMPLETE",
+            "COMPLETE"
+          ],
+          "cohorts": [
+            {
+              "tick": 17,
+              "actor_refs": [
+                "9",
+                "12"
+              ]
+            }
+          ]
+        },
+        "guard": "current_network_edits_and_start_poses"
+      },
+      {
+        "kind": "return",
+        "turn": 3,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:4:frame:e5988dd7f87420f6",
+        "owner": "configured_arrivals",
+        "matched": null,
+        "reason": "official_score_boundary",
+        "frames": 77,
+        "levels": 1,
+        "events": [
+          {
+            "kind": "configured_arrival_official_boundary",
+            "before": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:bce8c883896b59f4",
+            "after": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:4:frame:e5988dd7f87420f6"
+          }
+        ],
+        "frame": "e5988dd7f87420f6d2ac36c3bd65369ca488326cc1e310d6c8037e6c5b20ba42"
+      }
+    ],
+    "endpointOnly": [
+      {
+        "kind": "return",
+        "turn": 1,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:a69e9c93c4ca3988",
+        "owner": "observed_frontier",
+        "matched": null,
+        "frames": 1,
+        "levels": 0,
+        "events": [],
+        "frame": "a69e9c93c4ca398815c6f33a07ec515024a5752f53fbd274f816040c5d60ab0e"
+      },
+      {
+        "kind": "ticket",
+        "turn": 2,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:a69e9c93c4ca3988",
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:2",
+        "level": 1,
+        "owner": "observed_frontier",
+        "offer": "experiment",
+        "action": "ACTION6",
+        "point": {
+          "x": 10,
+          "y": 32
+        },
+        "index": 0,
+        "refs": [],
+        "proof": null,
+        "guard": "current_public_premises_match_provisional_step"
+      }
+    ]
+  },
+  "N3": {
+    "discrimination": {
+      "kind": "ticket",
+      "turn": 10,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:10:frame:b45bcd1c39abbb3d",
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:10",
+      "level": 3,
+      "owner": "configured_arrivals",
+      "offer": "configured_first_arrival_composition",
+      "action": "ACTION6",
+      "point": {
+        "x": 22,
+        "y": 21
+      },
+      "index": 0,
+      "target": [
+        34,
+        15
+      ],
+      "latestFit": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:10:frame:b45bcd1c39abbb3d",
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:10:frame:b45bcd1c39abbb3d",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:25d648e87fb8f86a",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:0dca5d2e5479375d",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:1fc6ca9809b62023",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:10:frame:b45bcd1c39abbb3d"
+      ],
+      "proof": {
+        "question": "route_order_discrimination",
+        "policies": 6,
+        "intervals": [
+          [
+            8,
+            17,
+            16
+          ],
+          [
+            8,
+            18,
+            16
+          ]
+        ],
+        "routeDomains": [
+          "COMPLETE",
+          "COMPLETE",
+          "COMPLETE"
+        ],
+        "cohorts": [
+          {
+            "tick": 8,
+            "actor_refs": [
+              "12"
+            ]
+          },
+          {
+            "tick": 16,
+            "actor_refs": [
+              "15"
+            ]
+          },
+          {
+            "tick": 17,
+            "actor_refs": [
+              "9"
+            ]
+          }
+        ]
+      },
+      "guard": "current_network_edits_and_start_poses"
+    },
+    "nextMeasurement": {
+      "kind": "public_configured_arrival_packet",
+      "before": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:11:frame:f083fc5522910a7f",
+      "after": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:12:frame:28db2c137ebdfa55",
+      "tracks": 3,
+      "compatible": 3,
+      "samples": 3,
+      "measured": {
+        "9": {
+          "target": [
+            34,
+            15
+          ],
+          "tick": 54
+        },
+        "12": {
+          "target": [
+            34,
+            15
+          ],
+          "tick": 24
+        },
+        "15": {
+          "target": [
+            34,
+            15
+          ],
+          "tick": 48
+        }
+      }
+    },
+    "coincidence": {
+      "kind": "ticket",
+      "turn": 12,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:12:frame:28db2c137ebdfa55",
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:12",
+      "level": 3,
+      "owner": "configured_arrivals",
+      "offer": "configured_first_arrival_composition",
+      "action": "ACTION6",
+      "point": {
+        "x": 34,
+        "y": 45
+      },
+      "index": 0,
+      "target": [
+        34,
+        15
+      ],
+      "latestFit": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:12:frame:28db2c137ebdfa55",
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:12:frame:28db2c137ebdfa55",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:1fc6ca9809b62023",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:10:frame:b45bcd1c39abbb3d",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:11:frame:f083fc5522910a7f",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:12:frame:28db2c137ebdfa55"
+      ],
+      "proof": {
+        "question": "coincident_first_arrivals",
+        "policies": 3,
+        "intervals": [
+          [
+            18,
+            18,
+            18
+          ]
+        ],
+        "routeDomains": [
+          "COMPLETE",
+          "COMPLETE",
+          "COMPLETE"
+        ],
+        "cohorts": [
+          {
+            "tick": 18,
+            "actor_refs": [
+              "12",
+              "9",
+              "15"
+            ]
+          }
+        ]
+      },
+      "guard": "current_network_edits_and_start_poses"
+    },
+    "fallback": [
+      {
+        "kind": "ticket",
+        "turn": 10,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:10:frame:b45bcd1c39abbb3d",
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:10",
+        "level": 3,
+        "owner": "observed_frontier",
+        "offer": "experiment",
+        "action": "ACTION6",
+        "point": {
+          "x": 10,
+          "y": 18
+        },
+        "index": 0,
+        "refs": [
+          "empirical:0344426c1c1db771a7b6acfb360a55557c1a1ec8b8453c201f919680d9af997a",
+          "empirical:5eae8ef3ef5befc45c8bc68adfc834eba11c48434d16b7c7bd29dd8f93592265",
+          "empirical:a01087db35d9e436cca16709f22ed39f58b20bb6429a85bdf3220a47960adcc2",
+          "empirical:f6c7f6ed2f08a5d0995653f075baaea0827fea85d27b0e1ab13fa08c23ca7197"
+        ],
+        "proof": null,
+        "guard": "current_public_premises_match_provisional_step"
+      },
+      {
+        "kind": "return",
+        "turn": 10,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:11:frame:b45bcd1c39abbb3d",
+        "owner": "observed_frontier",
+        "matched": null,
+        "frames": 1,
+        "levels": 2,
+        "events": [],
+        "frame": "b45bcd1c39abbb3dd27489d8b03c080d2e485d6c7ad99b56c49d3cb5f60c1068"
+      },
+      {
+        "kind": "ticket",
+        "turn": 11,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:11:frame:b45bcd1c39abbb3d",
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:11",
+        "level": 3,
+        "owner": "configured_arrivals",
+        "offer": "configured_first_arrival_composition",
+        "action": "ACTION6",
+        "point": {
+          "x": 22,
+          "y": 21
+        },
+        "index": 0,
+        "target": [
+          34,
+          15
+        ],
+        "latestFit": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:10:frame:b45bcd1c39abbb3d",
+        "refs": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:11:frame:b45bcd1c39abbb3d",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:25d648e87fb8f86a",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:0dca5d2e5479375d",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:1fc6ca9809b62023",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:3:revision:10:frame:b45bcd1c39abbb3d"
+        ],
+        "proof": {
+          "question": "route_order_discrimination",
+          "policies": 6,
+          "intervals": [
+            [
+              8,
+              17,
+              16
+            ],
+            [
+              8,
+              18,
+              16
+            ]
+          ],
+          "routeDomains": [
+            "COMPLETE",
+            "COMPLETE",
+            "COMPLETE"
+          ],
+          "cohorts": [
+            {
+              "tick": 8,
+              "actor_refs": [
+                "12"
+              ]
+            },
+            {
+              "tick": 16,
+              "actor_refs": [
+                "15"
+              ]
+            },
+            {
+              "tick": 17,
+              "actor_refs": [
+                "9"
+              ]
+            }
+          ]
+        },
+        "guard": "current_network_edits_and_start_poses"
+      }
+    ]
+  },
+  "archiveSHA256": "c76cd16b98723dd129ff8577cded65410b6fa8a84370a5f3962579d8bd43ce2e",
+  "startedAt": "2026-11-27T22:32:01.132189-03:00",
+  "qualifiedAt": "2026-11-27T22:36:54.184022-03:00",
+  "elapsedSeconds": 293
+}

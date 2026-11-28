@@ -22,6 +22,8 @@ cases = {
              ["docs/migration/native-campaigns-v54/baseline-wa30/wa30-public-trace.json.gz", "tests/fixtures/sic-wa30-alternate-returns.json.gz"]),
     "TICT": ("e8df1757272cae3da1669b3e7ddb2e7bf65e8e02", "cell-placement-positive-41", "sic-observe-tict-placement",
              ["docs/migration/native-campaigns-v46/tict-public-trace.json.gz"]),
+    "SMLP": ("1e11472a8acfe8d4287cf33e58fe3f629e532fb9", "smlp-line-6", "sic-observe-smlp-arrivals",
+             ["docs/migration/native-campaigns-v57/baseline-smlp/smlp-public-trace.json.gz", "tests/fixtures/sic-smlp-alternate-returns.json.gz"]),
     "SEQN": ("b5dda8ecb17b1725816bae09b44973449869dbae", "seqn-lines-11-81", "sic-observe-seqn-rewrites",
              ["tests/fixtures/sic-seqn-public-returns.json.gz"]),
     "SP80": ("bb4a99b5ba41531eb70f1dccb6a97a919cefec56", "sp80-two-lines", "sic-observe-sp80-routing",
