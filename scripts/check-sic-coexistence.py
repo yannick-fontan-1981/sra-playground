@@ -16,6 +16,7 @@ NEXT_ASSEMBLY = "f27eb1c055d44e852fb90a25c542d0a466eb6c16"
 TWENTY_FIVE = "278d5b357d3e3328a32697fe402f3fa9d957d547"
 THIRTY_FIVE = "09aeb9e14e40b6115269e47267b47ba8d71708fd"
 FORTY_SIX = "ba2e7c6b8d10e04edc149ff836c065178757c62d"
+FIFTY_FIVE = "674b0dd19d693a66687990ab2a4368d981aa8fb9"
 QUERY = "c0b9f4027f1df257d7b8c96f5656f9dbb83661f0"
 COMPONENTS = {
     "a5a90c3349ea49bba8e40055444cea2026bee962": "P05 et déplacement signé",
@@ -25,6 +26,18 @@ COMPONENTS = {
 
 
 def check_components(assembly):
+    if assembly == FIFTY_FIVE:
+        check(git("rev-parse", FIFTY_FIVE + "^").decode().strip() == FORTY_SIX, "Expected the forty-six-line parent")
+        components = check_components(FORTY_SIX)
+        revision = "f6ff40f5e6c870ab5f897eaccdd1d43873944c5c"
+        path = "src/logos-engine/v6-containment.ts"
+        check(git("diff", "--name-only", FROZEN, revision, "--", "src").decode().splitlines() == [path],
+              "Unexpected AR25 component scope")
+        check(git("diff", "--name-only", FORTY_SIX, FIFTY_FIVE).decode().splitlines() == [path],
+              "Unexpected change outside the new AR25 file")
+        check(git("rev-parse", FIFTY_FIVE + ":" + path) == git("rev-parse", revision + ":" + path), path)
+        components[revision] = {"purpose": "ligne 8 ; ligne 77 déjà présente", "files": [path]}
+        return components
     check(git("rev-parse", ASSEMBLY + "^").decode().strip() == FROZEN, "Assembly must descend directly from freeze")
     blocks = [(FROZEN, src, purpose) for src, purpose in COMPONENTS.items()]
     if assembly in (TEN_LINES, NEXT_ASSEMBLY, TWENTY_FIVE, THIRTY_FIVE, FORTY_SIX):
@@ -100,7 +113,8 @@ def check_components(assembly):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("archive", type=Path)
-    parser.add_argument("--candidate", choices=(ASSEMBLY, TEN_LINES, NEXT_ASSEMBLY, TWENTY_FIVE, THIRTY_FIVE, FORTY_SIX), default=ASSEMBLY)
+    parser.add_argument("--candidate", choices=(ASSEMBLY, TEN_LINES, NEXT_ASSEMBLY, TWENTY_FIVE, THIRTY_FIVE, FORTY_SIX, FIFTY_FIVE),
+                        default=ASSEMBLY)
     parser.add_argument("--workflow", required=True)
     parser.add_argument("--run", required=True)
     parser.add_argument("--output", type=Path)
@@ -110,7 +124,8 @@ def main():
     chain = runpy.run_path(str(ROOT / "scripts/sic-compare-receipt-chain.py"))
     rows = chain["load_archive"](args.archive, args.candidate, args.run, args.workflow, list(frozen), counts)
     parent = None
-    parent_sha = {TEN_LINES: ASSEMBLY, NEXT_ASSEMBLY: TEN_LINES, TWENTY_FIVE: NEXT_ASSEMBLY, THIRTY_FIVE: TWENTY_FIVE, FORTY_SIX: THIRTY_FIVE}.get(args.candidate)
+    parent_sha = {TEN_LINES: ASSEMBLY, NEXT_ASSEMBLY: TEN_LINES, TWENTY_FIVE: NEXT_ASSEMBLY, THIRTY_FIVE: TWENTY_FIVE,
+                  FORTY_SIX: THIRTY_FIVE, FIFTY_FIVE: FORTY_SIX}.get(args.candidate)
     if parent_sha:
         base = ROOT / "docs/diagnostics" / ("sic-coexistence-" + parent_sha[:8])
         ledger = json.loads((base / "qualification.json").read_bytes())
