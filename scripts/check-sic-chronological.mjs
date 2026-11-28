@@ -171,6 +171,11 @@ async function run(code,requestedTarget,parallelWorkers) {
         if (!sourceDecisions.has(key)) sourceDecisions.set(key, { level: previous.level, strategy: 'use_witnessed_contact_access',
           firstTurn: effects.length + 1, action: action.id });
       }
+      if (card?.witnessedContactActivation) {
+        const key = JSON.stringify([previous.level, 'test_control_after_contact']);
+        if (!sourceDecisions.has(key)) sourceDecisions.set(key, { level: previous.level, strategy: 'test_control_after_contact',
+          firstTurn: effects.length + 1, action: action.id });
+      }
       if (card?.jointContactCover) {
         const key = JSON.stringify([previous.level, 'test_joint_contact_cover', action.id === 6]);
         if (!sourceDecisions.has(key)) sourceDecisions.set(key, { level: previous.level, strategy: 'test_joint_contact_cover',

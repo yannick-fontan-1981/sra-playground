@@ -961,7 +961,8 @@ export function createSicPublicInputExploration(fallback = false,
         ? chooseTravelTrial(local.travel, rows, nonPoint, observation.available_action_refs.includes('ACTION6'), options.allowUnframedContact)
         : undefined;
       const groundedContact = publicTravel?.purpose === 'test_contact_hypothesis'
-        || publicTravel?.purpose === 'verify_contact_access' || publicTravel?.jointContactCover;
+        || publicTravel?.purpose === 'verify_contact_access' || publicTravel?.purpose === 'test_contact_activation'
+        || publicTravel?.jointContactCover;
       const travel = contactTrial ? { command: contactTrial.command, target: contactTrial.actor.split(',').map(Number) as [number, number],
         purpose: contactTrial.purpose, evidence: contactTrial.evidence, experiment: undefined } : separation
         ?? (canTravel || groundedContact ? publicTravel : undefined);
@@ -1282,6 +1283,7 @@ export function createSicPublicInputExploration(fallback = false,
         contact: 'Explore a reachable contact using the movement measured so far',
         test_contact_hypothesis: 'Reach a stable visible feature and test its role',
         verify_contact_access: 'Test passage through the footing changed by a witnessed contact',
+        test_contact_activation: 'Test an unused command where contact opened access',
         switch: 'Test a command from a surface it changed in an earlier return',
         select: 'Test whether a second visible piece can reach a different landing',
       }[travel.purpose] : uncover ? 'Step onto measured ground to uncover the source pattern before selecting a new destination'
@@ -1394,6 +1396,7 @@ export function createSicPublicInputExploration(fallback = false,
           ...(selectedCoverage?.routeImprovement ? { coverageRouteImprovement: { motion: selectedCoverage.motion, ...selectedCoverage.routeImprovement } } : {}),
           ...(travel?.purpose === 'test_contact_hypothesis' && travelEvidence.length ? { unframedContactHypothesis: true } : {}),
           ...(travel?.purpose === 'verify_contact_access' && travelEvidence.length ? { witnessedContactAccess: true } : {}),
+          ...(travel?.purpose === 'test_contact_activation' && travelEvidence.length ? { witnessedContactActivation: true } : {}),
           ...(travel && 'jointContactCover' in travel && travel.jointContactCover && travelEvidence.length ? { jointContactCover: true } : {}),
           ...(recalledDirection ? { priorLevelMechanism: 'Test a direction previously observed to change the board',
             newLevelConfiguration: 'The current interface needs a fresh control check' } : {}),

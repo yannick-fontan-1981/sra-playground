@@ -1,4 +1,4 @@
-name: SIC test simultaneous occupancy from repeated public cues
+name: SIC test unused controls after observed contact
 
 on:
   push:

@@ -15,9 +15,9 @@ export type ObservedTravel = { grid: Grid; actor: string | null; supports: strin
   moves: Record<string, Move>; tested: Record<string, number>; altered: string[]; controls: string[];
   completed: string[]; switches: Record<string, string | null>; pendingSelection?: string; refs: string[]; stalled: number;
   possibleContacts?: Record<string, ContactSite>;
-  contactAccess?: { sites: string[]; evidence: [string, string] }; contactCover?: ContactCover };
+  contactAccess?: { origin: string; sites: string[]; evidence: [string, string] }; contactCover?: ContactCover };
 export type TravelTrial = { approach?: WalkingStep[]; command: NativeCommand; target: NativePoint; evidence: string[];
-  purpose: 'approach' | 'contact' | 'test_contact_hypothesis' | 'verify_contact_access'
+  purpose: 'approach' | 'contact' | 'test_contact_hypothesis' | 'verify_contact_access' | 'test_contact_activation'
     | 'switch' | 'select' | 'approach_object' | 'separate_object'; experiment?: string; jointContactCover?: true };
 export type MarkContact = { command: NativeCommand; target: string; expected: string; evidence: string[] };
 
@@ -372,7 +372,7 @@ export function observeTravel(previous: ObservedTravel | undefined, before: Nati
             const opened = changed.filter(cell => !visited.has(cell)
               && !knownFooting(first.cells.get(cell), grid.floor, previous.supports)
               && knownFooting(next.cells.get(cell), grid.floor, previous.supports));
-            if (opened.length) contactAccess = { sites: opened, evidence: [contact.reference, ref] };
+            if (opened.length) contactAccess = { origin: to, sites: opened, evidence: [contact.reference, ref] };
           }
           possibleContacts = {};
           for (const [cell, pixels] of next.cells) {
@@ -513,6 +513,14 @@ export function chooseTravelTrial(state: ObservedTravel | undefined, rows: Nativ
   }
   const park = (cell: string) => state.completed.includes(cell) || !!cover?.sites[cell];
   const active = park(actor) ? undefined : route(actor);
+  const contactReturn = witnessedAccess.length && state.contactAccess;
+  if (contactReturn && contactReturn.origin === actor && contactReturn.evidence[1] === state.refs.at(-1)
+    && !park(actor) && active?.priority !== 3) {
+    const controls = inputs.filter(command => !directional(command.action_ref)
+      && !Object.hasOwn(tested, trialKey(cells, observedCommandKey(command), actor, start)));
+    if (controls.length === 1) return { command: controls[0]!, target: start, purpose: 'test_contact_activation',
+      evidence: [...new Set([...evidence, ...contactReturn.evidence])] };
+  }
   if (switchCommand && !active?.goal && canTestSwitch(actor)) {
     return { command: switchCommand, target: start, purpose: 'switch', evidence };
   }

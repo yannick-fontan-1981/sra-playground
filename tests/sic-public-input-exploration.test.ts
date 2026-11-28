@@ -114,9 +114,18 @@ test('a stable unframed feature suggests a contact from witnessed returns owned 
   assert.deepEqual(passage?.target, [12, 9]);
   assert.equal(passage?.command.action_ref, 'ACTION2');
   assert.ok(passage?.evidence.includes('observed-opening'));
+  const activate = { action_ref: 'ACTION5', data: {} };
+  const withActivation = [...inputs, activate];
+  const activation = chooseTravelTrial(access, contacted, withActivation, false, true);
+  assert.equal(activation?.purpose, 'test_contact_activation');
+  assert.equal(activation?.command, activate);
+  assert.ok(activation?.evidence.includes('observed-opening'));
+  const stationary = observeTravel(access, contacted, contacted, activate, 'stationary-activation', true);
+  assert.equal(chooseTravelTrial(stationary, contacted, withActivation, false, true)?.purpose, 'verify_contact_access');
   const noOpening = board([12, 6]);
   const control = observeTravel(approach, approached, noOpening, right, 'observed-contact-only', true);
   assert.notEqual(chooseTravelTrial(control, noOpening, inputs, false, true)?.purpose, 'verify_contact_access');
+  assert.notEqual(chooseTravelTrial(control, noOpening, withActivation, false, true)?.purpose, 'test_contact_activation');
 });
 
 test('a unique repeated cue keeps one occupied site while another actor tests its partner', () => {
