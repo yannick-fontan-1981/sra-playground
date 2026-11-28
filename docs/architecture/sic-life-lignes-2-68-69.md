@@ -1,0 +1,13 @@
+# LIFE · invitation animée, essai sur porteur et sélection de descendants
+
+## Critères préenregistrés
+
+Références `d0e7527ca8033bd805a6d7a8bb021eff62e87021` et `8ce7ee35`. Partir de N1 avec le pack par défaut du catalogue, sans graine explicite ni option `curious`, six niveaux cibles, plafond global 16 et plafond par niveau 600. Le premier rejeu du gel prend 46,35 s. Les 16 libérations et retours concordent avec le rejeu du catalogue. [Témoin 2](sic-v8-strategies-observees.md?plain=1#L28) · [Témoins 68 et 69](sic-v8-strategies-observees.md?plain=1#L94)
+
+| Ligne | Témoin, retour et reprise à préserver | Contre-épreuve |
+|---|---|---|
+| 2 · `animated_contact / measured_animated_contact` | T1 (24,7), invitation en forme de croix unique. Quatre images de retour, même image finale, aucune prédiction de contact. T2 quitte la famille. T16 en N2 retrouve une invitation en (40,7). | Retirer seulement la mesure d’invitation à géométrie constante pour les autres familles. Tester une scène à deux croix et ce que devient la décision T2 si le premier reçu n’est pas acquis. Distinguer la mémoire de l’essai et la présence actuelle des porteurs. |
+| 68 · `public_occurrence_recall / typed_material_flow / typed_carrier_experiment` | T2 (6,48) sélectionne l’un des quatre porteurs mesurés. Observer le marquage local, le choix du partenaire à T3 puis le remplacement et son activation à T4. La seconde paire est éprouvée dans le même niveau. | À scène et historique constants, tester un autre premier porteur ou le retrait des offres. Une fois le premier porteur marqué, le partenaire doit garder le profil requis et différer du sujet marqué. |
+| 69 · `public_occurrence_recall / typed_material_flow` | T5 (12,21) sélectionne un descendant observé au retour de T4, lié à une demande unique. T6 (24,7) tente de le livrer. Mesurer la marque, la disparition ou la modification de la demande, puis la reprise. | Tester l’autre descendant admissible à scène constante. Si le sujet est marqué et engagé, la livraison reste rattachée à lui. Retirer la preuve de sa demande unique ou de sa présence et observer le repli. |
+
+L’arbitrage commun envisagé pour 68 et 69 se limite au choix initial parmi les sujets effectivement admissibles. Le profil du partenaire, les demandes compatibles et le sujet déjà engagé sont calculés par leur famille. Le gel départage localement par position puis signature, à deux endroits. Conserver le tri nominal, la provenance et les gardes. Pour la ligne 2, éprouver le producteur existant `animatedCrossInvitation` et les deux vrais départs avant de conclure à la nécessité d’une extraction. [Contact animé](../../src/logos-engine/v6-animated-contact.ts) · [Porteurs, flux et reçus](../../src/logos-engine/v6-typed-material-access.ts)
