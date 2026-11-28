@@ -1,0 +1,37 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 6,
+      "gestes": 33,
+      "testsAuteur": 3
+    },
+    {
+      "sha": "5161917eebb0e7f5d2ec6010f61bae1c2eff7b3f",
+      "départs": 6,
+      "gestes": 33,
+      "testsAuteur": 3
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "occurrences": 12,
+  "phasesMêmeClic": [
+    "probe_congruent_empty_face",
+    "probe_visible_cap"
+  ],
+  "translationMesurée": [
+    0,
+    -6
+  ],
+  "reprisesN2etN3": [
+    4,
+    8
+  ],
+  "référencePréFrontière": {
+    "attendue": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:4:frame:65d0e43fa61b6784",
+    "substituée": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:9de8cd1b14d03ac3",
+    "admissionNative": true,
+    "mêmeRetour": true
+  },
+  "score": 3
+}
