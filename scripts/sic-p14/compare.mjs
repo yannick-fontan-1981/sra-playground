@@ -16,11 +16,17 @@ function freeze(value) {
 }
 
 /** The sole subject boundary. Private specs, world indices and certificates never cross it. */
-export function runEpisode(spec, worldIndex, variant, { removeFrame = null, verifyOracle = true } = {}) {
+export function runEpisode(spec, worldIndex, variant, { removeFrame = null, verifyOracle = true, meterSearch = false } = {}) {
   const started = performance.now();
   const environment = createEnvironment(spec, worldIndex);
   const reference = verifyOracle ? createOracleWorld(spec, worldIndex) : null;
-  const subject = createSubject(freeze(copy(spec.public)), freeze(copy(spec.budget)), variant);
+  let expanded = 0;
+  const chargeSearchState = meterSearch ? () => {
+    if (expanded >= spec.budget.states) return false;
+    expanded++;
+    return true;
+  } : undefined;
+  const subject = createSubject(freeze(copy(spec.public)), freeze(copy(spec.budget)), variant, { chargeSearchState });
   const history = [], decisions = [], actions = [], frames = new Map(), pending = [];
   let observation = environment.observation();
   let referenceObservation = reference?.observation();
@@ -153,6 +159,7 @@ export function runEpisode(spec, worldIndex, variant, { removeFrame = null, veri
   const crossed = observation.terminal === 'crossed' && observation.position === spec.public.goal;
   const success = crossed && !metrics.proofViolations && !metrics.unsupportedRevisions && !metrics.unguardedTimedActions;
   return { success, crossed, terminal: observation.terminal ?? 'budget', position: observation.position,
+    ...(meterSearch ? { expanded } : {}),
     metrics, wallMs: performance.now() - started, inferenceMs, oracleChecks,
     firstError, actions, decisions, history, traceHash: digest({ actions, history, decisions }) };
 }

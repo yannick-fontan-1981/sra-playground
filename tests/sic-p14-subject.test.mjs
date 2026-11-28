@@ -25,6 +25,13 @@ test('replays all six published early-extrapolation regressions under their orig
       assert.equal(episode.metrics.mistimed, 0);
     }
   }
+  const spec = generateCase('transient_then_period', 83, 26112814);
+  spec.budget = { ...spec.budget, states: 1 };
+  for (const variant of ['frozen', 'candidate']) {
+    const episode = runEpisode(spec, 0, variant, { meterSearch: true });
+    assert.equal(episode.expanded, 1);
+    assert.equal(episode.success, false);
+  }
 });
 
 test('dated inference learns after a long transient without collapsing missing ticks', () => {

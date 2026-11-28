@@ -8,6 +8,8 @@ Le test ciblé régénère les six cas publiés, vérifie leurs signatures et ex
 
 Sous 64 gestes et 12 000 états par monde, le même rejeu ciblé de développement donne 12/12 dans chaque bras, avec 306 gestes cumulés pour le figé et 387 pour l’actif. Le maximum d’un épisode est de 47 et 60 gestes respectivement. Aucun de ces six cas connus ne fait partie du résultat à l’aveugle.
 
+Le pilote public originel de 80 situations a aussi été régénéré signature par signature. Aux mêmes limites de gestes et d’états par monde, l’oracle certifie encore les 80 situations. Le figé en résout 3 et l’actif 63, avec 60 gains et aucune perte. Le comparateur débite la recherche P09 avant chaque expansion et conserve le débit cumulé d’un monde même après un nouveau choix ou une recherche sans plan. Le maximum mesuré est de 12 états côté figé et de 405 côté actif sur ce pilote. Ce contrôle conserve le plafond de 360 ticks et mesure le composant P14 dans les deux mondes de chaque situation du pilote. Le compteur global et l’environnement isolé de la réserve restent à vérifier.
+
 La nouvelle campagne sur `b225b1df` reproduit les 8 000 signatures et les 767 décisions finales du bras figé. Le candidat passe de 7 844 à 7 962 réussites. Il récupère 127 cas et en perd 9 face au candidat précédent. Aucun des 767 cas réussis par le figé n’est perdu. L’audit réunit les huit fragments et leur agrégation. Ces chiffres concernent le banc temporel aux plafonds de développement de 180 gestes, 360 ticks et 20 000 états. [Campagne P14](https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46155382495)
 
 ## Effet composé joué
@@ -23,3 +25,5 @@ node --test tests/sic-observed-timed-access.test.ts tests/sic-p14-subject.test.m
 ## Comparaison indépendante
 
 Les 6 000 cas générés et les 36 niveaux natifs appartiennent au scellement `SIC-OP-20261128-01`. La comparaison qualifiante exige un adaptateur du pack strict, un compteur hôte couvrant aussi les autres recherches de ce pack et un exécuteur confiné éprouvé par l’opérateur. Le raccord expérimental facturé ci-dessus ne couvre que ses deux recherches. Le test V6 emploie une famille de test dédiée. Les deux bras sur la réserve restent à exécuter. Les données privées de l’opérateur et SS08–SS25 restent sous scellés. [Conditions de qualification de l’opérateur](https://github.com/yannick-fontan-1981/sra-playground/blob/d0f7c0b9/docs/diagnostics/sic-operateur-independant/2026-11-28/SIC_SYNC.md)
+
+L’opérateur a reçu le SHA d’exécution `b408009aadc4663056208970e2ee999186226fcc`. Le contrôle de continuité des jeux sources tourne sur ce même SHA. [Continuité SIC](https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46155818021)

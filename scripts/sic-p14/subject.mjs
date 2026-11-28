@@ -10,7 +10,7 @@ const createClock = () => createTemporalEvidence({ witnesses: INFERENCE_LIMITS.w
  * Both subjects receive exactly this adapter. Only the inference implementation
  * changes; the frozen inference is the unmodified native SIC primitive at the base.
  */
-export function createSubject(publicTask, budget, variant = 'candidate') {
+export function createSubject(publicTask, budget, variant = 'candidate', { chargeSearchState } = {}) {
   if (!['candidate', 'frozen'].includes(variant)) throw new Error('Unknown subject variant');
   const task = structuredClone(publicTask), limits = structuredClone(budget);
   const rank = new Map(task.channels.map((id, index) => [id, index]));
@@ -170,11 +170,16 @@ export function createSubject(publicTask, budget, variant = 'candidate') {
         && (action.targets ?? []).every(channel => observed(channel, initial.tick)?.value === 1));
     if (!canModel) return null;
     const passiveActions = [...waitActions, ...inspectActions].sort((a, b) => a.duration - b.duration);
-    const chosen = composePlan({ initial,
-      key: state => JSON.stringify([state.tick, state.position, state.revalidate, state.holds, state.uses]),
-      goal: { relation: 'observed_temporal_access', holds: state => state.position === task.goal || state.revalidate
+    const exhausted = Symbol('P14 route budget');
+    function goal(state) {
+      if (chargeSearchState && !chargeSearchState()) throw exhausted;
+      return state.position === task.goal || state.revalidate
         || state.position !== initial.position && moves.some(action => action.from === state.position
-          && (action.gates ?? []).some(channel => !modelFor(channel))) },
+          && (action.gates ?? []).some(channel => !modelFor(channel)));
+    }
+    const problem = { initial,
+      key: state => JSON.stringify([state.tick, state.position, state.revalidate, state.holds, state.uses]),
+      goal: { relation: 'observed_temporal_access', holds: goal },
       budget: { commands: Math.min(remainingActions, 160), states: limits.states },
       choices: function* (state) {
         if (state.revalidate) return;
@@ -214,7 +219,13 @@ export function createSubject(publicTask, budget, variant = 'candidate') {
         if (passive && state.tick + passive.duration <= limits.ticks) yield {
           action: { id: passive.id, guards: [] }, evidence: [], after: { ...state, tick: state.tick + passive.duration } };
       },
-    });
+    };
+    let chosen;
+    try { chosen = composePlan(problem); }
+    catch (error) {
+      if (error !== exhausted) throw error;
+      return null;
+    }
     if (!chosen?.effects.length) return null;
     return { effects: chosen.effects, explored: chosen.explored };
   }
