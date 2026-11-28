@@ -10,6 +10,6 @@
   "shards": 24,
   "workflowCommit": "38008e359b917d2599f6609882026cc61f33cde6",
   "run": "46102900440",
-  "node": "24.22.3",
-  "maxConcurrentShards": 20
+  "localNode": "24.22.3",
+  "matrixMaxParallel": 24
 }

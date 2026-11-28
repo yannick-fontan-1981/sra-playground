@@ -1,0 +1,1867 @@
+{
+  "candidate": "bf1cbf245055a60c4a253b9c6ee4be18ea9b8c2c",
+  "frozen": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "run": "46102900440",
+  "workflow": "38008e359b917d2599f6609882026cc61f33cde6",
+  "srcTree": "b4094de3d334ef4e5812a08e2c554d2e55c558b9",
+  "components": {
+    "a5a90c3349ea49bba8e40055444cea2026bee962": {
+      "purpose": "P05 et déplacement signé",
+      "files": [
+        "src/sic/control-effect-next.ts",
+        "src/sic/missing-control-strategy.ts",
+        "src/sic/observed-translation.ts",
+        "src/sic/paired-passage.ts",
+        "src/sic/reception-access.ts",
+        "src/sic/replay-access.ts"
+      ]
+    },
+    "14db9cd82a345752030531e9db37fb7c0ea6df45": {
+      "purpose": "lignes 90 et 91",
+      "files": [
+        "src/logos-engine/v6-view-frontier.ts",
+        "src/sic/view-edge-access.ts",
+        "src/sic/view-obstruction-trial.ts"
+      ]
+    },
+    "c0b9f4027f1df257d7b8c96f5656f9dbb83661f0": {
+      "purpose": "ligne 87",
+      "files": [
+        "src/logos-engine/v6-subset-diagnosis.ts",
+        "src/sic/subset-query.ts"
+      ]
+    },
+    "16f3c5e8d300903e475400fb9b67a513f2834663": {
+      "purpose": "ligne 1",
+      "files": [
+        "src/logos-engine/v6-contextual-translation.ts",
+        "src/logos-engine/v6-native-caller.ts"
+      ]
+    },
+    "1a1cc965a4f4deb8b2702f8b4746ca2715ae5ebd": {
+      "purpose": "ligne 18",
+      "files": [
+        "src/logos-engine/v6-linked-temporal-contact.ts",
+        "src/sic/linked-contact-step.ts"
+      ]
+    },
+    "e21781637371b846c60aa50de5ff080c136c9abf": {
+      "purpose": "ligne 98 sur la ligne 87",
+      "files": [
+        "src/logos-engine/v6-observed-frontier.ts",
+        "src/sic/opening-curiosity.ts"
+      ]
+    },
+    "21fd159e8339ee464a5b7bee0824b93ccefe9995": {
+      "purpose": "ligne 61 corrigée",
+      "files": [
+        "src/logos-engine/v6-reception-service-access.ts"
+      ]
+    },
+    "495ea14890c1d0cd69de356d40a3b243e0b86f6d": {
+      "purpose": "lignes 44 et 47, portée corrigée de 48",
+      "files": [
+        "src/logos-engine/v6-field-service-access.ts"
+      ]
+    },
+    "39e32b1f0218d53f41c27b7140c925e8e929e705": {
+      "purpose": "lignes 52, 57 et 58",
+      "files": [
+        "src/logos-engine/v6-program-composition-access.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ]
+    },
+    "4946cf0297734b9464fc52256af6fb27846f3bad": {
+      "purpose": "ligne 96, projection isolée",
+      "files": [
+        "src/logos-engine/v5-piercing-plan.ts",
+        "src/logos-engine/v6-rooted-line-access.ts",
+        "src/logos-engine/v6-rooted-line-mechanics.ts"
+      ]
+    },
+    "75aa3829ddf9d7e4561c6c92297ad1bb8d2ac5ef": {
+      "purpose": "lignes 27 et 28 ; 29 déjà présente",
+      "files": [
+        "src/logos-engine/v6-periodic-sums.ts"
+      ]
+    },
+    "f489393bb15a1ce775a3904ee97a216d40db026f": {
+      "purpose": "ligne 3",
+      "files": [
+        "src/logos-engine/v6-band-transfer.ts"
+      ]
+    },
+    "f005be662b0e4b556a0cea3d246381cd98eec7ae": {
+      "purpose": "lignes 68, 69 ; ligne 2 déjà présente",
+      "files": [
+        "src/logos-engine/v6-typed-material-access.ts"
+      ]
+    },
+    "48aae7fc05ed8d8409b1aa3a05efa4fa9c65c06d": {
+      "purpose": "ligne 13 ; ligne 14 déjà présente",
+      "files": [
+        "src/logos-engine/v6-fixed-origin.ts"
+      ]
+    },
+    "bb4a99b5ba41531eb70f1dccb6a97a919cefec56": {
+      "purpose": "ligne 4 seule",
+      "files": [
+        "src/logos-engine/v6-branch-routing.ts"
+      ]
+    },
+    "e8df1757272cae3da1669b3e7ddb2e7bf65e8e02": {
+      "purpose": "ligne 41 seule",
+      "files": [
+        "src/logos-engine/v6-cell-placement.ts"
+      ]
+    },
+    "484f3f0d066b7c00a3e2ad68c983ad556be3a3ac": {
+      "purpose": "ligne 84 ; ligne horlogée 97 déjà présente",
+      "files": [
+        "src/logos-engine/v6-sliding-cavity.ts"
+      ]
+    },
+    "14a185d909d3b3cb42fcc8584b841865b8ff6dd0": {
+      "purpose": "lignes 26 et 31",
+      "files": [
+        "src/logos-engine/v6-effect-access.ts",
+        "src/logos-engine/v6-oriented-coupling.ts"
+      ]
+    },
+    "d84d0b938904a9e10a1ab82f8b8f92a0cfec5cdc": {
+      "purpose": "ligne 86, navigation combinée avec la partition de 87",
+      "files": [
+        "src/logos-engine/v6-subset-diagnosis.ts"
+      ],
+      "sharedWith": "c0b9f4027f1df257d7b8c96f5656f9dbb83661f0"
+    },
+    "f6ff40f5e6c870ab5f897eaccdd1d43873944c5c": {
+      "purpose": "ligne 8 ; ligne 77 déjà présente",
+      "files": [
+        "src/logos-engine/v6-containment.ts"
+      ]
+    },
+    "640bd882150f8164b2e6a1a7de6b85b16c52711f": {
+      "purpose": "ligne 10, provenance du passage entre niveaux",
+      "files": [
+        "src/logos-engine/v6-facet-examples.ts"
+      ]
+    }
+  },
+  "archiveSHA256": "d86e582e6d59e19b9fe48d6abcc5b7936ae4e9ab4bd09b3c40e330c9a354fd27",
+  "games": {
+    "AMZE": {
+      "levels": 6,
+      "actions": 34,
+      "authority": 34,
+      "sourceSHA256": "d01838994338c70de80b83154f49a8a0356506ad857246d21d65ba800efc4a7c",
+      "receiptSHA256": "8e7f139b56862ef5e2ceb8a02e6c3781a92ecfc744bb6168f83d2c8a43ac4f89",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "cee9d67873d86fe49c4452815475764b0548617e25539723340a1a5d73ff215b"
+    },
+    "AR25": {
+      "levels": 8,
+      "actions": 255,
+      "authority": 255,
+      "sourceSHA256": "89e3f40e80395e50d58056e69b9d01a75f311f235d248a6b945dbfd64dacdde2",
+      "receiptSHA256": "ee196dc8f75732251986c8d9adf10923972d36d2bec297c2f8d595e2ad26ebd2",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "92fcf617a981dd2a9c1478c5c85a21eeafe89a0fe76b1d4fcb5aa8143c54ac34"
+    },
+    "AS66": {
+      "levels": 9,
+      "actions": 161,
+      "authority": 161,
+      "sourceSHA256": "0ff69696ce9ed30fec8c83c4ad273d38cea24828ada5d09778f3114b0198dbe3",
+      "receiptSHA256": "9289bb83aa2ea8e747e976deeadb1109719dc552a0493be4d049d80ecace3a9c",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "c45d40e0cece62cc6780816973b0591f8c194f0c7099c0c4e080c80d998f1db3"
+    },
+    "BP35": {
+      "levels": 9,
+      "actions": 397,
+      "authority": 397,
+      "sourceSHA256": "2346d981cdffc7de21ed369b4d985bbeedb908595cd6cc5867d24087b5fc86cd",
+      "receiptSHA256": "98c2b98b917b5e608a0c3ec9145d99301c47c912e7432170b04930763926cea0",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "f03f3c42ac5ef5a51c48c098eeb1d7536950e9e3ebf66816544a4ad8d2b93bc7"
+    },
+    "CASC": {
+      "levels": 6,
+      "actions": 95,
+      "authority": 95,
+      "sourceSHA256": "82379480aafd2049957e474c55c3619e542222b19251119e167d997ed4979af5",
+      "receiptSHA256": "5b297af732e9acce32ea4c2ee0df126628f1f3035856cad105e683a41b3ae875",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "6c20040b0b146dca9ff2187ee5d8bf0b52241531276b68e2a4b8473ab32e859d"
+    },
+    "CATL": {
+      "levels": 6,
+      "actions": 48,
+      "authority": 48,
+      "sourceSHA256": "180717204af7451deef98769cf33a7b29445102d10da37dc7dd8adaefd406d4d",
+      "receiptSHA256": "c10eb9d0e6e9edfec3fbf8d5e2b0ab5ba967e59b882d44c447d123fb1134bdfa",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "b335212ab7cd79b4938b665d1630268aed73e37a4b9db83babf3893a938c57eb"
+    },
+    "CATR": {
+      "levels": 6,
+      "actions": 121,
+      "authority": 121,
+      "sourceSHA256": "aa77c5af47c649f1ee180f4d0d0fae9c050daff07259c645f6fa7739940968b0",
+      "receiptSHA256": "ef0cb18a12c64e9b1f37d80a09261ce77ab97f8ad98877a10ade8b60391dc837",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "e9b8c21afc4b8be9f14e5ebcc238ae04002838e4da495532ae5f5a6935989bb0"
+    },
+    "CAVA": {
+      "levels": 6,
+      "actions": 83,
+      "authority": 83,
+      "sourceSHA256": "d3ab5e160373afd2ab0f0473078a82b6ab22b40ea079800d9320d8fa850ed519",
+      "receiptSHA256": "37d49987dbaba33c285754ecdcd83a8f8b2a6695edd6f512a5a4dd06b0ba57f7",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "594c09e3acd0ea29431750aceba9cd0636bb981abea7a30076bc4a893d36c979"
+    },
+    "CD82": {
+      "levels": 6,
+      "actions": 111,
+      "authority": 111,
+      "sourceSHA256": "5744f292ed882f6d646912ea9869813a5a2c827d8b0c328a5d4a3e16b5b21a8e",
+      "receiptSHA256": "8adb86613f19104f0ca633886bbb101b1b6dcb3f93238bc51cd2f8324a24a6ba",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "9d11326cc715ad53581787e4b7d6acbae64acce2730fca230405a5c991d64b42"
+    },
+    "CGWL": {
+      "levels": 6,
+      "actions": 167,
+      "authority": 167,
+      "sourceSHA256": "0cca6a3d6ef9e04de8be8486405fbf8dcc567bc84b9916b45e1171300daeb9bb",
+      "receiptSHA256": "362541a2ac45c246f567e0477ca8652372eb4aee4ed1e8cffe99dbe4058c868a",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "7619139b2c4df78f246a7af39d6e3c5e2fb67daf7c786e39432e13615b05eecb"
+    },
+    "CLRS": {
+      "levels": 6,
+      "actions": 84,
+      "authority": 84,
+      "sourceSHA256": "652eb4edc1f310b478cceba1bbd398583621b628d7486babf0c54230dbbb9aaa",
+      "receiptSHA256": "7fe10cffb137d913ba3e98312302206e54de948d04e66ee613ebf0992115005c",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "7b9e48905258d472091df76f115454b301cb425257942d9dde94228a0ba85edd"
+    },
+    "CN04": {
+      "levels": 6,
+      "actions": 240,
+      "authority": 240,
+      "sourceSHA256": "6215f59d2e700cac5b87f582e40a7608e34e7dc874907bb67a87681a9b67c236",
+      "receiptSHA256": "b1778e5b39f987b3ac6fd8e1a553f96b7cef8562729b4b78c383a6e83c94cb70",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "024c365c7b05277d5213525416a3ba2c4ec300079da66f1185d1ed8c7dcf280a"
+    },
+    "COLM": {
+      "levels": 6,
+      "actions": 103,
+      "authority": 103,
+      "sourceSHA256": "272da5afe5c983c58a647e02c8a598f1d86af394e7cd0aace6674db99bb515c6",
+      "receiptSHA256": "f38509efc56a5b34aefe63f0fb0c386d611b478fe43acd190ca5ae1a176281ce",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "03917d87e7576c68109d204b5ab492b6805959dd695b99bb693f68ac952ab043"
+    },
+    "COMB": {
+      "levels": 6,
+      "actions": 90,
+      "authority": 90,
+      "sourceSHA256": "9d932b707a39c5007dea25136729ce061fba68b2de8c9ae84b732eaa1d4258b9",
+      "receiptSHA256": "f95a99cc1b831270b99e02023a48c369cf413135217af7db6cc557c7d4046d74",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "cc0d3538cea27c071e4fa8de6fbf1509ea65dd16800f7a8451dc5a661a0389d2"
+    },
+    "CONN": {
+      "levels": 6,
+      "actions": 66,
+      "authority": 66,
+      "sourceSHA256": "95ad376d561504da4203bc3ab1e024149f110e9318dcc77b3f3fc413e92253b2",
+      "receiptSHA256": "6f1e7fa34c2723735f2e6546a913c5280297daf6f033065b95203553ffc7ec5c",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "73d23082910224ca9b6618fb12df886df8c377e770bd4f84f83113876a56ff3b"
+    },
+    "CRAF": {
+      "levels": 6,
+      "actions": 106,
+      "authority": 106,
+      "sourceSHA256": "66618142e46e35d07acfab41fe3e2b2181b000f629fd883d9b5c51c8c5ada48e",
+      "receiptSHA256": "8cbe3eff32391eacf08296c82108fac19aea6bfbac834cabb00db5ecc66db750",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "93bced4ca1ceba0ac6fc977ed69ee607353b3674b16d3e3454f80ec268cc46fc"
+    },
+    "CWSE": {
+      "levels": 6,
+      "actions": 195,
+      "authority": 195,
+      "sourceSHA256": "9d6c18fa5c6526247931d2d94bda0d622095459bb55e6cb3057be83eb2346382",
+      "receiptSHA256": "208067d94fab9b2cac4b64ce90b9ed63f0560527db913d37479bcd75ab6b7e1a",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "4dd3e41bb3acda90c4e04fc81dce1ef4c160e56a012dcfdc9a63189f8f953beb"
+    },
+    "DAME": {
+      "levels": 6,
+      "actions": 65,
+      "authority": 65,
+      "sourceSHA256": "a2036ebc39a5330bca125ffbe14ca6f161dcb499eff13950ab03cdeed879e653",
+      "receiptSHA256": "eca78fddf8ac498f4d600420f3ead153a0c5eca9ce7e0ebc7d441bd6dc5f5b93",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "5cb17d4d4cbe1b482388f7217d152d3a1593573843fa9bf80bbb73d796748748"
+    },
+    "DC22": {
+      "levels": 6,
+      "actions": 630,
+      "authority": 630,
+      "sourceSHA256": "106a11a957f44d8cb521b611873d8aee815d2c341a071969f2cb4374089ae218",
+      "receiptSHA256": "dd2f074b7e1cab5d90c07998347015966407370e56f558e15f3b75d23fc97e6c",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "e19e24d411f2a2fe0a588aafc381c3dc095b1cdc97a9104faffa3296704b3491"
+    },
+    "DICO": {
+      "levels": 6,
+      "actions": 71,
+      "authority": 71,
+      "sourceSHA256": "ab3a213ec8335dffa40da9e0b1657fb42c0ff871d5ab3dc56f0213810f68e303",
+      "receiptSHA256": "cc632f1678de79e9d7d3fefebab8b8cedca72d26cc59430d217300e15c9dbaee",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "3e7f524aa03c06b3835dbfcd0e3fc642b33e9347b97745e81e8cb44b3db624c1"
+    },
+    "DNOI": {
+      "levels": 6,
+      "actions": 59,
+      "authority": 59,
+      "sourceSHA256": "ff33041b58fff0105bcb49854f0ec8298e9be222e1cebf2b4570a098924b471b",
+      "receiptSHA256": "18584c49181c33c95b7c0ee477823e2fc95d883646163ca17deb704f68db9db3",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "b70549a357ee5fd768f17fb9696c1ac165eb4b3b3f04b43c633101118640dec5"
+    },
+    "ELAS": {
+      "levels": 6,
+      "actions": 268,
+      "authority": 268,
+      "sourceSHA256": "0871da2be670eeb123175b392f66c0a023ef288a4eb3b7f37943390fab789f6b",
+      "receiptSHA256": "05d97c2bc7e02f39c571d96969d9e06f9fd569f9d8978b5923f6ae98bede2cbc",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "4dd1da611fe600954d2a757d5e09aa6a0a4ba1da48a26707ccc2cc809cffc4ad"
+    },
+    "ESCT": {
+      "levels": 6,
+      "actions": 118,
+      "authority": 118,
+      "sourceSHA256": "b477493115108196b2357fcd20e93946b613ddc9567b10e4e9dfb624521444a2",
+      "receiptSHA256": "721aa4d4428e0f81e7198722dcdd2069a90fc31757042d9e30e3f16408ac6a49",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "b7ef43ba4e052ecfcbe4afe34b5440ffafa6f5db66170338dbfffceb56ae06b5"
+    },
+    "ETAG": {
+      "levels": 6,
+      "actions": 274,
+      "authority": 274,
+      "sourceSHA256": "0860a38d0c05c5822205c671ea72103f2ff23d200a8dc862dc354b15f94585e8",
+      "receiptSHA256": "c7cc243fbea8189755accf787cbae872e5632b9b66179fc6cb0f6cada197c236",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "b4ccf405754dba296e272ea19035a212710f050ce8ec4fccd250d151c1e4d623"
+    },
+    "EVAS": {
+      "levels": 6,
+      "actions": 86,
+      "authority": 86,
+      "sourceSHA256": "d481b6e4e3c84c745227ca8c667340d5590cab0669d8395e13e1323a61c8d418",
+      "receiptSHA256": "da34f03a3339e50bb3a8cc38f4b9cfe8543790e44fb24048e3805960bb29d107",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "3a5806b50fbb1d6d2011b3820e944862282c6f551de48e50dc1878e93cec0650"
+    },
+    "FITE": {
+      "levels": 6,
+      "actions": 64,
+      "authority": 64,
+      "sourceSHA256": "a21fcf58bfcb5e857bc23fa05a021529ddc23d9cdf2d6bbc749f86036bbd086a",
+      "receiptSHA256": "00a6688b7d3e4674fcd1dcdd0bc1de96b1e30876bcd26b5f135564de59b4dae3",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "ac394ee06026181e862909b698f2465b6d7a947aab01a4ee4d220401f8a6010d"
+    },
+    "FOGW": {
+      "levels": 6,
+      "actions": 173,
+      "authority": 173,
+      "sourceSHA256": "a13498cff84caf9f0a6aee23587b838551f8d6a472de9eb406a0e7168d19ae8c",
+      "receiptSHA256": "577a91149eb5d322b290f93f6ebbaf2e12bf550402c021a80aabbd57b0265fa8",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "663510dfb4d83df0aff4c3ddc8b8dd9078b2e553346751e801d20f6c64683f0b"
+    },
+    "FT09": {
+      "levels": 6,
+      "actions": 75,
+      "authority": 75,
+      "sourceSHA256": "810cc3361d69ae64f4e6f250013d51499cbdde6369c3493c8028c8eca2fb0e72",
+      "receiptSHA256": "2fedf5c2bb77548e708fa0179c55e7629474411e06e8e23ed387e8c9688ad307",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "4b4bed8ade1b7f8c7db566c828b5541e39708c7ebebb3dc704a5c71df195b4e4"
+    },
+    "FUIT": {
+      "levels": 6,
+      "actions": 190,
+      "authority": 190,
+      "sourceSHA256": "662bb83af499eeeb1880dc53b34c6afcaa2614c9439978624f49bf736beecf1d",
+      "receiptSHA256": "25a30c15277724aa3c9fb64b6121e4d0a15fed3fbb1330cd094c7b28c0119175",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "6de15b219e2a598e9b7571a0c4ca76afe19f911e001789576e9805cf6e161755"
+    },
+    "G50T": {
+      "levels": 7,
+      "actions": 301,
+      "authority": 301,
+      "sourceSHA256": "38c7b8fd9bd25520c64ea9db2ca996c4e9b07ae06877ffbafbc773bb838faab7",
+      "receiptSHA256": "07c47f347ff6c3e5b4b2b1a7eec503e0c597c90feb8bdc6a78db426d353be201",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "9f9a21c6a0e5762c6a6c5ddb69a1c7c0d75d732339773796f39f865889c6ee34"
+    },
+    "GABA": {
+      "levels": 6,
+      "actions": 447,
+      "authority": 447,
+      "sourceSHA256": "2e3f4b7a7298b61a530075177ad98a53e266c0bd74e91179521040715418218f",
+      "receiptSHA256": "ace6c3fae5b80b0d9ab9401ae10c2f1fa4aa3e64f6f2f6718ba39cbd150d19c5",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "381eb180559c93dbcbb13e24b6da572912fe4339cf92d2f435962fa956ac9bb5"
+    },
+    "GARE": {
+      "levels": 6,
+      "actions": 56,
+      "authority": 56,
+      "sourceSHA256": "9cef6bb12dd3cc9ae3a1b801dc49bd3dad0503691d420476987006122d1827fd",
+      "receiptSHA256": "eb2226f8fb38518dd34d0e879976ffac4357333cbf1b9999d2941997084beab6",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "5aa0f659fc3c0b683bbaf3aff807ac7f6de826c86127697591b5380cf84292c1"
+    },
+    "GIGO": {
+      "levels": 6,
+      "actions": 70,
+      "authority": 70,
+      "sourceSHA256": "7a687d2e22db080d6632dd961f5a07b6e7c3c837b433f4f36f65ba50cee78552",
+      "receiptSHA256": "b42045d08fba0d9ea3efdd9c8ef869ac75f158fc21ac857520113cc0e0beff5d",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "3dfabab8ad562cb030188954b7bf84e34f9fe49ad708e29e31f87c0200e1d87a"
+    },
+    "GLOB": {
+      "levels": 6,
+      "actions": 79,
+      "authority": 79,
+      "sourceSHA256": "d307f32ed36d66db43b5c224ee3d1c51aeae4c872c7cefc5b65665eb83635b98",
+      "receiptSHA256": "bd80a6943b691116baa0c42024a50b29bdbf19fbfdaeaa252fa9cb79b4151e61",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "5fa3e618d315ee1ef7373ed94f735e99a407f9e17945b263fd3eaf87b692a7f5"
+    },
+    "GMAP": {
+      "levels": 6,
+      "actions": 69,
+      "authority": 69,
+      "sourceSHA256": "226eefde8988d1018183f6404553920065ae9458d526fb7ea0f7a6921cee0ebe",
+      "receiptSHA256": "2edfbbb30179b0b3f33adb19f8f41b370d24758aaafefbd6e0fbf6d658e4bcef",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "1d363e641edcebcb7705a2e9fd419d00a7f23e415ecc7f9151aca4705ef3cae5"
+    },
+    "GORI": {
+      "levels": 6,
+      "actions": 46,
+      "authority": 46,
+      "sourceSHA256": "9227769418e84b23311572d9a04ce10bd917ede5abf7e540fcda79cdf91fb45a",
+      "receiptSHA256": "790793a18ba8b0d1fcc992f84d112d36864cc2be1c9e3bf3fc13f4ca551c70d4",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "846d9d525d1388af94e5eb068f9806046f8413440b2ae1c937cd9b715bb09bf9"
+    },
+    "GRAV": {
+      "levels": 6,
+      "actions": 80,
+      "authority": 80,
+      "sourceSHA256": "90f42b7ec31c910be1df19e2fdfc539652919a4efdba6c044096a3fc4cab68a3",
+      "receiptSHA256": "1621dd7486572a5bfb21163edf5aefff036d28cabc8e0a2df43cd3b56a9723c2",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "22a840dfd376b7807054b17efa054198046c4b460f9f18a2652c7b3d7a5cda9b"
+    },
+    "GRIL": {
+      "levels": 6,
+      "actions": 74,
+      "authority": 74,
+      "sourceSHA256": "224dac2af6cadae831f718c73b7c5144c0c78787f4109a3977dc95f47e3eb627",
+      "receiptSHA256": "d3d5aa2898e66b6549748a16ae11e2c6186bc8bc96d5dcb94265247d76c795d2",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "2857c4d18c280b5493270972e2550f38f9894d68543eb8f39b14d95b2986cba1"
+    },
+    "HANO": {
+      "levels": 4,
+      "actions": 60,
+      "authority": 60,
+      "sourceSHA256": "bcbbed8ad76f86370fceb247b80a31781b82ce7571c2a28c43d76e5691fbdccc",
+      "receiptSHA256": "5a80886132696b97b6bb285e071061181049bbe5f122fa5497fb0dff50167566",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "0bfd939090c07959606b749e2765419d01b6b06bff37b56836a460f64b633a07"
+    },
+    "HOLE": {
+      "levels": 6,
+      "actions": 78,
+      "authority": 78,
+      "sourceSHA256": "abd43fdf55215d66ecff725e276a4102dacd84644fed27e49fc870f06f6a4179",
+      "receiptSHA256": "d37ad1a752aad7756480473eeeb0c4fe1f566e4c8ffb8aef6ce5a3c89e6b7173",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "3037138fde00ece6dbcfdee0e866238adce19c37d06a51eea2818666ba296f3f"
+    },
+    "HPDL": {
+      "levels": 6,
+      "actions": 54,
+      "authority": 54,
+      "sourceSHA256": "e3960840bb698df5d9fceef033927236eb363e04283fbcf046d5653b29564a64",
+      "receiptSHA256": "ba23f5d0b05c8c77cc8795a76bdda28908021ed3a6f286c5738841f9d894c978",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "cf7b4e4177e801d608aea4253c8ac4ba141186f79fe99196ec922dc43739c405"
+    },
+    "ISOS": {
+      "levels": 6,
+      "actions": 33,
+      "authority": 33,
+      "sourceSHA256": "888dff11a9de24bef4c88d4ee53bcbe3ebbc420794b30ed2e9af34e7f649f7ea",
+      "receiptSHA256": "e748d0e71b014f02469e41eee6a23a195461b8572c8c4db1f0cb61f9b88dedb3",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "8aabedda7fe313723dcaf658b1f83f3a921df7ea7ded77a113145069dd371c32"
+    },
+    "KA59": {
+      "levels": 7,
+      "actions": 311,
+      "authority": 311,
+      "sourceSHA256": "0b31c62c22c016ed2f01840a4910edcb6ca30135e2a272cac71f894a24884a83",
+      "receiptSHA256": "fcde37abfe4f2243bbea85373334b318d3559dc41828c6327ae0a3af9435582e",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "828d440ac553085eee87236a683667972fa0b91e68af049bddc4d7f0c0a72a31"
+    },
+    "KATA": {
+      "levels": 6,
+      "actions": 144,
+      "authority": 144,
+      "sourceSHA256": "0878b81f0b69528d7bef4b14e037f7e441f965c110723fdbed3e4da831af225c",
+      "receiptSHA256": "b34bdeef258787f594a5fff58605106cc695f41abfefe68401aeac84a1f421bd",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "a2aedc31dc57abb51932a857173e24548c06ec07215464a2905dd8aaa1ef17e3"
+    },
+    "KEYD": {
+      "levels": 6,
+      "actions": 153,
+      "authority": 153,
+      "sourceSHA256": "a944f7e2e3d0cebe4cebf2358d2f3b43865bb592dec2437e5916abdcc2d5023f",
+      "receiptSHA256": "12a4431f0c74a3aa336b4e912b9a5ceafe2838d6fb91175789171f5a3fdf6fd2",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "918a1f94c4a525e0af31111a349f338f0064b22ff433255e9a469a94d1b754cf"
+    },
+    "KLOT": {
+      "levels": 6,
+      "actions": 100,
+      "authority": 100,
+      "sourceSHA256": "376fb8664f1785e9168ddabf6d5290f545f9a31b86bccf9f8e99dbc70fa4076a",
+      "receiptSHA256": "ef5b068479e1ab747f21ebc98b1eba6c0eaf5c63b0911f9d426da8ccb75c523c",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "27e61529501f898ad44376b29daba294bcba5a7257eafa954dd9fe33bc073f0d"
+    },
+    "LF52": {
+      "levels": 10,
+      "actions": 713,
+      "authority": 713,
+      "sourceSHA256": "c4dcd569ed897a6cc771b96faf58a4255fe207886c323e330d0a9b8edb8ad30d",
+      "receiptSHA256": "e3cf545c1a7798520f95e11ae213019d185c8f57e2593ad1edb867d7138f7660",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "890c7e29758d2b1234c1f8928a4b7b0f0e80a038c3cf12a2e5edff32a3a06d9b"
+    },
+    "LIFE": {
+      "levels": 6,
+      "actions": 139,
+      "authority": 139,
+      "sourceSHA256": "fed8f8303d925044870858b0ad2078cf997b7dccdba2adc27c708a0a1604a9eb",
+      "receiptSHA256": "693bad508cd335b72185f9989ea8bc0301bb911279ace28eec81cc208e272b4f",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "ffd7da9cb076006e5212bbf79e40e15cb59e4eeea7b9bb24c6c5732ab7dd1c21"
+    },
+    "LKEY": {
+      "levels": 6,
+      "actions": 119,
+      "authority": 119,
+      "sourceSHA256": "11ce1632413efef1debfea4adb42e2d5d157cee229aca87e94a5dd235d52a914",
+      "receiptSHA256": "a6eccfb9b38d88f44e12130ee761424a615c7a16efe44f1a6eef815d8e0fc443",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "a595e5d3f44d3e4be6a5d04ea016fba10ab7a4ce0a0db7829dfbcd73ffbb3954"
+    },
+    "LOGI": {
+      "levels": 6,
+      "actions": 30,
+      "authority": 30,
+      "sourceSHA256": "0e678c2eb370fb9a7eb103711fd5d613d5b92c1690f2a30c2a08d1f723a437bc",
+      "receiptSHA256": "52dc3cd2a9d655bcff7906d4497ac31c7f5521870c3319138cf24416d985f729",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "b1d4bc6a5272273458c4459415269639f00b64add36a2c42905791b56c630609"
+    },
+    "LP85": {
+      "levels": 8,
+      "actions": 189,
+      "authority": 189,
+      "sourceSHA256": "63814ea3bcfaf431cd999a2a4fe48719d65c421fc70c961956601763c1c7457f",
+      "receiptSHA256": "c45968358e83b1849d65a079a71499f6572aa6b3815d66bc31b154021cb63b31",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "c6135ac5686c36a8c2f8eb845a3d94496073cf8751682a1fe8a280e8eb161a37"
+    },
+    "LS19": {
+      "levels": 8,
+      "actions": 332,
+      "authority": 332,
+      "sourceSHA256": "66a19e230742b9981d8c995fb4fa14002e8c7c27827ef28f0f538cf2d2b57055",
+      "receiptSHA256": "65b65daa31f0cf3728242aa1af341809b81076c4cca387888608d0ed2e346eee",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "952411b3e43eccab0cdf7226b7becaad0c1aa8b732eb4ddf72f1841234dc94b8"
+    },
+    "LS20": {
+      "levels": 7,
+      "actions": 393,
+      "authority": 393,
+      "sourceSHA256": "f07a05de8af7850d30100da8d8fb3a0ca1f9d578a4e0d3825ba3025fc3cfd30d",
+      "receiptSHA256": "e95c2dac4597acd5df7cbf035fe701a3ea0459abe8308e6ff2053c041e715060",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "72e0be7bd353788999acb010a3cc8d4c87e88da08f92e01d6a684bf3d61a7fd5"
+    },
+    "M0R0": {
+      "levels": 6,
+      "actions": 210,
+      "authority": 210,
+      "sourceSHA256": "86302dc4fee4aee340805685fb1e2eb8a33e8521191267db60357f7075493069",
+      "receiptSHA256": "d602136f4e52446487e0b98ef9ad8ef452583312cbfa943f28e3fc3945b316e6",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "de92a2394173715c12d9b4885ca2b704ea1165c60f04c6f52f61f0e3b77771e0"
+    },
+    "MEMO": {
+      "levels": 6,
+      "actions": 60,
+      "authority": 60,
+      "sourceSHA256": "b73fa3e02f38830e68ef41cb29d82132be02bd6970bd715363f1ec4358cc03ec",
+      "receiptSHA256": "030f9212899d0b5a2b643312cf8bb10aba67d9b4889c2816043a601836c631b8",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "fb1bfb5c6a62ede26922174c1d88dabeb949b47ef56cc3d3a9ee304e16200873"
+    },
+    "MIND": {
+      "levels": 6,
+      "actions": 93,
+      "authority": 93,
+      "sourceSHA256": "c78e4560ca64e45aa427f70236f06946f8721ec69975e2128c9eb9d9568823e8",
+      "receiptSHA256": "ceb6f4f3aa0458bf9da7a131687d1b459dde36a5bef083fc6d9c356b3f0c8dfe",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "54f9ee28273756f132f3ffda49bf3c8634da12b0d4fc1ab3f5f1246356776699"
+    },
+    "MOTO": {
+      "levels": 6,
+      "actions": 57,
+      "authority": 57,
+      "sourceSHA256": "cbe3b359576b5ca694c637df0652c0932a45b14258251d2b0d6c1459347d43e2",
+      "receiptSHA256": "d33a48b08d0972123e6e5804849fe1a059aeb079a44c535895d8da2f27879184",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "56d4cd176e71d379b8d4e44487d437eda2706f29ee5be66132466db81605798a"
+    },
+    "ONDE": {
+      "levels": 6,
+      "actions": 44,
+      "authority": 44,
+      "sourceSHA256": "b6f5da1464f79a38b81108f23bdb92195257f6ab657de88bf0589ca900451fbe",
+      "receiptSHA256": "a54fa6248c6838d6dc7ec6f014580ddad3594f5386827470f977fa4c79349a83",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "8e0f91690db0d6fbef794e4e579dfac163b3ef36ac0ee3d6d2eeda2ef28b7a0d"
+    },
+    "PIPE": {
+      "levels": 6,
+      "actions": 84,
+      "authority": 84,
+      "sourceSHA256": "74ea8ec1017af151c90d1cf2dba419fd896e9c808553a0a854246a1d6e167c36",
+      "receiptSHA256": "5f1e62a0900bde4894d3f5cee4c566f7136e1049c1739d7601ead5579976a78c",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "19640734df9423bd66d714ee30f8a1b5a5ee7f7d1ffa7266073fe0b621966079"
+    },
+    "POLA": {
+      "levels": 6,
+      "actions": 40,
+      "authority": 40,
+      "sourceSHA256": "3e617125d7e386a7ac33ea8e97c0df80b7a471e82702c9b15fabf3b283458720",
+      "receiptSHA256": "9678c55848bda4473db9746bb52af2573e1a433e7044d6b9b53ea3791deecd84",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "824094d7142518d77942ec3bdf511a333f9c3380164083ade74c3a0524f0b82e"
+    },
+    "PORT": {
+      "levels": 6,
+      "actions": 116,
+      "authority": 116,
+      "sourceSHA256": "c2a6fb925fbdeaaedb9797e118bfd809bc0eff4e53ae7453d7b9b4c29d1acd0f",
+      "receiptSHA256": "a81684c3a9b09a629482f85265af0c04f0095f438c9228773b6a9909f135d070",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "ee85544e6db9b2817eb7043666715758c67524445043b4393a511ec185ac9484"
+    },
+    "PRTL": {
+      "levels": 6,
+      "actions": 108,
+      "authority": 108,
+      "sourceSHA256": "8baab4e7eebd8313b8eb230ba9ad7b2dd5d56b9edc509d98ceaf7933ada4ac28",
+      "receiptSHA256": "8409960dbec879a3762ce05b5f84bd34811174cf3e59548cf80d890530501b01",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "e0e64ae01320be16571f321bb0a79f3a36c1cf83dcf24b3fe3505631b4c4c685"
+    },
+    "R11L": {
+      "levels": 6,
+      "actions": 97,
+      "authority": 97,
+      "sourceSHA256": "97a6292a5cdc5a74877e1fdf4c92fe6a6fa79bc6083539c531f7b1ae90da55c2",
+      "receiptSHA256": "14f0f99b1ea33038c9c1c3b904a79060fa5c76eef639a4370fe34bc996b6075b",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "8bb3717a6acc36ba4892715db0a0c778ebbde34dad172bea139520e28e2edd75"
+    },
+    "RE86": {
+      "levels": 8,
+      "actions": 561,
+      "authority": 561,
+      "sourceSHA256": "3da9339316a075e56d4fe048490310ec3816c18d17e8bdaed98104015dcd31de",
+      "receiptSHA256": "afd0a61a08e9e31e1233cd0ce7b5534b7cb74d3d57a28f8e6e04d6364ace84be",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "3ab20b537a41c270547e7c2db38e4cd24eabed2022bd20f2e567c4007f1cce0b"
+    },
+    "RECR": {
+      "levels": 6,
+      "actions": 134,
+      "authority": 134,
+      "sourceSHA256": "f9e2b8f300672de0725b7f616c4877d66a19cc6e055ff9ee2683342ce21a417b",
+      "receiptSHA256": "554153143d7c7edc82ae6520569d978c75b9f898b4c9ac3dd840e2cf568e6884",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "ca86e3ded504687dd2e67b69d5fbe3a53127451285daaee1aec3f7877c536404"
+    },
+    "REGN": {
+      "levels": 6,
+      "actions": 132,
+      "authority": 132,
+      "sourceSHA256": "e702edd34587b28cbb1452b3cfe2505855e0fd0079a7db2b12c249594de4371b",
+      "receiptSHA256": "706f6dddd8c9d01fe91c35000c544530092b85f152848741a3050b9961ac8032",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "b37ab82c68ab150c41478212e191a1a5fc90989501967e78794b0d00c62784e7"
+    },
+    "REWI": {
+      "levels": 6,
+      "actions": 31,
+      "authority": 31,
+      "sourceSHA256": "c3c105d901447bee9110b5385b74d2cdc13502bea147b4e08e49af1939281a88",
+      "receiptSHA256": "28a1e400d702d138af9533fcd357cda13d8051bf4bd9697966e22ad3294d5045",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "85cc8dd64d20836602ec251ed16a94b31b2096108dbccb8a8228a5638da81c96"
+    },
+    "RSWP": {
+      "levels": 6,
+      "actions": 110,
+      "authority": 110,
+      "sourceSHA256": "0e94e1842517ffc868666c06bf417da2fe4c29071f550a809151453ea191a6f1",
+      "receiptSHA256": "42246b15e99f178ebdc39e5c22a3c49ad4a0ce5c2b3198eb8a40b00854ff382f",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "e96dbffbb4c333e52cd04c681dc1425c850da9b799eafd247221f69685b53d12"
+    },
+    "S5I5": {
+      "levels": 8,
+      "actions": 252,
+      "authority": 252,
+      "sourceSHA256": "348db321fd35dfc9512c5dfa8d548665d37207ab932ccb15968ab3a8750e9556",
+      "receiptSHA256": "3afebd230dc4b93241651821c19a62ef8efb1615b67ab119cacc74626f096367",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "1d53bb7fd9e7525247da7de986bf31644e8f6739f10343a2ffc749619ca44995"
+    },
+    "SB26": {
+      "levels": 8,
+      "actions": 124,
+      "authority": 124,
+      "sourceSHA256": "d853a22977375a61b1a80bdf11dcbd5ede1e1b194d832010248c44d7d317fd74",
+      "receiptSHA256": "4a0a80ab3745f2fca0e266e4e1a419b27affdaceef9ec6638b3a8fef9dc88342",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "7703d7e844525e46bf838b320f505aae68dd31d341341ab66b7e3be79a30f732"
+    },
+    "SC25": {
+      "levels": 6,
+      "actions": 153,
+      "authority": 153,
+      "sourceSHA256": "b63d9191384ce3f9e8fe748a2a3be16a0833ad7149254b52783d2054b6e1ad60",
+      "receiptSHA256": "3563418d3ac27847b1d196064db2f07ed705bc22570a5bd9715038fee6eba97b",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "a586b5de9624f7c14846cfb11aae2d7cc0d9d5cedf27d652571e060d6c2e1ecd"
+    },
+    "SELE": {
+      "levels": 6,
+      "actions": 117,
+      "authority": 117,
+      "sourceSHA256": "cfc3846164ad36e96ed9a8f884de03ad3514b7723ff4ac05bbe78e195bd67c1b",
+      "receiptSHA256": "630f3317986def1e36bf50cecfe7c0499c0988b57740f3ee24ffbe0b250da703",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "cf96f75dc98b374f61865a92ad7c5a0b519e15bfffd07579be7a4e4193d70b56"
+    },
+    "SEQN": {
+      "levels": 6,
+      "actions": 46,
+      "authority": 46,
+      "sourceSHA256": "913ba6d5d5e98d09562da5741d050602d68329fbc64ab09b325beea3744276ad",
+      "receiptSHA256": "f1e08965a159e53fd6335e77af06199725da1b0bbcfc86d72284b83cfedd6cf7",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "51791bc9729907c4caf115122b18260c70182e345e41277872a80e29691fbadf"
+    },
+    "SERI": {
+      "levels": 6,
+      "actions": 54,
+      "authority": 54,
+      "sourceSHA256": "9fdb8ce038e7ccff7180dc9b1f6e423e12b6949d7a61af1fc8421b09b3f380ad",
+      "receiptSHA256": "5111dc0537f6046985b01e0612be72ce8cb96510d9b60c005a8f56b10d5b2df0",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "98aa963ebcedae6f13ac8086838eacae4851cdf8f6e1b9f6f420f2c132d7e19e"
+    },
+    "SIGN": {
+      "levels": 6,
+      "actions": 271,
+      "authority": 271,
+      "sourceSHA256": "306d166fa2ca0d3f29ea180eff0fe334a00db892d2bbce3fa804308907c902ce",
+      "receiptSHA256": "9b0a8d5707d03d68138e9b2ae3993fc81c6a7a02d8215235c7c6884e862f82c8",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "bb50f2c71ddf47c2e2c544488c097eee3ea47ced47d32b15711577cde0e93917"
+    },
+    "SK48": {
+      "levels": 8,
+      "actions": 348,
+      "authority": 348,
+      "sourceSHA256": "3c46c9b7eaa89d9dea1b2b17559ccc099b298c02061081a639310e475db45ad2",
+      "receiptSHA256": "1e3895d1d5c1fe3560ebd8bafedba2f47620e3b534d2d58d9e04ad582999b6d2",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "c3b1db68fc19bb27dcacbcda1482cf879b05eff897560b1fc12600294b678767"
+    },
+    "SKBN": {
+      "levels": 6,
+      "actions": 109,
+      "authority": 109,
+      "sourceSHA256": "2bb0d3d1e53878ea83aaa7fe4e036efe81484abac11e9067d6e21c64a0cfa293",
+      "receiptSHA256": "e41e6343580a4de3dbcf310a0a4d7de35c37b01138a38d479b2320e33962c482",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "c0f5f101d73d708b956d05806394a549b90749f71e89e645d6b540b2f2265e6f"
+    },
+    "SMLP": {
+      "levels": 6,
+      "actions": 59,
+      "authority": 59,
+      "sourceSHA256": "e43b11c8ee7fcb257c36cfc5a78656a5b47026adca601a886fdb4f61bc467a8e",
+      "receiptSHA256": "cf6d76aca7b4be9b7a918cf47136624fa031b21f461b4ef8e3509714695ce00d",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "f0960abad1b50f9e76bd2c4aa8ce76cd670c17e1f4b73e068c917793ff7be0a1"
+    },
+    "SNAR": {
+      "levels": 6,
+      "actions": 163,
+      "authority": 163,
+      "sourceSHA256": "777829699c72c1c3e6d75d42eb4863e4a3d145ef7d3705a022fb404bffa1a8bb",
+      "receiptSHA256": "85933cad790ca0b96b0a57c0d97a4f3bee0b3dd35cfe960358876361560e07c3",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "0cdda74e251cd981e4dd926595175df77c3ab890664981188a7ae0587bb130fa"
+    },
+    "SP80": {
+      "levels": 6,
+      "actions": 110,
+      "authority": 110,
+      "sourceSHA256": "0eb09d4e8612cfd6055a0a71de3b07c85e06cd2e5421f0d0356c748cbb86114f",
+      "receiptSHA256": "720100588f6f664e516f1cfa565a3327a04315601e5186f68286168393488693",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "46e841830976445b5ea43072c2d450564de5a0713b7092aa345e2c7b73fec8ee"
+    },
+    "SPOR": {
+      "levels": 6,
+      "actions": 121,
+      "authority": 121,
+      "sourceSHA256": "db1436306e0af4db8c394008de06fc3040ff22d0f2584e758249012a94df10a0",
+      "receiptSHA256": "48ee313a910efbc22915007d04a40b984c7e66f0ad32a6de35603b4396a4ff31",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "3f79f2f041226103afe95e020d6fa0627091819dd936e2ab800299531302207a"
+    },
+    "SS01": {
+      "levels": 8,
+      "actions": 444,
+      "authority": 444,
+      "sourceSHA256": "dad0adc13fdb9ec9cefc18b24ad2b9f5821071f53e1124556c8713aa39b35ab6",
+      "receiptSHA256": "e655b38783debcd52ee3f2b9cf75ce5cf0bfb5c1aae1ea97bf840af1fdfb5d97",
+      "category": "complete",
+      "recoveries": {
+        "reset": 1,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "176c1d0f9902028ccb6788e0d0e5575f1287b1115bf11eff5e3795b5a750e1bc"
+    },
+    "SS02": {
+      "levels": 8,
+      "actions": 546,
+      "authority": 546,
+      "sourceSHA256": "532feb52286eb5f09407436db3e78bcbee453510e7471bf44147bd2658236ad3",
+      "receiptSHA256": "441d8f5909c0c3b025e9cdab5de8b0febf2bcc6a3381084531e1ea022032fbb2",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "6b9db01e1bc234caa3f4c201fc9931395ddedb0ba335108ec9ff51acf6304b20"
+    },
+    "SS03": {
+      "levels": 8,
+      "actions": 491,
+      "authority": 491,
+      "sourceSHA256": "4ea4f5a0b50dd8d4267efac01afbfae43930ffada201b3294124ab687eadf4fb",
+      "receiptSHA256": "c0be0ed1c588a3c98923021dd07a5b2bfa247c2acbd7af14f864905869e2bf08",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "9a644942bfc0de494f207cfbc337a050097fae2ab9501b4d071a49ea2de05b85"
+    },
+    "SS04": {
+      "levels": 8,
+      "actions": 443,
+      "authority": 443,
+      "sourceSHA256": "970f2b97c275e431c8f8d2efdadf1818f0a6f545528c73104562b0c77ef1cb76",
+      "receiptSHA256": "58623fc9591f8424f4855d760339f0c7800ba5648f2f4cb2118b59c4e126a58b",
+      "category": "complete",
+      "recoveries": {
+        "reset": 1,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "3fa51a30db79b020cd51994781f665fc4d54f1a58e8a5a385d5024325728cee0"
+    },
+    "SS05": {
+      "levels": 8,
+      "actions": 393,
+      "authority": 393,
+      "sourceSHA256": "6c76f9e616a07a7706fea71c31e1daf5cfc6ea316e145ac185f889a21cbf4b9b",
+      "receiptSHA256": "2ce8998aff58a16bf974f2250150208273fcb07240f616b246dd636f13fc8549",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "4341b9c1442638ee1788b3bbe693afed58bccc58315d17f28b9cc8a72b446947"
+    },
+    "SS06": {
+      "levels": 8,
+      "actions": 399,
+      "authority": 399,
+      "sourceSHA256": "f756fad6f7be924c625cba4bf84207640cd41ca109ad9157d5d1bb73cb752b92",
+      "receiptSHA256": "01af74ef2d32b61f11098ce992196fbb10667bf26c86110ecd801f1fa8cef812",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "61ba5fd7674af7554df6342b4c8392265348c4e903ce717c063099cc8418d45f"
+    },
+    "SS07": {
+      "levels": 8,
+      "actions": 549,
+      "authority": 549,
+      "sourceSHA256": "2ea35e5074a5f696ea84a35563feba17859b3228b5fc2dc88e9aab13ffde0315",
+      "receiptSHA256": "8f2aad8e32b4051d796aad505f938be3d6379e30b5fea6d3592fcb7e51cbff52",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "6f3418ab762bccb43a23c1f5cebaa75b0a35bde125fbff2e05ed7e830d5902fc"
+    },
+    "STCK": {
+      "levels": 6,
+      "actions": 52,
+      "authority": 52,
+      "sourceSHA256": "d92620f2ead1c11876c9a5944c0466b419a02ebf657bc6d03a3ac7905b09dbd3",
+      "receiptSHA256": "3019bc80de4e46a2398f4dfb5c52baafd2e4f5cb77252432df795b55bf03f13e",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "86520da11ec8e8cd27d037629c3dd3f1f35a7a0d7fbee917318d6395cf00c471"
+    },
+    "SU15": {
+      "levels": 9,
+      "actions": 122,
+      "authority": 122,
+      "sourceSHA256": "ab973c8b39f317f9189a598e2058b9eea5a3de07004bde8d803592de2e786606",
+      "receiptSHA256": "8ea8c894cb02c501f3e11b1cdbff293e8a41532c7fc5491ca55ee100f48ae866",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "fe327a9e0ac6d3ac5d244e0b5c92f20f00d383217dd4e2efc6e1bb5398d48808"
+    },
+    "SWCH": {
+      "levels": 6,
+      "actions": 198,
+      "authority": 198,
+      "sourceSHA256": "c007f2f4a8b6b305acf21451797d0281670978e8faee1864ce3de49e4841ef09",
+      "receiptSHA256": "f6a8ad705e4b56c02ca7a0e1e3ccb2a3403c637cab927ecbd6a0fda71df5876f",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "6faeaaa91a5e868799a4ad797a796d775a1fe498d7b1b795a4fa1e726da59bea"
+    },
+    "SYME": {
+      "levels": 6,
+      "actions": 78,
+      "authority": 78,
+      "sourceSHA256": "0ad1f19ab15daf97dee0277f81ba4fd11abcc25605178400ca2d821e523bb212",
+      "receiptSHA256": "3af39e8fa3952b3e1d213c85d8d05c8a0f6a2233bb4ec3aa02de6802797a7c30",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "80b9ebeaad485a755e0de5e65b85576632f585219473df7dcb6ba1cfe7a615f0"
+    },
+    "TEQU": {
+      "levels": 6,
+      "actions": 106,
+      "authority": 106,
+      "sourceSHA256": "17e56aa28646d6f173e44f9a77f7fdb242c33306c53977398f0243a8e0779ed8",
+      "receiptSHA256": "e2150591c26c6af95f997334525cf83d1f7e9f1533196e7d6a97938fbbfa79b4",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "fefcbf1d619e1d2617761e515ac477b496ce1df5f6fce37d048f8c96324f3072"
+    },
+    "THER": {
+      "levels": 6,
+      "actions": 47,
+      "authority": 47,
+      "sourceSHA256": "384010c51dc4b45c6f67911bd176a060e05bb2bdf39e95b8c50d87f50ed3438d",
+      "receiptSHA256": "07b7213b69c6dac43acedd9e71043753f1ab213786b0ae217a4b67b7007d6473",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "fdd61a5ac8808e0036786bc23a5701c6c2d5021f69c583800b5dfe2c302a8b85"
+    },
+    "TICT": {
+      "levels": 6,
+      "actions": 58,
+      "authority": 58,
+      "sourceSHA256": "8afb8f3e6d5a81a4f0807bf6687c99a1df20227940526eb092b7440e1bcad6f9",
+      "receiptSHA256": "76fa26dc436e34b505007a9c330b0320aca7e35391dca11881ed6b311ead8fde",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "8abc94feb7ef90b67cfa0a480a90335d5f229a450a4152c77906578bc40da0be"
+    },
+    "TN36": {
+      "levels": 7,
+      "actions": 138,
+      "authority": 138,
+      "sourceSHA256": "64a4a98879d7b63bffda78ba3d5f354ae5a9d07be211c8e6264cffc22cd727ee",
+      "receiptSHA256": "dc8903c38da599bf5af1337f199d3491471fc8130a9d1d54b2c6de67543b2d7d",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "d78757f551bc7cb5704550cee46ee68f897b6629430f004f8a3aab7c0e46edfa"
+    },
+    "TR87": {
+      "levels": 6,
+      "actions": 199,
+      "authority": 199,
+      "sourceSHA256": "e7758d162842e60a314d04f0510b7f192e1096798eb55b91c210813f7d5bb62d",
+      "receiptSHA256": "a3dd1efde33f45f24d3ddd069d259836f75cf26beb1506565598cbf1b2465d3d",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "d670eee675d6cb1b04ec18205937d04c696c2d0a9639177d09b5c0e32c1fcf9c"
+    },
+    "TRCP": {
+      "levels": 6,
+      "actions": 240,
+      "authority": 240,
+      "sourceSHA256": "0fe71f73a91454fcf8ffd3274c41dea352fa233ae9ad870a66478eb6f796520a",
+      "receiptSHA256": "18a725714be42d1171e38873aa1432620d23e73f46924e18bff26c197ccc5d26",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "f8e4818f492e4c19d1940b64d1a6efee2ca248a1b16ce8116a2a5109db5ab3a5"
+    },
+    "TRIA": {
+      "levels": 6,
+      "actions": 119,
+      "authority": 119,
+      "sourceSHA256": "e6a3c3fc34c70dcede0b709d483392eb94d1c1b9940835ce7496707efaa3ac98",
+      "receiptSHA256": "95e1df9974808c61096df46b42a23251127e3ceefaf8d0aa8a511cf098b9d3fe",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "70143ee7faa66b0d0fe82ca8f0d771371054532e6cc6281cdfa02addeba18ee8"
+    },
+    "TU93": {
+      "levels": 9,
+      "actions": 205,
+      "authority": 205,
+      "sourceSHA256": "4bfa7b09a15660ecfa070f9db1a8ed0d04959446f528bc71fdeba2a0011614c3",
+      "receiptSHA256": "37da6e986ece40c75ac703d28ca14e3b83d4566fb8294629350cc55624d97b11",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "badea6c84e315dc1c2b814a2e377bb2a827216ea09ae13029dcb30395e7bec8e"
+    },
+    "UPST": {
+      "levels": 6,
+      "actions": 72,
+      "authority": 72,
+      "sourceSHA256": "bb59e178b4ebc851e52963e1ee4152ef214f455a3fd17bf1249b7f0869c59edd",
+      "receiptSHA256": "b98bb3123949d4c47ab4c3e234ccb1379540d74eb5c9643469351d5b2098165f",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "1205bb9350e205fb8af99e67ac6a16630435ec679407b2b26031f7f1dda5df60"
+    },
+    "VALV": {
+      "levels": 6,
+      "actions": 57,
+      "authority": 57,
+      "sourceSHA256": "f002534389db471667e38cfd6970c804d39726c4230465591986154726269922",
+      "receiptSHA256": "0ca27c4a7dcf4b15f02addb3461f8127c27746849665a65c2d2d7c6b3a9c49d3",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "e7449430a904a32043b21a785d74d23bba1ef66041047ce0ef5e634135b4e34f"
+    },
+    "VC33": {
+      "levels": 7,
+      "actions": 192,
+      "authority": 192,
+      "sourceSHA256": "e682195d3a453521cf1ff8fb5b6503adb189eb6dca74bfb74ba20152a9250844",
+      "receiptSHA256": "fd30ab5dfeb20ecd107e430e56c03a1e41dcbc8d9f378b60660f49600ad9aff7",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "0f179298c8442d746772a6081afe76776ac0c26c7af5ab5ca60d634479649818"
+    },
+    "VOIS": {
+      "levels": 6,
+      "actions": 196,
+      "authority": 196,
+      "sourceSHA256": "2d17b3d00ca39c96a6f94cd5c761da3899addbb2d38e9a3933e3f503978ea219",
+      "receiptSHA256": "72a256df2aeebab7b98df8e2fc82723086ce152ab6a6edbbd93230a3409c37de",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "6297267dde87d31d400a196eddd4072f5505dc6a9c15769d814feb64df0b6e75"
+    },
+    "WA30": {
+      "levels": 9,
+      "actions": 613,
+      "authority": 613,
+      "sourceSHA256": "5c3580207ef35e430cd127c7743cc787673cdb051c69fc458bc0617be8e1ecad",
+      "receiptSHA256": "e0b5b71ec7aeb5fbc1257b26d120a22fb9a75bdf6779f6f8ef5febd738487052",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "788fd454a3eff991e258c22b5cbfedaadc9ef26850469bd32be498ec51f78b02"
+    },
+    "WEAV": {
+      "levels": 6,
+      "actions": 199,
+      "authority": 199,
+      "sourceSHA256": "43e4dd65d3427c65201dedd4c4805f5dc8c1c711f7ba09fc04603c1cb2b42b05",
+      "receiptSHA256": "e2bdfbea364a00ebcc9c08c332664999dd3ebcd466d0ef4b6e67659071212303",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "4347f1f1a3e37991f8a83b1d34d594c74fb8a35655121529117073593c60da07"
+    },
+    "ZIPP": {
+      "levels": 6,
+      "actions": 101,
+      "authority": 101,
+      "sourceSHA256": "13dbc2e8071309fbf7e370491cd866115da12b5f64fc0fc811be1e9c0734e6c7",
+      "receiptSHA256": "f67e5efa5b5c1aff579ddc042af11f9df1f6342180f5f296c5f12f9222754b28",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "firstDifference": null,
+      "issues": [],
+      "scoreDeadlineOverruns": [],
+      "parentReceiptSHA256": "07691c6dcba8a2d60bd2f0dd86ab558cf981f86642001fc43ee21eb3e1fa190a"
+    }
+  },
+  "parent": "674b0dd19d693a66687990ab2a4368d981aa8fb9"
+}
