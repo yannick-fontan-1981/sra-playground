@@ -1,0 +1,60 @@
+{
+  "arms": {
+    "catalogue": {
+      "target": "complete",
+      "globalBudget": 16,
+      "actions": 16,
+      "levels": 2,
+      "stop": "session_action_budget",
+      "turns": [
+        5,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "matches": [
+        null,
+        true,
+        true,
+        true,
+        null,
+        false,
+        false
+      ],
+      "inventoryBlob": "8db1c9128be69e2477dd5cb7957c654e2e251aa7"
+    },
+    "couverture": {
+      "target": 3,
+      "globalBudget": null,
+      "actions": 19,
+      "levels": 3,
+      "stop": null,
+      "turns": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "matches": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      "inventoryBlob": "8db1c9128be69e2477dd5cb7957c654e2e251aa7"
+    }
+  },
+  "firstPhysicalDifference": 14,
+  "historicTargetedSessionParameters": "unknown",
+  "startUTC": "2026-11-28T00:44:03.990900+00:00",
+  "verdictUTC": "2026-11-28T00:47:01.136315+00:00",
+  "elapsedToVerdictSeconds": 177,
+  "archiveSHA256": "0c40a3542952f97361c865d95a30aacf28f2228a68667e5a47959625728a2245"
+}

@@ -9,12 +9,23 @@ import { createHash } from 'node:crypto';
 import { sourceBackend } from './sic-study-source-games.mjs';
 
 const [checkout, output, ...selection] = process.argv.slice(2);
+function numericOption(flag, fallback, allowOmission = false) {
+  const at = selection.indexOf(flag);
+  if (at === -1) return fallback;
+  const [_, value] = selection.splice(at, 2);
+  if (allowOmission && value === 'none') return undefined;
+  const n = Number(value);
+  if (!Number.isSafeInteger(n) || n < 1 || n > 600) throw Error('Invalid ' + flag);
+  return n;
+}
+const target = numericOption('--target-levels', 'complete');
+const maxActions = numericOption('--session-budget', 16, true);
 const curious = selection[0] === '--curious';
 if (curious) selection.shift();
 const offerFilter = selection[0] === '--offer' ? selection.slice(1, 4) : null;
 const codes = offerFilter ? selection.slice(4) : selection;
 if (!checkout || !output || !codes.length || new Set(codes).size !== codes.length) {
-  throw Error('Usage: node scripts/sic-recapture-strategy-inventory.mjs CHECKOUT NEW-REPORT.json [--curious] [--offer FAMILY STRATEGY PROPOSAL] GAME [GAME ...]');
+  throw Error('Usage: node scripts/sic-recapture-strategy-inventory.mjs CHECKOUT NEW-REPORT.json [--target-levels N] [--session-budget N|none] [--curious] [--offer FAMILY STRATEGY PROPOSAL] GAME [GAME ...]');
 }
 const sha = execFileSync('git', ['rev-parse','HEAD'], { cwd: checkout, encoding: 'utf8' }).trim();
 execFileSync('git', ['diff', '--quiet', 'HEAD', '--', 'src', 'public', 'reference', 'scripts'], { cwd: checkout });
@@ -59,13 +70,14 @@ const runtime = {
   load: (code, level) => backend.dispatch({ type: 'load', code, level }),
   action: (actionId, data) => backend.dispatch({ type: 'action', actionId, ...(actionId === 6 ? { data } : {}) }),
 };
-const report = { sha, inventoryBlob: inventory, session, startLevel: 1, seed: 0, maxActions: 16, games: [] };
+const report = { sha, inventoryBlob: inventory, session, startLevel: 1, seed: 0, maxActions: maxActions ?? null, games: [] };
+if (target !== 'complete') report.targetLevels = target;
 if (offerFilter) report.offerFilter = offerFilter;
 if (curious) report.openingCuriosity = 'active';
 const pack = curious ? { ...defaultRecoveryPack, openingCuriosity: 'active' } : defaultRecoveryPack;
 for (const game of codes) {
   const returned = [];
-  const result = await run(runtime, game, 'complete', pack, 16, row => returned.push({ ...row }));
+  const result = await run(runtime, game, target, pack, maxActions, row => returned.push({ ...row }));
   const keys = new Set(returned.map(row => JSON.stringify([row.family, row.strategy, row.entry, row.proposal])));
   const rows = returned.filter(row => {
     if (offerFilter) return [row.family, row.strategy, row.proposal].every((v, i) => offerFilter[i] === '*' || offerFilter[i] === v);
