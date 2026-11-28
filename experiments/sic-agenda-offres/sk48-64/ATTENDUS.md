@@ -1,0 +1,8 @@
+# SK48 · critères préenregistrés de l’accès initial, ligne 64
+
+Départ le 27 novembre 2026 à 22 h 44 min 51 s (UTC−3), depuis L1 sur `d0e7527ca8033bd805a6d7a8bb021eff62e87021`. Le témoin de catalogue est N1/T1 `public_occurrence_recall / observed_composition_services / rooted_line / ACTION1`. Couvrir T1–T5 en ouverture native avec les budgets du catalogue et comparer les deux palettes de développement à `4946cf02`.
+
+- Sceller la géométrie, l’ordre demandé, les contrôles disponibles, le domaine des contrôles encore inconnus et le statut de récupération avant T1. L’issue du ticket de calibrage reste ouverte. Relever le contrôle effectivement appris au retour et sa provenance.
+- Donner la priorité à un autre contrôle disponible au T1 via l’ordre déjà consommé par le fournisseur. Vérifier le ticket, le nouvel effet mesuré et le choix suivant. Présenter aussi l’ancien plateau après le vrai T1 pour vérifier la différence entre une tentative et un effet acquis.
+- Avec les quatre gestes physiques nominaux, retirer à la seule entrée du planificateur l’effet d’`ACTION1` appris au T1 et conserver sa marque d’essai. Le service doit suspendre l’accès faute de cette preuve. Au même état nominal, le premier plan conditionnel doit lire les quatre effets et leurs références.
+- Sur la permutation 9↔14, vérifier le premier arrêt du gel et la reprise de `4946cf02`. Conserver l’égalité des stations comme incertitude du modèle et contrôler le premier retour physique. La ligne 96 est vérifiée dans son propre dossier après une contradiction. Ici, aucune révision ni preuve de retour contraire ne doit autoriser le plan initial.
