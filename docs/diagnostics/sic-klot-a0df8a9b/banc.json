@@ -1,0 +1,27 @@
+{
+  "freeze": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "proof": "a0df8a9b13b51e63d08b5ca184c996ba20453e9c",
+  "strict": false,
+  "testsPerSHA": 3,
+  "firstWrongAttribution": 7,
+  "controlledReturn": {
+    "selected": "6",
+    "moved": "11",
+    "wrongSelect": {
+      "x": 36,
+      "y": 39
+    },
+    "matched": false,
+    "sealed": true,
+    "attributed": "observed_exclusive_receiver",
+    "models": 0,
+    "next": {
+      "kind": "stopped",
+      "family": "selected_rigid",
+      "next": null,
+      "reason": "rigid_control_or_collision_model_refuted"
+    },
+    "officialLevels": 0
+  },
+  "archiveSHA256": "ad3c951202938a0ac409192debaf0ef39bc0051f7a5853fbbf63614490459f37"
+}

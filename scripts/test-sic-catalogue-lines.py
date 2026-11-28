@@ -36,6 +36,7 @@ cases = {
     "LP85": ("80d14be16d5f3d4fa1f84c0c92498902e96a5e3f", "lp85-line-24", "sic-observe-lp85-orbit", []),
     "CN04": ("bfba3acb8de4c3f13fc10651b2aa22490def5070", "cn04-line-30", "sic-observe-cn04-ports", []),
     "SKBN": ("fa126d653aa5e123f9de78c220e9e6129a6436a2", "skbn-line-38", "sic-observe-skbn-inventory", []),
+    "KLOT": ("a0df8a9b13b51e63d08b5ca184c996ba20453e9c", "klot-line-82", "sic-observe-klot-selection", []),
     "SC25": ("6172e2d3579f36af9c0912578f6d58333a298343", "sc25-line-21", "sic-observe-sc25-motif", []),
     "MIND": ("860835b1b77ae9cde489230be5c1f83c05237302", "mind-line-12", "sic-observe-mind-feedback",
              ["docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-public-trace.json.gz", "tests/fixtures/sic-mind-alternate-returns.json.gz"]),
@@ -55,6 +56,7 @@ parser.add_argument("revision")
 parser.add_argument("--game", choices=cases, default="GARE")
 parser.add_argument("output", type=Path)
 parser.add_argument("--baseline-only", action="store_true", help="Run the LIFE cases shared with the historical engine")
+parser.add_argument("--wrong-receiver", action="store_true", help="Run the KLOT receipt attribution control")
 parser.add_argument("--game-root", required=True, type=Path)
 parser.add_argument("--node", default="node")
 args = parser.parse_args()
@@ -82,6 +84,26 @@ mount(args.game_root.resolve() / "public", engine / "public")
 env = {**os.environ, name + "GAME_ROOT": str(engine), name + "ENGINE_ROOT": str(engine),
        name + "RECEIPT": str(out / (revision[:8] + ".json"))}
 options = []
+if args.wrong_receiver:
+    if args.game != "KLOT":
+        parser.error("--wrong-receiver requires --game KLOT")
+    source = engine / test
+    text = source.read_text(encoding="utf8")
+    entry = "    async advance() {\n"
+    assert text.count(entry) == 1
+    mutated = ("    async advance(extraSelect?: { x: number; y: number }) {\n"
+               "      if (extraSelect) backend.dispatch({ type: 'action', actionId: 6, data: extraSelect });\n")
+    control = (bench / "scripts/sic-klot-receiver-control.ts").read_text(encoding="utf8")
+    decision = "    async decision() {\n"
+    assert text.count(decision) == 1
+    after = ("    async stateAfterAdvance() {\n"
+             "      if (reply.kind === 'boundary') reply = await service.handle({ type: 'resume', sessionId, sequence });\n"
+             "      return { kind: reply.kind, family: reply.snapshot.lastDecision,\n"
+             "        next: reply.command, reason: (reply as Row).reason ?? (reply.snapshot as Row).stopReason };\n"
+             "    },\n")
+    source.write_text(text.replace(entry, mutated).replace(decision, after + decision) + "\n" + control,
+                      encoding="utf8", newline="\n")
+    options = ["--test-name-pattern=^82 rejects the plan"]
 if args.game == "ISOS" and env.get("SIC_ISOS_STALE_BOUNDARY") == "1":
     options = ["--test-name-pattern=^10 distinguishes"]
 if args.game == "LIFE" and (args.baseline_only or revision in {
