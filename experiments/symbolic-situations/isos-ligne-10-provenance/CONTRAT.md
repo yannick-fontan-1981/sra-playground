@@ -1,0 +1,8 @@
+# ISOS · vérification indépendante du correctif de provenance de la ligne 10
+
+Comparer le parent `5161917eebb0e7f5d2ec6010f61bae1c2eff7b3f` et le correctif annoncé `640bd882150f8164b2e6a1a7de6b85b16c52711f`. Le parent reproduit exactement le moteur gelé. Les anciens contre-exemples restent dans leur dossier. Départs natifs N1, plafond catalogue de 16 gestes, 600 gestes par niveau. [Attentes auteur](https://github.com/yannick-fontan-1981/sra-playground/blob/4bf2d49d/docs/architecture/sic-isos-ligne-10-provenance.md) · [Verdict indépendant du parent](https://github.com/yannick-fontan-1981/sra-playground/blob/949c08db/experiments/symbolic-situations/isos-ligne-10/BILAN.md)
+
+- Rejouer le même faux reçu de T4 que sur le parent, puis à T8 présenter l’ancienne référence authentique du premier gain. Garder les paquets du vrai jeu, le ticket de frontière et le score inchangés. Relever le ticket de repli réellement délivré et son retour.
+- Au même gain matériel, solliciter la reprise avec une preuve portée par un autre ticket ou un autre propriétaire. Distinguer le cas construit, la réalité du gain et l’autorité propre au ticket. Documenter si le service peut émettre le même geste sous une autre famille ou si le contrôle se limite à la liaison de preuve.
+- Rejouer la provenance authentique en N2 et en N3 et vérifier toutes les projections et gains nominaux mesurés précédemment. Les métadonnées de preuve éventuellement ajoutées sont comparées séparément du comportement du jeu.
+- Comparer les deux SHA avec le même harnais. Donner le premier écart, les compteurs de chaque départ et le délai indépendant.
