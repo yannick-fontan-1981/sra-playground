@@ -4,7 +4,9 @@ import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { compareControlTrial, controlTrialEvaluation } from './control-effect-next.ts';
+import { controlEffectChildIsCurrent, currentControlSubjectPosition, measureControlEffectChild, openControlEffectChild } from './control-effect-child.ts';
 import { sicNeedId } from './need-identity.ts';
+import { readSicNeed } from './need-registry.ts';
 import { singleStepDisplacement } from './observed-translation.ts';
 import { maximumCommittedActions, unchangedOutside } from './plan-step.ts';
 import { beginRecording, chooseRecording, linkedTransfers, needsTransferPulse, observeRecording, openSupports, recordingActor, replaySprites,
@@ -64,8 +66,7 @@ function sceneAtStart(observation: NativeObservation, rows: NativeRows): Scene |
 }
 
 function actorPosition(observation: NativeObservation, scene: Scene): NativePoint | null {
-  const actors = observation.entities.filter(entity => entity.signature === scene.body.signature);
-  return actors.length === 1 ? [actors[0]!.bbox[0], actors[0]!.bbox[1]] : null;
+  return currentControlSubjectPosition(observation, scene.body.signature);
 }
 
 type Step = { to: NativePoint; delta: NativePoint };
@@ -273,17 +274,15 @@ export function createSicVerifyRemoteReplay(family = verifyRemoteReplayId): Nati
       if (!input) return null;
       const facts = { routeSupported: !!known, eligibleProbe: !!(replayAction || probe), knownInteraction: false, mode };
       const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
-      if (probe) {
-        const evaluation = controlTrialEvaluation(family, remaining, family === verifyRemoteReplayId
-          ? execution : { observeControlTrialShadow: execution?.observeControlTrialShadow });
-        if (evaluation) {
-          const selected = compareControlTrial(probe, evidence[0], {
-            observationRef: observation.observation_ref, availableActions: observation.available_action_refs, evidence,
-            objectiveSupported: Boolean(node), subjectBound: Boolean(from), effectKnown: Boolean(local.controls[probe]),
-            triedInContext: local.tried.includes(positionKey(from) + ':' + probe),
-          }, { selected: decision?.result === 'P05', evidence }, evaluation);
-          if (evaluation.active && !selected) return null;
-        }
+      const evaluation = probe ? controlTrialEvaluation(family, remaining, family === verifyRemoteReplayId
+        ? execution : { observeControlTrialShadow: execution?.observeControlTrialShadow }) : undefined;
+      if (probe && evaluation) {
+        const selected = compareControlTrial(probe, evidence[0], {
+          observationRef: observation.observation_ref, availableActions: observation.available_action_refs, evidence,
+          objectiveSupported: Boolean(node), subjectBound: Boolean(from), effectKnown: Boolean(local.controls[probe]),
+          triedInContext: local.tried.includes(positionKey(from) + ':' + probe),
+        }, { selected: decision?.result === 'P05', evidence }, evaluation);
+        if (evaluation.active && !selected) return null;
       }
       const strategy = facts.routeSupported ? 'P07' : 'P05';
       if (decision?.result !== strategy) return null;
@@ -293,8 +292,11 @@ export function createSicVerifyRemoteReplay(family = verifyRemoteReplayId): Nati
       const objective = { kind: 'use_repeated_remote_effect_to_gain_access', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['carrier', 'linked_occurrence', 'replay', 'open_receiver'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_verified_replay_access' };
-      const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
+      const need = { ...objective, id: sicNeedId(objective), status: 'assigned' as const, evidence };
       const id = 'replay-access:' + need.id, action = { action_ref: input, data: {} };
+      const controlEffectChild = evaluation?.active ? openControlEffectChild(
+        need, { id: scene.body.signature, start: from, stepSize: scene.body.quantum },
+        observation, action, evaluation.remaining) : null;
       const walk: Walk[] = [], commands: typeof action[] = [];
       let origin = from;
       if (intention === 'move') for (const step of path.slice(0, Math.min(remaining, maximumCommittedActions, 72 - local.count))) {
@@ -307,6 +309,7 @@ export function createSicVerifyRemoteReplay(family = verifyRemoteReplayId): Nati
       }
       const actions = walk.length > 1 ? commands : [action];
       return { status: 'proposed', kind: family, actions, local: { ...local, node }, from, to: expected, intention, needId: need.id,
+        ...(controlEffectChild ? { controlEffectChild } : {}),
         ...(walk.length > 1 ? { walk } : {}),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         steps: actions.map((action, index) => ({ action, expected_after: walk[index]?.to ?? expected })),
@@ -377,19 +380,27 @@ export function createSicVerifyRemoteReplay(family = verifyRemoteReplayId): Nati
       const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local;
       const from = proposal.walk?.[index]?.from ?? proposal.from, { intention } = proposal, scene = local.scene;
       const position = actorPosition(after, scene);
+      const child = proposal.controlEffectChild;
+      const parent = child ? readSicNeed((proposal.sicLocalDecision as NativeRecord | undefined)?.need) : null;
+      const controlEffectReturn = child && parent && parent.id === proposal.needId && index === 0
+        && child.subject.id === scene.body.signature && child.subject.stepSize === scene.body.quantum
+        && controlEffectChildIsCurrent(child, parent, before, command)
+        ? measureControlEffectChild(child, { before, after, command }) : null;
+      const record = { events: [], ...(controlEffectReturn ? { controlEffectReturn } : {}) };
       const next: State = { ...local, count: local.count + 1, stopped: !position, tried: [...local.tried, positionKey(from) + ':' + command.action_ref],
         evidence: [...local.evidence.slice(-5), after.observation_ref] };
-      if (!position) { state = next; return { events: [] }; }
+      if (!position) { state = next; return record; }
       if (intention === 'replay') {
         next.replay = command.action_ref;
         next.stopped = !equal(position, scene.body.start) || equal(position, from);
         if (!next.stopped) next.phaseEvidence = after.observation_ref;
       } else {
         const moved = !equal(position, from);
-        const delta = singleStepDisplacement(from, position, scene.body.quantum);
+        const delta = child ? controlEffectReturn?.status === 'observed_translation' ? controlEffectReturn.displacement : null
+          : singleStepDisplacement(from, position, scene.body.quantum);
         if (delta) {
           next.controls = { ...local.controls, [command.action_ref]: delta };
-          next.controlEvidence = { ...local.controlEvidence, [command.action_ref]: after.observation_ref };
+          next.controlEvidence = { ...local.controlEvidence, [command.action_ref]: controlEffectReturn?.afterRef ?? after.observation_ref };
         }
         if (local.replay) {
           next.ticks = local.ticks + Number(moved);
@@ -417,7 +428,7 @@ export function createSicVerifyRemoteReplay(family = verifyRemoteReplayId): Nati
         }
       }
       state = next;
-      return { events: [] };
+      return record;
     },
     state: () => ({ state, ...(recording ? { recording } : {}) }),
     restore(value: NativeRecord) {
