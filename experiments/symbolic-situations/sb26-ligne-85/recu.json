@@ -1,0 +1,51 @@
+{
+  "stats": {
+    "versions": 2,
+    "départsParVersion": 6,
+    "gestesParVersion": 37,
+    "catalogue": 16,
+    "occurrencesFamille": 11,
+    "niveauxTerminés": 1
+  },
+  "substitution": {
+    "nominale": [
+      9,
+      null,
+      null,
+      null
+    ],
+    "permutée": [
+      14,
+      null,
+      null,
+      null
+    ],
+    "ticket": [
+      "ACTION6",
+      {
+        "x": 22,
+        "y": 29
+      }
+    ]
+  },
+  "rejetés": [
+    {
+      "arm": "autre-contenu",
+      "dépôtPrésenté": 14,
+      "retour": "sb26-85:epoch:1:revision:5:frame:fea62b4c8ed246db",
+      "suivant": [
+        "ACTION5",
+        {}
+      ]
+    },
+    {
+      "arm": "depot-absent",
+      "dépôtPrésenté": null,
+      "retour": "sb26-85:epoch:1:revision:5:frame:b160f942b30e4110",
+      "suivant": [
+        "ACTION5",
+        {}
+      ]
+    }
+  ]
+}
