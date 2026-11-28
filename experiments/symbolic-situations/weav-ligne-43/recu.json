@@ -1,0 +1,25 @@
+{
+  "stats": [
+    {
+      "engine": "gel",
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 6,
+      "gestes": 36
+    },
+    {
+      "engine": "candidat",
+      "sha": "fab19fba7cc5e5ac5cd79da53c81fb3ab23b492a",
+      "départs": 6,
+      "gestes": 36
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "catalogue": 16,
+  "score": 0,
+  "repriseT7": {
+    "action": "ACTION1",
+    "sansPaire": "information_goal",
+    "référenceAntérieureAdmise": true,
+    "mêmePaquet": true
+  }
+}
