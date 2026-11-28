@@ -1,0 +1,88 @@
+name: SIC P07 reproducible access benchmark
+on:
+  push:
+    branches: [feat/sic-p07-access-20261128]
+    paths:
+      - 'scripts/p07-access/**'
+      - 'scripts/sic-p07-access-*.mjs'
+      - 'src/sic/access-policy.ts'
+      - 'src/sic/effect-composer.ts'
+      - 'tests/p07-*.test.mjs'
+      - '.github/workflows/sic-p07-access.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: sic-p07-development-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  pilot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Verify the independent protocol and integration controls
+        run: node --test tests/p07-*.test.mjs
+      - name: Qualify 80 pilot situations before expansion
+        run: node scripts/sic-p07-access-campaign.mjs --count 80 --seed 26112807 --expect-sha "$GITHUB_SHA" --out artifacts/p07-pilot
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sic-p07-pilot-${{ github.sha }}
+          path: artifacts/p07-pilot/
+          retention-days: 30
+  development:
+    needs: pilot
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        family: [F1-detour, F2-viewpoint, F3-contact-order, F4-held-support, F5-temporary-opening, F6-construct-route, F7-uncertain-location, F8-recovery]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Compare one balanced family sequentially on the frozen source
+        env:
+          P07_FAMILY: ${{ matrix.family }}
+        run: node scripts/sic-p07-access-campaign.mjs --count 1000 --family "$P07_FAMILY" --seed 26112807 --expect-sha "$GITHUB_SHA" --out artifacts/p07-family
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sic-p07-part-${{ github.sha }}-${{ matrix.family }}
+          path: artifacts/p07-family/
+          retention-days: 30
+  aggregate:
+    needs: development
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: sic-p07-part-${{ github.sha }}-*
+          path: parts
+      - name: Check all receipts, quotas, hashes and cross-family uniqueness
+        run: node scripts/sic-p07-access-aggregate.mjs --parts parts --count 8000 --expect-sha "$GITHUB_SHA" --out artifacts/p07-development
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sic-p07-development-${{ github.sha }}
+          path: artifacts/p07-development/
+          retention-days: 30
