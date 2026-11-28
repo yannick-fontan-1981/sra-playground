@@ -2,7 +2,7 @@ name: SIC frozen source candidate on SS08 to SS25
 
 on:
   push:
-    branches: [audit/sic-sealed-cohort-9a39a2c0]
+    branches: [audit/sic-sealed-cohort-8025e9cb]
     paths: [.github/workflows/sic-sealed-cohort.yml]
 
 permissions:
@@ -10,9 +10,9 @@ permissions:
   actions: read
 
 env:
-  VERIFIED_SOURCE: 9a39a2c03ab86a2511b6d3564b226a3f0fd8e171
-  VERIFIED_ENGINE: ed3b732c3da9d01b2854d64c3d191adb79480609
-  SOURCE_RUN: '46139436324'
+  VERIFIED_SOURCE: 8025e9cb02a1ba446bc5d3f02cdd0dd56df20f46
+  VERIFIED_ENGINE: b7c31326212b478a939cb53ef56d6e8b65e510f6
+  SOURCE_RUN: '46140352121'
 
 jobs:
   qualification:
