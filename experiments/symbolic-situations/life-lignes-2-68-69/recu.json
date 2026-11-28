@@ -1,0 +1,77 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 7,
+      "gestes": 35,
+      "testsAuteur": 6
+    },
+    {
+      "sha": "f005be662b0e4b556a0cea3d246381cd98eec7ae",
+      "départs": 9,
+      "gestes": 45,
+      "testsAuteur": 10
+    }
+  ],
+  "occurrences": {
+    "measured_animated_contact": 2,
+    "typed_carrier_experiment": 6,
+    "typed_material_flow": 8
+  },
+  "invitation": {
+    "images": 4,
+    "distinctes": 2,
+    "distinctesImmobiles": 1,
+    "suiteImmobile": "stopped"
+  },
+  "substitutions": {
+    "autre2": [
+      [
+        23,
+        48
+      ],
+      [
+        58,
+        48
+      ],
+      [
+        48,
+        34
+      ],
+      [
+        44,
+        21
+      ]
+    ],
+    "autre5": [
+      [
+        19,
+        21
+      ],
+      [
+        56,
+        7
+      ],
+      [
+        12,
+        21
+      ]
+    ]
+  },
+  "réserve": {
+    "pixelsFinauxMasqués": [
+      0,
+      0
+    ]
+  },
+  "complément": {
+    "pixelsFinauxMasqués": [
+      29,
+      32
+    ],
+    "suites": [
+      "stopped",
+      "stopped"
+    ]
+  }
+}
