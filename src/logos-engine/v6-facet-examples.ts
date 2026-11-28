@@ -133,8 +133,19 @@ export class NativeFacetExamples {
     }
     this.current = facetProject(obs, rows);
     if (this.current === null && this.configuration.compound) {
-      this.current = facetCompoundPlan(obs, rows, this.portable, this.compound_cache, this.configuration.compound);
-      if (this.current && this.refuted_compounds.has(this.current.scope_ref)) this.current = null;
+      const portable = this.portable;
+      let passage: NativeRecord | undefined;
+      for (let index = this.events.length - 1; index >= 0; index--) {
+        const event = this.events[index]!;
+        if (event.status === 'official_boundary') {
+          passage = event;
+          break;
+        }
+      }
+      if (portable?.boundary_ref && Array.isArray(passage?.evidence) && passage.evidence[1] === portable.boundary_ref) {
+        this.current = facetCompoundPlan(obs, rows, portable, this.compound_cache, this.configuration.compound);
+        if (this.current && this.refuted_compounds.has(this.current.scope_ref)) this.current = null;
+      }
     }
     return { qualified: this.current !== null, remaining };
   }
@@ -155,7 +166,8 @@ export class NativeFacetExamples {
     if (this.method && this.method.scope_ref === current.scope_ref && equal(this.method.cap_shape, facetShape(support))
       && this.method.cap_value === support.palette_value) { method = this.method; evidence.push(...method.evidence); }
     if (current.compound) {
-      evidence.push(...this.portable!.evidence, this.portable!.boundary_ref!);
+      const sourceMethod = current.compound.source_method;
+      evidence.push(...sourceMethod.evidence, sourceMethod.boundary_ref!);
       const known = this.compound_methods[String(support.palette_value)];
       if (known && known.model_ref === current.compound.model_ref) {
         method = known; evidence.push(...known.evidence);
@@ -213,7 +225,12 @@ export class NativeFacetExamples {
     let event: NativeRecord;
     if (after.levels_completed > before.levels_completed) {
       event = { status: 'official_boundary', evidence: refs, scope: 'visible-reference hypothesis corroborated, hidden occupancy not inferred' };
-      if (this.portable) this.portable.boundary_ref = after.observation_ref;
+      const portable = this.portable, local = this.method;
+      if (portable && (old.compound ? equal(old.compound.source_method, portable)
+        : local && portable.source_epoch === before.level_epoch && equal(proposal.facet_plan.method, local)
+          && equal(portable.up_shift, local.shift) && local.evidence.every(ref => portable.evidence.includes(ref)))) {
+        portable.boundary_ref = after.observation_ref;
+      }
     } else if (old.compound) {
       const c = old.compound, [l, t, r, b] = old.world, actual: FacetTriple[] = [];
       for (let y = t + 1; y < b; y++) for (let x = l + 1; x < r; x++) {
