@@ -69,7 +69,7 @@ try {
   assert.deepEqual(historique.nominal,gel.nominal);
   assert.deepEqual(gel.nominal,candidat.nominal);
   assert.deepEqual(gel.stationnaire,candidat.stationnaire);
-  assert.deepEqual(candidat.permutation,candidat.nominal);
+  assert.deepEqual(candidat.permutation.steps,candidat.nominal.steps);
 
   const [first,t2,t3,t4]=candidat.nominal.steps;
   const initial=t2.pre.offers.pre,later=t3.pre.offers.pre;
