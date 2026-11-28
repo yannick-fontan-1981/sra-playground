@@ -1,0 +1,49 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "stations": "4946cf0297734b9464fc52256af6fb27846f3bad",
+    "qualification": "1cf241c7625a1e76e4aa4828a50e0ec7ee2d099f",
+    "attendus": "40774688da30ecae9a7f0476f4894845e78b348a"
+  },
+  "prefixes": 8,
+  "calibration": {
+    "translation": [
+      -6,
+      0
+    ],
+    "extent": 0,
+    "evidence": [
+      "sk48-64:epoch:1:revision:1:frame:e4bbd31c5eaa4d7b",
+      "sk48-64:epoch:1:revision:2:frame:c40f87083cbf5fe8"
+    ]
+  },
+  "scheduleSubstitution": [
+    "ACTION4",
+    "ACTION1"
+  ],
+  "nominalPlan": {
+    "commands": [
+      "ACTION1",
+      "ACTION1",
+      "ACTION1",
+      "ACTION4",
+      "ACTION4",
+      "ACTION4",
+      "ACTION4",
+      "ACTION2",
+      "ACTION3",
+      "ACTION2",
+      "ACTION4"
+    ],
+    "return": "sk48-64:epoch:1:revision:6:frame:2d4043f4327ec3cd"
+  },
+  "withoutEffect": "frontier_unknown",
+  "palettePermutation": {
+    "gel": "rooted_contact_plan_unresolved",
+    "gelNodes": 792,
+    "stationsNodes": 282,
+    "stationsOrder": "compatible_unordered"
+  },
+  "archiveSHA256": "f502500cf7609c914e5649eee8d7dc1b13ac8b11659d60e5856e11f1f930d146"
+}
