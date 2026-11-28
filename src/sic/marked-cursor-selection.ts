@@ -20,6 +20,7 @@ export type CursorMemory = {
   motions:Motion[]; oriented?:PoseMotion[]; tried:string[]; refuted?:string[]; established?:string[]; motorSites?:Record<string,true>; returns?:number; blocked?:string[];
   verifyPoseChange?:boolean; followMarkedPose?:boolean;
   unconfirmedScaleContext?: string;
+  unconfirmedScaleRoles?: Record<string, true>;
   pending?:CursorTrial; verified?:{shape:string;mark?:number;refs:string[]};
   bearings?:Record<string,{dx:number;dy:number;ref:string}>;
 };
@@ -36,6 +37,7 @@ function clickPoint(peer:NativeEntity):NativePoint {
 }
 const signature=(m:Mark)=>[m.shape,m.ink,m.target.ink,tag(m.target.box)].join('/');
 const hypothesis=(m:Mark)=>[m.shape,m.ink,m.source.ink,m.target.ink,JSON.stringify(m.offsets)].join('/');
+const scaleRole = (form:string, available:readonly string[]) => JSON.stringify([form, [...available].sort()]);
 function bodyAfterClick(part:Part,b:NativeObservation,a:NativeObservation,rows:NativeRows,next:NativeRows,allowReshape=false):Part|undefined {
   let body=0,retained=0;
   for(let y=part.box[1];y<=part.box[3];y++)for(let x=part.box[0];x<=part.box[2];x++){
@@ -221,13 +223,14 @@ function distinguishControl(m:CursorMemory, mark:Mark, o:NativeObservation, pref
 }
 // A second subject may have another silhouette. An observed motor supplies a
 // spatial scale and a verification command even when the new response is unknown.
-export function motorScalePeers(o:NativeObservation,m:CursorMemory):Mark[] {
+export function motorScalePeers(o:NativeObservation,m:CursorMemory,respectRefutations=false):Mark[] {
   const ranked:{mark:Mark;cost:number}[]=[],scales=new Set<number>();
   const frequency=new Map<string,number>();
   for(const e of o.entities)frequency.set(e.signature,1+(frequency.get(e.signature)??0));
   const observed=[...m.motions,...(m.oriented??[])];
   for(const move of observed){
     if((move.dx===0)===(move.dy===0))continue;
+    if(respectRefutations && m.unconfirmedScaleRoles?.[scaleRole(move.form,o.available_action_refs)])continue;
     const span=Math.abs(move.dx)+Math.abs(move.dy);
     const base=o.entities.find(e=>e.signature===move.form&&tag(e.bbox)===tag(move.box));
     if(!base||base.area<2||frequency.get(base.signature)!==1)continue;
@@ -262,10 +265,10 @@ export function offerCursorTrial(m:CursorMemory|undefined,o:NativeObservation,ro
   const allowPoses=!!m.oriented?.length && preference?.mode==='active';
   if(!m.motions.length&&!allowStatic&&!allowPoses)return null;
   const marked=m.motions.length||allowStatic?cursorCandidates(o,rows,m):[];
-  const refutedScale = preference?.strategy === 'motion_contrast'
-    && m.unconfirmedScaleContext === observedCommandState(o);
+  const useScaleRefutations = preference?.strategy === 'motion_contrast';
+  const refutedScale = useScaleRefutations && m.unconfirmedScaleContext === observedCommandState(o);
   const candidates=!marked.length && preference?.mode==='active' && !m.verified && !refutedScale
-    ? motorScalePeers(o,m) : marked;
+    ? motorScalePeers(o,m,useScaleRefutations) : marked;
   const choices=candidates.map(mark=>({mark,projectedMove:mark.basis?undefined:possibleMove(m,mark,rows)}));
   choices.sort((a,b)=>Number(!!b.projectedMove)-Number(!!a.projectedMove));
   for(const {mark,projectedMove} of choices){
@@ -475,6 +478,18 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
       refute(m,trial);
       m.unconfirmedScaleContext = observedCommandState(a);
     }
+      if (!trial.feedback) {
+        const candidateMotions: (Motion | PoseMotion)[] = [...moves, ...(m.oriented ?? [])];
+        for (const move of candidateMotions) {
+          const origin: NativeBox = 'fromBox' in move ? move.fromBox
+            : [move.box[0]-move.dx,move.box[1]-move.dy,move.box[2]-move.dx,move.box[3]-move.dy];
+          if (!inside(origin, trial.source.box)) continue;
+          const roles = m.unconfirmedScaleRoles ??= {};
+          roles[scaleRole(move.form, b.available_action_refs)] = true;
+          const previous = b.entities.find(entity => tag(entity.bbox) === tag(origin));
+          if (previous) roles[scaleRole(previous.signature, b.available_action_refs)] = true;
+        }
+      }
 
     return 'cursor_control_unconfirmed';
   }

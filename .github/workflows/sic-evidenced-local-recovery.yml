@@ -1,4 +1,4 @@
-name: SIC source recovery and revision after an unconfirmed control transfer
+name: SIC source recovery and retained control refutation
 
 on:
   push:

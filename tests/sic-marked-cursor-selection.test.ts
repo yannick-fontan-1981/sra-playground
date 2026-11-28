@@ -185,7 +185,7 @@ test('follows the rotated body within a marked footprint and checks a step past 
   assert.equal(other.pending,undefined);
 });
 
-test('an unconfirmed control transfer retires scale-only trials at the observed return', async () => {
+test('an unconfirmed control transfer retires scale-only trials for the same mover and commands', async () => {
   function state(first:number) {
     const rows = Array.from({ length:18 }, () => Array<number>(46).fill(0));
     for (let y=5;y<8;y++) {
@@ -211,10 +211,14 @@ test('an unconfirmed control transfer retires scale-only trials at the observed 
     'cursor_control_unconfirmed');
   const unguarded={...memory};
   delete unguarded.unconfirmedScaleContext;
+  delete unguarded.unconfirmedScaleRoles;
   assert.equal(offerCursorTrial(unguarded,refuted!,frames[2]!,false,true,preference)?.basis,'motor_scale');
   assert.equal(offerCursorTrial(memory,refuted!,frames[2]!,false,true,preference),null);
   recordCursorTrial(memory,refuted!,newState!,frames[2]!,frames[3]!,'ACTION4');
-  assert.equal(offerCursorTrial(memory,newState!,frames[3]!,false,true,preference)?.basis,'motor_scale');
+  const reorder={...newState!,available_action_refs:[...newState!.available_action_refs].reverse()};
+  assert.equal(offerCursorTrial(memory,reorder,frames[3]!,false,true,preference),null);
+  const changedControls={...newState!,available_action_refs:newState!.available_action_refs.filter(action=>action!=='ACTION1')};
+  assert.equal(offerCursorTrial(memory,changedControls,frames[3]!,false,true,preference)?.basis,'motor_scale');
 });
 
 test('defers a click based on incompatible movement scales until the current exploration stalls',async()=>{
