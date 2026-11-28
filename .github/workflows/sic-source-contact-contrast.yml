@@ -1,4 +1,4 @@
-name: SIC source contact under new cue morphologies
+name: SIC source contact using returns from any executing family
 
 on:
   push:

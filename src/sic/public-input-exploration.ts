@@ -951,14 +951,18 @@ export function createSicPublicInputExploration(fallback = false,
       const coverageFrontier = coverageKey ? { action: coverageKey, probe: coverageKey, depth: 0, first: null } : null;
       const markTrial = !panel && !pressure && !exchange && !coverage ? chooseAnnotatedMarkContact(local.travel, rows, nonPoint) : undefined;
       const markKey = markTrial?.command.action_ref;
-      const canTravel = !panel && !pressure && !exchange && !coverage && !markTrial && local.experiments >= 5 && nonPoint.length >= 2;
+      const travelAvailable = !panel && !pressure && !exchange && !coverage && !markTrial && nonPoint.length >= 2;
+      const canTravel = travelAvailable && local.experiments >= 5;
       const contactTrial = fallback && canTravel && local.contactMemory && local.coverageTransfer && local.coverage && local.travel
         ? chooseContactExperiment(local.contactMemory, local.coverageTransfer, local.coverage, local.travel, rows) : undefined;
       const separation = canTravel && fallback && !local.coverage?.motion && observation.available_action_refs.every(input => /^ACTION[1-4]$/.test(input))
         ? chooseSeparationTrial(local.travel, rows, nonPoint, local.separationTests ?? []) : undefined;
+      const publicTravel = travelAvailable && (canTravel || options.allowUnframedContact)
+        ? chooseTravelTrial(local.travel, rows, nonPoint, observation.available_action_refs.includes('ACTION6'), options.allowUnframedContact)
+        : undefined;
       const travel = contactTrial ? { command: contactTrial.command, target: contactTrial.actor.split(',').map(Number) as [number, number],
         purpose: contactTrial.purpose, evidence: contactTrial.evidence, experiment: undefined } : separation
-        ?? (canTravel ? chooseTravelTrial(local.travel, rows, nonPoint, observation.available_action_refs.includes('ACTION6'), options.allowUnframedContact) : undefined);
+        ?? (canTravel || publicTravel?.purpose === 'test_contact_hypothesis' ? publicTravel : undefined);
       const fallbackProjection = fallback && (!panel || state.relayTransfer?.witness || state.programWitness || state.outletWitness || state.catalogueTransfer?.witness || state.panelServiceTransfer?.recall) && !pressure
         ? await chooseFallbackProjection(local.fallbackProjection, observation, rows, inputs, remaining, execution, state, !!panel) : undefined;
       const budget = fallbackProjection || state.orderedEntryTransfer?.epoch === observation.level_epoch - 1 || panel || travel || coverage || exchange || markTrial || pressure || joint ? remaining : Math.min(remaining, explorationLimit - local.experiments);
@@ -1434,20 +1438,24 @@ export function createSicPublicInputExploration(fallback = false,
         await acquireTransfer(before, after, command, rows, afterRows, frames ?? []);
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return;
-      if (state.coverageTransfer?.epoch === before.level_epoch - 1 && state.coverageTransfer.motion === 'push'
-        && before.available_action_refs.length === 4 && before.available_action_refs.every(input => /^ACTION[1-4]$/.test(input))) {
-        enterEpoch(before.level_epoch);
-        const previous = state.travel, travel = observeTravel(previous, rows, afterRows, command, after.observation_ref, options.allowUnframedContact);
-        if (travel) state.travel = travel;
-        const access = observePushAccess(state.pushAccess, previous, travel, rows, afterRows, command, after.observation_ref);
-        if (access) state.pushAccess = access;
-      }
-      if ((frames?.length ?? 0) > 1 && /^ACTION[1-4]$/.test(command.action_ref) && before.available_action_refs.includes('ACTION5')) {
+      const pushAccess = state.coverageTransfer?.epoch === before.level_epoch - 1 && state.coverageTransfer.motion === 'push'
+        && before.available_action_refs.length === 4 && before.available_action_refs.every(input => /^ACTION[1-4]$/.test(input));
+      const moved = /^ACTION[1-4]$/.test(command.action_ref);
+      const pressureAccess = moved && (frames?.length ?? 0) > 1 && before.available_action_refs.includes('ACTION5');
+      const contactAccess = fallback && options.allowUnframedContact && moved;
+      if (pushAccess || pressureAccess || contactAccess) {
         const previous = state.epoch === before.level_epoch ? state.travel : undefined;
-        const tracked = annotateTravelMarks(observeTravel(previous, rows, afterRows, command, after.observation_ref, options.allowUnframedContact), rows);
-        if (tracked?.grid.annotatedMarks) {
+        const measured = observeTravel(previous, rows, afterRows, command, after.observation_ref, options.allowUnframedContact);
+        const tracked = pressureAccess ? annotateTravelMarks(measured, rows) : measured;
+        if (pushAccess || contactAccess || tracked?.grid.annotatedMarks) {
           enterEpoch(before.level_epoch);
-          state.travel = tracked;
+          if (tracked) state.travel = tracked;
+        }
+        if (pushAccess) {
+          const access = observePushAccess(state.pushAccess, previous, tracked, rows, afterRows, command, after.observation_ref);
+          if (access) state.pushAccess = access;
+        }
+        if (pressureAccess && tracked?.grid.annotatedMarks) {
           const pressure = observePressureReserve(state.pressureReserve, tracked, rows, afterRows, command, after.observation_ref);
           if (pressure) state.pressureReserve = pressure;
         }

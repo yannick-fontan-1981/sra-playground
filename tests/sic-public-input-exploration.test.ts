@@ -64,7 +64,7 @@ test('a measured tile displacement gives untried directions a turn after a block
   assert.deepEqual(amongOtherChanges?.moves.ACTION4?.delta, [3, 0]);
 });
 
-test('a stable unframed feature suggests a contact only with current movement evidence', () => {
+test('a stable unframed feature suggests a contact from witnessed returns owned by other families', async () => {
   const board = (at: readonly [number, number]) => {
     const rows = Array.from({ length: 15 }, () => Array<number>(15).fill(3));
     rows[7]![12] = rows[7]![13] = 11;
@@ -93,6 +93,16 @@ test('a stable unframed feature suggests a contact only with current movement ev
   const changed = board([6, 6]);
   changed[7]![13] = 8;
   assert.equal(chooseTravelTrial(state, changed, inputs, false, true), undefined);
+  const observations = await Promise.all([start, moved, turned].map((rows, index) =>
+    measureNativeObservation({ frame_rows: rows, frame_hash: 'contact-' + index, level: 1,
+      levels_completed: 0, available_action_refs: ['ACTION4', 'ACTION2'], state: 'NOT_FINISHED' }, index + 1)));
+  const adopted = createSicPublicInputExploration(true, { allowUnframedContact: true });
+  await adopted.observePublicOutcome!(observations[0]!, observations[1]!, right, start, moved);
+  await adopted.observePublicOutcome!(observations[1]!, observations[2]!, down, moved, turned);
+  const proposal = await adopted.propose(observations[2]!, turned, inputs, 10);
+  assert.equal(proposal?.actions[0]?.action_ref, 'ACTION4');
+  assert.equal(proposal?.sicSituationCard?.unframedContactHypothesis, true);
+  assert.ok(proposal?.sicSituationCard?.evidence?.includes(observations[1]!.observation_ref));
 });
 
 test('a separated panel gets a turn between movement probes despite unrelated changes in the status strip', async () => {
