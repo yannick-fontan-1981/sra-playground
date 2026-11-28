@@ -1,0 +1,15 @@
+# COMB/46, qualification locale du gel
+
+Préenregistrement `8eec03c6`, harnais vérifié `07e70e95d36a9c9543927fda8dc1a9193a011fdd`. Sept préfixes natifs et 370 tests de parité et d'intégration passent. Le catalogue `8ce7ee35` et le gel `d0e7527c` concordent sur 16 gestes, avec 13 tickets de cette entrée. 10 min 53 s jusqu'au reçu, première passe agrégée réussie.
+
+| Moment | Calcul, décision et retour |
+| --- | --- |
+| N1/T1 `public_occurrence_recall / product_panel_composition / factor_product_experiment` | Les deux contrôles (24,20) et (38,20) ont les vocabulaires [4,9] et [4,8]. Les quatre cartes réalisent exactement le produit. Les deux effets sont inconnus. ACTION6(24,20) pose d'abord la question du premier facteur. Le retour [4,4] → [9,4] acquiert la seule arête correspondant au point contrôlé. |
+| N1/T2–T3 | T2 acquiert [9,4] → [9,8] pour le facteur 1. Au T3, les deux arêtes alimentent la compilation. Le reçu complet retenu examine six éléments et propose un pas du facteur 0 vers le dernier tuple [4,8], sous cycle et indépendance conditionnels. La commande est exécutée. Le niveau se termine officiellement, avec `matched:false` sur la comparaison qui n'a plus de tuple au même niveau. Aucune arête n'est ajoutée à partir de la nouvelle scène. |
+| N2, gestes globaux 4 à 10 | Un nouveau panneau de trois facteurs donne huit cartes. Après trois essais, le compilateur propose le mot d'indices [1,0,1,2]. Seul le premier geste est émis, car sa relation est encore à vérifier. Au geste 9, une arête déjà observée et un tuple conforme permettent la poursuite du même paquet de deux actions. Le second geste est revalidé sur [4,8,11], puis le moteur enregistre la limite officielle. |
+| Preuves retirées | Dupliquer une carte au T1 conserve les valeurs possibles des facteurs mais rend le catalogue incomplet. La famille laisse la décision à containment. Retirer l'arête du facteur 1 au T3 conserve la vue et repasse à ACTION6(38,20) sans prévision. Avec une réserve d'un geste au producteur au geste 7, les arêtes restent disponibles et aucune route entière n'est admise. Le plafond historique se manifeste aussi au geste 14, trois gestes restant pour N3. |
+| Retours construits T1 | La vue stationnaire conserve seulement le tuple initial. Le retour à deux facteurs modifiés retient le tuple et le contre-exemple, sans acquérir d'arête. Chacun repropose le contrôle du facteur 0 comme essai. |
+
+Le gel compose déjà mesure du produit, arête attribuée par contrôle, compilation conditionnelle et garde de reprise. Le compilateur émet un reçu descriptif et le service autorise le geste. Les contre-exemples multifactoriels sont journalisés. Le compilateur choisit ses cycles avec les arêtes et n'emploie pas directement ce journal pour invalider le modèle d'indépendance. La réserve compte des commandes émises, et le score officiel reste la seule preuve de niveau terminé. Aucun fichier de production modifié.
+
+[Commande de rejeu](README.md). Reçu local `artifacts/qualification-comb-46/07e70e95.json`, SHA-256 `44942fea84083750fa57a93946edfd9ef271738af8c8b4fb6f8a686f8d8a6de8`.
