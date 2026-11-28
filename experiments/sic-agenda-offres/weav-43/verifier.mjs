@@ -138,8 +138,9 @@ try{
   sameInput(rc,nc);
   assert.deepEqual(nc,{...rc,pairs:[]});
   assert.deepEqual(nc.incomingPairs,[pair]);
-  assert.deepEqual([noPair.next.family,noPair.next.kind,noPair.next.plan,noPair.next.command],
-    ['information_goal','experiment',null,point(28,61)]);
+  assert.deepEqual([noPair.next.family,noPair.next.kind,noPair.next.command],
+    ['information_goal','experiment',point(28,61)]);
+  assert.equal(Object.hasOwn(noPair.next,'plan'),false);
 
   await writeFile(values.recu,JSON.stringify({versions:{...versions,qualification:git('rev-parse','HEAD'),
     attendus:git('log','-1','--format=%H','--',fileURLToPath(new URL('ATTENDUS.md',import.meta.url)))},prefixes:6,native:g},null,2)+'\n');
