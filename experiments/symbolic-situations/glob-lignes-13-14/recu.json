@@ -1,0 +1,99 @@
+{
+  "shas": [
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "48aae7fc05ed8d8409b1aa3a05efa4fa9c65c06d"
+  ],
+  "départsParSHA": 9,
+  "gestesParSHA": 42,
+  "témoinEntréeLivréeParSHA": 6,
+  "dépendance": {
+    "nominal": [
+      "fixed_origin",
+      "fixed_origin_dependency",
+      "ACTION5",
+      {},
+      null
+    ],
+    "référenceAntérieure": [
+      "observed_frontier",
+      "experiment",
+      "ACTION6",
+      {
+        "x": 10,
+        "y": 17
+      },
+      null
+    ],
+    "retraitGel": [
+      "fixed_origin",
+      "fixed_origin_dependency",
+      "ACTION5",
+      {},
+      null
+    ],
+    "retraitBranche": [
+      "observed_frontier",
+      "experiment",
+      "ACTION6",
+      {
+        "x": 10,
+        "y": 17
+      },
+      null
+    ]
+  },
+  "accès": {
+    "nominal": [
+      "fixed_origin",
+      "fixed_program_origin_access",
+      "ACTION6",
+      {
+        "x": 31,
+        "y": 12
+      },
+      true
+    ],
+    "originesAdmissibles": [
+      10
+    ],
+    "cible": 23,
+    "autreCible": {
+      "origine": 11,
+      "cible": 24,
+      "point": {
+        "x": 37,
+        "y": 12
+      }
+    },
+    "placementAbsent": false,
+    "réessai": "ACTION6"
+  },
+  "réserve": {
+    "images": 66,
+    "transitionsParInstruction": {
+      "complet": 12,
+      "bornes": 1,
+      "palier": 12
+    },
+    "suiteBornes": [
+      "observed_frontier",
+      "experiment",
+      "ACTION6",
+      {
+        "x": 10,
+        "y": 17
+      },
+      null
+    ],
+    "suitePalier": [
+      "fixed_origin",
+      "fixed_program_origin_access",
+      "ACTION6",
+      {
+        "x": 31,
+        "y": 12
+      },
+      true
+    ]
+  }
+}
