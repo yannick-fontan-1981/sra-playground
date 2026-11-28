@@ -5,6 +5,7 @@ import type { ExecutionOptions, JsonObject, JsonValue, Primitive } from './ir.ts
 import type { NativeSrcReceipt } from './v6-src-program.ts';
 import type { NativeClickReturn } from './v6-native-click-return.ts';
 import type { FamilyAgendaReceipt } from '../sic/family-agenda.ts';
+import type { ControlEffectChild, ControlEffectReturn } from '../sic/control-effect-child.ts';
 export type NativeRows = readonly (readonly number[])[];
 export type NativePoint = readonly [x: number, y: number];
 export type NativeBox = readonly [left: number, top: number, right: number, bottom: number];
@@ -84,6 +85,7 @@ export interface NativeProposal extends NativeRecord {
   readonly binding?: NativeRecord;
   readonly facts?: NativeRecord;
   readonly compositions?: readonly NativeRecord[];
+  readonly controlEffectChild?: ControlEffectChild;
 }
 
 export interface NativeBeforeResult {
@@ -101,6 +103,7 @@ export interface NativeAfterResult {
 
 export interface NativeRecordResult extends NativeRecord {
   readonly events: readonly unknown[];
+  readonly controlEffectReturn?: ControlEffectReturn;
 }
 
 /** A conditional justification from actual acquired state, never an action ticket. */

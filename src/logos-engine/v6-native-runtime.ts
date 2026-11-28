@@ -33,6 +33,7 @@ import { OrderedRecruitment } from './v6-ordered-recruitment.ts';
 import { RankedWorkshop } from './v6-ranked-workshop.ts';
 import { compileRecoveryPack, isRecoveryStop } from '../sic/active-recovery.ts';
 import { nativePlanReceipt } from '../sic/native-plan-receipt.ts';
+import { controlEffectReturnMatches } from '../sic/control-effect-child.ts';
 import { buildVictoryReview, victoryReviewNodeId, type SicVictoryReview } from '../sic/victory-review.ts';
 import { createSicFieldRepair } from '../sic/field-repair.ts';
 import { createSicVerifyContactOrder, learnContactOrderId } from '../sic/ordered-contact.ts';
@@ -1822,6 +1823,14 @@ export class NativeV6Runtime implements NativeV6Backend {
       if (selectedIncomplete) nativeAcquisitionsIncomplete.push(this.acquisitionIncompletionReceipt(selectedFamily, 'selected', transition,
         record.native_acquisition_refusal as NativeRecord));
       if (!selectedIncomplete && record && this.caller && this.authority) this.retainSelectedAcquisition(selectedFamily, record, transition);
+      const child = prefix.sicPlan?.controlEffectChild;
+      const controlEffectReturn = record?.controlEffectReturn;
+      if (child && controlEffectReturn && !selectedIncomplete && transition.outcome.matched !== false
+        && controlEffectReturnMatches(child, controlEffectReturn, transition)) {
+        const dependency = { control_effect_return: controlEffectReturn };
+        compositionReturns.push(dependency);
+        this.note({ kind: 'native_composition_dependency', ...dependency });
+      }
       if (this.acquisitionFamilies) nativeAcquisitionsIncomplete.push(...await this.acquirePassiveFamilies(transition,
         prefix.proposal, Boolean(selectedSupport), prefix.family.id, acquisitionExecution, selectedIncomplete ? selectedFamily.id : null));
       const parentFamily = this.typedMaterialParentFamily();
@@ -1971,6 +1980,7 @@ export class NativeV6Runtime implements NativeV6Backend {
           objective: prefix.sicPlan.objective, subObjective: prefix.sicPlan.subObjective,
           ...(prefix.sicPlan.strategyObjective ? { strategyObjective: prefix.sicPlan.strategyObjective } : {}),
           ...(prefix.sicPlan.missingControl ? { missingControl: prefix.sicPlan.missingControl } : {}),
+          ...(prefix.sicPlan.controlEffectChild ? { controlEffectChild: prefix.sicPlan.controlEffectChild } : {}),
           observationRef: prefix.sicPlan.observationRef, index: prefix.sicPlan.index, planned: prefix.sicPlan.planned,
           ...(prefix.sicPlan.need ? { need: prefix.sicPlan.need } : {}),
           ...(prefix.sicPlan.prerequisite ? { prerequisite: prefix.sicPlan.prerequisite } : {}),

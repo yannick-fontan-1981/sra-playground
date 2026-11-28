@@ -1,6 +1,7 @@
 import type { NativeObservation, NativeProposal, SicActionCoverage } from '../logos-engine/v6-native-types.ts';
 import { readSicNeed } from './need-registry.ts';
 import { missingControlWitness } from './missing-control-strategy.ts';
+import { controlEffectChildIsCurrent } from './control-effect-child.ts';
 import type { ReasoningMode } from './reasoning-mode.ts';
 import { standalonePlanningFamilies } from './standalone-families.ts';
 
@@ -43,6 +44,9 @@ export function nativePlanReceipt(family: string, proposal: NativeProposal, obse
   const missingControl = missingControlWitness(proposal, command.action_ref, observation.observation_ref, mode);
   const need = readSicNeed(objectField(decision, 'need'));
   const prerequisite = readSicNeed(objectField(decision, 'prerequisite'));
+  const child = proposal.controlEffectChild;
+  const controlEffectChild = child && need && proposal.actions.length === 1 && index === 0
+    && controlEffectChildIsCurrent(child, need, observation, command) ? child : undefined;
   return {
     id: `sic-plan:${observation.observation_ref}`, family, strategy, objective, authority,
     subObjective: typeof subObjective === 'string' ? subObjective : null,
@@ -73,6 +77,7 @@ export function nativePlanReceipt(family: string, proposal: NativeProposal, obse
     ...(proposal.transportForecast ? { transportForecast: proposal.transportForecast } : {}),
     ...(proposal.exchangeForecast ? { exchangeForecast: proposal.exchangeForecast } : {}),
     ...(missingControl ? { missingControl } : {}),
+    ...(controlEffectChild ? { controlEffectChild } : {}),
     ...(need?.status === 'assigned' ? { need } : {}),
     ...(need?.status === 'assigned' && need.kind === 'observe_untried_input_effect'
       && prerequisite?.status === 'assigned' && prerequisite.kind === 'find_observable_frontier_access'
