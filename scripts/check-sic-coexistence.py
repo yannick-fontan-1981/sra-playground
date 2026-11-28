@@ -17,6 +17,7 @@ TWENTY_FIVE = "278d5b357d3e3328a32697fe402f3fa9d957d547"
 THIRTY_FIVE = "09aeb9e14e40b6115269e47267b47ba8d71708fd"
 FORTY_SIX = "ba2e7c6b8d10e04edc149ff836c065178757c62d"
 FIFTY_FIVE = "674b0dd19d693a66687990ab2a4368d981aa8fb9"
+SEVENTY_FIVE = "bf1cbf245055a60c4a253b9c6ee4be18ea9b8c2c"
 QUERY = "c0b9f4027f1df257d7b8c96f5656f9dbb83661f0"
 COMPONENTS = {
     "a5a90c3349ea49bba8e40055444cea2026bee962": "P05 et déplacement signé",
@@ -26,6 +27,19 @@ COMPONENTS = {
 
 
 def check_components(assembly):
+    if assembly == SEVENTY_FIVE:
+        check(git("rev-parse", assembly + "^").decode().strip() == FIFTY_FIVE, "Expected the sixty-five-line engine parent")
+        components = check_components(FIFTY_FIVE)
+        revision = "640bd882150f8164b2e6a1a7de6b85b16c52711f"
+        path = "src/logos-engine/v6-facet-examples.ts"
+        check(git("diff", "--name-only", FROZEN, revision, "--", "src").decode().splitlines() == [path],
+              "Unexpected ISOS component scope")
+        check(git("diff", "--name-only", FIFTY_FIVE, assembly).decode().splitlines() == [path],
+              "Unexpected change outside the corrected ISOS file")
+        check(git("rev-parse", FIFTY_FIVE + ":" + path) == git("rev-parse", FROZEN + ":" + path), path)
+        check(git("rev-parse", assembly + ":" + path) == git("rev-parse", revision + ":" + path), path)
+        components[revision] = {"purpose": "ligne 10, provenance du passage entre niveaux", "files": [path]}
+        return components
     if assembly == FIFTY_FIVE:
         check(git("rev-parse", FIFTY_FIVE + "^").decode().strip() == FORTY_SIX, "Expected the forty-six-line parent")
         components = check_components(FORTY_SIX)
@@ -113,7 +127,7 @@ def check_components(assembly):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("archive", type=Path)
-    parser.add_argument("--candidate", choices=(ASSEMBLY, TEN_LINES, NEXT_ASSEMBLY, TWENTY_FIVE, THIRTY_FIVE, FORTY_SIX, FIFTY_FIVE),
+    parser.add_argument("--candidate", choices=(ASSEMBLY, TEN_LINES, NEXT_ASSEMBLY, TWENTY_FIVE, THIRTY_FIVE, FORTY_SIX, FIFTY_FIVE, SEVENTY_FIVE),
                         default=ASSEMBLY)
     parser.add_argument("--workflow", required=True)
     parser.add_argument("--run", required=True)
@@ -125,7 +139,7 @@ def main():
     rows = chain["load_archive"](args.archive, args.candidate, args.run, args.workflow, list(frozen), counts)
     parent = None
     parent_sha = {TEN_LINES: ASSEMBLY, NEXT_ASSEMBLY: TEN_LINES, TWENTY_FIVE: NEXT_ASSEMBLY, THIRTY_FIVE: TWENTY_FIVE,
-                  FORTY_SIX: THIRTY_FIVE, FIFTY_FIVE: FORTY_SIX}.get(args.candidate)
+                  FORTY_SIX: THIRTY_FIVE, FIFTY_FIVE: FORTY_SIX, SEVENTY_FIVE: FIFTY_FIVE}.get(args.candidate)
     if parent_sha:
         base = ROOT / "docs/diagnostics" / ("sic-coexistence-" + parent_sha[:8])
         ledger = json.loads((base / "qualification.json").read_bytes())
