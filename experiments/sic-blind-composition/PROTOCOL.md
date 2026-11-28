@@ -16,3 +16,9 @@ L’opérateur de réserve conserve hors dépôt les instances, les mondes vrais
 ## Format remis à l’opérateur
 
 Fichier JSON v1 avec `cases` et `transfers`. Chaque cas porte `id`, `family`, `domain`, l’index privé `actualWorld` et éventuellement `pair`. Le domaine public porte `objective: "win"`, la liste ordonnée `actions`, `budget: {commands: 12, states: 12000}`, les `worlds`, et éventuellement `scope`. Chaque monde fournit `start`, `nodes` et les liaisons d’hypothèse facultatives `roles`. Chaque nœud porte une `view` publique et, soit son `outcome` terminal, soit une transition `next` totale sur les commandes. Les mondes d’un même domaine ont la même vue de départ. Une paire indiscernable réemploie le même domaine dans deux mondes vrais différents. Un transfert porte `from`, `to` et `role`.
+
+## Confirmation avec tickets V6
+
+Le deuxième lot utilise des instances fraîches et scellées séparément. Avec `--native`, les deux bras passent par le même `V6AgentService` et le même `NativeV6Runtime`. Un adaptateur représente le signal public et les commandes du terrain construit dans un raster. Chaque geste doit avoir un ticket natif lié à un point autorisé. Chaque retour est mesuré par le comparateur natif et scellé avant le suivant. Le même seuil et les mêmes budgets s’appliquent.
+
+Ce lot confirme la chaîne autorisation, jeu, retour et reprise sur des terrains construits. Les modèles déclaratifs publics restent fournis aux deux bras. L’acquisition de ces modèles par la perception d’un jeu source fera l’objet d’une validation distincte avant la première campagne SS08–SS25.

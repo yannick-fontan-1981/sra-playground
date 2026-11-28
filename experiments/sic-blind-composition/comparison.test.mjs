@@ -32,6 +32,10 @@ test('conditional planning takes a step that produces information only later', (
   assert.equal(fixed.decide().stop, 'observation_needed');
   const active = createPolicy(domain, 'active', { scope, role: 'control', action: 'first' });
   assert.equal(active.decide().action, 'pulse');
+  const saved = JSON.parse(JSON.stringify(active.checkpoint()));
+  assert.equal(active.expects({ view: 'two', outcome: null }), false);
+  assert.deepEqual(active.record({ view: 'start', outcome: null }).known, {});
+  active.restore(saved);
   assert.deepEqual(active.record({ view: 'start', outcome: null }).known, {});
   assert.equal(active.decide().action, 'inspect');
   const evidence = active.record({ view: 'two', outcome: null }).known.control;
@@ -49,7 +53,7 @@ test('both policies abstain when compatible worlds require opposing irreversible
   }
 });
 
-test('the standalone comparator runs isolated children and checks the preregistered digest', () => {
+for (const native of [false, true]) test('isolated comparator and digest verification, native=' + native, () => {
   const dir = mkdtempSync(join(tmpdir(), 'sic-blind-development-'));
   const cases = join(dir, 'cases.json'), report = join(dir, 'report.json');
   const domain = makeDomain(true), ambiguous = makeDomain(false);
@@ -60,17 +64,19 @@ test('the standalone comparator runs isolated children and checks the preregiste
   ], transfers: [{ from: 'public', to: 'paired-a', role: 'control' }] }));
   const compare = fileURLToPath(new URL('./compare.mjs', import.meta.url));
   const run = digest => spawnSync(process.execPath,
-    [compare, '--cases', cases, '--sha256', digest, '--report', report], { encoding: 'utf8' });
+    [compare, '--cases', cases, '--sha256', digest, '--report', report, ...(native ? ['--native'] : [])],
+    { encoding: 'utf8' });
   const mismatch = run('0'.repeat(64));
   assert.notEqual(mismatch.status, 0);
   assert.match(mismatch.stderr, /Reserve digest mismatch/);
   const result = run(createHash('sha256').update(readFileSync(cases)).digest('hex'));
   assert.equal(result.status, 0, result.stderr);
-  const { summary } = JSON.parse(readFileSync(report));
+  const { summary, cases: recordings } = JSON.parse(readFileSync(report));
   assert.equal(summary.total.fixedWins, 0);
   assert.equal(summary.total.activeWins, 1);
   assert.equal(summary.ambiguity.activeLosses, 0);
   assert.equal(summary.transfers.exported, 1);
   assert.equal(summary.transfers.changesInExecutedAction, 0);
   assert.equal(summary.gate.passed, false);
+  if (native) assert.ok(recordings[0].active.moves.every(move => move.nativeTicket && move.nativeSealed));
 });

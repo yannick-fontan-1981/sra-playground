@@ -10,6 +10,8 @@ import { budget, signal, validate } from './domain.mjs';
 const directory = fileURLToPath(new URL('.', import.meta.url));
 const worker = fileURLToPath(new URL('./policy.mjs', import.meta.url));
 const composer = fileURLToPath(new URL('../../src/sic/effect-composer.ts', import.meta.url));
+const sourceDirectory = fileURLToPath(new URL('../../src/', import.meta.url));
+const referenceTree = fileURLToPath(new URL('../../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/composition_target_tree.json', import.meta.url));
 const earliest = (a, b) => {
   for (let index = 0; index <= Math.max(a.moves.length, b.moves.length); index++) {
     const first = a.moves[index]?.action ?? a.stop;
@@ -26,13 +28,13 @@ function projection({ actions, worlds, objective, budget, scope }) {
   })) };
 }
 
-async function play(test, mode, prior) {
+async function play(test, mode, prior, native) {
   const { domain, actualWorld } = test;
   const world = domain.worlds[actualWorld];
   let cursor = world.start, known = {}, stop, states = 0;
   const moves = [];
-  const child = spawn(process.execPath, ['--permission', '--allow-fs-read=' + directory,
-    '--allow-fs-read=' + composer, worker, 'worker'], {
+  const readPaths = native ? [directory, sourceDirectory, referenceTree] : [directory, composer];
+  const child = spawn(process.execPath, ['--permission', ...readPaths.map(path => '--allow-fs-read=' + path), worker, 'worker'], {
     stdio: ['pipe', 'pipe', 'inherit'],
     timeout: 30_000,
   });
@@ -52,7 +54,7 @@ async function play(test, mode, prior) {
     states = decision.states;
   }
   try {
-    let decision = await request({ type: 'start', domain: projection(domain), mode, prior });
+    let decision = await request({ type: 'start', domain: projection(domain), mode, prior, native });
     while (!world.nodes[cursor].outcome) {
       recordCost(decision);
       const action = decision.action;
@@ -62,11 +64,14 @@ async function play(test, mode, prior) {
       }
       assert.ok(moves.length < budget.commands, 'Command budget exceeded');
       assert.ok(domain.actions.includes(action), 'Illegal command');
+      if (native) assert.equal(decision.nativeTicket, true);
       const next = world.nodes[cursor].next[action];
       assert.ok(Object.hasOwn(world.nodes, next), 'Illegal world transition');
       const returned = signal(world.nodes[next]);
-      moves.push({ action, route: decision.route, returned, states: decision.states });
       const reply = await request({ type: 'return', signal: returned });
+      if (native) assert.equal(reply.nativeSealed, true);
+      moves.push({ action, route: decision.route, returned, states: decision.states,
+        ...(native ? { nativeTicket: true, nativeSealed: true } : {}) });
       known = reply.acquisition.known;
       decision = reply.decision;
       cursor = next;
@@ -137,9 +142,10 @@ function summarize(cases, transfers) {
 const { values } = parseArgs({ options: {
   cases: { type: 'string' }, sha256: { type: 'string' }, report: { type: 'string' },
   summary: { type: 'string' },
+  native: { type: 'boolean', default: false },
 } });
 assert.ok(values.cases && values.report && /^[0-9a-f]{64}$/.test(values.sha256 ?? ''),
-  'Usage: node compare.mjs --cases private.json --sha256 digest --report private-report.json [--summary aggregate.json]');
+  'Usage: node compare.mjs --cases private.json --sha256 digest --report private-report.json [--summary aggregate.json] [--native]');
 const bytes = await readFile(values.cases);
 const hash = createHash('sha256').update(bytes).digest('hex');
 assert.equal(hash, values.sha256, 'Reserve digest mismatch');
@@ -166,8 +172,8 @@ for (const members of pairs.values()) {
   assert.notEqual(members[0].actualWorld, members[1].actualWorld);
 }
 for (const test of inputs.values()) {
-  const fixed = await play(test, 'fixed');
-  const active = await play(test, 'active');
+  const fixed = await play(test, 'fixed', undefined, values.native);
+  const active = await play(test, 'active', undefined, values.native);
   records.set(test.id, { id: test.id, family: test.family, pair: test.pair, fixed, active,
     firstDifference: earliest(fixed, active) });
 }
@@ -178,7 +184,7 @@ for (const { from, to, role } of input.transfers) {
   assert.ok(typeof role === 'string' && role);
   const prior = Object.hasOwn(source.active.known, role) ? source.active.known[role] : undefined;
   const withoutEvidence = target.active;
-  const withEvidence = await play(test, 'active', prior);
+  const withEvidence = await play(test, 'active', prior, values.native);
   if (!prior) assert.deepEqual(withEvidence, withoutEvidence);
   const firstDifference = earliest(withoutEvidence, withEvidence);
   const turn = firstDifference?.turn;
@@ -186,7 +192,7 @@ for (const { from, to, role } of input.transfers) {
   transfers.push({ from, to, role, prior, withEvidence, withoutEvidence, firstDifference, actionChanged });
 }
 const cases = [...records.values()];
-const summary = { sha256: hash, budget, illegalCommands: 0, ...summarize(cases, transfers) };
+const summary = { sha256: hash, budget, native: values.native, illegalCommands: 0, ...summarize(cases, transfers) };
 await writeFile(values.report, JSON.stringify({ summary, cases, transfers }, null, 2) + '\n', { flag: 'wx' });
 if (values.summary) await writeFile(values.summary, JSON.stringify(summary, null, 2) + '\n', { flag: 'wx' });
 console.log(JSON.stringify({ sha256: hash, budget, gate: summary.gate,

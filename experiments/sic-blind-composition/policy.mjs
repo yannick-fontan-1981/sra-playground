@@ -4,6 +4,10 @@ import { composePlan } from '../../src/sic/effect-composer.ts';
 import { knownRole, publicModel, signalKey, validate } from './domain.mjs';
 
 const terminal = { action: null };
+const savePlan = plan => !plan || plan.action === null ? plan :
+  { action: plan.action, branches: Array.from(plan.branches, ([key, next]) => [key, savePlan(next)]) };
+const loadPlan = plan => !plan || plan.action === null ? plan :
+  { action: plan.action, branches: new Map(plan.branches.map(([key, next]) => [key, loadPlan(next)])) };
 
 function linearPlan(model, belief, ordered, remaining, counter) {
   if (!counter.left()) return undefined;
@@ -146,7 +150,22 @@ export function createPolicy(domain, mode, prior) {
     pending = undefined;
     return { known: Object.fromEntries(known), hypotheses: belief.length };
   }
-  return { decide, record };
+  function expects(returned) {
+    assert.ok(pending !== undefined);
+    return model.partition(model.advance(belief, pending)).has(signalKey(returned));
+  }
+  function checkpoint() {
+    return structuredClone({ belief, visits, turns, pending: pending ?? null, fixed,
+      active: savePlan(active) ?? null, known: [...known] });
+  }
+  function restore(saved) {
+    ({ belief, visits, turns, pending, fixed } = structuredClone(saved));
+    pending ??= undefined;
+    active = loadPlan(saved.active);
+    known.clear();
+    for (const [role, fact] of saved.known) known.set(role, fact);
+  }
+  return { decide, record, expects, checkpoint, restore };
 }
 
 if (process.argv[2] === 'worker') {
@@ -159,11 +178,18 @@ if (process.argv[2] === 'worker') {
       case 'start':
         assert.equal(policy, undefined);
         policy = createPolicy(request.domain, request.mode, request.prior);
-        answer = policy.decide();
+        if (request.native) {
+          const { createNativeBridge } = await import('./native.mjs');
+          policy = createNativeBridge(request.domain, policy);
+          answer = await policy.start();
+        } else answer = policy.decide();
         break;
       case 'return': {
-        const acquisition = policy.record(request.signal);
-        answer = { acquisition, decision: request.signal.outcome ? null : policy.decide() };
+        if (policy.advance) answer = await policy.advance(request.signal);
+        else {
+          const acquisition = policy.record(request.signal);
+          answer = { acquisition, decision: request.signal.outcome ? null : policy.decide() };
+        }
         break;
       }
       default:
