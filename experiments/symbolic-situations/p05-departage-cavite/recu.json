@@ -1,0 +1,138 @@
+{
+  "sha": {
+    "base": "162e45506cd9196171c15cb2402cf2ca1ee4266d",
+    "candidat": "3047ef55a7a06d4560a07d36dfaf08719c50c802"
+  },
+  "stats": {
+    "departsParSha": 4,
+    "gestesParSha": 28
+  },
+  "preuvesÉgales": true,
+  "dir": [
+    [
+      "ACTION1",
+      1,
+      "selected"
+    ],
+    [
+      "ACTION4",
+      1,
+      "lower_priority"
+    ]
+  ],
+  "résultats": [
+    {
+      "départ": "nominal",
+      "t6": {
+        "commande": "ACTION1",
+        "auteur": "sliding_cavity",
+        "retour": {
+          "ref": "as66-operator-p05-tiebreak:epoch:2:revision:7:frame:9e25d42a95c97b84",
+          "reason": "unknown_input_direction_requires_observed_response_before_route_binding",
+          "family": "sliding_cavity",
+          "matched": null
+        },
+        "pixels": 80,
+        "paquet": "84ea3bd76484ab18290458e904e43dd5f7a551e48aa403c7efea1da0f67319f2"
+      },
+      "t7": {
+        "commande": "ACTION4",
+        "suite": "cavity_direction_question",
+        "retour": {
+          "ref": "as66-operator-p05-tiebreak:epoch:2:revision:8:frame:e060bc943f5637c5",
+          "reason": "unknown_input_direction_requires_observed_response_before_route_binding",
+          "family": "sliding_cavity",
+          "matched": null
+        }
+      },
+      "nouvelleDirection": [
+        -1,
+        0
+      ]
+    },
+    {
+      "départ": "première",
+      "t6": {
+        "commande": "ACTION4",
+        "auteur": "sliding_cavity",
+        "retour": {
+          "ref": "as66-operator-p05-tiebreak:epoch:2:revision:7:frame:1d4db55871a6a88a",
+          "reason": "unknown_input_direction_requires_observed_response_before_route_binding",
+          "family": "sliding_cavity",
+          "matched": null
+        },
+        "pixels": 82,
+        "paquet": "b397d52189c4541033f98696702c5b4492d404cd8d9844130110691c5554bbfe"
+      },
+      "t7": {
+        "commande": "ACTION2",
+        "suite": "sliding_cavity_access",
+        "retour": {
+          "ref": "as66-operator-p05-tiebreak:epoch:2:revision:8:frame:5049d5e79ade29e4",
+          "reason": "compare_frozen_slide_endpoint_and_static_support",
+          "family": "sliding_cavity",
+          "matched": true
+        }
+      },
+      "nouvelleDirection": [
+        0,
+        1
+      ]
+    },
+    {
+      "départ": "seconde",
+      "t6": {
+        "commande": "ACTION1",
+        "auteur": "sliding_cavity",
+        "retour": {
+          "ref": "as66-operator-p05-tiebreak:epoch:2:revision:7:frame:9e25d42a95c97b84",
+          "reason": "unknown_input_direction_requires_observed_response_before_route_binding",
+          "family": "sliding_cavity",
+          "matched": null
+        },
+        "pixels": 80,
+        "paquet": "84ea3bd76484ab18290458e904e43dd5f7a551e48aa403c7efea1da0f67319f2"
+      },
+      "t7": {
+        "commande": "ACTION4",
+        "suite": "cavity_direction_question",
+        "retour": {
+          "ref": "as66-operator-p05-tiebreak:epoch:2:revision:8:frame:e060bc943f5637c5",
+          "reason": "unknown_input_direction_requires_observed_response_before_route_binding",
+          "family": "sliding_cavity",
+          "matched": null
+        }
+      },
+      "nouvelleDirection": [
+        -1,
+        0
+      ]
+    },
+    {
+      "départ": "deux",
+      "t6": {
+        "commande": "ACTION2",
+        "auteur": "observed_frontier",
+        "retour": {
+          "ref": "as66-operator-p05-tiebreak:epoch:2:revision:7:frame:61737ec70d48f211",
+          "reason": null,
+          "family": "observed_frontier",
+          "matched": null
+        },
+        "pixels": 80,
+        "paquet": "b969fedaf67314bf3e9ff67d8632e323de691c0987fb7fb3a196ec70b092bd75"
+      },
+      "t7": {
+        "commande": "ACTION1",
+        "suite": "cavity_direction_question",
+        "retour": {
+          "ref": "as66-operator-p05-tiebreak:epoch:2:revision:8:frame:9e25d42a95c97b84",
+          "reason": "unknown_input_direction_requires_observed_response_before_route_binding",
+          "family": "sliding_cavity",
+          "matched": null
+        }
+      },
+      "nouvelleDirection": null
+    }
+  ]
+}
