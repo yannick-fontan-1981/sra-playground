@@ -1,0 +1,9 @@
+# REGN/80 · retour à une branche et question encore ouverte
+
+Référence moteur `d0e7527ca8033bd805a6d7a8bb021eff62e87021`, révision de preuve annoncée `6bfb8ccf9df3aa8597e74f0fd3f30a5744c55b35`. [Attendus publics](https://github.com/yannick-fontan-1981/sra-playground/blob/37eb151c/experiments/sic-agenda-offres/regn-80/ATTENDUS.md).
+
+1. Repartir du vrai N1 et **communiquer** un maximum global de 16 gestes. À N1/T3 vérifier la fermeture sans score, l’accès connu et son retour. À T4 identifier la branche, la commande réellement émise, le caractère prédit ou exploratoire de l’effet et la reprise. Refaire ce contrôle au N2 sur les tours globaux 8, 9 et 10. Examiner l’acquisition à la date de chaque retour.
+2. À présentation et histoire du service identiques, retirer uniquement au fournisseur de contraste la dernière transition prouvant le retour, aux choix T3 et T8 dans deux départs indépendants. Le fournisseur doit perdre la preuve de fermeture. Exécuter le ticket réellement délivré, même si la commande coïncide avec l’historique.
+3. À épisode complet, retirer de son domaine la question encore ouverte ciblée. À T3, puis séparément à T8, vérifier si une autre question justifie un autre choix ou si la famille s’efface. Distinguer l’existence d’une route connue de la raison de l’emprunter.
+4. Contrôle d’attribution indépendant : associer le reçu de la première sonde inédite à l’accès précédent, puis le reçu du N1 à un ticket du N2. Un vérificateur doit refuser les deux associations en contrôlant le ticket et les occurrences avant et après.
+5. Relancer les 16 premiers gestes avec une borne **communiquée de 600**, sans changer la limite de lecture de 16. Dater la première différence de famille, de commande ou d’effet. Ce départ documente la portée de la borne et reste distinct des autres. Le verdict de 80 se limite aux situations de contraste ; la ligne 22 dispose de son propre lot.
