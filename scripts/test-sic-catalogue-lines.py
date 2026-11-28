@@ -14,6 +14,8 @@ cases = {
              ["docs/migration/native-campaigns-v52/final/gare-public-trace.json.gz", "tests/fixtures/sic-gare-alternate-returns.json.gz"]),
     "LIFE": ("f005be662b0e4b556a0cea3d246381cd98eec7ae", "life-three-lines", "sic-observe-life-material",
              ["docs/migration/native-campaigns-v50/life-public-trace-final.json.gz", "tests/fixtures/sic-life-alternate-returns.json.gz"]),
+    "GRIL": ("915e0601e3aad82653733ac602909bef2286343d", "gril-lines-40-54", "sic-observe-gril-catalogue",
+             ["docs/migration/native-campaigns-v49/gril-public-trace.json.gz", "tests/fixtures/sic-gril-alternate-returns.json.gz"]),
     "TN36": ("0da75640d974e9fbe3b44b78b07649344169c470", "tn36-line-5", "sic-observe-tn36-code",
              ["tests/fixtures/sic-tn36-public-returns.json.gz"]),
     "WA30": ("14a185d909d3b3cb42fcc8584b841865b8ff6dd0", "wa30-contact-lines", "sic-observe-wa30-contacts",
