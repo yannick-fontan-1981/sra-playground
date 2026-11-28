@@ -1,0 +1,101 @@
+{
+  "fixture": {
+    "pre": {
+      "observation": "frontier-qualification:epoch:1:revision:4:frame:9d2f902488899a5a",
+      "index": "observation-index:a456261c0f98c1dc5bfa1fb352f12e2a3fcc6aff602662d953776531ef6bd8c3",
+      "epoch": 1,
+      "frame": "9d2f902488899a5a",
+      "sequence": 10,
+      "graphChain": "6e0444df1ad67644cabcdac4e00c2391dc46e25b9f2dbfbac0d9ec8e51580527",
+      "inputOrder": "least_tried",
+      "local": null,
+      "domain": [
+        {
+          "command": {
+            "action_ref": "ACTION4"
+          },
+          "tried": [
+            "transition:30a314d67564e61f20c2c555774ee31eb3a64c02e69abc7f5591ebee2ddfe919"
+          ]
+        }
+      ],
+      "routeStatus": "found",
+      "remote": {
+        "ref": "Q_cdd50005b0e7fd09342c",
+        "context": "observation-index:e2dd20e69ec9362551c3e8ed882f149f1369557770b1703f20a6995aca040bf8",
+        "action": {
+          "action_ref": "ACTION3"
+        }
+      },
+      "path": [
+        {
+          "ref": "edge:90a5d80c253398d1dcc6a19acd383ec67c0cd25e0ca8ae1a17545eb1979e6dc6",
+          "source": "observation-index:a456261c0f98c1dc5bfa1fb352f12e2a3fcc6aff602662d953776531ef6bd8c3",
+          "target": "observation-index:e2dd20e69ec9362551c3e8ed882f149f1369557770b1703f20a6995aca040bf8",
+          "action": {
+            "action_ref": "ACTION4"
+          },
+          "witnesses": [
+            "transition:30a314d67564e61f20c2c555774ee31eb3a64c02e69abc7f5591ebee2ddfe919"
+          ]
+        }
+      ]
+    },
+    "sha256": "df883569559822899ec1b729232577d7fb9d51425617bef868718a21e825078c",
+    "parity": "54e234876907d1ac1b03510f26169458f13952c75b14fbb977639e78114a7e3f"
+  },
+  "references": [
+    {
+      "revision": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+      "game": "G50T",
+      "preSha256": "9789b4da9ec687e34c49aa444e0b9ab41fddf3ecb329cb7b647357cc8c485f13",
+      "question": "Q_36ce889058ea8eda599b",
+      "observation": "frontier-qualification:epoch:1:revision:1:frame:f79ab0e9d856fdf8",
+      "family": "observed_frontier",
+      "strategy": "test_local_input",
+      "ticket": "frontier-qualification:native:1",
+      "command": "ACTION1",
+      "after": "frontier-qualification:epoch:1:revision:2:frame:f79ab0e9d856fdf8",
+      "matched": null
+    },
+    {
+      "revision": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+      "game": "REGN",
+      "preSha256": null,
+      "question": null,
+      "observation": "frontier-qualification:epoch:3:revision:16:frame:af0bcad41eef9c48",
+      "family": "returned_branch_contrast",
+      "strategy": "returned_branch_contrast",
+      "ticket": "frontier-qualification:native:16",
+      "command": "ACTION4",
+      "after": "frontier-qualification:epoch:3:revision:17:frame:aa7d9c16b3d8fb20",
+      "matched": true
+    },
+    {
+      "revision": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "game": "G50T",
+      "preSha256": "9789b4da9ec687e34c49aa444e0b9ab41fddf3ecb329cb7b647357cc8c485f13",
+      "question": "Q_36ce889058ea8eda599b",
+      "observation": "frontier-qualification:epoch:1:revision:1:frame:f79ab0e9d856fdf8",
+      "family": "observed_frontier",
+      "strategy": "test_local_input",
+      "ticket": "frontier-qualification:native:1",
+      "command": "ACTION1",
+      "after": "frontier-qualification:epoch:1:revision:2:frame:f79ab0e9d856fdf8",
+      "matched": null
+    },
+    {
+      "revision": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "game": "REGN",
+      "preSha256": null,
+      "question": null,
+      "observation": "frontier-qualification:epoch:3:revision:16:frame:af0bcad41eef9c48",
+      "family": "returned_branch_contrast",
+      "strategy": "returned_branch_contrast",
+      "ticket": "frontier-qualification:native:16",
+      "command": "ACTION4",
+      "after": "frontier-qualification:epoch:3:revision:17:frame:aa7d9c16b3d8fb20",
+      "matched": true
+    }
+  ]
+}

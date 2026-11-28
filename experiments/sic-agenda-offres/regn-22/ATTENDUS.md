@@ -1,0 +1,9 @@
+# REGN · Recherche bornée de la ligne 22
+
+Moteur du gel `d0e7527ca8033bd805a6d7a8bb021eff62e87021`, branche distincte du témoin 80, parent expérimental `6bfb8ccf` sans changement de production. La recherche vise la famille `observed_frontier`, la stratégie `reach_open_input` et le plan `access`. Le catalogue publié à `2a17e14b` sur le moteur `8ce7ee35` donne REGN N3/T16, ACTION4 confirmée. La fixture à deux plateaux de `02032a3d` demeure un témoin distinct.
+
+Comparer deux départs intacts depuis N1. Même moteur, même agenda, même horloge, même partie, même nombre maximal de gestes enregistrés (16). Dans le premier, la limite 16 est transmise au moteur. Dans le second, seule la lecture s'arrête au 16e ticket et le moteur conserve les budgets de niveau de 600. Comparer à part une coupure de lecture à 15 à limite de planification fixe. Vérifier à la libération le vrai fournisseur, le titre, le type, les références de preuve et le ticket. Vérifier ensuite la trame effectivement rendue. Une commande et un accord identiques ne suffisent pas à attribuer une stratégie.
+
+Si les réglages du catalogue restent insuffisants, essayer un budget global voisin (17) et une horloge de planification réelle, sur la même partie sans modifier les questions. Une extension unique à 24 gestes de lecture, avec horizon 24, cherchera une autre occurrence de 22 si le geste 16 reste négatif. Les interventions construites ne seront pas comptées comme occurrences spontanées de la stratégie dans le jeu.
+
+Attendu discriminant pour une occurrence positive : aucune question locale à ce tour, trajet déjà observé vers une question encore ouverte, références des arêtes disponibles avant l'émission. Le reçu natif devra sélectionner explicitement 22 puis enregistrer l'effet du ticket. Une offre préemptée, un plan rejeté par le garde ou un ticket de continuation seront comptés séparément.
