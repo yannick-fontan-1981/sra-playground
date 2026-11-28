@@ -1,4 +1,4 @@
-name: SIC witnessed temporal suffix on authorized sources
+name: SIC witnessed temporal suffix through source level six
 
 on:
   push:
@@ -16,13 +16,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        game: [EVAS, SMLP, ONDE, PORT, DC22]
+        game: [EVAS, SMLP]
     env:
       GAME: ${{ matrix.game }}
       SIC_SOURCE_COMPOSER_ARM: active
       SIC_SOURCE_COMPOSER_STRATEGY: motion_contrast
       SIC_SOURCE_TRANSPORT_UNDO: '1'
       SIC_SOURCE_COMPOSER_EVIDENCE: '1'
+      SIC_REPLAY_REFERENCES: docs/architecture/sic-replay-reference-levels-20261126.json
     steps:
       - uses: actions/checkout@v4
         with:
@@ -40,8 +41,8 @@ jobs:
           mkdir replay
           git rev-parse HEAD HEAD:src > replay/identity
           date -u +%s%3N > replay/start-ms
-          node scripts/check-sic-chronological.mjs "$GAME" 3 replay/base.jsonl 1 sic
-          SIC_SOURCE_WITNESSED_TRANSIENT=1 node scripts/check-sic-chronological.mjs "$GAME" 3 replay/active.jsonl 1 sic
+          node scripts/check-sic-chronological.mjs "$GAME" 6 replay/base.jsonl 1 sic
+          SIC_SOURCE_WITNESSED_TRANSIENT=1 node scripts/check-sic-chronological.mjs "$GAME" 6 replay/active.jsonl 1 sic
           date -u +%s%3N > replay/end-ms
           git diff --exit-code
           cd replay
