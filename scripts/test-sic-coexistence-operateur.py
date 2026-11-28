@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import runpy
 import subprocess
+from zipfile import ZipFile
 
 common = runpy.run_path(str(Path(__file__).with_name("test-sic-coexistence.py")))
 BENCH, ASSEMBLY, git, copy_git = (common[k] for k in ("BENCH", "NEXT_ASSEMBLY", "git", "copy_git"))
@@ -22,10 +23,23 @@ def main():
     parser.add_argument("--node", default="node")
     parser.add_argument("--candidate", choices=(ASSEMBLY, common["TWENTY_FIVE"], common["THIRTY_FIVE"]), default=ASSEMBLY)
     parser.add_argument("--game", choices=("STCK", "VALV"))
+    parser.add_argument("--reference-archive", type=Path, help="Reuse the individual operator results from a previous assembly")
     args = parser.parse_args()
     out, vendor = args.output.resolve(), str(args.pyodide.resolve())
     out.mkdir(parents=True)
     summaries = {}
+    def reuse_reference(name, revision, test, files, dest):
+        key = name + "-" + revision[:8]
+        with ZipFile(args.reference_archive) as archive:
+            reference = json.loads(archive.read("defis/resultats.json"))[key]
+            assert reference["source"] == revision and reference["operator"] == test
+            assert set(reference["receipts"]) == set(files)
+            dest.mkdir()
+            for file in files:
+                data = archive.read(f"defis/{key}/{file}")
+                assert hashlib.sha256(data).hexdigest() == reference["receipts"][file]
+                (dest / file).write_bytes(data)
+
     for name, candidate, test, lab in [
         ("STCK", STCK, STCK_TEST, "stck-lignes-52-57-58"),
         ("VALV", VALV, VALV_TEST, "valv-ligne-48-provenance"),
@@ -35,31 +49,34 @@ def main():
         previous = None
         for revision in (candidate, args.candidate):
             dest = out / (name + "-" + revision[:8])
-            scripts = dest / LAB / lab
-            paths = git("ls-tree", "-r", "--name-only", test, LAB + lab).decode().splitlines()
-            if name == "VALV":
-                paths += [LAB + "valv-lignes-44-47-48/" + f for f in ["commun.mjs", "moteur.mjs"]]
-            copy_git(test, [p for p in paths if p.endswith(".mjs")] +
-                     [LAB + "ls19-ligne-90/montage.mjs", LAB + "ls19-ligne-90/worker.mjs", LAB + "g50t-ligne-23/dialogue.mjs"], dest)
-            # Only bind the standalone operator runner to the additional revision; keep the source, boards and checks intact.
-            if revision == args.candidate:
-                entry = scripts / ("commun.mjs" if name == "STCK" else "qualifier.mjs")
-                source = entry.read_text(encoding="utf8")
-                assert source.count(candidate) == 1
-                entry.write_text(source.replace(candidate, revision), encoding="utf8", newline="\n")
-
-            def run(module, *argv):
-                with (dest / (module + ".log")).open("wb") as log:
-                    subprocess.run([args.node, str(scripts / (module + ".mjs")), *map(str, argv)], cwd=BENCH,
-                                   stdout=log, stderr=subprocess.STDOUT, check=True)
-
-            if name == "STCK":
-                run("jeu", vendor, dest / "jeu.json", dest / "observations.gz")
-                run("qualifier", revision, "ordre", dest / "ordre.json", dest)
-                files = ["jeu.json", "ordre.json"]
+            files = ["jeu.json", "ordre.json"] if name == "STCK" else ["provenance.json"]
+            reuse = args.reference_archive is not None and revision == candidate
+            if reuse:
+                reuse_reference(name, revision, test, files, dest)
             else:
-                run("qualifier", revision, vendor, dest / "provenance.json")
-                files = ["provenance.json"]
+                scripts = dest / LAB / lab
+                paths = git("ls-tree", "-r", "--name-only", test, LAB + lab).decode().splitlines()
+                if name == "VALV":
+                    paths += [LAB + "valv-lignes-44-47-48/" + f for f in ["commun.mjs", "moteur.mjs"]]
+                copy_git(test, [p for p in paths if p.endswith(".mjs")] +
+                         [LAB + "ls19-ligne-90/montage.mjs", LAB + "ls19-ligne-90/worker.mjs", LAB + "g50t-ligne-23/dialogue.mjs"], dest)
+                # Only bind the standalone operator runner to the additional revision; keep the source, boards and checks intact.
+                if revision == args.candidate:
+                    entry = scripts / ("commun.mjs" if name == "STCK" else "qualifier.mjs")
+                    source = entry.read_text(encoding="utf8")
+                    assert source.count(candidate) == 1
+                    entry.write_text(source.replace(candidate, revision), encoding="utf8", newline="\n")
+
+                def run(module, *argv):
+                    with (dest / (module + ".log")).open("wb") as log:
+                        subprocess.run([args.node, str(scripts / (module + ".mjs")), *map(str, argv)], cwd=BENCH,
+                                       stdout=log, stderr=subprocess.STDOUT, check=True)
+
+                if name == "STCK":
+                    run("jeu", vendor, dest / "jeu.json", dest / "observations.gz")
+                    run("qualifier", revision, "ordre", dest / "ordre.json", dest)
+                else:
+                    run("qualifier", revision, vendor, dest / "provenance.json")
             rows = {}
             for file in files:
                 data = json.loads((dest / file).read_bytes())
@@ -69,7 +86,10 @@ def main():
                 assert rows == previous, name + " operator receipts changed"
             previous = rows
             hashes = {f: hashlib.sha256((dest / f).read_bytes()).hexdigest() for f in files}
-            summaries[name + "-" + revision[:8]] = {"source": revision, "operator": test, "receipts": hashes}
+            entry = {"source": revision, "operator": test, "receipts": hashes}
+            if reuse:
+                entry["referenceArchiveSHA256"] = hashlib.sha256(args.reference_archive.read_bytes()).hexdigest()
+            summaries[name + "-" + revision[:8]] = entry
     (out / "resultats.json").write_text(json.dumps(summaries, indent=2) + "\n", encoding="utf8", newline="\n")
 
 

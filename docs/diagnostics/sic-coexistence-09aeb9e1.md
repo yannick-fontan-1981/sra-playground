@@ -1,6 +1,6 @@
 # Coexistence de trente-cinq lignes SIC
 
-Le moteur d’essai `09aeb9e14e40b6115269e47267b47ba8d71708fd` descend directement du [moteur à 25 lignes](sic-coexistence-278d5b35.md). Le périmètre et l’arbre `src` `09123570bc9009c3526364ffea57086327af2afc` sont figés avant qualification à 00:50:48 UTC le 28 novembre 2026. Branche `experiment/sic-coexistence-trente-cinq-lignes`. Le commit de transport CI `90b019cfaf184b416f2e8c3fe41346a7bec4a29d` ajoute le seul workflow. [Diff du moteur](https://github.com/yannick-fontan-1981/sra-playground/compare/278d5b357d3e3328a32697fe402f3fa9d957d547...09aeb9e14e40b6115269e47267b47ba8d71708fd)
+Le moteur d’essai `09aeb9e14e40b6115269e47267b47ba8d71708fd` descend directement du [moteur à 25 lignes](sic-coexistence-278d5b35.md). Le périmètre et l’arbre `src` `09123570bc9009c3526364ffea57086327af2afc` sont figés avant qualification à 21:50:48 (UTC−3) le 27 novembre 2026. Branche `experiment/sic-coexistence-trente-cinq-lignes`. Le commit de transport CI `90b019cfaf184b416f2e8c3fe41346a7bec4a29d` ajoute le seul workflow. [Diff du moteur](https://github.com/yannick-fontan-1981/sra-playground/compare/278d5b357d3e3328a32697fe402f3fa9d957d547...09aeb9e14e40b6115269e47267b47ba8d71708fd)
 
 | Lignes du lot | Source et témoins de coexistence | Verdict indépendant du banc et de l’opérateur |
 |---|---|---|
@@ -16,9 +16,11 @@ Les trois fichiers moteur sont disjoints et leurs blobs correspondent aux révis
 
 ## Verdict
 
-**Campagne en cours au passage de relais.** Le SHA et la liste des 35 sont fixés. Le contrôle des 29 chemins de production et de leurs blobs passe. La campagne distante et les témoins locaux sont lancés. Le verdict des 107, leurs empreintes, le réimport 3/104/107 et le verdict de coexistence détaillée restent à établir sur cet arbre.
+**Les 35 lignes coexistent sur `09aeb9e1`.** Le banc retrouve les 381 tests hérités et 24 tests supplémentaires sur GARE, LIFE et SP80. Les deux tests du sélecteur de cellule de la ligne 41 sont hors périmètre. Les sept scénarios REGN et onze GLOB reproduisent leurs reçus distincts, dont le retrait de la dépendance GLOB 13 et le changement de besoin au T16 de REGN. Les témoins publics STCK et VALV concordent. Le premier témoin STCK a atteint le délai du dialogue sous charge concurrente. Le banc a repris le candidat en série avec le même délai et les reçus individuels de l’archive des 25, dont les empreintes ont été contrôlées. TypeScript passe avec `--noEmit`. [Témoins et journaux](sic-coexistence-09aeb9e1/temoins.zip)
 
-Sur ce poste, les sorties se trouvent dans `artifacts/qualification-coexistence-35/`. Le suivi `suivre.py` y attend le run 46090081248, télécharge ses artefacts, les contrôle puis réimporte la cohorte, le reste et les reçus déjà traités. Conserver cet identifiant lors de la reprise. Les témoins locaux écrivent leurs résultats dans des dossiers distincts. Pour les deux défis publics, les sorties sont `defis-STCK` et `defis-VALV`. La liaison REGN80, REGN22 et GLOB a déjà reproduit les archives sur leurs révisions individuelles. Les mesures de l’assemblage ont leur propre dossier. La commande d’audit ci-dessous s’applique après récupération des reçus.
+Les reçus de **107 jeux uniques, 692 niveaux et 18 560 commandes** concordent avec le gel et le parent à 25 lignes. Deux resets, SS01 et SS04, et zéro undo. Le verdict sur les 107 a la précision des reçus historiques. Les décisions, preuves et retours détaillés sont comparés sur les témoins rejoués. [Index par jeu](sic-coexistence-09aeb9e1/qualification.json) · [Reçus des 24 lots](sic-coexistence-09aeb9e1/recus.zip)
+
+Les 24 lots ont tourné en 13 min 34 s, avec un pic de 20 runners et 6372 secondes cumulées de rejeu. L’import de reprise vérifie trois jeux au premier passage, puis 104 nouveaux et trois réutilisés, puis 107 réutilisés. Verdict complet du banc à 27/11 22:13:31 (UTC−3), après 22 min 27 s. [Horaires](sic-coexistence-09aeb9e1/horaires.json)
 
 ## Reproduire
 
@@ -35,6 +37,12 @@ foreach ($jeu in 'GARE','LIFE','SP80') { py -3.11 scripts/test-sic-coexistence-c
 py -3.11 scripts/test-sic-coexistence-retours.py REGN80 ../sic-regn-80 $m ./tests-regn80
 py -3.11 scripts/test-sic-coexistence-retours.py REGN22 ../sic-regn-22 $m ./tests-regn22
 py -3.11 scripts/test-sic-coexistence-retours.py GLOB ../sic-glob-13-14 $m ./tests-glob
+```
+
+Pour le défi STCK, le banc a utilisé cet appel de reprise avec l’archive publiée du précédent assemblage. Le programme vérifie les empreintes et la révision du témoin individuel avant de comparer la nouvelle capture de l’assemblage.
+
+```powershell
+py -3.11 scripts/test-sic-coexistence-operateur.py ./defis-stck --candidate 09aeb9e14e40b6115269e47267b47ba8d71708fd --pyodide "$m/public/vendor/pyodide" --game STCK --reference-archive docs/diagnostics/sic-coexistence-278d5b35/temoins.zip
 ```
 
 Les sorties locales sont dans `artifacts/qualification-coexistence-35/`. Les lots d’origine sont sous `ci-46090081248/download`, l’état de reprise sous `reimport`. [Campagne unique sur 35 lignes](https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46090081248)
