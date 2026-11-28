@@ -1,0 +1,32 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 4,
+      "gestes": 39,
+      "testsAuteur": 2
+    },
+    {
+      "sha": "80d14be16d5f3d4fa1f84c0c92498902e96a5e3f",
+      "départs": 4,
+      "gestes": 39,
+      "testsAuteur": 2
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "catalogue": 16,
+  "premierPlan": {
+    "cases": 20,
+    "nominal": 5,
+    "sansPreuve": 1
+  },
+  "contrôleStationnaire": false,
+  "N2": {
+    "candidats": [
+      2,
+      1
+    ],
+    "opérateursAuT17": 3
+  },
+  "score": 1
+}
