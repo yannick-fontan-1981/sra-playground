@@ -8,6 +8,10 @@ expected = [f"SS{index:02d}" for index in range(8, 26)]
 root, target = [Path(path) for path in sys.argv[1:]]
 assert {path.name for path in root.iterdir()} == {f"sic-sealed-cohort-{game}" for game in expected}
 budget = {"actions": 80, "activeTimeMs": 90000, "source": "no_level_reference"}
+if "SIC_COMPARISON_ACTION_CAP" in os.environ or "SIC_COMPARISON_TIME_CAP_MS" in os.environ:
+    budget = {"actions": int(os.environ["SIC_COMPARISON_ACTION_CAP"]),
+              "activeTimeMs": int(os.environ["SIC_COMPARISON_TIME_CAP_MS"]), "source": "matched_comparison_cap"}
+assert budget["actions"] > 0 and budget["activeTimeMs"] > 0
 games, intervals = [], []
 for game in expected:
     directory = root / f"sic-sealed-cohort-{game}"
@@ -35,7 +39,7 @@ for game in expected:
         assert len(levels) >= won and row["actions"] == row["authority"]
         assert [level["level"] for level in levels] == list(range(1, len(levels) + 1))
         assert [level["won"] for level in levels] == [True] * won + [False] * (len(levels) - won)
-        assert all(level["budget"] == budget and 0 <= level["actions"] <= 80 for level in levels)
+        assert all(level["budget"] == budget and 0 <= level["actions"] <= budget["actions"] for level in levels)
         assert sum(level["actions"] for level in levels) == row["actions"]
         independently_serialized = [
             json.loads(line) for line in (directory / f"{arm}.jsonl.levels").read_text().splitlines()]
@@ -57,7 +61,7 @@ for _, delta in sorted([(start, 1) for start, _ in intervals] + [(end, -1) for _
     active += delta
     peak = max(peak, active)
 result = {"source": os.environ["VERIFIED_SOURCE"], "engine": os.environ["VERIFIED_ENGINE"], "levels": 144,
-          "totals": totals, "games": games, "peakReplayJobs": peak,
+          "budget": budget, "totals": totals, "games": games, "peakReplayJobs": peak,
           "replayWallMs": max(end for _, end in intervals) - min(start for start, _ in intervals),
           "cumulativeReplayMs": sum(end - start for start, end in intervals)}
 target.write_text(json.dumps(result, indent=2) + "\n")
