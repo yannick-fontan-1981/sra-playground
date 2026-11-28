@@ -1,0 +1,48 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "d0348ec1f1646259b9c95f0fa4a44dd0bb966025",
+    "attendus": "ae88904c697aa63da171184d4b074909cb4e6d3a",
+    "hpdl": "66ce04946bccb531d5a6403ec36a5c2a90bf99a4",
+    "hpHash": "e46bf9bbb5d3dcea851b3e2aeb530b2fb7c966443b7bd4645fc319fb1ed606c8"
+  },
+  "prefixes": 6,
+  "addresses": [
+    [
+      "ACTION6",
+      {
+        "x": 38,
+        "y": 38
+      }
+    ],
+    [
+      "ACTION6",
+      {
+        "x": 38,
+        "y": 46
+      }
+    ]
+  ],
+  "singleSourceFallback": [
+    "ACTION6",
+    {
+      "x": 12,
+      "y": 10
+    }
+  ],
+  "T3": {
+    "sameCommand": true,
+    "sameGamePacket": true,
+    "expected": [
+      8,
+      null
+    ],
+    "matched": [
+      true,
+      null
+    ]
+  },
+  "firstOfficialLevel": 1,
+  "archiveSHA256": "12cd5bd2af21432c55fe9166b731ba72ba72be08a2f0da8522326ae128f92dda"
+}
