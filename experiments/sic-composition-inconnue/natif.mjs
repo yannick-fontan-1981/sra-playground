@@ -1,8 +1,10 @@
+import { randomUUID } from 'node:crypto';
 import { NativeV6Runtime } from '../../src/logos-engine/v6-native-runtime.ts';
 import { ObservedInputDomain } from '../../src/logos-engine/v6-native-observer.ts';
 import { V6AgentService } from '../../src/runtime/v6-agent-service.ts';
 import { toV6PublicObservation } from '../../src/runtime/v6-agent-protocol.ts';
 import { initialModels, observationKey, transitions } from './models.mjs';
+import { observeControl, retainedControl } from './rejouer.mjs';
 import { scenario } from './terrain.mjs';
 
 const familyId = 'experimental_delayed_passage';
@@ -46,8 +48,9 @@ function decode(rows) {
 }
 
 function family(rules, controller, commands) {
-  let models = initialModels(rules), stop;
+  let models = initialModels(rules), stop, learned;
   const outcomes = (rows, choice) => transitions(rules, decode(rows), models, choice);
+  const controlSet = candidates => [...new Set(candidates.map(model => model.control))];
   return {
     get stop() { return stop; },
     id: familyId,
@@ -78,25 +81,31 @@ function family(rules, controller, commands) {
       return { matched: found ? predictions.size === 1 ? true : null : false, seal_prefix: true,
         reason: found ? 'returned_observation_checked' : 'unexpected_delayed_passage_observation' };
     },
-    record(_before, _after, _command, beforeRows, afterRows, proposal) {
-      const branch = outcomes(beforeRows, proposal.decision.action).get(observationKey(decode(afterRows)));
-      if (branch) models = branch.models;
+    record(before, after, _command, beforeRows, afterRows, proposal) {
+      const returned = decode(afterRows);
+      const branch = outcomes(beforeRows, proposal.decision.action).get(observationKey(returned));
+      if (branch) {
+        learned = observeControl(rules, decode(beforeRows), returned, controlSet(models), controlSet(branch.models),
+          { before: before.observation_ref, after: after.observation_ref }, learned);
+        models = branch.models;
+      }
       return { events: [] };
     },
-    state: () => ({ models }),
-    restore(state) { models = state.models; },
+    state: () => ({ models, ...(learned ? { learned } : {}) }),
+    restore(state) { models = state.models; learned = state.learned; },
   };
 }
 
-export async function playNative(spec, policy) {
+export async function playNative(spec, policy, transferred = undefined) {
   const terrain = scenario(spec);
   const { rules } = terrain;
-  const commands = actions(rules), candidate = family(rules, policy(rules), commands);
+  const prior = retainedControl(rules, transferred);
+  const commands = actions(rules), candidate = family(rules, policy(rules, prior), commands);
   const service = new V6AgentService(() => new NativeV6Runtime({
     sourceDigest: familyId, maxPointOccurrences: 250, families: [candidate],
     groups: [{ id: familyId, families: [familyId] }],
   }));
-  const sessionId = 'delayed-passage';
+  const sessionId = 'delayed-passage-' + randomUUID();
   let sequence = 0, observed = terrain.read();
   const transport = () => toV6PublicObservation(packet(observed, commands), sequence);
   let reply = await service.handle({ type: 'init', sessionId, sequence, observation: transport(),
@@ -117,5 +126,6 @@ export async function playNative(spec, policy) {
       reply = await service.handle({ type: 'resume', sessionId, sequence });
     }
   }
-  return { moves, observed, stop: candidate.stop, kind: reply.kind, nativeActions: reply.snapshot.actions };
+  return { moves, observed, stop: candidate.stop, kind: reply.kind, nativeActions: reply.snapshot.actions,
+    prior, learned: candidate.state().learned };
 }

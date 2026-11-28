@@ -9,7 +9,7 @@ import { fixedWorkflow, onlineComposition } from './policies.mjs';
 const distinct = values => [...new Set(values)];
 const alphabetOf = rules => JSON.stringify([...rules.controls].sort());
 
-function retainedControl(rules, prior) {
+export function retainedControl(rules, prior) {
   if (!prior) return undefined;
   if (!rules.controlMarkers && !prior.markedDomain) return prior.alphabet === alphabetOf(rules) ? prior : undefined;
   if (!prior.marker || !rules.controlMarkers) return undefined;
@@ -18,7 +18,10 @@ function retainedControl(rules, prior) {
   return { ...prior, sourceControl: prior.control, control: matches[0], binding: 'unique_current_marker' };
 }
 
-function measureControl(rules, control, evidence, effect) {
+export function observeControl(rules, previous, observed, before, after, evidence, learned) {
+  const control = after[0];
+  const effect = observed.armed && !previous.armed ? 'armed' : observed.open && !previous.open ? 'opened' : undefined;
+  if (after.length !== 1 || (rules.controlMarkers ? learned || !effect : before.length <= 1)) return learned;
   if (!rules.controlMarkers) return { control, alphabet: alphabetOf(rules), evidence };
   const marker = rules.controlMarkers[control];
   return { control, alphabet: alphabetOf(rules), evidence, effect, markedDomain: true,
@@ -46,10 +49,7 @@ export function play(spec, policy, prior = undefined) {
     const after = distinct(branches.models.map(model => model.control));
     steps.push({ number: steps.length + 1, observed, decision, returned: next,
       hypothesesBefore: models.length, hypothesesAfter: branches.models.length, possibleControls: after });
-    const effect = next.armed && !observed.armed ? 'armed' : next.open && !observed.open ? 'opened' : undefined;
-    if (after.length === 1 && (rules.controlMarkers ? !learned && effect : before.length > 1)) {
-      learned = measureControl(rules, after[0], steps.length, effect);
-    }
+    learned = observeControl(rules, observed, next, before, after, steps.length, learned);
     observed = next;
     models = branches.models;
   }
