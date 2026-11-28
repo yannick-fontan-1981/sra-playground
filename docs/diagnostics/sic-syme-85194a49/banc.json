@@ -21,5 +21,6 @@
   ],
   "repairedCellCommon": false,
   "rawSHA256": "18c30e360e0c7ea13ff0c156a82f9b344f441fec1977d34f38666ec9ebc9aaeb",
-  "archiveSHA256": "a669e537a0499316b5c61e3ace977bbbf1998ddc6e954e2ac930a6ba412e533c"
+  "archiveSHA256": "a669e537a0499316b5c61e3ace977bbbf1998ddc6e954e2ac930a6ba412e533c",
+  "nativeReceiptWithoutQualificationSHA256": "fa17015aca16cd0f652ddfe9529789a40aa1ac1cac5522d3774b995d02422648"
 }

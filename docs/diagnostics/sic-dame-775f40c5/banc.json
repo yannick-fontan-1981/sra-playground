@@ -40,5 +40,6 @@
   "tests": 158,
   "author": "b7289bfb",
   "rawSHA256": "32580685b78da3a62df7ad03dc8126c5b72746adb0ad6c8882a5d0cea23eb4ab",
-  "archiveSHA256": "fcce596d975cf326a114442c2287186e00ab7525d72a5e8383c9690af9e4042f"
+  "archiveSHA256": "fcce596d975cf326a114442c2287186e00ab7525d72a5e8383c9690af9e4042f",
+  "nativeReceiptWithoutQualificationSHA256": "eec36be07714184c4e4813fd90f32f54b0252f536a7994a356ed3bcd0f2e85d5"
 }

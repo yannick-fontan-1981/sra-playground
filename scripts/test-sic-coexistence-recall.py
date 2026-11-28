@@ -30,6 +30,13 @@ proofs = {
     "PIPE": ("aa75791a", "pipe-60", ("gel",)),
     "VOIS": ("1391bd74", "vois-62", ("gel",)),
     "THER": ("dc9314cc", "ther-65", ("gel",)),
+    "DAME": ("775f40c5", "dame-17", ("gel",)),
+    "RECR": ("01f8fd39", "recr-70", ("gel",)),
+    "CRAF": ("c9737d98", "craf-73", ("gel",)),
+    "HOLE": ("4f39c408", "hole-74", ("gel",)),
+    "SYME": ("85194a49", "syme-78", ("gel",)),
+    "SB26": ("4e176032", "sb26-85", ("gel",)),
+    "TR87": ("c41c028c", "tr87-95", ("gel",)),
 }
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("game", choices=proofs)
@@ -52,7 +59,8 @@ contrast_fixtures = {"POLA": "tests/fixtures/v6-axial-question-reference.json.gz
                      "GMAP": "docs/migration/lot9a-evidence/reference-01/reference.json.gz"}
 if args.game in contrast_fixtures:
     assets += [lab + "contraste.mjs", contrast_fixtures[args.game]]
-if args.game in {"CATL", "WEAV-PROVENANCE", "COMB-CONTRE-EXEMPLE", "SELE", "RSWP", "COLM", "PIPE", "VOIS", "THER"}:
+if args.game in {"CATL", "WEAV-PROVENANCE", "COMB-CONTRE-EXEMPLE", "SELE", "RSWP", "COLM", "PIPE", "VOIS", "THER",
+                 "DAME", "RECR", "CRAF", "HOLE", "SYME", "SB26", "TR87"}:
     assets.append(frontier + "rejouer-service.mjs")
 if args.game == "THER":
     assets += [lab + "archive.mjs", "docs/migration/native-campaigns-v42/ther-four-level-public-trace.json.gz",
@@ -82,6 +90,8 @@ contract_commits = {
     "POLA": "0e24fac7", "GMAP": "d9097a5b", "CGWL": "36d4c259", "CATL": "4ab9c99b",
     "WEAV-PROVENANCE": "fd53da26", "COMB-CONTRE-EXEMPLE": "81f2d53d", "SELE": "421e12dc", "RSWP": "47ef461c",
     "COLM": "6c0c3e90", "PIPE": "85d1288b", "VOIS": "90e41585", "THER": "d40aa32d",
+    "DAME": "d6fd1887", "RECR": "28dbf9a9", "CRAF": "a838d542", "HOLE": "80cfa04c",
+    "SYME": "477fb675", "SB26": "d357cb1c", "TR87": "a6fd5ee1",
 }
 if args.game in contract_commits:
     verifier = out / entry

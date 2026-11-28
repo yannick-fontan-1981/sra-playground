@@ -20,5 +20,6 @@
   "firstRealDeposit": 9,
   "retiredAfterWrongColor": true,
   "rawSHA256": "803ab9210cf0b39897abd43551ded6b0d4494d21f87e77980f932731af6c8811",
-  "archiveSHA256": "46420df32a056e8827e8a1bd39b3ae8616891f8b39a4a76ad174ee3bee8a7672"
+  "archiveSHA256": "46420df32a056e8827e8a1bd39b3ae8616891f8b39a4a76ad174ee3bee8a7672",
+  "nativeReceiptWithoutQualificationSHA256": "db938dd35dd800f9595ae15f729859849870fa56ef11151519566a273cea7a55"
 }

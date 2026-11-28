@@ -1,0 +1,183 @@
+{
+  "engine": "167be950334988ffbc46a04bc26de60c74fea527",
+  "prefixes": 41,
+  "additionalNativeReturns": 1,
+  "witnesses": [
+    {
+      "game": "DAME",
+      "line": 17,
+      "source": "775f40c5505add040d3b1c1aac5aba8d0dd0a027",
+      "bank": "70551442",
+      "operator": "bea42ed7",
+      "prefixes": 5,
+      "result": {
+        "source": "167be950334988ffbc46a04bc26de60c74fea527",
+        "reference": "775f40c5",
+        "redirectedArms": [
+          "gel"
+        ],
+        "archiveSHA256": "fcce596d975cf326a114442c2287186e00ab7525d72a5e8383c9690af9e4042f"
+      },
+      "localReceipt": "artifacts/qualification-coexistence-96/DAME/qualification.json",
+      "replaySHA256": "f297d988509cba0fe0da05fde3a775e3a11176bcce9726b78a10829fd898919d"
+    },
+    {
+      "game": "RECR",
+      "line": 70,
+      "source": "01f8fd39e4f0813cdb273b4914d9d1cdc6a74b9b",
+      "bank": "3a557c85",
+      "operator": "97aedfaa",
+      "prefixes": 4,
+      "result": {
+        "source": "167be950334988ffbc46a04bc26de60c74fea527",
+        "reference": "01f8fd39",
+        "redirectedArms": [
+          "gel"
+        ],
+        "archiveSHA256": "48bcf23bb2d457dcb4fa4ad893d37d5614f07dddbbea5805a7a5398d919e8bbe"
+      },
+      "localReceipt": "artifacts/qualification-coexistence-96/RECR/qualification.json",
+      "replaySHA256": "643ebb23b40c44e0668e06de83d1f5207680499df99aad994a0f51767799e629"
+    },
+    {
+      "game": "CRAF",
+      "line": 73,
+      "source": "c9737d9831a703611422fcf03af83e39dbfdc6d6",
+      "bank": "41339732",
+      "operator": "97aedfaa",
+      "prefixes": 5,
+      "result": {
+        "source": "167be950334988ffbc46a04bc26de60c74fea527",
+        "reference": "c9737d98",
+        "redirectedArms": [
+          "gel"
+        ],
+        "archiveSHA256": "7e3faeafa9b3c6745f00ee083c067ee93f4ab2b697a4e42a1c360d1326577a1b"
+      },
+      "localReceipt": "artifacts/qualification-coexistence-96/CRAF/qualification.json",
+      "replaySHA256": "b88f76ebf0f3b41bba985da02942f5c20877ae7f3286ed29cabcb37c66352db7"
+    },
+    {
+      "game": "HOLE",
+      "line": 74,
+      "source": "4f39c40869cdb3c2881d4fef01d3a7eafaf196dd",
+      "bank": "2bc57d25",
+      "operator": "e1a515c4",
+      "prefixes": 5,
+      "result": {
+        "source": "167be950334988ffbc46a04bc26de60c74fea527",
+        "reference": "4f39c408",
+        "redirectedArms": [
+          "gel"
+        ],
+        "archiveSHA256": "3dd5917f751deb7f61268a01b9de3232f9651633e46fcc87c092734f6a7b2dd9"
+      },
+      "localReceipt": "artifacts/qualification-coexistence-96/HOLE/qualification.json",
+      "replaySHA256": "02dcba61905d392d937cdb1454c76d8f1490aae67069b940b724f5d476306814"
+    },
+    {
+      "game": "LF52",
+      "line": 76,
+      "source": "a2bd031cff2fb2ce7c919b2213f0ba5a8b75a36a",
+      "bank": "4a0c570b",
+      "operator": "bea42ed7",
+      "prefixes": 3,
+      "result": {
+        "source": "167be950334988ffbc46a04bc26de60c74fea527",
+        "individualProof": "a2bd031c",
+        "sessions": 3,
+        "passed": 3,
+        "skipped": 0,
+        "individualArchiveSHA256": "0bd9d496be41193d32507f31927a3b2df9f92c64f7cc502437caa22596c029d6"
+      },
+      "localReceipt": "artifacts/qualification-coexistence-96/LF52/resultats.json",
+      "replaySHA256": "857210cf480d2205b5763e79491bfe8fc5d228cb80b47cf8a65dda494be3adaf"
+    },
+    {
+      "game": "SYME",
+      "line": 78,
+      "source": "85194a499e1b81c4c26e418efbd171bf469d00d1",
+      "bank": "3a557c85",
+      "operator": "97aedfaa",
+      "prefixes": 6,
+      "result": {
+        "source": "167be950334988ffbc46a04bc26de60c74fea527",
+        "reference": "85194a49",
+        "redirectedArms": [
+          "gel"
+        ],
+        "archiveSHA256": "a669e537a0499316b5c61e3ace977bbbf1998ddc6e954e2ac930a6ba412e533c"
+      },
+      "localReceipt": "artifacts/qualification-coexistence-96/SYME/qualification.json",
+      "replaySHA256": "39124e301494a103d0981a2ea14746e28fc3ce3642ec24b2073d92f4ba33c036"
+    },
+    {
+      "game": "TRIA",
+      "line": 79,
+      "source": "735b5e7d9fc3d3b426588e4d619187d925d269f0",
+      "bank": "04fcfc8d",
+      "operator": "ee04aeef",
+      "prefixes": 2,
+      "result": {
+        "source": "167be950334988ffbc46a04bc26de60c74fea527",
+        "individualProof": "735b5e7d",
+        "sessions": 2,
+        "passed": 2,
+        "skipped": 0,
+        "individualArchiveSHA256": "7a54629d24fbaaf98f62e167d31883741290377b3f06ddba43d84bac3abd02fc"
+      },
+      "localReceipt": "artifacts/qualification-coexistence-96/TRIA/resultats.json",
+      "replaySHA256": "1ddb4bf6526b6995c087bd5761fc7620078777ff8a3e9387eeabc50754a7c319"
+    },
+    {
+      "game": "SB26",
+      "line": 85,
+      "source": "4e1760327c1aea9031654e7de7c26da3ae19cf7b",
+      "bank": "04fcfc8d",
+      "operator": "ee04aeef",
+      "prefixes": 5,
+      "result": {
+        "source": "167be950334988ffbc46a04bc26de60c74fea527",
+        "reference": "4e176032",
+        "redirectedArms": [
+          "gel"
+        ],
+        "archiveSHA256": "46420df32a056e8827e8a1bd39b3ae8616891f8b39a4a76ad174ee3bee8a7672"
+      },
+      "localReceipt": "artifacts/qualification-coexistence-96/SB26/qualification.json",
+      "replaySHA256": "ce19c101ed34042547f312fa94ca1997e20a8ef8eed7df9cff9a2e58f3bdb3c8"
+    },
+    {
+      "game": "TR87",
+      "line": 95,
+      "source": "c41c028c2ed06244715bad39024f542d44f8eda0",
+      "bank": "82f975e1",
+      "operator": "e1a515c4",
+      "prefixes": 6,
+      "result": {
+        "source": "167be950334988ffbc46a04bc26de60c74fea527",
+        "reference": "c41c028c",
+        "redirectedArms": [
+          "gel"
+        ],
+        "archiveSHA256": "92f1a35bb8fd8de3da272493ff3e55ecd7226c8249d9b63543cedb3b8557d823"
+      },
+      "localReceipt": "artifacts/qualification-coexistence-96/TR87/qualification.json",
+      "replaySHA256": "65a35a9b59e11447071cd7d6f45cc80f0df715ffcb9755eb8d27fbd1a1ec01d9"
+    }
+  ],
+  "holeT8": {
+    "localReceipt": "artifacts/qualification-coexistence-96/HOLE-T8/qualification.json",
+    "sha256": "b58cd82efcd21ab140aa1f1883a1f2277b0dcfefd3c2ba63c0b6827368a74d80",
+    "gelReceiptEqual": true,
+    "physicalReturn": {
+      "pixels": 92,
+      "regionPixels": 92,
+      "regionPainted9": 92,
+      "edgeActualBefore": 1,
+      "edgeActualAfter": 9,
+      "levels": 0,
+      "state": "NOT_FINISHED"
+    }
+  }
+}

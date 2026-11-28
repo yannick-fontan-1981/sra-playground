@@ -25,5 +25,6 @@
   ],
   "variantT3Executed": false,
   "rawSHA256": "d501cc979db6084e2214636ee6791a3aa782c8e550c203e735c9e5972c735762",
-  "archiveSHA256": "48bcf23bb2d457dcb4fa4ad893d37d5614f07dddbbea5805a7a5398d919e8bbe"
+  "archiveSHA256": "48bcf23bb2d457dcb4fa4ad893d37d5614f07dddbbea5805a7a5398d919e8bbe",
+  "nativeReceiptWithoutQualificationSHA256": "21cd4e0f26d591fb12f3199d29aff474a766cdae4531ba287d3543ec70a0e8d1"
 }

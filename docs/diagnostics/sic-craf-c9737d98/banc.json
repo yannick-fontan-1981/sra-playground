@@ -16,5 +16,6 @@
     "observed_frontier"
   ],
   "rawSHA256": "192ed5e83d5b0256878523526044c4125136211986cd19f653211eba42ee5560",
-  "archiveSHA256": "7e3faeafa9b3c6745f00ee083c067ee93f4ab2b697a4e42a1c360d1326577a1b"
+  "archiveSHA256": "7e3faeafa9b3c6745f00ee083c067ee93f4ab2b697a4e42a1c360d1326577a1b",
+  "nativeReceiptWithoutQualificationSHA256": "1828bc273973314cabbbc2eb3c0bda3a5d8dd7d4e8ffb04c1048b5633f06fa7a"
 }

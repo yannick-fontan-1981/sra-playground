@@ -32,5 +32,6 @@
     "authorProcedure": "b9e082078b17edbb6022e92845a0650f108f9d26fb926bb96e4c1aa60e26621b",
     "executedAlternate": "b58cd82efcd21ab140aa1f1883a1f2277b0dcfefd3c2ba63c0b6827368a74d80"
   },
-  "archiveSHA256": "3dd5917f751deb7f61268a01b9de3232f9651633e46fcc87c092734f6a7b2dd9"
+  "archiveSHA256": "3dd5917f751deb7f61268a01b9de3232f9651633e46fcc87c092734f6a7b2dd9",
+  "nativeReceiptWithoutQualificationSHA256": "4678e53b93f3f3ad327ffab45ac4e55e2a61569339620b6431b1b6f9d3ad86fb"
 }
