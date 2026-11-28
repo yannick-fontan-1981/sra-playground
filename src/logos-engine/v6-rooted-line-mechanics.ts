@@ -30,5 +30,5 @@ export function planRootedLine(scene: R, observation: R, effects: R, config: R, 
   const request = { configuration, effects: Object.values(effects).map(normalizePiercingCommandEffect), models: [rootedLineModel(config)],
     goal_requested_root_ref: 'current_root', goal_requested_type_order: [...scene.order], max_microsteps: config.max_microsteps,
     max_depth: config.max_depth, max_nodes: config.max_nodes, max_plans: 1 };
-  return [configuration, searchPiercingPlans(request, nativeBudget)];
+  return [configuration, searchPiercingPlans(request, nativeBudget, 'test_compatible_stations')];
 }

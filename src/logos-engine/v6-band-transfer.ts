@@ -171,6 +171,10 @@ export class BandTransfer {
     this.epoch = observation.level_epoch; this.model = measureBandGeometry(observation, rows, inputs); this.sense = null; this.blocked.clear(); this.supported.clear(); this.refs.clear(); this.tried.clear(); this.refuted = false;
     if (this.model) { this.initial = bandQuantities(rows, this.model); this.first = observation.observation_ref; }
   }
+  /** Choose among probes that have not been tried at the current quantities. */
+  selectProbe(eligible: readonly number[]): number | undefined {
+    return eligible[0];
+  }
   async propose(observation: BandObservation, rows: NativeRows, inputs: readonly BandCommand[], remaining: number): Promise<BandRecord | null> {
     if (this.epoch !== observation.level_epoch) this.start(observation, rows, inputs);
     const model = this.model; if (!model || this.refuted) return null;
@@ -185,7 +189,9 @@ export class BandTransfer {
     let path = sense ? findBandPath(q, model.targets, sense, model.step, this.blocked.values(), remaining) : [];
     if (!path.length) {
       const fresh = model.controls.map((_: unknown, i: number) => i).filter((i: number) => !this.tried.has(keyOf([q, i])));
-      if (!fresh.length) return null; path = [fresh[0]];
+      const control = this.selectProbe(fresh);
+      if (control === undefined || !fresh.includes(control)) return null;
+      path = [control];
     }
     const steps: BandRecord[] = [], start = q;
     for (const command of path.slice(0, Math.min(16, remaining))) {
