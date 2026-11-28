@@ -22,6 +22,8 @@ cases = {
              ["docs/migration/native-campaigns-v54/baseline-wa30/wa30-public-trace.json.gz", "tests/fixtures/sic-wa30-alternate-returns.json.gz"]),
     "TICT": ("e8df1757272cae3da1669b3e7ddb2e7bf65e8e02", "cell-placement-positive-41", "sic-observe-tict-placement",
              ["docs/migration/native-campaigns-v46/tict-public-trace.json.gz"]),
+    "HANO": ("f768bac6c4c9c34d230b63fe6cec39663164b6ae", "hano-line-25", "sic-observe-hano-support",
+             ["tests/fixtures/sic-hano-public-returns.json.gz"]),
     "SMLP": ("1e11472a8acfe8d4287cf33e58fe3f629e532fb9", "smlp-line-6", "sic-observe-smlp-arrivals",
              ["docs/migration/native-campaigns-v57/baseline-smlp/smlp-public-trace.json.gz", "tests/fixtures/sic-smlp-alternate-returns.json.gz"]),
     "SEQN": ("b5dda8ecb17b1725816bae09b44973449869dbae", "seqn-lines-11-81", "sic-observe-seqn-rewrites",

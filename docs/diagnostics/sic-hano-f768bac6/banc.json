@@ -1,0 +1,552 @@
+{
+  "equalScenarios": 3,
+  "cataloguePrefixTickets": 16,
+  "selection": [
+    {
+      "kind": "ticket",
+      "turn": 1,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:1",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:b98de996d71bd158",
+      "level": 1,
+      "owner": "ordered_support_transfer",
+      "offer": "conditional_ordered_support_transfer",
+      "action": "ACTION6",
+      "point": {
+        "x": 13,
+        "y": 51
+      },
+      "index": 0,
+      "configuration": [
+        [
+          11,
+          7
+        ],
+        [],
+        []
+      ],
+      "source": 0,
+      "destination": 1,
+      "member": [
+        10,
+        52,
+        16,
+        53
+      ],
+      "extent": 7,
+      "context": "8e5fb686abebde674947c804b2afb626a8b585c52aac9e3bc0c8c81c832190a6",
+      "expectedConfiguration": [
+        [
+          11
+        ],
+        [
+          7
+        ],
+        []
+      ],
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:b98de996d71bd158"
+      ],
+      "guard": "current_ordered_support_scope_and_intermediate_selection"
+    },
+    {
+      "kind": "ordered_support_response",
+      "before": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:b98de996d71bd158",
+      "after": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:dd9089663f52e835",
+      "epoch": 1,
+      "selection": true,
+      "transfer": false,
+      "progress": false,
+      "parent": "G_official_completion",
+      "closed": []
+    }
+  ],
+  "deposit": [
+    {
+      "kind": "ticket",
+      "turn": 2,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:2",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:dd9089663f52e835",
+      "level": 1,
+      "owner": "ordered_support_transfer",
+      "offer": "conditional_ordered_support_transfer",
+      "action": "ACTION6",
+      "point": {
+        "x": 31,
+        "y": 51
+      },
+      "index": 1,
+      "configuration": [
+        [
+          11,
+          7
+        ],
+        [],
+        []
+      ],
+      "source": 0,
+      "destination": 1,
+      "member": [
+        10,
+        52,
+        16,
+        53
+      ],
+      "extent": 7,
+      "context": "8e5fb686abebde674947c804b2afb626a8b585c52aac9e3bc0c8c81c832190a6",
+      "expectedConfiguration": [
+        [
+          11
+        ],
+        [
+          7
+        ],
+        []
+      ],
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:b98de996d71bd158"
+      ],
+      "guard": "current_ordered_support_scope_and_intermediate_selection"
+    },
+    {
+      "kind": "ordered_support_response",
+      "before": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:dd9089663f52e835",
+      "after": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:b4d48b14e12cfd69",
+      "epoch": 1,
+      "selection": false,
+      "transfer": true,
+      "progress": false,
+      "parent": "G_official_completion",
+      "closed": []
+    }
+  ],
+  "newMember": [
+    {
+      "kind": "ticket",
+      "turn": 3,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:3",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:b4d48b14e12cfd69",
+      "level": 1,
+      "owner": "ordered_support_transfer",
+      "offer": "conditional_ordered_support_transfer",
+      "action": "ACTION6",
+      "point": {
+        "x": 13,
+        "y": 51
+      },
+      "index": 0,
+      "configuration": [
+        [
+          11
+        ],
+        [
+          7
+        ],
+        []
+      ],
+      "source": 0,
+      "destination": 2,
+      "member": [
+        8,
+        54,
+        18,
+        55
+      ],
+      "extent": 11,
+      "context": "284b1ecea139d181f2f975d5a62f82ada0a5d56a889c6541a40376d663426ddd",
+      "expectedConfiguration": [
+        [],
+        [
+          7
+        ],
+        [
+          11
+        ]
+      ],
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:b4d48b14e12cfd69",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:b4d48b14e12cfd69"
+      ],
+      "guard": "current_ordered_support_scope_and_intermediate_selection"
+    },
+    {
+      "kind": "return",
+      "turn": 3,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:4bb62ad2067a6d80",
+      "owner": "ordered_support_transfer",
+      "matched": true,
+      "reason": "observed_selection_only",
+      "seal": false,
+      "levels": 0,
+      "acquired": [],
+      "frame": "4bb62ad2067a6d80729fe505d1c8af8f34d43d954194cf2267716832795cf0bb"
+    }
+  ],
+  "secondLevel": [
+    {
+      "kind": "ticket",
+      "turn": 7,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:7",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:cfd429328644402d",
+      "level": 2,
+      "owner": "ordered_support_transfer",
+      "offer": "conditional_ordered_support_transfer",
+      "action": "ACTION6",
+      "point": {
+        "x": 11,
+        "y": 50
+      },
+      "index": 0,
+      "configuration": [
+        [
+          15,
+          11,
+          7
+        ],
+        [],
+        [],
+        []
+      ],
+      "source": 0,
+      "destination": 1,
+      "member": [
+        8,
+        50,
+        14,
+        51
+      ],
+      "extent": 7,
+      "context": "27f7a79f29431352668dcf52a3711d4e59ab942d856f86301ab733605ea22b4e",
+      "expectedConfiguration": [
+        [
+          15,
+          11
+        ],
+        [
+          7
+        ],
+        [],
+        []
+      ],
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:cfd429328644402d",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:b4d48b14e12cfd69",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:870420dc2eeb5a0a"
+      ],
+      "guard": "current_ordered_support_scope_and_intermediate_selection"
+    },
+    {
+      "kind": "return",
+      "turn": 7,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:8:frame:c7162b79b3d9a831",
+      "owner": "ordered_support_transfer",
+      "matched": true,
+      "reason": "observed_selection_only",
+      "seal": false,
+      "levels": 1,
+      "acquired": [],
+      "frame": "c7162b79b3d9a83193ba71d876114f3b2a8b2354e48c38a19937bd186abd359a"
+    }
+  ],
+  "unmarked": [
+    {
+      "kind": "return",
+      "turn": 1,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:b98de996d71bd158",
+      "owner": "ordered_support_transfer",
+      "matched": false,
+      "reason": "observed_selection_only",
+      "seal": true,
+      "levels": 0,
+      "acquired": [
+        {
+          "kind": "ordered_support_response",
+          "before": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:b98de996d71bd158",
+          "after": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:b98de996d71bd158",
+          "epoch": 1,
+          "selection": false,
+          "transfer": false,
+          "progress": false,
+          "parent": "G_official_completion",
+          "closed": [
+            "8e5fb686abebde674947c804b2afb626a8b585c52aac9e3bc0c8c81c832190a6"
+          ]
+        }
+      ],
+      "frame": "b98de996d71bd15851a87548cec2dfe58106d84aa35339aad5963407bdbaaf2e"
+    },
+    {
+      "kind": "ticket",
+      "turn": 2,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:2",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:b98de996d71bd158",
+      "level": 1,
+      "owner": "public_framed_transfer",
+      "offer": "public_framed_transfer",
+      "action": "ACTION6",
+      "point": {
+        "x": 13,
+        "y": 50
+      },
+      "index": 0,
+      "refs": [
+        "projection.exploration.parallel_solid_band_interface_question"
+      ],
+      "guard": "current_parallel_support_and_payload"
+    }
+  ],
+  "withdrawal": [
+    {
+      "kind": "ticket",
+      "turn": 1,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:1",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:b98de996d71bd158",
+      "level": 1,
+      "owner": "public_framed_transfer",
+      "offer": "public_framed_transfer",
+      "action": "ACTION6",
+      "point": {
+        "x": 13,
+        "y": 50
+      },
+      "index": 0,
+      "refs": [
+        "projection.exploration.parallel_solid_band_interface_question"
+      ],
+      "guard": "current_parallel_support_and_payload"
+    },
+    {
+      "kind": "return",
+      "turn": 1,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:dd9089663f52e835",
+      "owner": "public_framed_transfer",
+      "matched": null,
+      "reason": "reconcile_complete_point_transition_without_assumed_mechanics",
+      "seal": true,
+      "levels": 0,
+      "acquired": [],
+      "frame": "dd9089663f52e835c057b0c0fd48890012ea0314666ff06fe96ad302688399ff"
+    },
+    {
+      "kind": "ticket",
+      "turn": 2,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:2",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:dd9089663f52e835",
+      "level": 1,
+      "owner": "public_framed_transfer",
+      "offer": "public_framed_transfer",
+      "action": "ACTION6",
+      "point": {
+        "x": 13,
+        "y": 48
+      },
+      "index": 0,
+      "refs": [
+        "projection.exploration.parallel_solid_band_interface_question"
+      ],
+      "guard": "current_parallel_support_and_payload"
+    },
+    {
+      "kind": "return",
+      "turn": 2,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:b98de996d71bd158",
+      "owner": "public_framed_transfer",
+      "matched": null,
+      "reason": "reconcile_complete_point_transition_without_assumed_mechanics",
+      "seal": true,
+      "levels": 0,
+      "acquired": [],
+      "frame": "b98de996d71bd15851a87548cec2dfe58106d84aa35339aad5963407bdbaaf2e"
+    },
+    {
+      "kind": "ticket",
+      "turn": 3,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:3",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:b98de996d71bd158",
+      "level": 1,
+      "owner": "ordered_support_transfer",
+      "offer": "conditional_ordered_support_transfer",
+      "action": "ACTION6",
+      "point": {
+        "x": 13,
+        "y": 51
+      },
+      "index": 0,
+      "configuration": [
+        [
+          11,
+          7
+        ],
+        [],
+        []
+      ],
+      "source": 0,
+      "destination": 1,
+      "member": [
+        10,
+        52,
+        16,
+        53
+      ],
+      "extent": 7,
+      "context": "8e5fb686abebde674947c804b2afb626a8b585c52aac9e3bc0c8c81c832190a6",
+      "expectedConfiguration": [
+        [
+          11
+        ],
+        [
+          7
+        ],
+        []
+      ],
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:b98de996d71bd158"
+      ],
+      "guard": "current_ordered_support_scope_and_intermediate_selection"
+    },
+    {
+      "kind": "return",
+      "turn": 3,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:dd9089663f52e835",
+      "owner": "ordered_support_transfer",
+      "matched": true,
+      "reason": "observed_selection_only",
+      "seal": false,
+      "levels": 0,
+      "acquired": [],
+      "frame": "dd9089663f52e835c057b0c0fd48890012ea0314666ff06fe96ad302688399ff"
+    },
+    {
+      "kind": "ticket",
+      "turn": 4,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:4",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:dd9089663f52e835",
+      "level": 1,
+      "owner": "ordered_support_transfer",
+      "offer": "conditional_ordered_support_transfer",
+      "action": "ACTION6",
+      "point": {
+        "x": 31,
+        "y": 51
+      },
+      "index": 1,
+      "configuration": [
+        [
+          11,
+          7
+        ],
+        [],
+        []
+      ],
+      "source": 0,
+      "destination": 1,
+      "member": [
+        10,
+        52,
+        16,
+        53
+      ],
+      "extent": 7,
+      "context": "8e5fb686abebde674947c804b2afb626a8b585c52aac9e3bc0c8c81c832190a6",
+      "expectedConfiguration": [
+        [
+          11
+        ],
+        [
+          7
+        ],
+        []
+      ],
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:b98de996d71bd158"
+      ],
+      "guard": "current_ordered_support_scope_and_intermediate_selection"
+    },
+    {
+      "kind": "return",
+      "turn": 4,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:b4d48b14e12cfd69",
+      "owner": "ordered_support_transfer",
+      "matched": true,
+      "reason": "compare_conditional_transfer_not_universal_law",
+      "seal": true,
+      "levels": 0,
+      "acquired": [
+        {
+          "kind": "ordered_support_response",
+          "before": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:b98de996d71bd158",
+          "after": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:dd9089663f52e835",
+          "epoch": 1,
+          "selection": true,
+          "transfer": false,
+          "progress": false,
+          "parent": "G_official_completion",
+          "closed": []
+        },
+        {
+          "kind": "ordered_support_response",
+          "before": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:dd9089663f52e835",
+          "after": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:b4d48b14e12cfd69",
+          "epoch": 1,
+          "selection": false,
+          "transfer": true,
+          "progress": false,
+          "parent": "G_official_completion",
+          "closed": []
+        }
+      ],
+      "frame": "b4d48b14e12cfd69d29a9adc8f1c6e4d4ab66911860152eaabe46af8c636cc94"
+    },
+    {
+      "kind": "ticket",
+      "turn": 5,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:5",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:b4d48b14e12cfd69",
+      "level": 1,
+      "owner": "ordered_support_transfer",
+      "offer": "conditional_ordered_support_transfer",
+      "action": "ACTION6",
+      "point": {
+        "x": 13,
+        "y": 51
+      },
+      "index": 0,
+      "configuration": [
+        [
+          11
+        ],
+        [
+          7
+        ],
+        []
+      ],
+      "source": 0,
+      "destination": 2,
+      "member": [
+        8,
+        54,
+        18,
+        55
+      ],
+      "extent": 11,
+      "context": "284b1ecea139d181f2f975d5a62f82ada0a5d56a889c6541a40376d663426ddd",
+      "expectedConfiguration": [
+        [],
+        [
+          7
+        ],
+        [
+          11
+        ]
+      ],
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:b4d48b14e12cfd69",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:b4d48b14e12cfd69"
+      ],
+      "guard": "current_ordered_support_scope_and_intermediate_selection"
+    }
+  ],
+  "archiveSHA256": "636258ea2a93cd7477e8f8f8df8fe64cfa8532ef1f11ee22678f6b4c8a3a036c",
+  "startedAt": "2026-11-27T22:41:39.665112-03:00",
+  "qualifiedAt": "2026-11-27T22:45:52.427117-03:00",
+  "elapsedSeconds": 253
+}
