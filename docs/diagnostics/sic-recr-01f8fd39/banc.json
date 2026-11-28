@@ -1,0 +1,29 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "01f8fd39e4f0813cdb273b4914d9d1cdc6a74b9b",
+    "attendus": "28dbf9a9add337c0c982e61686c8a2e1b6f59d22"
+  },
+  "nativePrefixes": 4,
+  "tests": 177,
+  "firstProjectedContrast": 3,
+  "sameCommand": [
+    "ACTION5",
+    {}
+  ],
+  "consumedFirst": [
+    "ally:0",
+    "enemy:0"
+  ],
+  "projectedSurvivors": [
+    1,
+    3
+  ],
+  "actualSecondLevelT7Queue": [
+    0
+  ],
+  "variantT3Executed": false,
+  "rawSHA256": "d501cc979db6084e2214636ee6791a3aa782c8e550c203e735c9e5972c735762",
+  "archiveSHA256": "48bcf23bb2d457dcb4fa4ad893d37d5614f07dddbbea5805a7a5398d919e8bbe"
+}

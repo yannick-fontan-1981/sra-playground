@@ -1,0 +1,25 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "85194a499e1b81c4c26e418efbd171bf469d00d1",
+    "attendus": "477fb675506c31066e7dd1ecef00ca3461070949"
+  },
+  "nativePrefixes": 6,
+  "tests": 8,
+  "mirror": {
+    "equalPairs": 27,
+    "contrastPairs": 9
+  },
+  "sameTicketChangedRequestedValue": [
+    9,
+    8
+  ],
+  "ambiguousPeriod": [
+    2,
+    2
+  ],
+  "repairedCellCommon": false,
+  "rawSHA256": "18c30e360e0c7ea13ff0c156a82f9b344f441fec1977d34f38666ec9ebc9aaeb",
+  "archiveSHA256": "a669e537a0499316b5c61e3ace977bbbf1998ddc6e954e2ac930a6ba412e533c"
+}
