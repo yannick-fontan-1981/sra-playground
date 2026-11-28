@@ -1,0 +1,133 @@
+{
+  "engine": "bf1cbf245055a60c4a253b9c6ee4be18ea9b8c2c",
+  "lineCount": 75,
+  "sourceTree": "b4094de3d334ef4e5812a08e2c554d2e55c558b9",
+  "parent": "674b0dd19d693a66687990ab2a4368d981aa8fb9",
+  "typecheck": true,
+  "engineTestsPassed": 113,
+  "witnesses": {
+    "ISOS-PROVENANCE": {
+      "source": "bf1cbf245055a60c4a253b9c6ee4be18ea9b8c2c",
+      "individualProof": "640bd882",
+      "sessions": 6,
+      "passed": 6,
+      "skipped": 0,
+      "individualArchiveSHA256": "6c8b6f76c2586ecbc9196da9631eabd06e8bfdb61cfb9ee8e2c1e4cc647c287d",
+      "receiptSHA256": "7602354e12f7cd41d69e7dde4b89b03a4345caeea0b6a2807e50248afdc038a9"
+    },
+    "GIGO": {
+      "source": "bf1cbf245055a60c4a253b9c6ee4be18ea9b8c2c",
+      "individualProof": "b2eef226",
+      "sessions": 5,
+      "passed": 4,
+      "skipped": 0,
+      "individualArchiveSHA256": "919926db38196ff92da992a68d96b8ec8b169f09d2040a41f362136d84bd9edf",
+      "receiptSHA256": "275ababdad4b7cc5b3428db6fe0d549a27893bd4b279c35a13dee98b932089d6"
+    },
+    "REWI": {
+      "source": "bf1cbf245055a60c4a253b9c6ee4be18ea9b8c2c",
+      "individualProof": "9b41b8ba",
+      "sessions": 4,
+      "passed": 4,
+      "skipped": 0,
+      "individualArchiveSHA256": "65070133d70612d5940888493d045437db79fb165de1456aa6bf0295556d9bd9",
+      "receiptSHA256": "90a1968bc46adf8f0378a1a9e193e998d8ef8c032134b438e6aaa5b6a339511b"
+    },
+    "LP85": {
+      "source": "bf1cbf245055a60c4a253b9c6ee4be18ea9b8c2c",
+      "individualProof": "80d14be1",
+      "sessions": 2,
+      "passed": 2,
+      "skipped": 0,
+      "individualArchiveSHA256": "d272cc6c66a4a523d9f137f5fa1ff756311af059d5acc319bef5307b97ce1ce9",
+      "receiptSHA256": "986694cf0a3509a06988e3d1be845afa2fda8e3665c7f8e6a12c55a0e0492989"
+    },
+    "CN04": {
+      "source": "bf1cbf245055a60c4a253b9c6ee4be18ea9b8c2c",
+      "individualProof": "bfba3acb",
+      "sessions": 1,
+      "passed": 1,
+      "skipped": 0,
+      "individualArchiveSHA256": "6929224b5bf1517cbac8b8416cdcee02c013f58cfb2185822b470ad4ee4ba9cd",
+      "receiptSHA256": "8f029af9275741e05279fb6ab4fd4726f325bb68cbb26d786bd3d57e3a3233c7"
+    },
+    "CATL": {
+      "source": "bf1cbf245055a60c4a253b9c6ee4be18ea9b8c2c",
+      "reference": "fad120b5",
+      "redirectedArms": [
+        "gel"
+      ],
+      "archiveSHA256": "42049ade8529cd52d5c7bde9d4191685d41ea746379d8f16a407d81681686472",
+      "receiptSHA256": "d25ae093fbd4bf6c2770d10692d5286293ff712a8f1c38132f51462a09e00966",
+      "sessions": 7
+    },
+    "FT09": {
+      "source": "bf1cbf245055a60c4a253b9c6ee4be18ea9b8c2c",
+      "reference": "d0348ec1",
+      "redirectedArms": [
+        "gel"
+      ],
+      "archiveSHA256": "12cd5bd2af21432c55fe9166b731ba72ba72be08a2f0da8522326ae128f92dda",
+      "receiptSHA256": "4409076291f9456c6f37cb51736d0f2b631e47a1b56c68fbec0cf2ed966ea0a8",
+      "sessions": 6
+    },
+    "POLA": {
+      "source": "bf1cbf245055a60c4a253b9c6ee4be18ea9b8c2c",
+      "reference": "dfc144ce",
+      "redirectedArms": [
+        "gel"
+      ],
+      "archiveSHA256": "3f97f46a9a4ff7da298ffa4f6309e5f5bc0e793db1c81a786a57bc2816d8504f",
+      "receiptSHA256": "9f10ba81119e7eaa551e812271b8e6115e569d0b698ba8118bdccf485570608f",
+      "sessions": 6
+    },
+    "GMAP": {
+      "source": "bf1cbf245055a60c4a253b9c6ee4be18ea9b8c2c",
+      "reference": "9c71cd82",
+      "redirectedArms": [
+        "gel"
+      ],
+      "archiveSHA256": "a6ab32670636468aa7894ada2357721149424d151a13bdb905707009f9ba1a9c",
+      "receiptSHA256": "2b8832a373db2024bc3e576b22ed019c6c5575c77bc1b3e211f0712640278837",
+      "sessions": 6
+    },
+    "CGWL": {
+      "source": "bf1cbf245055a60c4a253b9c6ee4be18ea9b8c2c",
+      "reference": "beb11112",
+      "redirectedArms": [
+        "gel"
+      ],
+      "archiveSHA256": "ec9b8a87fd830c984c5c36fda0ab5cc983837ef2fa31ef259fdbdc5e75afbe4c",
+      "receiptSHA256": "803663fbacdc9441b811fef845aa244cbe194699be0d975d6a5cefceaf6a0071",
+      "sessions": 7
+    }
+  },
+  "witnessArchiveSHA256": "45f4c9bdeb3830e62b0bd791a355e13256a8fa97ad1a313fb28e5f96af86bec1",
+  "campaign": {
+    "run": "46102900440",
+    "workflow": "38008e359b917d2599f6609882026cc61f33cde6",
+    "archiveSHA256": "d86e582e6d59e19b9fe48d6abcc5b7936ae4e9ab4bd09b3c40e330c9a354fd27",
+    "games": 107,
+    "levels": 692,
+    "actions": 18560,
+    "seconds": 697,
+    "replayPeak": 20,
+    "resume": [
+      [
+        3,
+        0,
+        0
+      ],
+      [
+        104,
+        3,
+        0
+      ],
+      [
+        0,
+        107,
+        0
+      ]
+    ]
+  }
+}

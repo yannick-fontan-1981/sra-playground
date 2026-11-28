@@ -17,6 +17,11 @@ proofs = {
     "CATR": ("9186a49e", "catr-42", ("gel",)),
     "CWSE": ("71e15295", "cwse-45", ("gel",)),
     "HPDL": ("66ce0494", "hpdl-75", ("gel",)),
+    "FT09": ("d0348ec1", "ft09-94", ("gel",)),
+    "POLA": ("dfc144ce", "pola-33", ("gel",)),
+    "GMAP": ("9c71cd82", "gmap-34", ("gel",)),
+    "CGWL": ("beb11112", "cgwl-37", ("gel",)),
+    "CATL": ("fad120b5", "catl-50", ("gel",)),
 }
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("game", choices=proofs)
@@ -35,6 +40,12 @@ lab = frontier + lab + "/"
 reference = frontier + "moteur-reference.mjs"
 entry = lab + "verifier.mjs"
 assets = [entry, lab + "operateur.mjs", reference, frontier + "evaluateur-jeu.mjs", frontier + "frontiere-22-23/game.mjs"]
+contrast_fixtures = {"POLA": "tests/fixtures/v6-axial-question-reference.json.gz",
+                     "GMAP": "docs/migration/lot9a-evidence/reference-01/reference.json.gz"}
+if args.game in contrast_fixtures:
+    assets += [lab + "contraste.mjs", contrast_fixtures[args.game]]
+if args.game == "CATL":
+    assets.append(frontier + "rejouer-service.mjs")
 out.mkdir(parents=True)
 copy_git(proof, assets, out)
 
@@ -48,7 +59,7 @@ source = source.replace(root, "const root = new URL(" + json.dumps(engine.as_uri
 source = source.replace(gate, "if(" + json.dumps(["candidat", *redirected]) + ".includes(name)) return fn(root);")
 helper.write_text(source, encoding="utf8", newline="\n")
 
-if args.game in {"MEMO", "SK48", "CATR", "CWSE", "HPDL"}:
+if args.game in {"MEMO", "SK48", "CATR", "CWSE", "HPDL", "FT09"}:
     verifier = out / entry
     source = verifier.read_text(encoding="utf8")
     expected_tree = "assert.equal(git('rev-parse','HEAD:src'),git('rev-parse','d0e7527c:src'));"
@@ -56,15 +67,25 @@ if args.game in {"MEMO", "SK48", "CATR", "CWSE", "HPDL"}:
     # Confirm the tested HEAD in place of the proof checkout's frozen-tree assertion.
     verifier.write_text(source.replace(expected_tree, "assert.equal(git('rev-parse','HEAD')," + json.dumps(revision) + ");"),
                         encoding="utf8", newline="\n")
+contract_commits = {"POLA": "0e24fac7", "GMAP": "d9097a5b", "CGWL": "36d4c259", "CATL": "4ab9c99b"}
+if args.game in contract_commits:
+    verifier = out / entry
+    source = verifier.read_text(encoding="utf8")
+    # The copied verifier sits outside the proof checkout. Resolve the sealed contract directly.
+    lookup = "git('log','-1','--format=%H','--',fileURLToPath(new URL('ATTENDUS.md',import.meta.url)))"
+    assert source.count(lookup) == 1
+    contract = contract_commits[args.game]
+    verifier.write_text(source.replace(lookup, f"git('rev-parse','{contract}')"), encoding="utf8", newline="\n")
 
 receipt = out / "qualification.json"
 extra_args = []
-if args.game == "CWSE":
-    catr_reference = bench / "docs/diagnostics/sic-catr-9186a49e/recus.zip"
-    native_catr = out / "catr-reference.json"
-    with ZipFile(catr_reference) as z:
-        native_catr.write_bytes(z.read("qualification.json"))
-    extra_args = ["--catr", str(native_catr)]
+if args.game in {"CWSE", "FT09"}:
+    flag, prior = {"CWSE": ("catr", "sic-catr-9186a49e"), "FT09": ("hpdl", "sic-hpdl-66ce0494")}[args.game]
+    prior_archive = bench / "docs/diagnostics" / prior / "recus.zip"
+    prior_receipt = out / (flag + "-reference.json")
+    with ZipFile(prior_archive) as z:
+        prior_receipt.write_bytes(z.read("qualification.json"))
+    extra_args = ["--" + flag, str(prior_receipt)]
 with (out / "qualification.log").open("wb") as log:
     subprocess.run([args.node, str(out / entry), "--pyodide", str(engine / "public/vendor/pyodide"),
                     "--recu", str(receipt), *extra_args], cwd=engine, stdout=log, stderr=subprocess.STDOUT, check=True)
@@ -90,12 +111,16 @@ archive = bench / "docs/diagnostics" / ("sic-" + args.game.lower() + "-" + proof
 archive_digest = hashlib.sha256(archive.read_bytes()).hexdigest()
 index = json.loads((archive.parent / "banc.json").read_bytes())
 assert archive_digest == index["archiveSHA256"]
-with ZipFile(archive) as zipped:
-    expected = json.loads(zipped.read("qualification.json"))
 actual = json.loads(receipt.read_bytes())
 assert actual["versions"].pop("qualification") == revision
-assert expected["versions"].pop("qualification").startswith(proof)
-assert actual == expected, args.game + " measured receipt changed"
+if "nativeReceiptWithoutQualificationSHA256" in index:
+    canonical = json.dumps(actual, sort_keys=True, separators=(",", ":")).encode()
+    assert hashlib.sha256(canonical).hexdigest() == index["nativeReceiptWithoutQualificationSHA256"], args.game + " measured receipt changed"
+else:
+    with ZipFile(archive) as zipped:
+        expected = json.loads(zipped.read("qualification.json"))
+    assert expected["versions"].pop("qualification").startswith(proof)
+    assert actual == expected, args.game + " measured receipt changed"
 assert revision == git("-C", str(engine), "rev-parse", "HEAD").decode().strip()
 git("-C", str(engine), "diff", "--exit-code", revision, "--", *scope)
 result = {
