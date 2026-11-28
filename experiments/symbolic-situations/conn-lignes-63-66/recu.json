@@ -1,0 +1,239 @@
+{
+  "versions": [
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "f8607d2ac0dac47900da3504365b3968a523a549"
+  ],
+  "départsParSHA": 9,
+  "occurrences": {
+    "63": 5,
+    "66": 4
+  },
+  "testsDeLAuteur": 7,
+  "empreinteCommune": "251ad2efecaaa1ed9a1af7b59944f0a8b7abfba4a3b724f5f098216637694997",
+  "chronologie": [
+    {
+      "tour": 10,
+      "images": 35,
+      "contribution": 14,
+      "réponse": 31,
+      "finaleSeule": [
+        0,
+        0
+      ]
+    },
+    {
+      "tour": 11,
+      "images": 33,
+      "contribution": 12,
+      "réponse": 29,
+      "finaleSeule": [
+        0,
+        0
+      ]
+    },
+    {
+      "tour": 12,
+      "images": 23,
+      "contribution": 9,
+      "réponse": 19,
+      "finaleSeule": [
+        0,
+        0
+      ]
+    }
+  ],
+  "alternates": {
+    "retrait-63": {
+      "ticket": [
+        "observed_frontier",
+        "experiment",
+        {
+          "x": 1,
+          "y": 61
+        },
+        null
+      ],
+      "retour": null,
+      "raison": null,
+      "suivant": [
+        "public_occurrence_recall",
+        "repeated_line_completion",
+        {
+          "x": 15,
+          "y": 13
+        },
+        null
+      ]
+    },
+    "substitution-63": {
+      "ticket": [
+        "public_occurrence_recall",
+        "repeated_line_completion",
+        {
+          "x": 47,
+          "y": 22
+        },
+        null
+      ],
+      "retour": true,
+      "raison": "series_continuation_observed",
+      "suivant": [
+        "public_occurrence_recall",
+        "repeated_line_completion",
+        {
+          "x": 15,
+          "y": 13
+        },
+        "series_continuation_observed"
+      ]
+    },
+    "retrait-66": {
+      "ticket": [
+        "observed_frontier",
+        "experiment",
+        {
+          "x": 10,
+          "y": 25
+        },
+        null
+      ],
+      "retour": null,
+      "raison": null,
+      "suivant": [
+        "public_occurrence_recall",
+        "supported_line_preparation",
+        {
+          "x": 31,
+          "y": 46
+        },
+        null
+      ]
+    },
+    "substitution-66": {
+      "ticket": [
+        "public_occurrence_recall",
+        "supported_line_preparation",
+        {
+          "x": 31,
+          "y": 46
+        },
+        null
+      ],
+      "retour": true,
+      "raison": "prepared_contribution_and_compatible_response_observed",
+      "suivant": [
+        "public_occurrence_recall",
+        "supported_line_preparation",
+        {
+          "x": 52,
+          "y": 32
+        },
+        "prepared_contribution_and_compatible_response_observed"
+      ]
+    }
+  },
+  "temporal": {
+    "finales": {
+      "observations": [
+        [
+          false,
+          false
+        ],
+        [
+          false,
+          false
+        ],
+        [
+          true,
+          false
+        ]
+      ],
+      "ticket": [
+        "observed_frontier",
+        "experiment",
+        {
+          "x": 10,
+          "y": 25
+        },
+        null
+      ],
+      "suivant": [
+        "observed_frontier",
+        "experiment",
+        {
+          "x": 10,
+          "y": 18
+        },
+        null
+      ]
+    },
+    "finale-T12": {
+      "observations": [
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ],
+        [
+          true,
+          false
+        ]
+      ],
+      "ticket": [
+        "observed_frontier",
+        "experiment",
+        {
+          "x": 10,
+          "y": 25
+        },
+        null
+      ],
+      "suivant": [
+        "observed_frontier",
+        "experiment",
+        {
+          "x": 10,
+          "y": 18
+        },
+        null
+      ]
+    },
+    "sans-but": {
+      "observations": [
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ],
+        [
+          true,
+          true
+        ]
+      ],
+      "ticket": [
+        "observed_frontier",
+        "experiment",
+        {
+          "x": 10,
+          "y": 25
+        },
+        null
+      ],
+      "suivant": [
+        "public_occurrence_recall",
+        "supported_line_preparation",
+        {
+          "x": 31,
+          "y": 46
+        },
+        null
+      ]
+    }
+  }
+}
