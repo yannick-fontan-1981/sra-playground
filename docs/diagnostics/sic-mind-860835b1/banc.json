@@ -241,5 +241,6 @@
       "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:13:frame:aa2ee9fedc4437d0"
     ],
     "guard": "ordered_prefix_and_loci_bound"
-  }
+  },
+  "archiveSHA256": "a6bc5e6d7f352fa7d207a20bd8e8099806a777f30bab07d20a9580574b94c31c"
 }

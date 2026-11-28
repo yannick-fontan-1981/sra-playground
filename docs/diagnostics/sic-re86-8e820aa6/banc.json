@@ -220,5 +220,6 @@
       ],
       "guard": "bind_control_focus_and_registered_composite"
     }
-  ]
+  ],
+  "archiveSHA256": "5abc7d532cb8d7dd1466cce5008b3806e24b66a20f36b9cca0698f1977abe7dd"
 }

@@ -11,7 +11,9 @@ from zipfile import ZipFile
 bench = Path(__file__).resolve().parents[1]
 references = {"GARE": ("c3f24fb8", 8, 0), "LIFE": ("f005be66", 10, 0), "SP80": ("bb4a99b5", 8, 0),
               "TICT": ("e8df1757", 4, 0), "WA30": ("14a185d9", 7, 0), "TN36": ("0da75640", 3, 0),
-              "GRIL": ("915e0601", 4, 0), "SEQN": ("b5dda8ec", 5, 0)}
+              "GRIL": ("915e0601", 4, 0), "SEQN": ("b5dda8ec", 5, 0),
+              "SMLP": ("1e11472a", 3, 0), "HANO": ("f768bac6", 3, 0), "RE86": ("8e820aa6", 3, 0),
+              "MIND": ("860835b1", 2, 0)}
 p = argparse.ArgumentParser(description=__doc__)
 p.add_argument("game", choices=references)
 p.add_argument("engine", type=Path)

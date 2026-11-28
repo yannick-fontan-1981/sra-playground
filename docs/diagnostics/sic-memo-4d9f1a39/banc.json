@@ -26,5 +26,6 @@
     ],
     "sameDecision": true
   },
-  "spor": "test_observed_enclosing_emphasis"
+  "spor": "test_observed_enclosing_emphasis",
+  "archiveSHA256": "70c586b3eab4d087386504c73fed2c7e07208dd73441bab46c0501244279d7e4"
 }

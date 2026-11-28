@@ -17,7 +17,11 @@ Les 55 numéros sont **1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 18, 22
 
 ## Verdict
 
-Le nom du workflow, sa révision et le moteur ont été vérifiés. La campagne unique est en cours. Le rejeu détaillé des 55 se clôture après import des 107 reçus et rapprochement des témoins nouveaux.
+**Les 55 lignes coexistent sur `674b0dd1`.** Les 98 tests Containment et Addressed Material passent. Les dix variantes AR25 et les onze scénarios SMLP, HANO, RE86 et MIND reproduisent leurs reçus individuels. SPOR et MEMO conservent chacun leur preuve propre. Le moteur commun confirme le T5 de SK48/64 sur les trois palettes éprouvées, dont 8↔13 rejouée expressément. [Témoins locaux](sic-coexistence-674b0dd1/temoins.zip)
+
+Les **107 jeux distincts, 692 niveaux et 18 560 gestes** concordent avec les reçus historiques du gel et de l’assemblage à 46. Deux resets (SS01 et SS04), zéro undo. Ce verdict porte sur les reçus pour le catalogue complet et sur les décisions et retours capturés pour les témoins ciblés. [Index par jeu](sic-coexistence-674b0dd1/qualification.json) · [Reçus historiques comparés](sic-coexistence-674b0dd1/recus.zip)
+
+Le run unique a duré 14 min 05 s avec un pic de 20 runners. Le réimport traite trois jeux, puis 104 nouveaux et trois réutilisés, puis réutilise les 107. Verdict publié le 27/11 à 23:26:27 UTC−3. [Horaires](sic-coexistence-674b0dd1/horaires.json)
 
 ## Reproduire
 

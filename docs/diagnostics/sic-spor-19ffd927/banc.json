@@ -20,5 +20,6 @@
     "return1": "spor-qualification:epoch:1:revision:2:frame:9ec85219437aac82",
     "turn2": "spor-qualification:epoch:1:revision:2:frame:9ec85219437aac82"
   },
-  "nominalParityDigest": "3301e7b6f798267e938da064359fa88db56cadcb8ec5e7c42f853bfdcc441f2f"
+  "nominalParityDigest": "3301e7b6f798267e938da064359fa88db56cadcb8ec5e7c42f853bfdcc441f2f",
+  "archiveSHA256": "ab600d59b97725cbff01471d1afae31583dce5bf852d486c28130a8cd99d5d4e"
 }
