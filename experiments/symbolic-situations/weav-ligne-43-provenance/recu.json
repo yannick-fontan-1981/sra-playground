@@ -1,0 +1,108 @@
+{
+  "stats": {
+    "versions": 2,
+    "départsParVersion": 9,
+    "gestesParVersion": 97,
+    "substitutionsRefusées": 4,
+    "retoursAdmisNominal": 16
+  },
+  "source": [
+    "weav-provenance-43:epoch:1:revision:5:frame:4dc5a0253d70ef39",
+    "weav-provenance-43:epoch:1:revision:6:frame:0780a7cbf1f33d44"
+  ],
+  "empreinte": "d99f801ccc67321cb74f1f3e398f55d85da2e2c84377b08c6b0ec249c44780de",
+  "effects": {
+    "ancienne-reference": {
+      "gel": [
+        "ACTION1",
+        {}
+      ],
+      "correctif": [
+        "ACTION6",
+        {
+          "x": 28,
+          "y": 61
+        }
+      ],
+      "retour": "weav-provenance-43:epoch:1:revision:8:frame:6d03f5cc1567dcf4"
+    },
+    "portee": {
+      "gel": [
+        "ACTION1",
+        {}
+      ],
+      "correctif": [
+        "ACTION6",
+        {
+          "x": 28,
+          "y": 61
+        }
+      ],
+      "retour": "weav-provenance-43:epoch:1:revision:8:frame:6d03f5cc1567dcf4"
+    },
+    "journal-altere": {
+      "gel": [
+        "ACTION1",
+        {}
+      ],
+      "correctif": [
+        "ACTION6",
+        {
+          "x": 28,
+          "y": 61
+        }
+      ],
+      "retour": "weav-provenance-43:epoch:1:revision:8:frame:6d03f5cc1567dcf4"
+    },
+    "journal-portee": {
+      "gel": [
+        "ACTION1",
+        {}
+      ],
+      "correctif": [
+        "ACTION6",
+        {
+          "x": 28,
+          "y": 61
+        }
+      ],
+      "retour": "weav-provenance-43:epoch:1:revision:8:frame:6d03f5cc1567dcf4"
+    },
+    "sans-paire": {
+      "gel": [
+        "ACTION6",
+        {
+          "x": 28,
+          "y": 61
+        }
+      ],
+      "correctif": [
+        "ACTION6",
+        {
+          "x": 28,
+          "y": 61
+        }
+      ],
+      "retour": "weav-provenance-43:epoch:1:revision:8:frame:6d03f5cc1567dcf4"
+    },
+    "sans-recu": {
+      "gel": [
+        "ACTION1",
+        {}
+      ],
+      "correctif": [
+        "ACTION6",
+        {
+          "x": 28,
+          "y": 61
+        }
+      ],
+      "retour": "weav-provenance-43:epoch:1:revision:8:frame:6d03f5cc1567dcf4"
+    }
+  },
+  "N2": {
+    "passageAprès": 27,
+    "paireConservéeAu": 28,
+    "premièreRéutilisation": null
+  }
+}
