@@ -132,6 +132,7 @@ export interface NativeExecution {
   /** Current level quota, separate from the remaining session/prefix allowance. */
   readonly remainingLevelActions?: number;
   readonly reasoningMode?: import('../sic/reasoning-mode.ts').ReasoningMode;
+  readonly observeControlTrialShadow?: import('../sic/control-effect-next.ts').ControlTrialObserver;
   readonly observedControlledMotion?: import('../sic/public-input-exploration.ts').ControlledMotion;
   readonly retainedCursorRoles?: ReturnType<typeof import('../sic/cursor-role-memory.ts').currentCursorRoles>;
   readonly panelFrontier?: import('../sic/public-input-exploration.ts').PanelFrontier;

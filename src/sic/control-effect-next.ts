@@ -1,4 +1,4 @@
-import { compileStrategyGraph, resolveStrategyGraph, type StrategyFact, type StrategyGraph } from './strategy-agenda.ts';
+import { compileStrategyGraph, resolveStrategyGraph, type AgendaEntry, type Applicability, type StrategyFact, type StrategyGraph } from './strategy-agenda.ts';
 
 export const controlEffectPrimitives = {
   P01: 'Identify the current subject',
@@ -20,6 +20,35 @@ export interface ControlTrialContext {
   readonly effectKnown: boolean;
   readonly triedInContext: boolean;
   readonly evidence: readonly string[];
+}
+
+export const controlEffectNeed = 'establish_control_effect_for_current_objective';
+
+interface ControlTrialVerdict {
+  readonly selected: boolean;
+  readonly applicability?: Applicability;
+  readonly reason?: string;
+  readonly evidence?: readonly string[];
+}
+
+export interface ControlTrialComparison {
+  readonly need: typeof controlEffectNeed;
+  readonly family: string;
+  readonly observationRef: string;
+  readonly action: string;
+  readonly cost: 1;
+  readonly remaining: number;
+  readonly reference: ControlTrialVerdict;
+  readonly shadow: Required<ControlTrialVerdict>;
+  readonly firstDifference: keyof ControlTrialVerdict | null;
+}
+
+export type ControlTrialObserver = (comparison: ControlTrialComparison) => void;
+
+export interface ControlTrialShadow {
+  readonly observe: ControlTrialObserver;
+  readonly family: string;
+  readonly remaining: number;
 }
 
 export const controlEffectNextGraph = compileStrategyGraph({
@@ -63,15 +92,50 @@ export function chooseControlEffectPrimitive<Plan>(facts: Facts, offers: Partial
 
 function unavailable(): null { return null; }
 
-/** Qualify the family's prepared offer. The caller owns the subject, trial history and execution. */
-export function qualifyControlTrial<Offer>(offer: Offer, action: string, offeredAt: unknown, context: ControlTrialContext) {
+function controlTrialFacts(action: string, offeredAt: unknown, context: ControlTrialContext): Facts {
   const current = offeredAt === context.observationRef && context.evidence.includes(context.observationRef);
   const evidence: [string, ...string[]] = [context.observationRef, ...context.evidence.filter(ref => ref !== context.observationRef)];
   const fact = (value: boolean): StrategyFact => current ? { value, evidence } : { value: 'unknown' };
-  const assessment = chooseControlEffectPrimitive({
+  return {
     currentObservation: fact(true), objectiveDependsOnEffect: fact(context.objectiveSupported), subjectBound: fact(context.subjectBound),
     commandAvailable: fact(context.availableActions.includes(action)), effectKnown: fact(context.effectKnown),
     alreadyTried: fact(context.triedInContext),
-  }, { P05: () => offer });
+  };
+}
+
+/** Qualify the family's prepared offer. The caller owns the subject, trial history and execution. */
+export function qualifyControlTrial<Offer>(offer: Offer, action: string, offeredAt: unknown, context: ControlTrialContext) {
+  const assessment = chooseControlEffectPrimitive(controlTrialFacts(action, offeredAt, context), { P05: () => offer });
   return assessment.entries.find(entry => entry.id === 'P05')!;
+}
+
+function rankControlTrial(facts: Facts, remaining: number): Required<ControlTrialVerdict> {
+  // Only P05 has an actual prepared offer at this boundary. The other primitives have no planners here.
+  const assessment = resolveStrategyGraph({
+    graph: controlEffectNextGraph, facts, mode: 'shadow', priorities: ['P05'],
+    planners: { P01: unavailable, P02: unavailable, P05: unavailable, P07: unavailable },
+  }).entries[0]!;
+  const affordable = remaining >= 1;
+  return { selected: assessment.result === 'shadow' && affordable, applicability: assessment.applicability,
+    reason: assessment.result === 'shadow' && !affordable ? 'One action is required for the control trial.' : assessment.reason,
+    evidence: assessment.evidence ?? [] };
+}
+
+/** Compare the actual local decision with a plan-free selection on the same prepared offer. */
+export function compareControlTrial(action: string, offeredAt: unknown, context: ControlTrialContext,
+  reference: ControlTrialVerdict | AgendaEntry, target: ControlTrialShadow): void {
+  try {
+    const shadow = rankControlTrial(controlTrialFacts(action, offeredAt, context), target.remaining);
+    const active = 'result' in reference
+      ? { selected: reference.result === 'selected', applicability: reference.applicability,
+        reason: reference.reason, evidence: [...reference.evidence ?? []] }
+      : { ...reference, ...(reference.evidence ? { evidence: [...reference.evidence] } : {}) };
+    const fields = ['selected', 'applicability', 'reason', 'evidence'] as const;
+    const firstDifference = fields.find(field => active[field] !== undefined
+      && JSON.stringify(active[field]) !== JSON.stringify(shadow[field])) ?? null;
+    target.observe({ need: controlEffectNeed, family: target.family, observationRef: context.observationRef,
+      action, cost: 1, remaining: target.remaining, reference: active, shadow, firstDifference });
+  } catch {
+    // A diagnostic consumer cannot interrupt a native decision.
+  }
 }
