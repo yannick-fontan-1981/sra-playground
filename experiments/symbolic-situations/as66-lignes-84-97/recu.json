@@ -1,0 +1,184 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 8,
+      "gestes": 96
+    },
+    {
+      "sha": "484f3f0d066b7c00a3e2ad68c983ad556be3a3ac",
+      "départs": 8,
+      "gestes": 96
+    }
+  ],
+  "catalogue": {
+    "gestes": 16,
+    "l84": [
+      5,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "choixT14": [
+      "observed_frontier",
+      "experiment",
+      "ACTION2",
+      0
+    ]
+  },
+  "couverture": {
+    "gestes": 19,
+    "l97": [
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "accords": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      false
+    ],
+    "phase": [
+      {
+        "ref": "as66-qualification:epoch:3:revision:13:frame:67292fea17408631",
+        "action": "ACTION2",
+        "position": [
+          16,
+          6
+        ],
+        "delta": [
+          4,
+          0
+        ],
+        "taille": [
+          12,
+          12
+        ],
+        "avantActeur": true
+      },
+      {
+        "ref": "as66-qualification:epoch:3:revision:14:frame:6322af68567e0d79",
+        "action": "ACTION3",
+        "position": [
+          20,
+          6
+        ],
+        "delta": [
+          4,
+          0
+        ],
+        "taille": [
+          12,
+          12
+        ],
+        "avantActeur": true
+      }
+    ],
+    "datationImages": [
+      {
+        "tour": 12,
+        "masque": 2,
+        "acteur": 3
+      },
+      {
+        "tour": 13,
+        "masque": 2,
+        "acteur": 3
+      }
+    ]
+  },
+  "ligne84": {
+    "nominal": [
+      "sliding_cavity",
+      "sliding_cavity_access",
+      "ACTION2",
+      0
+    ],
+    "sansAccèsGel": [
+      "sliding_cavity",
+      "sliding_cavity_access",
+      "ACTION2",
+      0
+    ],
+    "sansAccèsBranche": [
+      "observed_frontier",
+      "experiment",
+      "ACTION3",
+      0
+    ],
+    "sansDirection": [
+      "observed_frontier",
+      "experiment",
+      "ACTION3",
+      0
+    ],
+    "suiteRetrait": [
+      "sliding_cavity",
+      "sliding_cavity_access",
+      "ACTION2",
+      0
+    ],
+    "stationnaire": {
+      "accord": false,
+      "physique": 1,
+      "servi": 0,
+      "suite": [
+        "sliding_cavity",
+        "sliding_cavity_access",
+        "ACTION2",
+        0
+      ]
+    }
+  },
+  "ligne97": {
+    "sansHorloge": [
+      [
+        "observed_frontier",
+        "experiment",
+        "ACTION2",
+        0
+      ],
+      [
+        "sliding_cavity",
+        "clocked_cavity_access",
+        "ACTION1",
+        0
+      ]
+    ],
+    "mêmeCommande": [
+      [
+        "observed_frontier",
+        "experiment",
+        "ACTION2",
+        0
+      ],
+      [
+        "sliding_cavity",
+        "clocked_cavity_access",
+        "ACTION1",
+        0
+      ]
+    ],
+    "stationnaire": {
+      "tour": 14,
+      "indice": 0,
+      "accord": false,
+      "scellé": true,
+      "suite": [
+        "sliding_cavity",
+        "clocked_cavity_access",
+        "ACTION1",
+        0
+      ]
+    }
+  }
+}
