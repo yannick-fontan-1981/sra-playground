@@ -1,0 +1,325 @@
+{
+  "frozen": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "proof": "e8df1757272cae3da1669b3e7ddb2e7bf65e8e02",
+  "operator": "49e6f325",
+  "physicalCatalogueOccurrences": {
+    "TICT": 16,
+    "SP80": 5,
+    "catalogueTotal": 45
+  },
+  "tict": {
+    "fourCasesIdentical": true,
+    "ticket": {
+      "kind": "ticket",
+      "turn": 1,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:a672cd7ff15e02d1",
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:1",
+      "level": 1,
+      "owner": "public_occurrence_recall",
+      "offer": "cell_patch_placement",
+      "point": {
+        "x": 31,
+        "y": 28
+      },
+      "cell": [
+        1,
+        1
+      ],
+      "field": "cfc21b12d45a9a6a6ede3559422d0b7580ab51f38d7f1a4e6305c1fb639ec7c6",
+      "reason": "test_pointed_cell_patch_and_dated_response",
+      "expected": null,
+      "model": null,
+      "search": false,
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:a672cd7ff15e02d1"
+      ],
+      "guard": true
+    },
+    "model": {
+      "status": "candidate",
+      "epoch": 1,
+      "field_ref": "cfc21b12d45a9a6a6ede3559422d0b7580ab51f38d7f1a4e6305c1fb639ec7c6",
+      "own": "83fae751943ef579eb3a07a766e2b459286f7ef92ab352314a3ce80e530811c3",
+      "other": "49fdbaaaddc7bd39c3a1f7023c4ea4deb2258c62a711b48a3a5f09cce6f085e0",
+      "empty": "1037329ec489d6a516ae9ce272f412c1a8ef8819a3655e4a27c1f58192ddb243",
+      "evidence": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:a672cd7ff15e02d1",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:a2ffbd164f2c8c79"
+      ],
+      "ordered_frames": [
+        0,
+        2
+      ],
+      "scope": "Stable local patch precedes one remote stable patch in this returned packet. Free-placement and symmetric line-goal law remain conditional."
+    },
+    "consumedBy": {
+      "kind": "ticket",
+      "turn": 2,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:a2ffbd164f2c8c79",
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:2",
+      "level": 1,
+      "owner": "public_occurrence_recall",
+      "offer": "cell_patch_placement",
+      "point": {
+        "x": 15,
+        "y": 12
+      },
+      "cell": [
+        0,
+        0
+      ],
+      "field": "cfc21b12d45a9a6a6ede3559422d0b7580ab51f38d7f1a4e6305c1fb639ec7c6",
+      "reason": "prepare_visible_line_under_observed_local_and_remote_additions",
+      "expected": "83fae751943ef579eb3a07a766e2b459286f7ef92ab352314a3ce80e530811c3",
+      "model": {
+        "empty": "1037329ec489d6a516ae9ce272f412c1a8ef8819a3655e4a27c1f58192ddb243",
+        "epoch": 1,
+        "evidence": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:a672cd7ff15e02d1",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:a2ffbd164f2c8c79"
+        ],
+        "field_ref": "cfc21b12d45a9a6a6ede3559422d0b7580ab51f38d7f1a4e6305c1fb639ec7c6",
+        "ordered_frames": [
+          0,
+          2
+        ],
+        "other": "49fdbaaaddc7bd39c3a1f7023c4ea4deb2258c62a711b48a3a5f09cce6f085e0",
+        "own": "83fae751943ef579eb3a07a766e2b459286f7ef92ab352314a3ce80e530811c3",
+        "scope": "Stable local patch precedes one remote stable patch in this returned packet. Free-placement and symmetric line-goal law remain conditional.",
+        "status": "candidate"
+      },
+      "search": true,
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:a2ffbd164f2c8c79",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:a672cd7ff15e02d1",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:a2ffbd164f2c8c79"
+      ],
+      "guard": true
+    },
+    "confirmation": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:ee571775d90d42d3"
+  },
+  "sp80": {
+    "nominal": {
+      "kind": "ticket",
+      "turn": 12,
+      "level": 2,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:12",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:7246cd96c2ce8de1",
+      "owner": "public_occurrence_recall",
+      "offer": "cell_patch_placement",
+      "action": "ACTION6",
+      "point": {
+        "x": 13,
+        "y": 25
+      },
+      "subquestion": "cell_patch_composition",
+      "expected": {
+        "local_patch": null,
+        "response": "compatible observed motif or unknown",
+        "official_progress_required": true
+      },
+      "model": null,
+      "motif": null,
+      "cell": [
+        0,
+        1
+      ],
+      "geometry": {
+        "origin": [
+          8,
+          16
+        ],
+        "shape": [
+          2,
+          2
+        ],
+        "size": [
+          12,
+          4
+        ],
+        "pitch": [
+          20,
+          8
+        ]
+      },
+      "evidence": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:7246cd96c2ce8de1"
+      ],
+      "guard": true
+    },
+    "substitute": {
+      "kind": "ticket",
+      "turn": 12,
+      "level": 2,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:12",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:7246cd96c2ce8de1",
+      "owner": "public_occurrence_recall",
+      "offer": "cell_patch_placement",
+      "action": "ACTION6",
+      "point": {
+        "x": 33,
+        "y": 17
+      },
+      "subquestion": "cell_patch_composition",
+      "expected": {
+        "local_patch": null,
+        "response": "compatible observed motif or unknown",
+        "official_progress_required": true
+      },
+      "model": null,
+      "motif": null,
+      "cell": [
+        1,
+        0
+      ],
+      "geometry": {
+        "origin": [
+          8,
+          16
+        ],
+        "shape": [
+          2,
+          2
+        ],
+        "size": [
+          12,
+          4
+        ],
+        "pitch": [
+          20,
+          8
+        ]
+      },
+      "evidence": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:7246cd96c2ce8de1"
+      ],
+      "guard": true
+    },
+    "return": {
+      "kind": "return",
+      "turn": 12,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:13:frame:208e0c6e38740efd",
+      "matched": null,
+      "family": "public_occurrence_recall",
+      "reason": "cell_and_remote_response_require_reconciliation",
+      "acquired": [
+        {
+          "type": "CellPlacementMemory",
+          "prior": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:7246cd96c2ce8de1",
+          "current": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:13:frame:208e0c6e38740efd",
+          "modelCount": 0,
+          "refused": []
+        }
+      ],
+      "changedCount": 2,
+      "changed": [
+        [
+          4,
+          63
+        ],
+        [
+          5,
+          63
+        ]
+      ],
+      "frames": 1
+    },
+    "next": {
+      "kind": "ticket",
+      "turn": 13,
+      "level": 2,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:13",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:13:frame:208e0c6e38740efd",
+      "owner": "public_occurrence_recall",
+      "offer": "cell_patch_placement",
+      "action": "ACTION6",
+      "point": {
+        "x": 13,
+        "y": 25
+      },
+      "subquestion": "cell_patch_composition",
+      "expected": {
+        "local_patch": null,
+        "response": "compatible observed motif or unknown",
+        "official_progress_required": true
+      },
+      "model": null,
+      "motif": null,
+      "cell": [
+        0,
+        1
+      ],
+      "geometry": {
+        "origin": [
+          8,
+          16
+        ],
+        "pitch": [
+          20,
+          8
+        ],
+        "shape": [
+          2,
+          2
+        ],
+        "size": [
+          12,
+          4
+        ]
+      },
+      "evidence": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:13:frame:208e0c6e38740efd"
+      ],
+      "guard": true
+    },
+    "withdrawal": [
+      {
+        "kind": "ticket",
+        "turn": 12,
+        "level": 2,
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:12",
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:7246cd96c2ce8de1",
+        "owner": "branch_routing",
+        "offer": "parallel_branch_routing",
+        "action": "ACTION4",
+        "point": {},
+        "subquestion": "parallel_branch_routing",
+        "mode": "move",
+        "expected": [
+          [
+            [
+              12,
+              16
+            ],
+            [
+              28,
+              24
+            ],
+            [
+              28,
+              36
+            ]
+          ],
+          0
+        ],
+        "evidence": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:7246cd96c2ce8de1",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:11:frame:f29eebc8c8123f07"
+        ],
+        "guard": true
+      },
+      {
+        "kind": "return",
+        "turn": 12,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:13:frame:44fb7cfb6fb2929e",
+        "matched": true,
+        "family": "branch_routing",
+        "reason": "compare_observed_contributor_pose",
+        "acquired": [],
+        "changedCount": 34,
+        "frames": 1
+      }
+    ]
+  },
+  "archiveSHA256": "62d9a219699ed27d83753f4aac396421077dd70a11e2b582b70b924be97520b7"
+}
