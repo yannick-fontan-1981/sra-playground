@@ -1,0 +1,38 @@
+{
+  "stats": [
+    {
+      "engine": "gel",
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 9,
+      "gestes": 39
+    },
+    {
+      "engine": "candidat",
+      "sha": "d0348ec1f1646259b9c95f0fa4a44dd0bb966025",
+      "départs": 9,
+      "gestes": 39
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "occurrencesCatalogue": 4,
+  "sources": 4,
+  "contrôlesSourceSeule": 4,
+  "choixRetiréSansEffetSurLInférence": [
+    "ACTION6",
+    {
+      "x": 38,
+      "y": 46
+    }
+  ],
+  "T3": {
+    "valeurPrévue": 8,
+    "vrai": true,
+    "retourStationnaire": false
+  },
+  "scoreT4": 1,
+  "contratCommunHPDL": {
+    "opération": "OP18",
+    "pointRequis": true,
+    "questionScellée": true
+  }
+}
