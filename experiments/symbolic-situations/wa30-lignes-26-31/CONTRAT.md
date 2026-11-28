@@ -1,0 +1,17 @@
+# WA30 · présélection indépendante des lignes 26 et 31
+
+Gel vérifié `d0e7527ca8033bd805a6d7a8bb021eff62e87021`. Candidat annoncé `14a185d909d3b3cb42fcc8584b841865b8ff6dd0`. Présélection à partir du [contrat de l’auteur](https://github.com/yannick-fontan-1981/sra-playground/blob/3c93db1d/docs/architecture/sic-wa30-lignes-26-31.md), de l’inventaire et de la trace publique du gel. Aucun contenu du candidat n’a été consulté avant ce scellement. Un service neuf et le vrai jeu partent de N1, sans curiosité ciblée, avec six niveaux cibles et 600 actions par niveau. Le parcours catalogue envoie au service un plafond global de 16. Le parcours de reprise en communique 19. Comparer leurs commandes, propriétaires et paquets jusqu’à T16 inclus avant de créditer une suite au parcours prolongé.
+
+| Ligne | Preuves attendues | Interventions à état égal |
+|---|---|---|
+| 26 · relation de deux contours | T2 doit publier le besoin d’essayer la relation entre un porteur et son voisin. T3 doit libérer ACTION5 sous `oriented_coupling / conditional_oriented_coupling`. Relever la relation avant et après, et distinguer la modification d’un contour d’une translation conjointe des deux. T4 doit être évalué sur son propre retour avant de qualifier le transport. | Retirer seulement l’invitation disponible à T3 sur le même état. Relever la famille, la commande libérée et l’effet mesuré. Si le fournisseur permet de choisir explicitement l’offre, tester le point de retrait livré et préciser où il existe. |
+| 31 · accès vers un contact | T16 doit libérer ACTION1 sous `pre_score_contact / observed_effect_access`. Identifier le porteur courant et les deux destinations réellement proposées depuis (36,33). Mesurer le déplacement du porteur, l’éventuel effet hors du contact et la trace d’essai. Relever les deux besoins successifs sur le parcours prolongé. | Substituer l’autre site, puis retirer toute l’offre dans un autre départ. Jouer les deux tickets. Vérifier à qui appartient chaque retour, quelle tentative est inscrite et ce que la décision suivante peut encore demander, y compris si les commandes et les images sont identiques. |
+
+## Réserve opérateur
+
+Empreinte SHA-256 du fichier privé de sélection `8c4fd44f34a86f26fda77fe1e7041677349015423a9f7ed3d481b2bef97a59dd`.
+
+- **26.** Après le vrai T3, isoler les composantes 4-connexes des pixels qui changent dans l’image finale. Les classer par le plus petit couple (ligne, colonne) qu’elles contiennent. Conserver la composante d’indice `octet 0 modulo nombre de composantes`. Dans chaque image servie, reprendre les pixels du plateau précédent partout ailleurs. Consigner les différences réelles et celles servies, la relation que le moteur conserve et le prototype de T4. Si le retour final n’a qu’une composante, classer le départ comme contrôle de conservation. Dans ce cas, jouer aussi un témoin stationnaire à T3, en conservant le compte d’images et la commande.
+- **31.** Après le vrai T16, présenter le plateau précédent dans toutes les images, avec une nouvelle séquence. Examiner la distinction entre un site essayé et un accès physiquement observé. Relever si la famille retente le site, passe à l’autre ou cède la main. Conserver le vrai changement séparément. Faire rejeter un reçu qui attribue le retour du ticket substitué au ticket de repli de l’autre famille, même si commande et pixels concordent.
+
+Le compte rendu distingue l’admission, l’exécution, la portée de l’effet et la reprise. Il attribue les deux qualifications à leurs propres étapes. Les issues ultérieures sont hors périmètre.
