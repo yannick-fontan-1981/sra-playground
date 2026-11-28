@@ -1,0 +1,5 @@
+# DAME · ligne 17
+
+Rejouer le catalogue 8ce7ee35 et le gel d0e7527c, L1, pack natif, 600 gestes par niveau, 16 au global. Retrouver N1/T1 ACTION6 invited_reduction / invited_population_reduction. Avant choix, relever population, candidat sélectionné, focus, terrain et invitations avec leurs preuves. Le premier retour doit préserver la population même si la sélection affiche une invitation. Le geste suivant pourra acquérir une réduction si l'origine et le membre intermédiaire disparaissent et le mobile de même type/rang apparaît à l'arrivée visée.
+
+Retirer la seule invitation du retour de sélection et vérifier si le geste de prise reste proposé par le service. Dans un contrôle distinct, garder la destination réelle et restaurer le membre intermédiaire sur le retour présenté après le vrai geste, sans toucher à l'empreinte exécutée. Attendre l'absence de loi acquise à ce geste et vérifier la suite. Chercher une seconde sélection ou une nouvelle configuration où une relation acquise est réellement consommée. Séparer le résultat conditionnel du résultat officiel.
