@@ -185,6 +185,38 @@ test('follows the rotated body within a marked footprint and checks a step past 
   assert.equal(other.pending,undefined);
 });
 
+test('an unconfirmed control transfer retires scale-only trials at the observed return', async () => {
+  function state(first:number) {
+    const rows = Array.from({ length:18 }, () => Array<number>(46).fill(0));
+    for (let y=5;y<8;y++) {
+      rows[y]!.fill(1, first, first+3);
+      rows[y]!.fill(2, 21, 23);
+      rows[y]!.fill(3, 33, 35);
+    }
+    rows[7]![23]=2;
+    rows[7]![35]=3;
+    return rows;
+  }
+  const frames=[state(2),state(5),state(8),state(11)];
+  const [initial,ready,refuted,newState]=await Promise.all(frames.map((rows,i)=>observation(rows,i)));
+  const memory=newCursorMemory();
+  const preference={mode:'active',strategy:'motion_contrast',minimumOutcomes:2} as const;
+  recordCursorTrial(memory,initial!,ready!,frames[0]!,frames[1]!,'ACTION4');
+  const click=offerCursorTrial(memory,ready!,frames[1]!,false,true,preference)!;
+  assert.equal(click.basis,'motor_scale');
+  assert.equal(recordCursorTrial(memory,ready!,ready!,frames[1]!,frames[1]!,click.command,click),
+    'cursor_click_visually_unchanged');
+  const verification=offerCursorTrial(memory,ready!,frames[1]!)!;
+  assert.equal(recordCursorTrial(memory,ready!,refuted!,frames[1]!,frames[2]!,verification.command,verification),
+    'cursor_control_unconfirmed');
+  const unguarded={...memory};
+  delete unguarded.unconfirmedScaleContext;
+  assert.equal(offerCursorTrial(unguarded,refuted!,frames[2]!,false,true,preference)?.basis,'motor_scale');
+  assert.equal(offerCursorTrial(memory,refuted!,frames[2]!,false,true,preference),null);
+  recordCursorTrial(memory,refuted!,newState!,frames[2]!,frames[3]!,'ACTION4');
+  assert.equal(offerCursorTrial(memory,newState!,frames[3]!,false,true,preference)?.basis,'motor_scale');
+});
+
 test('defers a click based on incompatible movement scales until the current exploration stalls',async()=>{
   function scene(d:number){
     const r=Array.from({length:24},()=>Array<number>(48).fill(0));

@@ -2,6 +2,7 @@ import { markedPoseMotion } from './marked-pose-motion.ts';
 import { fallbackPalette } from '../runtime/display-palette.ts';
 import { visualLayout } from './witnessed-preview-transfer.ts';
 import { informationPriority, type InformationPreference } from './information-preference.ts';
+import { observedCommandState } from './observed-command-frontier.ts';
 import type {NativeBox,NativeEntity,NativeObservation,NativePoint,NativeRows} from '../logos-engine/v6-native-types.ts';
 
 type Part = {box:NativeBox; ink:number};
@@ -18,6 +19,7 @@ export type CursorTrial = Mark & { recurrentPlacement?:{key:string;verifiedRetur
 export type CursorMemory = {
   motions:Motion[]; oriented?:PoseMotion[]; tried:string[]; refuted?:string[]; established?:string[]; motorSites?:Record<string,true>; returns?:number; blocked?:string[];
   verifyPoseChange?:boolean; followMarkedPose?:boolean;
+  unconfirmedScaleContext?: string;
   pending?:CursorTrial; verified?:{shape:string;mark?:number;refs:string[]};
   bearings?:Record<string,{dx:number;dy:number;ref:string}>;
 };
@@ -260,7 +262,10 @@ export function offerCursorTrial(m:CursorMemory|undefined,o:NativeObservation,ro
   const allowPoses=!!m.oriented?.length && preference?.mode==='active';
   if(!m.motions.length&&!allowStatic&&!allowPoses)return null;
   const marked=m.motions.length||allowStatic?cursorCandidates(o,rows,m):[];
-  const candidates=!marked.length && preference?.mode==='active' && !m.verified ? motorScalePeers(o,m):marked;
+  const refutedScale = preference?.strategy === 'motion_contrast'
+    && m.unconfirmedScaleContext === observedCommandState(o);
+  const candidates=!marked.length && preference?.mode==='active' && !m.verified && !refutedScale
+    ? motorScalePeers(o,m) : marked;
   const choices=candidates.map(mark=>({mark,projectedMove:mark.basis?undefined:possibleMove(m,mark,rows)}));
   choices.sort((a,b)=>Number(!!b.projectedMove)-Number(!!a.projectedMove));
   for(const {mark,projectedMove} of choices){
@@ -466,7 +471,10 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
       m.pending={...trial,command:alternative,triedMotors,evidence:[...trial.evidence,a.observation_ref]};
       return 'cursor_move_blocked_try_another_direction';
     }
-    if(!trial.feedback && moves.length)refute(m,trial);
+    if (!trial.feedback && moves.length) {
+      refute(m,trial);
+      m.unconfirmedScaleContext = observedCommandState(a);
+    }
 
     return 'cursor_control_unconfirmed';
   }
