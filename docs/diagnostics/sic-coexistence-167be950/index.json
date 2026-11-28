@@ -1,0 +1,185 @@
+{
+  "engine": "167be950334988ffbc46a04bc26de60c74fea527",
+  "lineCount": 87,
+  "attribution": {
+    "gel": 55,
+    "branches": 32
+  },
+  "parent": "bf1cbf245055a60c4a253b9c6ee4be18ea9b8c2c",
+  "engineTestsPassed": 593,
+  "typecheck": true,
+  "witnesses": {
+    "WEAV-PROVENANCE": {
+      "source": "167be950334988ffbc46a04bc26de60c74fea527",
+      "reference": "b01ca9bf",
+      "redirectedArms": [],
+      "archiveSHA256": "9ab4636715ab01c4f91bf0e0b5b71304ed98bd072747891e2f11e8ec4a6e6f4c",
+      "sessions": 9,
+      "checksums": {
+        "qualification.json": "b8ad40716cecab02b32bf9d8e3850f9cb90e7a77f7c0a35cd16ff47dd78aa0aa",
+        "qualification.log": "97ac283352f95803de64b549d0288e75e89f8dc80bbd852002ee9de8d13999e8"
+      }
+    },
+    "COMB-CONTRE-EXEMPLE": {
+      "source": "167be950334988ffbc46a04bc26de60c74fea527",
+      "reference": "24e97436",
+      "redirectedArms": [],
+      "archiveSHA256": "c4eb4811d4a16e024081fa9e50751b69fb9aa2355da11d0117f563b7c3991c82",
+      "sessions": 13,
+      "checksums": {
+        "qualification.json": "485cd1090fc2684bdffd2b386687422170b1fd20b5da6ab64476949641eaf099",
+        "qualification.log": "429d346cc784d04905430fc6fdc7cfdcc7992c8b037bf9169724efb7f5b74a63"
+      }
+    },
+    "KEYD": {
+      "source": "167be950334988ffbc46a04bc26de60c74fea527",
+      "reference": "51d983a7",
+      "sessions": 6,
+      "archiveSHA256": "d3215a26664f7c1eb99ca91a0840d6ba7d0f2acb8e4a39fb130972b8743c4d8d",
+      "checksums": {
+        "167be950.json": "11b3b37f8987a9042050c2034cdd9009c70a6a92b684609d34d31ef9a0665f6b",
+        "SKBN/167be950.json": "d72d19b0e65193fb23542d7222ea8fd3c0222bf120815b01a9b1cd943aea3da5",
+        "SKBN/167be950.log": "09091a97569ffacf339659725907813133af5662344df340b801575277f56281"
+      }
+    },
+    "KLOT": {
+      "source": "167be950334988ffbc46a04bc26de60c74fea527",
+      "reference": "37983796",
+      "sessions": 4,
+      "archiveSHA256": "6983edf8c91ed3f7512085d6d53b270480465b02b207aa7aad9da05fad8a0dd4",
+      "checksums": {
+        "nominal/167be950.json": "c94e42a0b79b6016d16572248736eaa3779f7972622f9d716098a73eef079bcc",
+        "nominal/167be950.log": "64a0eeaff65ded993b298ea6361d935b502e22eaba9a1138467173a0021539e3",
+        "attribution/167be950.json": "8d4acf4409ce7cb6f21e34095d11deb325737f6e52c2b6ce48a7fa17f5546870",
+        "attribution/167be950.log": "02bb41b17391fd79fa8ab7ab4934b9876412049092680d10a4b0d55ef8787b48"
+      }
+    },
+    "SC25": {
+      "source": "167be950334988ffbc46a04bc26de60c74fea527",
+      "reference": "88e8abe8",
+      "sessions": 2,
+      "archiveSHA256": "766bc22e175ac1ee636964aa38ee665375fa54a69fe93298b101458641e8a72c",
+      "checksums": {
+        "qualification.log": "ad3bfe43033c3ad6b0a3696fffc0b6a9187f5d33afbd26b84e005347ce5b1d4d"
+      }
+    },
+    "SELE": {
+      "source": "167be950334988ffbc46a04bc26de60c74fea527",
+      "reference": "77df94e3",
+      "redirectedArms": [
+        "gel"
+      ],
+      "archiveSHA256": "4ac1a7a5c7339f7f5cd7fe51691a647268f6e27edfac2d5969d0df9c14872fab",
+      "sessions": 7,
+      "checksums": {
+        "qualification.json": "301423010c0098348c20fcb808956552052587162e461f5aeb720d5bf91a39ac",
+        "qualification.log": "5f042155e9209d9f7f2f10bb0db55aa3e258c4e97e17af576f6c014d63ef6d9a"
+      }
+    },
+    "RSWP": {
+      "source": "167be950334988ffbc46a04bc26de60c74fea527",
+      "reference": "f3051af8",
+      "redirectedArms": [
+        "gel"
+      ],
+      "archiveSHA256": "a03ad044034a8efa25bbbf92c11003eb6998917988a312a38ed2030d033ddb58",
+      "sessions": 7,
+      "checksums": {
+        "qualification.json": "1c28d9960ab054c89bbb62eeb94cb05c9c7df5e66f0fdbc0a2b0ec03509290a8",
+        "qualification.log": "29ede0ce98115c9a9560578073a81c9cb85d786de6528b5844447a05f7d2b645"
+      }
+    },
+    "COLM": {
+      "source": "167be950334988ffbc46a04bc26de60c74fea527",
+      "reference": "b8902646",
+      "redirectedArms": [
+        "gel"
+      ],
+      "archiveSHA256": "2a0a8e5e23aacfd9dd77f8297390f4c0c4df004efe9b0f5db703dfe8f104b2d8",
+      "sessions": 6,
+      "checksums": {
+        "qualification.json": "380eed6ff7a8867abd7402957288ae6db43ac4a37dbbb7543fc4483c9018737f",
+        "qualification.log": "bcae3baf736cc0c18b69f52fde4d01c1925697af1684389b2fe1c126625ad27d"
+      }
+    },
+    "PIPE": {
+      "source": "167be950334988ffbc46a04bc26de60c74fea527",
+      "reference": "aa75791a",
+      "redirectedArms": [
+        "gel"
+      ],
+      "archiveSHA256": "2a0e0482270430617c07fc07ef396e9670cd593ae91b5d85e00910f9801f3585",
+      "sessions": 6,
+      "checksums": {
+        "qualification.json": "5d4b3a2022bee33745543bb5cb31609330b30a3d65b54da9bd7650e3488596da",
+        "qualification.log": "198065c8b4526512916b88965eca9dcfd51e9cf4b331fbee761d300eca071c1d"
+      }
+    },
+    "VOIS": {
+      "source": "167be950334988ffbc46a04bc26de60c74fea527",
+      "reference": "1391bd74",
+      "redirectedArms": [
+        "gel"
+      ],
+      "archiveSHA256": "5512ebe9b8edcb2bd8d680371efee3cb76ad677a5244bc38a37f08e1157b768d",
+      "sessions": 6,
+      "checksums": {
+        "qualification.json": "66be9414d68fa7b65ddd08493ad7a813be305d6bba5e5435229b5d8009d30e0f",
+        "qualification.log": "5cb1edaab5da4d324d415247f2155f2d51196130d94f7079b99e5ec07abdf6e0"
+      }
+    },
+    "THER": {
+      "source": "167be950334988ffbc46a04bc26de60c74fea527",
+      "reference": "dc9314cc",
+      "redirectedArms": [
+        "gel"
+      ],
+      "archiveSHA256": "3d1db6404303226352be2788bec6bee78f6873c8b0f5c6cccb796334ba87659c",
+      "sessions": 4,
+      "checksums": {
+        "qualification.json": "0b85a8bc3596cae0e030cfc9bf70aee74be1f44709e5b70ebf4be8b2771f3caa",
+        "qualification.log": "47d71fae92c52cd472bb982e5eb9199983fbc6756f6bb9b2b8704297f23e98d5"
+      }
+    },
+    "CD82": {
+      "source": "167be950334988ffbc46a04bc26de60c74fea527",
+      "individualProof": "a6f7b0de",
+      "sessions": 2,
+      "passed": 2,
+      "skipped": 0,
+      "individualArchiveSHA256": "1a176eb9c322c7ec1680aac7182ca154b0cc3a44e5c30efe8d24f2342996cafc",
+      "checksums": {
+        "167be950.json": "42101696f14bfd441217ea57176417d08d2b364fcd8e48a4513fc3137ab65827",
+        "167be950.log": "36f999742a0d7c7c023d667f3432d7cc62de280c330de1185051d2ad73c8c62a"
+      }
+    }
+  },
+  "witnessArchiveSHA256": "17b8ced7e31e20a1f35ba1ebdbba533f3303da6cd6dff2ebdc8cde95df970746",
+  "campaign": {
+    "run": "46106829666",
+    "workflow": "4a12aaea0bf6a59d155bc9cca3200ee47b9c4f89",
+    "archiveSHA256": "45ef4e384e33d48ad9187b80543a389af7a7ad8ef1f89bfc5501186aca19a261",
+    "games": 107,
+    "levels": 692,
+    "actions": 18560,
+    "seconds": 708,
+    "replayPeak": 20,
+    "resume": [
+      [
+        3,
+        0,
+        0
+      ],
+      [
+        104,
+        3,
+        0
+      ],
+      [
+        0,
+        107,
+        0
+      ]
+    ]
+  }
+}

@@ -34,5 +34,6 @@
   "tests": 74,
   "author": "1ce9bd3f",
   "rawSHA256": "d1c7b8c029fa68033a065d9d3f88358811bd0bf0ab7b183e64222fadb7fc7e5c",
-  "archiveSHA256": "2a0a8e5e23aacfd9dd77f8297390f4c0c4df004efe9b0f5db703dfe8f104b2d8"
+  "archiveSHA256": "2a0a8e5e23aacfd9dd77f8297390f4c0c4df004efe9b0f5db703dfe8f104b2d8",
+  "nativeReceiptWithoutQualificationSHA256": "9a0688a241b77386293ef26e39618ba080bc10c6ecead9747c29f7eb16614bd9"
 }

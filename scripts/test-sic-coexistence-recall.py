@@ -22,6 +22,14 @@ proofs = {
     "GMAP": ("9c71cd82", "gmap-34", ("gel",)),
     "CGWL": ("beb11112", "cgwl-37", ("gel",)),
     "CATL": ("fad120b5", "catl-50", ("gel",)),
+    "WEAV-PROVENANCE": ("b01ca9bf", "weav-provenance-43", ()),
+    "COMB-CONTRE-EXEMPLE": ("24e97436", "comb-contre-exemple-46", ()),
+    "SELE": ("77df94e3", "sele-51", ("gel",)),
+    "RSWP": ("f3051af8", "rswp-55", ("gel",)),
+    "COLM": ("b8902646", "colm-59", ("gel",)),
+    "PIPE": ("aa75791a", "pipe-60", ("gel",)),
+    "VOIS": ("1391bd74", "vois-62", ("gel",)),
+    "THER": ("dc9314cc", "ther-65", ("gel",)),
 }
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("game", choices=proofs)
@@ -44,8 +52,11 @@ contrast_fixtures = {"POLA": "tests/fixtures/v6-axial-question-reference.json.gz
                      "GMAP": "docs/migration/lot9a-evidence/reference-01/reference.json.gz"}
 if args.game in contrast_fixtures:
     assets += [lab + "contraste.mjs", contrast_fixtures[args.game]]
-if args.game == "CATL":
+if args.game in {"CATL", "WEAV-PROVENANCE", "COMB-CONTRE-EXEMPLE", "SELE", "RSWP", "COLM", "PIPE", "VOIS", "THER"}:
     assets.append(frontier + "rejouer-service.mjs")
+if args.game == "THER":
+    assets += [lab + "archive.mjs", "docs/migration/native-campaigns-v42/ther-four-level-public-trace.json.gz",
+               "docs/migration/native-campaigns-v42/ther-four-levels.json", "tests/fixtures/v6-rooted-quota-reference.json.gz"]
 out.mkdir(parents=True)
 copy_git(proof, assets, out)
 
@@ -67,7 +78,11 @@ if args.game in {"MEMO", "SK48", "CATR", "CWSE", "HPDL", "FT09"}:
     # Confirm the tested HEAD in place of the proof checkout's frozen-tree assertion.
     verifier.write_text(source.replace(expected_tree, "assert.equal(git('rev-parse','HEAD')," + json.dumps(revision) + ");"),
                         encoding="utf8", newline="\n")
-contract_commits = {"POLA": "0e24fac7", "GMAP": "d9097a5b", "CGWL": "36d4c259", "CATL": "4ab9c99b"}
+contract_commits = {
+    "POLA": "0e24fac7", "GMAP": "d9097a5b", "CGWL": "36d4c259", "CATL": "4ab9c99b",
+    "WEAV-PROVENANCE": "fd53da26", "COMB-CONTRE-EXEMPLE": "81f2d53d", "SELE": "421e12dc", "RSWP": "47ef461c",
+    "COLM": "6c0c3e90", "PIPE": "85d1288b", "VOIS": "90e41585", "THER": "d40aa32d",
+}
 if args.game in contract_commits:
     verifier = out / entry
     source = verifier.read_text(encoding="utf8")

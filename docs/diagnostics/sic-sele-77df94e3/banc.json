@@ -29,5 +29,6 @@
   "author": "22f992a1",
   "operator": "12f289c1",
   "rawSHA256": "ea39fe0d6b934e089cd6402ebe409a1d5b55b7f04161ada7031e14834ed9f175",
-  "archiveSHA256": "4ac1a7a5c7339f7f5cd7fe51691a647268f6e27edfac2d5969d0df9c14872fab"
+  "archiveSHA256": "4ac1a7a5c7339f7f5cd7fe51691a647268f6e27edfac2d5969d0df9c14872fab",
+  "nativeReceiptWithoutQualificationSHA256": "8a70e506628ecf9cbd5c81dda6d0f36a6bba9fb6cef41b8deaab1fd33db0d753"
 }

@@ -16,7 +16,8 @@ references = {"GARE": ("c3f24fb8", 8, 0), "LIFE": ("f005be66", 10, 0), "SP80": (
               "MIND": ("860835b1", 2, 0), "KATA": ("d22d706c", 3, 0),
               "LS20": ("a0af03d0", 3, 0), "DC22": ("d713024a", 2, 0), "ELAS": ("280a54b5", 2, 0),
               "GIGO": ("b2eef226", 4, 0), "REWI": ("9b41b8ba", 4, 0), "LP85": ("80d14be1", 2, 0),
-              "CN04": ("bfba3acb", 1, 0), "ISOS-PROVENANCE": ("640bd882", 6, 0)}
+              "CN04": ("bfba3acb", 1, 0), "ISOS-PROVENANCE": ("640bd882", 6, 0),
+              "CD82": ("a6f7b0de", 2, 0)}
 p = argparse.ArgumentParser(description=__doc__)
 p.add_argument("game", choices=references)
 p.add_argument("engine", type=Path)
