@@ -1,0 +1,54 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "66ce04946bccb531d5a6403ec36a5c2a90bf99a4",
+    "attendus": "88dcf7893eaf032b5be804b78c2e697719c483a0"
+  },
+  "prefixes": 5,
+  "method": {
+    "box": 0,
+    "field": "capacity",
+    "before": 1,
+    "after": 4,
+    "signature": {
+      "box_shape": [
+        17,
+        8
+      ],
+      "unit": 2,
+      "word_shape": [
+        3,
+        3
+      ]
+    },
+    "evidence": [
+      "hpdl-75:epoch:1:revision:3:frame:a736549b36c7d3a0",
+      "hpdl-75:epoch:1:revision:4:frame:cbbbcefd06ad8c60"
+    ],
+    "authority": "observed_field_change_not_capture_law",
+    "source": 1
+  },
+  "firstSetting": {
+    "desired": 2,
+    "measured": 1,
+    "sealed": true
+  },
+  "retry": {
+    "measured": 2,
+    "sameCommand": [
+      "ACTION6",
+      {
+        "x": 14,
+        "y": 30
+      }
+    ]
+  },
+  "withdrawal": [
+    "ACTION4",
+    {}
+  ],
+  "stationary": "no_supported_window_change",
+  "boundary": 7,
+  "archiveSHA256": "377386e211cdb51eb703ef5a63559fd9fcb9df4f0bbb45e0d16b0bbc532db34d"
+}
