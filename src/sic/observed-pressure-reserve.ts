@@ -1,4 +1,5 @@
 import type { NativeCommand, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { composePlan, type Condition } from './effect-composer.ts';
 import { readTravelGrid, type ObservedTravel } from './observed-travel-frontier.ts';
 
 type Cells = ReturnType<typeof readTravelGrid>['cells'];
@@ -233,20 +234,24 @@ export function choosePressureReserve(local: PressureReserve | undefined, travel
   }
 
   function route(goal: PressurePlan['goal'], target: string, match: (pose: Pose) => boolean,
-    preserve: (pose: Pose) => boolean = () => true): PressurePlan | undefined {
-    const queue: { pose: Pose; first?: { command: NativeCommand; expected: Pose } }[] = [{ pose: initial! }];
-    const seen = new Set([poseKey(initial!)]);
-    for (let i = 0; i < queue.length && i < 7500; i++) {
-      const { pose, first } = queue[i]!;
-      if (first && match(pose)) return { ...first, goal, target, evidence };
-      for (const move of moves) {
-        const expected = project(pose, move);
-        if (!expected || !preserve(expected)) continue;
-        const key = poseKey(expected);
-        if (seen.has(key)) continue;
-        seen.add(key); queue.push({ pose: expected, first: first ?? { command: move.command, expected } });
-      }
-    }
+    opening?: Condition<Pose>): PressurePlan | undefined {
+    const start = initial!;
+    const plan = composePlan<Pose, NativeCommand>({
+      initial: start, key: poseKey,
+      goal: { relation: goal, holds: pose => pose !== start && match(pose) },
+      budget: { commands: 7_500, states: 7_500 },
+      *choices(pose) {
+        for (const move of moves) {
+          const expected = project(pose, move);
+          if (!expected) continue;
+          yield { action: move.command, after: expected, evidence,
+            // The existing route may establish pressure on its first step.
+            ...(opening ? opening.holds(pose) ? { maintains: [opening] } : { ensures: [opening] } : {}) };
+        }
+      },
+    });
+    const first = plan?.effects[0];
+    return first ? { command: first.action, expected: first.after, goal, target, evidence } : undefined;
   }
   if (!gate.closedRef && initial.actor === gate.mark && !initial.pieces.length) {
     const move = moves.find(item => project(initial, item));
@@ -258,18 +263,18 @@ export function choosePressureReserve(local: PressureReserve | undefined, travel
     const plan = route('reserve_weight', gate.mark, pose => pose.pieces.includes(gate.mark) && !near(pose.actor, gate.mark));
     if (plan) return plan;
   }
-  const holds = (pose: Pose) => pose.pieces.includes(gate.mark);
+  const opening = { relation: 'a weight remains on the gate mark', holds: (pose: Pose) => pose.pieces.includes(gate.mark) };
   if (!local.crossingBuilt) {
-    return route('build_crossing', bridge.landing, pose => pose.supports.includes(bridge.landing), holds);
+    return route('build_crossing', bridge.landing, pose => pose.supports.includes(bridge.landing), opening);
   }
   const exit = local.exit;
-  if (!exit || !holds(initial)) return;
+  if (!exit || !opening.holds(initial)) return;
   const island = new Set([exit]);
   for (const cell of island) for (const move of moves) {
     const adjacent = offset(cell, move.delta);
     if (free(adjacent, initial)) island.add(adjacent);
   }
-  if (island.has(initial.actor)) return route('cross_to_exit', exit, pose => pose.actor === exit, holds);
+  if (island.has(initial.actor)) return route('cross_to_exit', exit, pose => pose.actor === exit, opening);
   const alternative = inputs.filter(input => !travel.moves[input.action_ref] && /^ACTION[1-5]$/.test(input.action_ref));
   if (alternative.length !== 1) return;
   const mid = Math.floor(pitch / 2), center = mid * pitch + mid;
@@ -295,5 +300,5 @@ export function choosePressureReserve(local: PressureReserve | undefined, travel
       }
     }
   }
-  return route('cross_to_exit', exit, pose => candidates.has(pose.actor), holds);
+  return route('cross_to_exit', exit, pose => candidates.has(pose.actor), opening);
 }
