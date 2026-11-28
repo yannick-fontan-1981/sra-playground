@@ -1,0 +1,39 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "71e15295d2fd38996147a524e4b0cd63e2991cc5",
+    "attendus": "6db703b6d7df4e80c8d7de436c214025bc2c8a6f",
+    "catr": "9186a49ea207caff1fee6a1386b506739b22d4a3",
+    "catrSHA": "c11abc945f851c61a1579d71e6065674c00536465b804acdc399288c3ffa3cb2"
+  },
+  "prefixes": 5,
+  "vector": {
+    "delta": [
+      1,
+      0
+    ],
+    "evidence": [
+      "cwse-45:epoch:1:revision:1:frame:14b234e86cb071c9",
+      "cwse-45:epoch:1:revision:2:frame:17dd6cde2c053e40"
+    ]
+  },
+  "sameT2Command": "ACTION4",
+  "T2Decision": [
+    "access",
+    "control_question"
+  ],
+  "T2Returns": [
+    false,
+    null
+  ],
+  "partialN3": 8,
+  "executedN3": 4,
+  "sharedBinding": [
+    "frame_hash",
+    "level_epoch",
+    "levels_completed",
+    "state"
+  ],
+  "archiveSHA256": "0a39cf3a13bfba827bcc089ae119862c3f3ebe7396e34204d487005a55318be0"
+}
