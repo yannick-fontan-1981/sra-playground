@@ -1,0 +1,122 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 5,
+      "dontLectureInitiale": 1,
+      "gestes": 44,
+      "testsAuteur": 4
+    },
+    {
+      "sha": "bb4a99b5ba41531eb70f1dccb6a97a919cefec56",
+      "départs": 9,
+      "dontLectureInitiale": 1,
+      "gestes": 74,
+      "testsAuteur": 8
+    }
+  ],
+  "nominal": {
+    "4": {
+      "offres": 9,
+      "tickets": 11,
+      "retours": 11,
+      "confirmés": 6,
+      "contredits": 0,
+      "indéterminés": 5
+    },
+    "41": {
+      "offres": 5,
+      "tickets": 5,
+      "retours": 5,
+      "confirmés": 0,
+      "contredits": 0,
+      "indéterminés": 5
+    }
+  },
+  "fauxReçusRejetés": [
+    {
+      "tour": 1,
+      "ticketEmprunté": 2,
+      "mêmeCommande": false
+    },
+    {
+      "tour": 12,
+      "ticketEmprunté": 13,
+      "mêmeCommande": true
+    }
+  ],
+  "topologie": {
+    "sources": [
+      9
+    ],
+    "cavities": [
+      5,
+      11
+    ],
+    "lengths": [
+      5
+    ],
+    "state": [
+      [
+        [
+          12,
+          16
+        ]
+      ],
+      0
+    ]
+  },
+  "autreCalibrage": {
+    "commande": "ACTION4",
+    "delta": [
+      4,
+      0
+    ],
+    "suite": "ACTION1"
+  },
+  "placement": {
+    "point": [
+      "ACTION6",
+      {
+        "x": 13,
+        "y": 25
+      }
+    ],
+    "autrePoint": [
+      "ACTION6",
+      {
+        "x": 33,
+        "y": 17
+      }
+    ],
+    "variationFinale": {
+      "total": 2,
+      "local": 0,
+      "points": [
+        [
+          4,
+          63
+        ],
+        [
+          5,
+          63
+        ]
+      ]
+    },
+    "suite": [
+      "ACTION6",
+      {
+        "x": 13,
+        "y": 25
+      }
+    ],
+    "suiteStationnaire": [
+      "ACTION4",
+      {}
+    ],
+    "repli": [
+      "ACTION4",
+      {}
+    ]
+  }
+}
