@@ -14,7 +14,7 @@ Les quinze premiers tickets, leurs familles, leurs questions, leurs projections 
 
 | Plafond du moteur | Coupure de lecture | Première décision qui diffère et effet |
 |---|---|---|
-| 16 | 15 | Le relevé s'arrête avec le ticket suivant disponible. Les quinze lignes sont identiques à celles du relevé à 16. |
+| 16 | 15 | Le service rend une frontière après le retour 15. Dans le relevé à 16, `resume` délivre le ticket suivant. Les quinze lignes précédentes coïncident. |
 | 16 | 16 | Il reste un geste. `returned_branch_contrast` est interrogée et ne propose rien. `observed_frontier / reach_open_input / access` délivre ACTION4. Projection confirmée, puis arrêt sur le budget de session. |
 | Budgets par niveau seuls | 16 | La capacité du préfixe est 16. `returned_branch_contrast / access` propose ACTION4, ACTION4, ACTION4, ACTION3. Son premier ticket ACTION4 est confirmé. La frontière locale de 22 n'est jamais visitée. |
 | 17 | 17 | Il reste deux gestes au choix 16. La ligne 22 délivre l'accès ACTION4 puis, au choix 17, le ticket de continuation ACTION3. La question distante reçoit `observed`. C'est une sélection et une continuation. |

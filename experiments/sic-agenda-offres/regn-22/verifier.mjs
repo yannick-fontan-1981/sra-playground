@@ -117,7 +117,7 @@ async function verify() {
       if(n!=='horloge') samePrefix(run,b[n],run.steps.length,n+' / parité');
     }
     samePrefix(b.coupe,b.catalogue,15,'seule coupure de lecture');
-    assert.equal(b.coupe.stop.prochain,'action');
+    assert.equal(b.coupe.stop.prochain,'boundary');
     for(const v of ['historique','gel']) samePrefix(runs[v].horloge,runs[v].catalogue,16,v+' horloge du planificateur');
     const fixtureFile=join(dir,'fixture.json');
     execFileSync(process.execPath,[fileURLToPath(new URL('../frontiere-22-23/qualifier.mjs',import.meta.url)),'--recu',fixtureFile]);
