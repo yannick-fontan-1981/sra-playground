@@ -1,0 +1,113 @@
+{
+  "sha": {
+    "base": "09b9a509e5e07894b9fccf170f22ae26cbeffbda",
+    "candidat": "162e45506cd9196171c15cb2402cf2ca1ee4266d"
+  },
+  "gestes": {
+    "nominalParSha": 16,
+    "controlsCandidat": 23,
+    "mesureIndépendante": 5
+  },
+  "enfantsNominaux": {
+    "translations": 4,
+    "indéterminés": 2
+  },
+  "t5": {
+    "preuve": {
+      "childId": "sic-need:fa1c59a80e6f0e9a87eec516c8ca5731fcdc6ddc5c0d4bac72ca95016771a5c9",
+      "parentId": "sic-need:cf6862fd08a82b3682e1217e1391f523aaddd2b33093d45e2b57ee2ad2a5c083",
+      "subjectId": "9377082569ed42fe9b01ec63cc82ad5830e10c23e6a57819c134e54024168cb5",
+      "command": {
+        "action_ref": "ACTION4",
+        "data": {}
+      },
+      "levelEpoch": 1,
+      "beforeRef": "p05-operator-child:epoch:1:revision:5:frame:39ab93e8a10541a7",
+      "afterRef": "p05-operator-child:epoch:1:revision:6:frame:bd5da91d68f0d73d",
+      "status": "observed_translation",
+      "destination": [
+        20,
+        8
+      ],
+      "displacement": [
+        6,
+        0
+      ]
+    },
+    "paquet": "b9f0fe87ba076d344915234a1641438d498aceca78b4f19e90a16dee7216dad0"
+  },
+  "t6": {
+    "commande": "ACTION4",
+    "projection": [
+      26,
+      8
+    ],
+    "preuve": "p05-operator-child:epoch:1:revision:6:frame:bd5da91d68f0d73d"
+  },
+  "substitution": {
+    "genuine": "p05-operator-child:epoch:1:revision:5:frame:39ab93e8a10541a7",
+    "other": "p05-operator-child:epoch:1:revision:4:frame:77123df1f65d9149"
+  },
+  "contrôles": [
+    {
+      "arm": "témoin",
+      "t5": "observed_translation",
+      "control": [
+        6,
+        0
+      ],
+      "prochain": {
+        "strategy": "P07",
+        "command": "ACTION4",
+        "retour": "bb9f857e76f02ac687d293d6970ea2207feedae8462193c74b3077fd6d272a73"
+      }
+    },
+    {
+      "arm": "stationnaire",
+      "t5": "unresolved",
+      "control": null,
+      "prochain": {
+        "strategy": "P05",
+        "command": "ACTION5",
+        "retour": null
+      }
+    },
+    {
+      "arm": "provenance",
+      "t5": null,
+      "control": null,
+      "prochain": {
+        "strategy": "P05",
+        "command": "ACTION3",
+        "retour": "08f6e68d2963ca699166603c9746b2bd82519f022da6c93d2a0f9ccf6cba7dc0"
+      }
+    },
+    {
+      "arm": "retrait",
+      "t5": null,
+      "control": null,
+      "prochain": {
+        "strategy": "P05",
+        "command": "ACTION3",
+        "retour": "08f6e68d2963ca699166603c9746b2bd82519f022da6c93d2a0f9ccf6cba7dc0"
+      }
+    }
+  ],
+  "mesure": {
+    "position": [
+      14,
+      8
+    ],
+    "positionRetour": [
+      20,
+      8
+    ],
+    "vecteur": [
+      6,
+      0
+    ],
+    "pixels": 24,
+    "retour": "b9f0fe87ba076d344915234a1641438d498aceca78b4f19e90a16dee7216dad0",
+    "gestes": 5
+  }
+}
