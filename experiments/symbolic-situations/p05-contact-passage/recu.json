@@ -1,0 +1,62 @@
+{
+  "sha": {
+    "base": "86e0f172bfd4f743bccd985a57ce1811001a6d7e",
+    "candidat": "40f140f8dceb78c7ad1e448751a9f103bfc01362"
+  },
+  "stats": {
+    "base": {
+      "departs": 10,
+      "gestes": 128,
+      "contacts": 8
+    },
+    "candidat": {
+      "departs": 10,
+      "gestes": 126,
+      "contacts": 6
+    }
+  },
+  "results": [
+    {
+      "miroir": false,
+      "commande": "ACTION4",
+      "approches": 2,
+      "cible": [
+        15,
+        11
+      ],
+      "zero": {
+        "selected": false,
+        "contact": false
+      },
+      "inverse": {
+        "offreConservée": true,
+        "retour": "passage_connections_rewritten_at_landing"
+      },
+      "retrait": {
+        "contact": false
+      },
+      "ancienneReferenceRefusée": true
+    },
+    {
+      "miroir": true,
+      "commande": "ACTION3",
+      "approches": 2,
+      "cible": [
+        41,
+        12
+      ],
+      "zero": {
+        "selected": false,
+        "contact": false
+      },
+      "inverse": {
+        "offreConservée": true,
+        "retour": "passage_connections_rewritten_at_landing"
+      },
+      "retrait": {
+        "contact": false
+      },
+      "ancienneReferenceRefusée": true
+    }
+  ]
+}
