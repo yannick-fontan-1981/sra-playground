@@ -46,7 +46,13 @@ async function run(code,requestedTarget,parallelWorkers) {
   ]);
   const historical=historicalReplayReferences(JSON.parse(historicalData));
   const supplied=suppliedData ? JSON.parse(suppliedData) : undefined;
-  const pack={...defaultRecoveryPack,solver:mode};
+  const sourceArm=process.env.SIC_SOURCE_COMPOSER_ARM;
+  if (sourceArm !== undefined && (mode !== 'sic' || !['fixed', 'active'].includes(sourceArm))) {
+    throw new TypeError('The source composer comparison requires a registered arm and strict SIC.');
+  }
+  const pack={...defaultRecoveryPack,solver:mode,
+    ...(sourceArm === 'active' ? { informationPreference: { mode:'active',
+      strategy:'bind_earlier_motions_to_registered_subjects',minimumOutcomes:2 } } : {})};
   const games=createGameDispatcher(loadLegacy);
   const game=request=>games.dispatch(request);
   let solver;const service=new V6AgentService(async recovery=>(solver=await createNativeV6Runtime({common,strategy},{recovery})));
@@ -98,7 +104,7 @@ async function run(code,requestedTarget,parallelWorkers) {
     }
     const wall=performance.now()-start;
     const snapshot=agent.snapshot;
-    return {code,target,mode,parallelWorkers,recoveries,resumes,gaps:{continued:metric(continuedGaps),boundary:metric(boundaryGaps)},series:[...series.values()].filter(n=>n>1),pathKinds:[...series].filter(([,n])=>n>1).map(([id,n])=>({length:n,type:[...pathKinds.get(id)].sort().join("+")})),effects,decisions:Object.fromEntries(decisions),usage:Object.fromEntries(usage),actions:snapshot.actionCount,levels:board.levelsCompleted,reason:snapshot.reason,status:snapshot.status,
+    return {code,target,mode,parallelWorkers,...(sourceArm ? { sourceArm } : {}),recoveries,resumes,gaps:{continued:metric(continuedGaps),boundary:metric(boundaryGaps)},series:[...series.values()].filter(n=>n>1),pathKinds:[...series].filter(([,n])=>n>1).map(([id,n])=>({length:n,type:[...pathKinds.get(id)].sort().join("+")})),effects,decisions:Object.fromEntries(decisions),usage:Object.fromEntries(usage),actions:snapshot.actionCount,levels:board.levelsCompleted,reason:snapshot.reason,status:snapshot.status,
       ...(snapshot.status==='error'?{message:snapshot.message}:{}),authority:snapshot.sicActionCoverage?.sicOnly??0,solverFamilies:snapshot.coverage?.registeredFamilies.length,
       levelStats,
       ...(board.levelsCompleted < target ? { terminalDecisions: snapshot.trace

@@ -1,0 +1,73 @@
+name: SIC observed returns on authorized source games
+
+on:
+  push:
+    branches: [experiment/sic-source-return-composition]
+    paths: [.github/workflows/sic-source-return-composition.yml]
+
+permissions:
+  contents: read
+
+jobs:
+  replay:
+    name: Source A/B ${{ matrix.game }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        game: [SS01, SS03, SS05, SS06, SS07, G50T, DC22, COMB, PORT, CAVA]
+    env:
+      GAME: ${{ matrix.game }}
+      SOURCE_TREE: c6be00220e0691619413e9244101f9c6a302c144
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Verify checked-out engine and prepare
+        run: |
+          test "$(git rev-parse HEAD:src)" = "$SOURCE_TREE"
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          npm ci
+          node scripts/prepare-python.mjs
+      - name: Compare fixed and active policies from level 1
+        run: |
+          mkdir replay
+          date -u +%s%3N > replay/start-ms
+          for arm in fixed active; do
+            SIC_SOURCE_COMPOSER_ARM="$arm" node scripts/check-sic-chronological.mjs "$GAME" auto "replay/$arm.jsonl" 1 sic > "replay/$arm.log" 2>&1
+          done
+          date -u +%s%3N > replay/end-ms
+          printf '%s\n' "$GITHUB_SHA" "$SOURCE_TREE" "$GAME" > replay/identity
+          git diff --exit-code
+          cd replay
+          sha256sum fixed.jsonl active.jsonl *.levels identity start-ms end-ms > sha256sums
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sic-source-composer-${{ matrix.game }}
+          path: replay/
+          retention-days: 14
+
+  aggregate:
+    name: Validate equal budgets and reconcile official wins
+    needs: replay
+    runs-on: ubuntu-24.04
+    if: always() && needs.replay.result == 'success'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: sic-source-composer-*
+          path: downloads
+      - run: python3 scripts/summarize-sic-source-composition.py downloads summary.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sic-source-composition-summary
+          path: summary.json
