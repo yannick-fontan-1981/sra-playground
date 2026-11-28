@@ -11,7 +11,11 @@ Moteur `703cd1c32704171bae8e12a33a446bd6486fc288`, arbre `src` `fe6e22425293b31b
 
 Les reçus natifs ciblés distinguent trois effets. Le contact apparié modifie réellement son action en cas d'abstention sur PORT. L'enfant de G50T ajoute d'abord une preuve au reçu en conservant l'action. La reprise SS05 exerce la composition de réserve sur le jeu officiel. Les contrôles isolés donnent les références à reconstituer. [Contact PORT](sic-banc-p05-contact-40f140f8.md) · [Enfant G50T](sic-banc-p05-enfant-162e4550.md) · [Pression SS05](sic-banc-pressure-composer-c515ea14.md)
 
-Le transfert du parent de pression sur DC22 N4 et sa clôture T14 font l'objet d'un lot distinct. La campagne historique retrouve les six niveaux et 630 commandes du parcours ordinaire de DC22.
+Le transfert du parent de pression sur DC22 N4 et sa clôture T14 font l'objet d'un lot distinct. La campagne historique retrouve les six niveaux et 630 commandes du parcours ordinaire de DC22. Au N4, son reçu enregistre le clic ACTION6 P05 au T14, avec 41 pixels modifiés, puis le déplacement ACTION2 P07 au T15. Il atteste la succession, ses effets et le nombre de preuves.
+
+Le contrôle séparé `9e96585a` rejoue `c515ea14` jusqu'à N4, avec le même blob du fournisseur de support que `703cd1c3`. Les 187 effets du témoin et ses quatre empreintes de trajectoire se raccordent au préfixe des reçus historiques. Retirer seulement la citation r126 de `phaseMemory.refs` conserve l'offre de traversée. L'observation courante réintroduit r126 dans les références de l'offre.
+
+Rouvrir le dernier cycle à géométrie et `lastRef` identiques conserve les 125 premières commandes. Le premier écart est au **N4/T15, geste global 126**. Le service remplace ACTION2 par **ACTION6 (56,28)** et joue ce ticket. Le retour `support_phase_measured` laisse le cycle ouvert. Le témoin gagne N4 en 76 gestes. Le bras rouvert s'arrête à 92 gestes, avec trois niveaux gagnés. La clôture du cycle conditionne donc la traversée à cette observation. Ce constat porte sur le fait `closed` déjà mémorisé par le fournisseur. [Contre-épreuve et protocole](https://github.com/yannick-fontan-1981/sra-playground/blob/9e96585ac3d6c7bcc450e173592211238cdc0ee0/docs/diagnostics/sic-dc22-phased-obligations.md) · [Reçu compact](https://github.com/yannick-fontan-1981/sra-playground/blob/9e96585ac3d6c7bcc450e173592211238cdc0ee0/docs/diagnostics/sic-dc22-phased-obligations-receipt.json)
 
 ## Témoins sur le SHA commun
 
@@ -66,8 +70,8 @@ La branche `main` distante est restée à `d0e7527ca8033bd805a6d7a8bb021eff62e87
 
 Sur **AS66 officiel en V6**, le parent et l'assemblage concordent sur **84 événements et 7 décisions dans chacun des deux bras**. Au N2/T1, le nominal départage les deux offres de mêmes preuves et de coût 1 en faveur d'ACTION1. À la même observation et avec les mêmes commandes publiques, le retrait de la seule question ACTION1 fait jouer ACTION4. Le premier écart entre ces deux bras est l'événement **62**, champ `/value/actions/0/action_ref`. Le vrai retour modifie 82 pixels, établit `[0,1]`, puis le service joue ACTION2 et confirme l'accès. La campagne historique des 107 reste attachée à `703cd1c3`.
 
-Depuis le Banc avec Node 24.22.3, `$a` désigne le checkout propre de `703cd1c3` et `$b` celui de `b0574d0d`. Le reçu détaillé reste dans le dossier local de sortie.
+Depuis le Banc avec Node 24.22.3, `$a` désigne le checkout propre de `703cd1c3` et `$b` celui de `b0574d0d`. Le reçu détaillé reste dans le nouveau dossier local `$out`.
 
 ```powershell
-node scripts/sic-p05-cavity-native.mjs $a $b 703cd1c32704171bae8e12a33a446bd6486fc288 b0574d0d45d3253c38fd6a72e52074874b6a0da6 artifacts/sic-after-98/p05-cavite-b0574d0d
+node scripts/sic-p05-cavity-native.mjs $a $b 703cd1c32704171bae8e12a33a446bd6486fc288 b0574d0d45d3253c38fd6a72e52074874b6a0da6 $out
 ```
