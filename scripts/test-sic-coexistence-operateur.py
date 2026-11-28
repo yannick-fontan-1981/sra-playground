@@ -20,6 +20,7 @@ def main():
     parser.add_argument("output", type=Path)
     parser.add_argument("--pyodide", type=Path, required=True)
     parser.add_argument("--node", default="node")
+    parser.add_argument("--candidate", choices=(ASSEMBLY, common["TWENTY_FIVE"]), default=ASSEMBLY)
     args = parser.parse_args()
     out, vendor = args.output.resolve(), str(args.pyodide.resolve())
     out.mkdir(parents=True)
@@ -29,7 +30,7 @@ def main():
         ("VALV", VALV, VALV_TEST, "valv-ligne-48-provenance"),
     ]:
         previous = None
-        for revision in (candidate, ASSEMBLY):
+        for revision in (candidate, args.candidate):
             dest = out / (name + "-" + revision[:8])
             scripts = dest / LAB / lab
             paths = git("ls-tree", "-r", "--name-only", test, LAB + lab).decode().splitlines()
@@ -38,7 +39,7 @@ def main():
             copy_git(test, [p for p in paths if p.endswith(".mjs")] +
                      [LAB + "ls19-ligne-90/montage.mjs", LAB + "ls19-ligne-90/worker.mjs", LAB + "g50t-ligne-23/dialogue.mjs"], dest)
             # Only bind the standalone operator runner to the additional revision; keep the source, boards and checks intact.
-            if revision == ASSEMBLY:
+            if revision == args.candidate:
                 entry = scripts / ("commun.mjs" if name == "STCK" else "qualifier.mjs")
                 source = entry.read_text(encoding="utf8")
                 assert source.count(candidate) == 1

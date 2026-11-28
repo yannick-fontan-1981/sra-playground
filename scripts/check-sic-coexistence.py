@@ -10,6 +10,7 @@ from sic_qualification_reference import AUDIT, FROZEN, ROOT, check, frozen_campa
 ASSEMBLY = "1afdede0dcdd4a5bb2c7b284b1ead20e1782fe0d"
 TEN_LINES = "8a424aab6ca2e2f6b902cc4b9c89313ed6947b74"
 NEXT_ASSEMBLY = "f27eb1c055d44e852fb90a25c542d0a466eb6c16"
+TWENTY_FIVE = "278d5b357d3e3328a32697fe402f3fa9d957d547"
 QUERY = "c0b9f4027f1df257d7b8c96f5656f9dbb83661f0"
 COMPONENTS = {
     "a5a90c3349ea49bba8e40055444cea2026bee962": "P05 et déplacement signé",
@@ -21,19 +22,26 @@ COMPONENTS = {
 def check_components(assembly):
     check(git("rev-parse", ASSEMBLY + "^").decode().strip() == FROZEN, "Assembly must descend directly from freeze")
     blocks = [(FROZEN, src, purpose) for src, purpose in COMPONENTS.items()]
-    if assembly in (TEN_LINES, NEXT_ASSEMBLY):
+    if assembly in (TEN_LINES, NEXT_ASSEMBLY, TWENTY_FIVE):
         check(git("rev-parse", TEN_LINES + "^").decode().strip() == ASSEMBLY, "Expected the six-line parent")
         blocks.extend([
             (FROZEN, "16f3c5e8d300903e475400fb9b67a513f2834663", "ligne 1"),
             (FROZEN, "1a1cc965a4f4deb8b2702f8b4746ca2715ae5ebd", "ligne 18"),
             (QUERY, "e21781637371b846c60aa50de5ff080c136c9abf", "ligne 98 sur la ligne 87"),
         ])
-    if assembly == NEXT_ASSEMBLY:
-        check(git("rev-parse", assembly + "^").decode().strip() == TEN_LINES, "Expected the ten-line parent")
+    if assembly in (NEXT_ASSEMBLY, TWENTY_FIVE):
+        check(git("rev-parse", NEXT_ASSEMBLY + "^").decode().strip() == TEN_LINES, "Expected the ten-line parent")
         blocks.extend([
             (FROZEN, "21fd159e8339ee464a5b7bee0824b93ccefe9995", "ligne 61 corrigée"),
             (FROZEN, "495ea14890c1d0cd69de356d40a3b243e0b86f6d", "lignes 44 et 47, portée corrigée de 48"),
             (FROZEN, "39e32b1f0218d53f41c27b7140c925e8e929e705", "lignes 52, 57 et 58"),
+        ])
+    if assembly == TWENTY_FIVE:
+        check(git("rev-parse", assembly + "^").decode().strip() == NEXT_ASSEMBLY, "Expected the eighteen-line parent")
+        blocks.extend([
+            (FROZEN, "4946cf0297734b9464fc52256af6fb27846f3bad", "ligne 96, projection isolée"),
+            (FROZEN, "75aa3829ddf9d7e4561c6c92297ad1bb8d2ac5ef", "lignes 27 et 28 ; 29 déjà présente"),
+            (FROZEN, "f489393bb15a1ce775a3904ee97a216d40db026f", "ligne 3"),
         ])
     components, seen = {}, set()
     for baseline, revision, purpose in blocks:
@@ -51,7 +59,7 @@ def check_components(assembly):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("archive", type=Path)
-    parser.add_argument("--candidate", choices=(ASSEMBLY, TEN_LINES, NEXT_ASSEMBLY), default=ASSEMBLY)
+    parser.add_argument("--candidate", choices=(ASSEMBLY, TEN_LINES, NEXT_ASSEMBLY, TWENTY_FIVE), default=ASSEMBLY)
     parser.add_argument("--workflow", required=True)
     parser.add_argument("--run", required=True)
     parser.add_argument("--output", type=Path)
@@ -61,7 +69,7 @@ def main():
     chain = runpy.run_path(str(ROOT / "scripts/sic-compare-receipt-chain.py"))
     rows = chain["load_archive"](args.archive, args.candidate, args.run, args.workflow, list(frozen), counts)
     parent = None
-    parent_sha = {TEN_LINES: ASSEMBLY, NEXT_ASSEMBLY: TEN_LINES}.get(args.candidate)
+    parent_sha = {TEN_LINES: ASSEMBLY, NEXT_ASSEMBLY: TEN_LINES, TWENTY_FIVE: NEXT_ASSEMBLY}.get(args.candidate)
     if parent_sha:
         base = ROOT / "docs/diagnostics" / ("sic-coexistence-" + parent_sha[:8])
         ledger = json.loads((base / "qualification.json").read_bytes())

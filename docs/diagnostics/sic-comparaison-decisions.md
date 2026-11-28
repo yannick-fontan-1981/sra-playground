@@ -78,4 +78,4 @@ foreach ($jeu in 'AS66','G50T','HOLE') {
 }
 ```
 
-Le comparateur indique `equal: true` ou le premier écart pour chaque jeu. Le reçu conserve un éventuel arrêt sur budget. La capture depuis un checkout distinct a été vérifiée avec HOLE au SHA du gel : 6/6, 78 décisions, 784 événements identiques à A. La comparaison du candidat P05 reste à exécuter. Sur un autre poste, recréer A avec la commande de reproduction et désigner son dossier dans `$a`.
+Le comparateur indique `equal: true` ou le premier écart pour chaque jeu. Le reçu conserve un éventuel arrêt sur budget. La capture depuis un checkout distinct a été vérifiée avec HOLE au SHA du gel : 6/6, 78 décisions, 784 événements identiques à A. La comparaison A/B du candidat P05 `3c2d6bcf` a ensuite retrouvé les 5 401 événements de ces trois parcours. [Qualification P05](sic-qualification-3c2d6bcf.md) Sur un autre poste, recréer A avec la commande de reproduction et désigner son dossier dans `$a`.
