@@ -1,0 +1,218 @@
+name: SIC full campaign on bf1cbf24
+
+on:
+  push:
+    branches: [audit/sic-107-bf1cbf24-20261127]
+    paths: [.github/workflows/sic-campaign-107.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  SIC_SOURCE: bf1cbf245055a60c4a253b9c6ee4be18ea9b8c2c
+  SIC_TREE: b3f3f0605460a95cca9367894db69dab37e79730
+  SIC_REPLAY_REFERENCES: docs/architecture/sic-replay-reference-levels-20261126.json
+
+jobs:
+  plan:
+    name: Freeze the 107-game matrix
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.partition.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.SIC_SOURCE }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - id: partition
+        run: |
+          test "$(git rev-parse HEAD)" = "$SIC_SOURCE"
+          test "$(git rev-parse 'HEAD^{tree}')" = "$SIC_TREE"
+          mkdir campaign
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFileSync, writeFileSync, appendFileSync } from 'node:fs';
+          import { gunzipSync } from 'node:zlib';
+          const baseline = 'docs/diagnostics/sic-107-4a546a13-20261126/';
+          const reference = JSON.parse(readFileSync(baseline + 'manifest.json', 'utf8'));
+          const results = gunzipSync(readFileSync(baseline + 'results.jsonl.gz')).toString().trim().split(/\r?\n/).map(JSON.parse);
+          const codes = reference.expectedCodes;
+          const levels = reference.expectedLevelCounts;
+          assert.equal(codes.length, 107);
+          assert.equal(new Set(codes).size, 107);
+          assert.equal(codes.reduce((sum, code) => sum + levels[code], 0), 692);
+          assert.deepEqual(results.map(row => row.code).sort(), [...codes].sort());
+          const observedMs = new Map(results.map(row => [row.code, row.levelStats.reduce((sum, level) => sum + (level.ms ?? 0), 0)]));
+          const estimate = code => Math.max(15_000, observedMs.get(code), code === 'LF52' ? 565_000 : 0) + 5_000;
+          const shards = Array.from({ length: 24 }, (_, index) => ({
+            shard: String(index + 1).padStart(2, '0'), games: [], estimatedMs: 0,
+          }));
+          for (const code of [...codes].sort((a, b) => estimate(b) - estimate(a) || a.localeCompare(b))) {
+            const lightest = shards.reduce((best, next) => next.estimatedMs < best.estimatedMs ? next : best);
+            lightest.games.push(code);
+            lightest.estimatedMs += estimate(code);
+          }
+          assert.deepEqual(shards.flatMap(shard => shard.games).sort(), [...codes].sort());
+          const plan = { source: process.env.SIC_SOURCE, tree: process.env.SIC_TREE, baseline: reference.sourceCommit, codes, levels, shards };
+          writeFileSync('campaign/plan.json', JSON.stringify(plan, null, 2) + '\n');
+          const matrix = { include: shards.map(shard => ({ shard: shard.shard, games: shard.games.join(',') })) };
+          appendFileSync(process.env.GITHUB_OUTPUT, 'matrix=' + JSON.stringify(matrix) + '\n');
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sic-107-bf1cbf24-plan
+          path: campaign/plan.json
+          if-no-files-found: error
+          retention-days: 14
+
+  replay:
+    name: Strict 107 / ${{ matrix.shard }}
+    needs: plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      max-parallel: 24
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    env:
+      SIC_SHARD: ${{ matrix.shard }}
+      SIC_GAMES: ${{ matrix.games }}
+      SIC_WORKFLOW_SHA: ${{ github.workflow_sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.SIC_SOURCE }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Record exact source and command
+        run: |
+          test "$(git rev-parse HEAD)" = "$SIC_SOURCE"
+          test "$(git rev-parse 'HEAD^{tree}')" = "$SIC_TREE"
+          git diff --exit-code
+          mkdir replay
+          node --input-type=module <<'NODE'
+          import { createHash } from 'node:crypto';
+          import { readFileSync, writeFileSync } from 'node:fs';
+          const env = process.env;
+          const sourceFiles = ['scripts/check-sic-chronological.mjs', 'scripts/sic-replay-watchdog.mjs',
+            'scripts/sic-replay-budgets.mjs', 'src/games/catalog.ts', env.SIC_REPLAY_REFERENCES,
+            'docs/architecture/sic-v8-level6-campaign-7bb9f152.json', 'package-lock.json'];
+          const sourceHashes = Object.fromEntries(sourceFiles.map(path =>
+            [path, createHash('sha256').update(readFileSync(path)).digest('hex')]));
+          writeFileSync('replay/manifest.json', JSON.stringify({
+            schema: 'sic.full-campaign-shard.v1', source: env.SIC_SOURCE, tree: env.SIC_TREE,
+            workflowSha: env.SIC_WORKFLOW_SHA, runId: env.GITHUB_RUN_ID, runAttempt: env.GITHUB_RUN_ATTEMPT,
+            shard: env.SIC_SHARD, games: env.SIC_GAMES.split(','), solver: 'sic', parallelWorkers: 1,
+            nodeVersion: process.version, runnerOS: env.RUNNER_OS, runnerArch: env.RUNNER_ARCH,
+            environment: { SIC_REPLAY_REFERENCES: env.SIC_REPLAY_REFERENCES },
+            argv: ['node', 'scripts/check-sic-chronological.mjs', env.SIC_GAMES, 'auto', 'replay/results.jsonl', '1', 'sic'],
+            sourceHashes, startedAt: new Date().toISOString(),
+          }, null, 2) + '\n');
+          NODE
+      - run: npm ci
+      - run: node scripts/prepare-python.mjs
+      - name: Replay this shard sequentially
+        run: |
+          node scripts/check-sic-chronological.mjs "$SIC_GAMES" auto replay/results.jsonl 1 sic > replay/runner.log 2>&1
+          git diff --exit-code
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sic-107-bf1cbf24-shard-${{ matrix.shard }}
+          path: replay/
+          if-no-files-found: error
+          retention-days: 14
+
+  aggregate:
+    name: Classify all 107 game results and preserve receipts
+    needs: [plan, replay]
+    if: always() && needs.plan.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: sic-107-bf1cbf24-*
+          path: downloads
+      - name: Check source, game coverage and terminal outcomes
+        env:
+          MATRIX_RESULT: ${{ needs.replay.result }}
+        run: |
+          mkdir aggregate
+          node --input-type=module <<'NODE'
+          import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+          import { createHash } from 'node:crypto';
+          const planBytes = readFileSync('downloads/sic-107-bf1cbf24-plan/plan.json');
+          const plan = JSON.parse(planBytes);
+          writeFileSync('aggregate/plan.json', planBytes);
+          const seen = new Map(), issues = [], shards = [];
+          for (const shard of plan.shards) {
+            const path = 'downloads/sic-107-bf1cbf24-shard-' + shard.shard + '/';
+            if (!existsSync(path + 'manifest.json') || !existsSync(path + 'results.jsonl')) {
+              issues.push({ shard: shard.shard, reason: 'missing_shard_receipt' }); continue;
+            }
+            const manifest = JSON.parse(readFileSync(path + 'manifest.json'));
+            if (manifest.source !== plan.source || manifest.tree !== plan.tree || manifest.runId !== process.env.GITHUB_RUN_ID
+              || manifest.solver !== 'sic' || manifest.parallelWorkers !== 1
+              || JSON.stringify(manifest.games) !== JSON.stringify(shard.games)) {
+              issues.push({ shard: shard.shard, reason: 'invalid_shard_manifest' }); continue;
+            }
+            const bytes = readFileSync(path + 'results.jsonl');
+            shards.push({ shard: shard.shard, sha256: createHash('sha256').update(bytes).digest('hex'), bytes: bytes.length });
+            for (const line of bytes.toString().trim().split(/\r?\n/).filter(Boolean)) {
+              let result;
+              try { result = JSON.parse(line); } catch { issues.push({ shard: shard.shard, reason: 'invalid_json' }); continue; }
+              if (!shard.games.includes(result.code) || seen.has(result.code)) {
+                issues.push({ shard: shard.shard, code: result.code, reason: 'unexpected_or_duplicate_game' }); continue;
+              }
+              seen.set(result.code, { result, line });
+            }
+          }
+          const verdicts = plan.codes.map(code => {
+            const result = seen.get(code)?.result, target = plan.levels[code];
+            if (!result) return { code, target, category: 'missing' };
+            const { levels, actions, authority, reason, status, levelStats, recoveries, trace, resultOrigin } = result;
+            const valid = status !== 'harness_error' && status !== 'error' && result.target === target
+              && Number.isInteger(levels) && levels >= 0 && levels <= target;
+            const settled = valid && reason === 'target_levels_completed' && levels === target
+              && levelStats?.length === target && levelStats.at(-1)?.won === true
+              && Number.isInteger(actions) && levelStats.at(-1)?.acquiredRecords === actions;
+            const noRecovery = recoveries === undefined ? null : recoveries.reset === 0 && recoveries.undo === 0;
+            return { code, target, levels, actions, authority, reason, status, trace, resultOrigin,
+              category: !valid ? 'harness_error' : settled ? 'complete' : levels === target ? 'complete_unsettled' : 'incomplete',
+              recoveries: recoveries ?? null, noRecovery };
+          });
+          const summary = {
+            source: plan.source, tree: plan.tree, baseline: plan.baseline, runId: process.env.GITHUB_RUN_ID,
+            matrixResult: process.env.MATRIX_RESULT, expectedGames: plan.codes.length, rawResults: seen.size,
+            expectedLevels: Object.values(plan.levels).reduce((sum, levels) => sum + levels, 0),
+            categories: Object.fromEntries(['complete', 'complete_unsettled', 'incomplete', 'harness_error', 'missing']
+              .map(category => [category, verdicts.filter(row => row.category === category).length])),
+            noRecoveryComplete: verdicts.filter(row => row.category === 'complete' && row.noRecovery === true).length,
+            knownResets: verdicts.reduce((sum, row) => sum + (row.recoveries?.reset ?? 0), 0),
+            knownUndos: verdicts.reduce((sum, row) => sum + (row.recoveries?.undo ?? 0), 0),
+            unknownRecoveryCounts: verdicts.filter(row => row.recoveries === null).length, issues, shards, verdicts,
+          };
+          const raw = plan.codes.flatMap(code => seen.has(code) ? [seen.get(code).line + '\n'] : []).join('');
+          writeFileSync('aggregate/results.jsonl', raw);
+          writeFileSync('aggregate/summary.json', JSON.stringify(summary, null, 2) + '\n');
+          console.log(JSON.stringify({ categories: summary.categories, noRecoveryComplete: summary.noRecoveryComplete, issues }));
+          if (issues.length || summary.categories.harness_error || summary.categories.missing || process.env.MATRIX_RESULT !== 'success') process.exitCode = 1;
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sic-107-bf1cbf24-aggregate
+          path: aggregate/
+          if-no-files-found: error
+          retention-days: 14
