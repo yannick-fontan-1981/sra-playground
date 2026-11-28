@@ -1,0 +1,25 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "1391bd741ad11addfce68370db8969cd3d37b6b0",
+    "attendus": "90e41585430d745131676cd9dcb9be0340db02b3"
+  },
+  "nativePrefixes": 6,
+  "nominalTickets": 16,
+  "firstMatching": 6,
+  "firstArrival": 8,
+  "movedSquareSelects": [
+    "ACTION6",
+    {
+      "x": 43,
+      "y": 23
+    }
+  ],
+  "noAssignmentForSurplus": true,
+  "secondLevelPopulation": 4,
+  "tests": 183,
+  "author": "4ce57872",
+  "rawSHA256": "5331b26c83d0bd3f3907c8a005fa7a92425312091c88bc47fb8014668652af24",
+  "archiveSHA256": "5512ebe9b8edcb2bd8d680371efee3cb76ad677a5244bc38a37f08e1157b768d"
+}

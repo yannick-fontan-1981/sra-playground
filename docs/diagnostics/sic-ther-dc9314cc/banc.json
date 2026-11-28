@@ -1,0 +1,46 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "dc9314cc1ebdfc4ac4888d5ad0e7bfa0fb62542f",
+    "attendus": "d40aa32dfc22ce3811ed0fa7dfb9d47e220496fa"
+  },
+  "nativePrefixes": 4,
+  "nominalTickets": 16,
+  "additionLength": [
+    3,
+    0,
+    0
+  ],
+  "cutLength": [
+    1,
+    0,
+    0
+  ],
+  "firstProjection": [
+    [
+      1
+    ],
+    [
+      2
+    ],
+    [
+      1
+    ]
+  ],
+  "v42N5ChangedMark": [
+    [
+      10,
+      49
+    ],
+    [
+      10,
+      50
+    ]
+  ],
+  "v42Refusal": "conditional_prefix_marginals_not_singleton",
+  "tests": 227,
+  "author": "0ca67a95",
+  "rawSHA256": "0a5ac6b5c8af33d34279ad0b3f5a03fe76ba787206befdf86303028bdcb4d960",
+  "archiveSHA256": "3d1db6404303226352be2788bec6bee78f6873c8b0f5c6cccb796334ba87659c"
+}
