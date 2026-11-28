@@ -1,0 +1,97 @@
+{
+  "base": "b0574d0d45d3253c38fd6a72e52074874b6a0da6",
+  "game": "DC22",
+  "nominal": {
+    "sameCommandsAndEffects": 187,
+    "completed": 4,
+    "optionOffIdentical": true,
+    "prefixHashes": [
+      "b1b5c16f11a012560f0638c481b4b7d346e4fa119ef5fb943357f3185d5e0c8e",
+      "8773b34b1edba0ca44544949307c9a563b9d9af493488a916c795912a161b910",
+      "0750b95ce856e9bedf3cc4ec9662c081823559bdc232b23788eefe5bf677c11f",
+      "87e1c51418d91b86058950faeac3bbb2dd173f92191a3def59b435a0d2d72cbe"
+    ]
+  },
+  "firstChange": {
+    "level": 4,
+    "turn": 1,
+    "need": "sic-need:30bdebdc36463df2e9f82c1fe1e6e6e819454573211bb21df801e5571151cc73",
+    "parent": "sic-need:8ee5ae606de33371ade693485fb0da6358aff4e388d75638fccc06b9a690d15b",
+    "statusBeforeTicket": "open",
+    "command": {
+      "action_ref": "ACTION6",
+      "data": {
+        "x": 46,
+        "y": 28
+      }
+    },
+    "budget": 12
+  },
+  "closing": {
+    "level": 4,
+    "turn": 14,
+    "status": "satisfied",
+    "control": [
+      54,
+      26,
+      59,
+      31
+    ],
+    "need": "sic-need:9a0bbdd329fd9fb5f4e04ab742c9edb6c0140867ddfacc52765d7e0659adae84",
+    "beforeRef": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:125:frame:3aca73891bb53161",
+    "afterRef": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:126:frame:26979463126c657c"
+  },
+  "resume": {
+    "level": 4,
+    "turn": 15,
+    "command": {
+      "action_ref": "ACTION2",
+      "data": {}
+    },
+    "prerequisite": "sic-need:9a0bbdd329fd9fb5f4e04ab742c9edb6c0140867ddfacc52765d7e0659adae84",
+    "requires": [
+      "sic-need:30bdebdc36463df2e9f82c1fe1e6e6e819454573211bb21df801e5571151cc73",
+      "sic-need:9a0bbdd329fd9fb5f4e04ab742c9edb6c0140867ddfacc52765d7e0659adae84"
+    ],
+    "observed": "landing_on_phase_support_confirmed"
+  },
+  "variants": {
+    "commonCommands": 125,
+    "reopened": {
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 56,
+          "y": 28
+        }
+      },
+      "measureBudget": 5,
+      "observed": "support_phase_measured",
+      "finalStatus": "level_action_budget",
+      "authorizedCommands": 203
+    },
+    "denied": [
+      {
+        "arm": "wrong-control",
+        "proposed": "ACTION2",
+        "guard": "phase_cycle_prerequisite_unattested",
+        "replacement": {
+          "opening": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:112:frame:efe22d386f986a5b",
+          "beforeRef": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:117:frame:8a02d23dc8942522",
+          "afterRef": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:118:frame:8f08703d079675a8"
+        },
+        "authorizedCommands": 125
+      },
+      {
+        "arm": "stale",
+        "proposed": "ACTION2",
+        "guard": "phase_cycle_prerequisite_unattested",
+        "replacement": {
+          "beforeRef": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:124:frame:af0411a6f6e69aa5",
+          "afterRef": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:125:frame:3aca73891bb53161"
+        },
+        "authorizedCommands": 125
+      }
+    ]
+  }
+}

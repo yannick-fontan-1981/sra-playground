@@ -1,4 +1,5 @@
 import type { NativeObservation, NativeProposal, SicActionCoverage } from '../logos-engine/v6-native-types.ts';
+import { readPhaseCycleDecision } from './phase-cycle-child.ts';
 import { readSicNeed } from './need-registry.ts';
 import { missingControlWitness } from './missing-control-strategy.ts';
 import { controlEffectChildIsCurrent } from './control-effect-child.ts';
@@ -43,6 +44,8 @@ export function nativePlanReceipt(family: string, proposal: NativeProposal, obse
   if (!command) throw new TypeError('A release receipt requires a command in the selected plan.');
   const missingControl = missingControlWitness(proposal, command.action_ref, observation.observation_ref, mode);
   const need = readSicNeed(objectField(decision, 'need'));
+  const phaseCycle = family === 'sic_remote_support_route' && proposal.actions.length === 1 && index === 0
+    ? readPhaseCycleDecision(objectField(decision, 'phaseCycle'), need, observation, command) : undefined;
   const prerequisite = readSicNeed(objectField(decision, 'prerequisite'));
   const child = proposal.controlEffectChild;
   const controlEffectChild = child && need && proposal.actions.length === 1 && index === 0
@@ -79,6 +82,8 @@ export function nativePlanReceipt(family: string, proposal: NativeProposal, obse
     ...(missingControl ? { missingControl } : {}),
     ...(controlEffectChild ? { controlEffectChild } : {}),
     ...(need?.status === 'assigned' ? { need } : {}),
+    ...(phaseCycle ? { phaseCycle } : {}),
+    ...(phaseCycle?.kind === 'resume' ? { prerequisite: phaseCycle.closures.at(-1)!.need } : {}),
     ...(need?.status === 'assigned' && need.kind === 'observe_untried_input_effect'
       && prerequisite?.status === 'assigned' && prerequisite.kind === 'find_observable_frontier_access'
       && prerequisite.scope === need.scope && prerequisite.parentObjective === need.parentObjective ? { prerequisite } : {}),

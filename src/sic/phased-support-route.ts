@@ -14,6 +14,13 @@ export type PhasedSupport = {
   cycles: Cycle[]; position: PhasePosition; route: PhaseStep[];
 };
 
+export const maxObservedSupportPhases = 12;
+
+/** Every non-closing probe adds a phase. Reserve one probe for the closing return. */
+export function supportPhaseProbeBudget(parentRemaining: number, observedPhases: number): number {
+  return Math.max(0, Math.min(parentRemaining, maxObservedSupportPhases - observedPhases + 1));
+}
+
 const deltas: readonly NativePoint[] = [[0, -1], [0, 1], [-1, 0], [1, 0]];
 const width = ([l, , r]: NativeBox) => r - l + 1;
 const height = ([, t, , b]: NativeBox) => b - t + 1;
@@ -111,7 +118,7 @@ export function observePhaseStep(state: PhasedSupport, step: PhaseStep, rows: Na
   if ('control' in step && step.probing) {
     const changes = observed.flatMap<Change>((ink, cell) => cell !== next.cell && ink !== terrain.base[cell] ? [[cell, ink]] : []);
     const cycle = state.cycles[step.control]!;
-    if (!changes.length && cycle.phases.length === 1 || cycle.phases.length >= 12 && changes.length) return null;
+    if (!changes.length && cycle.phases.length === 1 || cycle.phases.length >= maxObservedSupportPhases && changes.length) return null;
     const previous = new Set(state.cycles.flatMap((other, index) => index === step.control ? [] : other.phases.flat().map(([cell]) => cell)));
     if (changes.some(([cell]) => previous.has(cell))) return null;
     const updated = changes.length ? { phases: [...cycle.phases, changes], closed: false } : { ...cycle, closed: true };

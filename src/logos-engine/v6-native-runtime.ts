@@ -174,6 +174,7 @@ import { defaultFrontierConfiguration } from '../sic/frontier-configuration.ts';
 import { selectStrategyFamily, type FamilyAgendaMode, type FamilyAgendaReceipt, type FamilyTrial } from '../sic/family-agenda.ts';
 import { reasoningGroupOrder, selectReasoningMode, type ReasoningSituation } from '../sic/reasoning-mode.ts';
 import { needCheckpoint, readSicNeed, type SicNeed } from '../sic/need-registry.ts';
+import { bindPhaseCycleClosure } from '../sic/phase-cycle-child.ts';
 import { SymbolTransactions } from './v6-symbol-transactions.ts';
 import { AddressedMaterial, ADDRESSED_NATIVE_SEARCH_BOUNDS } from './v6-addressed-material.ts';
 import { ObservedBinding, OBSERVED_BINDING_NATIVE_SEARCH_BOUNDS } from './v6-observed-binding.ts';
@@ -1552,7 +1553,14 @@ export class NativeV6Runtime implements NativeV6Backend {
       this.prefix.interruption = 'observed_fatal_choice';
       return false;
     }
+    const phaseRequested = (proposal.sicLocalDecision as { phaseCycle?: unknown } | undefined)?.phaseCycle !== undefined;
+    const reasoning = this.familyAgendaReceipt?.reasoning;
+    const mode = reasoning?.observationRef === this.observation.observation_ref ? reasoning.mode : undefined;
+    const phaseReceipt = phaseRequested ? nativePlanReceipt(family.id, proposal, this.observation, index, mode) : undefined;
     let before = await family.before(proposal, index, this.current, this.observation, this.currentExecution(execution));
+    if (before.admitted && phaseReceipt && !this.phaseCycleReady(phaseReceipt)) {
+      before = { admitted: false, reason: 'phase_cycle_prerequisite_unattested' };
+    }
     if (this.caller && proposal.native_composition_dependency) {
       const parentGuard = typedMaterialParentGuard(this.caller.attention, family.compositionDependencyState?.() ?? {},
         proposal, index, this.observation, this.current.frame_rows);
@@ -1581,9 +1589,17 @@ export class NativeV6Runtime implements NativeV6Backend {
         native_gate: this.authority !== null, graph_chain: this.knowledge?.graphChain ?? null });
     }
     if (!this.prefix.sicPlan) {
-      const reasoning = this.familyAgendaReceipt?.reasoning;
-      const receipt = nativePlanReceipt(family.id, proposal, this.observation, index,
-        reasoning?.observationRef === this.observation.observation_ref ? reasoning.mode : undefined);
+      const receipt = phaseReceipt ?? nativePlanReceipt(family.id, proposal, this.observation, index, mode);
+      const measurement = receipt.phaseCycle;
+      if (measurement?.kind === 'measure' && receipt.need && this.knowledge
+        && measurement.opening === this.observation.observation_ref) {
+        const opening = needCheckpoint(receipt.need, 'open', measurement.opening, receipt.id, this.previousSicNeed(receipt.need));
+        await this.knowledge.commit([{ ...opening,
+          value: { ...objectValue(opening.value), phaseCycleOpening: measurement.opening },
+        }], { workflow: SELECTION_PROGRAM, step: 'authorize', statement: 'phase_cycle.open' });
+        this.note({ kind: 'sic_phase_cycle_opened', need: receipt.need.id, parent: measurement.parent.id,
+          control: measurement.control, observation_ref: measurement.opening, action_budget: measurement.actionBudget });
+      }
       this.prefix.sicPlan = freeze(receipt);
       this.note({ kind: 'sic_native_plan', ...this.prefix.sicPlan,
         ...(this.prefix.proposal.sicSrcDecision ? { src_decision: this.prefix.proposal.sicSrcDecision } : {}) });
@@ -1946,10 +1962,27 @@ export class NativeV6Runtime implements NativeV6Backend {
       const status = established === 'satisfied' || established === 'observed' || established === 'refuted' || established === 'expired'
         ? established : observedInformation || observedView || previous?.status === 'observed' ? 'observed' : boundary ? 'expired'
           : established === 'access_interrupted' || outcome.matched === false ? 'refuted' : 'assigned';
-      const prerequisite = plan.prerequisite;
-      if (prerequisite) needWrites.push(needCheckpoint(prerequisite, 'satisfied', plan.observationRef, plan.id,
-        this.previousSicNeed(prerequisite)));
-      needWrites.push(needCheckpoint(need, status, lastReturn.after.observation_ref, plan.id, previous, prerequisite?.id));
+      const prerequisite = plan.prerequisite, phaseCycle = plan.phaseCycle;
+      if (phaseCycle?.kind === 'measure') {
+        const candidate = outcome.phaseCycleClosure;
+        const closure = candidate && outcome.matched === true
+          ? bindPhaseCycleClosure(phaseCycle, need, lastReturn.before, lastReturn.after, lastReturn.command) : undefined;
+        const exact = closure && v6Canonical(closure) === v6Canonical(candidate) ? closure : undefined;
+        const measuredStatus = exact ? 'satisfied' : status === 'satisfied' ? 'assigned' : status;
+        const write = needCheckpoint(need, measuredStatus, lastReturn.after.observation_ref, plan.id, previous);
+        needWrites.push({ ...write, value: { ...objectValue(write.value), phaseCycleOpening: phaseCycle.opening,
+          ...(exact ? { phaseCycleClosure: exact } : {}) } });
+        if (exact) this.note({ kind: 'sic_phase_cycle_closed', closure: exact });
+      } else if (phaseCycle?.kind === 'resume') {
+        const write = needCheckpoint(need, status, lastReturn.after.observation_ref, plan.id, previous);
+        needWrites.push({ ...write,
+          relations: phaseCycle.closures.map(closure => ({ relation: 'requires', target: closure.need.id })),
+        });
+      } else {
+        if (prerequisite) needWrites.push(needCheckpoint(prerequisite, 'satisfied', plan.observationRef, plan.id,
+          this.previousSicNeed(prerequisite)));
+        needWrites.push(needCheckpoint(need, status, lastReturn.after.observation_ref, plan.id, previous, prerequisite?.id));
+      }
     }
     const contactScope: NativeStoreWrite[] = [];
     if (prefix.family.id === 'animated_contact' && prefix.proposal.kind === 'measured_animated_contact' && prefix.witnessed.length === 1) {
@@ -1984,6 +2017,7 @@ export class NativeV6Runtime implements NativeV6Backend {
           observationRef: prefix.sicPlan.observationRef, index: prefix.sicPlan.index, planned: prefix.sicPlan.planned,
           ...(prefix.sicPlan.need ? { need: prefix.sicPlan.need } : {}),
           ...(prefix.sicPlan.prerequisite ? { prerequisite: prefix.sicPlan.prerequisite } : {}),
+          ...(prefix.sicPlan.phaseCycle ? { phaseCycle: prefix.sicPlan.phaseCycle } : {}),
         } } : {}),
         ...(prefix.nativeBindings.length ? { native_bindings: prefix.nativeBindings } : {}),
         ...(compositionReturns.length ? { composition_dependency_returns: compositionReturns } : {}),
@@ -2448,6 +2482,24 @@ export class NativeV6Runtime implements NativeV6Backend {
   inspectKnowledge(): KnowledgeMemory {
     if (!this.knowledge) throw new Error('Native knowledge store is not initialized');
     return this.knowledge.memory;
+  }
+
+  private phaseCycleReady(plan: ReturnType<typeof nativePlanReceipt>): boolean {
+    const phaseCycle = plan.phaseCycle, need = plan.need, knowledge = this.knowledge;
+    if (!phaseCycle || !need || !knowledge) return false;
+    const node = (id: string) => knowledge.memory.nodes[id]?.component === 'sic_need'
+      ? objectValue(knowledge.stateValue(id)) : null;
+    if (phaseCycle.kind === 'measure') {
+      if (phaseCycle.actionBudget > this.remaining()) return false;
+      const pending = node(need.id);
+      if (phaseCycle.opening === plan.observationRef) return !pending || pending.status === 'satisfied' || pending.status === 'refuted';
+      return pending?.phaseCycleOpening === phaseCycle.opening && (pending.status === 'open' || pending.status === 'assigned');
+    }
+    return phaseCycle.closures.every(proof => {
+      const committed = node(proof.need.id);
+      return committed?.status === 'satisfied' && !!committed.phaseCycleClosure
+        && v6Canonical(committed.phaseCycleClosure) === v6Canonical(proof);
+    });
   }
 
   private previousSicNeed(need: SicNeed) {

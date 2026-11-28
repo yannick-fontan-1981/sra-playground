@@ -96,6 +96,7 @@ export interface NativeBeforeResult {
 }
 
 export interface NativeAfterResult {
+  readonly phaseCycleClosure?: import('../sic/phase-cycle-child.ts').PhaseCycleClosure;
   readonly matched: boolean | null;
   readonly seal_prefix: boolean;
   readonly reason: string;
