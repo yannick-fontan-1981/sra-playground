@@ -1,0 +1,358 @@
+{
+  "schema": "sic-p14-public-first-errors-v1",
+  "scope": "developpement uniquement; observations publiques; aucun cas reserve; aucune victoire native",
+  "provenance": {
+    "codeSha": "05b9e74ad2a293ac91420d6f727b873f82c99686",
+    "pilotCommit": "ea2642d349bfbe7ea15e8b2f8966d8c1b690ac05",
+    "pilotCodeTreeEquivalent": true,
+    "receipts": "artifacts/sic-p14/pilot-ea2642d3/receipts.jsonl",
+    "receiptsSha256": "4b0d5a5badb4e41922b0a9ad32787c866165d04774982b16ead1f6a4ee9bdbae",
+    "report": "artifacts/sic-p14/pilot-ea2642d3/report.json",
+    "developmentSeed": 26112814,
+    "persistedEquivalentPilot": {
+      "report": "pilot-report.json",
+      "receipts": "pilot-receipts.jsonl.gz",
+      "compressedReceiptsSha256": "3f33729550341158708a39bf7c3b5810f004786f52216615e6f09917b95b29e9",
+      "deterministicReceiptsEquivalent": true
+    }
+  },
+  "pilot": {
+    "cases": 80,
+    "frozen": 3,
+    "candidate": 77,
+    "episodesPerVariant": 160,
+    "frozenEpisodes": 8,
+    "candidateEpisodes": 155,
+    "ablations": {
+      "tested": 147,
+      "changedActions": 76,
+      "retainedSameActions": 71,
+      "lostSuccess": 0
+    }
+  },
+  "budget": {
+    "actions": 180,
+    "gameTicks": 360,
+    "searchStates": 20000,
+    "changedForDiagnosis": false
+  },
+  "examples": [
+    {
+      "caseId": "P14-transient_then_period-26112814-8",
+      "family": "transient_then_period",
+      "sourceIndex": 8,
+      "evaluatedWorld": 0,
+      "sameFailureInWorlds": [
+        0,
+        1
+      ],
+      "classification": "induction-fausse-avant-plafond",
+      "firstDifference": {
+        "ordinal": 4,
+        "tick": 8,
+        "samePublicPrefix": true,
+        "frozenMode": "observe",
+        "candidateMode": "act"
+      },
+      "publicObservations": [
+        {
+          "ref": "t:2:c:1",
+          "tick": 2,
+          "values": {
+            "v804378": 1
+          },
+          "reliable": {
+            "v804378": true
+          },
+          "intermediate": true
+        },
+        {
+          "ref": "t:3:c:1",
+          "tick": 3,
+          "values": {
+            "v804378": 1
+          },
+          "reliable": {
+            "v804378": true
+          },
+          "intermediate": true
+        },
+        {
+          "ref": "t:4:c:1",
+          "tick": 4,
+          "values": {
+            "v804378": 0
+          },
+          "reliable": {
+            "v804378": true
+          },
+          "intermediate": true
+        },
+        {
+          "ref": "t:5:c:1",
+          "tick": 5,
+          "values": {
+            "v804378": 1
+          },
+          "reliable": {
+            "v804378": true
+          },
+          "intermediate": false
+        },
+        {
+          "ref": "t:6:c:2",
+          "tick": 6,
+          "values": {
+            "v804378": 0
+          },
+          "reliable": {
+            "v804378": true
+          },
+          "intermediate": false
+        },
+        {
+          "ref": "t:7:c:3",
+          "tick": 7,
+          "values": {
+            "v804378": 1
+          },
+          "reliable": {
+            "v804378": true
+          },
+          "intermediate": false
+        },
+        {
+          "ref": "t:8:c:4",
+          "tick": 8,
+          "values": {
+            "v804378": 0
+          },
+          "reliable": {
+            "v804378": true
+          },
+          "intermediate": false
+        }
+      ],
+      "candidateHypotheses": {
+        "v804378": [
+          {
+            "period": 2,
+            "since": 3
+          }
+        ]
+      },
+      "playedDecision": {
+        "tick": 8,
+        "action": "k902258",
+        "from": 1,
+        "to": 2,
+        "duration": 1,
+        "consumedGuards": [
+          {
+            "channel": "v804378",
+            "tick": 9,
+            "value": 1,
+            "evidence": [
+              "t:2:c:1",
+              "t:4:c:1",
+              "t:6:c:2",
+              "t:8:c:4",
+              "t:3:c:1",
+              "t:5:c:1",
+              "t:7:c:3"
+            ]
+          }
+        ]
+      },
+      "returnedObservation": {
+        "ref": "t:9:c:5",
+        "tick": 9,
+        "values": {
+          "v804378": 0
+        },
+        "reliable": {
+          "v804378": true
+        },
+        "intermediate": false
+      },
+      "outcome": {
+        "crossed": false,
+        "position": 1,
+        "terminal": "failed",
+        "gestures": 5,
+        "gameTicks": 9,
+        "proofViolations": 0
+      },
+      "diagnosis": "Les ticks 3..8 montrent 1,0,1,0,1,0. Le candidat extrapole une periode 2 et engage le passage avec une ouverture predite au tick 9. Le retour fiable vaut 0. Les preuves existent et sont consommees; elles ne garantissent pas la persistance du motif. Le budget ne cause pas cet echec."
+    },
+    {
+      "caseId": "P14-independent_clocks-26112814-0",
+      "family": "independent_clocks",
+      "sourceIndex": 0,
+      "evaluatedWorld": 1,
+      "classification": "occasion-initiale-perdue-puis-plafond-de-gestes",
+      "movementPremise": {
+        "from": 0,
+        "to": 1,
+        "duration": 2,
+        "gates": [
+          "v578985",
+          "v822640"
+        ],
+        "rule": "les deux signaux doivent valoir 1 pendant chacun des deux ticks du deplacement"
+      },
+      "publicObservations": [
+        {
+          "ref": "t:0:c:0",
+          "tick": 0,
+          "values": {
+            "v578985": 0,
+            "v822640": 0
+          },
+          "reliable": {
+            "v578985": true,
+            "v822640": true
+          }
+        },
+        {
+          "ref": "t:1:c:1",
+          "tick": 1,
+          "values": {
+            "v578985": 1,
+            "v822640": 1
+          },
+          "reliable": {
+            "v578985": true,
+            "v822640": true
+          }
+        },
+        {
+          "ref": "t:2:c:2",
+          "tick": 2,
+          "values": {
+            "v578985": 1,
+            "v822640": 1
+          },
+          "reliable": {
+            "v578985": true,
+            "v822640": true
+          }
+        },
+        {
+          "ref": "t:3:c:3",
+          "tick": 3,
+          "values": {
+            "v578985": 1,
+            "v822640": 1
+          },
+          "reliable": {
+            "v578985": true,
+            "v822640": true
+          }
+        },
+        {
+          "ref": "t:4:c:4",
+          "tick": 4,
+          "values": {
+            "v578985": 1,
+            "v822640": 1
+          },
+          "reliable": {
+            "v578985": true,
+            "v822640": true
+          }
+        },
+        {
+          "ref": "t:5:c:5",
+          "tick": 5,
+          "values": {
+            "v578985": 0,
+            "v822640": 0
+          },
+          "reliable": {
+            "v578985": true,
+            "v822640": true
+          }
+        }
+      ],
+      "jointOpenIntervalsFromPublicHistory": [
+        {
+          "start": 1,
+          "end": 4
+        },
+        {
+          "start": 31,
+          "end": 31
+        },
+        {
+          "start": 42,
+          "end": 42
+        },
+        {
+          "start": 91,
+          "end": 91
+        },
+        {
+          "start": 102,
+          "end": 102
+        },
+        {
+          "start": 151,
+          "end": 151
+        },
+        {
+          "start": 162,
+          "end": 162
+        }
+      ],
+      "firstSupportedCandidateModels": {
+        "tick": 43,
+        "models": {
+          "v578985": [
+            {
+              "period": 10,
+              "since": 5
+            }
+          ],
+          "v822640": [
+            {
+              "period": 12,
+              "since": 8
+            }
+          ]
+        },
+        "source": "hypotheses produites par le candidat a partir des observations publiques; pas des horloges privees"
+      },
+      "outcome": {
+        "crossed": false,
+        "position": 0,
+        "terminal": "failed",
+        "gestures": 180,
+        "gameTicks": 180,
+        "exhaustedLimit": "actions",
+        "inspections": 43,
+        "waits": 137,
+        "moves": 0,
+        "confirmedPredictions": 283,
+        "contradictedPredictions": 0,
+        "proofViolations": 0
+      },
+      "oracleEvaluationSummary": {
+        "solvable": true,
+        "maxActions": 2,
+        "maxGameTicks": 4,
+        "declaredWorlds": 2,
+        "scope": "existence d une politique commune sur les deux mondes declares"
+      },
+      "diagnosis": "L ouverture commune observee aux ticks 1..4 est assez longue pour le passage. Les ouvertures communes suivantes observees sous le plafond ne durent qu un tick. Les deux modeles sont soutenus seulement au tick 43. Le candidat attend ensuite jusqu au plafond de gestes sans prediction contredite ni deplacement.",
+      "qualificationLimit": "La politique existentielle certifiee exploite une possibilite initiale commune aux deux mondes. Elle ne prouve pas qu un agent ignorant leurs lois peut acquerir une garantie de duree avant cette occasion. Le cas et son echec sont conserves. Augmenter le plafond ne corrige pas cette occasion perdue."
+    }
+  ],
+  "interpretation": {
+    "ablation": "Aucune des 147 suppressions unitaires ne retire la reussite. Les 76 changements d actions montrent une utilisation ou un cout de reconstitution, pas la necessite de chaque trame pour gagner.",
+    "nextQualification": [
+      "Confirmer par une observation sure la phase d ouverture qui justifie le franchissement, en distinguant cette confirmation d une confirmation quelconque du cycle.",
+      "Distinguer existence d une politique sur les mondes declares et acquisition d une garantie avant une occasion unique; conserver les plafonds et les echecs publies."
+    ]
+  }
+}

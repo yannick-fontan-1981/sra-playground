@@ -1,0 +1,93 @@
+{
+  "sourceRevision": "05b9e74ad2a293ac91420d6f727b873f82c99686",
+  "workflow": {
+    "id": 46152308332,
+    "url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46152308332",
+    "status": "completed",
+    "conclusion": "success",
+    "createdAt": "2026-11-28T13:59:13Z",
+    "completedAt": "2026-11-28T14:02:59Z",
+    "elapsedToLastCheckSeconds": 226
+  },
+  "jobs": [
+    {
+      "id": 141001400052,
+      "name": "P14 family 1",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-28T13:59:17Z",
+      "completedAt": "2026-11-28T14:01:04Z"
+    },
+    {
+      "id": 141001400099,
+      "name": "P14 family 7",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-28T13:59:17Z",
+      "completedAt": "2026-11-28T14:01:07Z"
+    },
+    {
+      "id": 141001400107,
+      "name": "P14 family 5",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-28T13:59:17Z",
+      "completedAt": "2026-11-28T14:01:35Z"
+    },
+    {
+      "id": 141001400118,
+      "name": "P14 family 8",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-28T13:59:17Z",
+      "completedAt": "2026-11-28T14:01:04Z"
+    },
+    {
+      "id": 141001400119,
+      "name": "P14 family 6",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-28T13:59:17Z",
+      "completedAt": "2026-11-28T14:01:30Z"
+    },
+    {
+      "id": 141001400124,
+      "name": "P14 family 3",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-28T13:59:17Z",
+      "completedAt": "2026-11-28T14:00:55Z"
+    },
+    {
+      "id": 141001400141,
+      "name": "P14 family 2",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-28T13:59:17Z",
+      "completedAt": "2026-11-28T14:00:39Z"
+    },
+    {
+      "id": 141001400157,
+      "name": "P14 family 4",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-28T13:59:17Z",
+      "completedAt": "2026-11-28T14:00:26Z"
+    },
+    {
+      "id": 141002013757,
+      "name": "P14 aggregate and verify coverage",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-28T14:01:38Z",
+      "completedAt": "2026-11-28T14:02:58Z"
+    }
+  ],
+  "download": {
+    "artifactId": 15266351294,
+    "archiveSha256": "efa36f60c4c8313476f1c9d498912b5f3a3b9f41d47243a12f72e409f4b94150",
+    "verified": true
+  },
+  "nativeGamesExecuted": 0,
+  "operatorReserveAccessed": false
+}

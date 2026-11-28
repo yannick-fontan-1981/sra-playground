@@ -1,0 +1,53 @@
+{
+  "sourceRevision": "05b9e74ad2a293ac91420d6f727b873f82c99686",
+  "sourceFingerprint": "a0daee679f53af0d70a4b583cb4d7e9cfec2af516d3adb76817dabed0c8f3895",
+  "sourceFilesMatchLocal": true,
+  "unitTests": {
+    "p14": 18,
+    "existingTemporalComponents": 8,
+    "failures": 0
+  },
+  "pilotFullDeterministicAgreement": 80,
+  "targetedRegressionReplays": 24,
+  "nativeGamesExecuted": 0,
+  "extraMetrics": {
+    "ablationOracleChecks": 575255,
+    "ablationGestures": 561285,
+    "ablationWallMs": 30703.221539999937,
+    "ablationProofViolations": 0,
+    "ablationUnguardedTimedActions": 0,
+    "lostPhysicalCrossings": 19,
+    "totalOracleTransitionChecksIncludingAblations": 3395302,
+    "cumulativeReplayWallMsIncludingAblations": 271709.7462799971
+  },
+  "decisionModes": {
+    "frozen:act": 58473,
+    "frozen:observe": 2196582,
+    "candidate:act": 42687,
+    "candidate:observe": 398007,
+    "candidate:wait": 65113,
+    "candidate:revise": 3065,
+    "candidate:abstain": 12237,
+    "frozen:abstain": 7673,
+    "frozen:revise": 425,
+    "frozen:wait": 3785
+  },
+  "artifacts": {
+    "development-report.json": {
+      "bytes": 40595,
+      "sha256": "83bbae55004be3dcc4a9445e9124c516466bf253ad36e1d4020f1d2b00344311"
+    },
+    "development-receipts.jsonl.gz": {
+      "bytes": 7155247,
+      "sha256": "61e9cf22bfea275953bffda41e875bfee63894b77ddd3145d21612684819c603"
+    },
+    "pilot-report.json": {
+      "bytes": 35905,
+      "sha256": "409ef5c9186ea2349dc43019602aa910b05f2c940e636cd7ca25b1710aef51e7"
+    },
+    "pilot-receipts.jsonl.gz": {
+      "bytes": 74194,
+      "sha256": "3f33729550341158708a39bf7c3b5810f004786f52216615e6f09917b95b29e9"
+    }
+  }
+}

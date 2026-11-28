@@ -1,0 +1,3440 @@
+{
+  "schema": "sic-p14-development-regressions-v1",
+  "scope": "six regressions de developpement; aucune donnee reservee; diagnostics par observations publiques",
+  "provenance": {
+    "codeSha": "05b9e74ad2a293ac91420d6f727b873f82c99686",
+    "developmentSeed": 26112814,
+    "report": "development-report.json",
+    "receipts": "development-receipts.jsonl.gz",
+    "compressedReceiptsSha256": "61e9cf22bfea275953bffda41e875bfee63894b77ddd3145d21612684819c603",
+    "uncompressedReceiptsSha256": "a15ec1af61ce9da5e86ef54950b2978346f7c323ef0dc9c5cae252ed2881949c",
+    "targetedReplays": 24,
+    "replayMetricsExactlyMatchFrozenReceipts": true
+  },
+  "campaign": {
+    "cases": 8000,
+    "frozen": 767,
+    "candidate": 7844,
+    "gains": 7083,
+    "regressions": 6
+  },
+  "budget": {
+    "actions": 180,
+    "gameTicks": 360,
+    "searchStates": 20000,
+    "modified": false
+  },
+  "finding": {
+    "regressionCases": 6,
+    "evaluatedWorlds": 12,
+    "candidateFailedWorlds": 11,
+    "frozenSuccessfulWorlds": 12,
+    "candidateSuccessfulWorlds": 1,
+    "budgetExhaustionsAmongRegressions": 0,
+    "proofViolationsAmongRegressions": 0,
+    "unguardedTimedActionsAmongRegressions": 0,
+    "cause": "Les six regressions viennent de periodes 2 ou 3 extrapolees trop tot. La phase fermee peut etre confirmee pendant une attente, puis la phase ouverte employee par le mouvement est contredite. Elles ne reproduisent pas l attente jusqu au plafond du pilote F6/0.",
+    "status": "Echecs conserves sans filtre retrospectif ni correction du code mesure."
+  },
+  "summary": [
+    {
+      "id": "P14-transient_then_period-26112814-83",
+      "family": "transient_then_period",
+      "sourceIndex": 83,
+      "failedWorlds": [
+        0
+      ],
+      "candidatePeriods": [
+        2
+      ],
+      "firstDifferenceTicks": [
+        7
+      ],
+      "firstGuardContradictionTicks": [
+        8
+      ],
+      "candidateGestures": [
+        5
+      ],
+      "candidateGameTicks": [
+        8
+      ],
+      "frozenSuccessGestures": [
+        21,
+        24
+      ],
+      "frozenSuccessGameTicks": [
+        24,
+        27
+      ]
+    },
+    {
+      "id": "P14-ambiguous_periods-26112814-143",
+      "family": "ambiguous_periods",
+      "sourceIndex": 143,
+      "failedWorlds": [
+        0,
+        1
+      ],
+      "candidatePeriods": [
+        2
+      ],
+      "firstDifferenceTicks": [
+        5,
+        5
+      ],
+      "firstGuardContradictionTicks": [
+        7,
+        7
+      ],
+      "candidateGestures": [
+        7,
+        7
+      ],
+      "candidateGameTicks": [
+        7,
+        7
+      ],
+      "frozenSuccessGestures": [
+        35,
+        47
+      ],
+      "frozenSuccessGameTicks": [
+        35,
+        47
+      ]
+    },
+    {
+      "id": "P14-independent_clocks-26112814-189",
+      "family": "independent_clocks",
+      "sourceIndex": 189,
+      "failedWorlds": [
+        0,
+        1
+      ],
+      "candidatePeriods": [
+        2
+      ],
+      "firstDifferenceTicks": [
+        5,
+        5
+      ],
+      "firstGuardContradictionTicks": [
+        7,
+        7
+      ],
+      "candidateGestures": [
+        7,
+        7
+      ],
+      "candidateGameTicks": [
+        7,
+        7
+      ],
+      "frozenSuccessGestures": [
+        21,
+        21
+      ],
+      "frozenSuccessGameTicks": [
+        34,
+        34
+      ]
+    },
+    {
+      "id": "P14-ambiguous_periods-26112814-191",
+      "family": "ambiguous_periods",
+      "sourceIndex": 191,
+      "failedWorlds": [
+        0,
+        1
+      ],
+      "candidatePeriods": [
+        3
+      ],
+      "firstDifferenceTicks": [
+        8,
+        8
+      ],
+      "firstGuardContradictionTicks": [
+        10,
+        10
+      ],
+      "candidateGestures": [
+        6,
+        6
+      ],
+      "candidateGameTicks": [
+        10,
+        10
+      ],
+      "frozenSuccessGestures": [
+        18,
+        30
+      ],
+      "frozenSuccessGameTicks": [
+        22,
+        34
+      ]
+    },
+    {
+      "id": "P14-independent_clocks-26112814-440",
+      "family": "independent_clocks",
+      "sourceIndex": 440,
+      "failedWorlds": [
+        0,
+        1
+      ],
+      "candidatePeriods": [
+        2
+      ],
+      "firstDifferenceTicks": [
+        5,
+        5
+      ],
+      "firstGuardContradictionTicks": [
+        7,
+        7
+      ],
+      "candidateGestures": [
+        7,
+        7
+      ],
+      "candidateGameTicks": [
+        7,
+        7
+      ],
+      "frozenSuccessGestures": [
+        21,
+        21
+      ],
+      "frozenSuccessGameTicks": [
+        34,
+        34
+      ]
+    },
+    {
+      "id": "P14-ambiguous_periods-26112814-732",
+      "family": "ambiguous_periods",
+      "sourceIndex": 732,
+      "failedWorlds": [
+        0,
+        1
+      ],
+      "candidatePeriods": [
+        3
+      ],
+      "firstDifferenceTicks": [
+        8,
+        8
+      ],
+      "firstGuardContradictionTicks": [
+        10,
+        10
+      ],
+      "candidateGestures": [
+        7,
+        7
+      ],
+      "candidateGameTicks": [
+        11,
+        11
+      ],
+      "frozenSuccessGestures": [
+        16,
+        31
+      ],
+      "frozenSuccessGameTicks": [
+        20,
+        35
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "P14-transient_then_period-26112814-83",
+      "family": "transient_then_period",
+      "sourceIndex": 83,
+      "signature": "930964aa2efb8bbfac16571587ce77dad5b00e2e292a0498b988a1e6660c5025",
+      "oracle": {
+        "solvable": true,
+        "policyHash": "8af03191346d33e2f48dd540f20b23baff974bd33515de860c3f0b13cb532ee9",
+        "declaredWorlds": 2
+      },
+      "worlds": [
+        {
+          "world": 0,
+          "frozen": {
+            "success": true,
+            "crossed": true,
+            "terminal": "crossed",
+            "position": 2,
+            "gestures": 21,
+            "gameTicks": 24,
+            "predicted": 1,
+            "confirmed": 1,
+            "contradicted": 0,
+            "timedActions": 1,
+            "rightInstant": 1,
+            "mistimed": 0,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "candidate": {
+            "success": false,
+            "crossed": false,
+            "terminal": "failed",
+            "position": 1,
+            "gestures": 5,
+            "gameTicks": 8,
+            "predicted": 1,
+            "confirmed": 0,
+            "contradicted": 1,
+            "timedActions": 1,
+            "rightInstant": 0,
+            "mistimed": 1,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "firstDifference": {
+            "ordinal": 4,
+            "samePublicPrefix": true,
+            "frozen": {
+              "tick": 7,
+              "action": "k12838",
+              "mode": "observe"
+            },
+            "candidate": {
+              "tick": 7,
+              "action": "k40930",
+              "mode": "act"
+            }
+          },
+          "firstError": {
+            "kind": "prediction-contradicted",
+            "ordinal": 4,
+            "prediction": {
+              "channel": "v193036",
+              "tick": 8,
+              "value": 1,
+              "evidence": [
+                "t:1:c:1",
+                "t:3:c:1",
+                "t:2:c:1",
+                "t:4:c:1",
+                "t:6:c:3",
+                "t:5:c:2",
+                "t:7:c:4"
+              ],
+              "issued": 4,
+              "resolved": true
+            },
+            "frame": {
+              "ref": "t:8:c:5",
+              "tick": 8,
+              "values": {
+                "v193036": 0
+              },
+              "reliable": {
+                "v193036": true
+              },
+              "intermediate": false
+            }
+          },
+          "classification": "false-periodic-extrapolation-before-budget",
+          "playedDecision": {
+            "ordinal": 4,
+            "tick": 7,
+            "action": {
+              "id": "k40930",
+              "from": 1,
+              "to": 2,
+              "duration": 1,
+              "gates": [
+                "v193036"
+              ]
+            },
+            "candidateHypotheses": {
+              "v193036": [
+                {
+                  "period": 2,
+                  "since": 2
+                }
+              ]
+            },
+            "consumedGuards": [
+              {
+                "channel": "v193036",
+                "tick": 8,
+                "value": 1,
+                "evidence": [
+                  "t:1:c:1",
+                  "t:3:c:1",
+                  "t:2:c:1",
+                  "t:4:c:1",
+                  "t:6:c:3",
+                  "t:5:c:2",
+                  "t:7:c:4"
+                ]
+              }
+            ]
+          },
+          "publicObservationPrefix": {
+            "channels": [
+              "v193036"
+            ],
+            "columns": [
+              "tick",
+              "ref",
+              "values",
+              "reliable",
+              "intermediate"
+            ],
+            "rows": [
+              [
+                0,
+                "t:0:c:0",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                1,
+                "t:1:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                true
+              ],
+              [
+                2,
+                "t:2:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                true
+              ],
+              [
+                3,
+                "t:3:c:1",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                true
+              ],
+              [
+                4,
+                "t:4:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                5,
+                "t:5:c:2",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                6,
+                "t:6:c:3",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                7,
+                "t:7:c:4",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ]
+            ]
+          },
+          "publicReturn": {
+            "receipt": {
+              "action": "k40930",
+              "kind": "move",
+              "start": 7,
+              "end": 8,
+              "interventions": []
+            },
+            "frames": [
+              {
+                "ref": "t:8:c:5",
+                "tick": 8,
+                "values": {
+                  "v193036": 0
+                },
+                "reliable": {
+                  "v193036": true
+                },
+                "intermediate": false
+              }
+            ],
+            "position": 1,
+            "terminal": "failed"
+          },
+          "contradictedConsumedGuards": [
+            {
+              "channel": "v193036",
+              "tick": 8,
+              "predicted": 1,
+              "observed": 0,
+              "ref": "t:8:c:5",
+              "intermediate": false,
+              "evidence": [
+                "t:1:c:1",
+                "t:3:c:1",
+                "t:2:c:1",
+                "t:4:c:1",
+                "t:6:c:3",
+                "t:5:c:2",
+                "t:7:c:4"
+              ]
+            }
+          ],
+          "provenCause": "Une hypothese periodique courte est utilisee comme garde du mouvement. Le retour public fiable vaut 0 sur au moins un tick ou la garde consommee predit 1. Le mouvement echoue avant les plafonds; les references de preuve existent mais ne garantissent pas la prediction."
+        },
+        {
+          "world": 1,
+          "frozen": {
+            "success": true,
+            "crossed": true,
+            "terminal": "crossed",
+            "position": 2,
+            "gestures": 24,
+            "gameTicks": 27,
+            "predicted": 4,
+            "confirmed": 4,
+            "contradicted": 0,
+            "timedActions": 1,
+            "rightInstant": 1,
+            "mistimed": 0,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "candidate": {
+            "success": true,
+            "crossed": true,
+            "terminal": "crossed",
+            "position": 2,
+            "gestures": 24,
+            "gameTicks": 27,
+            "predicted": 4,
+            "confirmed": 4,
+            "contradicted": 0,
+            "timedActions": 1,
+            "rightInstant": 1,
+            "mistimed": 0,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "firstDifference": null,
+          "firstError": null
+        }
+      ]
+    },
+    {
+      "id": "P14-ambiguous_periods-26112814-143",
+      "family": "ambiguous_periods",
+      "sourceIndex": 143,
+      "signature": "8e90b36a4137f11168fc25b3432e9794aeb6201920a41d3e2df5a2c5f9ae5797",
+      "oracle": {
+        "solvable": true,
+        "policyHash": "4a73faaeb9d1302b5bc36b4ca5a3e07970a79c95fae19ff7ea219d883075ad1c",
+        "declaredWorlds": 2
+      },
+      "worlds": [
+        {
+          "world": 0,
+          "frozen": {
+            "success": true,
+            "crossed": true,
+            "terminal": "crossed",
+            "position": 2,
+            "gestures": 35,
+            "gameTicks": 35,
+            "predicted": 3,
+            "confirmed": 3,
+            "contradicted": 0,
+            "timedActions": 1,
+            "rightInstant": 1,
+            "mistimed": 0,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "candidate": {
+            "success": false,
+            "crossed": false,
+            "terminal": "failed",
+            "position": 1,
+            "gestures": 7,
+            "gameTicks": 7,
+            "predicted": 2,
+            "confirmed": 1,
+            "contradicted": 1,
+            "timedActions": 1,
+            "rightInstant": 0,
+            "mistimed": 1,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "firstDifference": {
+            "ordinal": 5,
+            "samePublicPrefix": true,
+            "frozen": {
+              "tick": 5,
+              "action": "k697303",
+              "mode": "observe"
+            },
+            "candidate": {
+              "tick": 5,
+              "action": "k22009",
+              "mode": "wait"
+            }
+          },
+          "firstError": {
+            "kind": "prediction-contradicted",
+            "ordinal": 6,
+            "prediction": {
+              "channel": "v57355",
+              "tick": 7,
+              "value": 1,
+              "evidence": [
+                "t:2:c:2",
+                "t:4:c:4",
+                "t:6:c:6",
+                "t:1:c:1",
+                "t:3:c:3",
+                "t:5:c:5"
+              ],
+              "issued": 6,
+              "resolved": true
+            },
+            "frame": {
+              "ref": "t:7:c:7",
+              "tick": 7,
+              "values": {
+                "v57355": 0
+              },
+              "reliable": {
+                "v57355": true
+              },
+              "intermediate": false
+            }
+          },
+          "classification": "false-periodic-extrapolation-before-budget",
+          "playedDecision": {
+            "ordinal": 6,
+            "tick": 6,
+            "action": {
+              "id": "k20228",
+              "from": 1,
+              "to": 2,
+              "duration": 1,
+              "gates": [
+                "v57355"
+              ]
+            },
+            "candidateHypotheses": {
+              "v57355": [
+                {
+                  "period": 2,
+                  "since": 0
+                }
+              ]
+            },
+            "consumedGuards": [
+              {
+                "channel": "v57355",
+                "tick": 7,
+                "value": 1,
+                "evidence": [
+                  "t:2:c:2",
+                  "t:4:c:4",
+                  "t:6:c:6",
+                  "t:1:c:1",
+                  "t:3:c:3",
+                  "t:5:c:5"
+                ]
+              }
+            ]
+          },
+          "publicObservationPrefix": {
+            "channels": [
+              "v57355"
+            ],
+            "columns": [
+              "tick",
+              "ref",
+              "values",
+              "reliable",
+              "intermediate"
+            ],
+            "rows": [
+              [
+                0,
+                "t:0:c:0",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                1,
+                "t:1:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                2,
+                "t:2:c:2",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                3,
+                "t:3:c:3",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                4,
+                "t:4:c:4",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                5,
+                "t:5:c:5",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                6,
+                "t:6:c:6",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ]
+            ]
+          },
+          "publicReturn": {
+            "receipt": {
+              "action": "k20228",
+              "kind": "move",
+              "start": 6,
+              "end": 7,
+              "interventions": []
+            },
+            "frames": [
+              {
+                "ref": "t:7:c:7",
+                "tick": 7,
+                "values": {
+                  "v57355": 0
+                },
+                "reliable": {
+                  "v57355": true
+                },
+                "intermediate": false
+              }
+            ],
+            "position": 1,
+            "terminal": "failed"
+          },
+          "contradictedConsumedGuards": [
+            {
+              "channel": "v57355",
+              "tick": 7,
+              "predicted": 1,
+              "observed": 0,
+              "ref": "t:7:c:7",
+              "intermediate": false,
+              "evidence": [
+                "t:2:c:2",
+                "t:4:c:4",
+                "t:6:c:6",
+                "t:1:c:1",
+                "t:3:c:3",
+                "t:5:c:5"
+              ]
+            }
+          ],
+          "provenCause": "Une hypothese periodique courte est utilisee comme garde du mouvement. Le retour public fiable vaut 0 sur au moins un tick ou la garde consommee predit 1. Le mouvement echoue avant les plafonds; les references de preuve existent mais ne garantissent pas la prediction."
+        },
+        {
+          "world": 1,
+          "frozen": {
+            "success": true,
+            "crossed": true,
+            "terminal": "crossed",
+            "position": 2,
+            "gestures": 47,
+            "gameTicks": 47,
+            "predicted": 3,
+            "confirmed": 3,
+            "contradicted": 0,
+            "timedActions": 1,
+            "rightInstant": 1,
+            "mistimed": 0,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "candidate": {
+            "success": false,
+            "crossed": false,
+            "terminal": "failed",
+            "position": 1,
+            "gestures": 7,
+            "gameTicks": 7,
+            "predicted": 2,
+            "confirmed": 1,
+            "contradicted": 1,
+            "timedActions": 1,
+            "rightInstant": 0,
+            "mistimed": 1,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "firstDifference": {
+            "ordinal": 5,
+            "samePublicPrefix": true,
+            "frozen": {
+              "tick": 5,
+              "action": "k697303",
+              "mode": "observe"
+            },
+            "candidate": {
+              "tick": 5,
+              "action": "k22009",
+              "mode": "wait"
+            }
+          },
+          "firstError": {
+            "kind": "prediction-contradicted",
+            "ordinal": 6,
+            "prediction": {
+              "channel": "v57355",
+              "tick": 7,
+              "value": 1,
+              "evidence": [
+                "t:2:c:2",
+                "t:4:c:4",
+                "t:6:c:6",
+                "t:1:c:1",
+                "t:3:c:3",
+                "t:5:c:5"
+              ],
+              "issued": 6,
+              "resolved": true
+            },
+            "frame": {
+              "ref": "t:7:c:7",
+              "tick": 7,
+              "values": {
+                "v57355": 0
+              },
+              "reliable": {
+                "v57355": true
+              },
+              "intermediate": false
+            }
+          },
+          "classification": "false-periodic-extrapolation-before-budget",
+          "playedDecision": {
+            "ordinal": 6,
+            "tick": 6,
+            "action": {
+              "id": "k20228",
+              "from": 1,
+              "to": 2,
+              "duration": 1,
+              "gates": [
+                "v57355"
+              ]
+            },
+            "candidateHypotheses": {
+              "v57355": [
+                {
+                  "period": 2,
+                  "since": 0
+                }
+              ]
+            },
+            "consumedGuards": [
+              {
+                "channel": "v57355",
+                "tick": 7,
+                "value": 1,
+                "evidence": [
+                  "t:2:c:2",
+                  "t:4:c:4",
+                  "t:6:c:6",
+                  "t:1:c:1",
+                  "t:3:c:3",
+                  "t:5:c:5"
+                ]
+              }
+            ]
+          },
+          "publicObservationPrefix": {
+            "channels": [
+              "v57355"
+            ],
+            "columns": [
+              "tick",
+              "ref",
+              "values",
+              "reliable",
+              "intermediate"
+            ],
+            "rows": [
+              [
+                0,
+                "t:0:c:0",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                1,
+                "t:1:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                2,
+                "t:2:c:2",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                3,
+                "t:3:c:3",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                4,
+                "t:4:c:4",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                5,
+                "t:5:c:5",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                6,
+                "t:6:c:6",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ]
+            ]
+          },
+          "publicReturn": {
+            "receipt": {
+              "action": "k20228",
+              "kind": "move",
+              "start": 6,
+              "end": 7,
+              "interventions": []
+            },
+            "frames": [
+              {
+                "ref": "t:7:c:7",
+                "tick": 7,
+                "values": {
+                  "v57355": 0
+                },
+                "reliable": {
+                  "v57355": true
+                },
+                "intermediate": false
+              }
+            ],
+            "position": 1,
+            "terminal": "failed"
+          },
+          "contradictedConsumedGuards": [
+            {
+              "channel": "v57355",
+              "tick": 7,
+              "predicted": 1,
+              "observed": 0,
+              "ref": "t:7:c:7",
+              "intermediate": false,
+              "evidence": [
+                "t:2:c:2",
+                "t:4:c:4",
+                "t:6:c:6",
+                "t:1:c:1",
+                "t:3:c:3",
+                "t:5:c:5"
+              ]
+            }
+          ],
+          "provenCause": "Une hypothese periodique courte est utilisee comme garde du mouvement. Le retour public fiable vaut 0 sur au moins un tick ou la garde consommee predit 1. Le mouvement echoue avant les plafonds; les references de preuve existent mais ne garantissent pas la prediction."
+        }
+      ]
+    },
+    {
+      "id": "P14-independent_clocks-26112814-189",
+      "family": "independent_clocks",
+      "sourceIndex": 189,
+      "signature": "cee5774534c56b10e36d780e903bbec7dd6e92899b4d47429e5647df135710ce",
+      "oracle": {
+        "solvable": true,
+        "policyHash": "26f4be1e2893ed0d8fd78183baa3234249eef313fa8c4eabd55c59dcd1642aa0",
+        "declaredWorlds": 2
+      },
+      "worlds": [
+        {
+          "world": 0,
+          "frozen": {
+            "success": true,
+            "crossed": true,
+            "terminal": "crossed",
+            "position": 3,
+            "gestures": 21,
+            "gameTicks": 34,
+            "predicted": 15,
+            "confirmed": 15,
+            "contradicted": 0,
+            "timedActions": 1,
+            "rightInstant": 1,
+            "mistimed": 0,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "candidate": {
+            "success": false,
+            "crossed": false,
+            "terminal": "failed",
+            "position": 0,
+            "gestures": 7,
+            "gameTicks": 7,
+            "predicted": 4,
+            "confirmed": 2,
+            "contradicted": 2,
+            "timedActions": 1,
+            "rightInstant": 0,
+            "mistimed": 1,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "firstDifference": {
+            "ordinal": 5,
+            "samePublicPrefix": true,
+            "frozen": {
+              "tick": 5,
+              "action": "k693479",
+              "mode": "observe"
+            },
+            "candidate": {
+              "tick": 5,
+              "action": "k461744",
+              "mode": "wait"
+            }
+          },
+          "firstError": {
+            "kind": "prediction-contradicted",
+            "ordinal": 6,
+            "prediction": {
+              "channel": "v711592",
+              "tick": 7,
+              "value": 1,
+              "evidence": [
+                "t:2:c:2",
+                "t:4:c:4",
+                "t:6:c:6",
+                "t:1:c:1",
+                "t:3:c:3",
+                "t:5:c:5"
+              ],
+              "issued": 6,
+              "resolved": true
+            },
+            "frame": {
+              "ref": "t:7:c:7",
+              "tick": 7,
+              "values": {
+                "v711592": 0,
+                "v855791": 0
+              },
+              "reliable": {
+                "v711592": true,
+                "v855791": true
+              },
+              "intermediate": false
+            }
+          },
+          "classification": "false-periodic-extrapolation-before-budget",
+          "playedDecision": {
+            "ordinal": 6,
+            "tick": 6,
+            "action": {
+              "id": "k560193",
+              "from": 0,
+              "to": 2,
+              "duration": 1,
+              "gates": [
+                "v855791"
+              ]
+            },
+            "candidateHypotheses": {
+              "v711592": [
+                {
+                  "period": 2,
+                  "since": 0
+                }
+              ],
+              "v855791": [
+                {
+                  "period": 2,
+                  "since": 0
+                }
+              ]
+            },
+            "consumedGuards": [
+              {
+                "channel": "v855791",
+                "tick": 7,
+                "value": 1,
+                "evidence": [
+                  "t:2:c:2",
+                  "t:4:c:4",
+                  "t:6:c:6",
+                  "t:1:c:1",
+                  "t:3:c:3",
+                  "t:5:c:5"
+                ]
+              }
+            ]
+          },
+          "publicObservationPrefix": {
+            "channels": [
+              "v855791"
+            ],
+            "columns": [
+              "tick",
+              "ref",
+              "values",
+              "reliable",
+              "intermediate"
+            ],
+            "rows": [
+              [
+                0,
+                "t:0:c:0",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                1,
+                "t:1:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                2,
+                "t:2:c:2",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                3,
+                "t:3:c:3",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                4,
+                "t:4:c:4",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                5,
+                "t:5:c:5",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                6,
+                "t:6:c:6",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ]
+            ]
+          },
+          "publicReturn": {
+            "receipt": {
+              "action": "k560193",
+              "kind": "move",
+              "start": 6,
+              "end": 7,
+              "interventions": []
+            },
+            "frames": [
+              {
+                "ref": "t:7:c:7",
+                "tick": 7,
+                "values": {
+                  "v711592": 0,
+                  "v855791": 0
+                },
+                "reliable": {
+                  "v711592": true,
+                  "v855791": true
+                },
+                "intermediate": false
+              }
+            ],
+            "position": 0,
+            "terminal": "failed"
+          },
+          "contradictedConsumedGuards": [
+            {
+              "channel": "v855791",
+              "tick": 7,
+              "predicted": 1,
+              "observed": 0,
+              "ref": "t:7:c:7",
+              "intermediate": false,
+              "evidence": [
+                "t:2:c:2",
+                "t:4:c:4",
+                "t:6:c:6",
+                "t:1:c:1",
+                "t:3:c:3",
+                "t:5:c:5"
+              ]
+            }
+          ],
+          "provenCause": "Une hypothese periodique courte est utilisee comme garde du mouvement. Le retour public fiable vaut 0 sur au moins un tick ou la garde consommee predit 1. Le mouvement echoue avant les plafonds; les references de preuve existent mais ne garantissent pas la prediction.",
+          "familySpecificFinding": "Le candidat choisit le detour 0 vers 2, soumis au second signal seulement. La regression est une mauvaise prediction de ce signal, pas un echec de synchronisation entre les deux horloges. Le firstError generique peut citer un autre signal predit au meme tick; les contradictedConsumedGuards identifient la cause physique."
+        },
+        {
+          "world": 1,
+          "frozen": {
+            "success": true,
+            "crossed": true,
+            "terminal": "crossed",
+            "position": 3,
+            "gestures": 21,
+            "gameTicks": 34,
+            "predicted": 15,
+            "confirmed": 15,
+            "contradicted": 0,
+            "timedActions": 1,
+            "rightInstant": 1,
+            "mistimed": 0,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "candidate": {
+            "success": false,
+            "crossed": false,
+            "terminal": "failed",
+            "position": 0,
+            "gestures": 7,
+            "gameTicks": 7,
+            "predicted": 2,
+            "confirmed": 1,
+            "contradicted": 1,
+            "timedActions": 1,
+            "rightInstant": 0,
+            "mistimed": 1,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "firstDifference": {
+            "ordinal": 5,
+            "samePublicPrefix": true,
+            "frozen": {
+              "tick": 5,
+              "action": "k693479",
+              "mode": "observe"
+            },
+            "candidate": {
+              "tick": 5,
+              "action": "k461744",
+              "mode": "abstain"
+            }
+          },
+          "firstError": {
+            "kind": "prediction-contradicted",
+            "ordinal": 6,
+            "prediction": {
+              "channel": "v855791",
+              "tick": 7,
+              "value": 1,
+              "evidence": [
+                "t:2:c:2",
+                "t:4:c:4",
+                "t:6:c:6",
+                "t:1:c:1",
+                "t:3:c:3",
+                "t:5:c:5"
+              ],
+              "issued": 6,
+              "resolved": true
+            },
+            "frame": {
+              "ref": "t:7:c:7",
+              "tick": 7,
+              "values": {
+                "v711592": 0,
+                "v855791": 0
+              },
+              "reliable": {
+                "v711592": true,
+                "v855791": true
+              },
+              "intermediate": false
+            }
+          },
+          "classification": "false-periodic-extrapolation-before-budget",
+          "playedDecision": {
+            "ordinal": 6,
+            "tick": 6,
+            "action": {
+              "id": "k560193",
+              "from": 0,
+              "to": 2,
+              "duration": 1,
+              "gates": [
+                "v855791"
+              ]
+            },
+            "candidateHypotheses": {
+              "v711592": [],
+              "v855791": [
+                {
+                  "period": 2,
+                  "since": 0
+                }
+              ]
+            },
+            "consumedGuards": [
+              {
+                "channel": "v855791",
+                "tick": 7,
+                "value": 1,
+                "evidence": [
+                  "t:2:c:2",
+                  "t:4:c:4",
+                  "t:6:c:6",
+                  "t:1:c:1",
+                  "t:3:c:3",
+                  "t:5:c:5"
+                ]
+              }
+            ]
+          },
+          "publicObservationPrefix": {
+            "channels": [
+              "v855791"
+            ],
+            "columns": [
+              "tick",
+              "ref",
+              "values",
+              "reliable",
+              "intermediate"
+            ],
+            "rows": [
+              [
+                0,
+                "t:0:c:0",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                1,
+                "t:1:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                2,
+                "t:2:c:2",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                3,
+                "t:3:c:3",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                4,
+                "t:4:c:4",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                5,
+                "t:5:c:5",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                6,
+                "t:6:c:6",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ]
+            ]
+          },
+          "publicReturn": {
+            "receipt": {
+              "action": "k560193",
+              "kind": "move",
+              "start": 6,
+              "end": 7,
+              "interventions": []
+            },
+            "frames": [
+              {
+                "ref": "t:7:c:7",
+                "tick": 7,
+                "values": {
+                  "v711592": 0,
+                  "v855791": 0
+                },
+                "reliable": {
+                  "v711592": true,
+                  "v855791": true
+                },
+                "intermediate": false
+              }
+            ],
+            "position": 0,
+            "terminal": "failed"
+          },
+          "contradictedConsumedGuards": [
+            {
+              "channel": "v855791",
+              "tick": 7,
+              "predicted": 1,
+              "observed": 0,
+              "ref": "t:7:c:7",
+              "intermediate": false,
+              "evidence": [
+                "t:2:c:2",
+                "t:4:c:4",
+                "t:6:c:6",
+                "t:1:c:1",
+                "t:3:c:3",
+                "t:5:c:5"
+              ]
+            }
+          ],
+          "provenCause": "Une hypothese periodique courte est utilisee comme garde du mouvement. Le retour public fiable vaut 0 sur au moins un tick ou la garde consommee predit 1. Le mouvement echoue avant les plafonds; les references de preuve existent mais ne garantissent pas la prediction.",
+          "familySpecificFinding": "Le candidat choisit le detour 0 vers 2, soumis au second signal seulement. La regression est une mauvaise prediction de ce signal, pas un echec de synchronisation entre les deux horloges. Le firstError generique peut citer un autre signal predit au meme tick; les contradictedConsumedGuards identifient la cause physique."
+        }
+      ]
+    },
+    {
+      "id": "P14-ambiguous_periods-26112814-191",
+      "family": "ambiguous_periods",
+      "sourceIndex": 191,
+      "signature": "280ec2a8a7bd58ec4b17a8c69491e13f2ae871825ae2119cbd086367316d09f7",
+      "oracle": {
+        "solvable": true,
+        "policyHash": "987a9a262526ef12b3c6fe9b9f3cc740e101110a2b02b7f7ab19f3383ddfa9a7",
+        "declaredWorlds": 2
+      },
+      "worlds": [
+        {
+          "world": 0,
+          "frozen": {
+            "success": true,
+            "crossed": true,
+            "terminal": "crossed",
+            "position": 2,
+            "gestures": 18,
+            "gameTicks": 22,
+            "predicted": 2,
+            "confirmed": 2,
+            "contradicted": 0,
+            "timedActions": 1,
+            "rightInstant": 1,
+            "mistimed": 0,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "candidate": {
+            "success": false,
+            "crossed": false,
+            "terminal": "failed",
+            "position": 1,
+            "gestures": 6,
+            "gameTicks": 10,
+            "predicted": 2,
+            "confirmed": 1,
+            "contradicted": 1,
+            "timedActions": 1,
+            "rightInstant": 0,
+            "mistimed": 1,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "firstDifference": {
+            "ordinal": 4,
+            "samePublicPrefix": true,
+            "frozen": {
+              "tick": 8,
+              "action": "k34443",
+              "mode": "observe"
+            },
+            "candidate": {
+              "tick": 8,
+              "action": "k319191",
+              "mode": "wait"
+            }
+          },
+          "firstError": {
+            "kind": "prediction-contradicted",
+            "ordinal": 5,
+            "prediction": {
+              "channel": "v178154",
+              "tick": 10,
+              "value": 1,
+              "evidence": [
+                "t:3:c:1",
+                "t:6:c:2",
+                "t:9:c:5",
+                "t:1:c:1",
+                "t:4:c:1",
+                "t:7:c:3",
+                "t:2:c:1",
+                "t:5:c:1",
+                "t:8:c:4"
+              ],
+              "issued": 5,
+              "resolved": true
+            },
+            "frame": {
+              "ref": "t:10:c:6",
+              "tick": 10,
+              "values": {
+                "v178154": 0
+              },
+              "reliable": {
+                "v178154": true
+              },
+              "intermediate": false
+            }
+          },
+          "classification": "false-periodic-extrapolation-before-budget",
+          "playedDecision": {
+            "ordinal": 5,
+            "tick": 9,
+            "action": {
+              "id": "k99908",
+              "from": 1,
+              "to": 2,
+              "duration": 1,
+              "gates": [
+                "v178154"
+              ]
+            },
+            "candidateHypotheses": {
+              "v178154": [
+                {
+                  "period": 3,
+                  "since": 0
+                }
+              ]
+            },
+            "consumedGuards": [
+              {
+                "channel": "v178154",
+                "tick": 10,
+                "value": 1,
+                "evidence": [
+                  "t:3:c:1",
+                  "t:6:c:2",
+                  "t:9:c:5",
+                  "t:1:c:1",
+                  "t:4:c:1",
+                  "t:7:c:3",
+                  "t:2:c:1",
+                  "t:5:c:1",
+                  "t:8:c:4"
+                ]
+              }
+            ]
+          },
+          "publicObservationPrefix": {
+            "channels": [
+              "v178154"
+            ],
+            "columns": [
+              "tick",
+              "ref",
+              "values",
+              "reliable",
+              "intermediate"
+            ],
+            "rows": [
+              [
+                0,
+                "t:0:c:0",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                1,
+                "t:1:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                true
+              ],
+              [
+                2,
+                "t:2:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                true
+              ],
+              [
+                3,
+                "t:3:c:1",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                true
+              ],
+              [
+                4,
+                "t:4:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                true
+              ],
+              [
+                5,
+                "t:5:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                6,
+                "t:6:c:2",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                7,
+                "t:7:c:3",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                8,
+                "t:8:c:4",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                9,
+                "t:9:c:5",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ]
+            ]
+          },
+          "publicReturn": {
+            "receipt": {
+              "action": "k99908",
+              "kind": "move",
+              "start": 9,
+              "end": 10,
+              "interventions": []
+            },
+            "frames": [
+              {
+                "ref": "t:10:c:6",
+                "tick": 10,
+                "values": {
+                  "v178154": 0
+                },
+                "reliable": {
+                  "v178154": true
+                },
+                "intermediate": false
+              }
+            ],
+            "position": 1,
+            "terminal": "failed"
+          },
+          "contradictedConsumedGuards": [
+            {
+              "channel": "v178154",
+              "tick": 10,
+              "predicted": 1,
+              "observed": 0,
+              "ref": "t:10:c:6",
+              "intermediate": false,
+              "evidence": [
+                "t:3:c:1",
+                "t:6:c:2",
+                "t:9:c:5",
+                "t:1:c:1",
+                "t:4:c:1",
+                "t:7:c:3",
+                "t:2:c:1",
+                "t:5:c:1",
+                "t:8:c:4"
+              ]
+            }
+          ],
+          "provenCause": "Une hypothese periodique courte est utilisee comme garde du mouvement. Le retour public fiable vaut 0 sur au moins un tick ou la garde consommee predit 1. Le mouvement echoue avant les plafonds; les references de preuve existent mais ne garantissent pas la prediction."
+        },
+        {
+          "world": 1,
+          "frozen": {
+            "success": true,
+            "crossed": true,
+            "terminal": "crossed",
+            "position": 2,
+            "gestures": 30,
+            "gameTicks": 34,
+            "predicted": 2,
+            "confirmed": 2,
+            "contradicted": 0,
+            "timedActions": 1,
+            "rightInstant": 1,
+            "mistimed": 0,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "candidate": {
+            "success": false,
+            "crossed": false,
+            "terminal": "failed",
+            "position": 1,
+            "gestures": 6,
+            "gameTicks": 10,
+            "predicted": 2,
+            "confirmed": 1,
+            "contradicted": 1,
+            "timedActions": 1,
+            "rightInstant": 0,
+            "mistimed": 1,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "firstDifference": {
+            "ordinal": 4,
+            "samePublicPrefix": true,
+            "frozen": {
+              "tick": 8,
+              "action": "k34443",
+              "mode": "observe"
+            },
+            "candidate": {
+              "tick": 8,
+              "action": "k319191",
+              "mode": "wait"
+            }
+          },
+          "firstError": {
+            "kind": "prediction-contradicted",
+            "ordinal": 5,
+            "prediction": {
+              "channel": "v178154",
+              "tick": 10,
+              "value": 1,
+              "evidence": [
+                "t:3:c:1",
+                "t:6:c:2",
+                "t:9:c:5",
+                "t:1:c:1",
+                "t:4:c:1",
+                "t:7:c:3",
+                "t:2:c:1",
+                "t:5:c:1",
+                "t:8:c:4"
+              ],
+              "issued": 5,
+              "resolved": true
+            },
+            "frame": {
+              "ref": "t:10:c:6",
+              "tick": 10,
+              "values": {
+                "v178154": 0
+              },
+              "reliable": {
+                "v178154": true
+              },
+              "intermediate": false
+            }
+          },
+          "classification": "false-periodic-extrapolation-before-budget",
+          "playedDecision": {
+            "ordinal": 5,
+            "tick": 9,
+            "action": {
+              "id": "k99908",
+              "from": 1,
+              "to": 2,
+              "duration": 1,
+              "gates": [
+                "v178154"
+              ]
+            },
+            "candidateHypotheses": {
+              "v178154": [
+                {
+                  "period": 3,
+                  "since": 0
+                }
+              ]
+            },
+            "consumedGuards": [
+              {
+                "channel": "v178154",
+                "tick": 10,
+                "value": 1,
+                "evidence": [
+                  "t:3:c:1",
+                  "t:6:c:2",
+                  "t:9:c:5",
+                  "t:1:c:1",
+                  "t:4:c:1",
+                  "t:7:c:3",
+                  "t:2:c:1",
+                  "t:5:c:1",
+                  "t:8:c:4"
+                ]
+              }
+            ]
+          },
+          "publicObservationPrefix": {
+            "channels": [
+              "v178154"
+            ],
+            "columns": [
+              "tick",
+              "ref",
+              "values",
+              "reliable",
+              "intermediate"
+            ],
+            "rows": [
+              [
+                0,
+                "t:0:c:0",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                1,
+                "t:1:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                true
+              ],
+              [
+                2,
+                "t:2:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                true
+              ],
+              [
+                3,
+                "t:3:c:1",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                true
+              ],
+              [
+                4,
+                "t:4:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                true
+              ],
+              [
+                5,
+                "t:5:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                6,
+                "t:6:c:2",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                7,
+                "t:7:c:3",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                8,
+                "t:8:c:4",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                9,
+                "t:9:c:5",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ]
+            ]
+          },
+          "publicReturn": {
+            "receipt": {
+              "action": "k99908",
+              "kind": "move",
+              "start": 9,
+              "end": 10,
+              "interventions": []
+            },
+            "frames": [
+              {
+                "ref": "t:10:c:6",
+                "tick": 10,
+                "values": {
+                  "v178154": 0
+                },
+                "reliable": {
+                  "v178154": true
+                },
+                "intermediate": false
+              }
+            ],
+            "position": 1,
+            "terminal": "failed"
+          },
+          "contradictedConsumedGuards": [
+            {
+              "channel": "v178154",
+              "tick": 10,
+              "predicted": 1,
+              "observed": 0,
+              "ref": "t:10:c:6",
+              "intermediate": false,
+              "evidence": [
+                "t:3:c:1",
+                "t:6:c:2",
+                "t:9:c:5",
+                "t:1:c:1",
+                "t:4:c:1",
+                "t:7:c:3",
+                "t:2:c:1",
+                "t:5:c:1",
+                "t:8:c:4"
+              ]
+            }
+          ],
+          "provenCause": "Une hypothese periodique courte est utilisee comme garde du mouvement. Le retour public fiable vaut 0 sur au moins un tick ou la garde consommee predit 1. Le mouvement echoue avant les plafonds; les references de preuve existent mais ne garantissent pas la prediction."
+        }
+      ]
+    },
+    {
+      "id": "P14-independent_clocks-26112814-440",
+      "family": "independent_clocks",
+      "sourceIndex": 440,
+      "signature": "70b0b388bf53a0bd564cbf0548d26cb36f419408d77adf4b45c17f1f6a9411ef",
+      "oracle": {
+        "solvable": true,
+        "policyHash": "a124e34a55f63b2c656a243db0ff51b2f2917746f86d0090fb0d1c067d2f7e54",
+        "declaredWorlds": 2
+      },
+      "worlds": [
+        {
+          "world": 0,
+          "frozen": {
+            "success": true,
+            "crossed": true,
+            "terminal": "crossed",
+            "position": 3,
+            "gestures": 21,
+            "gameTicks": 34,
+            "predicted": 15,
+            "confirmed": 15,
+            "contradicted": 0,
+            "timedActions": 1,
+            "rightInstant": 1,
+            "mistimed": 0,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "candidate": {
+            "success": false,
+            "crossed": false,
+            "terminal": "failed",
+            "position": 0,
+            "gestures": 7,
+            "gameTicks": 7,
+            "predicted": 4,
+            "confirmed": 2,
+            "contradicted": 2,
+            "timedActions": 1,
+            "rightInstant": 0,
+            "mistimed": 1,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "firstDifference": {
+            "ordinal": 5,
+            "samePublicPrefix": true,
+            "frozen": {
+              "tick": 5,
+              "action": "k54838",
+              "mode": "observe"
+            },
+            "candidate": {
+              "tick": 5,
+              "action": "k12303",
+              "mode": "wait"
+            }
+          },
+          "firstError": {
+            "kind": "prediction-contradicted",
+            "ordinal": 6,
+            "prediction": {
+              "channel": "v570973",
+              "tick": 7,
+              "value": 1,
+              "evidence": [
+                "t:2:c:2",
+                "t:4:c:4",
+                "t:6:c:6",
+                "t:1:c:1",
+                "t:3:c:3",
+                "t:5:c:5"
+              ],
+              "issued": 6,
+              "resolved": true
+            },
+            "frame": {
+              "ref": "t:7:c:7",
+              "tick": 7,
+              "values": {
+                "v570973": 0,
+                "v961899": 0
+              },
+              "reliable": {
+                "v570973": true,
+                "v961899": true
+              },
+              "intermediate": false
+            }
+          },
+          "classification": "false-periodic-extrapolation-before-budget",
+          "playedDecision": {
+            "ordinal": 6,
+            "tick": 6,
+            "action": {
+              "id": "k901920",
+              "from": 0,
+              "to": 2,
+              "duration": 1,
+              "gates": [
+                "v961899"
+              ]
+            },
+            "candidateHypotheses": {
+              "v570973": [
+                {
+                  "period": 2,
+                  "since": 0
+                }
+              ],
+              "v961899": [
+                {
+                  "period": 2,
+                  "since": 0
+                }
+              ]
+            },
+            "consumedGuards": [
+              {
+                "channel": "v961899",
+                "tick": 7,
+                "value": 1,
+                "evidence": [
+                  "t:2:c:2",
+                  "t:4:c:4",
+                  "t:6:c:6",
+                  "t:1:c:1",
+                  "t:3:c:3",
+                  "t:5:c:5"
+                ]
+              }
+            ]
+          },
+          "publicObservationPrefix": {
+            "channels": [
+              "v961899"
+            ],
+            "columns": [
+              "tick",
+              "ref",
+              "values",
+              "reliable",
+              "intermediate"
+            ],
+            "rows": [
+              [
+                0,
+                "t:0:c:0",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                1,
+                "t:1:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                2,
+                "t:2:c:2",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                3,
+                "t:3:c:3",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                4,
+                "t:4:c:4",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                5,
+                "t:5:c:5",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                6,
+                "t:6:c:6",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ]
+            ]
+          },
+          "publicReturn": {
+            "receipt": {
+              "action": "k901920",
+              "kind": "move",
+              "start": 6,
+              "end": 7,
+              "interventions": []
+            },
+            "frames": [
+              {
+                "ref": "t:7:c:7",
+                "tick": 7,
+                "values": {
+                  "v570973": 0,
+                  "v961899": 0
+                },
+                "reliable": {
+                  "v570973": true,
+                  "v961899": true
+                },
+                "intermediate": false
+              }
+            ],
+            "position": 0,
+            "terminal": "failed"
+          },
+          "contradictedConsumedGuards": [
+            {
+              "channel": "v961899",
+              "tick": 7,
+              "predicted": 1,
+              "observed": 0,
+              "ref": "t:7:c:7",
+              "intermediate": false,
+              "evidence": [
+                "t:2:c:2",
+                "t:4:c:4",
+                "t:6:c:6",
+                "t:1:c:1",
+                "t:3:c:3",
+                "t:5:c:5"
+              ]
+            }
+          ],
+          "provenCause": "Une hypothese periodique courte est utilisee comme garde du mouvement. Le retour public fiable vaut 0 sur au moins un tick ou la garde consommee predit 1. Le mouvement echoue avant les plafonds; les references de preuve existent mais ne garantissent pas la prediction.",
+          "familySpecificFinding": "Le candidat choisit le detour 0 vers 2, soumis au second signal seulement. La regression est une mauvaise prediction de ce signal, pas un echec de synchronisation entre les deux horloges. Le firstError generique peut citer un autre signal predit au meme tick; les contradictedConsumedGuards identifient la cause physique."
+        },
+        {
+          "world": 1,
+          "frozen": {
+            "success": true,
+            "crossed": true,
+            "terminal": "crossed",
+            "position": 3,
+            "gestures": 21,
+            "gameTicks": 34,
+            "predicted": 15,
+            "confirmed": 15,
+            "contradicted": 0,
+            "timedActions": 1,
+            "rightInstant": 1,
+            "mistimed": 0,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "candidate": {
+            "success": false,
+            "crossed": false,
+            "terminal": "failed",
+            "position": 0,
+            "gestures": 7,
+            "gameTicks": 7,
+            "predicted": 4,
+            "confirmed": 2,
+            "contradicted": 2,
+            "timedActions": 1,
+            "rightInstant": 0,
+            "mistimed": 1,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "firstDifference": {
+            "ordinal": 5,
+            "samePublicPrefix": true,
+            "frozen": {
+              "tick": 5,
+              "action": "k54838",
+              "mode": "observe"
+            },
+            "candidate": {
+              "tick": 5,
+              "action": "k12303",
+              "mode": "wait"
+            }
+          },
+          "firstError": {
+            "kind": "prediction-contradicted",
+            "ordinal": 6,
+            "prediction": {
+              "channel": "v570973",
+              "tick": 7,
+              "value": 1,
+              "evidence": [
+                "t:2:c:2",
+                "t:4:c:4",
+                "t:6:c:6",
+                "t:1:c:1",
+                "t:3:c:3",
+                "t:5:c:5"
+              ],
+              "issued": 6,
+              "resolved": true
+            },
+            "frame": {
+              "ref": "t:7:c:7",
+              "tick": 7,
+              "values": {
+                "v570973": 0,
+                "v961899": 0
+              },
+              "reliable": {
+                "v570973": true,
+                "v961899": true
+              },
+              "intermediate": false
+            }
+          },
+          "classification": "false-periodic-extrapolation-before-budget",
+          "playedDecision": {
+            "ordinal": 6,
+            "tick": 6,
+            "action": {
+              "id": "k901920",
+              "from": 0,
+              "to": 2,
+              "duration": 1,
+              "gates": [
+                "v961899"
+              ]
+            },
+            "candidateHypotheses": {
+              "v570973": [
+                {
+                  "period": 2,
+                  "since": 0
+                }
+              ],
+              "v961899": [
+                {
+                  "period": 2,
+                  "since": 0
+                }
+              ]
+            },
+            "consumedGuards": [
+              {
+                "channel": "v961899",
+                "tick": 7,
+                "value": 1,
+                "evidence": [
+                  "t:2:c:2",
+                  "t:4:c:4",
+                  "t:6:c:6",
+                  "t:1:c:1",
+                  "t:3:c:3",
+                  "t:5:c:5"
+                ]
+              }
+            ]
+          },
+          "publicObservationPrefix": {
+            "channels": [
+              "v961899"
+            ],
+            "columns": [
+              "tick",
+              "ref",
+              "values",
+              "reliable",
+              "intermediate"
+            ],
+            "rows": [
+              [
+                0,
+                "t:0:c:0",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                1,
+                "t:1:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                2,
+                "t:2:c:2",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                3,
+                "t:3:c:3",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                4,
+                "t:4:c:4",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                5,
+                "t:5:c:5",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                6,
+                "t:6:c:6",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ]
+            ]
+          },
+          "publicReturn": {
+            "receipt": {
+              "action": "k901920",
+              "kind": "move",
+              "start": 6,
+              "end": 7,
+              "interventions": []
+            },
+            "frames": [
+              {
+                "ref": "t:7:c:7",
+                "tick": 7,
+                "values": {
+                  "v570973": 0,
+                  "v961899": 0
+                },
+                "reliable": {
+                  "v570973": true,
+                  "v961899": true
+                },
+                "intermediate": false
+              }
+            ],
+            "position": 0,
+            "terminal": "failed"
+          },
+          "contradictedConsumedGuards": [
+            {
+              "channel": "v961899",
+              "tick": 7,
+              "predicted": 1,
+              "observed": 0,
+              "ref": "t:7:c:7",
+              "intermediate": false,
+              "evidence": [
+                "t:2:c:2",
+                "t:4:c:4",
+                "t:6:c:6",
+                "t:1:c:1",
+                "t:3:c:3",
+                "t:5:c:5"
+              ]
+            }
+          ],
+          "provenCause": "Une hypothese periodique courte est utilisee comme garde du mouvement. Le retour public fiable vaut 0 sur au moins un tick ou la garde consommee predit 1. Le mouvement echoue avant les plafonds; les references de preuve existent mais ne garantissent pas la prediction.",
+          "familySpecificFinding": "Le candidat choisit le detour 0 vers 2, soumis au second signal seulement. La regression est une mauvaise prediction de ce signal, pas un echec de synchronisation entre les deux horloges. Le firstError generique peut citer un autre signal predit au meme tick; les contradictedConsumedGuards identifient la cause physique."
+        }
+      ]
+    },
+    {
+      "id": "P14-ambiguous_periods-26112814-732",
+      "family": "ambiguous_periods",
+      "sourceIndex": 732,
+      "signature": "62f5d72a6ed5e8579b35f36b7e947d5862f827df6854e86b85e94b23bcff7b69",
+      "oracle": {
+        "solvable": true,
+        "policyHash": "d2ad287b3840d926bd38bb7449f2a19e43cbd6095ed40d0f33903afc323fd167",
+        "declaredWorlds": 2
+      },
+      "worlds": [
+        {
+          "world": 0,
+          "frozen": {
+            "success": true,
+            "crossed": true,
+            "terminal": "crossed",
+            "position": 2,
+            "gestures": 16,
+            "gameTicks": 20,
+            "predicted": 3,
+            "confirmed": 3,
+            "contradicted": 0,
+            "timedActions": 1,
+            "rightInstant": 1,
+            "mistimed": 0,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "candidate": {
+            "success": false,
+            "crossed": false,
+            "terminal": "failed",
+            "position": 1,
+            "gestures": 7,
+            "gameTicks": 11,
+            "predicted": 3,
+            "confirmed": 2,
+            "contradicted": 1,
+            "timedActions": 1,
+            "rightInstant": 0,
+            "mistimed": 1,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "firstDifference": {
+            "ordinal": 5,
+            "samePublicPrefix": true,
+            "frozen": {
+              "tick": 8,
+              "action": "k298018",
+              "mode": "observe"
+            },
+            "candidate": {
+              "tick": 8,
+              "action": "k581485",
+              "mode": "wait"
+            }
+          },
+          "firstError": {
+            "kind": "prediction-contradicted",
+            "ordinal": 6,
+            "prediction": {
+              "channel": "v272345",
+              "tick": 10,
+              "value": 1,
+              "evidence": [
+                "t:3:c:1",
+                "t:6:c:3",
+                "t:9:c:6",
+                "t:1:c:1",
+                "t:4:c:1",
+                "t:7:c:4",
+                "t:2:c:1",
+                "t:5:c:2",
+                "t:8:c:5"
+              ],
+              "issued": 6,
+              "resolved": true
+            },
+            "frame": {
+              "ref": "t:10:c:7",
+              "tick": 10,
+              "values": {
+                "v272345": 0
+              },
+              "reliable": {
+                "v272345": true
+              },
+              "intermediate": true
+            }
+          },
+          "classification": "false-periodic-extrapolation-before-budget",
+          "playedDecision": {
+            "ordinal": 6,
+            "tick": 9,
+            "action": {
+              "id": "k365367",
+              "from": 1,
+              "to": 2,
+              "duration": 2,
+              "gates": [
+                "v272345"
+              ]
+            },
+            "candidateHypotheses": {
+              "v272345": [
+                {
+                  "period": 3,
+                  "since": 0
+                }
+              ]
+            },
+            "consumedGuards": [
+              {
+                "channel": "v272345",
+                "tick": 10,
+                "value": 1,
+                "evidence": [
+                  "t:3:c:1",
+                  "t:6:c:3",
+                  "t:9:c:6",
+                  "t:1:c:1",
+                  "t:4:c:1",
+                  "t:7:c:4",
+                  "t:2:c:1",
+                  "t:5:c:2",
+                  "t:8:c:5"
+                ]
+              },
+              {
+                "channel": "v272345",
+                "tick": 11,
+                "value": 1,
+                "evidence": [
+                  "t:3:c:1",
+                  "t:6:c:3",
+                  "t:9:c:6",
+                  "t:1:c:1",
+                  "t:4:c:1",
+                  "t:7:c:4",
+                  "t:2:c:1",
+                  "t:5:c:2",
+                  "t:8:c:5"
+                ]
+              }
+            ]
+          },
+          "publicObservationPrefix": {
+            "channels": [
+              "v272345"
+            ],
+            "columns": [
+              "tick",
+              "ref",
+              "values",
+              "reliable",
+              "intermediate"
+            ],
+            "rows": [
+              [
+                0,
+                "t:0:c:0",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                1,
+                "t:1:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                true
+              ],
+              [
+                2,
+                "t:2:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                true
+              ],
+              [
+                3,
+                "t:3:c:1",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                true
+              ],
+              [
+                4,
+                "t:4:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                5,
+                "t:5:c:2",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                6,
+                "t:6:c:3",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                7,
+                "t:7:c:4",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                8,
+                "t:8:c:5",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                9,
+                "t:9:c:6",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ]
+            ]
+          },
+          "publicReturn": {
+            "receipt": {
+              "action": "k365367",
+              "kind": "move",
+              "start": 9,
+              "end": 11,
+              "interventions": []
+            },
+            "frames": [
+              {
+                "ref": "t:10:c:7",
+                "tick": 10,
+                "values": {
+                  "v272345": 0
+                },
+                "reliable": {
+                  "v272345": true
+                },
+                "intermediate": true
+              },
+              {
+                "ref": "t:11:c:7",
+                "tick": 11,
+                "values": {
+                  "v272345": 1
+                },
+                "reliable": {
+                  "v272345": true
+                },
+                "intermediate": false
+              }
+            ],
+            "position": 1,
+            "terminal": "failed"
+          },
+          "contradictedConsumedGuards": [
+            {
+              "channel": "v272345",
+              "tick": 10,
+              "predicted": 1,
+              "observed": 0,
+              "ref": "t:10:c:7",
+              "intermediate": true,
+              "evidence": [
+                "t:3:c:1",
+                "t:6:c:3",
+                "t:9:c:6",
+                "t:1:c:1",
+                "t:4:c:1",
+                "t:7:c:4",
+                "t:2:c:1",
+                "t:5:c:2",
+                "t:8:c:5"
+              ]
+            }
+          ],
+          "provenCause": "Une hypothese periodique courte est utilisee comme garde du mouvement. Le retour public fiable vaut 0 sur au moins un tick ou la garde consommee predit 1. Le mouvement echoue avant les plafonds; les references de preuve existent mais ne garantissent pas la prediction.",
+          "familySpecificFinding": "Le tick intermediaire 10 vaut 0; la finale 11 vaut pourtant 1 comme predit. La finale seule masquerait la violation de fenetre qui fait echouer le passage."
+        },
+        {
+          "world": 1,
+          "frozen": {
+            "success": true,
+            "crossed": true,
+            "terminal": "crossed",
+            "position": 2,
+            "gestures": 31,
+            "gameTicks": 35,
+            "predicted": 3,
+            "confirmed": 3,
+            "contradicted": 0,
+            "timedActions": 1,
+            "rightInstant": 1,
+            "mistimed": 0,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "candidate": {
+            "success": false,
+            "crossed": false,
+            "terminal": "failed",
+            "position": 1,
+            "gestures": 7,
+            "gameTicks": 11,
+            "predicted": 3,
+            "confirmed": 1,
+            "contradicted": 2,
+            "timedActions": 1,
+            "rightInstant": 0,
+            "mistimed": 1,
+            "revisions": 0,
+            "proofViolations": 0,
+            "unguardedTimedActions": 0
+          },
+          "firstDifference": {
+            "ordinal": 5,
+            "samePublicPrefix": true,
+            "frozen": {
+              "tick": 8,
+              "action": "k298018",
+              "mode": "observe"
+            },
+            "candidate": {
+              "tick": 8,
+              "action": "k581485",
+              "mode": "wait"
+            }
+          },
+          "firstError": {
+            "kind": "prediction-contradicted",
+            "ordinal": 6,
+            "prediction": {
+              "channel": "v272345",
+              "tick": 10,
+              "value": 1,
+              "evidence": [
+                "t:3:c:1",
+                "t:6:c:3",
+                "t:9:c:6",
+                "t:1:c:1",
+                "t:4:c:1",
+                "t:7:c:4",
+                "t:2:c:1",
+                "t:5:c:2",
+                "t:8:c:5"
+              ],
+              "issued": 6,
+              "resolved": true
+            },
+            "frame": {
+              "ref": "t:10:c:7",
+              "tick": 10,
+              "values": {
+                "v272345": 0
+              },
+              "reliable": {
+                "v272345": true
+              },
+              "intermediate": true
+            }
+          },
+          "classification": "false-periodic-extrapolation-before-budget",
+          "playedDecision": {
+            "ordinal": 6,
+            "tick": 9,
+            "action": {
+              "id": "k365367",
+              "from": 1,
+              "to": 2,
+              "duration": 2,
+              "gates": [
+                "v272345"
+              ]
+            },
+            "candidateHypotheses": {
+              "v272345": [
+                {
+                  "period": 3,
+                  "since": 0
+                }
+              ]
+            },
+            "consumedGuards": [
+              {
+                "channel": "v272345",
+                "tick": 10,
+                "value": 1,
+                "evidence": [
+                  "t:3:c:1",
+                  "t:6:c:3",
+                  "t:9:c:6",
+                  "t:1:c:1",
+                  "t:4:c:1",
+                  "t:7:c:4",
+                  "t:2:c:1",
+                  "t:5:c:2",
+                  "t:8:c:5"
+                ]
+              },
+              {
+                "channel": "v272345",
+                "tick": 11,
+                "value": 1,
+                "evidence": [
+                  "t:3:c:1",
+                  "t:6:c:3",
+                  "t:9:c:6",
+                  "t:1:c:1",
+                  "t:4:c:1",
+                  "t:7:c:4",
+                  "t:2:c:1",
+                  "t:5:c:2",
+                  "t:8:c:5"
+                ]
+              }
+            ]
+          },
+          "publicObservationPrefix": {
+            "channels": [
+              "v272345"
+            ],
+            "columns": [
+              "tick",
+              "ref",
+              "values",
+              "reliable",
+              "intermediate"
+            ],
+            "rows": [
+              [
+                0,
+                "t:0:c:0",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                1,
+                "t:1:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                true
+              ],
+              [
+                2,
+                "t:2:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                true
+              ],
+              [
+                3,
+                "t:3:c:1",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                true
+              ],
+              [
+                4,
+                "t:4:c:1",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                5,
+                "t:5:c:2",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                6,
+                "t:6:c:3",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                7,
+                "t:7:c:4",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                8,
+                "t:8:c:5",
+                [
+                  1
+                ],
+                [
+                  true
+                ],
+                false
+              ],
+              [
+                9,
+                "t:9:c:6",
+                [
+                  0
+                ],
+                [
+                  true
+                ],
+                false
+              ]
+            ]
+          },
+          "publicReturn": {
+            "receipt": {
+              "action": "k365367",
+              "kind": "move",
+              "start": 9,
+              "end": 11,
+              "interventions": []
+            },
+            "frames": [
+              {
+                "ref": "t:10:c:7",
+                "tick": 10,
+                "values": {
+                  "v272345": 0
+                },
+                "reliable": {
+                  "v272345": true
+                },
+                "intermediate": true
+              },
+              {
+                "ref": "t:11:c:7",
+                "tick": 11,
+                "values": {
+                  "v272345": 0
+                },
+                "reliable": {
+                  "v272345": true
+                },
+                "intermediate": false
+              }
+            ],
+            "position": 1,
+            "terminal": "failed"
+          },
+          "contradictedConsumedGuards": [
+            {
+              "channel": "v272345",
+              "tick": 10,
+              "predicted": 1,
+              "observed": 0,
+              "ref": "t:10:c:7",
+              "intermediate": true,
+              "evidence": [
+                "t:3:c:1",
+                "t:6:c:3",
+                "t:9:c:6",
+                "t:1:c:1",
+                "t:4:c:1",
+                "t:7:c:4",
+                "t:2:c:1",
+                "t:5:c:2",
+                "t:8:c:5"
+              ]
+            },
+            {
+              "channel": "v272345",
+              "tick": 11,
+              "predicted": 1,
+              "observed": 0,
+              "ref": "t:11:c:7",
+              "intermediate": false,
+              "evidence": [
+                "t:3:c:1",
+                "t:6:c:3",
+                "t:9:c:6",
+                "t:1:c:1",
+                "t:4:c:1",
+                "t:7:c:4",
+                "t:2:c:1",
+                "t:5:c:2",
+                "t:8:c:5"
+              ]
+            }
+          ],
+          "provenCause": "Une hypothese periodique courte est utilisee comme garde du mouvement. Le retour public fiable vaut 0 sur au moins un tick ou la garde consommee predit 1. Le mouvement echoue avant les plafonds; les references de preuve existent mais ne garantissent pas la prediction.",
+          "familySpecificFinding": "Les ticks 10 et 11 valent tous deux 0 alors que les deux gardes predictives valent 1."
+        }
+      ]
+    }
+  ],
+  "nextStep": "A bornes identiques, qualifier une confirmation sure de la phase ouverte effectivement consommee par le mouvement, avec un controle de chaque trame du deplacement. Distinguer les hypotheses soutenues des alternatives encore insuffisamment testees. Rejouer ces six regressions et les gains existants lors d une future modification; aucune modification du candidat gele dans ce diagnostic."
+}

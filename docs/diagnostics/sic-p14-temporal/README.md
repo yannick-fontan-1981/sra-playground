@@ -3,6 +3,8 @@
 Base gelée : `20433007224accc36e3d7976696d9ee7a783a227`.
 Branche isolée : `feat/sic-p14-temporal-dev-20261128`.
 
+**Campagne terminée :** [bilan des 8 000 situations](BILAN.md), [rapport et mesures](development-report.json), [six régressions conservées](regressions.json). SHA évalué : `05b9e74ad2a293ac91420d6f727b873f82c99686`.
+
 ## Périmètre de preuve
 
 Ce banc compare **une primitive SIC temporelle isolée** et son candidat dans un simulateur. Il ne compare pas deux exécutions complètes du worker SIC natif. Le figé appelle la fonction native `inferWitnessedSuffixCycle` du commit de base, inchangée ; le candidat ajoute `temporal-evidence.ts`. Les deux passent par le même adaptateur public et le composeur P09 `composePlan`, également inchangé. Aucune nouvelle primitive n'est raccordée à l'arbitrage de production par ce lot.
