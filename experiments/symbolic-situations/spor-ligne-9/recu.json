@@ -1,0 +1,112 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 5,
+      "gestes": 24
+    },
+    {
+      "sha": "19ffd927b588257ce54cf1a35c166ce41ecebf5b",
+      "départs": 5,
+      "gestes": 24
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "catalogue": {
+    "ligne9": 15,
+    "auCatalogue": 17,
+    "témoin56": 3
+  },
+  "T1": {
+    "compartiment": [
+      43,
+      44,
+      46,
+      57
+    ],
+    "commande": [
+      "ACTION6",
+      {
+        "x": 44,
+        "y": 50
+      }
+    ],
+    "pixels": {
+      "real": 134,
+      "shown": 134
+    }
+  },
+  "T2": {
+    "compartiment": [
+      50,
+      23,
+      57,
+      37
+    ],
+    "commande": [
+      "ACTION6",
+      {
+        "x": 53,
+        "y": 30
+      }
+    ]
+  },
+  "N2": {
+    "dépendance": [
+      {
+        "control": [
+          16,
+          48,
+          23,
+          57
+        ],
+        "receivers": [
+          [
+            25,
+            20,
+            28,
+            37
+          ]
+        ]
+      }
+    ]
+  },
+  "retrait": [
+    "observed_frontier",
+    "experiment",
+    [
+      "ACTION5",
+      {}
+    ]
+  ],
+  "stationnaire": {
+    "suite": [
+      "ACTION5",
+      {}
+    ],
+    "tentativeInscrite": true
+  },
+  "réserve": {
+    "composantes": [
+      5,
+      15,
+      5,
+      6,
+      46,
+      57
+    ],
+    "pixels": {
+      "real": 134,
+      "shown": 57
+    },
+    "local": true,
+    "suite": {
+      "famille": "observed_frontier",
+      "commande": [
+        "ACTION5",
+        {}
+      ]
+    }
+  },
+  "fauxReçusRejetés": 2
+}
