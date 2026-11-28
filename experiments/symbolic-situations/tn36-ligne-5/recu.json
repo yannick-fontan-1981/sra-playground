@@ -1,0 +1,242 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 6,
+      "gestes": 52,
+      "testsAuteur": 3
+    },
+    {
+      "sha": "0da75640d974e9fbe3b44b78b07649344169c470",
+      "départs": 6,
+      "gestes": 52,
+      "testsAuteur": 3
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "catalogue": {
+    "tickets": 16,
+    "modes": {
+      "execute": 2,
+      "edit": 13,
+      "demonstrate": 1
+    }
+  },
+  "prolongation": 19,
+  "N1": {
+    "ouverture": "execute",
+    "images": 7,
+    "transitions": [
+      {
+        "position": [
+          4,
+          1
+        ],
+        "colonne": null
+      },
+      {
+        "position": [
+          4,
+          2
+        ],
+        "colonne": 0
+      },
+      {
+        "position": [
+          4,
+          2
+        ],
+        "colonne": 1
+      },
+      {
+        "position": [
+          4,
+          3
+        ],
+        "colonne": 2
+      },
+      {
+        "position": [
+          4,
+          3
+        ],
+        "colonne": 3
+      },
+      {
+        "position": [
+          4,
+          3
+        ],
+        "colonne": 4
+      },
+      {
+        "position": [
+          4,
+          1
+        ],
+        "colonne": null
+      }
+    ],
+    "opérateur": [
+      [
+        "3",
+        [
+          0,
+          1
+        ]
+      ]
+    ],
+    "code": [
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "finaleSeule": {
+      "mesures": [],
+      "pointT2": {
+        "x": 21,
+        "y": 42
+      },
+      "mesuresT3": [
+        {
+          "code": 1,
+          "displacement": [
+            1,
+            0
+          ]
+        },
+        {
+          "code": 3,
+          "displacement": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    "retraitOpérateur": {
+      "pointT2": {
+        "x": 21,
+        "y": 42
+      },
+      "cible": [
+        1,
+        0,
+        3,
+        0,
+        0
+      ]
+    }
+  },
+  "N2": {
+    "exemple": {
+      "x": 21,
+      "y": 55
+    },
+    "opérateur": [
+      [
+        "33",
+        [
+          0,
+          -1
+        ]
+      ]
+    ],
+    "code": [
+      33,
+      33,
+      33,
+      33
+    ],
+    "autreExemple": {
+      "point": {
+        "x": 8,
+        "y": 58
+      },
+      "mesures": [],
+      "exécution": {
+        "x": 46,
+        "y": 58
+      }
+    }
+  },
+  "réserve": {
+    "paire": [
+      2,
+      3
+    ],
+    "séquence": [
+      {
+        "position": [
+          4,
+          1
+        ],
+        "colonne": null
+      },
+      {
+        "position": [
+          4,
+          2
+        ],
+        "colonne": 0
+      },
+      {
+        "position": [
+          4,
+          3
+        ],
+        "colonne": 2
+      },
+      {
+        "position": [
+          4,
+          2
+        ],
+        "colonne": 1
+      },
+      {
+        "position": [
+          4,
+          3
+        ],
+        "colonne": 3
+      },
+      {
+        "position": [
+          4,
+          3
+        ],
+        "colonne": 4
+      },
+      {
+        "position": [
+          4,
+          1
+        ],
+        "colonne": null
+      }
+    ],
+    "mesures": [
+      {
+        "code": 3,
+        "displacement": [
+          0,
+          1
+        ]
+      },
+      {
+        "code": 3,
+        "displacement": [
+          0,
+          1
+        ]
+      }
+    ],
+    "pointT2": {
+      "x": 26,
+      "y": 42
+    }
+  }
+}
