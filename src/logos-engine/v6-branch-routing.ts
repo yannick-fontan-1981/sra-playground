@@ -244,13 +244,19 @@ export class BranchRouting {
       return null;
     }
   }
+  selectCalibration(eligible: readonly string[]): string | undefined {
+    return eligible[0];
+  }
+
   private packageProposal(o: R, rows: NativeRows, inputs: readonly R[], remaining: number, actual: BranchState,
     ready: boolean, plain: string[], placement: BranchPlacement | null): R | null {
     const model = this.model!, [positions, active] = actual, steps: R[] = [];
     if (!ready) {
       const unknown = plain.filter(key => !Object.hasOwn(this.motion, key) && !this.seen.has(branchTupleKey([key, positions, active])));
       if (!unknown.length) return null;
-      steps.push({ action: { action_ref: unknown[0] }, mode: 'calibrate', state: actual, expected_after: null });
+      const control = this.selectCalibration([...unknown]);
+      if (control === undefined || !unknown.includes(control)) return null;
+      steps.push({ action: { action_ref: control }, mode: 'calibrate', state: actual, expected_after: null });
     } else {
       const commits = plain.filter(key => !Object.hasOwn(this.motion, key)), delta = placement!.displacement;
       const moving = delta.map((d, index) => d !== 0 ? index : -1).filter(index => index >= 0);
