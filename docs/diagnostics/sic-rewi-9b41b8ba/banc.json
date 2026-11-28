@@ -1,0 +1,101 @@
+{
+  "equalScenarios": 4,
+  "assembledEqual": true,
+  "previousView": {
+    "matches": [],
+    "reference": [
+      53,
+      53,
+      62,
+      62
+    ],
+    "image": [
+      1,
+      1,
+      62,
+      42
+    ]
+  },
+  "framedWindow": {
+    "kind": "ticket",
+    "turn": 9,
+    "level": 1,
+    "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:9",
+    "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:6ef02f22141cc32f",
+    "owner": "public_occurrence_recall",
+    "action": "ACTION6",
+    "point": {
+      "x": 33,
+      "y": 24
+    },
+    "offer": "framed_window_experiment",
+    "question": "test_current_exact_window_under_reference_role_hypothesis",
+    "subquestion": "framed_window_composition",
+    "guard": "current_window_and_point_bound",
+    "window": {
+      "position": [
+        27,
+        18
+      ],
+      "count": 1749,
+      "method": "COMPLETE",
+      "complete": true,
+      "trial": "a6234ceee1057cef8b4f2ed19a31eb4c3ad1928f75ef99cff929964cd8a6e8f3",
+      "expected": null
+    },
+    "refs": [
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:6ef02f22141cc32f"
+    ]
+  },
+  "ambiguousMatches": [
+    [
+      5,
+      5
+    ],
+    [
+      27,
+      18
+    ]
+  ],
+  "boundary": {
+    "kind": "framed_window_response",
+    "refs": [
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:6ef02f22141cc32f",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:10:frame:7bf7af563e8dcf7f"
+    ],
+    "epoch": 1,
+    "afterEpoch": 2,
+    "official": true,
+    "changed": true,
+    "blocked": []
+  },
+  "stationary": {
+    "kind": "framed_window_response",
+    "refs": [
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:6ef02f22141cc32f",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:10:frame:6ef02f22141cc32f"
+    ],
+    "epoch": 1,
+    "afterEpoch": 1,
+    "official": false,
+    "changed": false,
+    "blocked": [
+      "a6234ceee1057cef8b4f2ed19a31eb4c3ad1928f75ef99cff929964cd8a6e8f3"
+    ]
+  },
+  "next": {
+    "kind": "ticket",
+    "turn": 10,
+    "level": 2,
+    "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:10",
+    "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:10:frame:7bf7af563e8dcf7f",
+    "owner": "observed_frontier",
+    "action": "ACTION3",
+    "point": {},
+    "offer": "experiment",
+    "question": "rebind_prior_epoch_hypothesis_without_transferring_authority",
+    "guard": "current_public_premises_match_provisional_step",
+    "refs": []
+  },
+  "archiveSHA256": "65070133d70612d5940888493d045437db79fb165de1456aa6bf0295556d9bd9"
+}

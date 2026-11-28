@@ -30,6 +30,7 @@ cases = {
     "ELAS": ("280a54b5dd589d192d369b690781de057efaec8c", "elas-line-19", "sic-observe-elas-metric", []),
     "ZIPP": ("421dc6a58d051e8e418db80a98cf1e01755dab40", "zipp-lines-67-71", "sic-observe-zipp-trace-outline", []),
     "GIGO": ("b2eef22648f3a511bed0783d938013bae8673a8a", "gigo-line-53", "sic-observe-gigo-control", []),
+    "REWI": ("9b41b8ba322fceb2737a99dfa264a4d809055bad", "rewi-line-49", "sic-observe-rewi-window", []),
     "MIND": ("860835b1b77ae9cde489230be5c1f83c05237302", "mind-line-12", "sic-observe-mind-feedback",
              ["docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-public-trace.json.gz", "tests/fixtures/sic-mind-alternate-returns.json.gz"]),
     "RE86": ("8e820aa64f321153bb858040d462d7f766178947", "re86-line-7", "sic-observe-re86-ownership",
@@ -53,7 +54,7 @@ parser.add_argument("--node", default="node")
 args = parser.parse_args()
 proof, suite, observer, fixtures = cases[args.game]
 test = "tests/sic-" + suite + ".test.ts"
-name = "SIC_" + {"TICT": "SP80", "ZIPP": "ZIPP_67_71"}.get(args.game, args.game) + "_"
+name = "SIC_" + {"TICT": "SP80", "ZIPP": "ZIPP_67_71", "REWI": "REWI_49"}.get(args.game, args.game) + "_"
 revision = git("rev-parse", "--verify", args.revision + "^{commit}").decode().strip()
 git("-C", str(args.game_root.resolve()), "diff", "--exit-code", revision, "--", "public/python")
 out = args.output.resolve()
