@@ -10,6 +10,7 @@ import {readFile,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import { historicalReplayReferences, replayCampaignBudgets } from './sic-replay-budgets.mjs';
 import { superviseSicReplay } from './sic-replay-watchdog.mjs';
+import { sourceContactView } from './sic-source-contact-view.mjs';
 const replayChild=process.env.SIC_REPLAY_CHILD==='1' && typeof process.send==='function';
 const load=file=>import(pathToFileURL(resolve(file)));
 const pinned=resolve('reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6');
@@ -49,6 +50,11 @@ async function run(code,requestedTarget,parallelWorkers) {
   const sourceArm=process.env.SIC_SOURCE_COMPOSER_ARM;
   if (sourceArm !== undefined && (mode !== 'sic' || !['fixed', 'active'].includes(sourceArm))) {
     throw new TypeError('The source composer comparison requires a registered arm and strict SIC.');
+  }
+  const contactStyle = process.env.SIC_SOURCE_CONTACT_VIEW;
+  if (contactStyle && (!sourceArm || requestedTarget !== 1 || !['line', 'diagonal'].includes(contactStyle)
+    || /^SS(?:0[89]|1\d|2[0-5])$/.test(code))) {
+    throw new Error('Contact morphology contrasts require an authorized source at level one.');
   }
   const sourceStrategy = process.env.SIC_SOURCE_COMPOSER_STRATEGY ?? 'bind_earlier_motions_to_registered_subjects';
   if (sourceArm && !['motion_contrast', 'bind_earlier_motions_to_registered_subjects'].includes(sourceStrategy)) {
@@ -126,15 +132,18 @@ async function run(code,requestedTarget,parallelWorkers) {
   }
   const costs={};const transport={request:async operation=>{if(operation.type==='resume') resumes++;const start=performance.now();try{const response=await service.handle(operation);if(evidence)retainSourceEvidence(response);return response;}finally{const stat=costs[operation.type]??={ms:0,count:0};stat.ms+=performance.now()-start;stat.count++;}},reset:()=>{},dispose:()=>{}};
   const usage = new Map(), decisions = new Map(), series = new Map(); let resumes=0, priorDispatch=null;const continuedGaps=[], boundaryGaps=[]; let board=await game({type:'load',code,level:1}), gameMs=0, first=null; const effects=[]; const pathKinds = new Map();
+  const contactView = contactStyle
+    ? sourceContactView(board, (await load('src/logos-engine/v6-native-observer.ts')).geometricComponents, contactStyle) : null;
+  const present = raw => contactView ? contactView.present(raw) : raw;
   const target = requestedTarget ?? board.levelCount;
   const levelBudgets = replayCampaignBudgets(code, target, historical, supplied);
   const recoveries = { reset: 0, undo: 0 };
   const trajectory=createHash('sha256');
   const start=performance.now();
   const agent=new BrowserV6Agent({transport,targetLevels:target,levelBudgets,parallelWorkers,
-    resetLevel:async()=>{recoveries.reset++;return board=await game({type:'reset'});},
-    canUndoAction:()=>!!board.canUndo,undoAction:async()=>{recoveries.undo++;return board=await game({type:'undo'});},
-    recoveryConfiguration:()=>pack,getObservation:()=>board,canDispatch:()=>true,onState:()=>{},
+    resetLevel:async()=>{recoveries.reset++;board=await game({type:'reset'});return present(board);},
+    canUndoAction:()=>!!board.canUndo,undoAction:async()=>{recoveries.undo++;board=await game({type:'undo'});return present(board);},
+    recoveryConfiguration:()=>pack,getObservation:()=>present(board),canDispatch:()=>true,onState:()=>{},
     dispatch:async action=>{
       if (board.levelsCompleted >= target || board.level > target) throw new Error('Dispatch past the requested level');
       const issued=performance.now(); if(effects.length%25===0)console.log(JSON.stringify({progress:effects.length,level:board.level})); const plan=agent.snapshot.trace.findLast(e=>e.kind==='sic_native_plan'); if(plan){const kind=action.id===6?"click":action.id>=1&&action.id<=4?"move":"other"; const types=pathKinds.get(plan.id)??new Set();types.add(kind);pathKinds.set(plan.id,types);series.set(plan.id,(series.get(plan.id)??0)+1);if(priorDispatch){(priorDispatch.plan===plan.id?continuedGaps:boundaryGaps).push(issued-priorDispatch.at);}priorDispatch={plan:plan.id,at:issued};}
@@ -169,7 +178,8 @@ async function run(code,requestedTarget,parallelWorkers) {
       const family=agent.snapshot.trace.findLast(e=>e.kind==='sic_native_plan')?.family??'unbound'; usage.set(family,(usage.get(family)??0)+1); const strategy=agent.snapshot.trace.findLast(e=>e.kind==='sic_native_plan')?.strategy??'unbound'; decisions.set(strategy,(decisions.get(strategy)??0)+1);
       gameMs+=executionMs;
       trajectory.update(JSON.stringify([action,board.frame,board.frames,board.level,board.levelsCompleted,board.state]));
-      return {observation:board,executionMs};
+      if (effects.length === 2) contactView?.freeze(board, effects.map(effect => effect.slice(0, 2)));
+      return {observation:present(board),executionMs};
     }});
   try {
     const levelStats = [];
@@ -198,6 +208,7 @@ async function run(code,requestedTarget,parallelWorkers) {
     return {code,target,mode,parallelWorkers,...(sourceArm ? { sourceArm } : {}),recoveries,resumes,gaps:{continued:metric(continuedGaps),boundary:metric(boundaryGaps)},series:[...series.values()].filter(n=>n>1),pathKinds:[...series].filter(([,n])=>n>1).map(([id,n])=>({length:n,type:[...pathKinds.get(id)].sort().join("+")})),effects,decisions:Object.fromEntries(decisions),usage:Object.fromEntries(usage),actions:snapshot.actionCount,levels:board.levelsCompleted,reason:snapshot.reason,status:snapshot.status,
       ...(snapshot.status==='error'?{message:snapshot.message}:{}),authority:snapshot.sicActionCoverage?.sicOnly??0,solverFamilies:snapshot.coverage?.registeredFamilies.length,
       levelStats,
+      ...(contactView ? { sourceContactView: contactView.receipt() } : {}),
       ...(evidence ? { sourceComposerEvidence: [...evidence.values()], sourceRecoveryEvidence: [...recoveryEvidence.values()],
         sourceDecisions: [...sourceDecisions.values()] } : {}),
       ...(captureRivals ? { sourceReturnRivals: [...observedReturns.values()].filter(row => row.targets.size > 1)

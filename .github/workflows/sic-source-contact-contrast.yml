@@ -1,0 +1,56 @@
+name: SIC source contact under new cue morphologies
+
+on:
+  push:
+    branches: [experiment/sic-native-contact-contrast]
+    paths: [.github/workflows/sic-source-contact-contrast.yml]
+
+permissions:
+  contents: read
+
+jobs:
+  replay:
+    name: Source contact ${{ matrix.game }} ${{ matrix.style }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 14
+    strategy:
+      fail-fast: false
+      matrix:
+        game: [SS01, SS02, SS03, SS04, SS05, SS06, SS07]
+        style: [line, diagonal]
+    env:
+      GAME: ${{ matrix.game }}
+      SIC_SOURCE_CONTACT_VIEW: ${{ matrix.style }}
+      SIC_SOURCE_COMPOSER_ARM: active
+      SIC_SOURCE_COMPOSER_STRATEGY: motion_contrast
+      SIC_SOURCE_TRANSPORT_UNDO: '1'
+      SIC_SOURCE_COMPOSER_EVIDENCE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node scripts/prepare-python.mjs
+      - name: Compare only contact induction under the same rendered intervention
+        shell: bash
+        run: |
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          mkdir replay
+          git rev-parse HEAD HEAD:src > replay/identity
+          date -u +%s%3N > replay/start-ms
+          node scripts/check-sic-chronological.mjs "$GAME" 1 replay/base.jsonl 1 sic
+          SIC_SOURCE_UNFRAMED_CONTACT=1 node scripts/check-sic-chronological.mjs "$GAME" 1 replay/active.jsonl 1 sic
+          date -u +%s%3N > replay/end-ms
+          git diff --exit-code
+          cd replay
+          sha256sum base.jsonl active.jsonl *.levels identity start-ms end-ms > sha256sums
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sic-contact-contrast-${{ matrix.game }}-${{ matrix.style }}
+          path: replay/
+          retention-days: 14
