@@ -1,0 +1,138 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 6,
+      "gestes": 89,
+      "testsAuteur": 3
+    },
+    {
+      "sha": "8e820aa64f321153bb858040d462d7f766178947",
+      "départs": 6,
+      "gestes": 89,
+      "testsAuteur": 3
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "catalogue": 16,
+  "nominal": {
+    "vecteurs": [
+      [
+        0,
+        -3
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        -3,
+        0
+      ],
+      [
+        3,
+        0
+      ]
+    ],
+    "supports": [
+      {
+        "owner": 0,
+        "palette": 9,
+        "pixels": 53,
+        "refs": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:86e77cb5586f7c72",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:963cbb4b93ed4e85",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:4f601efbd51a3b6c",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:f1a140180b091241",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:335af69e78600545"
+        ]
+      },
+      {
+        "owner": 1,
+        "palette": 11,
+        "pixels": 45,
+        "refs": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:86e77cb5586f7c72",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:99f45f9bb942d802",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:4f601efbd51a3b6c",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:8:frame:6b1333b805591872",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:335af69e78600545",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:b43545371d5bc48f"
+        ]
+      }
+    ],
+    "couvertureT9": [
+      [
+        36,
+        45
+      ],
+      [
+        18,
+        24
+      ]
+    ],
+    "couvertureT21": [
+      [
+        48,
+        24
+      ],
+      [
+        18,
+        24
+      ]
+    ],
+    "scoreT26": 1
+  },
+  "alternative": {
+    "commande": "ACTION2",
+    "couverture": [
+      [
+        36,
+        45
+      ],
+      [
+        18,
+        30
+      ]
+    ],
+    "scoreT28": 1
+  },
+  "stationnaireT1": {
+    "choix": [
+      "constellation_cover",
+      "controlled_constellation_cover",
+      "ACTION2",
+      0
+    ],
+    "mode": "acquire",
+    "bodies": 0,
+    "complete": false
+  },
+  "réserve": {
+    "composantes": [
+      1,
+      1,
+      1
+    ],
+    "pixels": [
+      3,
+      1
+    ],
+    "partiel": {
+      "choix": [
+        "observed_frontier",
+        "experiment",
+        "ACTION2",
+        0
+      ]
+    },
+    "stationnaire": {
+      "choix": [
+        "pre_score_contact",
+        "observed_effect_access",
+        "ACTION1",
+        0
+      ]
+    }
+  }
+}
