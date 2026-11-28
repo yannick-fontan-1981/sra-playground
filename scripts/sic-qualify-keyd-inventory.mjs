@@ -6,8 +6,9 @@ import { pathToFileURL } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { sourceBackend } from './sic-study-source-games.mjs';
 
-const [checkout, output] = process.argv.slice(2);
-assert.ok(checkout && output, 'Pass CHECKOUT NEW-RECEIPT.json');
+const [checkout, output, mode] = process.argv.slice(2);
+assert.ok(checkout && output && (mode === undefined || mode === '--both-pairs'),
+  'Pass CHECKOUT NEW-RECEIPT.json [--both-pairs]');
 const git = (...args) => execFileSync('git', args, { cwd: checkout, encoding: 'utf8' }).trim();
 const revision = git('rev-parse', 'HEAD');
 git('diff', '--exit-code', revision, '--', 'src', 'public', 'reference');
@@ -44,9 +45,11 @@ ObservedInventory.prototype.project = function (request) {
   const active = existing.findLast(item => item.active && item.evidence?.at(-1) === request.observation_ref);
   if (variant !== 'nominal') assert.ok(active, 'Expected the access acquired at T8');
   if (variant === 'without-access') this.access_returns = existing.filter(item => item !== active);
-  if (variant === 'foreign-proof') {
+  if (variant === 'foreign-proof' || variant === 'prior-pair') {
+    const evidence = variant === 'foreign-proof' ? [active.evidence[0], previousRefs.get(6)]
+      : [previousRefs.get(7), previousRefs.get(8)];
     this.access_returns = existing.map(item => item === active
-      ? { ...item, evidence: [active.evidence[0], previousRefs.get(6)] } : item);
+      ? { ...item, evidence } : item);
   }
   try {
     projectionReads.push({ reference: request.observation_ref, before: existing.map(summarizeAccess),
@@ -93,9 +96,10 @@ async function capture(name) {
 const nominal = await capture('nominal');
 const removed = await capture('without-access');
 const foreign = await capture('foreign-proof');
-for (const scenario of [removed, foreign]) {
+const priorPair = mode === '--both-pairs' ? await capture('prior-pair') : undefined;
+for (const scenario of [removed, foreign, priorPair].filter(Boolean)) {
   assert.deepEqual(scenario.steps.slice(0, 8), nominal.steps.slice(0, 8));
   assert.equal(scenario.steps[8].pre.packet, nominal.steps[8].pre.packet);
 }
 assert.equal(git('rev-parse', 'HEAD'), revision);
-writeFileSync(output, JSON.stringify({ revision, level: 1, cap: 16, nominal, removed, foreign }) + '\n', { flag: 'wx' });
+writeFileSync(output, JSON.stringify({ revision, level: 1, cap: 16, nominal, removed, foreign, priorPair }) + '\n', { flag: 'wx' });

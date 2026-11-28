@@ -1,0 +1,38 @@
+{
+  "parent": "f710f2e13f252ca0ec1b7de7e25768e13a5e5bf4",
+  "correction": "51d983a7243289d2ebb2cef365dd536cbeaf59b1",
+  "nominalTickets": 16,
+  "scope": "KEYD N1 under catalogue action cap",
+  "firstDifference": 9,
+  "truePair": [
+    8,
+    9
+  ],
+  "rejectedPairs": [
+    [
+      8,
+      6
+    ],
+    [
+      7,
+      8
+    ]
+  ],
+  "confirmedCommands": [
+    "ACTION4",
+    "ACTION2"
+  ],
+  "typeBefore": "capacity_probe_candidate",
+  "typeAfter": "endpoint_approach_candidate",
+  "unchangedPhysicalReturns": [
+    9,
+    10
+  ],
+  "unchangedSKBNTurns": [
+    14,
+    16
+  ],
+  "nativeSuiteTests": 4,
+  "skbnTestsPerSHA": 2,
+  "archiveSHA256": "d3215a26664f7c1eb99ca91a0840d6ba7d0f2acb8e4a39fb130972b8743c4d8d"
+}
