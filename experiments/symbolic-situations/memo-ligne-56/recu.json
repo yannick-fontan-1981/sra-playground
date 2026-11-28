@@ -1,0 +1,81 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 4,
+      "gestes": 31
+    },
+    {
+      "sha": "4d9f1a397bd3706469f419739d077d366eb1b13c",
+      "départs": 4,
+      "gestes": 31
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "exemple": {
+    "point": [
+      46,
+      41
+    ],
+    "référence": "memo-qualification:epoch:1:revision:6:frame:0454a8cfe43f777b",
+    "modèles": [
+      "plural_antecedent:previous_all:exact_mask_and_color",
+      "plural_antecedent:previous_all:exact_mask",
+      "plural_antecedent:previous_unchosen:exact_mask_and_color",
+      "plural_antecedent:previous_unchosen:exact_mask"
+    ],
+    "appuisParModèle": 4
+  },
+  "rappel": {
+    "T7": [
+      "ACTION6",
+      {
+        "x": 15,
+        "y": 35
+      }
+    ],
+    "T8": [
+      "ACTION6",
+      {
+        "x": 14,
+        "y": 28
+      }
+    ],
+    "retours": [
+      "forward",
+      "forward"
+    ]
+  },
+  "sansExemple": {
+    "repli": [
+      "ACTION6",
+      {
+        "x": 37,
+        "y": 13
+      }
+    ],
+    "famille": "animated_contact",
+    "arrêt": "frontier_unknown"
+  },
+  "sansVoisin": [
+    "ACTION6",
+    {
+      "x": 15,
+      "y": 35
+    }
+  ],
+  "permutation": {
+    "pair": [
+      0,
+      1
+    ],
+    "choix": [
+      "ACTION6",
+      {
+        "x": 15,
+        "y": 35
+      }
+    ]
+  },
+  "fauxReçuRejeté": true
+}
