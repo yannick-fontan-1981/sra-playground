@@ -1,0 +1,21 @@
+{
+  "freeze": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "proof": "735b5e7d9fc3d3b426588e4d619187d925d269f0",
+  "testsPerSHA": 2,
+  "firstContrastTurn": 3,
+  "officialBoundaryTurns": [
+    2,
+    13
+  ],
+  "movedInContrast": {
+    "from": [
+      14,
+      2
+    ],
+    "to": [
+      13,
+      3
+    ]
+  },
+  "archiveSHA256": "7a54629d24fbaaf98f62e167d31883741290377b3f06ddba43d84bac3abd02fc"
+}

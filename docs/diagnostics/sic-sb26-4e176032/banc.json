@@ -1,0 +1,24 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "4e1760327c1aea9031654e7de7c26da3ae19cf7b",
+    "attendus": "d357cb1cacca5d0c39683b00e581910855354dd0"
+  },
+  "testsPassed": 127,
+  "nativePrefixes": 5,
+  "nominalTickets": 16,
+  "firstSelection": 3,
+  "newPick": [
+    "ACTION6",
+    {
+      "x": 19,
+      "y": 58
+    }
+  ],
+  "neutralInputOrder": true,
+  "firstRealDeposit": 9,
+  "retiredAfterWrongColor": true,
+  "rawSHA256": "803ab9210cf0b39897abd43551ded6b0d4494d21f87e77980f932731af6c8811",
+  "archiveSHA256": "46420df32a056e8827e8a1bd39b3ae8616891f8b39a4a76ad174ee3bee8a7672"
+}
