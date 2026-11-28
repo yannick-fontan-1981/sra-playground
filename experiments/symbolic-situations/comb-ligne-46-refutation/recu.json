@@ -1,0 +1,85 @@
+{
+  "stats": {
+    "versions": 2,
+    "départsGel": 8,
+    "gestesGel": 69,
+    "départsCorrectif": 11,
+    "gestesCorrectif": 84,
+    "catalogue": 16,
+    "compilationsContreditesRefusées": 2,
+    "réexécutionsLocalesConfirmées": 1
+  },
+  "conflict": [
+    {
+      "tour": 3,
+      "entrée": [
+        "containment",
+        null,
+        "containment_and_contact"
+      ],
+      "gel": [
+        "ACTION6",
+        {
+          "x": 24,
+          "y": 20
+        }
+      ],
+      "correctif": [
+        "ACTION1",
+        {}
+      ],
+      "retour": "comb-conflit-46:epoch:2:revision:4:frame:83e45baf852970ca",
+      "résultatOfficiel": 1
+    },
+    {
+      "tour": 9,
+      "entrée": [
+        "public_occurrence_recall",
+        "field_service_composition",
+        "nested_control_experiment"
+      ],
+      "gel": [
+        "ACTION6",
+        {
+          "x": 31,
+          "y": 20
+        }
+      ],
+      "correctif": [
+        "ACTION6",
+        {
+          "x": 45,
+          "y": 20
+        }
+      ],
+      "retour": "comb-conflit-46:epoch:2:revision:10:frame:dd90ca3b1ec65fa1",
+      "résultatOfficiel": 1
+    }
+  ],
+  "local": {
+    "tuple": [
+      4,
+      4,
+      11
+    ],
+    "projection": [
+      4,
+      8,
+      11
+    ],
+    "preuve": [
+      "comb-conflit-46:epoch:2:revision:9:frame:95c9ee015af1fe80",
+      "comb-conflit-46:epoch:2:revision:10:frame:16063b375d3ca9ef"
+    ],
+    "retour": "comb-conflit-46:epoch:2:revision:10:frame:16063b375d3ca9ef",
+    "scellé": true,
+    "suivant": [
+      "ACTION1",
+      {}
+    ]
+  },
+  "contrôleAutreÉpoque": {
+    "avant": 1,
+    "après": 2
+  }
+}

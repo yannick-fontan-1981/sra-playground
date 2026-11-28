@@ -1,0 +1,42 @@
+{
+  "stats": {
+    "versions": 2,
+    "départsParVersion": 8,
+    "gestesParVersion": 91,
+    "catalogue": 16,
+    "paquetsCanoniquesRéduitsParVersion": 3,
+    "ordrePermutéParVersion": 1
+  },
+  "premierLien": [
+    [
+      "support:47159914879bdea261d0ba13d34025735997d19616fe2880ec40ea8f16985bfc",
+      [
+        30,
+        24
+      ]
+    ]
+  ],
+  "T4": {
+    "front": [
+      8,
+      13
+    ],
+    "avant": "sele-51:epoch:1:revision:4:frame:bdcd7d02ac5d497a",
+    "après": "sele-51:epoch:1:revision:5:frame:bdcd7d02ac5d497a"
+  },
+  "T18": {
+    "officiel": 2,
+    "nominal": "matched_observed_front_prefix",
+    "inversé": "unknown_or_missing_expected_front",
+    "intervalleInversé": [
+      [
+        6,
+        8
+      ],
+      [
+        12,
+        15
+      ]
+    ]
+  }
+}
