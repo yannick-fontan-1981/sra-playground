@@ -75,6 +75,8 @@ export interface NativeSharedSeriesOptions {
   composedLabeledPredicates?: boolean;
   /** Explicit native interpretation of structurally witnessed trace-cell rims. */
   distinguishTraceCellSupport?: boolean;
+  /** Native crossed pairs require a receipt from the physical comparison. */
+  attestCrossedPairs?: boolean;
 }
 
 /** The inherited public reducer participates in the native mutation guard. */
@@ -175,6 +177,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   private readonly extendedRootedMarkSupport: boolean;
   private readonly composedLabeledPredicates: boolean;
   private readonly distinguishTraceCellSupport: boolean;
+  private readonly attestCrossedPairs: boolean;
 
   constructor(config: OccurrenceRecallPolicy, options: NativeSharedSeriesOptions = {}) {
     super(config);
@@ -184,6 +187,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     this.extendedRootedMarkSupport = options.extendedRootedMarkSupport === true;
     this.composedLabeledPredicates = options.composedLabeledPredicates === true;
     this.distinguishTraceCellSupport = options.distinguishTraceCellSupport === true;
+    this.attestCrossedPairs = options.attestCrossedPairs === true;
     this.certified = this.workingStamp();
   }
 
@@ -364,7 +368,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   /** The declared coupled-prefix entry reuses the already retained ancestor. */
   crossedPrefixPropose(observation: R, rows: NativeRows, inputs: readonly R[], remaining: number,
     deadlineMs: number | null, now?: () => number): Promise<R | null> {
-    return proposeCrossedPrefixCommon(this.crossedPrefix, observation, rows, inputs, remaining, deadlineMs, now);
+    return proposeCrossedPrefixCommon(this.crossedPrefix, observation, rows, inputs, remaining, deadlineMs, now,
+      { attestCrossedPairs: this.attestCrossedPairs });
   }
 
   /** The declared recurrent entry includes its supported-insertion fallback. */
@@ -699,6 +704,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     });
     if (!selectedRooted) events.push(...this.crossedPrefix.record(before, command, after, first, second, parentProposal, index, {
       after: (p, i, rows, later) => this.after(p, i, before, after, rows, later),
+      attestCrossedPairs: this.attestCrossedPairs,
     }));
     if (!selectedRooted) events.push(...recordObservedProgram(this.memory, before, command, after, first, second, parentProposal, index, {
       before: (p, i, rows, meta) => this.before(p, i, { frame_rows: rows, level: meta.epoch,

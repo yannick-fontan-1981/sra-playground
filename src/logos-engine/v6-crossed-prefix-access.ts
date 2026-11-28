@@ -31,10 +31,12 @@ export interface CrossedPrefixQuestionOptions extends CrossedPrefixAssignmentBou
   nativeBounds?: boolean;
   deadlineMs?: number | null;
   now?: Clock;
+  attestCrossedPairs?: boolean;
 }
 export interface CrossedPrefixRecordOptions {
   /** Source self.after dispatch may select a later inherited plan in a mixed envelope. */
   after?: (proposal: R, index: number, rows: NativeRows, later: NativeRows, meta: AfterMeta) => R;
+  attestCrossedPairs?: boolean;
 }
 export const freshCrossedPrefixMemory = (): CrossedPrefixState => ({
   cross_state: null, cross_pairs: [], cross_axis_inputs: { '0': [], '1': [] }, cross_events: [],
@@ -239,7 +241,12 @@ export class CrossedPrefixMemory {
         chosen = controller; mode = 'recolor'; action = pointCommand(addresses[0]!); intent = { desired_color: assignment[controller.key] }; break;
       }
     }
-    const known = this.pairs.filter(pair => knownOwner(required(pair, 'owner')));
+    // A pair is used only with an independent receipt from the return that
+    // measured it. A reference to a previous single-axis advance is insufficient.
+    const receipts = options.attestCrossedPairs ? new Set(this.events
+      .filter(event => event.kind === 'crossed_prefix_state' && typeof event.crossing_receipt === 'string')
+      .map(event => event.crossing_receipt)) : null;
+    const known = this.pairs.filter(pair => knownOwner(required(pair, 'owner')) && (!receipts || receipts.has(identity(pair))));
     if (chosen === null) {
       const pending = own(state, 'questions', []).find((question: R) => required(state!.progress, question.opposite_key) <= question.opposite_index
         && !known.some(pair => equal(pair.inputs[String(question.axis)], question.action)
@@ -317,6 +324,7 @@ export class CrossedPrefixMemory {
     const outcome = (options.after ?? crossedPrefixAfter)(proposal, index, rows, later,
       { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
     const boundary = !equal(after.level_epoch, before.level_epoch) || !equal(after.levels_completed, before.levels_completed);
+    let crossingReceipt: string | undefined;
     if (mode === 'select') state.selected = controller.key;
     else if (mode === 'recolor') { if (outcome.matched === false) state.invalid = true; }
     else if (mode === 'advance') {
@@ -337,17 +345,24 @@ export class CrossedPrefixMemory {
           const value = pixels[Math.floor(pixels.length / 2)]![Math.floor(pixels[0]!.length / 2)], current = own(bykey, controller.key);
           if (truth(current) && truth(other)) {
             const owners = [current, other].filter(control => equal(control.color, value)).map(control => control.axis);
-            extra.push({ kind: 'crossed_prefix_pair', inputs: { [String(controller.axis)]: command.action_ref, [String(other.axis)]: intent.other_action },
+            const pair = { kind: 'crossed_prefix_pair', inputs: { [String(controller.axis)]: command.action_ref, [String(other.axis)]: intent.other_action },
               owner: owners.length === 1 ? owners[0] : null, visible_palette: value,
               evidence: [before.observation_ref, after.observation_ref], epoch: before.level_epoch,
-              scope: 'Observed compatible intersection and visible appearance; prior-epoch use remains experimental.' });
+              scope: 'Observed compatible intersection and visible appearance; prior-epoch use remains experimental.' };
+            extra.push(pair);
+            if (options.attestCrossedPairs && knownOwner(pair.owner) && outcome.matched === true
+              && typeof outcome.reference_property_matched === 'boolean' && before.observation_ref === plan.observation_ref
+              && before.observation_ref !== after.observation_ref && command.action_ref === plan.action.action_ref) {
+              crossingReceipt = identity(pair);
+            }
           }
         }
       } else if (outcome.reason === 'input_has_no_effect_in_current_crossing') {
         state.blocked.push({ context: intent.trial_context, action: command.action_ref, evidence: after.observation_ref });
       } else state.invalid = true;
     }
-    extra.push({ kind: 'crossed_prefix_state', state, evidence: after.observation_ref, outcome });
+    extra.push({ kind: 'crossed_prefix_state', state, evidence: after.observation_ref, outcome,
+      ...(crossingReceipt === undefined ? {} : { crossing_receipt: crossingReceipt }) });
     const retained = extra.map(ownedEvent);
     for (const event of retained) this.applyOwned(event);
     return structuredClone(extra);
@@ -361,7 +376,7 @@ export class CrossedPrefixMemory {
  * The native assignment budget remains one request-wide counter. */
 export async function proposeCrossedPrefixCommon(memory: CrossedPrefixMemory, observation: R, rows: NativeRows,
   inputs: readonly R[], remaining: number, deadlineMs: number | null = null, now: Clock = () => performance.now(),
-  bounds: CrossedPrefixAssignmentBounds = {}): Promise<R | null> {
+  bounds: CrossedPrefixAssignmentBounds & Pick<CrossedPrefixQuestionOptions, 'attestCrossedPairs'> = {}): Promise<R | null> {
   if (remaining < 1) return null;
   const proposal = memory.crossQuestion(observation, rows, inputs,
     { ...bounds, nativeBounds: true, deadlineMs, now });
