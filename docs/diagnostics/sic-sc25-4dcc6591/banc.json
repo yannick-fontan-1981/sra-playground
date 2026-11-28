@@ -1,0 +1,27 @@
+{
+  "freeze": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "proof": "4dcc659183c31502edcca85f29d661426660a426",
+  "contract": "d4f1eec1",
+  "operator": "bb57dc99",
+  "officialWitness": "970b2c80",
+  "strict": false,
+  "testsPerSHA": 3,
+  "terrain": "constructed",
+  "t4AtSameOpenRaster": [
+    {
+      "axis": "horizontal",
+      "base": "walk",
+      "noCitation": "walk",
+      "noCalibration": "calibrate",
+      "samePacket": true
+    },
+    {
+      "axis": "vertical",
+      "base": "walk",
+      "noCitation": "walk",
+      "noCalibration": "calibrate",
+      "samePacket": true
+    }
+  ],
+  "archiveSHA256": "faf2329502aced52480d19e8f7ba8ac6239b84b85135495982b450771a19ed8b"
+}
