@@ -1,0 +1,82 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "49a971c37982154ea175294afffdf83469c1c302",
+    "attendus": "f27f64399119361ed0f13e00ad26d138510ebef2"
+  },
+  "prefixes": 6,
+  "measure": {
+    "signature": "78e3723964a6e212de36dcbe164d8650283c27751d037faef74f1758f8b24bd4",
+    "action": "ACTION4",
+    "delta": [
+      0,
+      6
+    ],
+    "epoch": 1,
+    "from": [
+      15,
+      15
+    ],
+    "to": [
+      15,
+      21
+    ],
+    "evidence": [
+      "tu93-39:epoch:1:revision:4:frame:b0fcb7706da4e628",
+      "tu93-39:epoch:1:revision:5:frame:fe165943d72a5de4"
+    ],
+    "size": 3,
+    "histogram": [
+      [
+        4,
+        1
+      ],
+      [
+        9,
+        8
+      ]
+    ]
+  },
+  "moves": [
+    "ACTION4",
+    "ACTION2"
+  ],
+  "measuredSecondMove": {
+    "signature": "78e3723964a6e212de36dcbe164d8650283c27751d037faef74f1758f8b24bd4",
+    "action": "ACTION2",
+    "delta": [
+      6,
+      0
+    ],
+    "epoch": 1,
+    "from": [
+      15,
+      21
+    ],
+    "to": [
+      21,
+      21
+    ],
+    "evidence": [
+      "tu93-39:epoch:1:revision:16:frame:9cea8b5604083671",
+      "tu93-39:epoch:1:revision:17:frame:5a57463b040750d8"
+    ],
+    "size": 3,
+    "histogram": [
+      [
+        4,
+        1
+      ],
+      [
+        9,
+        8
+      ]
+    ]
+  },
+  "levelsCompleted": 0,
+  "withdrawal": "graph_access_absent_or_ambiguous",
+  "stationary": "graph_displacement_or_extra_effect_diverged",
+  "next": "ACTION3",
+  "archiveSHA256": "38a961709f09e3714f7708c9ab93798d2be6a46efa1bb654c8b5e8beb63ac41c"
+}
