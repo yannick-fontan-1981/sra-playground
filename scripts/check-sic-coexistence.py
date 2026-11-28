@@ -19,6 +19,7 @@ FORTY_SIX = "ba2e7c6b8d10e04edc149ff836c065178757c62d"
 FIFTY_FIVE = "674b0dd19d693a66687990ab2a4368d981aa8fb9"
 SEVENTY_FIVE = "bf1cbf245055a60c4a253b9c6ee4be18ea9b8c2c"
 EIGHTY_SEVEN = "167be950334988ffbc46a04bc26de60c74fea527"
+NINETY_EIGHT = "0aef4289e97ce094782dfd03f5a79ace6eae5fd2"
 QUERY = "c0b9f4027f1df257d7b8c96f5656f9dbb83661f0"
 COMPONENTS = {
     "a5a90c3349ea49bba8e40055444cea2026bee962": "P05 et déplacement signé",
@@ -28,6 +29,21 @@ COMPONENTS = {
 
 
 def check_components(assembly):
+    if assembly == NINETY_EIGHT:
+        check(git("rev-parse", assembly + "^").decode().strip() == EIGHTY_SEVEN, "Expected the eighty-seven-line parent")
+        components = check_components(EIGHTY_SEVEN)
+        revision = "eb5611b3ff76409fbd67680ac29a5f6a17586422"
+        path = "src/logos-engine/v6-visual-sequences.ts"
+        check(git("diff", "--name-only", FROZEN, revision, "--", "src").decode().splitlines() == [path],
+              "Unexpected SERI component scope")
+        check(git("diff", "--name-only", EIGHTY_SEVEN, assembly).decode().splitlines() == [path],
+              "Unexpected change outside the corrected SERI file")
+        check(git("rev-parse", EIGHTY_SEVEN + ":" + path) == git("rev-parse", FROZEN + ":" + path), path)
+        check(git("rev-parse", assembly + ":" + path) == git("rev-parse", revision + ":" + path), path)
+        check(git("rev-parse", assembly + ":src").decode().strip() == "97a68f338d0ea96875cd915f65839db021595d95",
+              "Assembly source tree differs from the independent projection")
+        components[revision] = {"purpose": "ligne 93, témoins distincts des complétions", "files": [path]}
+        return components
     if assembly == EIGHTY_SEVEN:
         check(git("rev-parse", assembly + "^").decode().strip() == SEVENTY_FIVE, "Expected the seventy-five-line parent")
         components = check_components(SEVENTY_FIVE)
@@ -155,7 +171,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("archive", type=Path)
     parser.add_argument("--candidate", choices=(ASSEMBLY, TEN_LINES, NEXT_ASSEMBLY, TWENTY_FIVE, THIRTY_FIVE, FORTY_SIX,
-                                                FIFTY_FIVE, SEVENTY_FIVE, EIGHTY_SEVEN),
+                                                FIFTY_FIVE, SEVENTY_FIVE, EIGHTY_SEVEN, NINETY_EIGHT),
                         default=ASSEMBLY)
     parser.add_argument("--workflow", required=True)
     parser.add_argument("--run", required=True)
@@ -168,7 +184,7 @@ def main():
     parent = None
     parent_sha = {TEN_LINES: ASSEMBLY, NEXT_ASSEMBLY: TEN_LINES, TWENTY_FIVE: NEXT_ASSEMBLY, THIRTY_FIVE: TWENTY_FIVE,
                   FORTY_SIX: THIRTY_FIVE, FIFTY_FIVE: FORTY_SIX, SEVENTY_FIVE: FIFTY_FIVE,
-                  EIGHTY_SEVEN: SEVENTY_FIVE}.get(args.candidate)
+                  EIGHTY_SEVEN: SEVENTY_FIVE, NINETY_EIGHT: EIGHTY_SEVEN}.get(args.candidate)
     if parent_sha:
         base = ROOT / "docs/diagnostics" / ("sic-coexistence-" + parent_sha[:8])
         ledger = json.loads((base / "qualification.json").read_bytes())

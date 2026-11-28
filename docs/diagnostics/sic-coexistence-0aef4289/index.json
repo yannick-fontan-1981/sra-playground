@@ -1,0 +1,50 @@
+{
+  "engine": "0aef4289e97ce094782dfd03f5a79ace6eae5fd2",
+  "nativeSessions": 11,
+  "tests": {
+    "typescriptExitCode": 0,
+    "nodePassed": 23,
+    "nodeFailed": 0,
+    "testLogSHA256": "b434e00aadefac284640dfe4b438fb3c96c891aacb77912677380dc906d68868"
+  },
+  "witnesses": [
+    {
+      "source": "d67284e820e8d1987da055096732fc257c679f3f",
+      "operator": "f95f0b05eb37508858a7594809f6650b619ff29f",
+      "line": 72,
+      "game": "LKEY",
+      "bank": "0d34c890a63b5447a4491690e291d88374f6cbc0",
+      "attribution": "gel",
+      "result": {
+        "source": "0aef4289e97ce094782dfd03f5a79ace6eae5fd2",
+        "individualProof": "d67284e8",
+        "sessions": 4,
+        "passed": 4,
+        "skipped": 0,
+        "individualArchiveSHA256": "74810a41de04cb1beaf18f7c6dd9c62efa1953843e76241e81ebf394b98b560d"
+      },
+      "localReceiptHashes": {
+        "artifacts/qualification-coexistence-98/LKEY/0aef4289.json": "e3e361c5f72e5783f6fd3f394433a106b46b7cd2a46eb7cc4431819d594e191c"
+      }
+    },
+    {
+      "source": "eb5611b3ff76409fbd67680ac29a5f6a17586422",
+      "operator": "e595f03f076bdc2cbde66326c6131aab8f33e843",
+      "line": 93,
+      "game": "SERI",
+      "bank": "ea65b31b7c5fde76fd3e49cbc4f3f5410bae75de",
+      "attribution": "branche",
+      "result": {
+        "source": "0aef4289e97ce094782dfd03f5a79ace6eae5fd2",
+        "reference": "eb5611b3",
+        "sessions": 7,
+        "archiveSHA256": "32cc5e7d02f41b528dd461e2ebd09c67eb1bb6b30dff532061f79e367f9404c0"
+      },
+      "localReceiptHashes": {
+        "artifacts/qualification-coexistence-98/SERI/nominal/0aef4289.json": "bbe28ee619cddb4188437d34bf4872eb896f5a781e3513d0671f77669ee8377b",
+        "artifacts/qualification-coexistence-98/SERI/duplicate/0aef4289.json": "3c12c4d3e42e00e06ab1db8eac19ab6ac3c20c00bc2a06bf11599f1463fe5183"
+      }
+    }
+  ],
+  "independentFinalSERI": "c9a5f3550610bef88190233c4c4efd2f6bddfeba"
+}

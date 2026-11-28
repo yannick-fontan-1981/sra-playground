@@ -12,7 +12,7 @@ from zipfile import ZipFile
 
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument("game", choices=("KEYD", "KLOT", "SC25"))
+parser.add_argument("game", choices=("KEYD", "KLOT", "SC25", "SERI"))
 parser.add_argument("engine", type=Path)
 parser.add_argument("output", type=Path)
 parser.add_argument("--node", default="node")
@@ -33,7 +33,7 @@ revision = git("rev-parse", "HEAD")
 assert not git("diff", "--name-only", revision, "--", "src", "public/python", "reference")
 out.mkdir(parents=True)
 proof = {"KEYD": ("keyd-provenance", "51d983a7"), "KLOT": ("klot-provenance", "37983796"),
-         "SC25": ("sc25", "88e8abe8")}[args.game]
+         "SC25": ("sc25", "88e8abe8"), "SERI": ("seri-provenance", "eb5611b3")}[args.game]
 directory = bench / "docs/diagnostics" / f"sic-{proof[0]}-{proof[1]}"
 archive = directory / "recus.zip"
 digest = hashlib.sha256(archive.read_bytes()).hexdigest()
@@ -63,6 +63,14 @@ with ZipFile(archive) as oracle:
             actual = json.loads((out / kind / (revision[:8] + ".json")).read_bytes())
             assert actual == json.loads(oracle.read(kind + "/37983796.json")), "KLOT's physical or provenance receipt changed"
         sessions = 2 + 2
+    elif args.game == "SERI":
+        catalogue("SERI", "nominal")
+        catalogue("SERI", "duplicate", "--duplicate-completion", "--corrected-duplicates")
+        sessions = 0
+        for kind in ("nominal", "duplicate"):
+            actual = json.loads((out / kind / (revision[:8] + ".json")).read_bytes())
+            assert actual == json.loads(oracle.read(kind + "/eb5611b3.json")), "SERI's physical or provenance receipt changed"
+            sessions += len(actual)
     else:
         start = "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/"
         test = "tests/sic-sc25-motif-transfer.test.ts"
