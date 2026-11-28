@@ -1,0 +1,77 @@
+{
+  "stats": {
+    "versions": 2,
+    "départsParVersion": 6,
+    "gestesParVersion": 48,
+    "gestesContrefactuelsParVersion": 9,
+    "catalogue": 16,
+    "retoursConfirmés": 12,
+    "retoursSansPrédiction": 4,
+    "niveauxTerminés": 1,
+    "testsAuteurParVersion": 2
+  },
+  "sujets": [
+    {
+      "tour": 1,
+      "sujet": "11",
+      "commande": "ACTION6",
+      "avant": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:b70f41cc40f08e72",
+      "après": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:679e180e985ca52d",
+      "rôle": "selected_receiver_hypothesis"
+    },
+    {
+      "tour": 2,
+      "sujet": "11",
+      "commande": "ACTION4",
+      "avant": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:679e180e985ca52d",
+      "après": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:bd0afa946121cb8d",
+      "rôle": "observed_exclusive_receiver"
+    },
+    {
+      "tour": 6,
+      "sujet": "6",
+      "commande": "ACTION6",
+      "avant": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:4bdfb4e8adaeabe7",
+      "après": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:26aa70882f346fd4",
+      "rôle": "selected_receiver_hypothesis"
+    },
+    {
+      "tour": 7,
+      "sujet": "6",
+      "commande": "ACTION1",
+      "avant": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:26aa70882f346fd4",
+      "après": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:8:frame:d8c73b5adb06a81c",
+      "rôle": "observed_exclusive_receiver"
+    },
+    {
+      "tour": 8,
+      "sujet": "12",
+      "commande": "ACTION6",
+      "avant": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:8:frame:d8c73b5adb06a81c",
+      "après": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:ca4ea2dd84c21692",
+      "rôle": "selected_receiver_hypothesis"
+    },
+    {
+      "tour": 9,
+      "sujet": "12",
+      "commande": "ACTION1",
+      "avant": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:ca4ea2dd84c21692",
+      "après": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:10:frame:2590c8dfe989bc05",
+      "rôle": "observed_exclusive_receiver"
+    }
+  ],
+  "conflit": {
+    "point": {
+      "x": 20,
+      "y": 23
+    },
+    "moved": [
+      "6"
+    ],
+    "expected": "12",
+    "modèleRestant": 0,
+    "traceDeRôle": "observed_exclusive_receiver",
+    "sujetDeLaTrace": "12",
+    "arrêt": "rigid_control_or_collision_model_refuted"
+  }
+}
