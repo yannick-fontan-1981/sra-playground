@@ -1,0 +1,47 @@
+{
+  "sources": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "candidat": "48aae7fc05ed8d8409b1aa3a05efa4fa9c65c06d"
+  },
+  "prefixes": 23,
+  "identicalPairedCases": [
+    "acces",
+    "cible",
+    "commande",
+    "deplace",
+    "image-finale",
+    "inertie",
+    "nominal",
+    "placement",
+    "reference",
+    "catalogue"
+  ],
+  "nominalTurns13": [
+    3
+  ],
+  "nominalTurns14": [
+    4,
+    5
+  ],
+  "withdrawal13": {
+    "gel": "fixed_origin_dependency",
+    "candidat": "experiment"
+  },
+  "normalOrigin": 10,
+  "alternativeOrigin": 11,
+  "fullSamples": 12,
+  "lastFrameSamples": 1,
+  "archiveSHA256": "772b1bde394afed8a5393e233128c9c276939fd00cabd02d0ccb8604552d96de",
+  "captureStartUTC": "2026-11-28T00:35:44.460016+00:00",
+  "verdictUTC": "2026-11-28T00:44:22.185953+00:00",
+  "elapsedToVerdictSeconds": 518,
+  "verificationUpdate": {
+    "head": "787fee9746815121a133704e2c1554f096e09834",
+    "delta": [
+      "experiments/sic-agenda-offres/glob-13-14/verifier.mjs"
+    ],
+    "nominalRepeat": "identical",
+    "sha256": "85e95d308e8dbe774fd2ddaf8d6ae055da13ff21b2dd4e5987bac6881c620465"
+  }
+}
