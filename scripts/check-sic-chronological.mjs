@@ -56,7 +56,23 @@ async function run(code,requestedTarget,parallelWorkers) {
   const games=createGameDispatcher(loadLegacy);
   const game=request=>games.dispatch(request);
   let solver;const service=new V6AgentService(async recovery=>(solver=await createNativeV6Runtime({common,strategy},{recovery})));
-  const costs={};const transport={request:async operation=>{if(operation.type==='resume') resumes++;const start=performance.now();try{return await service.handle(operation);}finally{const stat=costs[operation.type]??={ms:0,count:0};stat.ms+=performance.now()-start;stat.count++;}},reset:()=>{},dispose:()=>{}};
+  const evidence = process.env.SIC_SOURCE_COMPOSER_EVIDENCE === '1' ? new Map() : null;
+  const seenEvidence = new Set();
+  function retainSourceEvidence(response) {
+    for (const event of response.snapshot?.trace ?? []) {
+      if (event.kind !== 'sic_preparation_outcome' || !Number.isSafeInteger(event.revision)) continue;
+      const occurrence = JSON.stringify([event.epoch, event.revision, event.hypothesis, event.result]);
+      if (seenEvidence.has(occurrence)) continue;
+      seenEvidence.add(occurrence);
+      const key = JSON.stringify([event.epoch, event.phase, event.hypothesis, event.result]);
+      const entry = evidence.get(key) ?? { level: event.epoch, phase: event.phase, hypothesis: event.hypothesis,
+        outcome: event.result, count: 0, first: { revision: event.revision,
+          witnesses: (event.refs ?? []).filter(Number.isSafeInteger).slice(0, 8) } };
+      entry.count++;
+      evidence.set(key, entry);
+    }
+  }
+  const costs={};const transport={request:async operation=>{if(operation.type==='resume') resumes++;const start=performance.now();try{const response=await service.handle(operation);if(evidence)retainSourceEvidence(response);return response;}finally{const stat=costs[operation.type]??={ms:0,count:0};stat.ms+=performance.now()-start;stat.count++;}},reset:()=>{},dispose:()=>{}};
   const usage = new Map(), decisions = new Map(), series = new Map(); let resumes=0, priorDispatch=null;const continuedGaps=[], boundaryGaps=[]; let board=await game({type:'load',code,level:1}), gameMs=0, first=null; const effects=[]; const pathKinds = new Map();
   const target = requestedTarget ?? board.levelCount;
   const levelBudgets = replayCampaignBudgets(code, target, historical, supplied);
@@ -107,6 +123,7 @@ async function run(code,requestedTarget,parallelWorkers) {
     return {code,target,mode,parallelWorkers,...(sourceArm ? { sourceArm } : {}),recoveries,resumes,gaps:{continued:metric(continuedGaps),boundary:metric(boundaryGaps)},series:[...series.values()].filter(n=>n>1),pathKinds:[...series].filter(([,n])=>n>1).map(([id,n])=>({length:n,type:[...pathKinds.get(id)].sort().join("+")})),effects,decisions:Object.fromEntries(decisions),usage:Object.fromEntries(usage),actions:snapshot.actionCount,levels:board.levelsCompleted,reason:snapshot.reason,status:snapshot.status,
       ...(snapshot.status==='error'?{message:snapshot.message}:{}),authority:snapshot.sicActionCoverage?.sicOnly??0,solverFamilies:snapshot.coverage?.registeredFamilies.length,
       levelStats,
+      ...(evidence ? { sourceComposerEvidence: [...evidence.values()] } : {}),
       ...(board.levelsCompleted < target ? { terminalDecisions: snapshot.trace
         .filter(event => ['sic_native_plan','before_guard','actual_outcome','sealed_prefix','native_acquisition_incomplete'].includes(event.kind))
         .slice(-32).map(event => Object.fromEntries(['kind','family','strategy','index','admitted','point_bound','matched','reason',
