@@ -30,3 +30,46 @@ sélectionné demeure observable même si cette distance réfute
 les modèles unitaires. La vérification sépare la mesure de la
 population réelle du rôle attribué et de la validation de la
 loi de commande.
+
+## Raccord et portée
+
+`NativeSelectedRigid.record` compare les poses portées par les
+mêmes clés et masques dans les deux observations. Le rôle exclusif
+requiert le déplacement de la pièce sélectionnée et l'immobilité
+de toutes les autres. Les observations conservent la sélection, la
+mesure physique et les références du ticket. La comparaison du
+modèle porte toujours sur la population complète. Elle conserve
+l'épuisement des modèles quand le retour ne correspond à aucun.
+
+Le rôle était publié dans le reçu d'acquisition
+`selected_rigid_event` et dans l'état retenu. Dans le moteur du gel,
+les deux références à sa valeur sont le schéma et le propriétaire.
+`NativeSelectedRigid.install` restaure l'état et les modèles du
+dernier événement. `proposeCurrent` s'arrête sur l'ensemble de
+modèles vide, ce qui explique le même arrêt dans les deux
+contre-épreuves. L'admission physique et l'acquisition du rôle
+se vérifient indépendamment.
+
+Les deux cas échouent sur le rôle exclusif au gel et donnent le
+rôle conditionnel sur le correctif. Le contrôle local passe quatre
+tests sur le jeu officiel, 58 tests de contrat et le typage. Les
+16 décisions nominales, 16 retours et 17 observations sont
+identiques dans la capture A/B à horloge déterministe, avec le
+passage officiel au T12.
+
+## Reproduction
+
+Node 24. `SIC_KLOT_GAME_ROOT` indique les actifs officiels et Pyodide.
+Les deux nouveaux tests libèrent le ticket nominal dans le vrai
+service et lui présentent le paquet d'un départ auxiliaire qui joue
+l'autre sélection. Pour reproduire l'ancien rôle, prendre
+`03fba8c8`, dont l'arbre moteur est celui du gel.
+
+```powershell
+node --experimental-strip-types --disable-warning=ExperimentalWarning --test tests/sic-klot-line-82.test.ts
+node --experimental-strip-types --disable-warning=ExperimentalWarning --test tests/v6-selected-rigid-native.test.ts tests/v6-selected-rigid-integration.test.ts tests/v6-selected-rigid-reference.test.ts
+npm run typecheck
+```
+
+[Tickets et retours](../../tests/sic-klot-line-82.test.ts) ·
+[Acquisition et reprise](../../src/logos-engine/v6-selected-rigid.ts)

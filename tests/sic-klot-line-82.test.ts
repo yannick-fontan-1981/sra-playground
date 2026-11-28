@@ -200,7 +200,7 @@ for (const [turn, selected, foreign] of [[7, '6', '11'], [9, '12', '6']] as cons
     const compared = await game.advance(toV6PublicObservation(alternateAfter, turn));
     const event = records.get(turn)!;
     assert.deepEqual([compared.matched, event.state.scene.bodies[event.state.active!].key, event.detail.moved, event.models.length,
-      event.detail.role_status], [false, selected, true, 0, 'observed_exclusive_receiver']);
+      event.detail.role_status], [false, selected, true, 0, 'blocked_or_unselected_remains_conditional']);
     assert.match(event.detail.before, new RegExp(':revision:' + turn + ':'));
     assert.match(event.detail.after, new RegExp(':revision:' + (turn + 1) + ':'));
     const final = await game.continuation();
