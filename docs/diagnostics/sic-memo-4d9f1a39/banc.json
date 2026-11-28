@@ -1,0 +1,30 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "4d9f1a397bd3706469f419739d077d366eb1b13c",
+    "attendus": "f9037da6a452091b303ea7dc30b00c51d35f9df2",
+    "spor": "2aad6e6c"
+  },
+  "borrowedExample": {
+    "point": [
+      46,
+      41
+    ],
+    "ref": "memo-qualification:epoch:1:revision:6:frame:0454a8cfe43f777b"
+  },
+  "positiveTicket": "memo-qualification:native:7",
+  "reason": "test_retained_occurrence_correspondence",
+  "withdrawal": {
+    "owner": "animated_contact",
+    "stop": "frontier_unknown"
+  },
+  "neutralControl": {
+    "point": [
+      14,
+      37
+    ],
+    "sameDecision": true
+  },
+  "spor": "test_observed_enclosing_emphasis"
+}
