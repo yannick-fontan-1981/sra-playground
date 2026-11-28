@@ -1,0 +1,69 @@
+{
+  "stats": {
+    "versions": 2,
+    "départsAdmisParVersion": 5,
+    "départsRefusésParVersion": 1,
+    "gestesParVersion": 92,
+    "motifsCatalogue": 12,
+    "gestesCatalogue": 16,
+    "gestesProlongés": 51,
+    "accèsMotifNatif": 0,
+    "testsAuteurParVersion": 3,
+    "contrôlesConstruitsNoyauParVersion": 2
+  },
+  "prolongation": {
+    "niveau": 1,
+    "score": 0,
+    "arrêt": "native_game_over"
+  },
+  "invocation": {
+    "tour": 15,
+    "commande": {
+      "x": 30,
+      "y": 60
+    },
+    "images": 17,
+    "changements": 54,
+    "ordinaire": {
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:16:frame:c45112c0db0fef9d",
+      "status": "public_response",
+      "mode": "invoke",
+      "before": [
+        [
+          39,
+          19
+        ],
+        4
+      ],
+      "after": [
+        [
+          39,
+          19
+        ],
+        2
+      ],
+      "cleared": true
+    },
+    "stationnaire": {
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:16:frame:1c3d861e0c8a2a59",
+      "status": "public_response",
+      "mode": "invoke",
+      "before": [
+        [
+          39,
+          19
+        ],
+        4
+      ],
+      "after": [
+        [
+          39,
+          19
+        ],
+        4
+      ],
+      "cleared": false
+    }
+  },
+  "refusN2": "The native V6 run must begin at level 1 with zero completed levels."
+}
