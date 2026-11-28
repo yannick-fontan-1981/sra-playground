@@ -1,0 +1,128 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 4,
+      "gestes": 60,
+      "testsAuteur": 1
+    },
+    {
+      "sha": "bfba3acb8de4c3f13fc10651b2aa22490def5070",
+      "départs": 4,
+      "gestes": 60,
+      "testsAuteur": 1
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "catalogue": 16,
+  "rotations": 3,
+  "translations": 11,
+  "contact": {
+    "avant": [
+      {
+        "pixels": [
+          [
+            [
+              12,
+              11
+            ],
+            8
+          ],
+          [
+            [
+              12,
+              13
+            ],
+            8
+          ]
+        ],
+        "match": false
+      }
+    ],
+    "retour": [
+      {
+        "pixels": [
+          [
+            [
+              12,
+              11
+            ],
+            3
+          ],
+          [
+            [
+              12,
+              13
+            ],
+            3
+          ]
+        ],
+        "match": true
+      },
+      {
+        "pixels": [
+          [
+            [
+              12,
+              11
+            ],
+            3
+          ],
+          [
+            [
+              12,
+              13
+            ],
+            3
+          ]
+        ],
+        "match": true
+      },
+      {
+        "pixels": [
+          [
+            [
+              12,
+              11
+            ],
+            12
+          ],
+          [
+            [
+              12,
+              13
+            ],
+            12
+          ]
+        ],
+        "match": false
+      }
+    ],
+    "finale": [
+      {
+        "pixels": [
+          [
+            [
+              12,
+              11
+            ],
+            12
+          ],
+          [
+            [
+              12,
+              13
+            ],
+            12
+          ]
+        ],
+        "match": false
+      }
+    ]
+  },
+  "frontière": [
+    2,
+    1
+  ],
+  "reprise": "calibrate"
+}
