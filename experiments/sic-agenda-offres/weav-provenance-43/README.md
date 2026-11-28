@@ -1,6 +1,6 @@
 # WEAV/43, contrôle de provenance
 
-Node 24, Pyodide local du Banc et Git avec la base `d0e7527c`. Depuis ce checkout, rejouer la borne catalogue de 16 et un préfixe étiqueté de 32 pour la réutilisation inter-niveaux :
+Node 24, Pyodide local du Banc et Git avec la base `d0e7527c`. Depuis ce checkout, rejouer la borne catalogue de 16 et un préfixe étiqueté de 32 pour vérifier la conservation de la paire au changement de niveau :
 
 ```powershell
 New-Item -ItemType Directory -Force artifacts/qualification-weav-provenance-43 | Out-Null

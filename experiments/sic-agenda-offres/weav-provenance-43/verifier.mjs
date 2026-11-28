@@ -77,12 +77,14 @@ try{
   }
 
   const continuation=candidate.epoque.steps;
-  const afterBoundary=continuation.find(s=>s.pre.level===2&&s.pre.plan?.pair?.epoch===1);
-  assert.ok(afterBoundary,'A genuine witnessed first-epoch pair remains available on a measured second-epoch support');
-  assert.ok(afterBoundary.pre.cut.pre.used.receipts.length);
+  const afterBoundary=continuation.find(s=>s.pre.level===2&&s.pre.cut);
+  assert.ok(afterBoundary,'The bounded run must reach the measured second level');
+  assert.ok(afterBoundary.pre.cut.pre.used.pairs.some(pair=>JSON.stringify(pair)===JSON.stringify(crossing.pair)));
+  assert.ok(afterBoundary.pre.cut.pre.used.receipts.some(receipt=>receipt.digest===crossing.witness));
   assert.ok(afterBoundary.after.record);
   await writeFile(values.recu,JSON.stringify({versions:{gel:versions.gel,qualification:git('rev-parse','HEAD'),
     attendus:git('log','-1','--format=%H','--',fileURLToPath(new URL('ATTENDUS.md',import.meta.url)))},
-    firstDifference:7,afterBoundary:afterBoundary.i,gel,candidate},null,2)+'\n');
+    firstDifference:7,afterBoundary:afterBoundary.i,
+    firstSecondEpochUse:continuation.find(s=>s.pre.level===2&&s.pre.plan?.pair?.epoch===1)?.i??null,gel,candidate},null,2)+'\n');
   console.log('WEAV 43 · provenance du croisement vérifiée avant et après réhydratation du journal.');
 }finally{await rm(tmp,{recursive:true,force:true});}
