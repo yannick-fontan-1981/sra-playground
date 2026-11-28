@@ -1,0 +1,34 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "f3051af812f4f7f74f0179a804a87753bffa5910",
+    "attendus": "47ef461c19a08eef6cb392372faf2fb205954e9e"
+  },
+  "prefixes": 7,
+  "nominalTickets": 16,
+  "pixelsChangedPerRoom": [
+    21,
+    21,
+    21
+  ],
+  "remeasuredAt": [
+    8,
+    16
+  ],
+  "withoutEffectsAt8": [
+    "ACTION6",
+    {
+      "x": 45,
+      "y": 12
+    }
+  ],
+  "missingRelationBlocks": [
+    8,
+    16
+  ],
+  "tests": 59,
+  "author": "4d5f0df0",
+  "rawSHA256": "d7b9414b6a4e9f7ce5094b95fe424aa654869d6a6427511db265ac0a04a4bdff",
+  "archiveSHA256": "a03ad044034a8efa25bbbf92c11003eb6998917988a312a38ed2030d033ddb58"
+}
