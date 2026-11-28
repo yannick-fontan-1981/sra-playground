@@ -1,0 +1,52 @@
+{
+  "parent": "03fba8c8",
+  "correction": "37983796259ab45f3366364896a72c55752e332d",
+  "firstRecordedDifferences": [
+    7,
+    9
+  ],
+  "counterexamples": [
+    {
+      "turn": 7,
+      "selected": "6",
+      "moved": "11",
+      "wrongSelect": {
+        "x": 36,
+        "y": 39
+      },
+      "matched": false,
+      "sealed": true,
+      "attributed": "blocked_or_unselected_remains_conditional",
+      "models": 0,
+      "next": {
+        "kind": "stopped",
+        "family": "selected_rigid",
+        "next": null,
+        "reason": "rigid_control_or_collision_model_refuted"
+      },
+      "officialLevels": 0
+    },
+    {
+      "turn": 9,
+      "selected": "12",
+      "moved": "6",
+      "wrongSelect": {
+        "x": 20,
+        "y": 23
+      },
+      "matched": false,
+      "sealed": true,
+      "attributed": "blocked_or_unselected_remains_conditional",
+      "models": 0,
+      "next": {
+        "kind": "stopped",
+        "family": "selected_rigid",
+        "next": null,
+        "reason": "rigid_control_or_collision_model_refuted"
+      },
+      "officialLevels": 0
+    }
+  ],
+  "nominalSessionsIdentical": 2,
+  "archiveSHA256": "6983edf8c91ed3f7512085d6d53b270480465b02b207aa7aad9da05fad8a0dd4"
+}

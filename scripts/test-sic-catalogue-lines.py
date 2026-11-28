@@ -58,6 +58,7 @@ parser.add_argument("--game", choices=cases, default="GARE")
 parser.add_argument("output", type=Path)
 parser.add_argument("--baseline-only", action="store_true", help="Run the LIFE cases shared with the historical engine")
 parser.add_argument("--wrong-receiver", action="store_true", help="Run the KLOT receipt attribution control")
+parser.add_argument("--corrected-receiver", action="store_true", help="Require KLOT's corrected receipt role")
 parser.add_argument("--game-root", required=True, type=Path)
 parser.add_argument("--node", default="node")
 args = parser.parse_args()
@@ -104,7 +105,11 @@ if args.wrong_receiver:
              "    },\n")
     source.write_text(text.replace(entry, mutated).replace(decision, after + decision) + "\n" + control,
                       encoding="utf8", newline="\n")
-    options = ["--test-name-pattern=^82 rejects the plan"]
+    env["SIC_KLOT_EXPECTED_WRONG_ROLE"] = ("blocked_or_unselected_remains_conditional" if args.corrected_receiver
+                                            else "observed_exclusive_receiver")
+    options = ["--test-name-pattern=^82 checks the receipt"]
+elif args.corrected_receiver:
+    parser.error("--corrected-receiver requires --wrong-receiver")
 if args.game == "ISOS" and env.get("SIC_ISOS_STALE_BOUNDARY") == "1":
     options = ["--test-name-pattern=^10 distinguishes"]
 if args.game == "LIFE" and (args.baseline_only or revision in {
