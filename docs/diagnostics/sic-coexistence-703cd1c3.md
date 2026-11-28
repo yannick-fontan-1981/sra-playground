@@ -17,6 +17,8 @@ Le contrôle séparé `9e96585a` rejoue `c515ea14` jusqu'à N4, avec le même bl
 
 Rouvrir le dernier cycle à géométrie et `lastRef` identiques conserve les 125 premières commandes. Le premier écart est au **N4/T15, geste global 126**. Le service remplace ACTION2 par **ACTION6 (56,28)** et joue ce ticket. Le retour `support_phase_measured` laisse le cycle ouvert. Le témoin gagne N4 en 76 gestes. Le bras rouvert s'arrête à 92 gestes, avec trois niveaux gagnés. La clôture du cycle conditionne donc la traversée à cette observation. Ce constat porte sur le fait `closed` déjà mémorisé par le fournisseur. [Contre-épreuve et protocole](https://github.com/yannick-fontan-1981/sra-playground/blob/9e96585ac3d6c7bcc450e173592211238cdc0ee0/docs/diagnostics/sic-dc22-phased-obligations.md) · [Reçu compact](https://github.com/yannick-fontan-1981/sra-playground/blob/9e96585ac3d6c7bcc450e173592211238cdc0ee0/docs/diagnostics/sic-dc22-phased-obligations-receipt.json)
 
+Le candidat `fb8d6913` a ensuite été vérifié par deux rejeux ciblés. Son nominal retrouve les 187 effets et les quatre empreintes DC22 archivés ici. Substituer le retour T13 à la fermeture T14 fait refuser le même ACTION2 avant le ticket T15. [Qualification ciblée de l'enfant de fermeture](sic-banc-dc22-phase-child-fb8d6913.md)
+
 ## Témoins sur le SHA commun
 
 | Épreuve | Verdict sur 703cd1c3 |
