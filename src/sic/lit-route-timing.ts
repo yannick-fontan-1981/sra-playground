@@ -1,4 +1,5 @@
 import type { NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { inferWitnessedSuffixCycle, type WitnessedCycle } from './witnessed-cycle.ts';
 
 export type LightTiming = {
   samples: string[];
@@ -6,6 +7,7 @@ export type LightTiming = {
   period: number;
   waitTicks: number;
   stopped: boolean;
+  transientEvidence?: Pick<WitnessedCycle<string>, 'onset' | 'witnesses'>;
 };
 export type LightRoute = { point: NativePoint; route: NativePoint[] };
 type TimedStep = LightRoute & { wait?: true };
@@ -38,7 +40,7 @@ export function exposureMask(rows: NativeRows, view: View, pitch: number): strin
 }
 
 export function collectLightTiming(timing: LightTiming | null, before: NativeRows, after: NativeRows, frames: readonly NativeRows[],
-  view: View, pitch: number): LightTiming | null {
+  view: View, pitch: number, allowWitnessedTransient = false): LightTiming | null {
   if (frames.length < 4 || frames.some(rows => rows[1]?.[1] !== view.walls)) return null;
   const observed = frames.map(rows => exposureMask(rows, view, pitch));
   const ticks = observed.length - 2;
@@ -52,6 +54,15 @@ export function collectLightTiming(timing: LightTiming | null, before: NativeRow
   for (let length = 2; length + confirmation <= samples.length; length++) {
     if (samples[length] !== origin || !samples.slice(0, length).some(mask => mask !== origin)) continue;
     if (samples.every((mask, i) => i < length || mask === samples[i - length])) { period = length; break; }
+  }
+  if (!period && allowWitnessedTransient) {
+    const cycle = inferWitnessedSuffixCycle(samples);
+    if (cycle) {
+      const { onset, phases, witnesses } = cycle;
+      const rotated = phases.map((_, index) => phases[(index - onset % phases.length + phases.length) % phases.length]!);
+      return { samples: rotated, elapsed: samples.length - 1, period: phases.length, waitTicks: ticks, stopped: false,
+        transientEvidence: { onset, witnesses } };
+    }
   }
   return { samples: period ? samples.slice(0, period) : samples, elapsed: samples.length - 1,
     period, waitTicks: ticks, stopped: !period && samples.length >= 320 };

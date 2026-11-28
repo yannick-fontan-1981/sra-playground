@@ -1,5 +1,6 @@
 import { configuredCrosses, configuredDistances, configuredPatch, configuredRoute, configuredTrajectories, type ConfiguredScene } from '../logos-engine/v6-configured-arrivals.ts';
 import type { NativeRows } from '../logos-engine/v6-native-types.ts';
+import { inferWitnessedSuffixCycle, type WitnessedCycle } from './witnessed-cycle.ts';
 
 type Point = [number, number];
 type Gate = { point: Point; open: boolean; mark: string };
@@ -8,7 +9,8 @@ export type GateEffects = Readonly<Record<string, Point[]>>;
 type ClockMark = { point: Point; mark: string };
 export type TimedNetwork = { gates: Gate[]; pads: Map<string, string>; clocks: Map<string, ClockMark>; nodes: Set<string> };
 export type ArrivalTiming = { orders: Point[][]; delays: Record<string, number>; observed: (number | null)[];
-  clocks?: Record<string, boolean[]> };
+  clocks?: Record<string, boolean[]>; clockPrefixes?: Record<string, (boolean | null)[]>;
+  clockEvidence?: Record<string, Pick<WitnessedCycle<boolean>, 'onset' | 'witnesses'>> };
 const key = (point: Point) => point.join(',');
 const oneStep = (from: string, to: string, pitch: number) => {
   const [x, y] = from.split(',').map(Number) as Point, [u, v] = to.split(',').map(Number) as Point;
@@ -94,7 +96,8 @@ function clockCycle(samples: readonly (boolean | null)[]): boolean[] | null {
   return null;
 }
 
-function arrivalTicks(path: readonly Point[], network: TimedNetwork, timing: Pick<ArrivalTiming, 'delays' | 'clocks'>): number[] | null {
+function arrivalTicks(path: readonly Point[], network: TimedNetwork,
+  timing: Pick<ArrivalTiming, 'delays' | 'clocks' | 'clockPrefixes'>): number[] | null {
   const ticks = [0];
   for (let i = 1; i < path.length; i++) {
     const pad = network.pads.get(key(path[i - 1]!)), dwell = pad ? timing.delays[pad] : 0;
@@ -103,7 +106,13 @@ function arrivalTicks(path: readonly Point[], network: TimedNetwork, timing: Pic
     const destination = key(path[i]!), cycle = timing.clocks?.[destination];
     if (network.clocks.has(destination)) {
       if (!cycle?.includes(true)) return null;
-      while (!cycle[attempted % cycle.length]) attempted++;
+      const prefix = timing.clockPrefixes?.[destination] ?? [];
+      while (attempted < prefix.length && prefix[attempted] === false) attempted++;
+      if (attempted < prefix.length) {
+        if (prefix[attempted] !== true) return null;
+      } else {
+        while (!cycle[(attempted - prefix.length) % cycle.length]) attempted++;
+      }
     }
     ticks.push(attempted);
   }
@@ -111,17 +120,28 @@ function arrivalTicks(path: readonly Point[], network: TimedNetwork, timing: Pic
 }
 
 function measureClockedTiming(scene: ConfiguredScene, network: TimedNetwork, frames: readonly NativeRows[], baseline: number,
-  paths: ReturnType<typeof configuredTrajectories>, inherited?: Readonly<Record<string, number>>): ArrivalTiming | null {
+  paths: ReturnType<typeof configuredTrajectories>, inherited: Readonly<Record<string, number>> | undefined,
+  allowWitnessedTransient: boolean): ArrivalTiming | null {
   const last = Math.max(...[...paths.values()].map(([, times]) => times.at(-1)!));
   const ticks = frames.slice(0, last + 1).filter((_, index) => index % baseline === 0);
   const clocks: Record<string, boolean[]> = {};
+  const clockPrefixes: NonNullable<ArrivalTiming['clockPrefixes']> = {};
+  const clockEvidence: NonNullable<ArrivalTiming['clockEvidence']> = {};
   for (const [id, { point, mark }] of network.clocks) {
-    const cycle = clockCycle(ticks.map(frame => {
+    const samples = ticks.map(frame => {
       const appearance = clockAppearance(scene, configuredPatch(frame, point).flat());
       return appearance?.mark === mark ? appearance.open : null;
-    }));
+    });
+    const steady = clockCycle(samples);
+    if (steady) {
+      clocks[id] = steady;
+      continue;
+    }
+    const cycle = allowWitnessedTransient ? inferWitnessedSuffixCycle(samples) : undefined;
     if (!cycle) return null;
-    clocks[id] = cycle;
+    clocks[id] = cycle.phases;
+    clockPrefixes[id] = samples.slice(0, cycle.onset);
+    clockEvidence[id] = { onset: cycle.onset, witnesses: cycle.witnesses };
   }
   const [pitch, left, top] = scene.grid;
   const positions = ticks.map(frame => configuredCrosses(frame)
@@ -149,7 +169,7 @@ function measureClockedTiming(scene: ConfiguredScene, network: TimedNetwork, fra
   const distances = configuredDistances(network.nodes, scene.target, pitch);
   const compatible = orders.filter(order => scene.actors.every(([, x, y], i) => {
     const path = configuredRoute(network.nodes, [x, y], scene.target, order, pitch, distances);
-    const dates = path && arrivalTicks(path, network, { delays, clocks });
+    const dates = path && arrivalTicks(path, network, { delays, clocks, clockPrefixes });
     if (!path || !dates || traces[i]!.filter(Boolean).length < 2) return false;
     let position = 0;
     return traces[i]!.every((observed, tick) => {
@@ -162,7 +182,8 @@ function measureClockedTiming(scene: ConfiguredScene, network: TimedNetwork, fra
     const frame = paths.get(color)?.[1].at(-1);
     return frame === undefined ? null : frame / baseline;
   });
-  return { orders: compatible, delays, observed, clocks };
+  return { orders: compatible, delays, observed, clocks,
+    ...(Object.keys(clockPrefixes).length ? { clockPrefixes, clockEvidence } : {}) };
 }
 
 function visiblePrefixes(scene: ConfiguredScene, frames: readonly NativeRows[]): Map<number, Point[]> {
@@ -196,7 +217,7 @@ function prefixDelay(network: TimedNetwork, delays: Readonly<Record<string, numb
 }
 
 export function measureArrivalTiming(scene: ConfiguredScene, network: TimedNetwork, frames: readonly NativeRows[],
-  inherited?: Readonly<Record<string, number>>): ArrivalTiming | null {
+  inherited?: Readonly<Record<string, number>>, allowWitnessedTransient = false): ArrivalTiming | null {
   const paths = configuredTrajectories(scene, frames);
   const partial = paths.size !== scene.actors.length;
   if (!paths.size || partial && !inherited && !network.clocks.size) return null;
@@ -209,7 +230,7 @@ export function measureArrivalTiming(scene: ConfiguredScene, network: TimedNetwo
   }
   const baseline = [...intervals].sort((a, b) => b[1] - a[1] || a[0] - b[0])[0]?.[0];
   if (!baseline) return null;
-  if (network.clocks.size) return measureClockedTiming(scene, network, frames, baseline, paths, inherited);
+  if (network.clocks.size) return measureClockedTiming(scene, network, frames, baseline, paths, inherited, allowWitnessedTransient);
   const delays: Record<string, number> = {};
   for (const [path, times] of paths.values()) {
     for (let i = 0; i < times.length - 1; i++) {

@@ -84,7 +84,7 @@ function confirmedGateEdit(proposal: Proposal, changed: Point[] | null): boolean
     && expected.every(point => changed.some(other => key(other) === key(point)));
 }
 
-export function createSicVerifySharedArrival(): NativeFamily<Proposal> {
+export function createSicVerifySharedArrival(allowWitnessedTransient = false): NativeFamily<Proposal> {
   let state = empty();
   let decide: NativeProgramHandle | undefined;
   return {
@@ -150,6 +150,7 @@ export function createSicVerifySharedArrival(): NativeFamily<Proposal> {
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
         sicSituationCard: { strategy, need: timed ? 'Synchronize arrivals at the common receiver' : 'Find how both pieces can reach the common receiver', mode,
+          ...(timed && local.timing?.clockEvidence ? { witnessedTransientCycle: true } : {}),
           situation: condition,
           agenda: [], evidence, triggerCard: decision.receipt.workflow,
           subjects: [...scene.actors.map(([, x, y]) => neighborhood([x, y])), neighborhood(scene.target),
@@ -186,7 +187,7 @@ export function createSicVerifySharedArrival(): NativeFamily<Proposal> {
         if (proposal.timed) {
           const scene = configuredScene(first, proposal.grid);
           const network = scene && timedNetwork(scene);
-          const timing = scene && network && measureArrivalTiming(scene, network, frames, state.transfer?.delays);
+          const timing = scene && network && measureArrivalTiming(scene, network, frames, state.transfer?.delays, allowWitnessedTransient);
           if (timing && state.timing) {
             const previous = state.timing;
             const valid = timing.orders.filter(order => previous.orders.some(candidate => String(candidate) === String(order)));

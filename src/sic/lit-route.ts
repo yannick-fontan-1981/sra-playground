@@ -157,7 +157,7 @@ function checkedPhase(clock: LightTiming, { scene, plan }: Proposal, rows: Nativ
     ? { ...clock, elapsed } : null;
 }
 
-export function createSicLitRoute(family = litRouteId): NativeFamily<Proposal> {
+export function createSicLitRoute(family = litRouteId, allowWitnessedTransient = false): NativeFamily<Proposal> {
   const learns = family === learnLitRouteId;
   let memory: Memory | null = null;
   let observation: Scene | null = null;
@@ -229,6 +229,7 @@ export function createSicLitRoute(family = litRouteId): NativeFamily<Proposal> {
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
         sicSituationCard: { strategy, need: 'Reach the exit past the changing light', situation, evidence, agenda: navigation?.entries ?? [],
+          ...(plan.timed && timing?.transientEvidence ? { witnessedTransientCycle: true } : {}),
           mode, triggerCard: navigation?.card ?? decision?.receipt.workflow, actor: box(scene.actor), focus: box(plan.target),
           goal: box(scene.goal), light: scene.litBox, ...(scene.guards ? { patrols: scene.guards.boxes } : {}) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
@@ -276,7 +277,7 @@ export function createSicLitRoute(family = litRouteId): NativeFamily<Proposal> {
       let timingObserved = false, recovery = local.recovery;
       if (scene.guards && plan.wait && !plan.timed) {
         const view = { ...scene, guardInk: scene.guards.ink };
-        timing = reached ? collectLightTiming(clock, first, second, frames, view, pitch) : null;
+        timing = reached ? collectLightTiming(clock, first, second, frames, view, pitch, allowWitnessedTransient) : null;
         timingObserved = timing !== null;
         if (!timing && (clock || frames.length > 0)) {
           const samples = [...(clock?.samples ?? []), ...frames.filter(rows => rows[1]?.[1] === scene.walls)

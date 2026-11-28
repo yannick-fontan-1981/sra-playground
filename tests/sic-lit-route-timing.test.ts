@@ -29,6 +29,22 @@ test('samples a repeat across waits without counting the duplicate idle frame', 
   assert.equal(clock?.samples.length, 5);
 });
 
+test('binds a witnessed light cycle to its actual phase after an initial transient', () => {
+  const phase = (at: number) => at < 3 ? frame([8 + at, 6]) : frame([3 + (at - 3) % 3, 5]);
+  let baseline: LightTiming | null = null;
+  let active: LightTiming | null = null;
+  for (let at = 0; at < 12; at += 4) {
+    const before = phase(at), after = phase(at + 4);
+    const frames = [before, phase(at + 1), phase(at + 2), phase(at + 3), after, after];
+    baseline = collectLightTiming(baseline, before, after, frames, view, pitch);
+    active = collectLightTiming(active, before, after, frames, view, pitch, true);
+  }
+  assert.equal(baseline?.period, 0);
+  assert.equal(active?.period, 3);
+  assert.deepEqual(active?.transientEvidence, { onset: 3, witnesses: [4, 3, 3] });
+  assert.equal(active?.samples[(active?.elapsed ?? 0) % 3], exposureMask(phase(12), view, pitch));
+});
+
 test('waits when an intermediate footprint is exposed even if the destination will be clear', () => {
   const dark = exposureMask(frame(), view, pitch), blocked = exposureMask(frame([4, 2]), view, pitch);
   const timing = { elapsed: 0, period: 6, waitTicks: 2, samples: [dark, blocked, dark, dark, dark, dark], stopped: false };

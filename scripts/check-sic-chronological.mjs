@@ -82,6 +82,7 @@ async function run(code,requestedTarget,parallelWorkers) {
   const preferTransportUndo = process.env.SIC_SOURCE_TRANSPORT_UNDO === '1';
   const preferShorterCoverage = process.env.SIC_SOURCE_SHORTEST_COVERAGE === '1';
   const allowUnframedContact = process.env.SIC_SOURCE_UNFRAMED_CONTACT === '1';
+  const allowWitnessedTransient = process.env.SIC_SOURCE_WITNESSED_TRANSIENT === '1';
   const sealedCoverageQualified = process.env.SIC_SEALED_COVERAGE_QUALIFIED === '1';
   if (preferTransportUndo && sourceArm !== 'active') throw new Error('Transport undo requires the active comparison arm.');
   if (preferShorterCoverage && (sourceArm !== 'active'
@@ -91,9 +92,13 @@ async function run(code,requestedTarget,parallelWorkers) {
   if (allowUnframedContact && (sourceArm !== 'active' || /^SS(?:0[89]|1\d|2[0-5])$/.test(code))) {
     throw new Error('Unframed contact hypotheses require an authorized source comparison.');
   }
+  if (allowWitnessedTransient && (sourceArm !== 'active' || /^SS(?:0[89]|1\d|2[0-5])$/.test(code))) {
+    throw new Error('Witnessed transient comparisons require an authorized source.');
+  }
   let solver;const service=new V6AgentService(async recovery=>(solver=await createNativeV6Runtime({common,strategy},{recovery,
     ...(preferShorterCoverage ? { preferShorterCoverage: true } : {}),
     ...(allowUnframedContact ? { allowUnframedContact: true } : {}),
+    ...(allowWitnessedTransient ? { allowWitnessedTransient: true } : {}),
     ...(preferTransportUndo ? { preferTransportUndo: true } : {})})));
   const evidence = process.env.SIC_SOURCE_COMPOSER_EVIDENCE === '1' ? new Map() : null;
   const seenEvidence = new Set();
@@ -150,6 +155,11 @@ async function run(code,requestedTarget,parallelWorkers) {
       if (card?.unframedContactHypothesis) {
         const key = JSON.stringify([previous.level, 'test_unframed_contact_hypothesis']);
         if (!sourceDecisions.has(key)) sourceDecisions.set(key, { level: previous.level, strategy: 'test_unframed_contact_hypothesis',
+          firstTurn: effects.length + 1, action: action.id });
+      }
+      if (card?.witnessedTransientCycle) {
+        const key = JSON.stringify([previous.level, 'use_witnessed_transient_cycle']);
+        if (!sourceDecisions.has(key)) sourceDecisions.set(key, { level: previous.level, strategy: 'use_witnessed_transient_cycle',
           firstTurn: effects.length + 1, action: action.id });
       }
       if (captureRivals) recordRivals(previous, action, board, effects.length + 1);
