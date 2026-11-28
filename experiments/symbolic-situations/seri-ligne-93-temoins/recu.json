@@ -1,0 +1,89 @@
+{
+  "sha": {
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "candidat": "eb5611b3ff76409fbd67680ac29a5f6a17586422"
+  },
+  "stats": {
+    "departsParSha": 5,
+    "gestesParSha": 29,
+    "testsComplementairesCandidat": 19
+  },
+  "nominal": {
+    "plan": [
+      3,
+      4,
+      5
+    ],
+    "gabarit": [
+      5,
+      3,
+      4,
+      5
+    ]
+  },
+  "doublon": {
+    "gel": {
+      "plan": [
+        3,
+        3,
+        5
+      ],
+      "gabarit": [
+        5,
+        3,
+        3,
+        5
+      ]
+    },
+    "candidat": {
+      "plan": [
+        2,
+        3,
+        5
+      ],
+      "gabarit": [
+        5,
+        2,
+        3,
+        5
+      ]
+    }
+  },
+  "doublonInverse": {
+    "plan": [
+      3,
+      4,
+      5
+    ],
+    "gabarit": [
+      5,
+      3,
+      4,
+      5
+    ]
+  },
+  "retrait": {
+    "plan": null,
+    "gabarit": [
+      5
+    ]
+  },
+  "premierClic": {
+    "x": 46,
+    "y": 54
+  },
+  "retourIdentique": "observed_row_completion",
+  "reprise": {
+    "plan": [
+      4,
+      6,
+      5
+    ],
+    "gabarit": [
+      6,
+      4,
+      6,
+      5
+    ]
+  }
+}
