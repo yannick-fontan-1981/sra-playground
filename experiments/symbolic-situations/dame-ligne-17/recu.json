@@ -1,0 +1,27 @@
+{
+  "stats": {
+    "versions": 2,
+    "départsParVersion": 6,
+    "gestesParVersion": 35,
+    "catalogue": 16,
+    "niveauxTerminés": 2
+  },
+  "relation": {
+    "clé": "78c31cec6c37",
+    "preuve": "dame-17:epoch:1:revision:3:frame:ae48374ae7f44c99",
+    "populationAvant": 5,
+    "populationAprès": 4,
+    "n1SansRelation": "probe",
+    "n2NombrePas": [
+      8,
+      1
+    ]
+  },
+  "repliSansIntermédiaire": [
+    "ACTION6",
+    {
+      "x": 24,
+      "y": 26
+    }
+  ]
+}

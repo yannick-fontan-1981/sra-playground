@@ -1,0 +1,22 @@
+{
+  "stats": {
+    "versions": 2,
+    "départsParVersion": 5,
+    "gestesParVersion": 25,
+    "testsParVersion": 3,
+    "gestesCatalogue": 16,
+    "occurrencesLigne": 8,
+    "niveauxTerminés": 1
+  },
+  "coupure": {
+    "masqués": 8,
+    "appuiRetiré": "4,3",
+    "appuiTémoin": "1,2",
+    "retourAuthentique": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:b4ccdb6a21abe7db",
+    "coupSansPreuve": "ACTION1",
+    "reprise": {
+      "x": 29,
+      "y": 19
+    }
+  }
+}
