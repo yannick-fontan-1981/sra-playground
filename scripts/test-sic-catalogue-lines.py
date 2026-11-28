@@ -14,6 +14,8 @@ cases = {
              ["docs/migration/native-campaigns-v52/final/gare-public-trace.json.gz", "tests/fixtures/sic-gare-alternate-returns.json.gz"]),
     "LIFE": ("f005be662b0e4b556a0cea3d246381cd98eec7ae", "life-three-lines", "sic-observe-life-material",
              ["docs/migration/native-campaigns-v50/life-public-trace-final.json.gz", "tests/fixtures/sic-life-alternate-returns.json.gz"]),
+    "WA30": ("14a185d909d3b3cb42fcc8584b841865b8ff6dd0", "wa30-contact-lines", "sic-observe-wa30-contacts",
+             ["docs/migration/native-campaigns-v54/baseline-wa30/wa30-public-trace.json.gz", "tests/fixtures/sic-wa30-alternate-returns.json.gz"]),
     "TICT": ("e8df1757272cae3da1669b3e7ddb2e7bf65e8e02", "cell-placement-positive-41", "sic-observe-tict-placement",
              ["docs/migration/native-campaigns-v46/tict-public-trace.json.gz"]),
     "SP80": ("bb4a99b5ba41531eb70f1dccb6a97a919cefec56", "sp80-two-lines", "sic-observe-sp80-routing",
@@ -40,6 +42,13 @@ for rev, paths in [(revision, ["src", "package.json", "reference/v6/786dcf51ca57
                    (proof, ["scripts/sic-study-source-games.mjs", test, *fixtures])]:
     with ZipFile(io.BytesIO(git("archive", "--format=zip", rev, *paths))) as archive:
         archive.extractall(engine)
+if args.game == "WA30":
+    # Replay the fallback against the game using the same expected return as the substituted site.
+    source = engine / test
+    text = source.read_text(encoding="utf8")
+    fallback = "const game = await start(19), record = t.mock.method(EffectAccess.prototype, 'record');"
+    assert text.count(fallback) == 1
+    source.write_text(text.replace(fallback, fallback.replace("start(19)", "start(19, true)")), encoding="utf8", newline="\n")
 mount(args.game_root.resolve() / "public", engine / "public")
 env = {**os.environ, name + "GAME_ROOT": str(engine), name + "ENGINE_ROOT": str(engine),
        name + "RECEIPT": str(out / (revision[:8] + ".json"))}

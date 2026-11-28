@@ -1,0 +1,296 @@
+{
+  "line26": {
+    "invitation": {
+      "owner": "OrientedCoupling",
+      "kind": "front_contour_invitation",
+      "evidence": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:b52a3a5c417adf46"
+    },
+    "interaction": {
+      "kind": "ticket",
+      "turn": 3,
+      "level": 1,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:3",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:b52a3a5c417adf46",
+      "owner": "oriented_coupling",
+      "offer": "conditional_oriented_coupling",
+      "action": "ACTION5",
+      "point": {},
+      "proof": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:b52a3a5c417adf46",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:7b51378789bb5854",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:b52a3a5c417adf46"
+      ],
+      "expected": null,
+      "guard": "current_controller_part_masks_and_orientation"
+    },
+    "translation": {
+      "owner": "OrientedCoupling",
+      "kind": "public_rigid_pair_translation",
+      "evidence": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:51647f32f718474a",
+      "delta": [
+        0,
+        -1
+      ]
+    },
+    "catalogueOccurrences": 13
+  },
+  "line31": {
+    "nominal": [
+      {
+        "kind": "ticket",
+        "turn": 16,
+        "level": 1,
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:16",
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:16:frame:27d10e9e3921fa91",
+        "owner": "pre_score_contact",
+        "offer": "observed_effect_access",
+        "action": "ACTION1",
+        "point": {},
+        "proof": [],
+        "site": [
+          36,
+          29
+        ],
+        "alternatives": [
+          {
+            "site": [
+              36,
+              29
+            ],
+            "action_ref": "ACTION1"
+          },
+          {
+            "site": [
+              32,
+              33
+            ],
+            "action_ref": "ACTION3"
+          }
+        ],
+        "trial": "40bb0347602cec93f80d75a50798bd5a81f18e9b7516cc931437875a4a0b68c7",
+        "contactProof": [],
+        "expected": null,
+        "guard": "bound_role_and_destination_match"
+      },
+      {
+        "kind": "return",
+        "turn": 16,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:17:frame:27d10e9e3921fa91",
+        "owner": "pre_score_contact",
+        "reason": "experimental_contact_observed",
+        "matched": null,
+        "changed": 0,
+        "packet": "8601071a4e8be64430f39e6c2601a4c5f841aee80bb7553f8cc42ca4ff27958f",
+        "acquisitions": [
+          {
+            "owner": "EffectAccess",
+            "kind": "pre_score_effect_contact",
+            "before": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:16:frame:27d10e9e3921fa91",
+            "after": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:17:frame:27d10e9e3921fa91",
+            "trial": "40bb0347602cec93f80d75a50798bd5a81f18e9b7516cc931437875a4a0b68c7",
+            "role": "e5255537318ea4abe51742ceead137dd10d81140d07597324659e79b2270bbee",
+            "action": "ACTION1",
+            "status": "measured",
+            "expected": [],
+            "matched": [],
+            "scoreDelta": 0,
+            "vector": [
+              0,
+              -4
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "ticket",
+        "turn": 17,
+        "level": 1,
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:17",
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:17:frame:27d10e9e3921fa91",
+        "owner": "pre_score_contact",
+        "offer": "observed_effect_access",
+        "action": "ACTION3",
+        "point": {},
+        "proof": [],
+        "site": [
+          32,
+          33
+        ],
+        "alternatives": [
+          {
+            "site": [
+              32,
+              33
+            ],
+            "action_ref": "ACTION3"
+          }
+        ],
+        "trial": "afb4e258a2a77b34d15c512ac55bff916dd0551caf76b62bdee5743a41a07742",
+        "contactProof": [],
+        "expected": null,
+        "guard": "bound_role_and_destination_match"
+      },
+      {
+        "kind": "return",
+        "turn": 17,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:18:frame:d527727bbd35e656",
+        "owner": "pre_score_contact",
+        "reason": "experimental_contact_observed",
+        "matched": null,
+        "changed": 44,
+        "packet": "8c5754b0091a7f4ef837d4bb2ddfe50c2d4eadac96d6812f594faec5c66e44bb",
+        "acquisitions": [
+          {
+            "owner": "EffectAccess",
+            "kind": "pre_score_effect_contact",
+            "before": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:17:frame:27d10e9e3921fa91",
+            "after": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:18:frame:d527727bbd35e656",
+            "trial": "afb4e258a2a77b34d15c512ac55bff916dd0551caf76b62bdee5743a41a07742",
+            "role": "e5255537318ea4abe51742ceead137dd10d81140d07597324659e79b2270bbee",
+            "action": "ACTION3",
+            "status": "measured",
+            "expected": [],
+            "matched": [],
+            "scoreDelta": 0,
+            "vector": [
+              -4,
+              0
+            ]
+          }
+        ]
+      }
+    ],
+    "substitution": [
+      {
+        "kind": "ticket",
+        "turn": 16,
+        "level": 1,
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:16",
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:16:frame:27d10e9e3921fa91",
+        "owner": "pre_score_contact",
+        "offer": "observed_effect_access",
+        "action": "ACTION3",
+        "point": {},
+        "proof": [],
+        "site": [
+          32,
+          33
+        ],
+        "alternatives": [
+          {
+            "site": [
+              36,
+              29
+            ],
+            "action_ref": "ACTION1"
+          },
+          {
+            "site": [
+              32,
+              33
+            ],
+            "action_ref": "ACTION3"
+          }
+        ],
+        "trial": "afb4e258a2a77b34d15c512ac55bff916dd0551caf76b62bdee5743a41a07742",
+        "contactProof": [],
+        "expected": null,
+        "guard": "bound_role_and_destination_match"
+      },
+      {
+        "kind": "return",
+        "turn": 16,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:17:frame:d527727bbd35e656",
+        "owner": "pre_score_contact",
+        "reason": "experimental_contact_observed",
+        "matched": null,
+        "changed": 44,
+        "packet": "1dbdfc41ce02d867c35bdca4edfcd050c074fae0265bf14a8682b30ad1760261",
+        "acquisitions": [
+          {
+            "owner": "EffectAccess",
+            "kind": "pre_score_effect_contact",
+            "before": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:16:frame:27d10e9e3921fa91",
+            "after": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:17:frame:d527727bbd35e656",
+            "trial": "afb4e258a2a77b34d15c512ac55bff916dd0551caf76b62bdee5743a41a07742",
+            "role": "e5255537318ea4abe51742ceead137dd10d81140d07597324659e79b2270bbee",
+            "action": "ACTION3",
+            "status": "measured",
+            "expected": [],
+            "matched": [],
+            "scoreDelta": 0,
+            "vector": [
+              -4,
+              0
+            ]
+          }
+        ]
+      }
+    ],
+    "withdrawal": [
+      {
+        "kind": "ticket",
+        "turn": 16,
+        "level": 1,
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:16",
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:16:frame:27d10e9e3921fa91",
+        "owner": "oriented_coupling",
+        "offer": "conditional_oriented_coupling",
+        "action": "ACTION3",
+        "point": {},
+        "proof": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:16:frame:27d10e9e3921fa91",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:13:frame:06f2e3e10248b7bd",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:14:frame:ea6623a74ce5c527",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:15:frame:d13b98840bb620bd",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:16:frame:27d10e9e3921fa91"
+        ],
+        "expected": {
+          "pose": [
+            8,
+            8
+          ],
+          "face": [
+            -1,
+            0
+          ],
+          "boxes": [
+            [
+              4,
+              7
+            ],
+            [
+              8,
+              7
+            ],
+            [
+              9,
+              7
+            ]
+          ],
+          "held": null
+        },
+        "guard": "current_controller_part_masks_and_orientation"
+      },
+      {
+        "kind": "return",
+        "turn": 16,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:17:frame:d527727bbd35e656",
+        "owner": "oriented_coupling",
+        "reason": "conditional_rigid_coupling_prediction",
+        "matched": true,
+        "changed": 44,
+        "packet": "1dbdfc41ce02d867c35bdca4edfcd050c074fae0265bf14a8682b30ad1760261",
+        "acquisitions": []
+      }
+    ],
+    "samePhysicalPacket": "1dbdfc41ce02d867c35bdca4edfcd050c074fae0265bf14a8682b30ad1760261",
+    "catalogueOccurrences": 1
+  },
+  "commonSessions": 4,
+  "archiveSHA256": "96b7028284bae51acf0ff77af8e93a537a4a267a49b373b44013e7262b8e011f",
+  "operator": "592be70d",
+  "startedAt": "2026-11-27T22:12:58.284261-03:00",
+  "qualifiedAt": "2026-11-27T22:18:41.747182-03:00",
+  "elapsedSeconds": 343
+}
