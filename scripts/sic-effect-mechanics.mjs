@@ -12,11 +12,11 @@ const rules = {
 export const development = Object.keys(rules).slice(0, 6);
 export const reserved = Object.keys(rules).slice(6);
 
-export function generateMechanic(family, draw) {
+export function generateMechanic(family, draw, positiveCorpus = false) {
   const integer = (from, to) => from + draw(to - from + 1);
   const has = trait => rules[family].includes(trait);
-  const timed = has('time'), stages = integer(3, 5);
-  const negative = draw(5) === 0;
+  const timed = has('time'), stages = positiveCorpus ? integer(4, 7) : integer(3, 5);
+  const negative = !positiveCorpus && draw(5) === 0;
   const operations = [];
   const add = (name, declarations = {}) => operations.push({
     name, needs: 0, forbids: 0, held: 0, either: 0, adds: 0, clears: 0, breakDuring: 0,
@@ -80,6 +80,12 @@ export function generateMechanic(family, draw) {
   }
   return { family, timed, initialFacts, finalClear, finalFacts, stock, negative, operations,
     depth: Math.max(...prerequisiteDepths) };
+}
+
+export function mechanicSignature({ timed, initialFacts, finalClear, finalFacts, stock, operations }) {
+  const effects = operations.map(({ name, ticks, delay, window, ...condition }) =>
+    JSON.stringify(timed ? { ...condition, ticks, delay, window } : condition));
+  return JSON.stringify([timed, initialFacts, finalClear, finalFacts, stock, [...new Set(effects)].sort()]);
 }
 
 const covers = (facts, wanted) => (facts & wanted) === wanted;
@@ -182,6 +188,10 @@ function searchReplay(spec, greedy) {
   }
 }
 
+export function oracleMechanic(spec) {
+  return searchReplay(spec, false) ?? null;
+}
+
 export function compareMechanic(spec) {
   const initial = start(spec);
   const certificate = composePlan({
@@ -191,7 +201,7 @@ export function compareMechanic(spec) {
     budget: { commands: maxActions, states: 70000 },
   });
   const baseline = searchReplay(spec, true);
-  const oracle = searchReplay(spec, false);
+  const oracle = oracleMechanic(spec);
   const effects = certificate?.effects ?? [];
   let current = initial;
   for (const { action } of effects) {
@@ -203,5 +213,5 @@ export function compareMechanic(spec) {
   const commands = certificate && !invalid ? effects.length : null;
   const plan = commands === null ? null : effects.map(({ action, after }) =>
     ({ action: action.name, tick: after.tick, units: after.units }));
-  return { commands, baseline: baseline ?? null, oracle: oracle ?? null, invalid, plan };
+  return { commands, baseline: baseline ?? null, oracle, invalid, plan };
 }

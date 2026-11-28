@@ -5,7 +5,7 @@ import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { setTimeout as pause } from 'node:timers/promises';
 import { parseArgs } from 'node:util';
-import { compareMechanic, development, generateMechanic, reserved } from './sic-effect-mechanics.mjs';
+import { compareMechanic, development, generateMechanic, mechanicSignature, oracleMechanic, reserved } from './sic-effect-mechanics.mjs';
 import { openQueue } from './sic-transfer-queue.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -13,8 +13,10 @@ const { values } = parseArgs({ options: {
   count: { type: 'string', default: '10000' },
   seed: { type: 'string', default: '261125' },
   state: { type: 'string', default: join(root, 'artifacts', 'sic-effect-composer') },
+  'positive-corpus': { type: 'boolean', default: false },
 } });
 const count = Number(values.count), seed = Number(values.seed);
+const positiveCorpus = values['positive-corpus'];
 if (!Number.isInteger(count) || count < 1) throw new Error('Invalid comparison count');
 if (!Number.isInteger(seed) || seed < 0 || seed >= 2 ** 32) throw new Error('Invalid seed');
 const directory = resolve(values.state);
@@ -28,7 +30,8 @@ for (const file of ['src/sic/effect-composer.ts', 'scripts/sic-effect-mechanics.
   fingerprint.update(readFileSync(join(root, file)));
 }
 const revision = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
-const configuration = { protocol: 'effect-composer-2', count, seed, revision, fingerprint: fingerprint.digest('hex'), stages };
+const configuration = { protocol: positiveCorpus ? 'P09-positive-corpus' : 'effect-composer-2',
+  count, seed, revision, fingerprint: fingerprint.digest('hex'), stages };
 mkdirSync(directory, { recursive: true });
 const queue = openQueue(join(directory, 'comparisons.sqlite'), configuration);
 const owner = randomUUID();
@@ -43,13 +46,15 @@ function* generate({ families, count, stage }, used) {
   }
   for (let index = 0; index < count; index++) {
     const family = families[index % families.length];
-    let spec, key, tries = 0;
+    let spec, key, tries = 0, duplicate;
     do {
       if (++tries > 10_000) throw new Error('Generator exhausted structural variations for ' + family);
-      spec = generateMechanic(family, draw);
+      spec = generateMechanic(family, draw, positiveCorpus);
       const byName = [...spec.operations].sort((a, b) => a.name.localeCompare(b.name));
-      key = createHash('sha256').update(JSON.stringify({ ...spec, operations: byName })).digest('hex');
-    } while (used.has(key));
+      const identity = positiveCorpus ? mechanicSignature(spec) : JSON.stringify({ ...spec, operations: byName });
+      key = createHash('sha256').update(identity).digest('hex');
+      duplicate = used.has(key) || positiveCorpus && oracleMechanic(spec) === null;
+    } while (duplicate);
     used.add(key);
     yield { spec, key };
   }
@@ -123,7 +128,7 @@ try {
   const { examples, ...totals } = stats;
   console.log(JSON.stringify({ ...totals, seconds: report.seconds }));
   if (count !== stats.tested || stats.invalid || stats.plannerMiss || stats.nonMinimum
-    || stats.negativeFeasible) process.exitCode = 1;
+    || stats.negativeFeasible || positiveCorpus && stats.feasible !== count) process.exitCode = 1;
 } finally {
   queue.release(owner);
   queue.close();
