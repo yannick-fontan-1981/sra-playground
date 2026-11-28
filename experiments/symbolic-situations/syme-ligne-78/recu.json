@@ -1,0 +1,84 @@
+{
+  "sha": {
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "candidat": "85194a499e1b81c4c26e418efbd171bf469d00d1"
+  },
+  "stats": {
+    "departsParSha": 8,
+    "gestesParSha": 18,
+    "recapturesSansGesteParSha": 2
+  },
+  "paires": 27,
+  "contrastes": 9,
+  "source": [
+    53,
+    33
+  ],
+  "clic": [
+    "ACTION6",
+    {
+      "x": 7,
+      "y": 35
+    }
+  ],
+  "valeurs": [
+    9,
+    8
+  ],
+  "valeurPhysique": 9,
+  "retourSourceSubstitue": "no_unique_local_rewrite",
+  "retourContraire": {
+    "valeur": 0,
+    "contreExemple": true,
+    "suite": "information_goal"
+  },
+  "reparations": {
+    "options": [
+      [
+        {
+          "point": [
+            12,
+            32
+          ],
+          "to": 8
+        },
+        {
+          "point": [
+            32,
+            32
+          ],
+          "to": 8
+        }
+      ],
+      [
+        {
+          "point": [
+            12,
+            12
+          ],
+          "to": 9
+        },
+        {
+          "point": [
+            32,
+            12
+          ],
+          "to": 9
+        }
+      ]
+    ],
+    "intersection": [],
+    "unique": [
+      [
+        {
+          "point": [
+            12,
+            12
+          ],
+          "to": 9
+        }
+      ]
+    ]
+  },
+  "gainNominal": 9
+}

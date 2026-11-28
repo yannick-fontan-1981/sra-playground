@@ -1,0 +1,62 @@
+{
+  "sha": {
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "candidat": "01f8fd39e4f0813cdb273b4914d9d1cdc6a74b9b"
+  },
+  "stats": {
+    "departsParSha": 4,
+    "gestesParSha": 23
+  },
+  "tour2": {
+    "queue": [
+      2,
+      2,
+      0
+    ],
+    "permutation": [
+      0,
+      2,
+      2
+    ],
+    "suffixeNominal": 1,
+    "suffixePerdu": true
+  },
+  "tour3": {
+    "commande": [
+      "ACTION5",
+      {}
+    ],
+    "projection": [
+      {
+        "trace": [
+          "RIGHT",
+          "RIGHT",
+          "LEFT",
+          "LEFT"
+        ],
+        "survivors": 1
+      },
+      {
+        "trace": [
+          "LEFT",
+          "LEFT"
+        ],
+        "survivors": 3
+      }
+    ],
+    "paquet": "6c67dd9386e24415fca4617ea59c7247b760378976352fcd90d09b27d2de29d5",
+    "niveaux": 1,
+    "survivantsPhysiques": null
+  },
+  "stationnaire": {
+    "repli": [
+      "ACTION6",
+      {
+        "x": 10,
+        "y": 63
+      }
+    ],
+    "famille": "observed_frontier"
+  },
+  "gainsNominaux": 2
+}

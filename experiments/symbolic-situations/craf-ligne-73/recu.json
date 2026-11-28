@@ -1,0 +1,53 @@
+{
+  "sha": {
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "candidat": "c9737d9831a703611422fcf03af83e39dbfdc6d6"
+  },
+  "stats": {
+    "departsParSha": 6,
+    "gestesParSha": 44
+  },
+  "charges": [
+    11,
+    9
+  ],
+  "produit": 14,
+  "interventions": {
+    "produit": {
+      "conversion": 0,
+      "gainT9": 1
+    },
+    "operande": {
+      "conversion": 0,
+      "gainT9": 1
+    },
+    "stationnaire": {
+      "conversion": 0,
+      "gainT9": 0,
+      "repli": [
+        "ACTION6",
+        {
+          "x": 46,
+          "y": 14
+        }
+      ]
+    }
+  },
+  "methode": {
+    "acquiseT9": true,
+    "reemploieT10": [
+      "ACTION6",
+      {
+        "x": 4,
+        "y": 31
+      }
+    ],
+    "reemploieT11": [
+      "ACTION6",
+      {
+        "x": 47,
+        "y": 44
+      }
+    ]
+  }
+}
