@@ -79,7 +79,7 @@ async function play(game,arm,cap){
 }
 export async function run(group,root){
   const game=await sourceBackend(root);
-  const sets={nominal:[['nominal',16]],contrôles:[['doublon',6],['doublonInverse',6],['unSeulSansBorne',6],['stationnaire',2]]};
+  const sets={nominal:[['nominal',16]],contrôles:[['doublon',6],['doublonInverse',6],['unSeulSansBorne',6],['stationnaire',2]],intégration:[['doublon',6],['unSeulSansBorne',6]]};
   assert.ok(Object.hasOwn(sets,group));
   const result={};
   for(const [arm,cap] of sets[group])result[arm]=await play(game,arm,cap);

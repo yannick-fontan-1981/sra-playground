@@ -1,0 +1,841 @@
+{
+  "reçu": "e595f03f076bdc2cbde66326c6131aab8f33e843",
+  "candidat": "eb5611b3ff76409fbd67680ac29a5f6a17586422",
+  "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "empreintes": {
+    "gel": "1888af70a33583bf3a40c31ccb9c14e7bac1cbb50abccda74b70a29d46521bff",
+    "candidat": "90124c33c26b74142d918d70ff4e7c6a378320ea028f746a5149e1797cf90713"
+  },
+  "gelObservé": {
+    "doublon": {
+      "préfixe": [
+        {
+          "tour": 1,
+          "photo": "a3d9e5b6d56eb9f748d1aeb08b87e47ac5df4ebabf02c279692ba2eebecaaefe",
+          "niveau": 1,
+          "score": 0,
+          "commande": "ACTION6",
+          "point": {
+            "x": 41,
+            "y": 54
+          }
+        },
+        {
+          "tour": 2,
+          "photo": "c46636da0dbc3203cff9710ee7a349e5c1b3e68dff61dd259c3cfb8046f03e77",
+          "niveau": 1,
+          "score": 0,
+          "commande": "ACTION6",
+          "point": {
+            "x": 21,
+            "y": 55
+          }
+        },
+        {
+          "tour": 3,
+          "photo": "1038debe887eb3e4f85bb6edb1a94141729067aa7aed7fcb29737e3ade543fc0",
+          "niveau": 1,
+          "score": 0,
+          "commande": "ACTION6",
+          "point": {
+            "x": 31,
+            "y": 54
+          }
+        },
+        {
+          "tour": 4,
+          "photo": "f3f29b2ff30c263510be06da06567433ffb537ad9913782d635bd7d1ad1b5b04",
+          "niveau": 1,
+          "score": 0,
+          "commande": "ACTION6",
+          "point": {
+            "x": 41,
+            "y": 54
+          }
+        }
+      ],
+      "portée": [
+        {
+          "tour": 5,
+          "photo": "f9dc1654efbdf1c30feb83fa6dc511cce8672572c78e7060c67a4090f96e3578",
+          "niveau": 2,
+          "score": 1,
+          "arrêt": null,
+          "ticket": {
+            "command": "ACTION6",
+            "point": {
+              "x": 46,
+              "y": 54
+            },
+            "owner": "visual_sequences",
+            "kind": "public_visual_sequence",
+            "admitted": true,
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3",
+            "row": 0,
+            "rank": 5,
+            "plan": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:1038debe887eb3e4",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:1038debe887eb3e4",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ],
+            "gabarit": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:1038debe887eb3e4",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:1038debe887eb3e4",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ]
+          },
+          "retour": {
+            "owner": "visual_sequences",
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3",
+            "matched": null,
+            "sealed": true,
+            "physical": "f9dc1654efbdf1c30feb83fa6dc511cce8672572c78e7060c67a4090f96e3578",
+            "shown": "f9dc1654efbdf1c30feb83fa6dc511cce8672572c78e7060c67a4090f96e3578",
+            "preuve": {
+              "statut": "official_boundary",
+              "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3",
+              "préservée": null,
+              "remplie": null,
+              "attendu": "1b4691acdd5b6f703eda9190f837403a3b64440399f1299fcecc4382ed8471c3",
+              "observé": "30f162553d4ee3e1e74d1c8da083960e96292e1206cb700a9abda6605e984d67"
+            }
+          }
+        },
+        {
+          "tour": 6,
+          "photo": "a28780b3bcbe26a30376c4968357d4916dbaab847288beb4f40d8ed65003162b",
+          "niveau": 2,
+          "score": 1,
+          "arrêt": null,
+          "ticket": {
+            "command": "ACTION6",
+            "point": {
+              "x": 26,
+              "y": 54
+            },
+            "owner": "visual_sequences",
+            "kind": "public_visual_sequence",
+            "admitted": true,
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+            "row": 1,
+            "rank": 5,
+            "plan": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:f3f29b2ff30c2635",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ],
+            "gabarit": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:f3f29b2ff30c2635",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ]
+          },
+          "retour": {
+            "owner": "visual_sequences",
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+            "matched": null,
+            "sealed": true,
+            "physical": "a28780b3bcbe26a30376c4968357d4916dbaab847288beb4f40d8ed65003162b",
+            "shown": "a28780b3bcbe26a30376c4968357d4916dbaab847288beb4f40d8ed65003162b",
+            "preuve": {
+              "statut": "observed_row_completion",
+              "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "préservée": true,
+              "remplie": true,
+              "attendu": "5e9156ef36f4e6be7a4c6e136270b1cd97fbcacb5abab849d299cb5126a8175d",
+              "observé": "5e9156ef36f4e6be7a4c6e136270b1cd97fbcacb5abab849d299cb5126a8175d"
+            }
+          }
+        },
+        {
+          "tour": 7,
+          "photo": "243ec5da88e667ce264c7d0f27fbe9787298adde42790bfd86194d385680c59e",
+          "niveau": 2,
+          "score": 1,
+          "arrêt": null,
+          "ticket": {
+            "command": "ACTION6",
+            "point": {
+              "x": 16,
+              "y": 54
+            },
+            "owner": "visual_sequences",
+            "kind": "public_visual_sequence",
+            "admitted": true,
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+            "row": 2,
+            "rank": 5,
+            "plan": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ],
+            "gabarit": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ]
+          },
+          "retour": {
+            "owner": "visual_sequences",
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+            "matched": null,
+            "sealed": true,
+            "physical": "243ec5da88e667ce264c7d0f27fbe9787298adde42790bfd86194d385680c59e",
+            "shown": "243ec5da88e667ce264c7d0f27fbe9787298adde42790bfd86194d385680c59e",
+            "preuve": {
+              "statut": "observed_row_completion",
+              "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+              "préservée": true,
+              "remplie": true,
+              "attendu": "d14433c4df890b0ec8713b607221bd1c238f7f7048a08eddedc269f215d4f4c2",
+              "observé": "d14433c4df890b0ec8713b607221bd1c238f7f7048a08eddedc269f215d4f4c2"
+            }
+          }
+        }
+      ],
+      "journal": [
+        {
+          "statut": "observed_row_completion",
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:c46636da0dbc3203",
+          "question": "d039ff42fca46191e6df8fb5ab925f8bd538ae506d1265c13b5709e590e69285"
+        },
+        {
+          "statut": "observed_row_completion",
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:1038debe887eb3e4",
+          "question": "ee07948bc2d59460e6d312a5acefc7c88e5e0fb90d0d79eb85185047ee738b6f"
+        },
+        {
+          "statut": "observed_row_completion",
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:1038debe887eb3e4",
+          "question": "ee07948bc2d59460e6d312a5acefc7c88e5e0fb90d0d79eb85185047ee738b6f"
+        },
+        {
+          "statut": "official_boundary",
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3",
+          "question": "476b3d24b78d662a3f54224afd105776bf2093cd031019d262c8e5f65fcb1496"
+        }
+      ]
+    },
+    "unSeulSansBorne": {
+      "préfixe": [
+        {
+          "tour": 1,
+          "photo": "a3d9e5b6d56eb9f748d1aeb08b87e47ac5df4ebabf02c279692ba2eebecaaefe",
+          "niveau": 1,
+          "score": 0,
+          "commande": "ACTION6",
+          "point": {
+            "x": 41,
+            "y": 54
+          }
+        },
+        {
+          "tour": 2,
+          "photo": "c46636da0dbc3203cff9710ee7a349e5c1b3e68dff61dd259c3cfb8046f03e77",
+          "niveau": 1,
+          "score": 0,
+          "commande": "ACTION6",
+          "point": {
+            "x": 21,
+            "y": 55
+          }
+        },
+        {
+          "tour": 3,
+          "photo": "1038debe887eb3e4f85bb6edb1a94141729067aa7aed7fcb29737e3ade543fc0",
+          "niveau": 1,
+          "score": 0,
+          "commande": "ACTION6",
+          "point": {
+            "x": 31,
+            "y": 54
+          }
+        },
+        {
+          "tour": 4,
+          "photo": "f3f29b2ff30c263510be06da06567433ffb537ad9913782d635bd7d1ad1b5b04",
+          "niveau": 1,
+          "score": 0,
+          "commande": "ACTION6",
+          "point": {
+            "x": 41,
+            "y": 54
+          }
+        }
+      ],
+      "portée": [
+        {
+          "tour": 5,
+          "photo": "f9dc1654efbdf1c30feb83fa6dc511cce8672572c78e7060c67a4090f96e3578",
+          "niveau": 2,
+          "score": 1,
+          "arrêt": null,
+          "ticket": {
+            "command": "ACTION6",
+            "point": {
+              "x": 46,
+              "y": 54
+            },
+            "owner": "visual_sequences",
+            "kind": "public_visual_sequence",
+            "admitted": true,
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3",
+            "row": 0,
+            "rank": 5,
+            "plan": null,
+            "gabarit": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ]
+          },
+          "retour": {
+            "owner": "visual_sequences",
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3",
+            "matched": null,
+            "sealed": true,
+            "physical": "f9dc1654efbdf1c30feb83fa6dc511cce8672572c78e7060c67a4090f96e3578",
+            "shown": "f9dc1654efbdf1c30feb83fa6dc511cce8672572c78e7060c67a4090f96e3578",
+            "preuve": {
+              "statut": "official_boundary",
+              "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3",
+              "préservée": null,
+              "remplie": null,
+              "attendu": "1b4691acdd5b6f703eda9190f837403a3b64440399f1299fcecc4382ed8471c3",
+              "observé": "30f162553d4ee3e1e74d1c8da083960e96292e1206cb700a9abda6605e984d67"
+            }
+          }
+        },
+        {
+          "tour": 6,
+          "photo": "a28780b3bcbe26a30376c4968357d4916dbaab847288beb4f40d8ed65003162b",
+          "niveau": 2,
+          "score": 1,
+          "arrêt": null,
+          "ticket": {
+            "command": "ACTION6",
+            "point": {
+              "x": 26,
+              "y": 54
+            },
+            "owner": "visual_sequences",
+            "kind": "public_visual_sequence",
+            "admitted": true,
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+            "row": 1,
+            "rank": 5,
+            "plan": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:f3f29b2ff30c2635",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ],
+            "gabarit": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:f3f29b2ff30c2635",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ]
+          },
+          "retour": {
+            "owner": "visual_sequences",
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+            "matched": null,
+            "sealed": true,
+            "physical": "a28780b3bcbe26a30376c4968357d4916dbaab847288beb4f40d8ed65003162b",
+            "shown": "a28780b3bcbe26a30376c4968357d4916dbaab847288beb4f40d8ed65003162b",
+            "preuve": {
+              "statut": "observed_row_completion",
+              "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "préservée": true,
+              "remplie": true,
+              "attendu": "5e9156ef36f4e6be7a4c6e136270b1cd97fbcacb5abab849d299cb5126a8175d",
+              "observé": "5e9156ef36f4e6be7a4c6e136270b1cd97fbcacb5abab849d299cb5126a8175d"
+            }
+          }
+        },
+        {
+          "tour": 7,
+          "photo": "243ec5da88e667ce264c7d0f27fbe9787298adde42790bfd86194d385680c59e",
+          "niveau": 2,
+          "score": 1,
+          "arrêt": null,
+          "ticket": {
+            "command": "ACTION6",
+            "point": {
+              "x": 16,
+              "y": 54
+            },
+            "owner": "visual_sequences",
+            "kind": "public_visual_sequence",
+            "admitted": true,
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+            "row": 2,
+            "rank": 5,
+            "plan": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ],
+            "gabarit": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ]
+          },
+          "retour": {
+            "owner": "visual_sequences",
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+            "matched": null,
+            "sealed": true,
+            "physical": "243ec5da88e667ce264c7d0f27fbe9787298adde42790bfd86194d385680c59e",
+            "shown": "243ec5da88e667ce264c7d0f27fbe9787298adde42790bfd86194d385680c59e",
+            "preuve": {
+              "statut": "observed_row_completion",
+              "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+              "préservée": true,
+              "remplie": true,
+              "attendu": "d14433c4df890b0ec8713b607221bd1c238f7f7048a08eddedc269f215d4f4c2",
+              "observé": "d14433c4df890b0ec8713b607221bd1c238f7f7048a08eddedc269f215d4f4c2"
+            }
+          }
+        }
+      ],
+      "journal": [
+        {
+          "statut": "observed_row_completion",
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:1038debe887eb3e4",
+          "question": "ee07948bc2d59460e6d312a5acefc7c88e5e0fb90d0d79eb85185047ee738b6f"
+        },
+        {
+          "statut": "observed_row_completion",
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:1038debe887eb3e4",
+          "question": "ee07948bc2d59460e6d312a5acefc7c88e5e0fb90d0d79eb85185047ee738b6f"
+        },
+        {
+          "statut": "observed_row_completion",
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:1038debe887eb3e4",
+          "question": "ee07948bc2d59460e6d312a5acefc7c88e5e0fb90d0d79eb85185047ee738b6f"
+        }
+      ]
+    }
+  },
+  "correction": {
+    "doublon": {
+      "préfixe": [
+        {
+          "tour": 1,
+          "photo": "a3d9e5b6d56eb9f748d1aeb08b87e47ac5df4ebabf02c279692ba2eebecaaefe",
+          "niveau": 1,
+          "score": 0,
+          "commande": "ACTION6",
+          "point": {
+            "x": 41,
+            "y": 54
+          }
+        },
+        {
+          "tour": 2,
+          "photo": "c46636da0dbc3203cff9710ee7a349e5c1b3e68dff61dd259c3cfb8046f03e77",
+          "niveau": 1,
+          "score": 0,
+          "commande": "ACTION6",
+          "point": {
+            "x": 21,
+            "y": 55
+          }
+        },
+        {
+          "tour": 3,
+          "photo": "1038debe887eb3e4f85bb6edb1a94141729067aa7aed7fcb29737e3ade543fc0",
+          "niveau": 1,
+          "score": 0,
+          "commande": "ACTION6",
+          "point": {
+            "x": 31,
+            "y": 54
+          }
+        },
+        {
+          "tour": 4,
+          "photo": "f3f29b2ff30c263510be06da06567433ffb537ad9913782d635bd7d1ad1b5b04",
+          "niveau": 1,
+          "score": 0,
+          "commande": "ACTION6",
+          "point": {
+            "x": 41,
+            "y": 54
+          }
+        }
+      ],
+      "portée": [
+        {
+          "tour": 5,
+          "photo": "f9dc1654efbdf1c30feb83fa6dc511cce8672572c78e7060c67a4090f96e3578",
+          "niveau": 2,
+          "score": 1,
+          "arrêt": null,
+          "ticket": {
+            "command": "ACTION6",
+            "point": {
+              "x": 46,
+              "y": 54
+            },
+            "owner": "visual_sequences",
+            "kind": "public_visual_sequence",
+            "admitted": true,
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3",
+            "row": 0,
+            "rank": 5,
+            "plan": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:c46636da0dbc3203",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:1038debe887eb3e4",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ],
+            "gabarit": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:c46636da0dbc3203",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:1038debe887eb3e4",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ]
+          },
+          "retour": {
+            "owner": "visual_sequences",
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3",
+            "matched": null,
+            "sealed": true,
+            "physical": "f9dc1654efbdf1c30feb83fa6dc511cce8672572c78e7060c67a4090f96e3578",
+            "shown": "f9dc1654efbdf1c30feb83fa6dc511cce8672572c78e7060c67a4090f96e3578",
+            "preuve": {
+              "statut": "official_boundary",
+              "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3",
+              "préservée": null,
+              "remplie": null,
+              "attendu": "1b4691acdd5b6f703eda9190f837403a3b64440399f1299fcecc4382ed8471c3",
+              "observé": "30f162553d4ee3e1e74d1c8da083960e96292e1206cb700a9abda6605e984d67"
+            }
+          }
+        },
+        {
+          "tour": 6,
+          "photo": "a28780b3bcbe26a30376c4968357d4916dbaab847288beb4f40d8ed65003162b",
+          "niveau": 2,
+          "score": 1,
+          "arrêt": null,
+          "ticket": {
+            "command": "ACTION6",
+            "point": {
+              "x": 26,
+              "y": 54
+            },
+            "owner": "visual_sequences",
+            "kind": "public_visual_sequence",
+            "admitted": true,
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+            "row": 1,
+            "rank": 5,
+            "plan": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:f3f29b2ff30c2635",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ],
+            "gabarit": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:f3f29b2ff30c2635",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ]
+          },
+          "retour": {
+            "owner": "visual_sequences",
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+            "matched": null,
+            "sealed": true,
+            "physical": "a28780b3bcbe26a30376c4968357d4916dbaab847288beb4f40d8ed65003162b",
+            "shown": "a28780b3bcbe26a30376c4968357d4916dbaab847288beb4f40d8ed65003162b",
+            "preuve": {
+              "statut": "observed_row_completion",
+              "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "préservée": true,
+              "remplie": true,
+              "attendu": "5e9156ef36f4e6be7a4c6e136270b1cd97fbcacb5abab849d299cb5126a8175d",
+              "observé": "5e9156ef36f4e6be7a4c6e136270b1cd97fbcacb5abab849d299cb5126a8175d"
+            }
+          }
+        },
+        {
+          "tour": 7,
+          "photo": "243ec5da88e667ce264c7d0f27fbe9787298adde42790bfd86194d385680c59e",
+          "niveau": 2,
+          "score": 1,
+          "arrêt": null,
+          "ticket": {
+            "command": "ACTION6",
+            "point": {
+              "x": 16,
+              "y": 54
+            },
+            "owner": "visual_sequences",
+            "kind": "public_visual_sequence",
+            "admitted": true,
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+            "row": 2,
+            "rank": 5,
+            "plan": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ],
+            "gabarit": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ]
+          },
+          "retour": {
+            "owner": "visual_sequences",
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+            "matched": null,
+            "sealed": true,
+            "physical": "243ec5da88e667ce264c7d0f27fbe9787298adde42790bfd86194d385680c59e",
+            "shown": "243ec5da88e667ce264c7d0f27fbe9787298adde42790bfd86194d385680c59e",
+            "preuve": {
+              "statut": "observed_row_completion",
+              "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+              "préservée": true,
+              "remplie": true,
+              "attendu": "d14433c4df890b0ec8713b607221bd1c238f7f7048a08eddedc269f215d4f4c2",
+              "observé": "d14433c4df890b0ec8713b607221bd1c238f7f7048a08eddedc269f215d4f4c2"
+            }
+          }
+        }
+      ],
+      "journal": [
+        {
+          "statut": "observed_row_completion",
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:c46636da0dbc3203",
+          "question": "d039ff42fca46191e6df8fb5ab925f8bd538ae506d1265c13b5709e590e69285"
+        },
+        {
+          "statut": "observed_row_completion",
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:1038debe887eb3e4",
+          "question": "ee07948bc2d59460e6d312a5acefc7c88e5e0fb90d0d79eb85185047ee738b6f"
+        },
+        {
+          "statut": "observed_row_completion",
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:1038debe887eb3e4",
+          "question": "ee07948bc2d59460e6d312a5acefc7c88e5e0fb90d0d79eb85185047ee738b6f"
+        },
+        {
+          "statut": "official_boundary",
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3",
+          "question": "476b3d24b78d662a3f54224afd105776bf2093cd031019d262c8e5f65fcb1496"
+        }
+      ]
+    },
+    "unSeulSansBorne": {
+      "préfixe": [
+        {
+          "tour": 1,
+          "photo": "a3d9e5b6d56eb9f748d1aeb08b87e47ac5df4ebabf02c279692ba2eebecaaefe",
+          "niveau": 1,
+          "score": 0,
+          "commande": "ACTION6",
+          "point": {
+            "x": 41,
+            "y": 54
+          }
+        },
+        {
+          "tour": 2,
+          "photo": "c46636da0dbc3203cff9710ee7a349e5c1b3e68dff61dd259c3cfb8046f03e77",
+          "niveau": 1,
+          "score": 0,
+          "commande": "ACTION6",
+          "point": {
+            "x": 21,
+            "y": 55
+          }
+        },
+        {
+          "tour": 3,
+          "photo": "1038debe887eb3e4f85bb6edb1a94141729067aa7aed7fcb29737e3ade543fc0",
+          "niveau": 1,
+          "score": 0,
+          "commande": "ACTION6",
+          "point": {
+            "x": 31,
+            "y": 54
+          }
+        },
+        {
+          "tour": 4,
+          "photo": "f3f29b2ff30c263510be06da06567433ffb537ad9913782d635bd7d1ad1b5b04",
+          "niveau": 1,
+          "score": 0,
+          "commande": "ACTION6",
+          "point": {
+            "x": 41,
+            "y": 54
+          }
+        }
+      ],
+      "portée": [
+        {
+          "tour": 5,
+          "photo": "f9dc1654efbdf1c30feb83fa6dc511cce8672572c78e7060c67a4090f96e3578",
+          "niveau": 2,
+          "score": 1,
+          "arrêt": null,
+          "ticket": {
+            "command": "ACTION6",
+            "point": {
+              "x": 46,
+              "y": 54
+            },
+            "owner": "visual_sequences",
+            "kind": "public_visual_sequence",
+            "admitted": true,
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3",
+            "row": 0,
+            "rank": 5,
+            "plan": null,
+            "gabarit": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ]
+          },
+          "retour": {
+            "owner": "visual_sequences",
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3",
+            "matched": null,
+            "sealed": true,
+            "physical": "f9dc1654efbdf1c30feb83fa6dc511cce8672572c78e7060c67a4090f96e3578",
+            "shown": "f9dc1654efbdf1c30feb83fa6dc511cce8672572c78e7060c67a4090f96e3578",
+            "preuve": {
+              "statut": "official_boundary",
+              "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3",
+              "préservée": null,
+              "remplie": null,
+              "attendu": "1b4691acdd5b6f703eda9190f837403a3b64440399f1299fcecc4382ed8471c3",
+              "observé": "30f162553d4ee3e1e74d1c8da083960e96292e1206cb700a9abda6605e984d67"
+            }
+          }
+        },
+        {
+          "tour": 6,
+          "photo": "a28780b3bcbe26a30376c4968357d4916dbaab847288beb4f40d8ed65003162b",
+          "niveau": 2,
+          "score": 1,
+          "arrêt": null,
+          "ticket": {
+            "command": "ACTION6",
+            "point": {
+              "x": 26,
+              "y": 54
+            },
+            "owner": "visual_sequences",
+            "kind": "public_visual_sequence",
+            "admitted": true,
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+            "row": 1,
+            "rank": 5,
+            "plan": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:f3f29b2ff30c2635",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ],
+            "gabarit": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:f3f29b2ff30c2635",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ]
+          },
+          "retour": {
+            "owner": "visual_sequences",
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+            "matched": null,
+            "sealed": true,
+            "physical": "a28780b3bcbe26a30376c4968357d4916dbaab847288beb4f40d8ed65003162b",
+            "shown": "a28780b3bcbe26a30376c4968357d4916dbaab847288beb4f40d8ed65003162b",
+            "preuve": {
+              "statut": "observed_row_completion",
+              "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "préservée": true,
+              "remplie": true,
+              "attendu": "5e9156ef36f4e6be7a4c6e136270b1cd97fbcacb5abab849d299cb5126a8175d",
+              "observé": "5e9156ef36f4e6be7a4c6e136270b1cd97fbcacb5abab849d299cb5126a8175d"
+            }
+          }
+        },
+        {
+          "tour": 7,
+          "photo": "243ec5da88e667ce264c7d0f27fbe9787298adde42790bfd86194d385680c59e",
+          "niveau": 2,
+          "score": 1,
+          "arrêt": null,
+          "ticket": {
+            "command": "ACTION6",
+            "point": {
+              "x": 16,
+              "y": 54
+            },
+            "owner": "visual_sequences",
+            "kind": "public_visual_sequence",
+            "admitted": true,
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+            "row": 2,
+            "rank": 5,
+            "plan": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ],
+            "gabarit": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:a28780b3bcbe26a3",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:5:frame:f9dc1654efbdf1c3"
+            ]
+          },
+          "retour": {
+            "owner": "visual_sequences",
+            "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+            "matched": null,
+            "sealed": true,
+            "physical": "243ec5da88e667ce264c7d0f27fbe9787298adde42790bfd86194d385680c59e",
+            "shown": "243ec5da88e667ce264c7d0f27fbe9787298adde42790bfd86194d385680c59e",
+            "preuve": {
+              "statut": "observed_row_completion",
+              "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:7:frame:243ec5da88e667ce",
+              "préservée": true,
+              "remplie": true,
+              "attendu": "d14433c4df890b0ec8713b607221bd1c238f7f7048a08eddedc269f215d4f4c2",
+              "observé": "d14433c4df890b0ec8713b607221bd1c238f7f7048a08eddedc269f215d4f4c2"
+            }
+          }
+        }
+      ],
+      "journal": [
+        {
+          "statut": "observed_row_completion",
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:1038debe887eb3e4",
+          "question": "ee07948bc2d59460e6d312a5acefc7c88e5e0fb90d0d79eb85185047ee738b6f"
+        },
+        {
+          "statut": "observed_row_completion",
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:1038debe887eb3e4",
+          "question": "ee07948bc2d59460e6d312a5acefc7c88e5e0fb90d0d79eb85185047ee738b6f"
+        },
+        {
+          "statut": "observed_row_completion",
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:1038debe887eb3e4",
+          "question": "ee07948bc2d59460e6d312a5acefc7c88e5e0fb90d0d79eb85185047ee738b6f"
+        }
+      ]
+    }
+  }
+}
