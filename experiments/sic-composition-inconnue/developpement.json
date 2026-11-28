@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "cases": [
+    {"id":"pulse-vue-porte","mechanic":"pulse","controls":["alpha","bravo"],"control":"bravo","delay":2,"window":3,"approach":2,"target":"left","visibility":"gate","moveBudget":9,"searchBudget":12000},
+    {"id":"charge-vue-porte","mechanic":"load","controls":["alpha","bravo"],"control":"bravo","delay":1,"window":3,"approach":1,"target":"right","visibility":"gate","moveBudget":9,"searchBudget":12000},
+    {"id":"charge-bloquee","mechanic":"load","controls":["alpha","bravo"],"control":"bravo","delay":1,"window":3,"approach":2,"target":"right","visibility":"gate","moveBudget":9,"searchBudget":12000},
+    {"id":"charge-effet-inverse","mechanic":"load","controls":["alpha","bravo"],"control":"alpha","delay":2,"window":4,"approach":1,"target":"left","visibility":"gate","moveBudget":9,"searchBudget":12000},
+    {"id":"sortie-depart","mechanic":"pulse","controls":["x","y","z"],"control":"z","delay":1,"window":5,"approach":2,"target":"right","visibility":"start","moveBudget":12,"searchBudget":12000},
+    {"id":"indiscernable-gauche","mechanic":"load","controls":["r","s"],"control":"r","delay":1,"window":4,"approach":1,"target":"left","visibility":"never","moveBudget":7,"searchBudget":12000},
+    {"id":"indiscernable-droite","mechanic":"load","controls":["r","s"],"control":"r","delay":1,"window":4,"approach":1,"target":"right","visibility":"never","moveBudget":7,"searchBudget":12000}
+  ],
+  "transfers": [
+    {"from":"pulse-vue-porte","to":"charge-vue-porte"},
+    {"from":"pulse-vue-porte","to":"charge-effet-inverse"}
+  ]
+}
