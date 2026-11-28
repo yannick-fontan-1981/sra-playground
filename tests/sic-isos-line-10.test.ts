@@ -124,3 +124,41 @@ test('10 suppresses the same seed trial after an unchanged constructed return', 
   const d = await game.decision();
   assert.notEqual(d.family, 'facet_examples');
 });
+
+for (const epoch of [2, 3]) {
+  test('10 rejects substituted boundary provenance before the native N' + epoch + ' resumption', async t => {
+    const original = NativeFacetExamples.prototype.record;
+    let actualBoundary: string | undefined, previousBoundary: string | undefined, substituted: string | undefined;
+    t.mock.method(NativeFacetExamples.prototype, 'record', function (this: InstanceType<typeof NativeFacetExamples>,
+      ...args: Parameters<typeof original>) {
+      const [before, after] = args, event = original.apply(this, args);
+      if (event.status !== 'official_boundary') return event;
+      if (after.level_epoch === epoch) {
+        const state = this.state();
+        actualBoundary = after.observation_ref;
+        assert.equal(state.portable?.boundary_ref, actualBoundary);
+        substituted = epoch === 2 ? before.observation_ref : previousBoundary;
+        assert.ok(substituted && substituted !== actualBoundary);
+        state.portable!.boundary_ref = substituted;
+        this.restore(state);
+      }
+      previousBoundary = after.observation_ref;
+      return event;
+    });
+    const game = await start();
+    const last = epoch === 2 ? 3 : 7;
+    for (let n = 1; n <= last; n++) {
+      const ticket = await game.decision(), [x, y] = points[n - 1]!;
+      assert.deepEqual([ticket.family, ticket.command.actionRef, ticket.command.data], ['facet_examples', 'ACTION6', { x, y }]);
+      await game.advance();
+    }
+    assert.deepEqual([game.observation.level, game.observation.levelsCompleted], [epoch, epoch - 1]);
+    assert.ok(actualBoundary && substituted);
+    const next = await game.decision();
+    assert.deepEqual([next.family, next.command.actionRef, next.command.data], ['observed_frontier', 'ACTION6', { x: 10, y: 14 }]);
+    assert.ok(!next.proposal.route_refs.includes(substituted));
+    const out = await game.advance();
+    assert.equal(out.family, 'observed_frontier');
+    assert.deepEqual([game.observation.level, game.observation.levelsCompleted], [epoch, epoch - 1]);
+  });
+}
