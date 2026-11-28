@@ -1,0 +1,127 @@
+{
+  "sha": {
+    "base": "0aef4289e97ce094782dfd03f5a79ace6eae5fd2",
+    "candidat": "c515ea1464387c940b06e93f3ad7ecd73f782f60"
+  },
+  "autonome": [
+    {
+      "code": "SS05",
+      "actions": 36,
+      "levels": 1,
+      "stop": "target_levels_completed",
+      "budget": 44,
+      "hash": "dc8e6b703554964fe38ce6ffd12e38be25c6b4390f6e7e0ea6c65dc0662894fb",
+      "firstDifference": null
+    },
+    {
+      "code": "SS11",
+      "actions": 80,
+      "levels": 0,
+      "stop": "session_action_budget",
+      "budget": 80,
+      "hash": "00ecb983b8e962287565313e2b36d46649f667925cd2716e0a14c540c7229580",
+      "firstDifference": null
+    }
+  ],
+  "guide": [
+    {
+      "closure": 14,
+      "crossing": 6,
+      "ink": 0,
+      "prefix": 14,
+      "evidenceTest": {
+        "closed": "return:14",
+        "without": {
+          "actions": [
+            "ACTION2"
+          ],
+          "pressure": null
+        },
+        "restored": {
+          "actions": [
+            "ACTION1"
+          ],
+          "pressure": "reserve_weight"
+        },
+        "control": {
+          "actions": [
+            "ACTION1"
+          ],
+          "pressure": "reserve_weight"
+        },
+        "fallback": {
+          "command": "ACTION2",
+          "admitted": true,
+          "return": "741d321306ec231ccbf8e5f36310aff25bfc35fe4a841e51ea00ef7b3194f5d5",
+          "changed": true,
+          "levels": 0,
+          "actor": "14,41"
+        },
+        "sameBoard": "4b530cd04298862a01a714ba300bef7d3a11561f1bb11323dfb62673a1675979"
+      },
+      "negative": {
+        "trueReturn": "0cc7625d2b5899e5cdfe1415f8363a9054cfd3d15340ede60eaab6b7b55f84fd",
+        "shown": "4b530cd04298862a01a714ba300bef7d3a11561f1bb11323dfb62673a1675979",
+        "command": "ACTION1",
+        "result": "pressure_projection_contradicted",
+        "rejected": "14,38|26,29;8,38||ACTION1",
+        "next": "ACTION4",
+        "references": 5
+      },
+      "first": "ACTION1",
+      "actions": 32,
+      "confirmations": 31,
+      "sha": "0e0da592e9c5c7a134f83b4b588d115ca21b42744cf44fceb001e2685cd0f668"
+    },
+    {
+      "closure": 6,
+      "crossing": 12,
+      "ink": 5,
+      "prefix": 12,
+      "evidenceTest": {
+        "closed": "return:6",
+        "without": {
+          "actions": [
+            "ACTION2"
+          ],
+          "pressure": null
+        },
+        "restored": {
+          "actions": [
+            "ACTION1"
+          ],
+          "pressure": "reserve_weight"
+        },
+        "control": {
+          "actions": [
+            "ACTION1"
+          ],
+          "pressure": "reserve_weight"
+        },
+        "fallback": {
+          "command": "ACTION2",
+          "admitted": true,
+          "return": "3a5918706e3f01f722219ba6577938f3e3d20647fad29f1960f1e23cbe3a86f8",
+          "changed": true,
+          "levels": 0,
+          "actor": "14,41"
+        },
+        "sameBoard": "a2349e74d1130490fd1bab48d6724d7ed8ccb7613f7a8a1f36d3180e5891d200"
+      },
+      "negative": {
+        "trueReturn": "82ba4d96b344abcc929236d981936a3aac0c33941e1baf47b133b5cd37bb8215",
+        "shown": "a2349e74d1130490fd1bab48d6724d7ed8ccb7613f7a8a1f36d3180e5891d200",
+        "command": "ACTION1",
+        "result": "pressure_projection_contradicted",
+        "rejected": "14,38|26,29;8,38||ACTION1",
+        "next": "ACTION4",
+        "references": 5
+      },
+      "first": "ACTION1",
+      "actions": 32,
+      "confirmations": 31,
+      "sha": "2132f46dfec47ced7269de9fda94f07b78f8974d8a5e28ab7cd9d698d56dbd31"
+    }
+  ],
+  "gestesNatifsParSha": 208
+}
