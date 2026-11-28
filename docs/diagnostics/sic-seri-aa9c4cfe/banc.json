@@ -1,0 +1,26 @@
+{
+  "freeze": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "proof": "aa9c4cfe2c4ac65d5f1164c7748a8a2c1f677aec",
+  "criteria": "243c93c0",
+  "testsPerSHA": 4,
+  "t5ContinuationReferences": [
+    [
+      3,
+      4,
+      5
+    ],
+    [
+      2,
+      3,
+      5
+    ],
+    []
+  ],
+  "t5SameTicketAndReturn": true,
+  "stationaryT1": "answer_acceptance_unconfirmed",
+  "officialBoundaries": [
+    4,
+    8
+  ],
+  "archiveSHA256": "03024f0f250ff4fea538ab6dc0f94235e6e97b12c3e87c4d58985459aa689b7a"
+}

@@ -38,6 +38,7 @@ cases = {
     "SKBN": ("fa126d653aa5e123f9de78c220e9e6129a6436a2", "skbn-line-38", "sic-observe-skbn-inventory", []),
     "KLOT": ("a0df8a9b13b51e63d08b5ca184c996ba20453e9c", "klot-line-82", "sic-observe-klot-selection", []),
     "CD82": ("a6f7b0de19f013b132ff133b1084be86988b2dc1", "cd82-line-89", "sic-observe-cd82-surface", []),
+    "SERI": ("aa9c4cfe2c4ac65d5f1164c7748a8a2c1f677aec", "seri-line-93", "sic-observe-seri-completions", []),
     "SC25": ("6172e2d3579f36af9c0912578f6d58333a298343", "sc25-line-21", "sic-observe-sc25-motif", []),
     "MIND": ("860835b1b77ae9cde489230be5c1f83c05237302", "mind-line-12", "sic-observe-mind-feedback",
              ["docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-public-trace.json.gz", "tests/fixtures/sic-mind-alternate-returns.json.gz"]),
