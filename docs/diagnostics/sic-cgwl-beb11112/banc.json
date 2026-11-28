@@ -1,0 +1,42 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "beb11112bc53afdb80d46b843f42d01474254126",
+    "attendus": "36d4c25913cf0c7f2827fc6ef46c83dfba08aa9a"
+  },
+  "prefixes": 7,
+  "firstMeasuredMove": {
+    "delta": [
+      0,
+      4
+    ],
+    "evidence": [
+      "cgwl-37:epoch:1:revision:2:frame:1d66b5eea0e0edfe",
+      "cgwl-37:epoch:1:revision:3:frame:5b9f513c36c7067d"
+    ],
+    "status": "observed_local_displacement"
+  },
+  "attachment": {
+    "status": "local_attachment_hypothesis",
+    "scope": "visible_part_only_occluded_part_unknown",
+    "visibleTranslations": [
+      -1,
+      -6
+    ]
+  },
+  "T13": [
+    [
+      "ACTION4",
+      {}
+    ],
+    [
+      "ACTION5",
+      {}
+    ]
+  ],
+  "T14": "joint_transport_observed",
+  "archiveSHA256": "ec9b8a87fd830c984c5c36fda0ab5cc983837ef2fa31ef259fdbdc5e75afbe4c",
+  "nativeReceiptSHA256": "a50d62df911977302fb467cfd401589c809779d4696577aa4b2d297390c68abe",
+  "nativeReceiptWithoutQualificationSHA256": "6a6694dde2c3db247150ef5dcc719a7609fa7c00486b42a09d2dc2d3511f9c92"
+}
