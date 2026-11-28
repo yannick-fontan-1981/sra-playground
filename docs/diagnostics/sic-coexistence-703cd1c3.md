@@ -59,3 +59,15 @@ foreach ($groupe in 'initial','all','all') {
 ```
 
 La branche `main` distante est restée à `d0e7527ca8033bd805a6d7a8bb021eff62e87021`.
+
+## Complément expérimental · b0574d0d
+
+`b0574d0d45d3253c38fd6a72e52074874b6a0da6` a pour parents `703cd1c3` et `3047ef55`. Son arbre `src` est `dad4f968ca4df71755ac143f39cb806062d7af45`. Le diff moteur comprend exactement deux fichiers. Les blobs de `v6-sliding-cavity.ts` (`300894dc4f20f7c7acb3617d863eb117e625cf59`) et `control-effect-next.ts` (`5bf2ca61bb93b595e3ed6b3fa9633768738dfe40`) sont identiques à ceux du lot `3047ef55`. [Dossier du départage isolé](sic-banc-p05-cavite-3047ef55.md)
+
+Sur **AS66 officiel en V6**, le parent et l'assemblage concordent sur **84 événements et 7 décisions dans chacun des deux bras**. Au N2/T1, le nominal départage les deux offres de mêmes preuves et de coût 1 en faveur d'ACTION1. À la même observation et avec les mêmes commandes publiques, le retrait de la seule question ACTION1 fait jouer ACTION4. Le premier écart entre ces deux bras est l'événement **62**, champ `/value/actions/0/action_ref`. Le vrai retour modifie 82 pixels, établit `[0,1]`, puis le service joue ACTION2 et confirme l'accès. La campagne historique des 107 reste attachée à `703cd1c3`.
+
+Depuis le Banc avec Node 24.22.3, `$a` désigne le checkout propre de `703cd1c3` et `$b` celui de `b0574d0d`. Le reçu détaillé reste dans le dossier local de sortie.
+
+```powershell
+node scripts/sic-p05-cavity-native.mjs $a $b 703cd1c32704171bae8e12a33a446bd6486fc288 b0574d0d45d3253c38fd6a72e52074874b6a0da6 artifacts/sic-after-98/p05-cavite-b0574d0d
+```
