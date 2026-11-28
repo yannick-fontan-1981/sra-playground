@@ -1,0 +1,257 @@
+{
+  "source": "c515ea1464387c940b06e93f3ad7ecd73f782f60",
+  "chronologicalArchive": "4a037c2b8e4e07f327f3e04baf85e1b53e0f8c10",
+  "game": "DC22",
+  "firstLevel": 1,
+  "targetLevel": 4,
+  "nativeParentNeed": "sic-need:8ee5ae606de33371ade693485fb0da6358aff4e388d75638fccc06b9a690d15b",
+  "identicalPrefixCommands": 125,
+  "firstDivergence": {
+    "level": 4,
+    "turn": 15,
+    "globalTurn": 126
+  },
+  "witnesses": [
+    {
+      "turn": 1,
+      "action": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 46,
+          "y": 28
+        }
+      },
+      "step": {
+        "kind": "measure",
+        "control": 0
+      },
+      "closedBefore": [
+        false,
+        false
+      ],
+      "closedAfter": [
+        false,
+        false
+      ],
+      "outcome": {
+        "matched": true,
+        "sealed": true,
+        "reason": "support_phase_measured",
+        "before": {
+          "revision": 112,
+          "frame": "efe22d386f986a5b"
+        },
+        "after": {
+          "revision": 113,
+          "frame": "b1ac42289a5e9062"
+        }
+      }
+    },
+    {
+      "turn": 14,
+      "action": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 56,
+          "y": 28
+        }
+      },
+      "step": {
+        "kind": "measure",
+        "control": 1
+      },
+      "closedBefore": [
+        true,
+        false
+      ],
+      "closedAfter": [
+        true,
+        true
+      ],
+      "outcome": {
+        "matched": true,
+        "sealed": true,
+        "reason": "support_phase_measured",
+        "before": {
+          "revision": 125,
+          "frame": "3aca73891bb53161"
+        },
+        "after": {
+          "revision": 126,
+          "frame": "26979463126c657c"
+        }
+      }
+    },
+    {
+      "turn": 15,
+      "action": {
+        "action_ref": "ACTION2",
+        "data": {}
+      },
+      "step": {
+        "kind": "cross",
+        "direction": 1
+      },
+      "closedBefore": [
+        true,
+        true
+      ],
+      "closedAfter": [
+        true,
+        true
+      ],
+      "outcome": {
+        "matched": true,
+        "sealed": true,
+        "reason": "landing_on_phase_support_confirmed",
+        "before": {
+          "revision": 126,
+          "frame": "26979463126c657c"
+        },
+        "after": {
+          "revision": 127,
+          "frame": "28757a3ad12c674b"
+        }
+      }
+    },
+    {
+      "turn": 17,
+      "action": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 46,
+          "y": 28
+        }
+      },
+      "step": {
+        "kind": "hold",
+        "control": 0
+      },
+      "closedBefore": [
+        true,
+        true
+      ],
+      "closedAfter": [
+        true,
+        true
+      ],
+      "outcome": {
+        "matched": true,
+        "sealed": true,
+        "reason": "cursor_support_preserved_after_phase_change",
+        "before": {
+          "revision": 128,
+          "frame": "d04a8e9983ea5d69"
+        },
+        "after": {
+          "revision": 129,
+          "frame": "f6bdebe14729ff63"
+        }
+      }
+    },
+    {
+      "turn": 76,
+      "action": {
+        "action_ref": "ACTION4",
+        "data": {}
+      },
+      "step": {
+        "kind": "cross",
+        "direction": 3
+      },
+      "closedBefore": [
+        true,
+        true
+      ],
+      "closedAfter": [
+        true,
+        true
+      ],
+      "outcome": {
+        "matched": true,
+        "sealed": true,
+        "reason": "official_boundary",
+        "before": {
+          "revision": 187,
+          "frame": "007c8e9eb53bb0fa"
+        },
+        "after": {
+          "revision": 188,
+          "frame": "71180537f796b4fc"
+        }
+      }
+    }
+  ],
+  "localContrast": {
+    "withdrawnRef": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:4:revision:126:frame:26979463126c657c",
+    "removeReferenceStillCrosses": true,
+    "reopenCycleCommand": {
+      "action_ref": "ACTION6",
+      "data": {
+        "x": 56,
+        "y": 28
+      }
+    }
+  },
+  "reopenedReturn": {
+    "turn": 15,
+    "action": {
+      "action_ref": "ACTION6",
+      "data": {
+        "x": 56,
+        "y": 28
+      }
+    },
+    "step": {
+      "kind": "measure",
+      "control": 1
+    },
+    "closedBefore": [
+      true,
+      false
+    ],
+    "closedAfter": [
+      true,
+      false
+    ],
+    "outcome": {
+      "matched": true,
+      "sealed": true,
+      "reason": "support_phase_measured",
+      "before": {
+        "revision": 126,
+        "frame": "26979463126c657c"
+      },
+      "after": {
+        "revision": 127,
+        "frame": "ee7d873be60ef100"
+      }
+    }
+  },
+  "terminal": {
+    "control": {
+      "levels": 4,
+      "actions": 187,
+      "authority": 187,
+      "reason": "target_levels_completed",
+      "actionsByLevel": [
+        22,
+        44,
+        45,
+        76
+      ]
+    },
+    "reopened": {
+      "levels": 3,
+      "actions": 203,
+      "authority": 203,
+      "reason": "level_action_budget",
+      "actionsByLevel": [
+        22,
+        44,
+        45,
+        92
+      ]
+    }
+  }
+}
