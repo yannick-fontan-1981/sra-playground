@@ -20,3 +20,7 @@ Le rapport associe chaque décision au retour effectué, aux hypothèses encore 
 Le candidat recherche d’abord une suite qui réussit dans chaque hypothèse encore compatible. Si cette suite manque, il peut retenir une expérience qui permet d’avancer dans une partie du domaine et indique cette portée dans le reçu. Il ne traverse une sortie qu’après observation de la cible. Ces deux règles permettent de distinguer une expérience prudente sur la charge d’un pari irréversible sur la sortie.
 
 Le fichier de développement sert à tester le lanceur et les deux politiques. L’opérateur conserve les situations réservées, enregistre leur empreinte avant évaluation et substitue ce fichier au fichier de développement une fois le candidat figé. Deux mondes qui restent indiscernables tout en exigeant des sorties incompatibles doivent conduire à une abstention et à l’identification de l’observation manquante.
+
+## Rejeu par le service V6
+
+Avec Node 24, `node --test experiments/sic-composition-inconnue/natif.test.mjs` fait passer les mêmes commandes de développement par le service V6. L’adaptateur transforme le terrain en observations raster et présente chaque sortie sous une coordonnée distincte. Une famille expérimentale demande un ticket par geste, puis contrôle et enregistre le retour. Le test compare les gestes autorisés, leurs propres références et les retours au comparatif direct. Les scènes restent celles du simulateur de ce dossier.
