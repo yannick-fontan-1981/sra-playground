@@ -8,6 +8,13 @@ import { assessHypothesisPartition } from '../sic/discriminating-experiment.ts';
 import { supportParts as components, supportBox as bounds, supportCompare as compare, supportSame as same } from './v6-support-measurements.ts';
 import type { NativeAfterResult, NativeBeforeResult, NativeFamily, NativeRows } from './v6-native-types.ts';
 type R=Record<string,any>;
+type SubsetNavigationOffer = {
+ scope: readonly number[];
+ command: R;
+ shape: unknown;
+ question: string;
+ knownEffect: boolean;
+};
 const clone=<T>(v:T):T=>structuredClone(v);
 const sorted=(v:Iterable<number>):number[]=>[...v].sort((a,b)=>a-b);
 const range=(n:number):number[]=>Array.from({length:n},(_,i)=>i);
@@ -81,6 +88,12 @@ export class SubsetDiagnosis implements NativeFamily<any>{
   if(proposal?.support_plan?.subset_diagnosis){const p=proposal.support_plan,b=measureSubsetScene(second);if(p.mode==='navigation'&&b&&b.universe_ref===a.universe_ref){const matched=same(sorted(b.focus),sorted(p.tested));this.questions.recordAttempt(p.question_key);if(matched&&!hasShape(this.nav_shapes,p.control_shape))this.nav_shapes.push(p.control_shape);this.events=[{kind:'scope_navigation_response',before:before.observation_ref,after:after.observation_ref,expected_focus:p.tested,observed_focus:b.focus,matched,nav_shapes:this.nav_shapes,candidates_unchanged:sorted(this.candidates!)}];}}
   return{status:'subset_navigation_or_unknown',events:this.events};
  }
+ selectNavigationOffer(offers: readonly SubsetNavigationOffer[]): SubsetNavigationOffer | null {
+  return [...offers].sort((a,b)=>compare(
+   [a.scope.length,a.command.data.x,a.command.data.y],
+   [b.scope.length,b.command.data.x,b.command.data.y],
+  ))[0]??null;
+ }
  async propose(obs:R,rows:NativeRows,_inputs:readonly any[],remaining:number):Promise<any>{
   if(!this.policy.enabled||!obs.available_action_refs.includes('ACTION6')||!this.press_shapes.length||remaining<1)return null;const scene=measureSubsetScene(rows);if(!scene)return null;this.resetDomain(obs,scene);const candidates=sorted(this.candidates!),offers:any[][]=[],controls=scene.controls.filter((c:R)=>hasShape(this.press_shapes,c.shape));
   const commandAt=(b:number[]):R=>({action_ref:'ACTION6',data:{x:Math.floor((b[0]!+b[2]!)/2),y:Math.floor((b[1]!+b[3]!)/2)}});
@@ -90,9 +103,30 @@ export class SubsetDiagnosis implements NativeFamily<any>{
    const partition=assessHypothesisPartition([inside,candidates.length-inside])!;
    offers.push([partition.remaining,0,tested,commandAt(c.bbox),c.shape]);
   }
-  const nav:any[][]=[];if(!offers.length&&candidates.length>2)for(const [color,tested0]of Object.entries(scene.scope_members)){const tested=tested0 as number[];if(!candidates.every(i=>tested.includes(i))||tested.length>=scene.focus.length||!tested.every(i=>scene.focus.includes(i)))continue;for(const c of scene.controls){if(c.color!==color||hasShape(this.press_shapes,c.shape))continue;const command=commandAt(c.bbox),question=digest([obs.level_epoch,'scope_navigation',{universe:scene.universe_ref,focus:scene.focus,desired:tested},command]);if(!this.questions.attempted.has(question))nav.push([tested.length,tested,command,c.shape,question]);}}
-  let mode='query',navigation_proof:R|null=null,tested:number[],command:R,control_shape:any,question:string;
-  if(nav.length){nav.sort((a,b)=>compare([a[0],a[2].data.x,a[2].data.y],[b[0],b[2].data.x,b[2].data.y]));[,tested,command,control_shape,question]=nav[0]!;mode='navigation';if(hasShape(this.nav_shapes,control_shape)){navigation_proof=subsetNavigationPrediction(scene,candidates,tested,remaining);if(navigation_proof===null)return null;}}
+  const nav:SubsetNavigationOffer[]=[];
+  if(!offers.length&&candidates.length>2){
+   for(const [color,scope] of Object.entries(scene.scope_members) as [string,number[]][]){
+    if(!candidates.every(i=>scope.includes(i))||scope.length>=scene.focus.length||!scope.every(i=>scene.focus.includes(i)))continue;
+    for(const control of scene.controls){
+     if(control.color!==color||hasShape(this.press_shapes,control.shape))continue;
+     const command=commandAt(control.bbox);
+     const question=digest([obs.level_epoch,'scope_navigation',{universe:scene.universe_ref,focus:scene.focus,desired:scope},command]);
+     if(this.questions.attempted.has(question))continue;
+     nav.push({scope,command,shape:control.shape,question,knownEffect:hasShape(this.nav_shapes,control.shape)});
+    }
+   }
+  }
+  let mode='query',navigation_proof:R|null=null,tested:readonly number[],command:R,control_shape:any,question:string;
+  if(nav.length){
+   const selected=this.selectNavigationOffer(nav);
+   if(!selected)return null;
+   ({scope:tested,command,shape:control_shape,question}=selected);
+   mode='navigation';
+   if(selected.knownEffect){
+    navigation_proof=subsetNavigationPrediction(scene,candidates,tested,remaining);
+    if(navigation_proof===null)return null;
+   }
+  }
   else{
    if(candidates.length){
     const single=assessHypothesisPartition([1,candidates.length-1])!;
