@@ -1,0 +1,113 @@
+{
+  "engine": "703cd1c32704171bae8e12a33a446bd6486fc288",
+  "sourceTree": "fe6e22425293b31bf01cc447edc9d06a0ddab3b3",
+  "contact": {
+    "nominalEvents": 844,
+    "nominalCommands": 116,
+    "contacts": [
+      {
+        "level": 4,
+        "turn": 7
+      },
+      {
+        "level": 6,
+        "turn": 6
+      }
+    ],
+    "firstZero": {
+      "game": "PORT",
+      "level": 4,
+      "turn": 7,
+      "event": 454,
+      "field": "/value/family",
+      "before": "sic_paired_passage",
+      "after": "sic_cavity_access"
+    },
+    "replacement": {
+      "actionRef": "ACTION1",
+      "data": {}
+    },
+    "sameReturnPacket": false
+  },
+  "child": {
+    "first": {
+      "game": "G50T",
+      "level": 1,
+      "turn": 1,
+      "event": 5,
+      "field": "/value/controlEffectChild"
+    },
+    "commands": 16,
+    "observations": 17,
+    "observedTranslations": 4,
+    "unresolved": 2,
+    "returnT5": {
+      "childId": "sic-need:b2ce3fc610737192547da1433fb0c0803b5b8e04d32fe42d6f50e2eeb7c14e28",
+      "parentId": "sic-need:6aa027ef68c58cf46d198af71e0efab166ede4f5cd57441b035e75fc51944354",
+      "subjectId": "9377082569ed42fe9b01ec63cc82ad5830e10c23e6a57819c134e54024168cb5",
+      "command": {
+        "action_ref": "ACTION4",
+        "data": {}
+      },
+      "levelEpoch": 1,
+      "beforeRef": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:1:revision:5:frame:39ab93e8a10541a7",
+      "afterRef": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:1:revision:6:frame:bd5da91d68f0d73d",
+      "status": "observed_translation",
+      "destination": [
+        20,
+        8
+      ],
+      "displacement": [
+        6,
+        0
+      ]
+    },
+    "staleOpeningInterventions": 1,
+    "wrongVectorRejected": true,
+    "earlierOpening": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:1:revision:3:frame:c9321e6cf1e0bb6d",
+    "fallback": {
+      "strategy": "P05",
+      "command": {
+        "actionRef": "ACTION3",
+        "data": {}
+      }
+    },
+    "firstStale": {
+      "game": "G50T",
+      "level": 1,
+      "turn": 5,
+      "event": 54,
+      "field": "/value/kind",
+      "before": "native_composition_dependency",
+      "after": "sealed_prefix"
+    }
+  },
+  "pressure": {
+    "gateClosedAt": 14,
+    "crossingAt": 6,
+    "recolored": false,
+    "actions": 32,
+    "goals": [
+      "reserve_weight",
+      "build_crossing",
+      "cross_to_exit"
+    ],
+    "commandsSHA256": "a3044772c1c7cb1b12eb2a9fe04ef0f57145269305e50e4eea829930b4991fdd",
+    "projectionsSHA256": "e0a480613853ce8389f22cde1a4084c59edbc29d32e6398702e739240ff7df4e"
+  },
+  "nodeTestCount": 39,
+  "localReceipts": {
+    "contact": {
+      "path": "artifacts/sic-after-98/combined-703cd1c3/contact/report.json",
+      "sha256": "5c4ed30c270e18c65ef9357a5c23140c6733c3d4b45a9fa86dc6c5b3c0636a0b"
+    },
+    "child": {
+      "path": "artifacts/sic-after-98/combined-703cd1c3/child-provenance/report.json",
+      "sha256": "dad13605f344a2cc08ce0aa2bf6e306b22561fd25b1fb6f15f9c1f1e1858edc8"
+    },
+    "pressure": {
+      "path": "artifacts/sic-after-98/combined-703cd1c3/pressure/report.json",
+      "sha256": "91f5581201d24108a3a7fb24979dec1cc54a8d457cd5e3dbb91c4404319209e4"
+    }
+  }
+}

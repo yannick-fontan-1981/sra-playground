@@ -20,6 +20,7 @@ FIFTY_FIVE = "674b0dd19d693a66687990ab2a4368d981aa8fb9"
 SEVENTY_FIVE = "bf1cbf245055a60c4a253b9c6ee4be18ea9b8c2c"
 EIGHTY_SEVEN = "167be950334988ffbc46a04bc26de60c74fea527"
 NINETY_EIGHT = "0aef4289e97ce094782dfd03f5a79ace6eae5fd2"
+P05_COMPOSITION = "703cd1c32704171bae8e12a33a446bd6486fc288"
 QUERY = "c0b9f4027f1df257d7b8c96f5656f9dbb83661f0"
 COMPONENTS = {
     "a5a90c3349ea49bba8e40055444cea2026bee962": "P05 et déplacement signé",
@@ -29,6 +30,30 @@ COMPONENTS = {
 
 
 def check_components(assembly):
+    if assembly == P05_COMPOSITION:
+        components = check_components(NINETY_EIGHT)
+        active = "09b9a509e5e07894b9fccf170f22ae26cbeffbda"
+        blocks = (
+            (NINETY_EIGHT, active, "activation locale du budget P05"),
+            (NINETY_EIGHT, "c515ea1464387c940b06e93f3ad7ecd73f782f60", "composition de la réserve de pression"),
+            ("86e0f172bfd4f743bccd985a57ce1811001a6d7e", "40f140f8dceb78c7ad1e448751a9f103bfc01362",
+             "P05 au contact des passages appariés"),
+            (active, "162e45506cd9196171c15cb2402cf2ca1ee4266d", "enfant P05 et retour natif typés"),
+        )
+        owners = {}
+        for parent, revision, purpose in blocks:
+            git("merge-base", "--is-ancestor", revision, assembly)
+            paths = git("diff", "--name-only", parent, revision, "--", "src").decode().splitlines()
+            for path in paths:
+                owners[path] = revision
+            components[revision] = {"purpose": purpose, "files": paths}
+        changed = set(git("diff", "--name-only", NINETY_EIGHT, assembly, "--", "src").decode().splitlines())
+        check(changed == owners.keys() and len(owners) == 11, "Unexpected source footprint for the P05 composition")
+        for path, revision in owners.items():
+            check(git("rev-parse", assembly + ":" + path) == git("rev-parse", revision + ":" + path), path)
+        check(git("rev-parse", assembly + ":src").decode().strip() == "fe6e22425293b31bf01cc447edc9d06a0ddab3b3",
+              "Unexpected P05 composition source tree")
+        return components
     if assembly == NINETY_EIGHT:
         check(git("rev-parse", assembly + "^").decode().strip() == EIGHTY_SEVEN, "Expected the eighty-seven-line parent")
         components = check_components(EIGHTY_SEVEN)
@@ -167,11 +192,28 @@ def check_components(assembly):
     return components
 
 
+def compare_level_graphs(reference, candidate):
+    fields = ("graph", "prefixHash", "nodes", "deltas", "acquiredRecords", "traceEvents")
+    counts = dict.fromkeys(("comparedLevels", "missingLevels", *fields, "operationCounts"), 0)
+    for game, (row, _) in reference.items():
+        a = {level["level"]: level for level in row["levelStats"]}
+        b = {level["level"]: level for level in candidate[game][0]["levelStats"]}
+        counts["missingLevels"] += len(a.keys() ^ b.keys())
+        for level in a.keys() & b.keys():
+            counts["comparedLevels"] += 1
+            for key in fields:
+                counts[key] += a[level].get(key) != b[level].get(key)
+            a_counts = {k: v["count"] for k, v in a[level].get("costs", {}).items()}
+            b_counts = {k: v["count"] for k, v in b[level].get("costs", {}).items()}
+            counts["operationCounts"] += a_counts != b_counts
+    return counts
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("archive", type=Path)
     parser.add_argument("--candidate", choices=(ASSEMBLY, TEN_LINES, NEXT_ASSEMBLY, TWENTY_FIVE, THIRTY_FIVE, FORTY_SIX,
-                                                FIFTY_FIVE, SEVENTY_FIVE, EIGHTY_SEVEN, NINETY_EIGHT),
+                                                FIFTY_FIVE, SEVENTY_FIVE, EIGHTY_SEVEN, NINETY_EIGHT, P05_COMPOSITION),
                         default=ASSEMBLY)
     parser.add_argument("--workflow", required=True)
     parser.add_argument("--run", required=True)
@@ -184,7 +226,7 @@ def main():
     parent = None
     parent_sha = {TEN_LINES: ASSEMBLY, NEXT_ASSEMBLY: TEN_LINES, TWENTY_FIVE: NEXT_ASSEMBLY, THIRTY_FIVE: TWENTY_FIVE,
                   FORTY_SIX: THIRTY_FIVE, FIFTY_FIVE: FORTY_SIX, SEVENTY_FIVE: FIFTY_FIVE,
-                  EIGHTY_SEVEN: SEVENTY_FIVE, NINETY_EIGHT: EIGHTY_SEVEN}.get(args.candidate)
+                  EIGHTY_SEVEN: SEVENTY_FIVE, NINETY_EIGHT: EIGHTY_SEVEN, P05_COMPOSITION: NINETY_EIGHT}.get(args.candidate)
     if parent_sha:
         base = ROOT / "docs/diagnostics" / ("sic-coexistence-" + parent_sha[:8])
         ledger = json.loads((base / "qualification.json").read_bytes())
@@ -224,6 +266,9 @@ def main():
               "archiveSHA256": sha(args.archive.read_bytes()), "games": games}
     if parent:
         result["parent"] = parent_sha
+    if args.candidate == P05_COMPOSITION:
+        result["graphComparison"] = {"freeze": compare_level_graphs(frozen, rows),
+                                     "comparisonAssembly": compare_level_graphs(parent, rows)}
     if args.output:
         args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf8", newline="\n")
     print(json.dumps({"games": len(games), "levels": sum(g["levels"] for g in games.values()),
