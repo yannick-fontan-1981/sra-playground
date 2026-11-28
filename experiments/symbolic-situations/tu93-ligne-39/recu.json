@@ -1,0 +1,63 @@
+{
+  "stats": [
+    {
+      "engine": "gel",
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 6,
+      "gestes": 95
+    },
+    {
+      "engine": "candidat",
+      "sha": "49a971c37982154ea175294afffdf83469c1c302",
+      "départs": 6,
+      "gestes": 95
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "tail": [
+    {
+      "action_ref": "ACTION4",
+      "from": [
+        15,
+        15
+      ],
+      "to": [
+        15,
+        21
+      ],
+      "destination_histogram": [
+        [
+          0,
+          9
+        ]
+      ],
+      "ordinary_support": true
+    },
+    {
+      "action_ref": "ACTION2",
+      "from": [
+        15,
+        21
+      ],
+      "to": [
+        21,
+        21
+      ],
+      "destination_histogram": [
+        [
+          0,
+          9
+        ]
+      ],
+      "ordinary_support": true
+    }
+  ],
+  "prévu": 18,
+  "réalisé": 2,
+  "refusT15": [
+    "graph_access_absent_or_ambiguous",
+    "graph_access_absent_or_ambiguous"
+  ],
+  "arrêtStationnaire": "graph_displacement_or_extra_effect_diverged",
+  "progressionOfficielle": 0
+}
