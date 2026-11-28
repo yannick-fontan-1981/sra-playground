@@ -14,6 +14,7 @@ TEN_LINES = "8a424aab6ca2e2f6b902cc4b9c89313ed6947b74"
 NEXT_ASSEMBLY = "f27eb1c055d44e852fb90a25c542d0a466eb6c16"
 TWENTY_FIVE = "278d5b357d3e3328a32697fe402f3fa9d957d547"
 THIRTY_FIVE = "09aeb9e14e40b6115269e47267b47ba8d71708fd"
+FORTY_SIX = "ba2e7c6b8d10e04edc149ff836c065178757c62d"
 FRONTIER = "experiments/sic-agenda-offres"
 
 
@@ -45,7 +46,7 @@ def main():
     args = p.parse_args()
     engine, out = args.engine.resolve(), args.output.resolve()
     source_sha = git("-C", str(engine), "rev-parse", "HEAD").decode().strip()
-    assert source_sha in (ASSEMBLY, TEN_LINES, NEXT_ASSEMBLY, TWENTY_FIVE, THIRTY_FIVE)
+    assert source_sha in (ASSEMBLY, TEN_LINES, NEXT_ASSEMBLY, TWENTY_FIVE, THIRTY_FIVE, FORTY_SIX)
     git("-C", str(engine), "diff", "--exit-code", "HEAD", "--", "src", "scripts", "reference", "public", "tests")
     overlay = out / "overlay"
     overlay.mkdir(parents=True)
@@ -60,7 +61,7 @@ def main():
         tests.extend(path for path in paths if path.endswith(".test.ts"))
     tests.extend("tests/" + name + ".test.ts" for name in
                  ("v6-view-frontier", "v6-caller-integration", "v6-point-display", "v6-goal-attention", "v6-control-attention-reference"))
-    if source_sha in (TEN_LINES, NEXT_ASSEMBLY, TWENTY_FIVE, THIRTY_FIVE):
+    if source_sha in (TEN_LINES, NEXT_ASSEMBLY, TWENTY_FIVE, THIRTY_FIVE, FORTY_SIX):
         for revision in ("16f3c5e8", "1a1cc965", "1aaafe36"):
             paths = git("diff", "--name-only", "d0e7527c", revision, "--", "tests").decode().splitlines()
             for path in paths:

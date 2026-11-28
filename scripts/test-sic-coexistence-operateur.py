@@ -21,7 +21,7 @@ def main():
     parser.add_argument("output", type=Path)
     parser.add_argument("--pyodide", type=Path, required=True)
     parser.add_argument("--node", default="node")
-    parser.add_argument("--candidate", choices=(ASSEMBLY, common["TWENTY_FIVE"], common["THIRTY_FIVE"]), default=ASSEMBLY)
+    parser.add_argument("--candidate", choices=(ASSEMBLY, common["TWENTY_FIVE"], common["THIRTY_FIVE"], common["FORTY_SIX"]), default=ASSEMBLY)
     parser.add_argument("--game", choices=("STCK", "VALV"))
     parser.add_argument("--reference-archive", type=Path, help="Reuse the individual operator results from a previous assembly")
     args = parser.parse_args()
