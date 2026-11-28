@@ -119,6 +119,47 @@ test('a stable unframed feature suggests a contact from witnessed returns owned 
   assert.notEqual(chooseTravelTrial(control, noOpening, inputs, false, true)?.purpose, 'verify_contact_access');
 });
 
+test('a unique repeated cue keeps one occupied site while another actor tests its partner', () => {
+  const board = (at: readonly [number, number], competitor = false) => {
+    const rows = Array.from({ length: 18 }, () => Array<number>(18).fill(3));
+    for (const y of [7, 13]) rows[y]![12] = rows[y]![13] = 11;
+    if (competitor) for (const y of [4, 10]) {
+      rows[y]![15] = rows[y + 1]![15] = 9;
+    }
+    for (const [left, top] of [at, [3, 9]]) {
+      for (const [x, y] of [[0, 0], [1, 0], [2, 0], [0, 1], [1, 1], [0, 2]]) rows[top! + y!]![left! + x!] = 6;
+    }
+    return rows;
+  };
+  const right = { action_ref: 'ACTION4', data: {} };
+  const down = { action_ref: 'ACTION2', data: {} };
+  const inputs = [right, down];
+  const withCalibrationCue = (rows: number[][]) => {
+    for (let y = 15; y < 18; y++) for (let x = 15; x < 18; x++) if (x !== 16 || y !== 16) rows[y]![x] = 4;
+    return rows;
+  };
+  for (const competing of [false, true]) {
+    const start = withCalibrationCue(board([3, 3], competing)), moved = withCalibrationCue(board([6, 3], competing));
+    const turned = board([6, 6], competing);
+    const first = observeTravel(undefined, start, moved, right, 'first-movement', true);
+    const second = observeTravel(first, moved, turned, down, 'second-movement', true);
+    assert.ok(second);
+    const offer = chooseTravelTrial(second, turned, inputs, true, true);
+    if (competing) {
+      assert.notEqual(offer?.jointContactCover, true);
+      continue;
+    }
+    assert.equal(offer?.jointContactCover, true);
+    const approached = board([9, 6]), parked = board([12, 6]);
+    const near = observeTravel(second, turned, approached, right, 'approach', true);
+    const held = observeTravel(near, approached, parked, right, 'one-occupied', true);
+    const peer = chooseTravelTrial(held, parked, inputs, true, true);
+    assert.equal(peer?.command.action_ref, 'ACTION6');
+    assert.equal(peer?.jointContactCover, true);
+    assert.ok(peer?.evidence.includes('one-occupied'));
+  }
+});
+
 test('a separated panel gets a turn between movement probes despite unrelated changes in the status strip', async () => {
   const board = (step: number) => Array.from({ length: 18 }, (_, y) => Array.from({ length: 32 }, (_, x) => {
     if (y === 17) return x < step ? 4 : 0;

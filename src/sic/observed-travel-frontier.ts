@@ -9,14 +9,16 @@ type Move = { delta: NativePoint; ref: string };
 type Grid = { pitch: number; phase: NativePoint; ink: number; floor: number; signature?: string;
   annotatedMarks?: Readonly<Record<string, readonly number[]>>; actorFooting?: readonly number[] };
 type Calibration = { grid: Grid; previous: string[]; next: string[]; destination: string; delta: NativePoint };
+type ContactSite = { appearance: string; reference: string };
+type ContactCover = { sites: Record<string, ContactSite>; evidence: string[] };
 export type ObservedTravel = { grid: Grid; actor: string | null; supports: string[]; visited: string[];
   moves: Record<string, Move>; tested: Record<string, number>; altered: string[]; controls: string[];
   completed: string[]; switches: Record<string, string | null>; pendingSelection?: string; refs: string[]; stalled: number;
-  possibleContacts?: Record<string, { appearance: string; reference: string }>;
-  contactAccess?: { sites: string[]; evidence: [string, string] } };
+  possibleContacts?: Record<string, ContactSite>;
+  contactAccess?: { sites: string[]; evidence: [string, string] }; contactCover?: ContactCover };
 export type TravelTrial = { approach?: WalkingStep[]; command: NativeCommand; target: NativePoint; evidence: string[];
   purpose: 'approach' | 'contact' | 'test_contact_hypothesis' | 'verify_contact_access'
-    | 'switch' | 'select' | 'approach_object' | 'separate_object'; experiment?: string };
+    | 'switch' | 'select' | 'approach_object' | 'separate_object'; experiment?: string; jointContactCover?: true };
 export type MarkContact = { command: NativeCommand; target: string; expected: string; evidence: string[] };
 
 const key = ([x, y]: NativePoint) => `${x},${y}`;
@@ -117,6 +119,33 @@ export function annotateTravelMarks(travel: ObservedTravel | undefined, rows: Na
 
 function knownFooting(pixels: readonly number[] | undefined, floor: number, supports: readonly string[]) {
   return !!pixels && (pixels.every(ink => ink === floor) || supports.includes(pixels.join(',')));
+}
+
+function repeatedContactCover(
+  state: ObservedTravel, cells: ReadonlyMap<string, number[]>, pieces: readonly string[],
+): ContactCover | undefined {
+  if (pieces.length < 2 || pieces.length > 4) return;
+  const groups = new Map<string, Record<string, ContactSite>>();
+  const visited = new Set(state.visited);
+  for (const [cell, contact] of Object.entries(state.possibleContacts ?? {})) {
+    const pixels = cells.get(cell);
+    if (!pixels || pixels.join(',') !== contact.appearance || pieces.includes(cell) || visited.has(cell)) continue;
+    const shape = pixels.map(ink => Number(ink !== state.grid.floor)).join('');
+    const sites = groups.get(shape) ?? {};
+    sites[cell] = contact;
+    groups.set(shape, sites);
+  }
+  const matching = [...groups.values()].filter(sites => Object.keys(sites).length === pieces.length);
+  if (matching.length === 1) return { sites: matching[0]!,
+    evidence: [...new Set(Object.values(matching[0]!).map(contact => contact.reference))] };
+}
+
+function currentCover(cover: ContactCover | undefined,
+  cells: ReadonlyMap<string, number[]>, occupied: readonly string[]) {
+  if (!cover) return;
+  const sites = Object.entries(cover.sites);
+  if (sites.length !== occupied.length || sites.every(([cell]) => occupied.includes(cell))) return;
+  if (sites.every(([cell, contact]) => occupied.includes(cell) || cells.get(cell)?.join(',') === contact.appearance)) return cover;
 }
 
 function calibrateAmongOtherChanges(before: NativeRows, after: NativeRows, lattices: Iterable<Grid>,
@@ -315,6 +344,7 @@ export function observeTravel(previous: ObservedTravel | undefined, before: Nati
   const altered = action === 'ACTION5' && changed.length >= 2 ? [...new Set([...previous.altered, ...changed])].sort() : previous.altered;
   const supports = new Set(previous.supports), visited = new Set(previous.visited), completed = new Set(previous.completed);
   let possibleContacts = previous.possibleContacts;
+  let contactCover = currentCover(previous.contactCover, next.cells, next.pieces);
   const stillOpen = previous.contactAccess?.sites.filter(cell => !next.pieces.includes(cell)
     && !visited.has(cell) && knownFooting(next.cells.get(cell), grid.floor, previous.supports));
   let contactAccess = previous.contactAccess && stillOpen?.length ? { ...previous.contactAccess, sites: stillOpen } : undefined;
@@ -331,6 +361,14 @@ export function observeTravel(previous: ObservedTravel | undefined, before: Nati
         if (witnessPossibleContacts) {
           const contact = previous.possibleContacts?.[to];
           if (contact && contact.appearance === first.cells.get(to)?.join(',')) {
+            if (!frameMarks(before, grid).length) {
+              const cover = currentCover(previous.contactCover, first.cells, first.pieces)
+                ?? repeatedContactCover(previous, first.cells, first.pieces);
+              if (cover?.sites[to]) {
+                const witnessed = currentCover(cover, next.cells, next.pieces);
+                if (witnessed) contactCover = { ...witnessed, evidence: [...new Set([...witnessed.evidence, ref])] };
+              }
+            }
             const opened = changed.filter(cell => !visited.has(cell)
               && !knownFooting(first.cells.get(cell), grid.floor, previous.supports)
               && knownFooting(next.cells.get(cell), grid.floor, previous.supports));
@@ -380,6 +418,7 @@ export function observeTravel(previous: ObservedTravel | undefined, before: Nati
     supports: [...supports], visited: [...visited], moves, tested, altered, controls, switches, completed: [...completed],
     ...(possibleContacts ? { possibleContacts } : {}),
     ...(contactAccess ? { contactAccess } : {}),
+    ...(contactCover ? { contactCover } : {}),
     ...(pendingSelection ? { pendingSelection } : {}), refs: [...previous.refs.slice(-5), ref], stalled: gained ? 0 : previous.stalled + 1 };
 }
 
@@ -398,10 +437,14 @@ export function chooseTravelTrial(state: ObservedTravel | undefined, rows: Nativ
   const witnessedAccess = !framed.length && allowUnframedContact
     ? (state.contactAccess?.sites ?? []).filter(cell => !pieces.includes(cell) && !visited.has(cell)
       && knownFooting(cells.get(cell), grid.floor, state.supports)) : [];
-  const goals = framed.length ? framed : [...new Set([...witnessedAccess, ...hypotheses])];
+  const cover = !framed.length && allowUnframedContact && canSelect && moves.length >= 2
+    ? currentCover(state.contactCover, cells, pieces) ?? repeatedContactCover(state, cells, pieces) : undefined;
+  const pendingCover = Object.keys(cover?.sites ?? {}).filter(cell => !pieces.includes(cell));
+  const goals = framed.length ? framed : [...new Set([...pendingCover, ...witnessedAccess, ...hypotheses])];
+  const desired = pendingCover.length ? pendingCover : goals;
   if (!goals.length) return;
   const access = new Set(witnessedAccess);
-  const contactOnly = new Set(hypotheses.filter(cell => !access.has(cell)));
+  const contactOnly = new Set(cover ? pendingCover : hypotheses.filter(cell => !access.has(cell)));
   const evidence = [...new Set([...state.refs, ...moves.map(move => move.ref)])];
   const start = point(actor);
   const unmeasured = inputs.filter(input => directional(input.action_ref) && !state.moves[input.action_ref]);
@@ -425,11 +468,11 @@ export function chooseTravelTrial(state: ObservedTravel | undefined, rows: Nativ
     const costs = new Map([[origin, 0]]);
     let best: { first: NativeCommand; cell: string; score: number; goal: boolean; priority: number; path?:Path } | undefined;
     const offer = (first: NativeCommand, cell: string, cost: number, goal: boolean, path?:Path) => {
-      const near = Math.min(...goals.map(target => distance(point(cell), point(target)))) / grid.pitch;
+      const near = Math.min(...desired.map(target => distance(point(cell), point(target)))) / grid.pitch;
       const score = cost + 4 * near - (canTestSwitch(cell) ? 4 : 0);
-      const priority = access.has(cell) ? 2 : Number(goal);
+      const priority = pendingCover.includes(cell) ? 3 : access.has(cell) ? 2 : Number(goal && !cover);
       if (!best || priority > best.priority || priority === best.priority && score < best.score) {
-        best = { first, cell, score, goal, priority, path };
+        best = { first, cell, score, goal: priority > 0, priority, path };
       }
     };
     for (let i = 0; i < open.length; i++) {
@@ -468,17 +511,20 @@ export function chooseTravelTrial(state: ObservedTravel | undefined, rows: Nativ
     }
     return best;
   }
-  const active = state.completed.includes(actor) ? undefined : route(actor);
+  const park = (cell: string) => state.completed.includes(cell) || !!cover?.sites[cell];
+  const active = park(actor) ? undefined : route(actor);
   if (switchCommand && !active?.goal && canTestSwitch(actor)) {
     return { command: switchCommand, target: start, purpose: 'switch', evidence };
   }
-  const peer = pieces.filter(cell => cell !== actor && !state.completed.includes(cell)).map(cell => ({ cell, plan: route(cell) }))
+  const peer = pieces.filter(cell => cell !== actor && !park(cell)).map(cell => ({ cell, plan: route(cell) }))
     .filter(option => !!option.plan).sort((a, b) => a.plan!.score - b.plan!.score)[0];
   if (canSelect && peer && (!active || peer.plan!.score + 8 < active.score)) {
     const at = point(peer.cell), offset = Math.floor(grid.pitch / 2);
     const command = { action_ref: 'ACTION6', data: { x: at[0] + offset, y: at[1] + offset } };
     if (!tested[trialKey(cells, observedCommandKey(command), actor, start)]) {
-      return { command, target: at, purpose: 'select', evidence };
+      return { command, target: at, purpose: 'select',
+        evidence: cover ? [...new Set([...evidence, ...cover.evidence])] : evidence,
+        ...(cover ? { jointContactCover: true } : {}) };
     }
   }
   if (active) {
@@ -486,10 +532,14 @@ export function chooseTravelTrial(state: ObservedTravel | undefined, rows: Nativ
       command: active.first, target: point(active.cell), purpose: 'verify_contact_access',
       evidence: [...new Set([...evidence, ...state.contactAccess!.evidence])],
     };
-    if (contactOnly.has(active.cell)) return {
+    if (contactOnly.has(active.cell) || hypotheses.includes(active.cell)) return {
       command: active.first, target: point(active.cell), purpose: 'test_contact_hypothesis',
-      evidence: [...new Set([...evidence, state.possibleContacts![active.cell]!.reference])],
+      evidence: [...new Set([...evidence, (cover?.sites[active.cell] ?? state.possibleContacts![active.cell]!).reference,
+        ...(cover?.evidence ?? [])])],
+      ...(cover ? { jointContactCover: true } : {}),
     };
+    if (cover) return { command: active.first, target: point(active.cell), purpose: 'contact', jointContactCover: true,
+      evidence: [...new Set([...evidence, ...cover.evidence])] };
     const approach:WalkingStep[]=[];
     const bounds=(at:string):NativeBox=>{const [x,y]=point(at);return [x,y,x+grid.pitch-1,y+grid.pitch-1];};
     if(active.goal && !unmeasured.length){

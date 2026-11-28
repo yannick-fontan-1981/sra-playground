@@ -960,7 +960,8 @@ export function createSicPublicInputExploration(fallback = false,
       const publicTravel = travelAvailable && (canTravel || options.allowUnframedContact)
         ? chooseTravelTrial(local.travel, rows, nonPoint, observation.available_action_refs.includes('ACTION6'), options.allowUnframedContact)
         : undefined;
-      const groundedContact = publicTravel?.purpose === 'test_contact_hypothesis' || publicTravel?.purpose === 'verify_contact_access';
+      const groundedContact = publicTravel?.purpose === 'test_contact_hypothesis'
+        || publicTravel?.purpose === 'verify_contact_access' || publicTravel?.jointContactCover;
       const travel = contactTrial ? { command: contactTrial.command, target: contactTrial.actor.split(',').map(Number) as [number, number],
         purpose: contactTrial.purpose, evidence: contactTrial.evidence, experiment: undefined } : separation
         ?? (canTravel || groundedContact ? publicTravel : undefined);
@@ -1393,6 +1394,7 @@ export function createSicPublicInputExploration(fallback = false,
           ...(selectedCoverage?.routeImprovement ? { coverageRouteImprovement: { motion: selectedCoverage.motion, ...selectedCoverage.routeImprovement } } : {}),
           ...(travel?.purpose === 'test_contact_hypothesis' && travelEvidence.length ? { unframedContactHypothesis: true } : {}),
           ...(travel?.purpose === 'verify_contact_access' && travelEvidence.length ? { witnessedContactAccess: true } : {}),
+          ...(travel && 'jointContactCover' in travel && travel.jointContactCover && travelEvidence.length ? { jointContactCover: true } : {}),
           ...(recalledDirection ? { priorLevelMechanism: 'Test a direction previously observed to change the board',
             newLevelConfiguration: 'The current interface needs a fresh control check' } : {}),
           ...(selectedEntry?.recurring ? { priorLevelMechanism: selectedEntry.recurring } : {}),

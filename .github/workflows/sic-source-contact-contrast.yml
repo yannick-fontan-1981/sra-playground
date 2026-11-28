@@ -1,4 +1,4 @@
-name: SIC witnessed remote access following a native contact
+name: SIC test simultaneous occupancy from repeated public cues
 
 on:
   push:
