@@ -1,0 +1,140 @@
+{
+  "versions": [
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "626afb83bcc904c6be987fae08fae01b7bd8a94b",
+    "be816a3f09e7b36d9393aaead8d835d9dc3850c5"
+  ],
+  "départsCommunsParSHA": 8,
+  "gestesCommunsParSHA": 130,
+  "catalogue": {
+    "sha": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gestes": 16
+  },
+  "appelsSupplémentaires": {
+    "révisions": [
+      "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "be816a3f09e7b36d9393aaead8d835d9dc3850c5"
+    ],
+    "départsParSHA": 2,
+    "gestesParSHA": 31,
+    "dialogue": [
+      {
+        "appel": "advance",
+        "sequence": 15,
+        "ticketEntrant": "frontier-qualification:native:15",
+        "réponse": "boundary",
+        "ticketSortant": null,
+        "commande": null
+      },
+      {
+        "appel": "resume",
+        "sequence": 15,
+        "ticketEntrant": null,
+        "réponse": "action",
+        "ticketSortant": "frontier-qualification:native:16",
+        "commande": "ACTION4"
+      }
+    ]
+  },
+  "arêteDatée": "transition:b4b5c2eae6c3a201220681c71d4822638372d8a008a1af28178f814adb81a86b",
+  "questionsAtteignables": 3,
+  "premiersÉcarts": {
+    "question": {
+      "longueur": 2,
+      "question": "Q_af0257e2c8ca6ad0386a",
+      "tickets": [
+        [
+          "observed_frontier",
+          "reach_open_input",
+          "access",
+          "ACTION4",
+          true
+        ],
+        [
+          "observed_frontier",
+          "reach_open_input",
+          "access",
+          "ACTION4",
+          true
+        ]
+      ],
+      "arrêt": {
+        "kind": "limite_du_releve",
+        "prochain": "stopped",
+        "raison": "session_action_budget"
+      }
+    },
+    "arête": {
+      "longueur": 0,
+      "question": null,
+      "tickets": [],
+      "arrêt": {
+        "kind": "stopped",
+        "reason": "frontier_frontier_exhausted",
+        "decision": "observed_frontier",
+        "phase": "stopped"
+      }
+    },
+    "remplacement": {
+      "longueur": 1,
+      "question": "Q_8b45c6cdc354b85cd0a2",
+      "tickets": [
+        [
+          "observed_frontier",
+          "reach_open_input",
+          "access",
+          "ACTION4",
+          true
+        ],
+        [
+          "observed_frontier",
+          "reach_open_input",
+          "access",
+          "ACTION3",
+          null
+        ]
+      ],
+      "arrêt": {
+        "kind": "limite_du_releve",
+        "prochain": "stopped",
+        "raison": "session_action_budget"
+      }
+    },
+    "autre-question": {
+      "longueur": 2,
+      "question": "Q_af0257e2c8ca6ad0386a",
+      "tickets": [
+        [
+          "observed_frontier",
+          "reach_open_input",
+          "access",
+          "ACTION4",
+          true
+        ],
+        [
+          "observed_frontier",
+          "reach_open_input",
+          "access",
+          "ACTION4",
+          true
+        ]
+      ],
+      "arrêt": {
+        "kind": "limite_du_releve",
+        "prochain": "stopped",
+        "raison": "session_action_budget"
+      }
+    },
+    "retrait": {
+      "longueur": 0,
+      "question": null,
+      "tickets": [],
+      "arrêt": {
+        "kind": "stopped",
+        "reason": "frontier_frontier_exhausted",
+        "decision": "observed_frontier",
+        "phase": "stopped"
+      }
+    }
+  }
+}
