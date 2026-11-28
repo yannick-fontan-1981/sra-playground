@@ -16,7 +16,13 @@ Les 46 numéros sont **1, 2, 3, 4, 5, 11, 13, 14, 15, 16, 18, 22, 23, 26, 27, 28
 
 ## État du verdict
 
-**Qualification en cours.** Le montage Git et le typage sont vérifiés. La campagne des 107 et les témoins locaux sont lancés sur cet arbre.
+**Les 46 lignes coexistent sur `ba2e7c6b`.** Les 430 tests locaux passent. Les deux défis publics STCK et VALV concordent après contrôle des références réutilisées. Les témoins TN36, SEQN, WA30, GRIL et TICT/SP80 reproduisent leurs décisions et retours. Les douze préfixes AS66 retrouvent leurs preuves de raccord statique et horlogé. [Témoins et journaux](sic-coexistence-ba2e7c6b/temoins.zip)
+
+**DICO/86, 87 et 98 ont été vérifiées sur ce même SHA.** Pour 86, cinq variantes de navigation reproduisent leur ticket, garde, retour et suite. Pour 87, le catalogue, la curiosité et la substitution de l’autre optimum reproduisent leurs reçus. Pour 98, les trois ordres d’ouverture reproduisent les choix de leur protocole. Le vérificateur recalcule le blob combiné de 86 et 87 ainsi que les fichiers de partition et d’ouverture hérités.
+
+Les reçus des **107 jeux uniques, 692 niveaux et 18 560 commandes** concordent avec le gel et le parent à 35 lignes. Deux resets, SS01 et SS04, et zéro undo. Le verdict sur les 107 a la précision des reçus historiques. Les décisions, preuves et retours détaillés sont comparés sur les témoins ciblés. [Index par jeu](sic-coexistence-ba2e7c6b/qualification.json) · [Reçus des 24 lots](sic-coexistence-ba2e7c6b/recus.zip)
+
+La campagne a duré 11 min 39 s, avec un pic de 20 runners et 6111 secondes cumulées de rejeu. L’import vérifie trois jeux au premier passage, puis 104 nouveaux et trois réutilisés, puis 107 réutilisés. Verdict complet à 27/11 23:01:39 (UTC−3), après 26 min 58 s. [Horaires](sic-coexistence-ba2e7c6b/horaires.json)
 
 ## Reproduire
 
