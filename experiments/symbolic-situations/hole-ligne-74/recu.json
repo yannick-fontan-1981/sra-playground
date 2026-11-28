@@ -1,0 +1,73 @@
+{
+  "sha": {
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "candidat": "4f39c40869cdb3c2881d4fef01d3a7eafaf196dd"
+  },
+  "stats": {
+    "departsParSha": 7,
+    "gestesParSha": 59,
+    "parite": true
+  },
+  "lengths": {
+    "nominal": 16,
+    "stationnaire": 6,
+    "exterieur": 6,
+    "poche-ouverte": 7,
+    "poche-jouee": 8,
+    "poche-coherente": 8,
+    "pixel-neutre": 8
+  },
+  "nominal": {
+    "selectionPixels": 44,
+    "pixelsT7": 133,
+    "pixelsT8": 95,
+    "gains": 1,
+    "N2T16": {
+      "pixels": 89,
+      "pigment": 14
+    }
+  },
+  "poche": {
+    "point": [
+      36,
+      11
+    ],
+    "ancienneCible": 10,
+    "nouvelleCible": 9,
+    "ancienClic": [
+      "ACTION6",
+      {
+        "x": 20,
+        "y": 32
+      }
+    ],
+    "autreClic": [
+      "ACTION6",
+      {
+        "x": 43,
+        "y": 11
+      }
+    ],
+    "paquet": "af564c0c724eb66a51b150fe805d67cb29479cfea28e76778365f094b2ae921f",
+    "physique": {
+      "seed": [
+        43,
+        11
+      ],
+      "count": 92,
+      "pigment": 9,
+      "within": false,
+      "outside": 1
+    },
+    "presente": {
+      "seed": [
+        43,
+        11
+      ],
+      "count": 91,
+      "pigment": 9,
+      "within": true,
+      "outside": 0
+    }
+  }
+}

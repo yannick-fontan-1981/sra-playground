@@ -1,0 +1,48 @@
+{
+  "sha": {
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "candidat": "c41c028c2ed06244715bad39024f542d44f8eda0"
+  },
+  "stats": {
+    "departsParSha": 6,
+    "gestesParSha": 31,
+    "parite": true
+  },
+  "lengths": {
+    "nominal": 16,
+    "sans-types": 1,
+    "type-temoin": 1,
+    "ordre-entrees": 2,
+    "stationnaire": 1,
+    "stationnaire-plan": 10
+  },
+  "paires": 6,
+  "glyphes": 5,
+  "derivations": 1,
+  "familleNominale": "word_interface",
+  "retraitType": {
+    "paires": 5,
+    "famille": "acquire_control_for_target",
+    "memePaquet": true
+  },
+  "temoinType": {
+    "paires": 5,
+    "famille": "word_interface"
+  },
+  "apprentissage": {
+    "premierIndice": 0,
+    "editionInverse": 8,
+    "curseur": 9
+  },
+  "projectionsConfirmees": 7,
+  "gains": 0,
+  "stationnaireT10": {
+    "matched": false,
+    "seal": true,
+    "commandeSuivante": [
+      "ACTION2",
+      {}
+    ],
+    "indexSuivant": 0
+  }
+}
