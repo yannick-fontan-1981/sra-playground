@@ -1,0 +1,15 @@
+# AS66 · critères figés avant le changement
+
+Le témoin de la ligne 84 est le cinquième geste du catalogue depuis L1, au niveau 1, avec un plafond global de 16. La ligne 97 est le quatorzième geste depuis L1, au niveau 3. L’inventaire publié à `2a17e14b` indique six occurrences de la seconde. L’entrée publique `coverage` de `8ce7ee35` fournit un parcours de comparaison avec le pack par défaut, ouverture native, 600 gestes par niveau et arrêt du pilote après trois niveaux. Elle omet le plafond de session. La fiche ne renseigne ni l’URL ni le budget de la campagne qui a produit la ligne 97.
+
+| Ligne | Pré-événement requis | Vérification dans le service et première divergence enregistrée |
+|---|---|---|
+| 84 · glisser jusqu’à une cavité | Corps lié, cavité compatible, surface, sens de commande mesuré et accès dérivé de la géométrie d’arrêt. | Au T5, `sliding_cavity_access / ACTION2` propose un arrêt avant d’émettre. Le changement de niveau scelle le pas. Retirer le sens requis ou l’offre d’accès à ce tour doit empêcher ce ticket. Un deuxième accès en L2 doit employer la même articulation, après acquisition des directions manquantes. |
+| 97 · rejoindre la cavité en tenant compte du cycle | Deux mesures de co-mouvement avant celui de l’acteur, issues de commandes distinctes, même motif et même translation, position actuelle reliée à l’image. Deux prévisions de rebond restent concurrentes. | Au T14 du parcours à trois niveaux, le fournisseur doit offrir `clocked_cavity_access / ACTION1`. Les pas suivants sont des continuations tant que les gardes du plan restent admises. Un seul témoin, deux mesures attribuées à la même commande, un masque déplacé ou un horizon insuffisant doivent écarter l’offre horlogée. Un écart de plateau après émission doit sceller le préfixe et forcer une nouvelle décision. |
+
+**Contrôles d’attribution.** Pour 84, comparer le noyau de calcul géométrique déjà consommé sur le gel et la possibilité de retirer seulement l’offre complète d’accès, sans retirer le fournisseur de la famille. Pour 97, retirer seulement le résultat du producteur temporel déjà appelé et enregistrer le choix suivant. Le service reste seul habilité à délivrer le ticket. Une sonde de direction choisie au lieu d’un accès appartient à la ligne 83. Les observations de son retour renseignent la direction disponible au tour suivant.
+
+**Sources des entrées.** Départ réel du jeu au niveau 1 et paquets publics rendus après chaque ticket. Les références, la portée des arrêts, les vecteurs connus, les échantillons de phase et l’horizon sont relevés avant la production locale. Le type de proposition, l’indice, la commande et la comparaison au retour se lisent ensuite. Un retour modifié et un retrait expérimental sont désignés comme tels. Les contre-épreuves locales sont rejouées sur des copies de l’état natif déjà acquis.
+
+Début du lot après remise de GLOB : 2026-11-28 00:47:58 UTC. Le Banc a reproduit les réglages du parcours public à `47ae8531`.
+
