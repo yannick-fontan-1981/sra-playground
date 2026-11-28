@@ -11,7 +11,7 @@ Les 16 commandes, les 17 observations, les gardes et les retours physiques conco
 | N1/T5 après retour | L'enfant est clos sur la paire de références r5 → r6. Le sujet avance de `[6,0]`. La mémoire du parent contient ce vecteur et la référence r6. |
 | N1/T6 | P07 joue le même ACTION4 et prévoit le point `[26,8]`. Le ticket et son observation portent r6. |
 
-Le banc a remplacé la seule référence d'ouverture au moment où le fournisseur acquiert le vrai retour T5. Les cinq premières commandes et leurs paquets physiques restent ceux du nominal. Le reçu typé et les champs du vecteur ACTION4 restent absents. Le T6 perd la sélection P07. La remesure rejette également un couple destination-vecteur fabriqué, cohérent numériquement et incompatible avec les observations de ce ticket. Les 31 tests ciblés passent.
+Le banc a remplacé la seule référence d'ouverture r5 par la vraie r3 de la même époque au moment où le fournisseur acquiert le retour T5. Les cinq premières commandes et leurs paquets physiques restent ceux du nominal. Le reçu typé et les champs du vecteur ACTION4 restent absents. Le T6 joue ACTION3 sous P05 à la place d'ACTION4 sous P07. La remesure rejette également un couple destination-vecteur fabriqué, cohérent numériquement et incompatible avec les observations de ce ticket. Les 31 tests ciblés passent.
 
 Depuis le Banc, utiliser Node 24.22.3, deux checkouts propres, et un nouveau dossier de sortie.
 

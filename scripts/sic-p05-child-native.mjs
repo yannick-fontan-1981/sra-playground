@@ -93,7 +93,7 @@ assert.deepEqual(decision(after, 6).proposal.steps[0].expected_after, [26, 8]);
 assert.ok(rejectedForgery);
 
 const staleMemory = {};
-let interventions = 0;
+let interventions = 0, earlierOpening;
 const stale = await capture(candidate, sha, 'stale', {
   stopAfter: 6, allowStopped: true, onReply: inspect(staleMemory),
   configureRuntime(runtime) {
@@ -101,9 +101,12 @@ const stale = await capture(candidate, sha, 'stale', {
     const record = producer.record.bind(producer);
     producer.record = (...args) => {
       const [before, , command, , , proposal] = args;
+      if (before.revision === 3) earlierOpening = before.observation_ref;
       if (before.revision === 5 && command.action_ref === 'ACTION4' && proposal.controlEffectChild) {
+        assert.ok(earlierOpening?.includes(':revision:3:'));
+        assert.equal(earlierOpening.split(':revision:')[0], before.observation_ref.split(':revision:')[0]);
         interventions++;
-        args[5] = { ...proposal, controlEffectChild: { ...proposal.controlEffectChild, opening: 'stale' } };
+        args[5] = { ...proposal, controlEffectChild: { ...proposal.controlEffectChild, opening: earlierOpening } };
       }
       return record(...args);
     };
@@ -116,11 +119,13 @@ assert.deepEqual(snapshots(altered).slice(0, 6), snapshots(after).slice(0, 6));
 assert.equal(returns(altered).find(e => e.turn === 5), undefined);
 assert.equal(staleMemory[5].vector, undefined);
 assert.equal(staleMemory[5].evidence, undefined);
-assert.notEqual(decision(altered, 6)?.proposal.sicLocalDecision?.strategy, 'P07');
+const fallback = decision(altered, 6);
+assert.notEqual(fallback?.proposal.sicLocalDecision?.strategy, 'P07');
 const summary = { base, sha, commands: b.commands.length, observations: snapshots(after).length, first: native,
-  resultCount: received.length, observed: 4, unresolved: 2, fifth, memory, staleMemory, interventions, rejectedForgery };
+  resultCount: received.length, observed: 4, unresolved: 2, fifth, memory, staleMemory, interventions, rejectedForgery,
+  earlierOpening, fallback: { strategy: fallback?.proposal.sicLocalDecision?.strategy, command: fallback?.command } };
 writeFileSync(join(directory, 'report.json'), JSON.stringify(summary, null, 2) + '\n', { flag: 'wx' });
 const { event, level, turn, field } = native;
 console.log(JSON.stringify({ commands: summary.commands, observations: summary.observations,
   first: { event, level, turn, field }, results: [summary.observed, summary.unresolved],
-  displacement: fifth.displacement, afterRef: fifth.afterRef, interventions, rejectedForgery }));
+  displacement: fifth.displacement, afterRef: fifth.afterRef, interventions, rejectedForgery, fallback: summary.fallback }));
