@@ -1,0 +1,36 @@
+{
+  "stats": {
+    "versions": 2,
+    "départsParVersion": 5,
+    "gestesParVersion": 26,
+    "testsParVersion": 4,
+    "occurrencesCatalogue": 8,
+    "gestesCatalogue": 9,
+    "niveauxTerminés": 2
+  },
+  "continuation": {
+    "authentiques": [
+      3,
+      4,
+      5
+    ],
+    "dupliquées": [
+      3,
+      3,
+      5
+    ],
+    "choix": {
+      "x": 46,
+      "y": 54
+    }
+  },
+  "stationnaire": {
+    "statut": "answer_acceptance_unconfirmed",
+    "repli": "ACTION1",
+    "reprise": {
+      "x": 41,
+      "y": 54
+    },
+    "autreEssai": "45ab46c1fccf4e4de5dd40ec890404134beab9cb65fd02f35e562b8b2e914440"
+  }
+}
