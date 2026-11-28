@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { ConfiguredScene } from '../src/logos-engine/v6-configured-arrivals.ts';
 import { planTimedArrival, timedNetwork, type ArrivalTiming, type TimedNetwork } from '../src/sic/shared-arrival-timing.ts';
+import { inferWitnessedSuffixCycle } from '../src/sic/witnessed-cycle.ts';
+import { composePlan, type ComposableEffect } from '../src/sic/effect-composer.ts';
 
 test('a closed admission phase delays entry into the next cell', () => {
   const base = new Set(['0,0', '1,0', '2,0', '2,1', '2,2', '2,3']);
@@ -32,6 +34,46 @@ test('arrival planning consumes the observed prefix before the steady admission 
   assert.equal(planTimedArrival(scene, network, timing, 1), null);
   assert.deepEqual(planTimedArrival(scene, network, { ...timing, clockPrefixes: { '1,0': [true, false, false] } }, 1)?.ticks, [4]);
   assert.equal(planTimedArrival(scene, network, { ...timing, clockPrefixes: { '1,0': [true, null, false] } }, 1), null);
+});
+
+test('a phase learned from public observations composes with a load held across the passage', () => {
+  const gate = (tick: number) => tick < 3 ? tick !== 0 : tick % 3 === 0;
+  const samples = Array.from({ length: 15 }, (_, tick) => gate(tick));
+  const cycle = inferWitnessedSuffixCycle(samples);
+  assert.ok(cycle);
+  type State = { tick: number; cell: number; held: boolean };
+  type Action = 'wait' | 'put_load' | 'enter' | 'exit';
+  const initial = { tick: samples.length - 1, cell: 0, held: false };
+  const pressure = { relation: 'load still holds the passage', holds: (state: State) => state.held };
+  const plan = composePlan<State, Action>({
+    initial, key: state => JSON.stringify(state), budget: { commands: 5, states: 64 },
+    goal: { relation: 'cross the passage', holds: state => state.cell === 2 },
+    *choices(state): Iterable<ComposableEffect<State, Action>> {
+      const tick = state.tick + 1, after = { ...state, tick };
+      yield { action: 'wait', after };
+      if (state.cell === 0 && !state.held) yield { action: 'put_load', after: { ...after, held: true } };
+      if (state.cell === 0 && cycle.phases[(tick - cycle.onset) % cycle.phases.length]) {
+        yield { action: 'enter', after: { ...after, cell: 1 }, maintains: [pressure] };
+      }
+      if (state.cell === 1) yield { action: 'exit', after: { ...after, cell: 2 }, maintains: [pressure] };
+    },
+  });
+  assert.ok(plan);
+  let actual = { ...initial };
+  for (const { action, after } of plan.effects) {
+    actual = { ...actual, tick: actual.tick + 1 };
+    if (action === 'put_load') actual.held = true;
+    if (action === 'enter') {
+      assert.ok(actual.cell === 0 && actual.held && gate(actual.tick));
+      actual.cell = 1;
+    }
+    if (action === 'exit') {
+      assert.ok(actual.cell === 1 && actual.held);
+      actual.cell = 2;
+    }
+    assert.deepEqual(actual, after);
+  }
+  assert.deepEqual(actual, { tick: 19, cell: 2, held: true });
 });
 
 test('measure a wider gate network when there is a periodic admission mark', () => {
