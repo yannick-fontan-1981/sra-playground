@@ -7,11 +7,28 @@ import { initialModels, observationKey, transitions } from './models.mjs';
 import { fixedWorkflow, onlineComposition } from './policies.mjs';
 
 const distinct = values => [...new Set(values)];
+const alphabetOf = rules => JSON.stringify([...rules.controls].sort());
+
+function retainedControl(rules, prior) {
+  if (!prior) return undefined;
+  if (!rules.controlMarkers && !prior.markedDomain) return prior.alphabet === alphabetOf(rules) ? prior : undefined;
+  if (!prior.marker || !rules.controlMarkers) return undefined;
+  const matches = rules.controls.filter(code => rules.controlMarkers[code] === prior.marker);
+  if (matches.length !== 1) return undefined;
+  return { ...prior, sourceControl: prior.control, control: matches[0], binding: 'unique_current_marker' };
+}
+
+function measureControl(rules, control, evidence, effect) {
+  if (!rules.controlMarkers) return { control, alphabet: alphabetOf(rules), evidence };
+  const marker = rules.controlMarkers[control];
+  return { control, alphabet: alphabetOf(rules), evidence, effect, markedDomain: true,
+    ...(rules.controls.filter(code => rules.controlMarkers[code] === marker).length === 1 ? { marker } : {}) };
+}
 
 export function play(spec, policy, prior = undefined) {
   const terrain = scenario(spec);
   const { rules } = terrain;
-  const compatiblePrior = prior?.alphabet === JSON.stringify([...rules.controls].sort()) ? prior : undefined;
+  const compatiblePrior = retainedControl(rules, prior);
   const controller = policy(rules, compatiblePrior);
   let models = initialModels(rules), observed = terrain.read(), stop, learned;
   const steps = [];
@@ -29,8 +46,9 @@ export function play(spec, policy, prior = undefined) {
     const after = distinct(branches.models.map(model => model.control));
     steps.push({ number: steps.length + 1, observed, decision, returned: next,
       hypothesesBefore: models.length, hypothesesAfter: branches.models.length, possibleControls: after });
-    if (before.length > 1 && after.length === 1) {
-      learned = { control: after[0], alphabet: JSON.stringify([...rules.controls].sort()), evidence: steps.length };
+    const effect = next.armed && !observed.armed ? 'armed' : next.open && !observed.open ? 'opened' : undefined;
+    if (after.length === 1 && (rules.controlMarkers ? !learned && effect : before.length > 1)) {
+      learned = measureControl(rules, after[0], steps.length, effect);
     }
     observed = next;
     models = branches.models;

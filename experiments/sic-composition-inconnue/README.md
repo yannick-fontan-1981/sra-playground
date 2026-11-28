@@ -28,3 +28,7 @@ Avec Node 24, `node --test experiments/sic-composition-inconnue/natif.test.mjs` 
 ## Contre-épreuve sur l’accusé d’armement
 
 Avec une charge unique, deux pas d’approche et une fenêtre de trois gestes, attendre la porte ouverte peut consommer le temps nécessaire pour lire la cible et sortir. L’essai `mesure-armement.json` compare deux observations d’un même terrain. L’option `armingSignal: true` rend visible le fait que la charge vient d’être consommée, alors que la porte est encore fermée. Le test vérifie d’abord l’égalité des retours physiques pour la même suite imposée, puis mesure si l’accusé change une décision et permet le franchissement.
+
+## Transfert sous un autre alphabet
+
+Le terrain peut publier `controlMarkers`, qui associe un identifiant de repère observé à chaque commande. Un effet acquis lie le repère à la commande seulement si le repère est unique dans la scène source. Une scène de destination peut proposer une commande différente portant ce même repère unique. Cette correspondance change l’ordre des essais. Chaque hypothèse d’effet demeure possible jusqu’au nouveau retour. Les cas de `transfert-reperes.json` couvrent le renommage, le repère absent ou dupliqué et l’effet contredit après rappel.

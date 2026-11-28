@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "cases": [
+    {"id":"source-impulsion","mechanic":"pulse","controls":["alpha","bravo"],"control":"bravo","controlMarkers":{"alpha":"ring","bravo":"split"},"delay":2,"window":3,"approach":2,"target":"left","visibility":"gate","moveBudget":9,"searchBudget":12000},
+    {"id":"charge-renommee","mechanic":"load","controls":["y","z"],"control":"z","controlMarkers":{"y":"ring","z":"split"},"delay":1,"window":3,"approach":1,"target":"right","visibility":"gate","moveBudget":9,"searchBudget":12000},
+    {"id":"charge-repere-ambigu","mechanic":"load","controls":["y","z"],"control":"z","controlMarkers":{"y":"split","z":"split"},"delay":1,"window":3,"approach":1,"target":"right","visibility":"gate","moveBudget":9,"searchBudget":12000},
+    {"id":"charge-repere-absent","mechanic":"load","controls":["y","z"],"control":"z","controlMarkers":{"y":"ring","z":"grid"},"delay":1,"window":3,"approach":1,"target":"right","visibility":"gate","moveBudget":9,"searchBudget":12000},
+    {"id":"charge-effet-refute","mechanic":"load","controls":["y","z"],"control":"y","controlMarkers":{"y":"ring","z":"split"},"delay":1,"window":3,"approach":1,"target":"right","visibility":"gate","moveBudget":9,"searchBudget":12000,"armingSignal":true}
+  ],
+  "transfers": [
+    {"from":"source-impulsion","to":"charge-renommee"},
+    {"from":"source-impulsion","to":"charge-repere-ambigu"},
+    {"from":"source-impulsion","to":"charge-repere-absent"},
+    {"from":"source-impulsion","to":"charge-effet-refute"}
+  ]
+}
