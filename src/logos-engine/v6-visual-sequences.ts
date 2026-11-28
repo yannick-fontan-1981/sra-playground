@@ -310,10 +310,18 @@ export class VisualSequences {
       bundle_template: { operation_key: 'OP18', composition_ref: focus, objective_ref: 'G_official_completion', preserve_refs: [], purpose: this.config.question, preconditions: facts, evidence, actions: [action], outcome_guard: { path: ['value'], contains: focus } } };
   }
   async proposeContinuation(obs: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number, minimumRows: number): Promise<VisualSequenceProposal | null> {
-    const seen = this.events.filter(e => e.status === 'observed_row_completion' && e.other_cards_preserved && e.expected_card_filled), boundaries = this.events.filter(e => e.status === 'official_boundary');
-    if (new Set(seen.map(e => e.question)).size < minimumRows || !boundaries.length) return null;
+    const completions = new Map<unknown, NativeRecord>();
+    const boundaries = this.events.filter(e => e.status === 'official_boundary');
+    for (const event of this.events) {
+      if (event.status !== 'observed_row_completion' || !event.other_cards_preserved || !event.expected_card_filled) continue;
+      // Keep each question's latest receipt in its chronological position.
+      completions.delete(event.question);
+      completions.set(event.question, event);
+    }
+    if (completions.size < minimumRows || !boundaries.length) return null;
     const proposal = await this.propose(obs, rows, inputs, remaining); if (!proposal) return null;
-    const witnesses = [...seen.slice(-minimumRows).map(e => e.evidence as string), boundaries.at(-1)!.evidence as string];
+    const recentCompletions = [...completions.values()].slice(-minimumRows);
+    const witnesses = [...recentCompletions.map(e => e.evidence as string), boundaries.at(-1)!.evidence as string];
     proposal.facts.visual_answer_method_recalled = true; proposal.bundle_template.preconditions.visual_answer_method_recalled = true;
     proposal.bundle_template.evidence.push(...witnesses); proposal.sequence_plan.continuation_witnesses = witnesses; return proposal;
   }
