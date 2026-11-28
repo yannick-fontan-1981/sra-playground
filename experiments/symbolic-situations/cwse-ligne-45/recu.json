@@ -1,0 +1,38 @@
+{
+  "stats": [
+    {
+      "engine": "gel",
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 7,
+      "gestes": 38
+    },
+    {
+      "engine": "candidat",
+      "sha": "71e15295d2fd38996147a524e4b0cd63e2991cc5",
+      "départs": 7,
+      "gestes": 38
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "trajetInitial": 6,
+  "mêmeACTION4": {
+    "accès": false,
+    "sonde": null
+  },
+  "référenceCommune": [
+    "frame_hash",
+    "level_epoch",
+    "levels_completed",
+    "state"
+  ],
+  "gardes": [
+    "reception_binding_changed",
+    "relation_binding_changed"
+  ],
+  "N3": {
+    "pasPrévus": 8,
+    "pasConfirmés": 4,
+    "niveauxFinis": 2,
+    "stationnaireScellé": true
+  }
+}
