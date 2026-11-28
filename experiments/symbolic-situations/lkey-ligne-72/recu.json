@@ -1,0 +1,48 @@
+{
+  "sha": {
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "candidat": "d67284e820e8d1987da055096732fc257c679f3f"
+  },
+  "stats": {
+    "departsParSha": 4,
+    "gestesParSha": 52,
+    "occurrencesCatalogue": 6,
+    "extensionsPortablesConsommees": 0
+  },
+  "contrasteT10": [
+    [
+      0,
+      1
+    ]
+  ],
+  "tour11": {
+    "commande": [
+      "ACTION1",
+      {}
+    ],
+    "revisions": [
+      11,
+      10
+    ],
+    "delta": -1
+  },
+  "retrait": {
+    "commande": [
+      "ACTION6",
+      {
+        "x": 47,
+        "y": 18
+      }
+    ],
+    "effetGeometrique": 0,
+    "reprise": [
+      "ACTION1",
+      {}
+    ],
+    "suite": [
+      "ACTION4",
+      {}
+    ]
+  },
+  "gainsNominaux": 1
+}
