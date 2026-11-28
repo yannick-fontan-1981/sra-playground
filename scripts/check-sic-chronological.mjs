@@ -117,7 +117,16 @@ async function run(code,requestedTarget,parallelWorkers) {
   const costs={};const transport={request:async operation=>{if(operation.type==='resume') resumes++;const start=performance.now();try{const response=await service.handle(operation);if(evidence)retainSourceEvidence(response);return response;}finally{const stat=costs[operation.type]??={ms:0,count:0};stat.ms+=performance.now()-start;stat.count++;}},reset:()=>{},dispose:()=>{}};
   const usage = new Map(), decisions = new Map(), series = new Map(); let resumes=0, priorDispatch=null;const continuedGaps=[], boundaryGaps=[]; let board=await game({type:'load',code,level:1}), gameMs=0, first=null; const effects=[]; const pathKinds = new Map();
   const target = requestedTarget ?? board.levelCount;
-  const levelBudgets = replayCampaignBudgets(code, target, historical, supplied);
+  const actionCap = process.env.SIC_COMPARISON_ACTION_CAP;
+  const timeCap = process.env.SIC_COMPARISON_TIME_CAP_MS;
+  const explicitCap = actionCap !== undefined || timeCap !== undefined;
+  if (explicitCap && (!sourceArm || supplied !== undefined || !/^[1-9]\d*$/.test(actionCap ?? '')
+    || !/^[1-9]\d*$/.test(timeCap ?? '') || !Number.isSafeInteger(Number(actionCap)) || !Number.isSafeInteger(Number(timeCap)))) {
+    throw new TypeError('A matched comparison cap requires a registered arm and two positive integer bounds.');
+  }
+  const levelBudgets = explicitCap
+    ? Array.from({length:target}, () => ({actions:Number(actionCap),activeTimeMs:Number(timeCap),source:'matched_comparison_cap'}))
+    : replayCampaignBudgets(code, target, historical, supplied);
   const recoveries = { reset: 0, undo: 0 };
   const trajectory=createHash('sha256');
   const start=performance.now();
