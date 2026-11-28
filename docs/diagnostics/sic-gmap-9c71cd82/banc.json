@@ -1,0 +1,56 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "9c71cd820b59ef3456455b637a0a062abe1d03d0",
+    "attendus": "d9097a5bd413f17b4113937a7983356d4292b4f9"
+  },
+  "prefixes": 6,
+  "scopedPermission": {
+    "edge": "[29, 28]>[35, 28]",
+    "from": [
+      29,
+      28
+    ],
+    "to": [
+      35,
+      28
+    ],
+    "value": 10,
+    "removed_boundary_bbox": [
+      58,
+      23,
+      63,
+      36
+    ],
+    "evidence": [
+      "gmap-34:epoch:1:revision:2:frame:813ce56b08ec745e",
+      "gmap-34:epoch:1:revision:3:frame:865a59b976616de7",
+      "gmap-34:epoch:1:revision:4:frame:df00c3bd79810681"
+    ],
+    "returned_frame_context": {},
+    "position_association": "scoped_conditional_chart_correspondence",
+    "status": "local_permission_hypothesis_not_confirmed_transaction"
+  },
+  "noLocationOffer": [],
+  "sameFallbackCommand": [
+    "ACTION1",
+    {}
+  ],
+  "admissibleLocations": [
+    [
+      29,
+      28
+    ],
+    [
+      35,
+      28
+    ]
+  ],
+  "commonAction": [
+    "ACTION4",
+    {}
+  ],
+  "firstOfficialLevel": 1,
+  "archiveSHA256": "a6ab32670636468aa7894ada2357721149424d151a13bdb905707009f9ba1a9c"
+}
