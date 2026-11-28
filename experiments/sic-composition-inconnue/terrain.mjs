@@ -6,19 +6,21 @@ export const exits = ['left', 'right'];
 const between = (value, min, max) => Number.isInteger(value) && value >= min && value <= max;
 
 export function scenario(spec) {
-  const { id, mechanic, controls, control, delay, window, approach, target, visibility, moveBudget, searchBudget } = spec;
+  const { id, mechanic, controls, control, delay, window, approach, target, visibility, moveBudget, searchBudget, armingSignal = false } = spec;
   if (typeof id !== 'string' || !id || !['pulse', 'load'].includes(mechanic)
     || !Array.isArray(controls) || !between(controls.length, 2, 3) || new Set(controls).size !== controls.length
     || controls.some(code => typeof code !== 'string' || !code || navigation.includes(code))
     || !controls.includes(control) || !delays.includes(delay) || !windows.includes(window)
     || ![1, 2].includes(approach) || !exits.includes(target) || !['start', 'gate', 'never'].includes(visibility)
+    || typeof armingSignal !== 'boolean' || armingSignal && mechanic !== 'load'
     || !between(moveBudget, 6, 12) || !between(searchBudget, 1000, 12000)) {
     throw new Error('Invalid scenario: ' + id);
   }
-  const rules = Object.freeze({ mechanic, controls: Object.freeze([...controls]), approach, visibility, moveBudget, searchBudget });
+  const rules = Object.freeze({ mechanic, controls: Object.freeze([...controls]), approach, visibility, moveBudget, searchBudget,
+    ...(armingSignal ? { armingSignal } : {}) });
   let tick = 0, position = 0, opening = Infinity, reveal = null, outcome = null, armed = false;
   const open = () => tick >= opening && tick < opening + window;
-  const read = () => ({ position, open: open(), target: reveal, outcome });
+  const read = () => ({ position, open: open(), target: reveal, outcome, ...(armingSignal ? { armed } : {}) });
   return {
     rules,
     read,

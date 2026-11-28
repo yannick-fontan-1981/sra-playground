@@ -7,7 +7,7 @@ import { scenario } from './terrain.mjs';
 
 const familyId = 'experimental_delayed_passage';
 const exitPoints = { left: [11, 44], right: [41, 44] };
-const indicators = { position: [8, 9], open: [12, 9], target: [16, 9], outcome: [20, 9] };
+const indicators = { position: [8, 9], open: [12, 9], target: [16, 9], outcome: [20, 9], armed: [24, 9] };
 
 function actions(rules) {
   return new Map([
@@ -19,13 +19,13 @@ function actions(rules) {
   ]);
 }
 
-function packet({ position, open, target, outcome }, allowed) {
+function packet({ position, open, target, outcome, armed }, allowed) {
   const frame = Array.from({ length: 64 }, () => Array(64).fill(0));
   for (const [x, y] of Object.values(exitPoints)) {
     for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) frame[y + dy][x + dx] = 7;
   }
   const marks = { position: position + 1, open: open ? 4 : 5, target: [null, 'left', 'right'].indexOf(target) + 8,
-    outcome: [null, 'win', 'loss'].indexOf(outcome) + 11 };
+    outcome: [null, 'win', 'loss'].indexOf(outcome) + 11, armed: armed === undefined ? 0 : armed ? 14 : 15 };
   for (const [field, [x, y]] of Object.entries(indicators)) frame[y][x] = marks[field];
   return {
     gameCode: 'DELAYED-PASSAGE', frame, frames: [frame], level: 1, levelCount: 1,
@@ -41,6 +41,7 @@ function decode(rows) {
     position: value(indicators.position) - 1, open: value(indicators.open) === 4,
     target: [null, 'left', 'right'][value(indicators.target) - 8],
     outcome: [null, 'win', 'loss'][value(indicators.outcome) - 11],
+    ...(value(indicators.armed) ? { armed: value(indicators.armed) === 14 } : {}),
   };
 }
 

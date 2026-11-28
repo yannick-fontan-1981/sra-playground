@@ -6,8 +6,9 @@ import { fixedWorkflow, onlineComposition } from './policies.mjs';
 import { play } from './rejouer.mjs';
 
 const { cases } = JSON.parse(readFileSync(new URL('./developpement.json', import.meta.url)));
+const { cases: measurement } = JSON.parse(readFileSync(new URL('./mesure-armement.json', import.meta.url)));
 
-for (const spec of cases) {
+for (const spec of [...cases, ...measurement]) {
   test('issued V6 tickets reproduce the public terrain decisions and returns: ' + spec.id, async () => {
     for (const policy of [fixedWorkflow, onlineComposition]) {
       const native = await playNative(spec, policy);

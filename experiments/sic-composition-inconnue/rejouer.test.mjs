@@ -6,6 +6,7 @@ import { run } from './rejouer.mjs';
 import { navigation, scenario } from './terrain.mjs';
 
 const fixture = JSON.parse(readFileSync(new URL('./developpement.json', import.meta.url)));
+const measurement = JSON.parse(readFileSync(new URL('./mesure-armement.json', import.meta.url)));
 
 test('the public hypothesis set covers the independent terrain returns', () => {
   for (const spec of fixture.cases) {
@@ -67,4 +68,21 @@ test('reuse orders a new trial and a conflicting prior can be discarded with an 
   assert.ok(reused.withEvidence.steps[0].possibleControls.length > 1);
   assert.equal(changed.withEvidence.stop.reason, 'win');
   assert.notEqual(changed.withEvidence.learned.control, changed.withEvidence.prior.control);
+});
+
+test('a public arming acknowledgement enables an approach without changing the physical window', () => {
+  const [masked, visible] = measurement.cases.map(scenario);
+  for (const action of ['alpha', 'advance', 'advance', 'inspect', 'right']) {
+    const { armed, ...rest } = visible.step(action);
+    assert.equal(armed, true);
+    assert.deepEqual(masked.step(action), rest);
+  }
+  const { cases } = run(measurement);
+  const a = cases['temoin-sans-accuse'].composed;
+  const b = cases['temoin-avec-accuse'].composed;
+  assert.equal(a.stop.reason, 'no_justified_plan_within_move_budget');
+  assert.equal(b.stop.reason, 'win');
+  assert.equal(b.steps[0].returned.armed, true);
+  assert.equal(b.steps[0].returned.open, false);
+  assert.equal(b.steps[1].decision.action, 'advance');
 });

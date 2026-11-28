@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "cases": [
+    {"id":"temoin-sans-accuse","mechanic":"load","controls":["alpha","bravo"],"control":"alpha","delay":1,"window":3,"approach":2,"target":"right","visibility":"gate","moveBudget":10,"searchBudget":12000},
+    {"id":"temoin-avec-accuse","mechanic":"load","controls":["alpha","bravo"],"control":"alpha","delay":1,"window":3,"approach":2,"target":"right","visibility":"gate","moveBudget":10,"searchBudget":12000,"armingSignal":true}
+  ],
+  "transfers": []
+}

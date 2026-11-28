@@ -25,11 +25,14 @@ function projection(rules, observation, action, model) {
   }
   if (allowance > 0) allowance--;
   if (pending > 0 && --pending === 0) allowance = model.window;
-  return { next: { ...model, pending, allowance, spent }, observed: { position, open: allowance > 0, target, outcome } };
+  return {
+    next: { ...model, pending, allowance, spent },
+    observed: { position, open: allowance > 0, target, outcome, ...(rules.armingSignal ? { armed: spent } : {}) },
+  };
 }
 
-export function observationKey({ position, open, target, outcome }) {
-  return [position, +open, target ?? '', outcome ?? ''].join('/');
+export function observationKey({ position, open, target, outcome, armed }) {
+  return [position, +open, target ?? '', outcome ?? '', armed ?? ''].join('/');
 }
 
 export function transitions(rules, observed, models, action) {

@@ -24,3 +24,7 @@ Le fichier de développement sert à tester le lanceur et les deux politiques. L
 ## Rejeu par le service V6
 
 Avec Node 24, `node --test experiments/sic-composition-inconnue/natif.test.mjs` fait passer les mêmes commandes de développement par le service V6. L’adaptateur transforme le terrain en observations raster et présente chaque sortie sous une coordonnée distincte. Une famille expérimentale demande un ticket par geste, puis contrôle et enregistre le retour. Le test compare les gestes autorisés, leurs propres références et les retours au comparatif direct. Les scènes restent celles du simulateur de ce dossier.
+
+## Contre-épreuve sur l’accusé d’armement
+
+Avec une charge unique, deux pas d’approche et une fenêtre de trois gestes, attendre la porte ouverte peut consommer le temps nécessaire pour lire la cible et sortir. L’essai `mesure-armement.json` compare deux observations d’un même terrain. L’option `armingSignal: true` rend visible le fait que la charge vient d’être consommée, alors que la porte est encore fermée. Le test vérifie d’abord l’égalité des retours physiques pour la même suite imposée, puis mesure si l’accusé change une décision et permet le franchissement.
