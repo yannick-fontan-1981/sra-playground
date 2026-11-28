@@ -1,7 +1,7 @@
 // Évaluateur du préfixe DICO : seul le paquet public passe du jeu au service.
 import { readFile } from 'node:fs/promises';
 
-export async function evaluateurJeu(root) {
+export async function evaluateurJeu(root, now = () => 0) {
   const native = path => import(new URL('src/' + path, root));
   const { createNativeV6Runtime } = await native('logos-engine/v6-native-runtime.ts');
   const { V6AgentService } = await native('runtime/v6-agent-service.ts');
@@ -14,7 +14,7 @@ export async function evaluateurJeu(root) {
   return {
     defaultRecoveryPack,
     createService: () => new V6AgentService(config => createNativeV6Runtime(declarations, {
-      recovery: { ...config, familyAgenda: defaultBrowserFamilyAgenda }, now: () => 0,
+      recovery: { ...config, familyAgenda: defaultBrowserFamilyAgenda }, now,
     })),
     packet: (board,step) => toV6PublicObservation({ ...board, gameCode: board.code ?? board.gameCode },step),
   };
