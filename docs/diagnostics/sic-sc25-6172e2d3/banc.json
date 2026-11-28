@@ -1,0 +1,75 @@
+{
+  "short": {
+    "scenarios": 3,
+    "motifTickets": 12,
+    "invocation": {
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:16:frame:c45112c0db0fef9d",
+      "status": "public_response",
+      "mode": "invoke",
+      "before": [
+        [
+          39,
+          19
+        ],
+        4
+      ],
+      "after": [
+        [
+          39,
+          19
+        ],
+        2
+      ],
+      "clear": true
+    }
+  },
+  "catalogueExtension": {
+    "decisions": 51,
+    "levelsWon": 0,
+    "afterT15": "cell_patch_placement"
+  },
+  "historical": [
+    {
+      "directory": "qualification-sc25-6172e2d3-historique",
+      "levelsWon": 5,
+      "decisions": 147,
+      "perLevel": {
+        "1": 17,
+        "2": 5,
+        "3": 12,
+        "4": 27,
+        "5": 45,
+        "6": 41
+      },
+      "selectedProposalKinds": {
+        "sic_reproduce_cue": 147
+      },
+      "motifOffers": [],
+      "stop": "level_wall_time_budget",
+      "traceSHA256": "fb963af8b0959431891f4b9df5ac3a95b0f52bf202d8d5904aa42ce4bba83919"
+    },
+    {
+      "directory": "qualification-sc25-6172e2d3-historique-reprise",
+      "levelsWon": 5,
+      "decisions": 142,
+      "perLevel": {
+        "1": 17,
+        "2": 5,
+        "3": 12,
+        "4": 27,
+        "5": 45,
+        "6": 36
+      },
+      "selectedProposalKinds": {
+        "sic_reproduce_cue": 142
+      },
+      "motifOffers": [],
+      "stop": "level_wall_time_budget",
+      "traceSHA256": "65b7830d20b3ae5fe8d24ef77117c7dade3fb7e2c73022617ede34c232943805"
+    }
+  ],
+  "freeze": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "proof": "6172e2d3579f36af9c0912578f6d58333a298343",
+  "operator": "fb5a2091",
+  "archiveSHA256": "e18815546376d6d79e63cc1c095df14b454c2f6bd349f3f7c4cd6488ce35c9d4"
+}
