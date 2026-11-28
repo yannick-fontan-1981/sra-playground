@@ -1,0 +1,40 @@
+# Coexistence de trente-cinq lignes SIC
+
+Le moteur d’essai `09aeb9e14e40b6115269e47267b47ba8d71708fd` descend directement du [moteur à 25 lignes](sic-coexistence-278d5b35.md). Le périmètre et l’arbre `src` `09123570bc9009c3526364ffea57086327af2afc` sont figés avant qualification à 00:50:48 UTC le 28 novembre 2026. Branche `experiment/sic-coexistence-trente-cinq-lignes`. Le commit de transport CI `90b019cfaf184b416f2e8c3fe41346a7bec4a29d` ajoute le seul workflow. [Diff du moteur](https://github.com/yannick-fontan-1981/sra-playground/compare/278d5b357d3e3328a32697fe402f3fa9d957d547...09aeb9e14e40b6115269e47267b47ba8d71708fd)
+
+| Lignes du lot | Source et témoins de coexistence | Verdict indépendant du banc et de l’opérateur |
+|---|---|---|
+| 1, 3, 15, 16, 18, 23, 27, 28, 29, 44, 47, 48, 52, 57, 58, 61, 63, 66, 83, 87, 90, 91, 92, 96, 98 | Les 25 du parent. Les parcours de retrait et de reprise du parent sont rejoués sur ce nouvel arbre, ainsi que le mode de projection par défaut, l’attribution ONDE et les captures CONN et VC33. | [Archive des 25](sic-coexistence-278d5b35.md) |
+| 80 | REGN `6bfb8ccf`, comportement du gel. Deux longueurs de trajet consommées, retraits du retour et de la question, distinction entre budget et coupure de lecture. | [Banc](sic-qualification-regn-6bfb8ccf.md) · opérateur `93d0af42` |
+| 22 | REGN `be816a3f`, comportement du gel. Reprise au tour 16, substitution de la seule question distante, retrait du trajet et persistance du besoin d’accès. | [Banc](sic-qualification-regn-be816a3f.md) · opérateur `641f5540` |
+| 35, 36 | GARE `c3f24fb8`, deux entrées du gel. Alternative de transfert T1 et deux suites distinctes de l’analogie aux T4 et T5. | [Banc](sic-qualification-gare-c3f24fb8.md) · opérateur `6f676693` |
+| 2, 68, 69 | LIFE `f005be66`, un fichier repris, `v6-typed-material-access.ts`. L’invitation animée relève du gel. Les choix du porteur ou du descendant libre et le rattachement du partenaire ou de la livraison sont éprouvés sur l’assemblage. | [Banc](sic-qualification-life-f005be66.md) · opérateur `85cb6702` |
+| 13, 14 | GLOB `48aae7fc`, un fichier repris, `v6-fixed-origin.ts`. La question de dépendance est substituable sur branche. L’origine, le placement et sa confirmation sont déjà mesurés sur le gel. Dix variations et le catalogue sont comparés sur l’assemblage. | [Banc](sic-qualification-glob-48aae7fc.md) · opérateur `1b5dd9d3`, liaison du vérificateur `f52f29ea` |
+| 4 | SP80 `bb4a99b5`, seul `v6-branch-routing.ts` a été importé. Mesure native et substituée du vecteur, et réattribution de `ACTION1` après retrait. Le sélecteur de cellule de 41 a été exclu avant le gel de cet assemblage. | [Banc](sic-qualification-sp80-bb4a99b5.md) · opérateur `2177b164` |
+
+Les trois fichiers moteur sont disjoints et leurs blobs correspondent aux révisions indiquées. Le diff cumulé par rapport à `d0e7527c` compte 29 fichiers, tous sous `src`. Le vérificateur exige aussi que le blob `v6-cell-placement.ts` soit celui du gel. La qualification ultérieure de TICT/41 et les références AS66/84 et 97 ont leurs propres reçus.
+
+## Verdict
+
+**Campagne en cours au passage de relais.** Le SHA et la liste des 35 sont fixés. Le contrôle des 29 chemins de production et de leurs blobs passe. La campagne distante et les témoins locaux sont lancés. Le verdict des 107, leurs empreintes, le réimport 3/104/107 et le verdict de coexistence détaillée restent à établir sur cet arbre.
+
+Sur ce poste, les sorties se trouvent dans `artifacts/qualification-coexistence-35/`. Le suivi `suivre.py` y attend le run 46090081248, télécharge ses artefacts, les contrôle puis réimporte la cohorte, le reste et les reçus déjà traités. Conserver cet identifiant lors de la reprise. Les témoins locaux écrivent leurs résultats dans des dossiers distincts. Pour les deux défis publics, les sorties sont `defis-STCK` et `defis-VALV`. La liaison REGN80, REGN22 et GLOB a déjà reproduit les archives sur leurs révisions individuelles. Les mesures de l’assemblage ont leur propre dossier. La commande d’audit ci-dessous s’applique après récupération des reçus.
+
+## Reproduire
+
+L’audit recharge les reçus, contrôle les 107 codes et leurs paramètres, vérifie les blobs, puis compare chaque jeu au gel et au parent à 25 :
+
+```powershell
+py -3.11 scripts/check-sic-coexistence.py docs/diagnostics/sic-coexistence-09aeb9e1/recus.zip --candidate 09aeb9e14e40b6115269e47267b47ba8d71708fd --workflow 90b019cfaf184b416f2e8c3fe41346a7bec4a29d --run 46090081248
+```
+
+Pour les témoins, prendre un checkout propre du moteur d’essai en `$m`, Node 24.22.3, les jeux et Pyodide préparés. Depuis le banc, reprendre les commandes de la fiche du parent, dans des dossiers neufs, avec le nouveau `$m` et **`--candidate 09aeb9e14e40b6115269e47267b47ba8d71708fd`** pour les défis STCK/VALV. Ajouter les contrôles suivants. Les trois checkouts de preuve sont épinglés aux révisions du tableau ; GLOB accepte aussi `787fee97`, qui corrige seulement son vérificateur agrégé.
+
+```powershell
+foreach ($jeu in 'GARE','LIFE','SP80') { py -3.11 scripts/test-sic-coexistence-catalogue.py $jeu $m "./tests-$jeu" }
+py -3.11 scripts/test-sic-coexistence-retours.py REGN80 ../sic-regn-80 $m ./tests-regn80
+py -3.11 scripts/test-sic-coexistence-retours.py REGN22 ../sic-regn-22 $m ./tests-regn22
+py -3.11 scripts/test-sic-coexistence-retours.py GLOB ../sic-glob-13-14 $m ./tests-glob
+```
+
+Les sorties locales sont dans `artifacts/qualification-coexistence-35/`. Les lots d’origine sont sous `ci-46090081248/download`, l’état de reprise sous `reimport`. [Campagne unique sur 35 lignes](https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46090081248)

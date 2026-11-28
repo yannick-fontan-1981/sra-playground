@@ -27,7 +27,7 @@ def main():
     args = p.parse_args()
     engine, out = args.engine.resolve(), args.output.resolve()
     sha = git("-C", str(engine), "rev-parse", "HEAD").decode().strip()
-    assert sha in (common["NEXT_ASSEMBLY"], common["TWENTY_FIVE"])
+    assert sha in (common["NEXT_ASSEMBLY"], common["TWENTY_FIVE"], common["THIRTY_FIVE"])
     git("-C", str(engine), "diff", "--exit-code", "HEAD", "--", "src", "public", "scripts", "reference")
     overlay = out / "overlay"
     overlay.mkdir(parents=True)

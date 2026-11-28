@@ -20,7 +20,16 @@ const card = await readCard(new URL('regn-22/public/reprise.json', lab));
 const question = 'Q_8b45c6cdc354b85cd0a2';
 const target = 'frontier-qualification:epoch:3:revision:16:frame:af0bcad41eef9c48';
 const interventions = [], boundaries = [];
-const game = await withEngine(label, async engine => {
+const candidateRoot = process.env.SIC_REGN_ENGINE_ROOT;
+let source = label === 'gel' ? versions.gel : revision;
+if (candidateRoot) {
+  assert.equal(label, 'candidat');
+  const inspect = (...args) => execFileSync('git', ['-C', candidateRoot, ...args], { encoding: 'utf8' }).trim();
+  source = inspect('rev-parse', 'HEAD');
+  inspect('diff', '--exit-code', 'HEAD', '--', 'src', 'public/python', 'reference');
+}
+const run = candidateRoot ? fn => fn(pathToFileURL(resolve(candidateRoot) + sep)) : fn => withEngine(label, fn);
+const game = await run(async engine => {
   const { NativeCallerCoordinator } = await import(new URL('src/logos-engine/v6-native-caller.ts', engine));
   const { V6AgentService } = await import(new URL('src/runtime/v6-agent-service.ts', engine));
   const handle = V6AgentService.prototype.handle;
@@ -65,4 +74,4 @@ const game = await withEngine(label, async engine => {
 });
 assert.ok(interventions.length > 0);
 assert.ok(interventions.every(i => i.routes.length && i.questions.some(q => q.available.includes(question))));
-await writeFile(output, JSON.stringify({ source: label === 'gel' ? versions.gel : revision, condition, card, interventions, boundaries, game }) + '\n');
+await writeFile(output, JSON.stringify({ source, condition, card, interventions, boundaries, game }) + '\n');

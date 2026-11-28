@@ -20,7 +20,8 @@ def main():
     parser.add_argument("output", type=Path)
     parser.add_argument("--pyodide", type=Path, required=True)
     parser.add_argument("--node", default="node")
-    parser.add_argument("--candidate", choices=(ASSEMBLY, common["TWENTY_FIVE"]), default=ASSEMBLY)
+    parser.add_argument("--candidate", choices=(ASSEMBLY, common["TWENTY_FIVE"], common["THIRTY_FIVE"]), default=ASSEMBLY)
+    parser.add_argument("--game", choices=("STCK", "VALV"))
     args = parser.parse_args()
     out, vendor = args.output.resolve(), str(args.pyodide.resolve())
     out.mkdir(parents=True)
@@ -29,6 +30,8 @@ def main():
         ("STCK", STCK, STCK_TEST, "stck-lignes-52-57-58"),
         ("VALV", VALV, VALV_TEST, "valv-ligne-48-provenance"),
     ]:
+        if args.game and name != args.game:
+            continue
         previous = None
         for revision in (candidate, args.candidate):
             dest = out / (name + "-" + revision[:8])

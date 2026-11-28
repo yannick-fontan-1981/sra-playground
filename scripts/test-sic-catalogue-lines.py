@@ -11,10 +11,13 @@ common = runpy.run_path(str(Path(__file__).with_name("test-sic-coexistence.py"))
 bench, git, mount = (common[k] for k in ("BENCH", "git", "mount"))
 cases = {
     "GARE": ("c3f24fb80a39604bf99686f7c0725b175c2628dd", "gare-framed-lines", "sic-observe-gare-framed",
-             "native-campaigns-v52/final/gare-public-trace"),
+             ["docs/migration/native-campaigns-v52/final/gare-public-trace.json.gz", "tests/fixtures/sic-gare-alternate-returns.json.gz"]),
     "LIFE": ("f005be662b0e4b556a0cea3d246381cd98eec7ae", "life-three-lines", "sic-observe-life-material",
-             "native-campaigns-v50/life-public-trace-final"),
-    "SP80": ("bb4a99b5ba41531eb70f1dccb6a97a919cefec56", "sp80-two-lines", "sic-observe-sp80-routing", None),
+             ["docs/migration/native-campaigns-v50/life-public-trace-final.json.gz", "tests/fixtures/sic-life-alternate-returns.json.gz"]),
+    "TICT": ("e8df1757272cae3da1669b3e7ddb2e7bf65e8e02", "cell-placement-positive-41", "sic-observe-tict-placement",
+             ["docs/migration/native-campaigns-v46/tict-public-trace.json.gz"]),
+    "SP80": ("bb4a99b5ba41531eb70f1dccb6a97a919cefec56", "sp80-two-lines", "sic-observe-sp80-routing",
+             ["tests/fixtures/sic-sp80-public-returns.json.gz"]),
 }
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("revision")
@@ -24,16 +27,14 @@ parser.add_argument("--baseline-only", action="store_true", help="Run the LIFE c
 parser.add_argument("--game-root", required=True, type=Path)
 parser.add_argument("--node", default="node")
 args = parser.parse_args()
-proof, suite, observer, packets = cases[args.game]
+proof, suite, observer, fixtures = cases[args.game]
 test = "tests/sic-" + suite + ".test.ts"
-name = "SIC_" + args.game + "_"
+name = "SIC_" + ("SP80" if args.game == "TICT" else args.game) + "_"
 revision = git("rev-parse", "--verify", args.revision + "^{commit}").decode().strip()
 git("-C", str(args.game_root.resolve()), "diff", "--exit-code", revision, "--", "public/python")
 out = args.output.resolve()
 engine = out / revision[:8]
 engine.mkdir(parents=True)
-fixtures = (["tests/fixtures/sic-" + args.game.lower() + "-alternate-returns.json.gz",
-             "docs/migration/" + packets + ".json.gz"] if packets else ["tests/fixtures/sic-sp80-public-returns.json.gz"])
 for rev, paths in [(revision, ["src", "package.json", "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto",
                                "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy"]),
                    (proof, ["scripts/sic-study-source-games.mjs", test, *fixtures])]:

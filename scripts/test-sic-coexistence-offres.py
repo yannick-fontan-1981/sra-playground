@@ -20,7 +20,7 @@ def main():
     args = parser.parse_args()
     engine, out = args.engine.resolve(), args.output.resolve()
     source = git("-C", str(engine), "rev-parse", "HEAD").decode().strip()
-    assert source in (common["TEN_LINES"], common["NEXT_ASSEMBLY"], common["TWENTY_FIVE"])
+    assert source in (common["TEN_LINES"], common["NEXT_ASSEMBLY"], common["TWENTY_FIVE"], common["THIRTY_FIVE"])
     git("-C", str(engine), "diff", "--exit-code", "HEAD", "--", "src", "scripts", "public", "reference")
     out.mkdir(parents=True, exist_ok=False)
     with ZipFile(BENCH / "docs/diagnostics/sic-zipp-ligne-1/recus.zip") as archive:
