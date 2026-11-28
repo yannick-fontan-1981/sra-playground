@@ -1,0 +1,36 @@
+{
+  "freeze": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "proof": "fa126d653aa5e123f9de78c220e9e6129a6436a2",
+  "line": 38,
+  "strict": false,
+  "skbn": {
+    "officialApproaches": 2,
+    "turns": [
+      14,
+      16
+    ],
+    "accessAcquisitions": 0
+  },
+  "keyd": {
+    "officialInventoryTickets": 16,
+    "accessAcquiredAt": 8,
+    "firstDifferenceAt": 9,
+    "withdrawal": [
+      "capacity_probe_candidate",
+      "endpoint_approach_candidate"
+    ],
+    "foreignEvidenceAdmitted": true,
+    "command": {
+      "actionRef": "ACTION4",
+      "data": {}
+    },
+    "sameOfficialReturn": true,
+    "levels": 0
+  },
+  "catalogueCrosscheckSHA256": "0f41bf06f7d367c3bfd21193b44910cf24195c8fa744f29861028590d1d60a98",
+  "otherCatalogueGames": [
+    "CRAF",
+    "LKEY"
+  ],
+  "archiveSHA256": "65ddc5329ecf5c92607b38bd08207905f42bd3f6d668319d391519d040269adf"
+}

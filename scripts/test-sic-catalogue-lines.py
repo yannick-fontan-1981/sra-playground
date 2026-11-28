@@ -35,6 +35,7 @@ cases = {
     "ISOS-PROVENANCE": ("640bd882150f8164b2e6a1a7de6b85b16c52711f", "isos-line-10", "sic-observe-isos-facet", []),
     "LP85": ("80d14be16d5f3d4fa1f84c0c92498902e96a5e3f", "lp85-line-24", "sic-observe-lp85-orbit", []),
     "CN04": ("bfba3acb8de4c3f13fc10651b2aa22490def5070", "cn04-line-30", "sic-observe-cn04-ports", []),
+    "SKBN": ("fa126d653aa5e123f9de78c220e9e6129a6436a2", "skbn-line-38", "sic-observe-skbn-inventory", []),
     "SC25": ("6172e2d3579f36af9c0912578f6d58333a298343", "sc25-line-21", "sic-observe-sc25-motif", []),
     "MIND": ("860835b1b77ae9cde489230be5c1f83c05237302", "mind-line-12", "sic-observe-mind-feedback",
              ["docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-public-trace.json.gz", "tests/fixtures/sic-mind-alternate-returns.json.gz"]),
