@@ -1,0 +1,55 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départsService": 3,
+      "gestesService": 27,
+      "départsPhysiquesComplémentaires": 1,
+      "gestesPhysiquesComplémentaires": 10,
+      "testsAuteur": 2
+    },
+    {
+      "sha": "d713024aa7f9b45c8fbd114b86209d36c4efd6ba",
+      "départsService": 3,
+      "gestesService": 27,
+      "départsPhysiquesComplémentaires": 1,
+      "gestesPhysiquesComplémentaires": 10,
+      "testsAuteur": 2
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "catalogue": 15,
+  "mesureT2": [
+    2,
+    0
+  ],
+  "réglageT9": [
+    {
+      "x": 48,
+      "y": 36
+    },
+    {
+      "x": 24,
+      "y": 20
+    }
+  ],
+  "accès": {
+    "cible": [
+      10,
+      36
+    ],
+    "nominal": [
+      9,
+      9,
+      9,
+      9
+    ],
+    "alternatif": [
+      4,
+      9,
+      9,
+      4
+    ],
+    "resultatGarde": "support_binding_changed"
+  }
+}
