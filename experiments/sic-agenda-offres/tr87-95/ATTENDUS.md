@@ -1,0 +1,5 @@
+# TR87 · ligne 95
+
+Rejouer le catalogue 8ce7ee35 et le gel d0e7527c depuis L1, pack natif, 600 gestes par niveau, 16 au global. Retrouver N1/T1 ACTION1 word_interface / typed_word_interface. Sceller les types observés, les occurrences appariées, les tailles et le curseur avant proposition. Distinguer traduction candidate et opération physique encore inconnue. Rapprocher le retour réel de l'édition ou du déplacement mesuré et des références réutilisées.
+
+Contraster le dictionnaire où les types des deux membres d'une paire deviennent identiques sans modifier les glyphes internes, le cas où l'ordre des commandes disponibles change seul et le retour stationnaire du même geste. Prévoir que la preuve typée perd sa portée si les types d'entrée et de sortie ne peuvent plus être appariés. Une commande de même forme issue d'une autre famille ne démontre pas l'articulation. Un retour constant ne fournit aucune arête d'édition ni loi de curseur. Chercher le premier usage d'une opération mesurée et une seconde situation justifiée dans le préfixe ou dans la fixture publique de référence.
