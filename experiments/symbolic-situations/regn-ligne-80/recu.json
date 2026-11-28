@@ -1,0 +1,66 @@
+{
+  "shas": [
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "6bfb8ccf9df3aa8597e74f0fd3f30a5744c55b35"
+  ],
+  "départsParRévision": 6,
+  "gestesParRévision": 66,
+  "résultats": {
+    "3": {
+      "accès": 1,
+      "question": "ACTION4",
+      "prochaineÉpoque": 2,
+      "repli": [
+        "observed_frontier",
+        "test_local_input",
+        "ACTION4",
+        null,
+        0
+      ],
+      "suite": [
+        "observed_frontier",
+        "test_local_input",
+        "ACTION4",
+        null,
+        0
+      ]
+    },
+    "8": {
+      "accès": 2,
+      "question": "ACTION4",
+      "prochaineÉpoque": 3,
+      "repli": [
+        "observed_frontier",
+        "test_local_input",
+        "ACTION4",
+        null,
+        1
+      ],
+      "suite": [
+        "observed_frontier",
+        "test_local_input",
+        "ACTION4",
+        null,
+        1
+      ]
+    }
+  },
+  "premierÉcartDeBudget": {
+    "tour": 16,
+    "borne16": [
+      "observed_frontier",
+      "reach_open_input",
+      "ACTION4",
+      true,
+      2
+    ],
+    "borne600": [
+      "returned_branch_contrast",
+      "access",
+      "ACTION4",
+      true,
+      2
+    ]
+  },
+  "attributionsInvalidesRejetées": 4
+}
