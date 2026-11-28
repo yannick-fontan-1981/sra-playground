@@ -79,7 +79,7 @@ try{
   const continuation=candidate.epoque.steps;
   const afterBoundary=continuation.find(s=>s.pre.level===2&&s.pre.cut);
   assert.ok(afterBoundary,'The bounded run must reach the measured second level');
-  assert.ok(afterBoundary.pre.cut.pre.used.pairs.some(pair=>JSON.stringify(pair)===JSON.stringify(crossing.pair)));
+  assert.deepEqual(afterBoundary.pre.cut.pre.used.pairs.find(pair=>pair.evidence[1]===crossing.evidence),crossing.pair);
   assert.ok(afterBoundary.pre.cut.pre.used.receipts.some(receipt=>receipt.digest===crossing.witness));
   assert.ok(afterBoundary.after.record);
   await writeFile(values.recu,JSON.stringify({versions:{gel:versions.gel,qualification:git('rev-parse','HEAD'),
