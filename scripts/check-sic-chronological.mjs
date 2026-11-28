@@ -53,6 +53,26 @@ async function run(code,requestedTarget,parallelWorkers) {
   const pack={...defaultRecoveryPack,solver:mode,
     ...(sourceArm === 'active' ? { informationPreference: { mode:'active',
       strategy:'bind_earlier_motions_to_registered_subjects',minimumOutcomes:2 } } : {})};
+  const captureRivals = process.env.SIC_SOURCE_RETURN_RIVALS === '1';
+  if (captureRivals && (!sourceArm || /^SS(?:0[89]|1\d|2[0-5])$/.test(code))) {
+    throw new Error('Return hypothesis capture requires an authorized source comparison.');
+  }
+  const observedReturns = new Map();
+  let accessContext = null;
+  const publicKey = board => createHash('sha256').update(JSON.stringify([board.level, board.levelsCompleted,
+    board.state, [...board.availableActionIds].sort((a,b) => a-b), board.frame])).digest('hex');
+  function recordRivals(before, action, after, turn) {
+    const from = publicKey(before), to = publicKey(after);
+    const command = JSON.stringify([action.id, action.data ?? null]);
+    const key = JSON.stringify([from, command]);
+    const returns = observedReturns.get(key) ?? { level: before.level, command: action.id, targets: new Map() };
+    const hypothesis = returns.targets.get(to) ?? { firstTurn: turn, count: 0, contexts: new Set() };
+    hypothesis.count++;
+    if (accessContext !== null) hypothesis.contexts.add(accessContext);
+    returns.targets.set(to, hypothesis);
+    observedReturns.set(key, returns);
+    accessContext = before.level === after.level ? JSON.stringify([from, command]) : null;
+  }
   const games=createGameDispatcher(loadLegacy);
   const game=request=>games.dispatch(request);
   let solver;const service=new V6AgentService(async recovery=>(solver=await createNativeV6Runtime({common,strategy},{recovery})));
@@ -88,6 +108,7 @@ async function run(code,requestedTarget,parallelWorkers) {
       const issued=performance.now(); if(effects.length%25===0)console.log(JSON.stringify({progress:effects.length,level:board.level})); const plan=agent.snapshot.trace.findLast(e=>e.kind==='sic_native_plan'); if(plan){const kind=action.id===6?"click":action.id>=1&&action.id<=4?"move":"other"; const types=pathKinds.get(plan.id)??new Set();types.add(kind);pathKinds.set(plan.id,types);series.set(plan.id,(series.get(plan.id)??0)+1);if(priorDispatch){(priorDispatch.plan===plan.id?continuedGaps:boundaryGaps).push(issued-priorDispatch.at);}priorDispatch={plan:plan.id,at:issued};}
       first??=issued-start;
       const previous=board; board=await game({type:'action',actionId:action.id,...(action.id===6?{data:action.data}:{})});
+      if (captureRivals) recordRivals(previous, action, board, effects.length + 1);
       const executionMs=performance.now()-issued; let changed=0, left=64, right=-1, top=64, bottom=-1; for(let y=0;y<64;y++) for(let x=0;x<64;x++) if(previous.frame[y][x]!==board.frame[y][x]){changed++; left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);} effects.push([action.id,action.data??null,changed,changed?[left,top,right,bottom]:null,board.frames.length,board.levelsCompleted,agent.snapshot.proposal?.sicSituationCard?.strategy,agent.snapshot.trace.findLast(e=>e.kind==="sic_native_plan")?.family,agent.snapshot.proposal?.sicSituationCard?.situation,agent.snapshot.proposal?.sicSituationCard?.evidence?.length]);
       process.send({ kind:'command-applied', sicAuthorized:plan!==undefined && mode==='sic', levelsCompleted:board.levelsCompleted,
         command: { id:action.id, family:plan?.family??null, strategy:plan?.strategy??null } });
@@ -124,6 +145,13 @@ async function run(code,requestedTarget,parallelWorkers) {
       ...(snapshot.status==='error'?{message:snapshot.message}:{}),authority:snapshot.sicActionCoverage?.sicOnly??0,solverFamilies:snapshot.coverage?.registeredFamilies.length,
       levelStats,
       ...(evidence ? { sourceComposerEvidence: [...evidence.values()] } : {}),
+      ...(captureRivals ? { sourceReturnRivals: [...observedReturns.values()].filter(row => row.targets.size > 1)
+        .map(({ level, command, targets }) => {
+          const hypotheses = [...targets.values()];
+          const uniqueContexts = new Set(hypotheses.flatMap(item => [...item.contexts]));
+          return { level, command, branches: hypotheses.map(item => ({ firstTurn: item.firstTurn, observations: item.count })),
+            contexts: uniqueContexts.size, contextualConflict: hypotheses.reduce((sum, item) => sum + item.contexts.size, 0) > uniqueContexts.size };
+        }) } : {}),
       ...(board.levelsCompleted < target ? { terminalDecisions: snapshot.trace
         .filter(event => ['sic_native_plan','before_guard','actual_outcome','sealed_prefix','native_acquisition_incomplete'].includes(event.kind))
         .slice(-32).map(event => Object.fromEntries(['kind','family','strategy','index','admitted','point_bound','matched','reason',
