@@ -1,0 +1,69 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 6,
+      "gestes": 89,
+      "testsAuteur": 3
+    },
+    {
+      "sha": "d22d706c8c148da1b6bde090d3c6c53d20c69d50",
+      "départs": 6,
+      "gestes": 89,
+      "testsAuteur": 3
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "catalogue": 16,
+  "sélection": {
+    "cible": [
+      0,
+      1
+    ],
+    "cellules": 5,
+    "couleur": 0
+  },
+  "reprise": {
+    "nominal": [
+      "ACTION2",
+      [
+        1,
+        6
+      ]
+    ],
+    "sansAction2": [
+      "ACTION2",
+      null,
+      [
+        2,
+        6
+      ]
+    ],
+    "sansTout": [
+      "ACTION1",
+      null,
+      [
+        1,
+        6
+      ]
+    ]
+  },
+  "changement": {
+    "posé": "piece:2",
+    "pose": [
+      2,
+      0
+    ],
+    "prochain": "piece:3",
+    "cible": [
+      2,
+      1
+    ],
+    "scoreN3": 3
+  },
+  "réserve": {
+    "imagesRéelles": 1,
+    "imagesServies": 1,
+    "rejetFaux": true
+  }
+}
