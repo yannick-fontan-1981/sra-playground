@@ -133,6 +133,7 @@ export interface NativeExecution {
   readonly remainingLevelActions?: number;
   readonly reasoningMode?: import('../sic/reasoning-mode.ts').ReasoningMode;
   readonly observeControlTrialShadow?: import('../sic/control-effect-next.ts').ControlTrialObserver;
+  readonly controlTrialAgenda?: import('../sic/control-effect-next.ts').ActiveControlTrialAgenda;
   readonly observedControlledMotion?: import('../sic/public-input-exploration.ts').ControlledMotion;
   readonly retainedCursorRoles?: ReturnType<typeof import('../sic/cursor-role-memory.ts').currentCursorRoles>;
   readonly panelFrontier?: import('../sic/public-input-exploration.ts').PanelFrontier;

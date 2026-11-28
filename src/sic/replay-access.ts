@@ -3,7 +3,7 @@ import { temporalPatch } from '../logos-engine/v6-linked-temporal-common.ts';
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
-import { compareControlTrial } from './control-effect-next.ts';
+import { compareControlTrial, controlTrialEvaluation } from './control-effect-next.ts';
 import { sicNeedId } from './need-identity.ts';
 import { singleStepDisplacement } from './observed-translation.ts';
 import { maximumCommittedActions, unchangedOutside } from './plan-step.ts';
@@ -273,12 +273,17 @@ export function createSicVerifyRemoteReplay(family = verifyRemoteReplayId): Nati
       if (!input) return null;
       const facts = { routeSupported: !!known, eligibleProbe: !!(replayAction || probe), knownInteraction: false, mode };
       const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
-      if (probe && execution?.observeControlTrialShadow) {
-        compareControlTrial(probe, evidence[0], {
-          observationRef: observation.observation_ref, availableActions: observation.available_action_refs, evidence,
-          objectiveSupported: Boolean(node), subjectBound: Boolean(from), effectKnown: Boolean(local.controls[probe]),
-          triedInContext: local.tried.includes(positionKey(from) + ':' + probe),
-        }, { selected: decision?.result === 'P05', evidence }, { observe: execution.observeControlTrialShadow, family, remaining });
+      if (probe) {
+        const evaluation = controlTrialEvaluation(family, remaining, family === verifyRemoteReplayId
+          ? execution : { observeControlTrialShadow: execution?.observeControlTrialShadow });
+        if (evaluation) {
+          const selected = compareControlTrial(probe, evidence[0], {
+            observationRef: observation.observation_ref, availableActions: observation.available_action_refs, evidence,
+            objectiveSupported: Boolean(node), subjectBound: Boolean(from), effectKnown: Boolean(local.controls[probe]),
+            triedInContext: local.tried.includes(positionKey(from) + ':' + probe),
+          }, { selected: decision?.result === 'P05', evidence }, evaluation);
+          if (evaluation.active && !selected) return null;
+        }
       }
       const strategy = facts.routeSupported ? 'P07' : 'P05';
       if (decision?.result !== strategy) return null;

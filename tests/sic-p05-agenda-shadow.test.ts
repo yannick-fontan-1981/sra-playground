@@ -2,11 +2,12 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { gunzipSync } from 'node:zlib';
-import { NativeV6Runtime } from '../src/logos-engine/v6-native-runtime.ts';
+import { createNativeV6Runtime, NativeV6Runtime, type NativeV6Declarations } from '../src/logos-engine/v6-native-runtime.ts';
 import type { NativeCommand, NativeObservation, NativePublicObservation } from '../src/logos-engine/v6-native-types.ts';
 import { SlidingCavity } from '../src/logos-engine/v6-sliding-cavity.ts';
 import type { V6PublicObservation } from '../src/runtime/v6-agent-protocol.ts';
 import { V6AgentService } from '../src/runtime/v6-agent-service.ts';
+import { defaultRecoveryPack } from '../src/sic/active-recovery.ts';
 import type { ControlTrialComparison } from '../src/sic/control-effect-next.ts';
 import { bindMissingControlTrial, evaluateMissingControl, missingControlNeed, missingControlWitness } from '../src/sic/missing-control-strategy.ts';
 import { createSicVerifyRemoteReplay, verifyRemoteReplayId } from '../src/sic/replay-access.ts';
@@ -21,7 +22,7 @@ test('P05 shadow independently ranks one prepared trial, records the first diffe
   const context = { observationRef, availableActions: [action], objectiveSupported: true, subjectBound: true,
     effectKnown: false, triedInContext: false, evidence: [observationRef, 'method:retained'] };
   const comparisons: ControlTrialComparison[] = [];
-  const observer = { family: 'test', remaining: 1, observe: (receipt: ControlTrialComparison) => comparisons.push(receipt) };
+  const observer = { active: false, family: 'test', remaining: 1, observe: (receipt: ControlTrialComparison) => comparisons.push(receipt) };
 
   for (const [facts, expected] of [[{ ...context, evidence: [] }, 'undetermined'],
     [{ ...context, effectKnown: true }, 'inapplicable'], [context, 'applicable']] as const) {
@@ -141,4 +142,98 @@ test('native G50T compares the prepared probes and the real fifth return still g
   assert.deepEqual(last.state.state.controls.ACTION4, [6, 0]);
   assert.equal(last.state.state.controlEvidence.ACTION4, last.returns.at(-1)?.observation_ref);
   assert.deepEqual(last.proposal?.steps?.[0]?.expected_after, [26, 8]);
+});
+
+test('the active P05 budget abstains on incomplete or contrary evidence and an observer cannot grant admission', () => {
+  const action = 'ACTION1', observationRef = 'revision:4';
+  const prepared = () => ({ actions: [{ action_ref: action, data: {} }], binding: { observation_ref: observationRef } });
+  const facts = { observationRef, availableActions: [action], objectiveSupported: true, subjectBound: true,
+    effectKnown: false, triedInContext: false, evidence: [observationRef, 'method:retained'] };
+  for (const situation of [{ ...facts, evidence: [] }, { ...facts, subjectBound: false }, { ...facts, effectKnown: true },
+    { ...facts, triedInContext: true }, { ...facts, availableActions: [] }]) {
+    const proposal = prepared();
+    assert.equal(bindMissingControlTrial(proposal, situation, { active: true, family: 'test', remaining: 1 }), false);
+    assert.equal(missingControlWitness(proposal, action, observationRef), undefined);
+  }
+  const proposal = prepared();
+  assert.equal(bindMissingControlTrial(proposal, facts, { active: true, family: 'test', remaining: 0, observe(receipt) {
+    Object.assign(receipt.shadow, { selected: true });
+    throw new Error('Diagnostic sink attempted to override abstention');
+  } }), false);
+  assert.equal(missingControlWitness(proposal, action, observationRef), undefined);
+});
+
+test('the active cavity offer still goes through the native observation guard', async () => {
+  const { steps } = fixture<{ games: { code: string; steps: CavityStep[] }[] }>('v6-sliding-cavity-reference.json.gz')
+    .games.find(game => game.code === 'AS66')!;
+  const step = steps[4]!;
+  const { before, after } = step;
+  const family = new SlidingCavity();
+  family.restore(step.beforeState);
+  const ask = (actionBudget: 0 | 1) => family.propose(before.observation, before.public.frame_rows, [], step.remaining,
+    { yieldControl: async () => {}, controlTrialAgenda: { mode: 'active', actionBudget } });
+  assert.equal(await ask(0), null);
+  const proposal = await ask(1);
+  assert.equal(proposal?.kind, 'cavity_direction_question');
+  assert.equal(family.before(proposal!, 0, before.public, before.observation).admitted, true);
+  assert.equal(family.before(proposal!, 0, after.public, after.observation).admitted, false);
+});
+
+test('G50T with an exhausted local P05 budget releases the real public-input fallback at the same observation', async () => {
+  const sample = fixture<Omit<V6PublicObservation, 'frame' | 'frames' | 'palette' | 'stepIndex'>
+    & { frames: V6PublicObservation['frame'][] }>('sic-replay-control-g50t-l1.json.gz');
+  const { frames, ...publicState } = sample;
+  const root = new URL('../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/', import.meta.url);
+  const read = (file: string) => JSON.parse(readFileSync(new URL(file, root), 'utf8'));
+  const declarations: NativeV6Declarations = {
+    common: read('laya_proto/common_frontier_policy.drm.json'), strategy: read('morphology_policy/strategy.drm'),
+  };
+  const observation = (stepIndex: number): V6PublicObservation => {
+    const frame = frames[stepIndex]!;
+    return { ...publicState, frame, frames: [frame], stepIndex };
+  };
+  async function run(actionBudget?: 0 | 1) {
+    const comparisons: ControlTrialComparison[] = [];
+    const service = new V6AgentService(recovery => createNativeV6Runtime(declarations, { recovery, now: () => 0,
+      observeControlTrialShadow: receipt => comparisons.push(receipt),
+      ...(actionBudget === undefined ? {} : { controlTrialAgenda: { mode: 'active', actionBudget } }),
+    }));
+    const sessionId = 'g50t-active-budget';
+    const reply = await service.handle({ type: 'init', sessionId, sequence: 0, observation: observation(0),
+      recovery: { ...defaultRecoveryPack, solver: 'sic' }, budgets: { targetLevels: 1, levelActionCaps: [20], maxActions: 1 } });
+    assert.ok(reply.ticket);
+    const ticket = reply.ticket;
+    const guard = reply.snapshot.trace.findLast(event => event.kind === 'before_guard');
+    assert.equal(guard?.admitted, true);
+    const returned = await service.handle({ type: 'advance', sessionId, sequence: 1, ticketId: ticket.id,
+      observation: observation(1), executionMs: 0 });
+    const outcome = returned.snapshot.trace.findLast(event => event.kind === 'actual_outcome')!;
+    assert.equal(outcome.matched, null);
+    assert.equal(returned.ticket, null);
+    return { family: outcome.family, command: { action: ticket.actionRef, data: ticket.data }, current: ticket.observationRef,
+      returnRef: outcome.observation_ref, guard: guard?.reason, reason: outcome.reason, comparisons };
+  }
+  const reference = await run();
+  assert.deepEqual(await run(), reference);
+  const affordable = await run(1);
+  assert.deepEqual({ ...affordable, comparisons: [] }, { ...reference, comparisons: [] });
+  assert.equal(affordable.comparisons[0]?.firstDifference, null);
+  assert.equal(reference.family, verifyRemoteReplayId);
+  assert.equal(reference.guard, 'current_replay_and_carrier_bound');
+  assert.equal(reference.reason, 'compare_replayed_motion_and_remote_return');
+
+  const exhausted = await run(0);
+  assert.equal(exhausted.family, 'sic_public_input_exploration');
+  assert.deepEqual(exhausted.command, reference.command);
+  assert.equal(exhausted.current, reference.current);
+  assert.equal(exhausted.returnRef, reference.returnRef);
+  assert.equal(exhausted.guard, 'current_public_input_bound');
+  assert.equal(exhausted.reason, 'observed_public_input_return');
+  const comparison = exhausted.comparisons[0]!;
+  assert.equal(comparison.mode, 'active');
+  assert.equal(comparison.firstDifference, 'selected');
+  assert.equal(comparison.remaining, 0);
+  assert.equal(comparison.reference.selected, true);
+  assert.equal(comparison.shadow.selected, false);
+  assert.deepEqual(comparison.shadow.evidence, affordable.comparisons[0]?.shadow.evidence);
 });
