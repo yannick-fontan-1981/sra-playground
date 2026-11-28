@@ -570,7 +570,7 @@ function panelTestKey(command: string, rows: NativeRows, box: NativeBox | null |
   return `${command}:${rows.slice(top, bottom + 1).map(row => row.slice(left, right + 1).join(',')).join('/')}`;
 }
 
-export function createSicPublicInputExploration(fallback = false): NativeFamily<Proposal> {
+export function createSicPublicInputExploration(fallback = false, preferShorterCoverage = false): NativeFamily<Proposal> {
   let state = initial();
   let decide: NativeProgramHandle | undefined;
   const entryReturns = new WeakMap<EntryProposal, Promise<OrderedEntry>>();
@@ -944,7 +944,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const jointKey = joint?.command.action_ref;
       const exchange = !panel && !pressure ? chooseExchange(local.exchange, local.travel, rows, remaining) : undefined;
       const exchangeKey = exchange?.command.action_ref;
-      const coverage = !panel && !pressure && !exchange && local.coverage?.body ? chooseCoverage(local.coverage, local.travel, rows, remaining) : undefined;
+      const coverage = !panel && !pressure && !exchange && local.coverage?.body
+        ? chooseCoverage(local.coverage, local.travel, rows, remaining, preferShorterCoverage) : undefined;
       const coverageKey = coverage?.command.action_ref;
       const coverageFrontier = coverageKey ? { action: coverageKey, probe: coverageKey, depth: 0, first: null } : null;
       const markTrial = !panel && !pressure && !exchange && !coverage ? chooseAnnotatedMarkContact(local.travel, rows, nonPoint) : undefined;
@@ -1380,7 +1381,9 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
           : opening ? 'Reach the new region opened by the support placement' : 'Learn how to act on the current board'), mode,
           situation: !selectedFallback && !selectedPressure && !selectedMark && !selectedExchange && !selectedCoverage && !travelTarget && !contextualCommand && deferred && frontier.depth === 0 && frontier.probe !== deferred
             ? 'The last direction changed the board. Test another input before trying its opposite.'
-            : label, agenda: decision ? [] : entries, evidence: proof, ...(recalledDirection ? { priorLevelMechanism: 'Test a direction previously observed to change the board',
+            : label, agenda: decision ? [] : entries, evidence: proof,
+          ...(selectedCoverage?.routeImprovement ? { coverageRouteImprovement: { motion: selectedCoverage.motion, ...selectedCoverage.routeImprovement } } : {}),
+          ...(recalledDirection ? { priorLevelMechanism: 'Test a direction previously observed to change the board',
             newLevelConfiguration: 'The current interface needs a fresh control check' } : {}),
           ...(selectedEntry?.recurring ? { priorLevelMechanism: selectedEntry.recurring } : {}),
           ...(selectedEntry?.novelty ? { newLevelConfiguration: selectedEntry.novelty } : {}),

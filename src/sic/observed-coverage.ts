@@ -19,7 +19,7 @@ export type CoverageLearning = {
 };
 export type CoveragePlan = { command: NativeCommand; motion: Motion; marks: string[]; exit: string; evidence: string[];
   covered: boolean; verifyBarrier?: true; pullRoute?: readonly PullStep[]; pushSeries?: readonly CoverageMovementStep[];
-  pullSeries?: CoveragePullSeries };
+  pullSeries?: CoveragePullSeries; routeImprovement?: { previous: number; proposed: number; states: number } };
 
 type CoveragePose = { actor: string; arrangement: string };
 export type CoverageMovementStep = {
@@ -327,25 +327,53 @@ function measureBarrier(local: CoverageLearning, layout: Layout, cells: Cells, g
 }
 
 type Position = { actor: string; bodies: Set<string>; supports: Set<string> };
-type PushPath = { state: Position; step?: { input: string; landing: string; previous: PushPath } };
+type PushPath = { state: Position; commands: number; step?: { input: string; landing: string; previous: PushPath } };
+const coverageSearchStates = 6000;
+type ShorterSearch = { commands: number; states: number };
 
-function pushPath(start: Position, layout: Layout, ground: ReadonlySet<string>, water: ReadonlySet<string>, moves: readonly Move[]) {
+function pushPath(start: Position, layout: Layout, ground: ReadonlySet<string>, water: ReadonlySet<string>, moves: readonly Move[],
+  shorter?: ShorterSearch) {
   const key = (state: Position) => JSON.stringify([state.actor, [...state.bodies].sort(), [...state.supports].sort()]);
-  const queue: PushPath[] = [{ state: start }];
+  const root: PushPath = { state: start, commands: 0 };
+  const queue: PushPath[] = [root];
   const seen = new Set([key(start)]), relaxed = new Set([...ground, ...water, ...layout.gate]);
   const reverse = layout.marks.map(mark => reversePush(mark, relaxed, moves));
-  for (let i = 0; i < queue.length && i < 6000; i++) {
-    const path = queue[i]!, { state } = path;
+  // A push expands a whole walk. Charge each traversed cell when comparing full routes.
+  const byCommandCost = shorter ? new Map<number, PushPath[]>([[0, [root]]]) : undefined;
+  const bestArrival = new Map<string, number>([[key(start), 0]]);
+  let best: PushPath | undefined;
+  let examined = 0;
+  const bound = () => best?.commands ?? shorter?.commands ?? Infinity;
+  for (; examined < (shorter?.states ?? coverageSearchStates);) {
+    let path = queue[examined];
+    if (byCommandCost) {
+      if (!byCommandCost.size) break;
+      const cost = Math.min(...byCommandCost.keys());
+      if (cost >= bound()) break;
+      const bucket = byCommandCost.get(cost)!;
+      path = bucket.pop();
+      if (!bucket.length) byCommandCost.delete(cost);
+      if (path && bestArrival.get(key(path.state)) !== cost) { examined++; continue; }
+    }
+    if (!path) break;
+    examined++;
+    const { state } = path;
     const covered = layout.marks.every(mark => state.bodies.has(mark));
     const canStand = (cell: string) => ground.has(cell) || state.supports.has(cell) || covered && layout.gate.includes(cell);
     const reachable = new Map<string, PushPath>([[state.actor, path]]);
     for (const [cell, previous] of reachable) for (const move of moves) {
       const target = next(cell, move.delta);
-      if (!reachable.has(target) && !state.bodies.has(target) && canStand(target)) {
-        reachable.set(target, { state: { ...state, actor: target }, step: { input: move.input, landing: target, previous } });
+      const commands = previous.commands + 1;
+      if (commands < bound()
+        && !reachable.has(target) && !state.bodies.has(target) && canStand(target)) {
+        reachable.set(target, { state: { ...state, actor: target }, commands, step: { input: move.input, landing: target, previous } });
       }
     }
-    if (covered && reachable.has(layout.exit)) return reachable.get(layout.exit);
+    const finish = covered ? reachable.get(layout.exit) : undefined;
+    if (finish) {
+      if (!byCommandCost) return { path: finish, examined };
+      best = finish;
+    }
     for (const piece of state.bodies) for (const move of moves) {
       const behind = next(piece, move.delta, -1);
       const previous = reachable.get(behind);
@@ -361,12 +389,20 @@ function pushPath(start: Position, layout: Layout, ground: ReadonlySet<string>, 
       if (!matchesAssignment([...bodies], reverse)) continue;
       const candidate = { actor: piece, bodies, supports };
       const signature = key(candidate);
-      if (!seen.has(signature)) {
+      const commands = previous.commands + 1;
+      if (byCommandCost) {
+        if (commands >= Math.min(bestArrival.get(signature) ?? Infinity, bound())) continue;
+        bestArrival.set(signature, commands);
+        const bucket = byCommandCost.get(commands) ?? [];
+        bucket.push({ state: candidate, commands, step: { input: move.input, landing: end, previous } });
+        byCommandCost.set(commands, bucket);
+      } else if (!seen.has(signature)) {
         seen.add(signature);
-        queue.push({ state: candidate, step: { input: move.input, landing: end, previous } });
+        queue.push({ state: candidate, commands, step: { input: move.input, landing: end, previous } });
       }
     }
   }
+  return { path: best, examined };
 }
 
 function pushSteps(path: PushPath | undefined) {
@@ -461,8 +497,8 @@ export function coveragePullReturn(local: CoverageLearning, travel: ObservedTrav
 }
 
 export function searchPullCoverage(actor: string, pieces: Set<string>, layout: Pick<Layout, 'marks' | 'gate' | 'exit'>,
-  ground: ReadonlySet<string>, moves: readonly Move[], refusals: readonly string[], pressureBudget?: number):
-  { route?: PullStep[]; exhausted: boolean } {
+  ground: ReadonlySet<string>, moves: readonly Move[], refusals: readonly string[], pressureBudget?: number, shorter?: ShorterSearch):
+  { route?: PullStep[]; exhausted: boolean; examined: number } {
   const gates = new Set(layout.gate), open = new Set([...ground, ...gates]);
   const rejected = new Set(refusals);
   const neighbors = new Map([...open].map(cell => [cell, moves.flatMap(({ delta, input }) => {
@@ -494,6 +530,16 @@ export function searchPullCoverage(actor: string, pieces: Set<string>, layout: P
   const pressure = pressureBudget !== undefined;
   let truncated = false;
   let best = Infinity;
+  let finish: Path | undefined;
+  let examined = 0;
+  const bound = () => finish?.distance ?? shorter?.commands ?? Infinity;
+  function route(ending: Path | undefined): PullStep[] {
+    const steps: PullStep[] = [];
+    for (let step = ending; step; step = step.previous) {
+      steps.push({ input: step.input, actor: step.actor, arrangement: step.arrangement });
+    }
+    return steps.reverse();
+  }
   function enqueue(state: PullPosition) {
     const arrangement = arrangementOf(state.pieces), key = `${state.actor}|${arrangement}`;
     const distance = state.path?.distance ?? 0;
@@ -505,11 +551,15 @@ export function searchPullCoverage(actor: string, pieces: Set<string>, layout: P
       if (!pressure) return;
       estimate = 0;
     }
-    const priority = distance + 2 * estimate, bucket = queue.get(priority) ?? [];
+    const priority = distance + (shorter ? 1 : 2) * estimate;
+    if (priority >= bound()) return;
+    const bucket = queue.get(priority) ?? [];
     bucket.push(state); queue.set(priority, bucket); best = Math.min(best, priority);
   }
   enqueue({ actor, pieces });
-  for (let i = 0; queue.size && i < (pressure ? 24_000 : 6_000); i++) {
+  while (queue.size && examined < (shorter?.states ?? (pressure ? 24_000 : coverageSearchStates))) {
+    if (best >= bound()) break;
+    examined++;
     const bucket = queue.get(best)!;
     const state = bucket.pop()!;
     if (!bucket.length) { queue.delete(best); best = Math.min(...queue.keys()); }
@@ -518,13 +568,12 @@ export function searchPullCoverage(actor: string, pieces: Set<string>, layout: P
     const walk = new Map<string, Path | undefined>([[state.actor, state.path]]);
     for (const [cell, previous] of walk) {
       if ((pressure || covered) && cell === layout.exit) {
-        const route: PullStep[] = [];
-        for (let step = previous; step; step = step.previous) {
-          route.push({ input: step.input, actor: step.actor, arrangement: step.arrangement });
-        }
-        return { route: route.reverse(), exhausted: false };
+        if (!shorter || previous === undefined) return { route: route(previous), exhausted: false, examined };
+        if (previous.distance < bound()) finish = previous;
+        break;
       }
       const distance = (previous?.distance ?? 0) + 1;
+      if (distance >= bound()) continue;
       for (const { target, tail, input } of neighbors.get(cell) ?? []) {
         if (state.pieces.has(target) || !(pressure ? held(state.pieces, cell) : covered) && gates.has(target)
           || rejected.has(refusalKey(cell, arrangement, input))) continue;
@@ -541,11 +590,12 @@ export function searchPullCoverage(actor: string, pieces: Set<string>, layout: P
       }
     }
   }
-  return { exhausted: !queue.size && !truncated };
+  return finish ? { route: route(finish), exhausted: false, examined }
+    : { exhausted: !queue.size && !truncated, examined };
 }
 
 export function chooseCoverage(local: CoverageLearning | undefined, travel: ObservedTravel | undefined, rows: NativeRows,
-  remaining = maximumCommittedActions): CoveragePlan | undefined {
+  remaining = maximumCommittedActions, preferShorter = false): CoveragePlan | undefined {
   if (!local?.layout || !local.body || !travel?.actor || local.deadlock) return;
   const { cells, pieces } = readTravelGrid(rows, travel.grid), moves = namedMoves(travel);
   if (!coversFourDirections(moves)) return;
@@ -556,20 +606,38 @@ export function chooseCoverage(local: CoverageLearning | undefined, travel: Obse
   for (const cell of layout.gate) ground.delete(cell);
   const retained = local.pullRoute?.anchor === pullAnchor(travel.actor, arrangementOf(bodies), layout, cells)
     ? local.pullRoute.steps : undefined;
-  const route = motion === 'pull'
-    ? retained?.length ? retained : searchPullCoverage(travel.actor, bodies, layout, ground, moves, local.pullRefusals ?? []).route
-    : undefined;
+  const pullSearch = motion === 'pull' && !retained?.length
+    ? searchPullCoverage(travel.actor, bodies, layout, ground, moves, local.pullRefusals ?? []) : undefined;
+  const firstPull = retained?.length ? retained : pullSearch?.route;
+  // Keep the complete baseline route unless a shorter one fits both remaining budgets.
+  const pullAlternative = preferShorter && pullSearch && firstPull && firstPull.length > 1 && pullSearch.examined < coverageSearchStates
+    ? searchPullCoverage(travel.actor, bodies, layout, ground, moves, local.pullRefusals ?? [], undefined,
+      { commands: Math.min(firstPull.length, remaining + 1), states: coverageSearchStates - pullSearch.examined }) : undefined;
+  const shorterPull = pullAlternative?.route;
+  const route = shorterPull ?? firstPull;
   const start = { actor: travel.actor, bodies, supports: new Set(local.supports) };
-  const pushed = motion === 'push' ? pushSteps(pushPath(start, layout, ground, new Set(local.water ? bySignature(cells, local.water) : []), moves)) : [];
+  const water = new Set(motion === 'push' && local.water ? bySignature(cells, local.water) : []);
+  const pushSearch = motion === 'push' ? pushPath(start, layout, ground, water, moves) : undefined;
+  const firstPush = pushSearch?.path;
+  const pushAlternative = preferShorter && pushSearch && firstPush && firstPush.commands > 1 && pushSearch.examined < coverageSearchStates
+    ? pushPath(start, layout, ground, water, moves,
+      { commands: Math.min(firstPush.commands, remaining + 1), states: coverageSearchStates - pushSearch.examined }) : undefined;
+  const shorterPush = pushAlternative?.path;
+  const pushed = pushSteps(shorterPush ?? firstPush);
   const input = route?.[0]?.input ?? pushed[0]?.input;
   const pushSeries = pieces.length === 1 && pieces[0] === start.actor
     ? bindPushSeries(pushed, start, cells, layout, travel.grid.pitch, remaining) : undefined;
   const pullSeries = route && pieces.length === 1 && pieces[0] === start.actor
     ? bindPullSeries(route, start.actor, bodies, cells, layout, travel.grid.pitch, remaining) : undefined;
   const verify = input || motion === 'pull' ? undefined : measureBarrier(local, layout, cells, ground, travel.actor, bodies, moves, travel.grid.floor);
+  const routeImprovement = shorterPush && pushAlternative && firstPush && pushSearch
+    ? { previous: firstPush.commands, proposed: shorterPush.commands, states: pushSearch.examined + pushAlternative.examined }
+    : shorterPull && pullAlternative && firstPull && pullSearch
+      ? { previous: firstPull.length, proposed: shorterPull.length, states: pullSearch.examined + pullAlternative.examined } : undefined;
   return input || verify ? { command: { action_ref: (input ?? verify)!, data: {} }, motion, marks: layout.marks, exit: layout.exit,
     evidence: [...new Set([...local.refs, ...moves.map(move => travel.moves[move.input]!.ref)])],
     covered: layout.marks.every(mark => bodies.has(mark)), ...(verify ? { verifyBarrier: true } : {}),
+    ...(routeImprovement ? { routeImprovement } : {}),
     ...(route?.length ? { pullRoute: route } : {}), ...(pushSeries ? { pushSeries } : {}), ...(pullSeries ? { pullSeries } : {}) } : undefined;
 }
 

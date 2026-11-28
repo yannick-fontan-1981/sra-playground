@@ -80,8 +80,13 @@ async function run(code,requestedTarget,parallelWorkers) {
   const games=createGameDispatcher(loadLegacy);
   const game=request=>games.dispatch(request);
   const preferTransportUndo = process.env.SIC_SOURCE_TRANSPORT_UNDO === '1';
+  const preferShorterCoverage = process.env.SIC_SOURCE_SHORTEST_COVERAGE === '1';
   if (preferTransportUndo && sourceArm !== 'active') throw new Error('Transport undo requires the active comparison arm.');
+  if (preferShorterCoverage && (sourceArm !== 'active' || /^SS(?:0[89]|1\d|2[0-5])$/.test(code))) {
+    throw new Error('The experimental coverage cost comparison requires an authorized source.');
+  }
   let solver;const service=new V6AgentService(async recovery=>(solver=await createNativeV6Runtime({common,strategy},{recovery,
+    ...(preferShorterCoverage ? { preferShorterCoverage: true } : {}),
     ...(preferTransportUndo ? { preferTransportUndo: true } : {})})));
   const evidence = process.env.SIC_SOURCE_COMPOSER_EVIDENCE === '1' ? new Map() : null;
   const seenEvidence = new Set();
@@ -128,6 +133,12 @@ async function run(code,requestedTarget,parallelWorkers) {
         const key = JSON.stringify([previous.level, card.strategy, card.trigger ?? null, card.situation ?? null]);
         if (!sourceDecisions.has(key)) sourceDecisions.set(key, { level: previous.level, strategy: card.strategy,
           trigger: card.trigger ?? null, firstTurn: effects.length + 1, action: action.id });
+      }
+      if (card?.coverageRouteImprovement) {
+        const cost = card.coverageRouteImprovement;
+        const key = JSON.stringify([previous.level, 'compare_coverage_cost', cost.motion, cost.previous, cost.proposed]);
+        if (!sourceDecisions.has(key)) sourceDecisions.set(key, { level: previous.level, strategy: 'compare_coverage_cost',
+          firstTurn: effects.length + 1, action: action.id, ...cost });
       }
       if (captureRivals) recordRivals(previous, action, board, effects.length + 1);
       const executionMs=performance.now()-issued; let changed=0, left=64, right=-1, top=64, bottom=-1; for(let y=0;y<64;y++) for(let x=0;x<64;x++) if(previous.frame[y][x]!==board.frame[y][x]){changed++; left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);} effects.push([action.id,action.data??null,changed,changed?[left,top,right,bottom]:null,board.frames.length,board.levelsCompleted,agent.snapshot.proposal?.sicSituationCard?.strategy,agent.snapshot.trace.findLast(e=>e.kind==="sic_native_plan")?.family,agent.snapshot.proposal?.sicSituationCard?.situation,agent.snapshot.proposal?.sicSituationCard?.evidence?.length]);

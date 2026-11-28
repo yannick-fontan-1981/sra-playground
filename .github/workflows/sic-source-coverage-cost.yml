@@ -1,0 +1,54 @@
+name: SIC source coverage by authorized command count
+
+on:
+  push:
+    branches: [experiment/sic-composed-action-cost]
+    paths: [.github/workflows/sic-source-coverage-cost.yml]
+
+permissions:
+  contents: read
+
+jobs:
+  replay:
+    name: Source coverage cost A/B ${{ matrix.game }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    strategy:
+      fail-fast: false
+      matrix:
+        game: [SS01, SS02, SS03, SS04, SS05, SS06, SS07]
+    env:
+      GAME: ${{ matrix.game }}
+      SIC_SOURCE_COMPOSER_ARM: active
+      SIC_SOURCE_COMPOSER_STRATEGY: motion_contrast
+      SIC_SOURCE_TRANSPORT_UNDO: '1'
+      SIC_SOURCE_COMPOSER_EVIDENCE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node scripts/prepare-python.mjs
+      - name: Compare the action-cost improvement on the same source replies
+        shell: bash
+        run: |
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          mkdir replay
+          git rev-parse HEAD HEAD:src > replay/identity
+          date -u +%s%3N > replay/start-ms
+          node scripts/check-sic-chronological.mjs "$GAME" 3 replay/base.jsonl 1 sic
+          SIC_SOURCE_SHORTEST_COVERAGE=1 node scripts/check-sic-chronological.mjs "$GAME" 3 replay/active.jsonl 1 sic
+          date -u +%s%3N > replay/end-ms
+          git diff --exit-code
+          cd replay
+          sha256sum base.jsonl active.jsonl *.levels identity start-ms end-ms > sha256sums
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sic-coverage-cost-${{ matrix.game }}
+          path: replay/
+          retention-days: 14
