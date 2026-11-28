@@ -1,0 +1,42 @@
+{
+  "equalScenarios": 5,
+  "GIGO": {
+    "kind": "nested_control_response",
+    "refs": [
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:7e07e56969825161",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:722ed37e55f034f3"
+    ],
+    "pixels": 420,
+    "local": 20,
+    "remote": 400,
+    "official": false
+  },
+  "GIGOstop": "nested_control_effect_requires_composition",
+  "syntheticUnchanged": {
+    "kind": "nested_control_response",
+    "refs": [
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:7e07e56969825161",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:7e07e56969825161"
+    ],
+    "pixels": 0,
+    "local": 0,
+    "remote": 0,
+    "official": false,
+    "disposition": "local_no_visible_effect",
+    "selection": false,
+    "impossibility": false
+  },
+  "VALV": {
+    "kind": "nested_control_response",
+    "refs": [
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:cde1b5db276f7597",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:295ef69927a324e5"
+    ],
+    "pixels": 72,
+    "local": 0,
+    "remote": 72,
+    "official": false
+  },
+  "VALVnext": "envelope_fill_experiment",
+  "archiveSHA256": "919926db38196ff92da992a68d96b8ec8b169f09d2040a41f362136d84bd9edf"
+}

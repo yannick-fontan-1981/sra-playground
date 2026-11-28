@@ -29,6 +29,7 @@ cases = {
     "DC22": ("d713024aa7f9b45c8fbd114b86209d36c4efd6ba", "dc22-line-88", "sic-observe-dc22-support", []),
     "ELAS": ("280a54b5dd589d192d369b690781de057efaec8c", "elas-line-19", "sic-observe-elas-metric", []),
     "ZIPP": ("421dc6a58d051e8e418db80a98cf1e01755dab40", "zipp-lines-67-71", "sic-observe-zipp-trace-outline", []),
+    "GIGO": ("b2eef22648f3a511bed0783d938013bae8673a8a", "gigo-line-53", "sic-observe-gigo-control", []),
     "MIND": ("860835b1b77ae9cde489230be5c1f83c05237302", "mind-line-12", "sic-observe-mind-feedback",
              ["docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-public-trace.json.gz", "tests/fixtures/sic-mind-alternate-returns.json.gz"]),
     "RE86": ("8e820aa64f321153bb858040d462d7f766178947", "re86-line-7", "sic-observe-re86-ownership",
