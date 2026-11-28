@@ -1,0 +1,8 @@
+# Composeur natif de pression · qualification indépendante
+
+Candidat annoncé `c515ea1464387c940b06e93f3ad7ecd73f782f60`, référence d’intégration `0aef4289e97ce094782dfd03f5a79ace6eae5fd2`. Les cas de réserve synthétiques restent à part. Vérifier uniquement les préfixes et contre-épreuves utiles au portage.
+
+- Rejouer les deux variantes de reprise de SS05, la séquence autonome de SS05 depuis N1 et SS11 au plafond annoncé de 80. Consigner le SHA du moteur, le budget transmis, le premier ticket utile, l’admission, les retours et les issues officielles de chaque variante. Si les deux codes délivrent le même ticket, comparer aussi la provenance et l’usage des preuves. Séparer résultat du parcours et qualification de sa composition.
+- À état comparable, retirer seulement la preuve locale de fermeture. Conserver les autres faits et le paquet en vol lorsque l’intervention le permet. Vérifier le refus du ticket, son premier repli et, s’il est joué, son retour. Ajouter un contrôle avec la preuve authentique rétablie ou une preuve étrangère retirée. Toute combinaison d’entrées de synthèse est explicitement distinguée des retours natifs.
+- Lorsque le vrai ticket est joué, vérifier qu’une observation contraire empêche l’acquisition et la reprise qui en dépend. Relever la première différence de plan, de garde, d’acquisition ou de continuation. Comparer une entrée stationnaire ou un retour d’un autre sujet seulement s’il reste possible de conserver le reste de la scène.
+- Distinguer le comportement du gel d’intégration, la sélection effectivement exercée sur le candidat et un éventuel test de surface qui ne libère aucun ticket. Budget et contexte au service identiques pour les comparaisons. La campagne des 107 reste hors de ce contrôle ciblé.
