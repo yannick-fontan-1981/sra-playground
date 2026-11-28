@@ -1,0 +1,104 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 7,
+      "gestes": 89,
+      "testsAuteur": 5
+    },
+    {
+      "sha": "b5dda8ecb17b1725816bae09b44973449869dbae",
+      "départs": 7,
+      "gestes": 89,
+      "testsAuteur": 5
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "catalogue": {
+    "11": 4,
+    "81": 5
+  },
+  "ligne11": {
+    "plan": [
+      "ACTION1",
+      "ACTION3",
+      "ACTION2",
+      "ACTION4"
+    ],
+    "témoins": [
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:81c6823aece1aaf9",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:7a66d2673edec39e",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:7916c8b3cb87be1e"
+    ],
+    "repli": [
+      "observed_frontier",
+      "experiment",
+      "ACTION4",
+      0
+    ],
+    "réserve": {
+      "pixels": [
+        [
+          103,
+          3
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "suite": [
+        "observed_frontier",
+        "experiment",
+        "ACTION4",
+        0
+      ]
+    }
+  },
+  "ligne81": {
+    "modèle": {
+      "source": 5,
+      "target": 14,
+      "epoch": 1,
+      "witnesses": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:8:frame:90b98f0d2993a933",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:81c6823aece1aaf9",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:10:frame:db55300e1b674d5e"
+      ],
+      "boundary": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:11:frame:460ea530dabc2dc9",
+      "command": "ACTION4",
+      "key": "7aa0648744d0407f45199606976a0223062138ef836f0c4e98cb29fd5303544e"
+    },
+    "repli": [
+      "observed_frontier",
+      "experiment",
+      "ACTION1",
+      0
+    ],
+    "suite": [
+      "scored_local_rewrite",
+      "public_scored_rewrite",
+      "ACTION2",
+      0
+    ],
+    "sansModèleÀLaFrontière": [
+      "observed_frontier",
+      "experiment",
+      "ACTION1",
+      0
+    ],
+    "réserve": {
+      "masque": {
+        "géométrie": 30,
+        "physique": 30,
+        "servi": 0
+      },
+      "suite": [
+        "scored_local_rewrite",
+        "public_scored_rewrite",
+        "ACTION2",
+        0
+      ]
+    }
+  }
+}
