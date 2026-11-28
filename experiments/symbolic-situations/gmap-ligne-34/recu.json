@@ -1,0 +1,48 @@
+{
+  "stats": [
+    {
+      "engine": "gel",
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 8,
+      "gestes": 39,
+      "contrasteConstruit": 1
+    },
+    {
+      "engine": "candidat",
+      "sha": "9c71cd820b59ef3456455b637a0a062abe1d03d0",
+      "départs": 8,
+      "gestes": 39,
+      "contrasteConstruit": 1
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "catalogue": 16,
+  "occurrences": 16,
+  "permission": {
+    "de": [
+      29,
+      28
+    ],
+    "vers": [
+      35,
+      28
+    ],
+    "statut": "local_permission_hypothesis_not_confirmed_transaction"
+  },
+  "pasCommun": {
+    "positions": [
+      [
+        29,
+        28
+      ],
+      [
+        35,
+        28
+      ]
+    ],
+    "action": "ACTION4",
+    "ordreOffreSeuleAdmis": false,
+    "ordreCohérentAdmis": true,
+    "gain": 1
+  }
+}
