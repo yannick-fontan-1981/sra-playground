@@ -7,6 +7,7 @@ export type ConditionalAccessProblem<State, Action> = {
   goal: (state: State) => boolean;
   choices: (state: State) => Iterable<AccessChoice<State, Action>>;
   budget: { commands: number; states: number };
+  chargeState?: () => boolean;
 };
 export type ConditionalAccessPolicy<Action> = {
   action: Action;
@@ -56,6 +57,7 @@ export function planConditionalAccess<State, Action>(
   };
   for (let index = 0; index < frontier.length && explored < problem.budget.states; index++) {
     if (Number.isFinite(root.cost)) break;
+    if (problem.chargeState && !problem.chargeState()) { limited = true; break; }
     const node = frontier[index]!;
     explored++;
     if (node.cost === 0 || node.depth >= problem.budget.commands) continue;
