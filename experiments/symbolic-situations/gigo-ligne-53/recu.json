@@ -1,0 +1,76 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 6,
+      "gestes": 16,
+      "testsAuteur": 4
+    },
+    {
+      "sha": "b2eef22648f3a511bed0783d938013bae8673a8a",
+      "départs": 6,
+      "gestes": 16,
+      "testsAuteur": 4
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "occurrences53": {
+    "rejouées": 2,
+    "catalogue": 6
+  },
+  "GIGO": {
+    "pixels": {
+      "total": 420,
+      "près": 20,
+      "loin": 400,
+      "hist": {
+        "0→9": 316,
+        "15→0": 104
+      },
+      "local": {
+        "15→0": 20
+      },
+      "distant": {
+        "0→9": 316,
+        "15→0": 84
+      }
+    },
+    "arrêt": "nested_control_effect_requires_composition"
+  },
+  "retoursConstruits": [
+    [
+      "stationnaire",
+      0,
+      "observed_frontier"
+    ],
+    [
+      "local",
+      20,
+      "nested_control_effect_requires_composition"
+    ],
+    [
+      "distant",
+      400,
+      "nested_control_effect_requires_composition"
+    ]
+  ],
+  "VALV": {
+    "gestes": 11,
+    "pixels": {
+      "total": 72,
+      "près": 0,
+      "loin": 72,
+      "hist": {
+        "3→11": 56,
+        "9→5": 16
+      },
+      "local": {},
+      "distant": {
+        "3→11": 56,
+        "9→5": 16
+      }
+    },
+    "champs": 3,
+    "reprise": "envelope_fill_experiment"
+  }
+}
