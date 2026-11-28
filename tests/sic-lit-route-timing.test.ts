@@ -3,6 +3,7 @@ import { test } from 'node:test';
 import type { NativePoint } from '../src/logos-engine/v6-native-types.ts';
 import { collectLightTiming, exposureMask, searchLightTiming } from '../src/sic/lit-route-timing.ts';
 import type { LightRoute, LightTiming } from '../src/sic/lit-route-timing.ts';
+import { inferWitnessedSuffixCycle } from '../src/sic/witnessed-cycle.ts';
 
 const actor: NativePoint = [2, 2], goal: NativePoint = [4, 2];
 const view = { actor, goal, light: 1, guardInk: 3, walls: 4 };
@@ -43,6 +44,17 @@ test('binds a witnessed light cycle to its actual phase after an initial transie
   assert.equal(active?.period, 3);
   assert.deepEqual(active?.transientEvidence, { onset: 3, witnesses: [4, 3, 3] });
   assert.equal(active?.samples[(active?.elapsed ?? 0) % 3], exposureMask(phase(12), view, pitch));
+});
+
+test('withheld observations leave competing futures unresolved until an observed contrast', () => {
+  const first = ['A', 'B', 'C'], second = ['A', 'A', 'B', 'C'];
+  const common = ['Z', 'Z', 'Z', ...Array.from({ length: 36 }, (_, index) =>
+    first[index % first.length] === second[index % second.length] ? first[index % first.length]! : null)];
+  assert.equal(inferWitnessedSuffixCycle(common), undefined);
+  const withContrast = [...common, ...first, ...first];
+  const cycle = inferWitnessedSuffixCycle(withContrast);
+  assert.equal(cycle?.onset, 3);
+  assert.deepEqual(cycle?.phases, first);
 });
 
 test('waits when an intermediate footprint is exposed even if the destination will be clear', () => {
