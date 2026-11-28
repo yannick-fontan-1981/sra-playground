@@ -31,6 +31,21 @@ interface ControlTrialVerdict {
   readonly evidence?: readonly string[];
 }
 
+export interface ControlTrialOffer {
+  readonly action: string;
+  readonly offeredAt: string;
+  readonly context: ControlTrialContext;
+}
+
+interface RankedControlTrial {
+  readonly action: string;
+  readonly cost: 1;
+  readonly applicability: Applicability;
+  readonly reason: string;
+  readonly evidence: readonly string[];
+  readonly result: 'selected' | 'lower_priority' | 'skipped';
+}
+
 export interface ControlTrialComparison {
   readonly need: typeof controlEffectNeed;
   readonly mode: 'shadow' | 'active';
@@ -42,6 +57,7 @@ export interface ControlTrialComparison {
   readonly reference: ControlTrialVerdict;
   readonly shadow: Required<ControlTrialVerdict>;
   readonly firstDifference: keyof ControlTrialVerdict | null;
+  readonly offers?: readonly RankedControlTrial[];
 }
 
 export type ControlTrialObserver = (comparison: ControlTrialComparison) => void;
@@ -138,14 +154,10 @@ function rankControlTrial(facts: Facts, remaining: number): Required<ControlTria
     evidence: assessment.evidence ?? [] };
 }
 
-/** Compare the actual local decision with a plan-free selection on the same prepared offer. */
-export function compareControlTrial(action: string, offeredAt: unknown, context: ControlTrialContext,
-  reference: ControlTrialVerdict | AgendaEntry, target: ControlTrialEvaluation): boolean {
-  let selected = false;
+function observeControlTrial(offer: Pick<ControlTrialOffer, 'action' | 'context'>, reference: ControlTrialVerdict | AgendaEntry,
+  shadow: Required<ControlTrialVerdict>, target: ControlTrialEvaluation, offers?: readonly RankedControlTrial[]): void {
+  if (!target.observe) return;
   try {
-    const shadow = rankControlTrial(controlTrialFacts(action, offeredAt, context), target.remaining);
-    selected = shadow.selected;
-    if (!target.observe) return selected;
     const active = 'result' in reference
       ? { selected: reference.result === 'selected', applicability: reference.applicability,
         reason: reference.reason, evidence: [...reference.evidence ?? []] }
@@ -153,8 +165,40 @@ export function compareControlTrial(action: string, offeredAt: unknown, context:
     const fields = ['selected', 'applicability', 'reason', 'evidence'] as const;
     const firstDifference = fields.find(field => active[field] !== undefined
       && JSON.stringify(active[field]) !== JSON.stringify(shadow[field])) ?? null;
-    target.observe({ need: controlEffectNeed, mode: target.active ? 'active' : 'shadow', family: target.family, observationRef: context.observationRef,
-      action, cost: 1, remaining: target.remaining, reference: active, shadow, firstDifference });
+    target.observe({ need: controlEffectNeed, mode: target.active ? 'active' : 'shadow', family: target.family,
+      observationRef: offer.context.observationRef, action: offer.action, cost: 1, remaining: target.remaining,
+      reference: active, shadow, firstDifference, ...(offers ? { offers } : {}) });
+  } catch {
+    // A diagnostic consumer cannot interrupt a native decision.
+  }
+}
+
+/** The supplier passes only prepared offers, ordered by its historical priority at equal cost. */
+export function selectControlTrialOffer<Offer extends ControlTrialOffer>(offers: readonly Offer[],
+  target: ControlTrialEvaluation): Offer | undefined {
+  const ranked = offers.map(offer => ({ offer,
+    verdict: rankControlTrial(controlTrialFacts(offer.action, offer.offeredAt, offer.context), target.remaining) }));
+  const first = ranked[0];
+  if (!first) return undefined;
+  const chosen = ranked.find(candidate => candidate.verdict.selected);
+  if (target.observe) {
+    const offer = first.offer, reference = qualifyControlTrial(offer, offer.action, offer.offeredAt, offer.context);
+    observeControlTrial(offer, reference, { ...first.verdict, selected: chosen === first }, target,
+      ranked.map(candidate => ({ action: candidate.offer.action, cost: 1, applicability: candidate.verdict.applicability,
+        reason: candidate.verdict.reason, evidence: candidate.verdict.evidence,
+        result: candidate === chosen ? 'selected' : candidate.verdict.selected ? 'lower_priority' : 'skipped' })));
+  }
+  return target.active ? chosen?.offer : first.offer;
+}
+
+/** Compare the actual local decision with a plan-free selection on the same prepared offer. */
+export function compareControlTrial(action: string, offeredAt: unknown, context: ControlTrialContext,
+  reference: ControlTrialVerdict | AgendaEntry, target: ControlTrialEvaluation): boolean {
+  let selected = false;
+  try {
+    const shadow = rankControlTrial(controlTrialFacts(action, offeredAt, context), target.remaining);
+    selected = shadow.selected;
+    observeControlTrial({ action, context }, reference, shadow, target);
   } catch {
     // A diagnostic consumer cannot interrupt a native decision.
   }
