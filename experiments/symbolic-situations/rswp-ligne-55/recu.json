@@ -1,0 +1,104 @@
+{
+  "stats": {
+    "versions": 2,
+    "départsParVersion": 9,
+    "gestesParVersion": 91,
+    "catalogue": 16,
+    "reprisesExercées": 2,
+    "niveauxTerminés": 2
+  },
+  "scopes": {
+    "8": {
+      "matériauxAvant": [
+        15,
+        12,
+        13
+      ],
+      "matériauxAprès": [
+        12,
+        13,
+        15
+      ],
+      "changement": [
+        21,
+        21,
+        21
+      ],
+      "sourceRetour": "rswp-55:epoch:2:revision:8:frame:6948b3b939691e51",
+      "pixelsSansZone": [
+        0,
+        21,
+        21
+      ],
+      "retraitRelation": {
+        "panel": "74d650d45ec1f6c0c6e535e949745c36177ed40da738566f5d9cebeacf53ff91",
+        "site": [
+          28,
+          16
+        ],
+        "removed": [
+          28,
+          20,
+          30,
+          22
+        ],
+        "value": 12,
+        "background": 5
+      },
+      "commandeRésolue": [
+        "ACTION6",
+        {
+          "x": 45,
+          "y": 12
+        }
+      ],
+      "score": 1
+    },
+    "16": {
+      "matériauxAvant": [
+        13,
+        15,
+        12
+      ],
+      "matériauxAprès": [
+        13,
+        15,
+        12
+      ],
+      "changement": [
+        21,
+        21,
+        21
+      ],
+      "sourceRetour": "rswp-55:epoch:3:revision:16:frame:b9c8d0c59685582c",
+      "pixelsSansZone": [
+        0,
+        21,
+        21
+      ],
+      "retraitRelation": {
+        "panel": "74d650d45ec1f6c0c6e535e949745c36177ed40da738566f5d9cebeacf53ff91",
+        "site": [
+          28,
+          49
+        ],
+        "removed": [
+          28,
+          53,
+          30,
+          55
+        ],
+        "value": 13,
+        "background": 5
+      },
+      "commandeRésolue": [
+        "ACTION6",
+        {
+          "x": 45,
+          "y": 12
+        }
+      ],
+      "score": 2
+    }
+  }
+}
