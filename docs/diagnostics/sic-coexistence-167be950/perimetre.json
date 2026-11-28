@@ -1,0 +1,275 @@
+{
+  "engine": "167be950334988ffbc46a04bc26de60c74fea527",
+  "parent": "bf1cbf245055a60c4a253b9c6ee4be18ea9b8c2c",
+  "lines": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    71,
+    75,
+    77,
+    80,
+    81,
+    82,
+    83,
+    84,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    94,
+    96,
+    97,
+    98
+  ],
+  "srcTree": "8eb1d3d453c29d0254a7a22183bf9b1fa0886f45",
+  "witnesses": [
+    {
+      "game": "WEAV",
+      "line": 43,
+      "source": "b01ca9bfde92510eb622a105e1f1470c796dc8e0",
+      "bank": "96f38fac",
+      "operator": "cff51c7b",
+      "files": [
+        "src/logos-engine/v6-crossed-prefix-access.ts",
+        "src/logos-engine/v6-native-runtime.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ]
+    },
+    {
+      "game": "COMB",
+      "line": 46,
+      "source": "24e9743683b22b2256104d9f4de2c84abb1a1de3",
+      "bank": "ecd4241f",
+      "operator": "12f289c1",
+      "files": [
+        "src/logos-engine/v6-native-runtime.ts",
+        "src/logos-engine/v6-product-panel-access.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ]
+    },
+    {
+      "game": "KEYD",
+      "line": 38,
+      "source": "51d983a7243289d2ebb2cef365dd536cbeaf59b1",
+      "bank": "9e47edee",
+      "operator": "da55ca29",
+      "files": [
+        "src/logos-engine/v6-native-runtime.ts",
+        "src/logos-engine/v6-observed-inventory.ts"
+      ]
+    },
+    {
+      "game": "SELE",
+      "line": 51,
+      "source": "77df94e33aa8bae8ecc7f81c8b57e062943dffa6",
+      "bank": "66ec7c8a",
+      "operator": "12f289c1"
+    },
+    {
+      "game": "RSWP",
+      "line": 55,
+      "source": "f3051af812f4f7f74f0179a804a87753bffa5910",
+      "bank": "c7c14eaa",
+      "operator": "d14d6254"
+    },
+    {
+      "game": "COLM",
+      "line": 59,
+      "source": "b8902646b6c968f78e5512f62d1d641b0bd20dd0",
+      "bank": "0c2582b8",
+      "operator": "e63c9424"
+    },
+    {
+      "game": "PIPE",
+      "line": 60,
+      "source": "aa75791a365b1ab6edcfa6a464654c6432cb3b46",
+      "bank": "71b1c491",
+      "operator": "4715e103"
+    },
+    {
+      "game": "KLOT",
+      "line": 82,
+      "source": "37983796259ab45f3366364896a72c55752e332d",
+      "bank": "efdccb9f",
+      "operator": "497ff17e",
+      "files": [
+        "src/logos-engine/v6-selected-rigid.ts"
+      ]
+    },
+    {
+      "game": "CD82",
+      "line": 89,
+      "source": "a6f7b0de19f013b132ff133b1084be86988b2dc1",
+      "bank": "18435983",
+      "operator": "497ff17e"
+    },
+    {
+      "game": "VOIS",
+      "line": 62,
+      "source": "1391bd741ad11addfce68370db8969cd3d37b6b0",
+      "bank": "c900beef",
+      "operator": "1a45d32a"
+    },
+    {
+      "game": "THER",
+      "line": 65,
+      "source": "dc9314cc1ebdfc4ac4888d5ad0e7bfa0fb62542f",
+      "bank": "c900beef",
+      "operator": "1a45d32a"
+    },
+    {
+      "game": "SC25",
+      "line": 21,
+      "source": "88e8abe8389ba9e5809de6aa8e2f911053f14959",
+      "bank": "193fadcb",
+      "operator": "1a45d32a",
+      "scope": "constructed same-epoch transfer; official invocation and absence of crossing assessed separately"
+    }
+  ],
+  "files": {
+    "src/logos-engine/v6-crossed-prefix-access.ts": {
+      "gitBlob": "48b119d66bcd05a3fac0596fb6674350f6a67a64",
+      "inputs": [
+        "b01ca9bfde92510eb622a105e1f1470c796dc8e0"
+      ],
+      "sha256": "cd973234a713cfa854b5c12f0278b9ba9a13e01a06b9d6c39c9ffe0f4261b7c5"
+    },
+    "src/logos-engine/v6-native-runtime.ts": {
+      "gitBlob": "0f1d33145d6df5968b8550c930e73056d3d35356",
+      "inputs": [
+        "b01ca9bfde92510eb622a105e1f1470c796dc8e0",
+        "24e9743683b22b2256104d9f4de2c84abb1a1de3",
+        "51d983a7243289d2ebb2cef365dd536cbeaf59b1"
+      ],
+      "sha256": "f06b03f4cab2af3e4078f4eda930018057bec0d05248b23f2f6560982de8a1dc"
+    },
+    "src/logos-engine/v6-observed-inventory.ts": {
+      "gitBlob": "025b19a0d47a14b8fabcc850d982c199fbc08b64",
+      "inputs": [
+        "51d983a7243289d2ebb2cef365dd536cbeaf59b1"
+      ],
+      "sha256": "b333540133b180ec27ccabed27f004bf745613b4ec382c65549d76c7f65e3d6f"
+    },
+    "src/logos-engine/v6-product-panel-access.ts": {
+      "gitBlob": "db4fc13a334bceb5b3589173b0e65a962240d583",
+      "inputs": [
+        "24e9743683b22b2256104d9f4de2c84abb1a1de3"
+      ],
+      "sha256": "c93d590d5b4ce51caf50eb36a0ca3a9cf03298dba4fbf7b53bff329ed5d219e8"
+    },
+    "src/logos-engine/v6-selected-rigid.ts": {
+      "gitBlob": "2ff99dbcea804229b7dd41b9e2c94d7fbb42ee29",
+      "inputs": [
+        "37983796259ab45f3366364896a72c55752e332d"
+      ],
+      "sha256": "4abe170fee842d4f9ac23fbd0a5cb1c487a3f4205e12c6fa1e78b1c4b9a274bc"
+    },
+    "src/logos-engine/v6-shared-series.ts": {
+      "gitBlob": "810ac4056f2490a7c7d44b189730ce2b6337632e",
+      "inputs": [
+        "b01ca9bfde92510eb622a105e1f1470c796dc8e0",
+        "24e9743683b22b2256104d9f4de2c84abb1a1de3"
+      ],
+      "sha256": "2940a5fded3496ce1f78006353bf4c7fce8a795e45e4ede2a2be57228d5f7821"
+    }
+  },
+  "freeze": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "threshold": 85,
+  "count": 87,
+  "newLines": [
+    21,
+    38,
+    43,
+    46,
+    51,
+    55,
+    59,
+    60,
+    62,
+    65,
+    82,
+    89
+  ],
+  "attribution": {
+    "gel": 55,
+    "branches": 32
+  },
+  "thresholdBatch": {
+    "operator": "1a45d32a",
+    "lines": [
+      21,
+      62,
+      65
+    ]
+  },
+  "run": "46106829666"
+}

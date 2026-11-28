@@ -18,6 +18,7 @@ THIRTY_FIVE = "09aeb9e14e40b6115269e47267b47ba8d71708fd"
 FORTY_SIX = "ba2e7c6b8d10e04edc149ff836c065178757c62d"
 FIFTY_FIVE = "674b0dd19d693a66687990ab2a4368d981aa8fb9"
 SEVENTY_FIVE = "bf1cbf245055a60c4a253b9c6ee4be18ea9b8c2c"
+EIGHTY_SEVEN = "167be950334988ffbc46a04bc26de60c74fea527"
 QUERY = "c0b9f4027f1df257d7b8c96f5656f9dbb83661f0"
 COMPONENTS = {
     "a5a90c3349ea49bba8e40055444cea2026bee962": "P05 et déplacement signé",
@@ -27,6 +28,32 @@ COMPONENTS = {
 
 
 def check_components(assembly):
+    if assembly == EIGHTY_SEVEN:
+        check(git("rev-parse", assembly + "^").decode().strip() == SEVENTY_FIVE, "Expected the seventy-five-line parent")
+        components = check_components(SEVENTY_FIVE)
+        runtime = "src/logos-engine/v6-native-runtime.ts"
+        series = "src/logos-engine/v6-shared-series.ts"
+        sources = {
+            "b01ca9bfde92510eb622a105e1f1470c796dc8e0": ("ligne 43", "v6-crossed-prefix-access.ts", [runtime, series]),
+            "24e9743683b22b2256104d9f4de2c84abb1a1de3": ("ligne 46", "v6-product-panel-access.ts", [runtime, series]),
+            "51d983a7243289d2ebb2cef365dd536cbeaf59b1": ("ligne 38", "v6-observed-inventory.ts", [runtime]),
+            "37983796259ab45f3366364896a72c55752e332d": ("ligne 82", "v6-selected-rigid.ts", []),
+        }
+        merged = {runtime: "0f1d33145d6df5968b8550c930e73056d3d35356", series: "810ac4056f2490a7c7d44b189730ce2b6337632e"}
+        seen = set(merged)
+        for revision, (purpose, basename, overlap) in sources.items():
+            path = "src/logos-engine/" + basename
+            expected = set(overlap) | {path}
+            check(set(git("diff", "--name-only", FROZEN, revision, "--", "src").decode().splitlines()) == expected, revision)
+            check(git("rev-parse", assembly + ":" + path) == git("rev-parse", revision + ":" + path), path)
+            check(git("rev-parse", SEVENTY_FIVE + ":" + path) == git("rev-parse", FROZEN + ":" + path), path)
+            components[revision] = {"purpose": purpose, "files": [path, *overlap]}
+            seen.add(path)
+        for path, blob in merged.items():
+            check(git("rev-parse", assembly + ":" + path).decode().strip() == blob, path)
+        check(set(git("diff", "--name-only", SEVENTY_FIVE, assembly).decode().splitlines()) == seen,
+              "Unexpected file outside the four merged corrections")
+        return components
     if assembly == SEVENTY_FIVE:
         check(git("rev-parse", assembly + "^").decode().strip() == FIFTY_FIVE, "Expected the sixty-five-line engine parent")
         components = check_components(FIFTY_FIVE)
@@ -127,7 +154,8 @@ def check_components(assembly):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("archive", type=Path)
-    parser.add_argument("--candidate", choices=(ASSEMBLY, TEN_LINES, NEXT_ASSEMBLY, TWENTY_FIVE, THIRTY_FIVE, FORTY_SIX, FIFTY_FIVE, SEVENTY_FIVE),
+    parser.add_argument("--candidate", choices=(ASSEMBLY, TEN_LINES, NEXT_ASSEMBLY, TWENTY_FIVE, THIRTY_FIVE, FORTY_SIX,
+                                                FIFTY_FIVE, SEVENTY_FIVE, EIGHTY_SEVEN),
                         default=ASSEMBLY)
     parser.add_argument("--workflow", required=True)
     parser.add_argument("--run", required=True)
@@ -139,7 +167,8 @@ def main():
     rows = chain["load_archive"](args.archive, args.candidate, args.run, args.workflow, list(frozen), counts)
     parent = None
     parent_sha = {TEN_LINES: ASSEMBLY, NEXT_ASSEMBLY: TEN_LINES, TWENTY_FIVE: NEXT_ASSEMBLY, THIRTY_FIVE: TWENTY_FIVE,
-                  FORTY_SIX: THIRTY_FIVE, FIFTY_FIVE: FORTY_SIX, SEVENTY_FIVE: FIFTY_FIVE}.get(args.candidate)
+                  FORTY_SIX: THIRTY_FIVE, FIFTY_FIVE: FORTY_SIX, SEVENTY_FIVE: FIFTY_FIVE,
+                  EIGHTY_SEVEN: SEVENTY_FIVE}.get(args.candidate)
     if parent_sha:
         base = ROOT / "docs/diagnostics" / ("sic-coexistence-" + parent_sha[:8])
         ledger = json.loads((base / "qualification.json").read_bytes())

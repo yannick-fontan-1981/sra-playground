@@ -1,0 +1,15 @@
+{
+  "source": "167be950334988ffbc46a04bc26de60c74fea527",
+  "tree": "6c07dee26693193e4cd97f0f6e1ea963bc0ff076",
+  "branch": "audit/sic-107-167be950-20261127",
+  "workflow": ".github/workflows/sic-campaign-107.yml",
+  "workflowSha256": "adaa08730662ec9483baa5ef9d9787571ced801ff066525385c318c14d7c9d6e",
+  "templateCommit": "9d730b984b88268162f6de4e51615422e727750a",
+  "games": 107,
+  "levels": 692,
+  "shards": 24,
+  "workflowCommit": "4a12aaea0bf6a59d155bc9cca3200ee47b9c4f89",
+  "run": "46106829666",
+  "localNode": "24.22.3",
+  "matrixMaxParallel": 24
+}
