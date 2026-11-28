@@ -1,0 +1,39 @@
+{
+  "stats": {
+    "versions": 2,
+    "départsParVersion": 6,
+    "gestesServiceParVersion": 48,
+    "gestesAuxiliairesParVersion": 17,
+    "testsCorrectif": 4,
+    "retoursÉtrangersCorrigés": 2,
+    "catalogue": 16
+  },
+  "interventions": [
+    {
+      "tour": 7,
+      "sujetAttendu": "6",
+      "sujetMesuré": "11",
+      "gel": "observed_exclusive_receiver",
+      "correctif": "blocked_or_unselected_remains_conditional",
+      "arrêt": "rigid_control_or_collision_model_refuted",
+      "reçu": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:8:frame:cc6749f830aa18bb"
+    },
+    {
+      "tour": 9,
+      "sujetAttendu": "12",
+      "sujetMesuré": "6",
+      "gel": "observed_exclusive_receiver",
+      "correctif": "blocked_or_unselected_remains_conditional",
+      "arrêt": "rigid_control_or_collision_model_refuted",
+      "reçu": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:10:frame:0883f2d14cfad4bd"
+    }
+  ],
+  "doublePas": {
+    "mouvement": [
+      0,
+      1
+    ],
+    "modèles": 0,
+    "rôle": "observed_exclusive_receiver"
+  }
+}

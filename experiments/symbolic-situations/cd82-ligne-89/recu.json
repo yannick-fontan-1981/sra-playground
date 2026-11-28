@@ -1,0 +1,41 @@
+{
+  "stats": {
+    "versions": 2,
+    "départsParVersion": 4,
+    "gestesParVersion": 49,
+    "testsParVersion": 2,
+    "catalogue": 16
+  },
+  "preuve": {
+    "surfaces": [
+      [
+        3,
+        3,
+        12,
+        12
+      ],
+      [
+        27,
+        34,
+        36,
+        43
+      ]
+    ],
+    "acquis": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:10:frame:06b9e9876df7cf38",
+    "commande": "ACTION5",
+    "retour": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:11:frame:48794aa7abb5b652",
+    "édition": 50,
+    "référence": 0,
+    "passages": [
+      9,
+      15
+    ]
+  },
+  "modèleErroné": {
+    "origine": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:d4a1a7d9612ca003",
+    "commande": "ACTION4",
+    "refus": false,
+    "repli": "ACTION1",
+    "propriétaire": "observed_frontier"
+  }
+}
