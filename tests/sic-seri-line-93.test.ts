@@ -153,3 +153,48 @@ test('93 incomplete visual response keeps the same answer unconfirmed and change
   await game.advance();
   assert.equal(game.observation.levelsCompleted, 0);
 });
+
+for (const distinct of [1, 2]) {
+  test('93 duplicate journal with ' + distinct + ' distinct qualifying questions', async t => {
+    const original = VisualSequences.prototype.proposeContinuation;
+    let injected = false;
+    t.mock.method(VisualSequences.prototype, 'proposeContinuation', async function (this: VisualOwner, ...args: Parameters<typeof original>) {
+      if (args[0].level_epoch !== 2 || args[0].revision !== 5) return original.apply(this, args);
+      const state = this.state();
+      const events = state.events as Row[];
+      const completed = events.filter(event => event.status === 'observed_row_completion');
+      assert.deepEqual(completed.map(event => revision(event.evidence)), [2, 3, 4]);
+      assert.equal(args[4], 2);
+      const prefix = completed.slice(0, distinct);
+      this.restore({ ...state, events: [...prefix, structuredClone(prefix.at(-1)!), ...events.filter(event => !completed.includes(event))] });
+      injected = true;
+      try {
+        return await original.apply(this, args);
+      } finally {
+        this.restore(state);
+      }
+    });
+    const game = await start();
+    for (const [x, y] of catalog.slice(0, 4)) {
+      assert.deepEqual((await game.decision()).command.data, { x, y });
+      await game.advance();
+    }
+    const before = game.observation;
+    const d = await game.decision(), proposal = d.proposal, plan = proposal.sequence_plan;
+    assert.ok(injected);
+    assert.equal(game.observation, before);
+    assert.deepEqual([d.family, d.command, d.guard.admitted],
+      ['visual_sequences', { actionRef: 'ACTION6', data: { x: 46, y: 54 } }, true]);
+    if (distinct === 2) {
+      assert.equal(proposal.facts.visual_answer_method_recalled, true);
+      assert.deepEqual(plan.continuation_witnesses.map(revision), [3, 3, 5]);
+      assert.deepEqual(proposal.bundle_template.evidence.map(revision), [5, 3, 3, 5]);
+    } else {
+      assert.equal(proposal.facts.visual_answer_method_recalled, undefined);
+      assert.equal(plan.continuation_witnesses, undefined);
+      assert.deepEqual(proposal.bundle_template.evidence.map(revision), [5]);
+    }
+    assert.equal((await game.advance()).matched, null);
+    assert.deepEqual(visualInterior(game.observation.frame, plan.target_box), plan.expected_raster);
+  });
+}
