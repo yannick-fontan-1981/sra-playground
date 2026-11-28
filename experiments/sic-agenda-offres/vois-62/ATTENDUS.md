@@ -1,0 +1,5 @@
+# VOIS · ligne 62
+
+Sur le catalogue 8ce7ee35 et le gel d0e7527c, comparer les 16 premiers gestes, départ L1, pack natif, 600 gestes par niveau, plafond global 16. Identifier le ticket T1 et distinguer sélection d'une occurrence, identité commandée prouvée par un déplacement, appariement injectif et retour réel d'exécution.
+
+Retirer exactement une unité du motif de référence avec le nombre d'occurrences mobiles intact. Prédire la perte de l'offre locale faute d'égalité des populations. Déplacer une seule unité de référence vers une autre cellule, en conservant les deux cadres, la géométrie et le cardinal, pour changer les places visées et vérifier le choix qui les consomme. Au cours du préfixe, modifier seulement la référence après un vrai geste et vérifier que son empreinte invalide le contexte retenu avant toute reprise. Comparer à un contrôle qui conserve l'occupation et le motif, et à la relecture au niveau suivant si le préfixe l'atteint. L'égalité d'occupation ne vaut aucune loi de couleur ou victoire officielle.
