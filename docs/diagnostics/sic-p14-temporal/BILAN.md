@@ -81,7 +81,7 @@ L’oracle ne dépend ni du candidat, ni du figé, ni du simulateur. Il construi
 
 La normalisation retire noms, ordre de présentation, origine absolue, répétitions de périodes primitives et prolongements redondants du suffixe. Elle conserve les dépendances, durées, fenêtres, commandes, choix et conditions d’observation. La signature porte sur les programmes causaux ; elle ne revendique pas une équivalence exhaustive par bisimulation. Les **32 contrôles de translation d’origine** passent et restent hors des 8 000 cas.
 
-**3 395 302 contrôles de transitions concordent** entre les deux implémentations : 2 820 047 pour les deux bras principaux, puis 575 255 dans les ablations. Les 80 reçus du pilote sont identiques aux cas correspondants de la campagne après exclusion des mesures murales. Les 24 rejeux ciblés des six régressions reproduisent leurs métriques.
+**3 395 302 contrôles d’observations et de transitions concordent** entre les deux implémentations : 2 820 047 pour les deux bras principaux, puis 575 255 dans les ablations. Ce compteur comprend **3 349 332 transitions jouées et 45 970 observations initiales**. Les 80 reçus du pilote sont identiques aux cas correspondants de la campagne après exclusion des mesures murales. Les 24 rejeux ciblés des six régressions reproduisent leurs métriques.
 
 ## Ablations des témoins effectivement consommés
 

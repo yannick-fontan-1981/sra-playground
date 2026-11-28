@@ -18,7 +18,10 @@
     "ablationUnguardedTimedActions": 0,
     "lostPhysicalCrossings": 19,
     "totalOracleTransitionChecksIncludingAblations": 3395302,
-    "cumulativeReplayWallMsIncludingAblations": 271709.7462799971
+    "cumulativeReplayWallMsIncludingAblations": 271709.7462799971,
+    "actualTransitionsIncludingAblations": 3349332,
+    "initialObservationChecksIncludingAblations": 45970,
+    "counterClarification": "oracleTransitionChecks includes one initial observation check per episode; actual action transitions are reported separately here."
   },
   "decisionModes": {
     "frozen:act": 58473,

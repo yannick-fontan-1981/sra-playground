@@ -16,7 +16,7 @@
 
 Le figé utilise la primitive temporelle native inchangée ; le candidat et le figé partagent le même adaptateur et P09. Les gardes sont consommées avant les mouvements réellement joués dans le simulateur. **Aucune victoire native qualifiée, aucune intégration dans l'arbitrage de production.**
 
-13 970 ablations de témoins réellement cités : 19 pertes de franchissement, 6 947 suites d'actions modifiées, 6 889 inspections supplémentaires, 7 023 réussites avec les mêmes actions. 3 395 302 contrôles de transitions indépendants concordants. Zéro preuve invalide ou garde manquante.
+13 970 ablations de témoins réellement cités : 19 pertes de franchissement, 6 947 suites d'actions modifiées, 6 889 inspections supplémentaires, 7 023 réussites avec les mêmes actions. 3 395 302 contrôles indépendants concordants, dont 3 349 332 transitions jouées et 45 970 observations initiales. Zéro preuve invalide ou garde manquante.
 
 ## Point à reprendre
 
