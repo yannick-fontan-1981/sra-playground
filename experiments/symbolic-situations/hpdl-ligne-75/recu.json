@@ -1,0 +1,31 @@
+{
+  "stats": [
+    {
+      "engine": "gel",
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 5,
+      "gestes": 35
+    },
+    {
+      "engine": "candidat",
+      "sha": "66ce04946bccb531d5a6403ec36a5c2a90bf99a4",
+      "départs": 5,
+      "gestes": 35
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "catalogue": 10,
+  "retourT4": [
+    4,
+    1
+  ],
+  "cibleT4": 2,
+  "retourT5": [
+    1,
+    2
+  ],
+  "méthodeÉtrangèreIgnorée": true,
+  "méthodeHomologueAjoutée": true,
+  "offreInchangée": true,
+  "scoreAuT7": 1
+}
