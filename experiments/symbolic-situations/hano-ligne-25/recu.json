@@ -1,0 +1,190 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 6,
+      "gestes": 43,
+      "testsAuteur": 3
+    },
+    {
+      "sha": "f768bac6c4c9c34d230b63fe6cec39663164b6ae",
+      "départs": 6,
+      "gestes": 43,
+      "testsAuteur": 3
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "catalogue": 16,
+  "témoins": [
+    {
+      "i": 1,
+      "piles": [
+        [
+          11,
+          7
+        ],
+        [],
+        []
+      ],
+      "source": 0,
+      "destination": 1,
+      "largeur": 7,
+      "point": {
+        "x": 13,
+        "y": 51
+      },
+      "cible": 2
+    },
+    {
+      "i": 3,
+      "piles": [
+        [
+          11
+        ],
+        [
+          7
+        ],
+        []
+      ],
+      "source": 0,
+      "destination": 2,
+      "largeur": 11,
+      "point": {
+        "x": 13,
+        "y": 51
+      },
+      "cible": 2
+    },
+    {
+      "i": 7,
+      "piles": [
+        [
+          15,
+          11,
+          7
+        ],
+        [],
+        [],
+        []
+      ],
+      "source": 0,
+      "destination": 1,
+      "largeur": 7,
+      "point": {
+        "x": 11,
+        "y": 50
+      },
+      "cible": 3
+    }
+  ],
+  "dépôts": {
+    "T2": [
+      [
+        11
+      ],
+      [
+        7
+      ],
+      []
+    ],
+    "T8": [
+      [
+        15,
+        11
+      ],
+      [
+        7
+      ],
+      [],
+      []
+    ]
+  },
+  "retrait": [
+    [
+      "public_framed_transfer",
+      "public_framed_transfer",
+      "ACTION6",
+      {
+        "x": 13,
+        "y": 50
+      },
+      0
+    ],
+    [
+      "public_framed_transfer",
+      "public_framed_transfer",
+      "ACTION6",
+      {
+        "x": 13,
+        "y": 48
+      },
+      0
+    ],
+    [
+      "ordered_support_transfer",
+      "conditional_ordered_support_transfer",
+      "ACTION6",
+      {
+        "x": 13,
+        "y": 51
+      },
+      0
+    ],
+    [
+      "ordered_support_transfer",
+      "conditional_ordered_support_transfer",
+      "ACTION6",
+      {
+        "x": 31,
+        "y": 51
+      },
+      1
+    ]
+  ],
+  "réserve": {
+    "marque": [
+      [
+        9,
+        51,
+        17,
+        54
+      ],
+      [
+        10,
+        52,
+        16,
+        53
+      ]
+    ],
+    "suiteMarque": [
+      "public_framed_transfer",
+      "public_framed_transfer",
+      "ACTION6",
+      {
+        "x": 13,
+        "y": 50
+      },
+      0
+    ],
+    "suiteAutreMembre": [
+      "public_framed_transfer",
+      "public_framed_transfer",
+      "ACTION6",
+      {
+        "x": 13,
+        "y": 49
+      },
+      0
+    ],
+    "suiteDépôt": [
+      "public_framed_transfer",
+      "public_framed_transfer",
+      "ACTION6",
+      {
+        "x": 13,
+        "y": 48
+      },
+      0
+    ]
+  }
+}
