@@ -1,0 +1,5 @@
+# SB26 · ligne 85
+
+Comparer catalogue 8ce7ee35 et gel d0e7527c, L1, pack natif, 600 gestes par niveau et 16 au total. Retrouver le ticket N1/T3 ACTION6 slot_substitution / ordered_slot_substitution. Sceller le mot des cadres ordonnés, les jetons disponibles, l'éventuelle expansion des appels, les emplacements et l'occupation avant la sélection. Identifier la substitution émise, la preuve de sélection ou de transfert, puis le premier geste qui réutilise la preuve.
+
+Permuter deux couleurs des cadres de référence dont les positions excèdent le simple ensemble, à inventaire, emplacements et liens constants. Attendre un changement d'appariement de la première position concernée. Conserver comme témoin des entrées réordonnées où le même appariement reste admissible. Remplacer seulement le contenu déposé dans le retour d'un vrai placement pour éprouver la garde, la clôture ou la nouvelle sélection. Distinguer l'offre locale de la priorité de sélection globale et la soumission de son issue officielle.
