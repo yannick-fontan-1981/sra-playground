@@ -1,11 +1,11 @@
 import type { NativeProposal } from '../logos-engine/v6-native-types.ts';
-import { qualifyControlTrial, type ControlTrialContext } from './control-effect-next.ts';
+import { compareControlTrial, controlEffectNeed, qualifyControlTrial, type ControlTrialContext, type ControlTrialShadow } from './control-effect-next.ts';
 import type { AgendaEntry } from './strategy-agenda.ts';
 import { controlEffectTrigger, type ControlEffectTrigger } from './control-effect-trigger.ts';
 import type { ReasoningMode } from './reasoning-mode.ts';
 
 export const missingControlStrategy = 'test_missing_control';
-export const missingControlNeed = 'establish_control_effect_for_current_objective';
+export const missingControlNeed = controlEffectNeed;
 export const missingControlLabel = 'Test an input needed by the retained method';
 
 export interface MissingControlSituation extends ControlTrialContext {
@@ -35,17 +35,19 @@ export function* unmeasuredControls(order: Iterable<string>, available: readonly
 const trials = new WeakMap<object, MissingControlWitness & Pick<MissingControlSituation, 'priorEffect' | 'planDependency'>>();
 
 /** Families supply observations that establish the same need in their current context. */
-export function bindMissingControlTrial(proposal: TrialProposal, situation: MissingControlSituation): void {
+export function bindMissingControlTrial(proposal: TrialProposal, situation: MissingControlSituation, shadow?: ControlTrialShadow): void {
   const [command] = proposal.actions;
   if (proposal.actions.length !== 1 || !command) return;
-  const assessment = evaluateMissingControl(proposal, command.action_ref, situation);
+  const assessment = evaluateMissingControl(proposal, command.action_ref, situation, shadow);
   if (assessment.result === 'selected') trials.set(proposal, { id: missingControlStrategy, need: missingControlNeed,
     action: command.action_ref, observationRef: situation.observationRef, evidence: assessment.evidence ?? [], agenda: assessment,
     priorEffect: situation.priorEffect, planDependency: situation.planDependency });
 }
 
-export function evaluateMissingControl(proposal: TrialProposal, action: string, situation: MissingControlSituation): AgendaEntry<typeof missingControlStrategy> {
+export function evaluateMissingControl(proposal: TrialProposal, action: string, situation: MissingControlSituation,
+  shadow?: ControlTrialShadow): AgendaEntry<typeof missingControlStrategy> {
   const entry = qualifyControlTrial(proposal, action, proposal.binding?.observation_ref, situation);
+  if (shadow) compareControlTrial(action, proposal.binding?.observation_ref, situation, entry, shadow);
   return { ...entry, id: missingControlStrategy };
 }
 
