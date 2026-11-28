@@ -33,6 +33,7 @@ cases = {
     "REWI": ("9b41b8ba322fceb2737a99dfa264a4d809055bad", "rewi-line-49", "sic-observe-rewi-window", []),
     "ISOS": ("5161917eebb0e7f5d2ec6010f61bae1c2eff7b3f", "isos-line-10", "sic-observe-isos-facet", []),
     "LP85": ("80d14be16d5f3d4fa1f84c0c92498902e96a5e3f", "lp85-line-24", "sic-observe-lp85-orbit", []),
+    "CN04": ("bfba3acb8de4c3f13fc10651b2aa22490def5070", "cn04-line-30", "sic-observe-cn04-ports", []),
     "MIND": ("860835b1b77ae9cde489230be5c1f83c05237302", "mind-line-12", "sic-observe-mind-feedback",
              ["docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-public-trace.json.gz", "tests/fixtures/sic-mind-alternate-returns.json.gz"]),
     "RE86": ("8e820aa64f321153bb858040d462d7f766178947", "re86-line-7", "sic-observe-re86-ownership",

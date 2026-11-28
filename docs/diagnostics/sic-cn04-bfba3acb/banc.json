@@ -1,0 +1,88 @@
+{
+  "equalScenarios": 1,
+  "assembledEqual": true,
+  "compatibilityBeforeRotation": {
+    "compatible": true,
+    "path": null,
+    "withoutDown": null
+  },
+  "routeAfterRotation": {
+    "compatible": true,
+    "path": [
+      "ACTION2",
+      "ACTION2",
+      "ACTION2",
+      "ACTION2",
+      "ACTION2",
+      "ACTION2",
+      "ACTION2",
+      "ACTION4",
+      "ACTION4",
+      "ACTION4",
+      "ACTION4"
+    ],
+    "withoutDown": null
+  },
+  "T17": {
+    "points": [
+      [
+        12,
+        11
+      ],
+      [
+        12,
+        13
+      ]
+    ],
+    "frames": [
+      [
+        false,
+        [
+          8,
+          8
+        ]
+      ]
+    ]
+  },
+  "T18": {
+    "points": [
+      [
+        12,
+        11
+      ],
+      [
+        12,
+        13
+      ]
+    ],
+    "frames": [
+      [
+        true,
+        [
+          3,
+          3
+        ]
+      ],
+      [
+        true,
+        [
+          3,
+          3
+        ]
+      ],
+      [
+        false,
+        [
+          12,
+          12
+        ]
+      ]
+    ]
+  },
+  "officialTurn": 18,
+  "catalogue": [
+    16,
+    16
+  ],
+  "archiveSHA256": "6929224b5bf1517cbac8b8416cdcee02c013f58cfb2185822b470ad4ee4ba9cd"
+}
