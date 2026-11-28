@@ -523,6 +523,18 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.acquisitionFamilies?.inventory?.enableCallerContext(() => {
       if (!this.caller) throw new Error('Inventory context requires the initialized common caller');
       return this.caller.goal.memory.models;
+    }, beforeRef => {
+      const memory = this.authority?.memory;
+      const revision = Number(/:revision:([1-9]\d*):frame:[0-9a-f]+$/.exec(beforeRef)?.[1]);
+      if (!memory || !Number.isSafeInteger(revision)) return null;
+      try {
+        const event = memory.nativeGet(EPISODE, `observed_inventory_event:${revision}`);
+        const access = event.value?.dependency_return;
+        return access?.before === beforeRef && event.evidence === access.after ? access : null;
+      } catch (error) {
+        if (error instanceof RangeError) return null;
+        throw error;
+      }
     });
     this.acquisitionFamilies?.morphology?.enableCallerContext({
       goal: () => { if (!this.caller) throw new Error('Morphology requires the initialized common caller'); return this.caller.goal.memory; },

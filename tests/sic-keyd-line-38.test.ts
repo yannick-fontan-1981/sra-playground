@@ -152,16 +152,12 @@ for (const variant of ['missing', 'earlier ref', 'earlier transition'] as const)
     assert.ok(substituted);
     assert.equal(game.observation, before);
     assert.deepEqual([decision.family, decision.command.actionRef, decision.guard.admitted], [inventory, 'ACTION4', true]);
-    if (variant === 'missing') {
-      assert.equal(offer.kind, 'endpoint_approach_candidate');
-      assert.equal(offer.target.endpoint_role, 'unknown');
-    } else {
-      assert.equal(offer.kind, 'capacity_probe_candidate');
-      assert.deepEqual(offer.target.dependency_return.evidence, substituted);
-      assert.deepEqual(decision.proposal.route_refs.slice(0, 3), [refs.get(9), ...substituted]);
-    }
+    assert.equal(offer.kind, 'endpoint_approach_candidate');
+    assert.equal(offer.target.endpoint_role, 'unknown');
+    assert.equal(offer.target.dependency_return?.status, undefined);
     const outcome = await game.advance();
     assert.equal(outcome.matched, true);
     assert.deepEqual(locate(game.observation.frame, offer.core), [30, 7, 32, 9]);
+    assert.equal(game.observation.levelsCompleted, 0);
   });
 }

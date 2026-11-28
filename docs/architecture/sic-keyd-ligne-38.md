@@ -85,7 +85,32 @@ disparition de la signature. Lire ces éléments dans le chemin
 d'acquisition permet de conserver les autres règles de provenance du
 moteur. [Contre-épreuve opérateur](https://github.com/yannick-fontan-1981/sra-playground/blob/4efefe02ae9b33bf811659c7a621505ea3f473d3/experiments/symbolic-situations/skbn-ligne-38/BILAN.md)
 
-## Reproduction du nominal et du retrait
+## Raccord candidat
+
+Le moteur natif utilise l'événement `observed_inventory_event` déjà
+consigné pour la révision antérieure par le propriétaire du ticket.
+Il compare la référence postérieure à celle attachée à la
+consignation. `ObservedInventory.project` conserve le reçu de
+travail seulement s'il correspond au contenu de l'accès acquis et
+à l'époque courante. La mémoire de transition, les formes de reçus
+et la mesure d'accès restent celles du gel.
+
+Les quatre tests du service exercent le parcours nominal, le
+retrait et les deux substitutions. La comparaison intégrale des
+captures KEYD retrouve les 16 offres, 16 retours et 17 observations
+à l'identique. Sur SKBN, le préfixe des 16 mêmes gestes et ses
+17 observations concordent également. Le statut d'une nouvelle
+qualification indépendante reste distinct du constat local.
+
+Le contrôle de provenance commun consiste à retrouver la transition
+dont le propriétaire a acquis le fait. Ici il faut retrouver la
+partition, la disparition du signe et le retour d'accès, avec le
+corps déjà identifié par le plan. Pour ISOS, le contenu à corroborer
+est le passage officiel et sa méthode. Pour WEAV, il s'agit de
+l'événement de croisement précis. Chaque fournisseur conserve son
+lecteur de contenu.
+
+## Reproduction du nominal, du retrait et des substitutions
 
 Node 24, avec `SIC_KEYD_GAME_ROOT` pour le checkout qui contient
 Pyodide et les archives officielles. L'option
