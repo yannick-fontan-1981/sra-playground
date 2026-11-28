@@ -1,0 +1,86 @@
+{
+  "configuration": {
+    "protocol": "sic-p07-development-campaign-v1",
+    "sourceSha": "a914ed888116248dc40d22d5b9fcf53d43028297",
+    "sourceDirty": false,
+    "fingerprint": "7d378332d9e41a033ae0b4f3bd6d6b5905eefcfaaa83490615b54f60e6392e8e",
+    "sourceFiles": [
+      "scripts/p07-access/candidate.mjs",
+      "scripts/p07-access/comparator.mjs",
+      "scripts/p07-access/frozen.mjs",
+      "scripts/p07-access/generator.mjs",
+      "scripts/p07-access/oracle.mjs",
+      "scripts/p07-access/p09-audit.mjs",
+      "scripts/p07-access/p09.mjs",
+      "scripts/p07-access/reporting.mjs",
+      "scripts/p07-access/runtime.mjs",
+      "scripts/p07-access/schema.ts",
+      "scripts/sic-p07-access-aggregate.mjs",
+      "scripts/sic-p07-access-campaign.mjs",
+      "src/sic/access-policy.ts",
+      "src/sic/effect-composer.ts"
+    ],
+    "count": 80,
+    "seed": 26112807,
+    "families": [
+      "F1-detour",
+      "F2-viewpoint",
+      "F3-contact-order",
+      "F4-held-support",
+      "F5-temporary-opening",
+      "F6-construct-route",
+      "F7-uncertain-location",
+      "F8-recovery"
+    ],
+    "quotas": {
+      "F1-detour": 10,
+      "F2-viewpoint": 10,
+      "F3-contact-order": 10,
+      "F4-held-support": 10,
+      "F5-temporary-opening": 10,
+      "F6-construct-route": 10,
+      "F7-uncertain-location": 10,
+      "F8-recovery": 10
+    },
+    "familySeeds": {
+      "F1-detour": 2679704222,
+      "F2-viewpoint": 1038123093,
+      "F3-contact-order": 3676839436,
+      "F4-held-support": 2035520963,
+      "F5-temporary-opening": 379261882,
+      "F6-construct-route": 3032656241,
+      "F7-uncertain-location": 1376397096,
+      "F8-recovery": 4030054127
+    },
+    "provenance": "simulated-declarative-P07",
+    "nativeVictories": 0,
+    "sealed": {
+      "independentCases": 2000,
+      "consulted": false,
+      "games": "SS08–SS25",
+      "gamesConsulted": false
+    }
+  },
+  "status": "completed",
+  "startedAt": "2026-11-28T14:08:20.485Z",
+  "completed": 80,
+  "finishedAt": "2026-11-28T14:08:34.497Z",
+  "seconds": 14.011,
+  "artifacts": {
+    "corpus": {
+      "file": "corpus.jsonl.gz",
+      "sha256": "582b8262bc09b57ae610d1816a56a2c20dead4b6f24a7024369efccfc6713865",
+      "bytes": 28200,
+      "uncompressedSha256": "380d2a5aa7e0cfc02e664bd0096dbcc39cdeecfd27f78dcad7148ff67dd0a6f3",
+      "uncompressedBytes": 654426
+    },
+    "results": {
+      "file": "results.jsonl.gz",
+      "sha256": "435499c479f9497430f9a56b434ed6bdecbcd91d52ac989ec20414e31722b63e",
+      "bytes": 121644,
+      "uncompressedSha256": "9b3a4d754f761d25fb2839321e0b89a4d5d0c75c795f82658c39cbfc85178ded",
+      "uncompressedBytes": 2454966
+    }
+  },
+  "failures": []
+}

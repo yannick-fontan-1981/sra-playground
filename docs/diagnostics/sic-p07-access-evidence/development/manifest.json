@@ -1,0 +1,259 @@
+{
+  "configuration": {
+    "protocol": "sic-p07-access-v1",
+    "sourceSha": "a914ed888116248dc40d22d5b9fcf53d43028297",
+    "fingerprint": "7d378332d9e41a033ae0b4f3bd6d6b5905eefcfaaa83490615b54f60e6392e8e",
+    "seed": 26112807,
+    "count": 8000,
+    "families": [
+      "F1-detour",
+      "F2-viewpoint",
+      "F3-contact-order",
+      "F4-held-support",
+      "F5-temporary-opening",
+      "F6-construct-route",
+      "F7-uncertain-location",
+      "F8-recovery"
+    ],
+    "familySeeds": {
+      "F1-detour": 2679704222,
+      "F2-viewpoint": 1038123093,
+      "F3-contact-order": 3676839436,
+      "F4-held-support": 2035520963,
+      "F5-temporary-opening": 379261882,
+      "F6-construct-route": 3032656241,
+      "F7-uncertain-location": 1376397096,
+      "F8-recovery": 4030054127
+    },
+    "quotas": {
+      "F1-detour": 1000,
+      "F2-viewpoint": 1000,
+      "F3-contact-order": 1000,
+      "F4-held-support": 1000,
+      "F5-temporary-opening": 1000,
+      "F6-construct-route": 1000,
+      "F7-uncertain-location": 1000,
+      "F8-recovery": 1000
+    },
+    "scope": "frozen common composer versus conditional access component",
+    "sealed": {
+      "situations": 2000,
+      "accessed": 0,
+      "generated": 0
+    },
+    "native": {
+      "gamesExecuted": 0,
+      "victories": 0
+    }
+  },
+  "artifacts": {
+    "corpus": {
+      "file": "corpus.jsonl.gz",
+      "bytes": 2463143,
+      "sha256": "94671bc14425dec056f364a916926eca46c468095d11382d3137af8e16dadee8",
+      "uncompressedBytes": 67021309,
+      "uncompressedSha256": "be51223877eadb9074ad974bd0cebb4e8e618cfdc4f7e1e7d5ac843101a5db4a"
+    },
+    "results": {
+      "file": "results.jsonl.gz",
+      "bytes": 12257422,
+      "sha256": "0e3cb426e13c5e56b7dcd873b38fcb8715417131874223dd8eef0b6d3acc6a83",
+      "uncompressedBytes": 252742164,
+      "uncompressedSha256": "ffcc8f2d1335c978d16ecf80d6a4b756f974f3f39ecbf41ea350a372bc48b7c9"
+    }
+  },
+  "parts": [
+    {
+      "family": "F1-detour",
+      "sourceSha": "a914ed888116248dc40d22d5b9fcf53d43028297",
+      "seconds": 43.999,
+      "corpusSha256": "276a400c0a2386c86b7bc56202b10b2692d5271080c689f4a27d8c9be172486c",
+      "resultsSha256": "5a358efc320df92f7f69296a703c9d9241584f336398aaf4855fb9f9e8e9c892",
+      "generation": {
+        "attempted": 1001,
+        "accepted": 1000,
+        "duplicates": 1,
+        "infeasible": 0,
+        "certificationErrors": 0,
+        "byFamily": {
+          "F1-detour": {
+            "attempted": 1001,
+            "accepted": 1000,
+            "duplicates": 1,
+            "infeasible": 0,
+            "certificationErrors": 0,
+            "rejectionReasons": {}
+          }
+        }
+      }
+    },
+    {
+      "family": "F2-viewpoint",
+      "sourceSha": "a914ed888116248dc40d22d5b9fcf53d43028297",
+      "seconds": 43.428,
+      "corpusSha256": "9791befce83847c655188b376c7014de6525f5642b85e53af23786f6ebb9127e",
+      "resultsSha256": "7906907247ad57a1a9b10db7f3fa15408db3f1c6befa250c623f8db28e7d3dfe",
+      "generation": {
+        "attempted": 1002,
+        "accepted": 1000,
+        "duplicates": 2,
+        "infeasible": 0,
+        "certificationErrors": 0,
+        "byFamily": {
+          "F2-viewpoint": {
+            "attempted": 1002,
+            "accepted": 1000,
+            "duplicates": 2,
+            "infeasible": 0,
+            "certificationErrors": 0,
+            "rejectionReasons": {}
+          }
+        }
+      }
+    },
+    {
+      "family": "F3-contact-order",
+      "sourceSha": "a914ed888116248dc40d22d5b9fcf53d43028297",
+      "seconds": 54.465,
+      "corpusSha256": "7b33dc28ac5a859835e0b2fa9e6d5b2beb3d8fba268965e73bc22a6f62b3114e",
+      "resultsSha256": "2a4a221dd61dc75e3ee6c176b77ac01f8f4464a2557da713199db29edf1d6d1e",
+      "generation": {
+        "attempted": 1009,
+        "accepted": 1000,
+        "duplicates": 9,
+        "infeasible": 0,
+        "certificationErrors": 0,
+        "byFamily": {
+          "F3-contact-order": {
+            "attempted": 1009,
+            "accepted": 1000,
+            "duplicates": 9,
+            "infeasible": 0,
+            "certificationErrors": 0,
+            "rejectionReasons": {}
+          }
+        }
+      }
+    },
+    {
+      "family": "F4-held-support",
+      "sourceSha": "a914ed888116248dc40d22d5b9fcf53d43028297",
+      "seconds": 177.372,
+      "corpusSha256": "00479605d3fbe3ca02b5bde262baf269f5ca92d6cb38682b4fb7e8df1eb2dbb9",
+      "resultsSha256": "48f8cc69229713e7448110fbd2fed059135b6d3d3f2896d5fb16c560f383331f",
+      "generation": {
+        "attempted": 1004,
+        "accepted": 1000,
+        "duplicates": 4,
+        "infeasible": 0,
+        "certificationErrors": 0,
+        "byFamily": {
+          "F4-held-support": {
+            "attempted": 1004,
+            "accepted": 1000,
+            "duplicates": 4,
+            "infeasible": 0,
+            "certificationErrors": 0,
+            "rejectionReasons": {}
+          }
+        }
+      }
+    },
+    {
+      "family": "F5-temporary-opening",
+      "sourceSha": "a914ed888116248dc40d22d5b9fcf53d43028297",
+      "seconds": 419.791,
+      "corpusSha256": "cf686d64c2a02e493ceb0b2d4dea9f4dba7a572981813f22d95f9a2150a28252",
+      "resultsSha256": "cff42d8b85e58c4febc3e693824aa61e40beb1269bf15fedabe31807dd92fb86",
+      "generation": {
+        "attempted": 1002,
+        "accepted": 1000,
+        "duplicates": 2,
+        "infeasible": 0,
+        "certificationErrors": 0,
+        "byFamily": {
+          "F5-temporary-opening": {
+            "attempted": 1002,
+            "accepted": 1000,
+            "duplicates": 2,
+            "infeasible": 0,
+            "certificationErrors": 0,
+            "rejectionReasons": {}
+          }
+        }
+      }
+    },
+    {
+      "family": "F6-construct-route",
+      "sourceSha": "a914ed888116248dc40d22d5b9fcf53d43028297",
+      "seconds": 50.141,
+      "corpusSha256": "028ed739a534ccbc2795e99e2f8cf151063802aeda498356f57882959ec11e75",
+      "resultsSha256": "5e51823a989fc0bb70750376f9514abe9d7b420d02c32c582bb8e61f31724ce7",
+      "generation": {
+        "attempted": 1005,
+        "accepted": 1000,
+        "duplicates": 5,
+        "infeasible": 0,
+        "certificationErrors": 0,
+        "byFamily": {
+          "F6-construct-route": {
+            "attempted": 1005,
+            "accepted": 1000,
+            "duplicates": 5,
+            "infeasible": 0,
+            "certificationErrors": 0,
+            "rejectionReasons": {}
+          }
+        }
+      }
+    },
+    {
+      "family": "F7-uncertain-location",
+      "sourceSha": "a914ed888116248dc40d22d5b9fcf53d43028297",
+      "seconds": 92.038,
+      "corpusSha256": "7648d75099bc0dfb899e98377caf4ba0fd73b3365206f23d486a9543d354fe27",
+      "resultsSha256": "cba953ba54f6749926d28644bdbc86b46381170485931e5475f136de8c4a4a27",
+      "generation": {
+        "attempted": 1003,
+        "accepted": 1000,
+        "duplicates": 3,
+        "infeasible": 0,
+        "certificationErrors": 0,
+        "byFamily": {
+          "F7-uncertain-location": {
+            "attempted": 1003,
+            "accepted": 1000,
+            "duplicates": 3,
+            "infeasible": 0,
+            "certificationErrors": 0,
+            "rejectionReasons": {}
+          }
+        }
+      }
+    },
+    {
+      "family": "F8-recovery",
+      "sourceSha": "a914ed888116248dc40d22d5b9fcf53d43028297",
+      "seconds": 153.062,
+      "corpusSha256": "481930c1414cd362394905205934489064fda2d0c969996657d798ce9141a490",
+      "resultsSha256": "470c1841b6aceadffa2a39ebf9a9fe41069b1537d2f0c7eeee7c9af026acb564",
+      "generation": {
+        "attempted": 1000,
+        "accepted": 1000,
+        "duplicates": 0,
+        "infeasible": 0,
+        "certificationErrors": 0,
+        "byFamily": {
+          "F8-recovery": {
+            "attempted": 1000,
+            "accepted": 1000,
+            "duplicates": 0,
+            "infeasible": 0,
+            "certificationErrors": 0,
+            "rejectionReasons": {}
+          }
+        }
+      }
+    }
+  ]
+}

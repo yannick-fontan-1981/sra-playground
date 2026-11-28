@@ -1,0 +1,338 @@
+{
+  "subfamilies": {
+    "F4-held-support": {
+      "relay=True": 476,
+      "relay=False": 524
+    },
+    "F6-construct-route": {
+      "method=2": 334,
+      "method=1": 306,
+      "method=0": 360
+    },
+    "F7-uncertain-location": {
+      "common=False": 506,
+      "common=True": 494
+    },
+    "F8-recovery": {
+      "mode=contrary-return": 330,
+      "mode=support-lost": 322,
+      "mode=target-moved": 348
+    }
+  },
+  "oracleCommands": {
+    "F1-detour": {
+      "min": 5,
+      "max": 15
+    },
+    "F2-viewpoint": {
+      "min": 4,
+      "max": 15
+    },
+    "F3-contact-order": {
+      "min": 8,
+      "max": 17
+    },
+    "F4-held-support": {
+      "min": 8,
+      "max": 24
+    },
+    "F5-temporary-opening": {
+      "min": 7,
+      "max": 19
+    },
+    "F6-construct-route": {
+      "min": 6,
+      "max": 16
+    },
+    "F7-uncertain-location": {
+      "min": 6,
+      "max": 16
+    },
+    "F8-recovery": {
+      "min": 8,
+      "max": 20
+    }
+  },
+  "oracleMaxExplored": {
+    "F1-detour": 59,
+    "F2-viewpoint": 53,
+    "F3-contact-order": 65,
+    "F4-held-support": 993,
+    "F5-temporary-opening": 510,
+    "F6-construct-route": 63,
+    "F7-uncertain-location": 201,
+    "F8-recovery": 139
+  },
+  "ablationsByKind": {
+    "route-proof": 9995,
+    "support": 644
+  },
+  "crossingsWithDependency": {
+    "F1-detour:frozen": 2955,
+    "F1-detour:candidate": 2955,
+    "F2-viewpoint:frozen": 2000,
+    "F2-viewpoint:candidate": 2000,
+    "F3-contact-order:frozen": 3949,
+    "F3-contact-order:candidate": 3949,
+    "F4-held-support:frozen": 3716,
+    "F4-held-support:candidate": 3716,
+    "F5-temporary-opening:frozen": 6953,
+    "F5-temporary-opening:candidate": 6953,
+    "F6-construct-route:frozen": 3268,
+    "F6-construct-route:candidate": 3268,
+    "F7-uncertain-location:candidate": 3122,
+    "F8-recovery:frozen": 14857,
+    "F8-recovery:candidate": 14857
+  },
+  "examples": {
+    "F7-uncertain-location": {
+      "id": "p07-F7-uncertain-location-0",
+      "signature": "d5ad06915b7f96f57aafecff4ac3c82d8efad6e27da2324a39789f8c33070479",
+      "firstDifference": {
+        "world": 0,
+        "command": 1,
+        "frozen": null,
+        "candidate": {
+          "action": "a0",
+          "observation": {
+            "values": {
+              "traveler": 0,
+              "done": 0,
+              "alive": 1,
+              "reserve": 2,
+              "where": 0,
+              "located": 1
+            },
+            "feedback": "ok"
+          }
+        },
+        "prefixHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "reason": "frozen-has-no-next-command"
+      },
+      "frozenWorst": 0,
+      "candidateWorst": 8,
+      "candidateActions": [
+        [
+          "a0",
+          "a1",
+          "a2",
+          "a6",
+          "a10",
+          "a11",
+          "a12",
+          "a13"
+        ],
+        [
+          "a0",
+          "a14",
+          "a30",
+          "a26",
+          "a27",
+          "a28",
+          "a29"
+        ]
+      ],
+      "retainedSegments": [
+        {
+          "world": 0,
+          "invalidated": [],
+          "reusedAfterChange": [],
+          "prefixCommandsPreserved": 0,
+          "finalAccess": true
+        },
+        {
+          "world": 1,
+          "invalidated": [],
+          "reusedAfterChange": [],
+          "prefixCommandsPreserved": 0,
+          "finalAccess": true
+        }
+      ],
+      "ablations": [
+        {
+          "kind": "route-proof",
+          "dependency": "route-proof",
+          "accessRetained": false,
+          "extraCommands": -7,
+          "oracleFeasible": false
+        },
+        {
+          "kind": "route-proof",
+          "dependency": "route-proof",
+          "accessRetained": false,
+          "extraCommands": -6,
+          "oracleFeasible": false
+        },
+        {
+          "kind": "route-proof",
+          "dependency": "return-resource",
+          "accessRetained": true,
+          "extraCommands": 3,
+          "oracleFeasible": true
+        }
+      ]
+    },
+    "F8-recovery": {
+      "id": "p07-F8-recovery-0",
+      "signature": "a2a905d02a204cf8469518e1f94ad01504aa9b0b5e5c7bcef6348e182e25e503",
+      "firstDifference": {
+        "world": 0,
+        "command": 6,
+        "frozen": {
+          "action": "a25",
+          "observation": {
+            "values": {
+              "traveler": 10,
+              "done": 0,
+              "alive": 1,
+              "reserve": 2,
+              "change": 0,
+              "feedbackKnown": 1,
+              "oldSupport": 1,
+              "newSupport": 0,
+              "rejoined": 0
+            },
+            "feedback": "blocked"
+          }
+        },
+        "candidate": {
+          "action": "a46",
+          "observation": {
+            "values": {
+              "traveler": 18,
+              "done": 0,
+              "alive": 1,
+              "reserve": 0,
+              "change": 0,
+              "feedbackKnown": 1,
+              "oldSupport": 1,
+              "newSupport": 0,
+              "rejoined": 0
+            },
+            "feedback": "ok"
+          }
+        },
+        "prefixHash": "ebf45fd6687ab9faec25a15acfbbf0588a90f5653e31eeae904e20c1890fbc3f",
+        "reason": "different-command"
+      },
+      "frozenWorst": 17,
+      "candidateWorst": 15,
+      "candidateActions": [
+        [
+          "a4",
+          "a5",
+          "a9",
+          "a10",
+          "a11",
+          "a46",
+          "a24",
+          "a38",
+          "a42",
+          "a45"
+        ],
+        [
+          "a4",
+          "a5",
+          "a9",
+          "a10",
+          "a11",
+          "a25",
+          "a30",
+          "a31",
+          "a32",
+          "a33",
+          "a34",
+          "a37",
+          "a38",
+          "a42",
+          "a45"
+        ]
+      ],
+      "retainedSegments": [
+        {
+          "world": 0,
+          "invalidated": [],
+          "reusedAfterChange": [],
+          "prefixCommandsPreserved": 0,
+          "finalAccess": true
+        },
+        {
+          "world": 1,
+          "invalidated": [
+            {
+              "command": 5,
+              "segment": "contradicted-edge"
+            }
+          ],
+          "reusedAfterChange": [
+            {
+              "action": "a38",
+              "command": 13
+            },
+            {
+              "action": "a42",
+              "command": 14
+            },
+            {
+              "action": "a45",
+              "command": 15
+            }
+          ],
+          "prefixCommandsPreserved": 5,
+          "finalAccess": true
+        }
+      ],
+      "ablations": [
+        {
+          "kind": "route-proof",
+          "dependency": "preserved-prefix",
+          "accessRetained": false,
+          "extraCommands": -7,
+          "oracleFeasible": false
+        },
+        {
+          "kind": "route-proof",
+          "dependency": "old-route",
+          "accessRetained": false,
+          "extraCommands": -6,
+          "oracleFeasible": false
+        },
+        {
+          "kind": "route-proof",
+          "dependency": "retained-route",
+          "accessRetained": true,
+          "extraCommands": 2,
+          "oracleFeasible": true
+        },
+        {
+          "kind": "route-proof",
+          "dependency": "return-resource",
+          "accessRetained": true,
+          "extraCommands": 3,
+          "oracleFeasible": true
+        },
+        {
+          "kind": "route-proof",
+          "dependency": "preserved-prefix",
+          "accessRetained": false,
+          "extraCommands": -12,
+          "oracleFeasible": false
+        },
+        {
+          "kind": "route-proof",
+          "dependency": "revised-route-proof",
+          "accessRetained": false,
+          "extraCommands": -10,
+          "oracleFeasible": false
+        },
+        {
+          "kind": "route-proof",
+          "dependency": "retained-route",
+          "accessRetained": true,
+          "extraCommands": 2,
+          "oracleFeasible": true
+        }
+      ]
+    }
+  }
+}

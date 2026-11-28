@@ -1,0 +1,24 @@
+{
+  "sourceSha": "a914ed888116248dc40d22d5b9fcf53d43028297",
+  "tests": {
+    "command": "node --test tests/p07-*.test.mjs",
+    "passed": 43,
+    "failed": 0,
+    "scope": "P07 protocol/oracle/P09/structure; run locally and by the GitHub pilot job"
+  },
+  "typecheck": {
+    "command": "npm exec --yes --package=typescript@5.9.3 -- tsc src/sic/access-policy.ts --noEmit --strict --target es2022 --module nodenext --skipLibCheck",
+    "exitCode": 0,
+    "scope": "new generic conditional access module only"
+  },
+  "native": {
+    "gamesExecuted": 0,
+    "victories": 0,
+    "continuity": "not claimed; no native integration"
+  },
+  "pilotReproduction": {
+    "localAndGitHubCorpusSha256": "582b8262bc09b57ae610d1816a56a2c20dead4b6f24a7024369efccfc6713865",
+    "localAndGitHubResultsSha256": "435499c479f9497430f9a56b434ed6bdecbcd91d52ac989ec20414e31722b63e",
+    "identical": true
+  }
+}

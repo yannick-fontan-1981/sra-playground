@@ -1,5 +1,9 @@
 # Compositions d’effets générées après les 98 démarches
 
+## Suite P07 : création d’accès
+
+Le [banc P07 et son bilan](sic-p07-access-bilan.md), développé sur une branche isolée depuis `20433007`, qualifie 8 000 situations de développement avec oracle indépendant, comparaison figé/candidat, ablations et contrat P09 → P07. Les résultats restent des mesures de composants simulés ; les 2 000 situations de l’opérateur et SS08–SS25 ne sont pas utilisés.
+
 ## Corpus P09 de 10 000 situations résolubles
 
 Sur `f44982ce`, le générateur remplit le quota après validation de la faisabilité par un simulateur indépendant du composeur. Il varie les dépendances entre quatre à sept passages, la conservation des appuis, les fenêtres, le stock et les obligations de mesure. Les signatures excluent les noms et l’ordre de présentation des commandes ainsi que les paramètres temporels qui ne régissent aucun effet. Les neuf familles ont 666 à 1 334 cas chacune. Les plans minimaux vont de 5 à 21 gestes. La profondeur des dépendances entre passages va de 1 à 7.

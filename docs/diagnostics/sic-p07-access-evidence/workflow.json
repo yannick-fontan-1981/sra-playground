@@ -1,0 +1,93 @@
+{
+  "runId": 46153015715,
+  "url": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46153015715",
+  "sourceSha": "a914ed888116248dc40d22d5b9fcf53d43028297",
+  "status": "completed",
+  "conclusion": "success",
+  "startedAt": "2026-11-28T14:07:19Z",
+  "lastControlCompletedAt": "2026-11-28T14:17:56.000Z",
+  "wallSeconds": 637,
+  "peakConcurrentDevelopmentJobs": 8,
+  "jobs": [
+    {
+      "id": 141003522206,
+      "name": "pilot",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-28T14:07:22Z",
+      "completedAt": "2026-11-28T14:08:38Z"
+    },
+    {
+      "id": 141003870711,
+      "name": "development (F4-held-support)",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-28T14:08:40Z",
+      "completedAt": "2026-11-28T14:12:34Z"
+    },
+    {
+      "id": 141003870713,
+      "name": "development (F7-uncertain-location)",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-28T14:08:41Z",
+      "completedAt": "2026-11-28T14:11:07Z"
+    },
+    {
+      "id": 141003870724,
+      "name": "development (F5-temporary-opening)",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-28T14:08:41Z",
+      "completedAt": "2026-11-28T14:16:50Z"
+    },
+    {
+      "id": 141003870726,
+      "name": "development (F8-recovery)",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-28T14:08:41Z",
+      "completedAt": "2026-11-28T14:12:22Z"
+    },
+    {
+      "id": 141003870730,
+      "name": "development (F3-contact-order)",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-28T14:08:41Z",
+      "completedAt": "2026-11-28T14:10:47Z"
+    },
+    {
+      "id": 141003870733,
+      "name": "development (F1-detour)",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-28T14:08:41Z",
+      "completedAt": "2026-11-28T14:10:35Z"
+    },
+    {
+      "id": 141003870736,
+      "name": "development (F6-construct-route)",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-28T14:08:41Z",
+      "completedAt": "2026-11-28T14:10:32Z"
+    },
+    {
+      "id": 141003870833,
+      "name": "development (F2-viewpoint)",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-28T14:08:41Z",
+      "completedAt": "2026-11-28T14:10:31Z"
+    },
+    {
+      "id": 141006036657,
+      "name": "aggregate",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-11-28T14:16:52Z",
+      "completedAt": "2026-11-28T14:17:56Z"
+    }
+  ]
+}
