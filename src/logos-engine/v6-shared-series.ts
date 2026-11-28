@@ -75,6 +75,8 @@ export interface NativeSharedSeriesOptions {
   composedLabeledPredicates?: boolean;
   /** Explicit native interpretation of structurally witnessed trace-cell rims. */
   distinguishTraceCellSupport?: boolean;
+  /** Same-scope factor counterexamples with directly observed local fallback. */
+  honorProductCounterexamples?: boolean;
 }
 
 /** The inherited public reducer participates in the native mutation guard. */
@@ -175,6 +177,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   private readonly extendedRootedMarkSupport: boolean;
   private readonly composedLabeledPredicates: boolean;
   private readonly distinguishTraceCellSupport: boolean;
+  private readonly honorProductCounterexamples: boolean;
 
   constructor(config: OccurrenceRecallPolicy, options: NativeSharedSeriesOptions = {}) {
     super(config);
@@ -184,6 +187,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     this.extendedRootedMarkSupport = options.extendedRootedMarkSupport === true;
     this.composedLabeledPredicates = options.composedLabeledPredicates === true;
     this.distinguishTraceCellSupport = options.distinguishTraceCellSupport === true;
+    this.honorProductCounterexamples = options.honorProductCounterexamples === true;
     this.certified = this.workingStamp();
   }
 
@@ -377,7 +381,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   /** ProductPanelConstraint's declared entry, sharing the actual acquired journal. */
   productPropose(observation: R, rows: NativeRows, inputs: readonly R[], remaining: number, config: R,
     deadlineMs: number | null, now?: () => number): Promise<R | null> {
-    return commonProductPanelProposal(this.product, observation, rows, inputs, remaining, config, deadlineMs, now);
+    return commonProductPanelProposal(this.product, observation, rows, inputs, remaining, config, deadlineMs, now,
+      undefined, { honorCounterexamples: this.honorProductCounterexamples });
   }
 
   /** Current measured catalogue controls use the same acquired owner. */
@@ -733,7 +738,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     events.push(...this.catalogue.record(before, command, after, first, second, proposal, index));
     // ProductPanelAccess calls its inherited record first, then measures every
     // actual return. It remains outside RootedQuotaAccess's older-chain cutoff.
-    events.push(...this.product.record(before, command, after, first, second, proposal, index));
+    events.push(...this.product.record(before, command, after, first, second, proposal, index,
+      { honorCounterexamples: this.honorProductCounterexamples }));
     // LabeledSequenceAccess first lets Product and its ancestors acquire, then
     // retains this actual submission without promoting a unique universal law.
     events.push(...this.labeled.record(before, command, after, first, second, proposal, index));
