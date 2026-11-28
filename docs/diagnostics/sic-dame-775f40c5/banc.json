@@ -1,0 +1,44 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "775f40c5505add040d3b1c1aac5aba8d0dd0a027",
+    "attendus": "d6fd18875cfafb1ddc57bba91c76460dee36f49c"
+  },
+  "nativePrefixes": 5,
+  "nominalTickets": 16,
+  "firstInvitations": [
+    [
+      0,
+      2
+    ],
+    [
+      4,
+      2
+    ]
+  ],
+  "physicalReduction": [
+    5,
+    4
+  ],
+  "samePacketWithoutIntermediateRemoval": true,
+  "secondLevelSearchStates": 33,
+  "reusedSameRankRelation": [
+    [
+      -1,
+      1
+    ],
+    [
+      -2,
+      2
+    ]
+  ],
+  "officialBoundaries": [
+    7,
+    15
+  ],
+  "tests": 158,
+  "author": "b7289bfb",
+  "rawSHA256": "32580685b78da3a62df7ad03dc8126c5b72746adb0ad6c8882a5d0cea23eb4ab",
+  "archiveSHA256": "fcce596d975cf326a114442c2287186e00ab7525d72a5e8383c9690af9e4042f"
+}
