@@ -1,0 +1,62 @@
+name: SIC P14 observed temporal development
+
+on:
+  push:
+    branches: [feat/sic-p14-temporal-dev-20261128]
+    paths: [.github/workflows/sic-p14-temporal.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  family:
+    name: P14 family ${{ matrix.family }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        family: [1, 2, 3, 4, 5, 6, 7, 8]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Validate the isolated protocol
+        run: node --test tests/sic-p14-*.test.mjs
+      - name: Compare 1000 oracle-certified development situations
+        run: node scripts/sic-p14-campaign.mjs --count 1000 --seed 26112814 --family ${{ matrix.family }} --state artifacts/sic-p14
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sic-p14-family-${{ matrix.family }}
+          path: |
+            artifacts/sic-p14/configuration.json
+            artifacts/sic-p14/report.json
+            artifacts/sic-p14/receipts.jsonl.gz
+          retention-days: 30
+  aggregate:
+    name: P14 aggregate and verify coverage
+    needs: family
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: sic-p14-family-*
+          path: artifacts/shards
+      - run: node scripts/sic-p14-aggregate.mjs --input artifacts/shards --output artifacts/sic-p14-development --count 8000
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sic-p14-development-8000
+          path: artifacts/sic-p14-development/
+          retention-days: 30
