@@ -4,6 +4,7 @@ import { resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { sourceBackend } from '../scripts/sic-study-source-games.mjs';
+import type { V6Command, V6PublicObservation } from '../src/runtime/v6-agent-protocol.ts';
 
 const root = process.env.SIC_KLOT_ENGINE_ROOT;
 const moduleURL = (path: string) => root ? pathToFileURL(resolve(root, path)).href : new URL('../' + path, import.meta.url).href;
@@ -12,7 +13,7 @@ const { toV6PublicObservation }: typeof import('../src/runtime/v6-agent-protocol
 const { createNativeV6Runtime }: typeof import('../src/logos-engine/v6-native-runtime.ts') = await import(moduleURL('src/logos-engine/v6-native-runtime.ts'));
 const { NativeSelectedRigid }: typeof import('../src/logos-engine/v6-selected-rigid.ts') =
   await import(moduleURL('src/logos-engine/v6-selected-rigid.ts'));
-const { selectedRigidPoses, selectedRigidScene }: typeof import('../src/logos-engine/v6-selected-rigid-geometry.ts') =
+const { selectedRigidPoint, selectedRigidPoses, selectedRigidScene }: typeof import('../src/logos-engine/v6-selected-rigid-geometry.ts') =
   await import(moduleURL('src/logos-engine/v6-selected-rigid-geometry.ts'));
 
 type Row = Record<string, any>;
@@ -29,18 +30,24 @@ async function start() {
   let sequence = 0, observation = toV6PublicObservation(backend.dispatch({ type: 'load', code: 'KLOT', level: 1 }), sequence);
   let reply = await service.handle({ type: 'init', sessionId, sequence, observation,
     budgets: { targetLevels: 6, levelActionCaps: Array(6).fill(600), maxActions: 16 } });
+  async function continuation() {
+    if (reply.kind === 'boundary') reply = await service.handle({ type: 'resume', sessionId, sequence });
+    return reply;
+  }
   return {
     get observation() { return observation; },
+    continuation,
     async decision() {
-      if (reply.kind === 'boundary') reply = await service.handle({ type: 'resume', sessionId, sequence });
+      await continuation();
       assert.equal(reply.kind, 'action');
       return { command: reply.command!, proposal: reply.snapshot.proposal as Row, family: reply.snapshot.lastDecision,
         guard: (reply.snapshot.trace as Row[]).findLast(e => e.kind === 'before_guard')! };
     },
-    async advance() {
+    async advance(returned?: V6PublicObservation) {
       const { actionRef, data } = reply.command!;
       const actionId = Number(actionRef.slice(6));
-      observation = toV6PublicObservation(backend.dispatch({ type: 'action', actionId, ...(actionId === 6 ? { data } : {}) }), ++sequence);
+      sequence++;
+      observation = returned ?? toV6PublicObservation(backend.dispatch({ type: 'action', actionId, ...(actionId === 6 ? { data } : {}) }), sequence);
       reply = await service.handle({ type: 'advance', sessionId, sequence, ticketId: reply.ticket!.id, executionMs: 0, observation });
       return (reply.snapshot.trace as Row[]).findLast(e => e.kind === 'actual_outcome')!;
     },
@@ -151,3 +158,52 @@ test('82 without the selection event reissues the click against the same current
   await game.advance();
   assert.deepEqual([records.get(3)?.detail.role_status, records.get(3)?.detail.compatible_model_count], ['observed_exclusive_receiver', 6]);
 });
+
+for (const [turn, selected, foreign] of [[7, '6', '11'], [9, '12', '6']] as const) {
+  test('82 identifies the foreign receiver in the authentic T' + turn + ' return', async t => {
+    const records = observeRecords(t);
+    const game = await start();
+    const prefix: V6Command[] = [];
+    for (let i = 1; i < turn; i++) {
+      prefix.push((await game.decision()).command);
+      await game.advance();
+    }
+
+    const decision = await game.decision();
+    const plan = decision.proposal.selected_rigid_plan;
+    const before = selectedRigidScene(game.observation.frame, plan.scene);
+    assert.ok(before);
+    assert.deepEqual([decision.family, decision.command.actionRef, before.bodies[plan.active].key], ['selected_rigid', 'ACTION1', selected]);
+    assert.equal(prefix.at(-1)?.actionRef, 'ACTION6');
+
+    const alternate = await sourceBackend(assetRoot);
+    alternate.dispatch({ type: 'load', code: 'KLOT', level: 1 });
+    for (const { actionRef, data } of prefix.slice(0, -1)) {
+      const actionId = Number(actionRef.slice(6));
+      alternate.dispatch({ type: 'action', actionId, ...(actionId === 6 ? { data } : {}) });
+    }
+    const other = before.bodies.findIndex(body => body.key === foreign);
+    assert.ok(other >= 0);
+    const point = selectedRigidPoint(before, other);
+    if (turn === 9) assert.deepEqual(point, { x: 20, y: 23 });
+    const alternateBefore = alternate.dispatch({ type: 'action', actionId: 6, data: point });
+    const alternateAfter = alternate.dispatch({ type: 'action', actionId: 1 });
+    const alteredBefore = selectedRigidScene(alternateBefore.frame, plan.scene);
+    const alteredAfter = selectedRigidScene(alternateAfter.frame, plan.scene);
+    assert.ok(alteredBefore && alteredAfter);
+    assert.deepEqual(selectedRigidPoses(alteredBefore), selectedRigidPoses(before));
+    const measured = selectedRigidPoses(alteredAfter);
+    const changed = selectedRigidPoses(before).flatMap((pose, index) =>
+      pose[0] === measured[index][0] && pose[1] === measured[index][1] ? [] : [before.bodies[index].key]);
+    assert.deepEqual(changed, [foreign]);
+
+    const compared = await game.advance(toV6PublicObservation(alternateAfter, turn));
+    const event = records.get(turn)!;
+    assert.deepEqual([compared.matched, event.state.scene.bodies[event.state.active!].key, event.detail.moved, event.models.length,
+      event.detail.role_status], [false, selected, true, 0, 'observed_exclusive_receiver']);
+    assert.match(event.detail.before, new RegExp(':revision:' + turn + ':'));
+    assert.match(event.detail.after, new RegExp(':revision:' + (turn + 1) + ':'));
+    const final = await game.continuation();
+    assert.deepEqual([final.kind, final.reason, final.ticket], ['stopped', 'rigid_control_or_collision_model_refuted', null]);
+  });
+}
