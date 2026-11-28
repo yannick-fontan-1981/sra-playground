@@ -341,6 +341,7 @@ export interface NativeFeedbackFamily extends NativeFamily {
 export interface NativeV6RuntimeConfiguration {
   sourceDigest: string; families: readonly NativeFamily[]; maxPointOccurrences: number; now?: () => number;
   observeControlTrialShadow?: NativeExecution['observeControlTrialShadow'];
+  controlTrialAgenda?: NativeExecution['controlTrialAgenda'];
   /** Source DRM groups retain their order even while some implementations are pending. */
   groups?: readonly NativeSelectionGroup[];
   /** Production supplies the original objective policy and enables the real WHY/ACT gate. */
@@ -367,6 +368,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private readonly domain: ObservedInputDomain;
   private readonly now: () => number;
   private readonly observeControlTrialShadow?: NativeExecution['observeControlTrialShadow'];
+  private readonly controlTrialAgenda?: NativeExecution['controlTrialAgenda'];
   private readonly authorityPolicy?: { provided_objective: { definition: string } };
   private authority: NativeCompositionAuthority | null = null;
   private caller: NativeCallerCoordinator | null = null;
@@ -454,6 +456,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       || configuration.families.some(f => typeof f.restore !== 'function')) throw new TypeError('A native implementation identity and distinct state-restorable families are required');
     this.sourceDigest = configuration.sourceDigest;
     this.observeControlTrialShadow = configuration.observeControlTrialShadow;
+    this.controlTrialAgenda = configuration.controlTrialAgenda && { ...configuration.controlTrialAgenda };
     this.callerStrategy = configuration.callerStrategy ? structuredClone(configuration.callerStrategy) : undefined;
     this.sicFrontier = configuration.sicFrontier;
     this.sicView = configuration.sicView;
@@ -816,6 +819,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       : Math.max(0, execution.deadlineMs - (execution.now ?? (() => performance.now()))());
     return { ...execution, now: this.now,
       ...(this.observeControlTrialShadow ? { observeControlTrialShadow: this.observeControlTrialShadow } : {}),
+      ...(this.controlTrialAgenda ? { controlTrialAgenda: this.controlTrialAgenda } : {}),
       deadlineMs: currentNow + Math.min(this.remainingActiveMs(this.current.level, currentNow), callerRemainingMs),
       remainingLevelActions: this.remainingLevelActions() };
   }
@@ -2916,7 +2920,7 @@ export async function loadNativeV6Declarations(): Promise<NativeV6Declarations> 
 }
 /** Identifies native declarations/version, not a Python runtime or source binary. */
 export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
-  options: Pick<NativeV6RuntimeConfiguration, 'now' | 'observeControlTrialShadow'>
+  options: Pick<NativeV6RuntimeConfiguration, 'now' | 'observeControlTrialShadow' | 'controlTrialAgenda'>
     & { recovery?: import('../sic/active-recovery.ts').RecoveryPack } = {}): Promise<NativeV6Runtime> {
   const recovery = compileRecoveryPack(options.recovery);
   const loaded = declarations ?? await loadNativeV6Declarations();
@@ -2937,7 +2941,8 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       groups, symmetry, policy, sequence, support, recovery, compositionPrior, preparationReturns, sourceFieldRelations };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
-    return new NativeV6Runtime({ sourceDigest, groups, observeControlTrialShadow: options.observeControlTrialShadow, families: [
+    return new NativeV6Runtime({ sourceDigest, groups, observeControlTrialShadow: options.observeControlTrialShadow,
+      controlTrialAgenda: options.controlTrialAgenda, families: [
       createCompositionTrials(), createPreparedEffects(recovery.informationPreference, recovery), createCursorRoleMemory(), createObservedActorComposition(),
       createSicFieldRepair(symmetry), createSicVerifyContactOrder(policy, recovery), createSicVerifyContactOrder(policy, recovery, learnContactOrderId), createSicSupportTransfer(support), createSicLearnSupportMoves(), createSicLearnSupportMoves(learnObservedSupportsId),
       createSicVerifyParallelSymbolPrefixes(), createSicPeriodicProfileAlignment(),
@@ -3135,6 +3140,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
   return new NativeV6Runtime({ sourceDigest, families, groups, authorityPolicy: loaded.common, callerStrategy: configuration,
     observeControlTrialShadow: options.observeControlTrialShadow,
+    controlTrialAgenda: options.controlTrialAgenda,
     sicFrontier: recovery.frontier ?? defaultFrontierConfiguration, sicView: 'active', sicInformation: 'active',
     familyAgenda: recovery.reasoningMode === 'adaptive' ? 'active' : recovery.familyAgenda === 'native' ? undefined : recovery.familyAgenda,
     adaptiveReasoning: recovery.reasoningMode === 'adaptive',

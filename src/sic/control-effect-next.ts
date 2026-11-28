@@ -33,6 +33,7 @@ interface ControlTrialVerdict {
 
 export interface ControlTrialComparison {
   readonly need: typeof controlEffectNeed;
+  readonly mode: 'shadow' | 'active';
   readonly family: string;
   readonly observationRef: string;
   readonly action: string;
@@ -45,10 +46,26 @@ export interface ControlTrialComparison {
 
 export type ControlTrialObserver = (comparison: ControlTrialComparison) => void;
 
-export interface ControlTrialShadow {
-  readonly observe: ControlTrialObserver;
+export interface ActiveControlTrialAgenda {
+  readonly mode: 'active';
+  readonly actionBudget: 0 | 1;
+}
+
+export interface ControlTrialEvaluation {
+  readonly active: boolean;
+  readonly observe?: ControlTrialObserver;
   readonly family: string;
   readonly remaining: number;
+}
+
+export function controlTrialEvaluation(family: string, remaining: number, options?: {
+  readonly observeControlTrialShadow?: ControlTrialObserver;
+  readonly controlTrialAgenda?: ActiveControlTrialAgenda;
+}): ControlTrialEvaluation | undefined {
+  const agenda = options?.controlTrialAgenda?.mode === 'active' ? options.controlTrialAgenda : undefined;
+  const observe = options?.observeControlTrialShadow;
+  if (!agenda && !observe) return undefined;
+  return { active: Boolean(agenda), observe, family, remaining: agenda ? Math.min(agenda.actionBudget, remaining) : remaining };
 }
 
 export const controlEffectNextGraph = compileStrategyGraph({
@@ -123,9 +140,12 @@ function rankControlTrial(facts: Facts, remaining: number): Required<ControlTria
 
 /** Compare the actual local decision with a plan-free selection on the same prepared offer. */
 export function compareControlTrial(action: string, offeredAt: unknown, context: ControlTrialContext,
-  reference: ControlTrialVerdict | AgendaEntry, target: ControlTrialShadow): void {
+  reference: ControlTrialVerdict | AgendaEntry, target: ControlTrialEvaluation): boolean {
+  let selected = false;
   try {
     const shadow = rankControlTrial(controlTrialFacts(action, offeredAt, context), target.remaining);
+    selected = shadow.selected;
+    if (!target.observe) return selected;
     const active = 'result' in reference
       ? { selected: reference.result === 'selected', applicability: reference.applicability,
         reason: reference.reason, evidence: [...reference.evidence ?? []] }
@@ -133,9 +153,10 @@ export function compareControlTrial(action: string, offeredAt: unknown, context:
     const fields = ['selected', 'applicability', 'reason', 'evidence'] as const;
     const firstDifference = fields.find(field => active[field] !== undefined
       && JSON.stringify(active[field]) !== JSON.stringify(shadow[field])) ?? null;
-    target.observe({ need: controlEffectNeed, family: target.family, observationRef: context.observationRef,
+    target.observe({ need: controlEffectNeed, mode: target.active ? 'active' : 'shadow', family: target.family, observationRef: context.observationRef,
       action, cost: 1, remaining: target.remaining, reference: active, shadow, firstDifference });
   } catch {
     // A diagnostic consumer cannot interrupt a native decision.
   }
+  return selected;
 }
