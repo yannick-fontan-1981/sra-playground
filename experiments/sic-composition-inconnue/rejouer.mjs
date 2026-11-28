@@ -15,6 +15,8 @@ export function retainedControl(rules, prior) {
   if (!prior.marker || !rules.controlMarkers) return undefined;
   const matches = rules.controls.filter(code => rules.controlMarkers[code] === prior.marker);
   if (matches.length !== 1) return undefined;
+  // At a retained alphabet, the observed code and marker must still point to the same command.
+  if (prior.alphabet === alphabetOf(rules) && matches[0] !== prior.control) return undefined;
   return { ...prior, sourceControl: prior.control, control: matches[0], binding: 'unique_current_marker' };
 }
 

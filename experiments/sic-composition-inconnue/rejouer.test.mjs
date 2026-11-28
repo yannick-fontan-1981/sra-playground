@@ -89,14 +89,14 @@ test('a public arming acknowledgement enables an approach without changing the p
 });
 
 test('a uniquely observed marker binds across alphabets and still requires a fresh effect', () => {
-  const [renamed, ambiguous, absent, contradicted] = run(markers).transfers;
+  const [renamed, ambiguous, absent, discordant, contradicted] = run(markers).transfers;
   assert.equal(renamed.withEvidence.prior.sourceControl, 'bravo');
   assert.equal(renamed.withEvidence.prior.control, 'z');
   assert.equal(renamed.withEvidence.steps[0].decision.action, 'z');
   assert.deepEqual(renamed.withEvidence.steps[0].possibleControls, ['y', 'z']);
   assert.equal(renamed.withEvidence.stop.reason, 'win');
   assert.ok(renamed.withEvidence.gestures < renamed.without.gestures);
-  for (const row of [ambiguous, absent]) {
+  for (const row of [ambiguous, absent, discordant]) {
     assert.deepEqual(row.withEvidence, row.without);
     assert.equal(row.firstDifference, null);
   }
