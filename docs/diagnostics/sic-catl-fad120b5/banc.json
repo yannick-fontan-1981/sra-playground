@@ -1,0 +1,60 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "fad120b559f52767208ba2620dd48b5a5f530dff",
+    "attendus": "4ab9c99bbc04088185646a14772ab326ad830cb0"
+  },
+  "nativePrefixes": 7,
+  "officialBoundaries": [
+    8,
+    16
+  ],
+  "level1Preserved": {
+    "feature": "COUNT:8",
+    "ticket": [
+      "ACTION6",
+      {
+        "x": 43,
+        "y": 52
+      }
+    ]
+  },
+  "level2Permutation": {
+    "feature": "ENDPOINT_EQUAL",
+    "before": [
+      "ACTION6",
+      {
+        "x": 56,
+        "y": 52
+      }
+    ],
+    "after": [
+      "ACTION6",
+      {
+        "x": 43,
+        "y": 52
+      }
+    ]
+  },
+  "buttonRevalidation": {
+    "withdrawn": [
+      "ACTION6",
+      {
+        "x": 10,
+        "y": 11
+      }
+    ],
+    "freshInference": [
+      "ACTION6",
+      {
+        "x": 56,
+        "y": 52
+      }
+    ]
+  },
+  "sourceTree": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "nativeReceiptWithoutQualificationSHA256": "94f538f0cfdb742d6db95b1164de91009182d64e88a78c7d1ab5a449c5ded4be",
+  "archiveSHA256": "42049ade8529cd52d5c7bde9d4191685d41ea746379d8f16a407d81681686472",
+  "testsPassed": 622
+}
