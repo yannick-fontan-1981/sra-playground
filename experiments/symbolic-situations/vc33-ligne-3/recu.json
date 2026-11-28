@@ -1,0 +1,32 @@
+{
+  "mesures": {
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021": {
+      "départs": 7,
+      "ticketsAvecRetour": 27,
+      "nominaux": 16,
+      "prédictionsConfirmées": 13,
+      "sondeSansPrédiction": 1,
+      "frontièresOfficielles": 2,
+      "autreSonde": {
+        "x": 61,
+        "y": 25
+      },
+      "repli": "band_transfer",
+      "testsAuteur": 3
+    },
+    "f489393bb15a1ce775a3904ee97a216d40db026f": {
+      "départs": 7,
+      "ticketsAvecRetour": 27,
+      "nominaux": 16,
+      "prédictionsConfirmées": 13,
+      "sondeSansPrédiction": 1,
+      "frontièresOfficielles": 2,
+      "autreSonde": {
+        "x": 61,
+        "y": 33
+      },
+      "repli": "observed_frontier",
+      "testsAuteur": 6
+    }
+  }
+}
