@@ -1,0 +1,60 @@
+{
+  "sourceSha": "3e33f0f6610f28484200ed915723c39f45302f7b",
+  "runId": 46153159758,
+  "runConclusion": "success",
+  "observedPeakFamilyJobs": 8,
+  "wallSecondsFromRunStartThroughLastControl": 100.703,
+  "wallSecondsFromFirstControl": 84.703,
+  "cumulativeFamilyReplaySeconds": 178.669990466,
+  "positiveCases": 8000,
+  "uniqueBehaviors": 8000,
+  "quotaPerFamily": 1000,
+  "acceptedAfterOracleBeforeCandidate": true,
+  "candidateFilteringUsed": false,
+  "sourceFingerprint": "bb73ae7ecc1cd3282fcf89e7457a3e255c17321b9f85193a6516b738a2b80b55",
+  "nativeGamesTested": 0,
+  "sealedCasesRead": 0,
+  "sealedCasesGenerated": 0,
+  "files": {
+    "ci-jobs.json": {
+      "bytes": 1898,
+      "sha256": "bc6a0bac07d810e49336d00a0a06d3ed956741744a8d70f34cea2a2cd0669400"
+    },
+    "ci-run.json": {
+      "bytes": 374,
+      "sha256": "01486eb6cd95f3cbc500436092bc369725860f04815c4ad8bcaffa43fc27c547"
+    },
+    "ci-timing.json": {
+      "bytes": 569,
+      "sha256": "be11261cebfbc946f57ad93c92e86ece4ad950b085164a39ea99efe6a5c21d2f"
+    },
+    "first-delayed-gain.json": {
+      "bytes": 33063,
+      "sha256": "377dc09f17f496e0ca04b70057e7c28055e1691ec4c41bc626a45a06e2d64644"
+    },
+    "first-deviations.json.gz": {
+      "bytes": 20044,
+      "sha256": "fff54d56a3b054538933cde5ad278a10196d0af5f5f74ee76241117ba85a19c4"
+    },
+    "manifest.json": {
+      "bytes": 4849,
+      "sha256": "719117f412e990d51a403e2b0d410eaf450f416e16954fb5535199cdf4867ce3"
+    },
+    "pilot-report.json": {
+      "bytes": 69591,
+      "sha256": "dc18816c282c5f8ed3cacfcacc4d41d3692acd1b1f778f06c31e55902381eb66"
+    },
+    "report.json": {
+      "bytes": 71434,
+      "sha256": "4b2f167f3aa06b8fbda9c44ea2f9ff6b53f461e675105fcee2aee8ae74f8bbe4"
+    },
+    "results.jsonl.gz": {
+      "bytes": 1076853,
+      "sha256": "264ebeb912677c8581b5c3bbcf7cf195d17a2a9bf9c28321b81068adccfc97d0"
+    },
+    "tests.log": {
+      "bytes": 6807,
+      "sha256": "4459fbc482ca6f94a1a4196bd8aee82215605ff4907d811d1bfd417acf6a29cc"
+    }
+  }
+}

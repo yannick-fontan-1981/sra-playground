@@ -1,0 +1,2401 @@
+{
+  "protocol": "P05-development-v1",
+  "configuration": {
+    "baseRevision": "20433007224accc36e3d7976696d9ee7a783a227",
+    "revision": "3e33f0f6610f28484200ed915723c39f45302f7b",
+    "sourceFingerprint": "bb73ae7ecc1cd3282fcf89e7457a3e255c17321b9f85193a6516b738a2b80b55",
+    "files": {
+      "scripts/sic-p05-laboratory.mjs": "7d69730d8af2f301bc6b3300135ce437d6ab7e549971412f5c534adc10a934ec",
+      "scripts/sic-p05-oracle.mjs": "d1dc42b6bb16edc33f8024dc742b74875330a896e6d83a7fee9411aebc26a020",
+      "scripts/sic-p05-compare.mjs": "8535a3c28cef57b70cb1a145d49a427ac7addc1e62298ddc1049f05357a3c7ac",
+      "scripts/sic-p05-campaign.mjs": "204dd08143739668ec5ec4be1cc8952b85742eddebf67914f3a4771198f0ceff",
+      "scripts/sic-p05-contrasts.mjs": "bb7e46bb9eb4285743fc008572ba1a80a3f88117e3454e39d85697e1626fdaee",
+      "scripts/sic-p05-p09-bridge.mjs": "dfeda00f94b5443caac0a1d110cc910d87af2c9a92d54486e90542b4b03e9645",
+      "src/sic/p05-acquisition.ts": "94eca5600e63e4b3c9b58ed6ab69229a911e9221affe57a4a9f176d763c91910",
+      "src/sic/p05-frozen-adapter.ts": "0930386ad5b53249ffe952668616daa2fb2e2cc8a7d98764650906ddb19579df",
+      "src/sic/controlled-parts.ts": "685578b5ae01a268d4a303175d3fb1a28ffa7971568b2cbbbf8a103cb105bf6d",
+      "src/sic/effect-composer.ts": "c1aa7513b79c76942ceb3d28c788c9356215ddbc31e4cc49aea276de178b3e88"
+    },
+    "frozenBlob": "35bf4e14f1d632d6e4e732846670ecfe1f940160",
+    "p09ComposerBlob": "f54a624abaaa89e4d5363f41869017f4e7f99b35",
+    "dirtySource": false,
+    "node": "v24.22.3",
+    "seed": 26112805,
+    "developmentSeeds": {
+      "1": 26113814,
+      "2": 26114823,
+      "3": 26115832,
+      "4": 26116841,
+      "5": 26117850,
+      "6": 26118859,
+      "7": 26119868,
+      "8": 26120877
+    },
+    "perFamily": 10,
+    "count": 80,
+    "families": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "commonCommandBudget": 96,
+    "modelContract": {
+      "version": "finite-interventional-contexts-v1",
+      "deterministic": true,
+      "prepare": "Public, one gesture; resets the listed context, clock, actors and pending effects.",
+      "command": "One intervention per episode; its unknown bounded-latency effect has a selected or fixed receiver.",
+      "background": "Context-specific constant remote drift per tick; measured by time-matched WAIT controls.",
+      "scope": "Only the listed, measured public contexts; no claim of universal guard discovery.",
+      "resource": "A command spends its nonnegative cost when affordable; otherwise it has no causal effect.",
+      "observation": "Complete, noiseless public positions, selection, context, reserve and remote counter after each gesture.",
+      "excluded": [
+        "hidden persistent state between prepared episodes",
+        "unbounded latency",
+        "unobserved context discovery"
+      ]
+    },
+    "frozen": {
+      "revision": "20433007224accc36e3d7976696d9ee7a783a227",
+      "module": "src/sic/controlled-parts.ts",
+      "gitBlob": "35bf4e14f1d632d6e4e732846670ecfe1f940160",
+      "functions": [
+        "rememberMotion",
+        "controlledStrokes"
+      ],
+      "scope": "direct-return command-to-dominant-vector subsystem",
+      "nativeWorker": false
+    },
+    "nativeWorkerCompared": false,
+    "P04ExplorationPolicy": "identical-public-factorial-policy"
+  },
+  "stats": {
+    "situations": 80,
+    "oracleSolvable": 80,
+    "expectedAcquisitions": 316,
+    "candidateCompleteSituations": 80,
+    "correctlyAcquiredEffects": 316,
+    "erroneousAttributions": 0,
+    "unsupportedClaims": 0,
+    "frozen": {
+      "comparisonScope": "direct-return command-to-dominant-vector subsystem",
+      "qualifiedApiAvailable": false,
+      "qualifiedAcquisitions": 0,
+      "qualifiedSituationVerdict": "not-representable-at-this-frozen-boundary",
+      "expectedMotionRows": 316,
+      "recordedCorrectMotionRows": 295,
+      "selectedCorrectMotionRows": 181,
+      "allMotionRowsRecordedSituations": 70,
+      "erroneousQualifiedAttributions": 0,
+      "note": "Raw vectors and qualified contextual effects are different measures. No global SIC failure is inferred from an absent API."
+    },
+    "rawMotionAcquisitionGainSituations": 10,
+    "newQualificationSituations": 80,
+    "oracleExperimentGestures": {
+      "min": 15,
+      "median": 45,
+      "max": 60,
+      "sum": 3200
+    },
+    "actualGesturesEachArm": {
+      "min": 15,
+      "median": 45,
+      "max": 60,
+      "sum": 3200
+    },
+    "firstAcquisitionGesture": {
+      "min": 10,
+      "median": 10,
+      "max": 50,
+      "sum": 1265
+    },
+    "acquisitionEvidenceCompleteGesture": {
+      "min": 15,
+      "median": 45,
+      "max": 60,
+      "sum": 3200
+    },
+    "oracleMinimality": "not-claimed",
+    "stationaryAttempts": 127,
+    "noEffectAttempts": 127,
+    "justifiedStationaryAbstentions": 127,
+    "staleProofsKeptSeparate": 22,
+    "transfer": {
+      "confirmed": 3,
+      "refuted": 24,
+      "restricted": 32
+    },
+    "choiceTasks": 10,
+    "correctChoices": 10,
+    "choiceReplayGestures": 50,
+    "choiceReplayBudget": "Separate post-acquisition evaluation; one preparation + one command + maxLatency waits.",
+    "ablations": 80,
+    "successfulLinkWithdrawals": 80,
+    "ablationsWithNoResidualSnapshotCopy": 80,
+    "p09StillSolvableByAnotherAcquisition": 10,
+    "p09": {
+      "compositionsTested": 80,
+      "replayedSuccesses": 80,
+      "gestures": {
+        "min": 5,
+        "median": 5,
+        "max": 7,
+        "sum": 407
+      },
+      "native": false
+    },
+    "publicTraceDisagreements": 0,
+    "native": {
+      "tested": 0,
+      "wins": 0,
+      "status": "not-run; SS08–SS25 and the independent 2,000-case reserve remain sealed"
+    }
+  },
+  "families": {
+    "1": {
+      "name": "unknown-displacement",
+      "situations": 10,
+      "oracleSolvable": 10,
+      "expectedAcquisitions": 24,
+      "candidateCompleteSituations": 10,
+      "correctlyAcquiredEffects": 24,
+      "erroneousAttributions": 0,
+      "unsupportedClaims": 0,
+      "frozen": {
+        "comparisonScope": "direct-return command-to-dominant-vector subsystem",
+        "qualifiedApiAvailable": false,
+        "qualifiedAcquisitions": 0,
+        "qualifiedSituationVerdict": "not-representable-at-this-frozen-boundary",
+        "expectedMotionRows": 24,
+        "recordedCorrectMotionRows": 24,
+        "selectedCorrectMotionRows": 16,
+        "allMotionRowsRecordedSituations": 10,
+        "erroneousQualifiedAttributions": 0,
+        "note": "Raw vectors and qualified contextual effects are different measures. No global SIC failure is inferred from an absent API."
+      },
+      "rawMotionAcquisitionGainSituations": 0,
+      "newQualificationSituations": 10,
+      "oracleExperimentGestures": {
+        "min": 15,
+        "median": 15,
+        "max": 20,
+        "sum": 170
+      },
+      "actualGesturesEachArm": {
+        "min": 15,
+        "median": 15,
+        "max": 20,
+        "sum": 170
+      },
+      "firstAcquisitionGesture": {
+        "min": 10,
+        "median": 10,
+        "max": 10,
+        "sum": 100
+      },
+      "acquisitionEvidenceCompleteGesture": {
+        "min": 15,
+        "median": 15,
+        "max": 20,
+        "sum": 170
+      },
+      "oracleMinimality": "not-claimed",
+      "stationaryAttempts": 0,
+      "noEffectAttempts": 0,
+      "justifiedStationaryAbstentions": 0,
+      "staleProofsKeptSeparate": 0,
+      "transfer": {
+        "confirmed": 0,
+        "refuted": 0,
+        "restricted": 0
+      },
+      "choiceTasks": 0,
+      "correctChoices": 0,
+      "choiceReplayGestures": 0,
+      "choiceReplayBudget": "Separate post-acquisition evaluation; one preparation + one command + maxLatency waits.",
+      "ablations": 10,
+      "successfulLinkWithdrawals": 10,
+      "ablationsWithNoResidualSnapshotCopy": 10,
+      "p09StillSolvableByAnotherAcquisition": 0,
+      "p09": {
+        "compositionsTested": 10,
+        "replayedSuccesses": 10,
+        "gestures": {
+          "min": 5,
+          "median": 5,
+          "max": 5,
+          "sum": 50
+        },
+        "native": false
+      },
+      "publicTraceDisagreements": 0,
+      "native": {
+        "tested": 0,
+        "wins": 0,
+        "status": "not-run; SS08–SS25 and the independent 2,000-case reserve remain sealed"
+      }
+    },
+    "2": {
+      "name": "selected-receiver",
+      "situations": 10,
+      "oracleSolvable": 10,
+      "expectedAcquisitions": 70,
+      "candidateCompleteSituations": 10,
+      "correctlyAcquiredEffects": 70,
+      "erroneousAttributions": 0,
+      "unsupportedClaims": 0,
+      "frozen": {
+        "comparisonScope": "direct-return command-to-dominant-vector subsystem",
+        "qualifiedApiAvailable": false,
+        "qualifiedAcquisitions": 0,
+        "qualifiedSituationVerdict": "not-representable-at-this-frozen-boundary",
+        "expectedMotionRows": 70,
+        "recordedCorrectMotionRows": 70,
+        "selectedCorrectMotionRows": 48,
+        "allMotionRowsRecordedSituations": 10,
+        "erroneousQualifiedAttributions": 0,
+        "note": "Raw vectors and qualified contextual effects are different measures. No global SIC failure is inferred from an absent API."
+      },
+      "rawMotionAcquisitionGainSituations": 0,
+      "newQualificationSituations": 10,
+      "oracleExperimentGestures": {
+        "min": 30,
+        "median": 45,
+        "max": 60,
+        "sum": 485
+      },
+      "actualGesturesEachArm": {
+        "min": 30,
+        "median": 45,
+        "max": 60,
+        "sum": 485
+      },
+      "firstAcquisitionGesture": {
+        "min": 10,
+        "median": 10,
+        "max": 10,
+        "sum": 100
+      },
+      "acquisitionEvidenceCompleteGesture": {
+        "min": 30,
+        "median": 45,
+        "max": 60,
+        "sum": 485
+      },
+      "oracleMinimality": "not-claimed",
+      "stationaryAttempts": 0,
+      "noEffectAttempts": 0,
+      "justifiedStationaryAbstentions": 0,
+      "staleProofsKeptSeparate": 0,
+      "transfer": {
+        "confirmed": 0,
+        "refuted": 0,
+        "restricted": 0
+      },
+      "choiceTasks": 0,
+      "correctChoices": 0,
+      "choiceReplayGestures": 0,
+      "choiceReplayBudget": "Separate post-acquisition evaluation; one preparation + one command + maxLatency waits.",
+      "ablations": 10,
+      "successfulLinkWithdrawals": 10,
+      "ablationsWithNoResidualSnapshotCopy": 10,
+      "p09StillSolvableByAnotherAcquisition": 0,
+      "p09": {
+        "compositionsTested": 10,
+        "replayedSuccesses": 10,
+        "gestures": {
+          "min": 5,
+          "median": 5,
+          "max": 5,
+          "sum": 50
+        },
+        "native": false
+      },
+      "publicTraceDisagreements": 0,
+      "native": {
+        "tested": 0,
+        "wins": 0,
+        "status": "not-run; SS08–SS25 and the independent 2,000-case reserve remain sealed"
+      }
+    },
+    "3": {
+      "name": "terrain-and-support",
+      "situations": 10,
+      "oracleSolvable": 10,
+      "expectedAcquisitions": 24,
+      "candidateCompleteSituations": 10,
+      "correctlyAcquiredEffects": 24,
+      "erroneousAttributions": 0,
+      "unsupportedClaims": 0,
+      "frozen": {
+        "comparisonScope": "direct-return command-to-dominant-vector subsystem",
+        "qualifiedApiAvailable": false,
+        "qualifiedAcquisitions": 0,
+        "qualifiedSituationVerdict": "not-representable-at-this-frozen-boundary",
+        "expectedMotionRows": 24,
+        "recordedCorrectMotionRows": 24,
+        "selectedCorrectMotionRows": 18,
+        "allMotionRowsRecordedSituations": 10,
+        "erroneousQualifiedAttributions": 0,
+        "note": "Raw vectors and qualified contextual effects are different measures. No global SIC failure is inferred from an absent API."
+      },
+      "rawMotionAcquisitionGainSituations": 0,
+      "newQualificationSituations": 10,
+      "oracleExperimentGestures": {
+        "min": 45,
+        "median": 45,
+        "max": 60,
+        "sum": 510
+      },
+      "actualGesturesEachArm": {
+        "min": 45,
+        "median": 45,
+        "max": 60,
+        "sum": 510
+      },
+      "firstAcquisitionGesture": {
+        "min": 10,
+        "median": 30,
+        "max": 50,
+        "sum": 290
+      },
+      "acquisitionEvidenceCompleteGesture": {
+        "min": 45,
+        "median": 45,
+        "max": 60,
+        "sum": 510
+      },
+      "oracleMinimality": "not-claimed",
+      "stationaryAttempts": 48,
+      "noEffectAttempts": 48,
+      "justifiedStationaryAbstentions": 48,
+      "staleProofsKeptSeparate": 0,
+      "transfer": {
+        "confirmed": 0,
+        "refuted": 0,
+        "restricted": 0
+      },
+      "choiceTasks": 0,
+      "correctChoices": 0,
+      "choiceReplayGestures": 0,
+      "choiceReplayBudget": "Separate post-acquisition evaluation; one preparation + one command + maxLatency waits.",
+      "ablations": 10,
+      "successfulLinkWithdrawals": 10,
+      "ablationsWithNoResidualSnapshotCopy": 10,
+      "p09StillSolvableByAnotherAcquisition": 0,
+      "p09": {
+        "compositionsTested": 10,
+        "replayedSuccesses": 10,
+        "gestures": {
+          "min": 5,
+          "median": 5,
+          "max": 5,
+          "sum": 50
+        },
+        "native": false
+      },
+      "publicTraceDisagreements": 0,
+      "native": {
+        "tested": 0,
+        "wins": 0,
+        "status": "not-run; SS08–SS25 and the independent 2,000-case reserve remain sealed"
+      }
+    },
+    "4": {
+      "name": "phase-and-delay",
+      "situations": 10,
+      "oracleSolvable": 10,
+      "expectedAcquisitions": 21,
+      "candidateCompleteSituations": 10,
+      "correctlyAcquiredEffects": 21,
+      "erroneousAttributions": 0,
+      "unsupportedClaims": 0,
+      "frozen": {
+        "comparisonScope": "direct-return command-to-dominant-vector subsystem",
+        "qualifiedApiAvailable": false,
+        "qualifiedAcquisitions": 0,
+        "qualifiedSituationVerdict": "not-representable-at-this-frozen-boundary",
+        "expectedMotionRows": 21,
+        "recordedCorrectMotionRows": 0,
+        "selectedCorrectMotionRows": 0,
+        "allMotionRowsRecordedSituations": 0,
+        "erroneousQualifiedAttributions": 0,
+        "note": "Raw vectors and qualified contextual effects are different measures. No global SIC failure is inferred from an absent API."
+      },
+      "rawMotionAcquisitionGainSituations": 10,
+      "newQualificationSituations": 10,
+      "oracleExperimentGestures": {
+        "min": 45,
+        "median": 45,
+        "max": 60,
+        "sum": 465
+      },
+      "actualGesturesEachArm": {
+        "min": 45,
+        "median": 45,
+        "max": 60,
+        "sum": 465
+      },
+      "firstAcquisitionGesture": {
+        "min": 10,
+        "median": 40,
+        "max": 40,
+        "sum": 265
+      },
+      "acquisitionEvidenceCompleteGesture": {
+        "min": 45,
+        "median": 45,
+        "max": 60,
+        "sum": 465
+      },
+      "oracleMinimality": "not-claimed",
+      "stationaryAttempts": 42,
+      "noEffectAttempts": 42,
+      "justifiedStationaryAbstentions": 42,
+      "staleProofsKeptSeparate": 0,
+      "transfer": {
+        "confirmed": 0,
+        "refuted": 0,
+        "restricted": 0
+      },
+      "choiceTasks": 0,
+      "correctChoices": 0,
+      "choiceReplayGestures": 0,
+      "choiceReplayBudget": "Separate post-acquisition evaluation; one preparation + one command + maxLatency waits.",
+      "ablations": 10,
+      "successfulLinkWithdrawals": 10,
+      "ablationsWithNoResidualSnapshotCopy": 10,
+      "p09StillSolvableByAnotherAcquisition": 0,
+      "p09": {
+        "compositionsTested": 10,
+        "replayedSuccesses": 10,
+        "gestures": {
+          "min": 5,
+          "median": 6,
+          "max": 7,
+          "sum": 57
+        },
+        "native": false
+      },
+      "publicTraceDisagreements": 0,
+      "native": {
+        "tested": 0,
+        "wins": 0,
+        "status": "not-run; SS08–SS25 and the independent 2,000-case reserve remain sealed"
+      }
+    },
+    "5": {
+      "name": "resource-and-exhaustion",
+      "situations": 10,
+      "oracleSolvable": 10,
+      "expectedAcquisitions": 36,
+      "candidateCompleteSituations": 10,
+      "correctlyAcquiredEffects": 36,
+      "erroneousAttributions": 0,
+      "unsupportedClaims": 0,
+      "frozen": {
+        "comparisonScope": "direct-return command-to-dominant-vector subsystem",
+        "qualifiedApiAvailable": false,
+        "qualifiedAcquisitions": 0,
+        "qualifiedSituationVerdict": "not-representable-at-this-frozen-boundary",
+        "expectedMotionRows": 36,
+        "recordedCorrectMotionRows": 36,
+        "selectedCorrectMotionRows": 29,
+        "allMotionRowsRecordedSituations": 10,
+        "erroneousQualifiedAttributions": 0,
+        "note": "Raw vectors and qualified contextual effects are different measures. No global SIC failure is inferred from an absent API."
+      },
+      "rawMotionAcquisitionGainSituations": 0,
+      "newQualificationSituations": 10,
+      "oracleExperimentGestures": {
+        "min": 45,
+        "median": 45,
+        "max": 60,
+        "sum": 480
+      },
+      "actualGesturesEachArm": {
+        "min": 45,
+        "median": 45,
+        "max": 60,
+        "sum": 480
+      },
+      "firstAcquisitionGesture": {
+        "min": 10,
+        "median": 10,
+        "max": 40,
+        "sum": 175
+      },
+      "acquisitionEvidenceCompleteGesture": {
+        "min": 45,
+        "median": 45,
+        "max": 60,
+        "sum": 480
+      },
+      "oracleMinimality": "not-claimed",
+      "stationaryAttempts": 30,
+      "noEffectAttempts": 30,
+      "justifiedStationaryAbstentions": 30,
+      "staleProofsKeptSeparate": 0,
+      "transfer": {
+        "confirmed": 0,
+        "refuted": 0,
+        "restricted": 0
+      },
+      "choiceTasks": 0,
+      "correctChoices": 0,
+      "choiceReplayGestures": 0,
+      "choiceReplayBudget": "Separate post-acquisition evaluation; one preparation + one command + maxLatency waits.",
+      "ablations": 10,
+      "successfulLinkWithdrawals": 10,
+      "ablationsWithNoResidualSnapshotCopy": 10,
+      "p09StillSolvableByAnotherAcquisition": 0,
+      "p09": {
+        "compositionsTested": 10,
+        "replayedSuccesses": 10,
+        "gestures": {
+          "min": 5,
+          "median": 5,
+          "max": 5,
+          "sum": 50
+        },
+        "native": false
+      },
+      "publicTraceDisagreements": 0,
+      "native": {
+        "tested": 0,
+        "wins": 0,
+        "status": "not-run; SS08–SS25 and the independent 2,000-case reserve remain sealed"
+      }
+    },
+    "6": {
+      "name": "local-and-remote-causality",
+      "situations": 10,
+      "oracleSolvable": 10,
+      "expectedAcquisitions": 42,
+      "candidateCompleteSituations": 10,
+      "correctlyAcquiredEffects": 42,
+      "erroneousAttributions": 0,
+      "unsupportedClaims": 0,
+      "frozen": {
+        "comparisonScope": "direct-return command-to-dominant-vector subsystem",
+        "qualifiedApiAvailable": false,
+        "qualifiedAcquisitions": 0,
+        "qualifiedSituationVerdict": "not-representable-at-this-frozen-boundary",
+        "expectedMotionRows": 42,
+        "recordedCorrectMotionRows": 42,
+        "selectedCorrectMotionRows": 36,
+        "allMotionRowsRecordedSituations": 10,
+        "erroneousQualifiedAttributions": 0,
+        "note": "Raw vectors and qualified contextual effects are different measures. No global SIC failure is inferred from an absent API."
+      },
+      "rawMotionAcquisitionGainSituations": 0,
+      "newQualificationSituations": 10,
+      "oracleExperimentGestures": {
+        "min": 30,
+        "median": 30,
+        "max": 40,
+        "sum": 310
+      },
+      "actualGesturesEachArm": {
+        "min": 30,
+        "median": 30,
+        "max": 40,
+        "sum": 310
+      },
+      "firstAcquisitionGesture": {
+        "min": 10,
+        "median": 10,
+        "max": 10,
+        "sum": 100
+      },
+      "acquisitionEvidenceCompleteGesture": {
+        "min": 30,
+        "median": 30,
+        "max": 40,
+        "sum": 310
+      },
+      "oracleMinimality": "not-claimed",
+      "stationaryAttempts": 0,
+      "noEffectAttempts": 0,
+      "justifiedStationaryAbstentions": 0,
+      "staleProofsKeptSeparate": 0,
+      "transfer": {
+        "confirmed": 0,
+        "refuted": 0,
+        "restricted": 0
+      },
+      "choiceTasks": 0,
+      "correctChoices": 0,
+      "choiceReplayGestures": 0,
+      "choiceReplayBudget": "Separate post-acquisition evaluation; one preparation + one command + maxLatency waits.",
+      "ablations": 10,
+      "successfulLinkWithdrawals": 10,
+      "ablationsWithNoResidualSnapshotCopy": 10,
+      "p09StillSolvableByAnotherAcquisition": 0,
+      "p09": {
+        "compositionsTested": 10,
+        "replayedSuccesses": 10,
+        "gestures": {
+          "min": 5,
+          "median": 5,
+          "max": 5,
+          "sum": 50
+        },
+        "native": false
+      },
+      "publicTraceDisagreements": 0,
+      "native": {
+        "tested": 0,
+        "wins": 0,
+        "status": "not-run; SS08–SS25 and the independent 2,000-case reserve remain sealed"
+      }
+    },
+    "7": {
+      "name": "transferred-evidence",
+      "situations": 10,
+      "oracleSolvable": 10,
+      "expectedAcquisitions": 59,
+      "candidateCompleteSituations": 10,
+      "correctlyAcquiredEffects": 59,
+      "erroneousAttributions": 0,
+      "unsupportedClaims": 0,
+      "frozen": {
+        "comparisonScope": "direct-return command-to-dominant-vector subsystem",
+        "qualifiedApiAvailable": false,
+        "qualifiedAcquisitions": 0,
+        "qualifiedSituationVerdict": "not-representable-at-this-frozen-boundary",
+        "expectedMotionRows": 59,
+        "recordedCorrectMotionRows": 59,
+        "selectedCorrectMotionRows": 14,
+        "allMotionRowsRecordedSituations": 10,
+        "erroneousQualifiedAttributions": 0,
+        "note": "Raw vectors and qualified contextual effects are different measures. No global SIC failure is inferred from an absent API."
+      },
+      "rawMotionAcquisitionGainSituations": 0,
+      "newQualificationSituations": 10,
+      "oracleExperimentGestures": {
+        "min": 45,
+        "median": 45,
+        "max": 60,
+        "sum": 480
+      },
+      "actualGesturesEachArm": {
+        "min": 45,
+        "median": 45,
+        "max": 60,
+        "sum": 480
+      },
+      "firstAcquisitionGesture": {
+        "min": 10,
+        "median": 10,
+        "max": 30,
+        "sum": 135
+      },
+      "acquisitionEvidenceCompleteGesture": {
+        "min": 45,
+        "median": 45,
+        "max": 60,
+        "sum": 480
+      },
+      "oracleMinimality": "not-claimed",
+      "stationaryAttempts": 7,
+      "noEffectAttempts": 7,
+      "justifiedStationaryAbstentions": 7,
+      "staleProofsKeptSeparate": 22,
+      "transfer": {
+        "confirmed": 3,
+        "refuted": 24,
+        "restricted": 32
+      },
+      "choiceTasks": 0,
+      "correctChoices": 0,
+      "choiceReplayGestures": 0,
+      "choiceReplayBudget": "Separate post-acquisition evaluation; one preparation + one command + maxLatency waits.",
+      "ablations": 10,
+      "successfulLinkWithdrawals": 10,
+      "ablationsWithNoResidualSnapshotCopy": 10,
+      "p09StillSolvableByAnotherAcquisition": 0,
+      "p09": {
+        "compositionsTested": 10,
+        "replayedSuccesses": 10,
+        "gestures": {
+          "min": 5,
+          "median": 5,
+          "max": 5,
+          "sum": 50
+        },
+        "native": false
+      },
+      "publicTraceDisagreements": 0,
+      "native": {
+        "tested": 0,
+        "wins": 0,
+        "status": "not-run; SS08–SS25 and the independent 2,000-case reserve remain sealed"
+      }
+    },
+    "8": {
+      "name": "initially-equivalent-commands",
+      "situations": 10,
+      "oracleSolvable": 10,
+      "expectedAcquisitions": 40,
+      "candidateCompleteSituations": 10,
+      "correctlyAcquiredEffects": 40,
+      "erroneousAttributions": 0,
+      "unsupportedClaims": 0,
+      "frozen": {
+        "comparisonScope": "direct-return command-to-dominant-vector subsystem",
+        "qualifiedApiAvailable": false,
+        "qualifiedAcquisitions": 0,
+        "qualifiedSituationVerdict": "not-representable-at-this-frozen-boundary",
+        "expectedMotionRows": 40,
+        "recordedCorrectMotionRows": 40,
+        "selectedCorrectMotionRows": 20,
+        "allMotionRowsRecordedSituations": 10,
+        "erroneousQualifiedAttributions": 0,
+        "note": "Raw vectors and qualified contextual effects are different measures. No global SIC failure is inferred from an absent API."
+      },
+      "rawMotionAcquisitionGainSituations": 0,
+      "newQualificationSituations": 10,
+      "oracleExperimentGestures": {
+        "min": 30,
+        "median": 30,
+        "max": 30,
+        "sum": 300
+      },
+      "actualGesturesEachArm": {
+        "min": 30,
+        "median": 30,
+        "max": 30,
+        "sum": 300
+      },
+      "firstAcquisitionGesture": {
+        "min": 10,
+        "median": 10,
+        "max": 10,
+        "sum": 100
+      },
+      "acquisitionEvidenceCompleteGesture": {
+        "min": 30,
+        "median": 30,
+        "max": 30,
+        "sum": 300
+      },
+      "oracleMinimality": "not-claimed",
+      "stationaryAttempts": 0,
+      "noEffectAttempts": 0,
+      "justifiedStationaryAbstentions": 0,
+      "staleProofsKeptSeparate": 0,
+      "transfer": {
+        "confirmed": 0,
+        "refuted": 0,
+        "restricted": 0
+      },
+      "choiceTasks": 10,
+      "correctChoices": 10,
+      "choiceReplayGestures": 50,
+      "choiceReplayBudget": "Separate post-acquisition evaluation; one preparation + one command + maxLatency waits.",
+      "ablations": 10,
+      "successfulLinkWithdrawals": 10,
+      "ablationsWithNoResidualSnapshotCopy": 10,
+      "p09StillSolvableByAnotherAcquisition": 10,
+      "p09": {
+        "compositionsTested": 10,
+        "replayedSuccesses": 10,
+        "gestures": {
+          "min": 5,
+          "median": 5,
+          "max": 5,
+          "sum": 50
+        },
+        "native": false
+      },
+      "publicTraceDisagreements": 0,
+      "native": {
+        "tested": 0,
+        "wins": 0,
+        "status": "not-run; SS08–SS25 and the independent 2,000-case reserve remain sealed"
+      }
+    }
+  },
+  "generation": {
+    "1": {
+      "attempted": 10,
+      "accepted": 10,
+      "duplicateBehaviorsRejected": 0,
+      "uncertifiedRejected": 0,
+      "rejectionReasons": {},
+      "invarianceChecks": 10
+    },
+    "2": {
+      "attempted": 10,
+      "accepted": 10,
+      "duplicateBehaviorsRejected": 0,
+      "uncertifiedRejected": 0,
+      "rejectionReasons": {},
+      "invarianceChecks": 10
+    },
+    "3": {
+      "attempted": 10,
+      "accepted": 10,
+      "duplicateBehaviorsRejected": 0,
+      "uncertifiedRejected": 0,
+      "rejectionReasons": {},
+      "invarianceChecks": 10
+    },
+    "4": {
+      "attempted": 10,
+      "accepted": 10,
+      "duplicateBehaviorsRejected": 0,
+      "uncertifiedRejected": 0,
+      "rejectionReasons": {},
+      "invarianceChecks": 10
+    },
+    "5": {
+      "attempted": 10,
+      "accepted": 10,
+      "duplicateBehaviorsRejected": 0,
+      "uncertifiedRejected": 0,
+      "rejectionReasons": {},
+      "invarianceChecks": 10
+    },
+    "6": {
+      "attempted": 10,
+      "accepted": 10,
+      "duplicateBehaviorsRejected": 0,
+      "uncertifiedRejected": 0,
+      "rejectionReasons": {},
+      "invarianceChecks": 10
+    },
+    "7": {
+      "attempted": 10,
+      "accepted": 10,
+      "duplicateBehaviorsRejected": 0,
+      "uncertifiedRejected": 0,
+      "rejectionReasons": {},
+      "invarianceChecks": 10
+    },
+    "8": {
+      "attempted": 10,
+      "accepted": 10,
+      "duplicateBehaviorsRejected": 0,
+      "uncertifiedRejected": 0,
+      "rejectionReasons": {},
+      "invarianceChecks": 10
+    }
+  },
+  "contrasts": {
+    "config": {
+      "protocol": "sic-p05-development-contrasts-v1",
+      "seed": 26112805,
+      "countPerKind": 32,
+      "indiscernibleCommandCap": 2,
+      "delayedEffect": 3,
+      "mainQuotaContribution": 0,
+      "sealedOperatorCasesGenerated": 0,
+      "sealedNativeGamesTested": 0
+    },
+    "indiscernible": {
+      "tested": 32,
+      "worlds": 64,
+      "verifiedPairs": 32,
+      "justifiedAbstentions": 32,
+      "publicHistoryPrefixes": 1530,
+      "abstainingPrefixes": 1530,
+      "simulatorAgreementPrefixes": 1530,
+      "futureDivergenceWitnesses": 32,
+      "examples": [
+        {
+          "id": "contrast-indiscernible-0",
+          "publicInterfaceHash": "d7593b22563ddc53f200aa89e4f6036d3ebac4facecf4cfb93e30bf48dbe599c",
+          "histories": 43,
+          "cap": 2,
+          "distinguishingReturnBeyondCap": 4
+        },
+        {
+          "id": "contrast-indiscernible-1",
+          "publicInterfaceHash": "38f8fbbad2afdef655c2828b6d8e7b8d68565dca040a5dbff570bb599464b8fc",
+          "histories": 57,
+          "cap": 2,
+          "distinguishingReturnBeyondCap": 4
+        },
+        {
+          "id": "contrast-indiscernible-2",
+          "publicInterfaceHash": "c724a54ff5d54bbecb3ebb8704a277d3ed81c79ab8a797888e90b41274caf7fb",
+          "histories": 43,
+          "cap": 2,
+          "distinguishingReturnBeyondCap": 4
+        }
+      ]
+    },
+    "stationary": {
+      "tested": 32,
+      "oracleNoEffect": 32,
+      "justifiedAbstentions": 32,
+      "attempts": 76,
+      "stationaryReturnIds": 304,
+      "contextCountertrials": 32,
+      "noGlobalCommandBlacklist": 32,
+      "examples": [
+        {
+          "id": "contrast-stationary-0",
+          "commands": 20,
+          "attempts": 3,
+          "newContextAcquisitions": 3
+        },
+        {
+          "id": "contrast-stationary-1",
+          "commands": 20,
+          "attempts": 3,
+          "newContextAcquisitions": 3
+        },
+        {
+          "id": "contrast-stationary-2",
+          "commands": 15,
+          "attempts": 2,
+          "newContextAcquisitions": 2
+        }
+      ]
+    },
+    "stale": {
+      "tested": 32,
+      "justifiedAbstentions": 32,
+      "oldProofsRetainedSeparately": 32,
+      "currentAcquisitions": 0,
+      "unconfirmedRecallScopes": [
+        {
+          "id": "contrast-stale-0",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION2",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-a"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION1",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-a"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            },
+            {
+              "effectId": "old:2",
+              "command": "ACTION3",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-a"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-1",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION2",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-b"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION1",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-b"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-2",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-3",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION2",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-b"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION1",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-b"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            },
+            {
+              "effectId": "old:2",
+              "command": "ACTION3",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-b"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-4",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-5",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-6",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION3",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            },
+            {
+              "effectId": "old:2",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-7",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-8",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-9",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-10",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-11",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-12",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            },
+            {
+              "effectId": "old:2",
+              "command": "ACTION3",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-13",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-14",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION3",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            },
+            {
+              "effectId": "old:2",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-15",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION2",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-b"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION1",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-b"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-16",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-17",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            },
+            {
+              "effectId": "old:2",
+              "command": "ACTION3",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-18",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-19",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION2",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-b"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION1",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-b"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-20",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION1",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-a"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION2",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-a"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-21",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION2",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-b"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION1",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-b"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-22",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-23",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION2",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-b"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION1",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-b"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-24",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-25",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-26",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-27",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            },
+            {
+              "effectId": "old:2",
+              "command": "ACTION3",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-28",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-29",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION3",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            },
+            {
+              "effectId": "old:2",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-30",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION2",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION1",
+              "conditions": [],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contrast-stale-31",
+          "newObservations": 0,
+          "currentAcquisitions": 0,
+          "recalls": [
+            {
+              "effectId": "old:0",
+              "command": "ACTION1",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-b"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-0"
+              ]
+            },
+            {
+              "effectId": "old:1",
+              "command": "ACTION2",
+              "conditions": [
+                {
+                  "field": "context.blocked",
+                  "equals": false
+                },
+                {
+                  "field": "context.phase",
+                  "equals": 0
+                },
+                {
+                  "field": "context.supported",
+                  "equals": true
+                },
+                {
+                  "field": "context.terrain",
+                  "equals": "surface-a"
+                },
+                {
+                  "field": "reserve",
+                  "equals": 20
+                },
+                {
+                  "field": "selected",
+                  "equals": "body-b"
+                }
+              ],
+              "oldReturnIds": [
+                "old:return-1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "scalarEffects": {
+      "tested": 2,
+      "oracleSolvable": 2,
+      "correctlyAcquired": 2,
+      "geometricStationarityPreserved": 2,
+      "cases": [
+        {
+          "kind": "resource",
+          "acquiredEffects": 2,
+          "commands": 15,
+          "oracleExpectedEffects": 2,
+          "acquired": true
+        },
+        {
+          "kind": "remote",
+          "acquiredEffects": 2,
+          "commands": 15,
+          "oracleExpectedEffects": 2,
+          "acquired": true
+        }
+      ]
+    },
+    "firstFailure": null
+  },
+  "corpus": {
+    "uniqueBehaviorSignatures": 80,
+    "signatureSetSha256": "3aba672217fa450f38325a87db82efeae380d8e40d1152aced07f2f385a9b2de",
+    "resultRowsSha256": "b0b336d84ae3226f23df549a41b10bc8742b64bef572bd39e84c8b2747c4226d",
+    "evaluationOnly": [
+      "privateSpec",
+      "oracle.policy",
+      "oracle.outcomes"
+    ],
+    "learnerInputs": [
+      "public observations",
+      "public return IDs",
+      "public maxLatency",
+      "unconfirmed prior claims"
+    ],
+    "reserved": {
+      "requestedCount": 2000,
+      "generated": 0,
+      "read": 0,
+      "operatorOwned": true
+    },
+    "sealedNativeGames": "SS08–SS25: no read or execution"
+  },
+  "firstFailure": null,
+  "firstDeviationExamples": {
+    "1": {
+      "id": "p05-1-a7bd9176f42ad60696cc",
+      "behaviorHash": "a7bd9176f42ad60696cce879b2828187fb829f59412cc4d767fba44e376039bb",
+      "firstDeviationGesture": 10,
+      "decisiveReturnId": "r17",
+      "effectId": "p05:51323855",
+      "publicTraceHash": "ecef22d110307a255f1091627bf80aee3f5d2d6dfcb5bfbaa76f1eb32a32a06f",
+      "detail": "Full public prefix, claims, independent verdict and P09 replay in evaluation.jsonl.gz."
+    },
+    "2": {
+      "id": "p05-2-cbd536f994a0fbf3fe66",
+      "behaviorHash": "cbd536f994a0fbf3fe66842a5573a50d6d3ba595ca39ecdabf03ef3ea9f7bf3a",
+      "firstDeviationGesture": 10,
+      "decisiveReturnId": "r42",
+      "effectId": "p05:2514a784",
+      "publicTraceHash": "ebea6f193a7fe6e5d0f376df0b390bfb521422b6dae6b7c54228ff98223a9470",
+      "detail": "Full public prefix, claims, independent verdict and P09 replay in evaluation.jsonl.gz."
+    },
+    "3": {
+      "id": "p05-3-9a0e5a0b34312c580b8a",
+      "behaviorHash": "9a0e5a0b34312c580b8ae8f52310a5c652e9ff5685ba2e68bcf816d2e0fc651f",
+      "firstDeviationGesture": 10,
+      "decisiveReturnId": "r7",
+      "effectId": "p05:de1baf21",
+      "publicTraceHash": "1c33468d5f13a092e34c3c3eb455e4cffe8cec89b23d0c5e30c653778fde417a",
+      "detail": "Full public prefix, claims, independent verdict and P09 replay in evaluation.jsonl.gz."
+    },
+    "4": {
+      "id": "p05-4-37374f640552496433d6",
+      "behaviorHash": "37374f640552496433d607cec878331d40af0425134be11029fe42fedb94d4fc",
+      "firstDeviationGesture": 25,
+      "decisiveReturnId": "r28",
+      "effectId": "p05:0bc07274",
+      "publicTraceHash": "b9c7d2d9a3ce0ab51ad76ed4699dfe09b81b9176150c8427c6755a39600c6f2b",
+      "detail": "Full public prefix, claims, independent verdict and P09 replay in evaluation.jsonl.gz."
+    },
+    "5": {
+      "id": "p05-5-1ad8f0597eece4d560a2",
+      "behaviorHash": "1ad8f0597eece4d560a2d96bec581eea5e9c61683d2efaa4aff59e6af5edc489",
+      "firstDeviationGesture": 10,
+      "decisiveReturnId": "r22",
+      "effectId": "p05:9329577a",
+      "publicTraceHash": "acef47dff16f7accb62f921e08c30114f4fe6816b12bc2ffe3809f8045980f8f",
+      "detail": "Full public prefix, claims, independent verdict and P09 replay in evaluation.jsonl.gz."
+    },
+    "6": {
+      "id": "p05-6-afecd6fc64e0e8716792",
+      "behaviorHash": "afecd6fc64e0e87167926fcc7bf83e959cbc844d9da2cf9c0b9627040fc7e04c",
+      "firstDeviationGesture": 10,
+      "decisiveReturnId": "r7",
+      "effectId": "p05:385ac688",
+      "publicTraceHash": "b06887735c2025003ec60a94e54fb183578febdc02cbd9e92e5f2e02d1afdc78",
+      "detail": "Full public prefix, claims, independent verdict and P09 replay in evaluation.jsonl.gz."
+    },
+    "7": {
+      "id": "p05-7-9d8a0efdeaa60863b125",
+      "behaviorHash": "9d8a0efdeaa60863b125945dd9c1aaf8ab7f3ff57eb52cbb51cf2071c4948bfa",
+      "firstDeviationGesture": 10,
+      "decisiveReturnId": "r42",
+      "effectId": "p05:1c93ea14",
+      "publicTraceHash": "7153012197d57b8fe947571d17a15a75351f4d16157f3405cee844cea80b7403",
+      "detail": "Full public prefix, claims, independent verdict and P09 replay in evaluation.jsonl.gz."
+    },
+    "8": {
+      "id": "p05-8-28987de968715f27df8c",
+      "behaviorHash": "28987de968715f27df8c60d52817ccb9cd06cf19a3a65749bcfa62cead597d7e",
+      "firstDeviationGesture": 10,
+      "decisiveReturnId": "r22",
+      "effectId": "p05:6e5ccb90",
+      "publicTraceHash": "a6a9f9f1d395693024b4d9026f145fea5ae1f90d936c5232277c887ab29c788a",
+      "detail": "Full public prefix, claims, independent verdict and P09 replay in evaluation.jsonl.gz."
+    }
+  },
+  "timing": {
+    "startedAt": "2026-11-28T14:09:25.439Z",
+    "finishedAt": "2026-11-28T14:09:27.951Z",
+    "wallSeconds": 2.512013559,
+    "parallelFamilyJobs": 1,
+    "cumulativeReplayGesturesBothArms": 6400
+  },
+  "qualityFailures": []
+}

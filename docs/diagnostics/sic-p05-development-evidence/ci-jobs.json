@@ -1,0 +1,67 @@
+{
+  "sourceSha": "3e33f0f6610f28484200ed915723c39f45302f7b",
+  "runId": 46153159758,
+  "observedPeakFamilyJobs": 8,
+  "familyJobs": [
+    {
+      "id": 141004108650,
+      "name": "P05 development / family 3",
+      "started_at": "2026-11-28T14:09:36Z",
+      "completed_at": "2026-11-28T14:10:15Z",
+      "conclusion": "success"
+    },
+    {
+      "id": 141004108653,
+      "name": "P05 development / family 5",
+      "started_at": "2026-11-28T14:09:35Z",
+      "completed_at": "2026-11-28T14:10:10Z",
+      "conclusion": "success"
+    },
+    {
+      "id": 141004108674,
+      "name": "P05 development / family 6",
+      "started_at": "2026-11-28T14:09:36Z",
+      "completed_at": "2026-11-28T14:10:12Z",
+      "conclusion": "success"
+    },
+    {
+      "id": 141004108688,
+      "name": "P05 development / family 7",
+      "started_at": "2026-11-28T14:09:35Z",
+      "completed_at": "2026-11-28T14:10:23Z",
+      "conclusion": "success"
+    },
+    {
+      "id": 141004108692,
+      "name": "P05 development / family 8",
+      "started_at": "2026-11-28T14:09:35Z",
+      "completed_at": "2026-11-28T14:10:19Z",
+      "conclusion": "success"
+    },
+    {
+      "id": 141004108694,
+      "name": "P05 development / family 1",
+      "started_at": "2026-11-28T14:09:35Z",
+      "completed_at": "2026-11-28T14:09:56Z",
+      "conclusion": "success"
+    },
+    {
+      "id": 141004108707,
+      "name": "P05 development / family 4",
+      "started_at": "2026-11-28T14:09:35Z",
+      "completed_at": "2026-11-28T14:10:16Z",
+      "conclusion": "success"
+    },
+    {
+      "id": 141004108718,
+      "name": "P05 development / family 2",
+      "started_at": "2026-11-28T14:09:35Z",
+      "completed_at": "2026-11-28T14:10:09Z",
+      "conclusion": "success"
+    }
+  ],
+  "totalJobSeconds": 298,
+  "allJobsSuccess": true,
+  "firstJobStart": "2026-11-28T14:09:05Z",
+  "lastJobEnd": "2026-11-28T14:10:46Z"
+}

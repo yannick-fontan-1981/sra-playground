@@ -1,0 +1,14 @@
+{
+  "sourceSha": "3e33f0f6610f28484200ed915723c39f45302f7b",
+  "runId": "46153159758",
+  "runAttempt": "1",
+  "startedAt": "2026-11-28T14:09:17Z",
+  "lastControlEndedAt": "2026-11-28T14:10:41.703Z",
+  "wallSecondsThroughLastControl": 84.703,
+  "configuredFamilyParallelism": 8,
+  "observedPeakFamilyJobs": null,
+  "observedPeakStatus": "Collect completed GitHub Jobs started_at/completed_at intervals after this run; the cap is not an observed peak.",
+  "nativeGamesTestedByDevelopmentCampaign": 0,
+  "sealedOperatorCasesGenerated": 0,
+  "sealedNativeGamesTested": 0
+}

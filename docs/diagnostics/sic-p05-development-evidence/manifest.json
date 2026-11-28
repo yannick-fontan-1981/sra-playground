@@ -1,0 +1,116 @@
+{
+  "protocol": "P05-development-v1",
+  "configuration": {
+    "baseRevision": "20433007224accc36e3d7976696d9ee7a783a227",
+    "revision": "3e33f0f6610f28484200ed915723c39f45302f7b",
+    "sourceFingerprint": "bb73ae7ecc1cd3282fcf89e7457a3e255c17321b9f85193a6516b738a2b80b55",
+    "files": {
+      "scripts/sic-p05-laboratory.mjs": "7d69730d8af2f301bc6b3300135ce437d6ab7e549971412f5c534adc10a934ec",
+      "scripts/sic-p05-oracle.mjs": "d1dc42b6bb16edc33f8024dc742b74875330a896e6d83a7fee9411aebc26a020",
+      "scripts/sic-p05-compare.mjs": "8535a3c28cef57b70cb1a145d49a427ac7addc1e62298ddc1049f05357a3c7ac",
+      "scripts/sic-p05-campaign.mjs": "204dd08143739668ec5ec4be1cc8952b85742eddebf67914f3a4771198f0ceff",
+      "scripts/sic-p05-contrasts.mjs": "bb7e46bb9eb4285743fc008572ba1a80a3f88117e3454e39d85697e1626fdaee",
+      "scripts/sic-p05-p09-bridge.mjs": "dfeda00f94b5443caac0a1d110cc910d87af2c9a92d54486e90542b4b03e9645",
+      "src/sic/p05-acquisition.ts": "94eca5600e63e4b3c9b58ed6ab69229a911e9221affe57a4a9f176d763c91910",
+      "src/sic/p05-frozen-adapter.ts": "0930386ad5b53249ffe952668616daa2fb2e2cc8a7d98764650906ddb19579df",
+      "src/sic/controlled-parts.ts": "685578b5ae01a268d4a303175d3fb1a28ffa7971568b2cbbbf8a103cb105bf6d",
+      "src/sic/effect-composer.ts": "c1aa7513b79c76942ceb3d28c788c9356215ddbc31e4cc49aea276de178b3e88"
+    },
+    "frozenBlob": "35bf4e14f1d632d6e4e732846670ecfe1f940160",
+    "p09ComposerBlob": "f54a624abaaa89e4d5363f41869017f4e7f99b35",
+    "dirtySource": false,
+    "node": "v24.22.3",
+    "seed": 26112805,
+    "developmentSeeds": {
+      "1": 26113814,
+      "2": 26114823,
+      "3": 26115832,
+      "4": 26116841,
+      "5": 26117850,
+      "6": 26118859,
+      "7": 26119868,
+      "8": 26120877
+    },
+    "perFamily": 1000,
+    "count": 8000,
+    "families": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "commonCommandBudget": 96,
+    "modelContract": {
+      "version": "finite-interventional-contexts-v1",
+      "deterministic": true,
+      "prepare": "Public, one gesture; resets the listed context, clock, actors and pending effects.",
+      "command": "One intervention per episode; its unknown bounded-latency effect has a selected or fixed receiver.",
+      "background": "Context-specific constant remote drift per tick; measured by time-matched WAIT controls.",
+      "scope": "Only the listed, measured public contexts; no claim of universal guard discovery.",
+      "resource": "A command spends its nonnegative cost when affordable; otherwise it has no causal effect.",
+      "observation": "Complete, noiseless public positions, selection, context, reserve and remote counter after each gesture.",
+      "excluded": [
+        "hidden persistent state between prepared episodes",
+        "unbounded latency",
+        "unobserved context discovery"
+      ]
+    },
+    "frozen": {
+      "revision": "20433007224accc36e3d7976696d9ee7a783a227",
+      "module": "src/sic/controlled-parts.ts",
+      "gitBlob": "35bf4e14f1d632d6e4e732846670ecfe1f940160",
+      "functions": [
+        "rememberMotion",
+        "controlledStrokes"
+      ],
+      "scope": "direct-return command-to-dominant-vector subsystem",
+      "nativeWorker": false
+    },
+    "nativeWorkerCompared": false,
+    "P04ExplorationPolicy": "identical-public-factorial-policy",
+    "aggregateOf": [
+      {
+        "family": "1",
+        "resultRowsSha256": "041218e7aed72f9d1986b39ce1dbeea1cf1883168b4c2730e65c880575961c68"
+      },
+      {
+        "family": "2",
+        "resultRowsSha256": "8c539b46241b01ad83e6b0f2712990b929185b4fab62efcbdf304b006936b15a"
+      },
+      {
+        "family": "3",
+        "resultRowsSha256": "589b3fe7164eae2a1a4e2d767514d83880cd9497786c5eae385179f2b585c196"
+      },
+      {
+        "family": "4",
+        "resultRowsSha256": "88b9a251e2a6c6071cdb42a40024f0a3e864e1108edaf93a609ca0c75fe7208b"
+      },
+      {
+        "family": "5",
+        "resultRowsSha256": "4f4c2daf8aee9b0e609114a555c4dcc143cdf92a66b4004aa0e6587eac0eed39"
+      },
+      {
+        "family": "6",
+        "resultRowsSha256": "92e9c7ef8a987b87b2afff925a85cc8a0ae7383dbcda5287eaff14ec3ff37f3a"
+      },
+      {
+        "family": "7",
+        "resultRowsSha256": "182f47431348aabfea93ba6f8b668733774fb7661ac62283b89a94f135820ef8"
+      },
+      {
+        "family": "8",
+        "resultRowsSha256": "99c6859cb9fae95e9ae695346ffd59f4857ddeb51afb3d20695d3faf4e1fedf8"
+      }
+    ]
+  },
+  "resultRowsSha256": "550d734c0ace53d7670aca970015014b07665f61782fcc6d4787639ad4d56704",
+  "signatureSetSha256": "465d30d1f70b0a16e4a70c393d12c3b7aa90bfcea94071a6fa360e62f336acd3",
+  "files": {
+    "report.json": "4b2f167f3aa06b8fbda9c44ea2f9ff6b53f461e675105fcee2aee8ae74f8bbe4",
+    "results.jsonl.gz": "264ebeb912677c8581b5c3bbcf7cf195d17a2a9bf9c28321b81068adccfc97d0"
+  }
+}

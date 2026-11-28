@@ -1,0 +1,1555 @@
+{
+  "firstDeviation": {
+    "kind": "qualified-effect-contract",
+    "gesture": 10,
+    "publicHistory": [
+      {
+        "kind": "prepare",
+        "command": "PREPARE",
+        "contextId": "setting-0",
+        "id": "r1",
+        "before": {
+          "ref": "e0:t0",
+          "epoch": "e0",
+          "tick": 0,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "after": {
+          "ref": "e1:t0",
+          "epoch": "e1",
+          "tick": 0,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "elapsed": 1
+      },
+      {
+        "kind": "wait",
+        "command": "WAIT",
+        "id": "r2",
+        "before": {
+          "ref": "e1:t0",
+          "epoch": "e1",
+          "tick": 0,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "after": {
+          "ref": "e1:t1",
+          "epoch": "e1",
+          "tick": 1,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "elapsed": 1
+      },
+      {
+        "kind": "wait",
+        "command": "WAIT",
+        "id": "r3",
+        "before": {
+          "ref": "e1:t1",
+          "epoch": "e1",
+          "tick": 1,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "after": {
+          "ref": "e1:t2",
+          "epoch": "e1",
+          "tick": 2,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "elapsed": 1
+      },
+      {
+        "kind": "wait",
+        "command": "WAIT",
+        "id": "r4",
+        "before": {
+          "ref": "e1:t2",
+          "epoch": "e1",
+          "tick": 2,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "after": {
+          "ref": "e1:t3",
+          "epoch": "e1",
+          "tick": 3,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "elapsed": 1
+      },
+      {
+        "kind": "wait",
+        "command": "WAIT",
+        "id": "r5",
+        "before": {
+          "ref": "e1:t3",
+          "epoch": "e1",
+          "tick": 3,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "after": {
+          "ref": "e1:t4",
+          "epoch": "e1",
+          "tick": 4,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "elapsed": 1
+      },
+      {
+        "kind": "prepare",
+        "command": "PREPARE",
+        "contextId": "setting-0",
+        "id": "r6",
+        "before": {
+          "ref": "e1:t4",
+          "epoch": "e1",
+          "tick": 4,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "after": {
+          "ref": "e2:t0",
+          "epoch": "e2",
+          "tick": 0,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "elapsed": 1
+      },
+      {
+        "kind": "command",
+        "command": "ACTION1",
+        "id": "r7",
+        "before": {
+          "ref": "e2:t0",
+          "epoch": "e2",
+          "tick": 0,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "after": {
+          "ref": "e2:t1",
+          "epoch": "e2",
+          "tick": 1,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "elapsed": 1
+      },
+      {
+        "kind": "wait",
+        "command": "WAIT",
+        "id": "r8",
+        "before": {
+          "ref": "e2:t1",
+          "epoch": "e2",
+          "tick": 1,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "after": {
+          "ref": "e2:t2",
+          "epoch": "e2",
+          "tick": 2,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "elapsed": 1
+      },
+      {
+        "kind": "wait",
+        "command": "WAIT",
+        "id": "r9",
+        "before": {
+          "ref": "e2:t2",
+          "epoch": "e2",
+          "tick": 2,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "after": {
+          "ref": "e2:t3",
+          "epoch": "e2",
+          "tick": 3,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "elapsed": 1
+      },
+      {
+        "kind": "wait",
+        "command": "WAIT",
+        "id": "r10",
+        "before": {
+          "ref": "e2:t3",
+          "epoch": "e2",
+          "tick": 3,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "after": {
+          "ref": "e2:t4",
+          "epoch": "e2",
+          "tick": 4,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                -6,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        },
+        "elapsed": 1
+      }
+    ],
+    "candidateClaims": [
+      {
+        "effectKind": "translation",
+        "command": "ACTION1",
+        "receiver": "body-b",
+        "delta": [
+          -6,
+          0
+        ],
+        "delay": 3,
+        "resourceCost": 0,
+        "remoteDelta": 0,
+        "conditions": [
+          {
+            "field": "context.blocked",
+            "equals": false
+          },
+          {
+            "field": "context.phase",
+            "equals": 0
+          },
+          {
+            "field": "context.supported",
+            "equals": true
+          },
+          {
+            "field": "context.terrain",
+            "equals": "surface-a"
+          },
+          {
+            "field": "reserve",
+            "equals": 20
+          },
+          {
+            "field": "selected",
+            "equals": "body-b"
+          }
+        ],
+        "effectId": "p05:6de53197",
+        "supportingReturnIds": [
+          "r10",
+          "r5",
+          "r7",
+          "r2",
+          "r8",
+          "r3",
+          "r9",
+          "r4"
+        ],
+        "limitingReturnIds": [],
+        "status": "restricted"
+      }
+    ],
+    "frozenQualifiedClaims": [],
+    "frozenObservedEffects": [],
+    "meaning": "New justified P05 contract at this subsystem boundary; not a native SIC victory or all-engine comparison."
+  },
+  "claims": [
+    {
+      "effectKind": "translation",
+      "command": "ACTION1",
+      "receiver": "body-b",
+      "delta": [
+        -6,
+        0
+      ],
+      "delay": 3,
+      "resourceCost": 0,
+      "remoteDelta": 0,
+      "conditions": [
+        {
+          "field": "context.blocked",
+          "equals": false
+        },
+        {
+          "field": "context.phase",
+          "equals": 0
+        },
+        {
+          "field": "context.supported",
+          "equals": true
+        },
+        {
+          "field": "context.terrain",
+          "equals": "surface-a"
+        },
+        {
+          "field": "reserve",
+          "equals": 20
+        },
+        {
+          "field": "selected",
+          "equals": "body-b"
+        }
+      ],
+      "effectId": "p05:6de53197",
+      "supportingReturnIds": [
+        "r10",
+        "r5",
+        "r7",
+        "r2",
+        "r8",
+        "r3",
+        "r9",
+        "r4"
+      ],
+      "limitingReturnIds": [
+        "r22",
+        "r23",
+        "r24",
+        "r25",
+        "r37",
+        "r38",
+        "r39",
+        "r40"
+      ],
+      "status": "restricted"
+    },
+    {
+      "effectKind": "translation",
+      "command": "ACTION2",
+      "receiver": "body-b",
+      "delta": [
+        2,
+        0
+      ],
+      "delay": 2,
+      "resourceCost": 0,
+      "remoteDelta": 0,
+      "conditions": [
+        {
+          "field": "context.blocked",
+          "equals": false
+        },
+        {
+          "field": "context.phase",
+          "equals": 0
+        },
+        {
+          "field": "context.supported",
+          "equals": true
+        },
+        {
+          "field": "context.terrain",
+          "equals": "surface-a"
+        },
+        {
+          "field": "reserve",
+          "equals": 20
+        },
+        {
+          "field": "selected",
+          "equals": "body-b"
+        }
+      ],
+      "effectId": "p05:2b451b28",
+      "supportingReturnIds": [
+        "r14",
+        "r4",
+        "r12",
+        "r2",
+        "r13",
+        "r3",
+        "r15",
+        "r5"
+      ],
+      "limitingReturnIds": [
+        "r27",
+        "r28",
+        "r29",
+        "r30",
+        "r42",
+        "r43",
+        "r44",
+        "r45"
+      ],
+      "status": "restricted"
+    }
+  ],
+  "verdicts": [
+    {
+      "valid": true,
+      "correctEffect": true,
+      "justified": true,
+      "reason": "effect-and-public-return-verified",
+      "matchedContextIds": [
+        "setting-0"
+      ],
+      "decisiveReturnId": "r10",
+      "commandReturnId": "r7",
+      "controlReturnId": "r5"
+    },
+    {
+      "valid": true,
+      "correctEffect": true,
+      "justified": true,
+      "reason": "effect-and-public-return-verified",
+      "matchedContextIds": [
+        "setting-0"
+      ],
+      "decisiveReturnId": "r14",
+      "commandReturnId": "r12",
+      "controlReturnId": "r4"
+    }
+  ],
+  "diagnostics": {
+    "receipts": 45,
+    "stationaryReturnIds": [
+      "r22",
+      "r23",
+      "r24",
+      "r25",
+      "r27",
+      "r28",
+      "r29",
+      "r30",
+      "r37",
+      "r38",
+      "r39",
+      "r40",
+      "r42",
+      "r43",
+      "r44",
+      "r45"
+    ],
+    "missingReturnIds": [],
+    "staleProofIds": [],
+    "ambiguousEpochs": [],
+    "uncontrolledEpochs": [],
+    "missingLinkEpochs": [],
+    "rejectedReturnIds": []
+  },
+  "p09": {
+    "tested": true,
+    "planned": true,
+    "success": true,
+    "validReplay": true,
+    "usedEffect": true,
+    "usedEffectId": "p05:6de53197",
+    "usedEvidenceIds": [
+      "r10",
+      "r5",
+      "r7",
+      "r2",
+      "r8",
+      "r3",
+      "r9",
+      "r4"
+    ],
+    "consumedConditions": [
+      {
+        "field": "context.blocked",
+        "equals": false
+      },
+      {
+        "field": "context.phase",
+        "equals": 0
+      },
+      {
+        "field": "context.supported",
+        "equals": true
+      },
+      {
+        "field": "context.terrain",
+        "equals": "surface-a"
+      },
+      {
+        "field": "reserve",
+        "equals": 20
+      },
+      {
+        "field": "selected",
+        "equals": "body-b"
+      }
+    ],
+    "commands": 7,
+    "plan": [
+      {
+        "action": {
+          "kind": "command",
+          "command": "ACTION1",
+          "receiver": "body-b",
+          "effectId": "p05:6de53197"
+        },
+        "evidence": [
+          "r10",
+          "r5",
+          "r7",
+          "r2",
+          "r8",
+          "r3",
+          "r9",
+          "r4"
+        ],
+        "requires": [
+          "P05 acquired context and resource bounds"
+        ],
+        "maintains": []
+      },
+      {
+        "action": {
+          "kind": "prepare-relay"
+        },
+        "evidence": [
+          "public relay/cargo rule"
+        ],
+        "requires": [],
+        "maintains": []
+      },
+      {
+        "action": {
+          "kind": "wait"
+        },
+        "evidence": [
+          "public relay/cargo rule"
+        ],
+        "requires": [],
+        "maintains": []
+      },
+      {
+        "action": {
+          "kind": "wait"
+        },
+        "evidence": [
+          "public relay/cargo rule"
+        ],
+        "requires": [],
+        "maintains": []
+      },
+      {
+        "action": {
+          "kind": "charge-relay"
+        },
+        "evidence": [
+          "public relay/cargo rule"
+        ],
+        "requires": [],
+        "maintains": [
+          "carrier holds the support throughout cargo transfer"
+        ]
+      },
+      {
+        "action": {
+          "kind": "load-cargo"
+        },
+        "evidence": [
+          "public relay/cargo rule"
+        ],
+        "requires": [],
+        "maintains": [
+          "carrier holds the support throughout cargo transfer"
+        ]
+      },
+      {
+        "action": {
+          "kind": "deliver-cargo"
+        },
+        "evidence": [
+          "public relay/cargo rule"
+        ],
+        "requires": [],
+        "maintains": [
+          "carrier holds the support throughout cargo transfer"
+        ]
+      }
+    ],
+    "returns": [
+      {
+        "index": 0,
+        "action": {
+          "kind": "command",
+          "command": "ACTION1",
+          "receiver": "body-b",
+          "effectId": "p05:6de53197"
+        },
+        "observation": {
+          "ref": "e1:t1",
+          "epoch": "e1",
+          "tick": 1,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        }
+      },
+      {
+        "index": 1,
+        "action": {
+          "kind": "prepare-relay"
+        },
+        "observation": {
+          "ref": "e1:t2",
+          "epoch": "e1",
+          "tick": 2,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        }
+      },
+      {
+        "index": 2,
+        "action": {
+          "kind": "wait"
+        },
+        "observation": {
+          "ref": "e1:t3",
+          "epoch": "e1",
+          "tick": 3,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                0,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        }
+      },
+      {
+        "index": 3,
+        "action": {
+          "kind": "wait"
+        },
+        "observation": {
+          "ref": "e1:t4",
+          "epoch": "e1",
+          "tick": 4,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                -6,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        }
+      },
+      {
+        "index": 4,
+        "action": {
+          "kind": "charge-relay"
+        },
+        "observation": {
+          "ref": "e1:t5",
+          "epoch": "e1",
+          "tick": 5,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                -6,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        }
+      },
+      {
+        "index": 5,
+        "action": {
+          "kind": "load-cargo"
+        },
+        "observation": {
+          "ref": "e1:t6",
+          "epoch": "e1",
+          "tick": 6,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                -6,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        }
+      },
+      {
+        "index": 6,
+        "action": {
+          "kind": "deliver-cargo"
+        },
+        "observation": {
+          "ref": "e1:t7",
+          "epoch": "e1",
+          "tick": 7,
+          "selected": "body-b",
+          "subjects": [
+            {
+              "id": "body-b",
+              "position": [
+                -6,
+                0
+              ]
+            },
+            {
+              "id": "body-a",
+              "position": [
+                80,
+                37
+              ]
+            }
+          ],
+          "context": {
+            "terrain": "surface-a",
+            "supported": true,
+            "blocked": false,
+            "phase": 0
+          },
+          "reserve": 20,
+          "remote": 0
+        }
+      }
+    ],
+    "firstMismatch": null,
+    "native": {
+      "tested": 0,
+      "wins": 0
+    },
+    "physicalReplaySuccess": true,
+    "acquisitionVerdict": {
+      "valid": true,
+      "correctEffect": true,
+      "justified": true,
+      "reason": "effect-and-public-return-verified",
+      "matchedContextIds": [
+        "setting-0"
+      ],
+      "decisiveReturnId": "r10",
+      "commandReturnId": "r7",
+      "controlReturnId": "r5"
+    },
+    "acquisition": {
+      "effectKind": "translation",
+      "command": "ACTION1",
+      "receiver": "body-b",
+      "delta": [
+        -6,
+        0
+      ],
+      "delay": 3,
+      "resourceCost": 0,
+      "remoteDelta": 0,
+      "conditions": [
+        {
+          "field": "context.blocked",
+          "equals": false
+        },
+        {
+          "field": "context.phase",
+          "equals": 0
+        },
+        {
+          "field": "context.supported",
+          "equals": true
+        },
+        {
+          "field": "context.terrain",
+          "equals": "surface-a"
+        },
+        {
+          "field": "reserve",
+          "equals": 20
+        },
+        {
+          "field": "selected",
+          "equals": "body-b"
+        }
+      ],
+      "effectId": "p05:6de53197",
+      "supportingReturnIds": [
+        "r10",
+        "r5",
+        "r7",
+        "r2",
+        "r8",
+        "r3",
+        "r9",
+        "r4"
+      ],
+      "limitingReturnIds": [
+        "r22",
+        "r23",
+        "r24",
+        "r25",
+        "r37",
+        "r38",
+        "r39",
+        "r40"
+      ],
+      "status": "restricted"
+    },
+    "scene": {
+      "initial": {
+        "selected": "body-b",
+        "subjects": [
+          {
+            "id": "body-b",
+            "position": [
+              0,
+              0
+            ]
+          },
+          {
+            "id": "body-a",
+            "position": [
+              80,
+              37
+            ]
+          }
+        ],
+        "context": {
+          "terrain": "surface-a",
+          "supported": true,
+          "blocked": false,
+          "phase": 0
+        },
+        "reserve": 20,
+        "remote": 0,
+        "ref": "e1:t0",
+        "epoch": "e1",
+        "tick": 0
+      },
+      "support": {
+        "subjectId": "body-b",
+        "position": [
+          -6,
+          0
+        ]
+      },
+      "deliveryResourceCost": 0,
+      "budget": {
+        "commands": 16,
+        "states": 4096
+      }
+    },
+    "contextId": "setting-0"
+  },
+  "ablation": {
+    "decisiveReturnId": "r10",
+    "withheldSnapshotRef": "e2:t4",
+    "retainedAllActions": true,
+    "residualCopies": 0,
+    "targetEffectId": "p05:6de53197",
+    "targetRetained": false,
+    "remainingClaims": 1,
+    "oldClaimVerdictAfterWithdrawal": {
+      "valid": false,
+      "correctEffect": true,
+      "justified": false,
+      "reason": "no-complete-matched-public-measurement",
+      "matchedContextIds": [
+        "setting-0"
+      ]
+    },
+    "observedReacquisition": false,
+    "p09AfterWithdrawal": {
+      "success": false,
+      "planned": false
+    },
+    "p09WithoutOnlyCausalEvidence": {
+      "success": false,
+      "planned": false
+    },
+    "success": true
+  },
+  "id": "p05-4-36146e809c104a8e9509",
+  "publicSpec": {
+    "commands": [
+      "ACTION1",
+      "ACTION2"
+    ],
+    "contexts": [
+      {
+        "id": "setting-0",
+        "selected": "body-b",
+        "subjects": [
+          {
+            "id": "body-b",
+            "position": [
+              0,
+              0
+            ]
+          },
+          {
+            "id": "body-a",
+            "position": [
+              80,
+              37
+            ]
+          }
+        ],
+        "context": {
+          "terrain": "surface-a",
+          "supported": true,
+          "blocked": false,
+          "phase": 0
+        },
+        "reserve": 20,
+        "remote": 0
+      },
+      {
+        "id": "setting-1",
+        "selected": "body-b",
+        "subjects": [
+          {
+            "id": "body-b",
+            "position": [
+              0,
+              0
+            ]
+          },
+          {
+            "id": "body-a",
+            "position": [
+              80,
+              37
+            ]
+          }
+        ],
+        "context": {
+          "terrain": "surface-a",
+          "supported": true,
+          "blocked": false,
+          "phase": 1
+        },
+        "reserve": 20,
+        "remote": 0
+      },
+      {
+        "id": "setting-2",
+        "selected": "body-b",
+        "subjects": [
+          {
+            "id": "body-b",
+            "position": [
+              0,
+              0
+            ]
+          },
+          {
+            "id": "body-a",
+            "position": [
+              80,
+              37
+            ]
+          }
+        ],
+        "context": {
+          "terrain": "surface-a",
+          "supported": true,
+          "blocked": false,
+          "phase": 2
+        },
+        "reserve": 20,
+        "remote": 0
+      }
+    ],
+    "maxLatency": 3,
+    "commandBudget": 96,
+    "modelContract": {
+      "version": "finite-interventional-contexts-v1",
+      "deterministic": true,
+      "prepare": "Public, one gesture; resets the listed context, clock, actors and pending effects.",
+      "command": "One intervention per episode; its unknown bounded-latency effect has a selected or fixed receiver.",
+      "background": "Context-specific constant remote drift per tick; measured by time-matched WAIT controls.",
+      "scope": "Only the listed, measured public contexts; no claim of universal guard discovery.",
+      "resource": "A command spends its nonnegative cost when affordable; otherwise it has no causal effect.",
+      "observation": "Complete, noiseless public positions, selection, context, reserve and remote counter after each gesture.",
+      "excluded": [
+        "hidden persistent state between prepared episodes",
+        "unbounded latency",
+        "unobserved context discovery"
+      ]
+    },
+    "priorClaims": []
+  }
+}
