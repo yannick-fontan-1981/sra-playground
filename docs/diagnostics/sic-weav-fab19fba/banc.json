@@ -48,5 +48,8 @@
   },
   "archiveSHA256": "296ab30cfcd7770a6de00108082911e62aa4c6a24a9caf1729280b961f8e1c17",
   "nativeReceiptSHA256": "7689d18e0b7971bbf0b2418753ce1917f020ac45f0617297b772daa1f7de1d87",
-  "nativeReceiptWithoutQualificationSHA256": "8f90eea95a9163159fa280050398463a0ec1886826edcb9dabb68e0a5bfcb02e"
+  "nativeReceiptWithoutQualificationSHA256": "8f90eea95a9163159fa280050398463a0ec1886826edcb9dabb68e0a5bfcb02e",
+  "strict": false,
+  "operator": "8187e6ca",
+  "provenanceArchiveSHA256": "4ff5387ae89239aa856c3fa54c53c89969633fafd1d5dff430f4d28855c2f055"
 }
