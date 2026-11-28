@@ -1,0 +1,38 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "b8902646b6c968f78e5512f62d1d641b0bd20dd0",
+    "attendus": "6c0c3e90aed995a125b26115588dc3f9a2939310"
+  },
+  "nativePrefixes": 6,
+  "nominalTickets": 16,
+  "t3Reception": {
+    "frameIndex": 1,
+    "displacement": 1,
+    "closureModels": 2,
+    "status": "compatible_public_closure_models"
+  },
+  "t3Reduced": {
+    "status": "unexplained_or_boundary",
+    "frames": 8,
+    "next": [
+      "ACTION2",
+      {}
+    ]
+  },
+  "t3OfficialLevels": [
+    0,
+    0
+  ],
+  "t3Matched": [
+    null,
+    null
+  ],
+  "t6OnlyPremiseRefuted": true,
+  "t16RevalidatedEpoch": 2,
+  "tests": 74,
+  "author": "1ce9bd3f",
+  "rawSHA256": "d1c7b8c029fa68033a065d9d3f88358811bd0bf0ab7b183e64222fadb7fc7e5c",
+  "archiveSHA256": "2a0a8e5e23aacfd9dd77f8297390f4c0c4df004efe9b0f5db703dfe8f104b2d8"
+}
