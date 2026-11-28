@@ -1,0 +1,8 @@
+# POLA · présélection indépendante de la ligne 33
+
+Comparer le gel `d0e7527ca8033bd805a6d7a8bb021eff62e87021` et la révision de harnais annoncée `dfc144ce46139e887d0f48fff9ae3ac2d42d3c3d`. Catalogue natif depuis N1, budget communiqué de 16 gestes et 600 par niveau. Séparer le vrai parcours POLA et le témoin de contraste construit. [Critères auteur](https://github.com/yannick-fontan-1981/sra-playground/blob/0e24fac7/experiments/sic-agenda-offres/pola-33/ATTENDUS.md)
+
+- Sur le vrai T4, relever le porteur sélectionné, axe, pôles, but, offres et garde. Retirer la sélection attestée sans toucher au raster, puis retirer uniquement la direction géométrique nécessaire dans un autre départ. Comparer le premier choix et le retour.
+- Mesurer l’ordre des trames, le sens et l’amplitude d’une rotation si les trames sont comparables au même niveau. Rattacher le vecteur appris et sa portée aux références. Distinguer cette mesure du score officiel. Sur le même ticket, présenter un retour stationnaire construit restant au niveau antérieur.
+- En N2, comparer l’offre nominale, l’offre sans mesure portable et l’offre lorsque la mesure est de sens opposé dans le témoin de contraste. Garder sélection, géométrie et commandes constantes à l’entrée. Vérifier si la décision change, puis confronter le ticket joué au vrai retour disponible. Une prédiction sur tableau construit reste conditionnelle. Si le vrai jeu n’exécute pas cette variante de l’offre, ne pas lui attribuer un effet.
+- Exercer une permutation de deux offres strictement classées et contrôler que l’ordre de présentation ne change pas le choix. Rapporter les départs, gestes, premier écart, limites et délai indépendant.
