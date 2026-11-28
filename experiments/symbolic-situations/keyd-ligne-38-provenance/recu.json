@@ -1,0 +1,43 @@
+{
+  "stats": {
+    "versions": 2,
+    "départsParVersion": 5,
+    "gestesParVersion": 62,
+    "testsCorrectif": 4,
+    "substitutionsRefusées": 2,
+    "grandeurCatalogueKEYD": 16,
+    "grandeurCatalogueSKBN": 16
+  },
+  "vraiePaire": [
+    "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:8:frame:09c5f5e8a830079a",
+    "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:c6fcf7a0d5682e47"
+  ],
+  "comparisons": {
+    "preuveÉtrangère": {
+      "références": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:4b4b561ede6348df",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:8:frame:09c5f5e8a830079a"
+      ],
+      "nominal": "capacity_probe_candidate",
+      "correctif": "endpoint_approach_candidate",
+      "commandes": [
+        "ACTION4",
+        "ACTION2"
+      ],
+      "retour": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:10:frame:5038bcec904167ae"
+    },
+    "finÉtrangère": {
+      "références": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:8:frame:09c5f5e8a830079a",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:59df588664ddf890"
+      ],
+      "nominal": "capacity_probe_candidate",
+      "correctif": "endpoint_approach_candidate",
+      "commandes": [
+        "ACTION4",
+        "ACTION2"
+      ],
+      "retour": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:10:frame:5038bcec904167ae"
+    }
+  }
+}
