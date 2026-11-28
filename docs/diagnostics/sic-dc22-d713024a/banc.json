@@ -1,0 +1,145 @@
+{
+  "equalScenarios": 2,
+  "measuredT2": {
+    "kind": "unit_translation_and_support_observed",
+    "command": "ACTION2",
+    "delta": [
+      2,
+      0
+    ],
+    "after": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:f25be748551852b4"
+  },
+  "T9": {
+    "kind": "ticket",
+    "turn": 9,
+    "level": 1,
+    "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:9",
+    "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:4955d859be4a48b8",
+    "owner": "support_navigation",
+    "action": "ACTION6",
+    "point": {
+      "x": 48,
+      "y": 36
+    },
+    "positions": [
+      [
+        12,
+        38
+      ]
+    ],
+    "actor": [
+      12,
+      38,
+      13,
+      39
+    ],
+    "question": "45a3edb5f7784f19a01671750c1b4bdabac0e15d9a83e3e538f2b358abab013a",
+    "guard": "current_support_actor_and_epoch_bound",
+    "guards": []
+  },
+  "T9return": {
+    "kind": "return",
+    "turn": 9,
+    "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:10:frame:30110b33d3776302",
+    "matched": true,
+    "reason": "compare_observed_actor_with_conditional_support_prediction",
+    "owner": "support_navigation",
+    "levels": 0,
+    "acquired": [
+      {
+        "kind": "remote_support_effect_measured",
+        "effectRef": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:10:frame:30110b33d3776302",
+        "cells": 3,
+        "usefulness": "unconfirmed"
+      },
+      {
+        "kind": "contextual_control_question_closed",
+        "after": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:10:frame:30110b33d3776302",
+        "question": "45a3edb5f7784f19a01671750c1b4bdabac0e15d9a83e3e538f2b358abab013a"
+      }
+    ],
+    "surface": {
+      "start": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "next": [
+        9,
+        9,
+        9,
+        9
+      ]
+    },
+    "packet": "c99786b7ce164f3b7323979edb0b43f37945ad289d422c6bff2b58cb4fd05843"
+  },
+  "T11guards": [
+    {
+      "admitted": true,
+      "reason": "current_support_actor_and_epoch_bound",
+      "action": "ACTION1",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:11:frame:a0a7653e40456c1a",
+      "surface": {
+        "start": [
+          14,
+          14,
+          14,
+          14
+        ],
+        "next": [
+          9,
+          9,
+          9,
+          9
+        ]
+      }
+    },
+    {
+      "admitted": false,
+      "reason": "support_binding_changed",
+      "action": "ACTION1",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:11:frame:a0a7653e40456c1a",
+      "surface": {
+        "start": [
+          14,
+          14,
+          14,
+          14
+        ],
+        "next": [
+          4,
+          9,
+          9,
+          4
+        ]
+      }
+    }
+  ],
+  "T11return": {
+    "kind": "return",
+    "turn": 11,
+    "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:12:frame:990760b71c4045fd",
+    "matched": true,
+    "reason": "compare_observed_actor_with_conditional_support_prediction",
+    "owner": "support_navigation",
+    "levels": 0,
+    "acquired": [],
+    "surface": {
+      "start": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "next": [
+        14,
+        14,
+        14,
+        14
+      ]
+    },
+    "packet": "5734046d1d9cd042a4afaa5541f3b8c43d8021fd6b167b30b8255810005e4d91"
+  },
+  "archiveSHA256": "608943bfd8d3e98e321b1f8d597a670fc3cf2cfa1ee08ca29cf3e390ea16a439"
+}
