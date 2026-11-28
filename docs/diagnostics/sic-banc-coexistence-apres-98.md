@@ -21,3 +21,22 @@ $sha = '096bc103fa5ec1af6b141968d39566e20051496e'
 node scripts/sic-p05-shadow-native.mjs $a $b $sha "$out/p05"
 py -3.11 scripts/test-sic-pressure-composer-port.py $a $b $sha "$out/pressure" --one
 ```
+
+## 8d6e19d · activation explicite et pression
+
+Le moteur `8d6e19d5ef6e4ffc5b6ce647dfeebd17aaabfce8` porte les six blobs exacts du P05 actif `09b9a509` et les deux blobs exacts du composeur. Son arbre `src` est `9ffc440d90bc70574303dea88427081ce61aa1d0`. Par rapport à `096bc103`, les six fichiers du P05 sont les seuls chemins moteur modifiés. L'activation est transmise par une option explicite du runtime.
+
+| Témoin | Verdict sur 8d6e19d |
+|---|---|
+| AS66 · V6, quota local 1 | 16 commandes et 168 événements identiques à la référence. Deux choix et preuves concordants. |
+| G50T · SIC, quota local 1 | 16 commandes et 163 événements identiques à la référence. Six choix et preuves concordants. |
+| G50T · SIC, quota local 0 | Au N1/T1, premier écart à l'événement 2 sur `/value/family`. `sic_public_input_exploration` remplace `sic_verify_remote_replay` avec sa propre garde et son propre motif de retour. ACTION1 et le paquet physique concordent. |
+| SS05 · reprise après passage puis fermeture | 32 commandes et gain N1. Même suite de projections. La preuve de fermeture retirée et la projection contredite donnent les mêmes refus ciblés. |
+
+[Activation qualifiée isolément](sic-banc-p05-actif-09b9a509.md)
+
+```powershell
+$sha = '8d6e19d5ef6e4ffc5b6ce647dfeebd17aaabfce8'
+node scripts/sic-p05-shadow-native.mjs $a $b $sha "$out/p05-actif" --active
+py -3.11 scripts/test-sic-pressure-composer-port.py $a $b $sha "$out/pressure-actif" --one
+```
