@@ -1,0 +1,38 @@
+{
+  "stats": {
+    "versions": 2,
+    "départsParVersion": 10,
+    "gestesParVersion": 133,
+    "catalogueRecapturé": 18,
+    "catalogueTotalDocumenté": 31,
+    "testsParVersion": [
+      8,
+      8
+    ]
+  },
+  "SKBN": {
+    "tours": [
+      14,
+      16
+    ],
+    "preuve": "arrivée du corps et changement étranger",
+    "accèsAcquis": 0
+  },
+  "KEYD": {
+    "tours": 16,
+    "acquis": {
+      "status": "local_access_return",
+      "evidence": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:8:frame:09c5f5e8a830079a",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:c6fcf7a0d5682e47"
+      ],
+      "objective": "G_official_completion"
+    },
+    "utilisations": 8,
+    "provenanceAltéréeAdmise": [
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:4b4b561ede6348df",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:8:frame:09c5f5e8a830079a"
+    ],
+    "aprèsRetrait": "endpoint_approach_candidate"
+  }
+}
