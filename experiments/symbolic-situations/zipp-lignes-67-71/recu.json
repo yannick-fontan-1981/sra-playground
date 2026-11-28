@@ -1,0 +1,37 @@
+{
+  "stats": [
+    {
+      "sha": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "départs": 6,
+      "gestes": 53,
+      "testsAuteur": 4
+    },
+    {
+      "sha": "421dc6a58d051e8e418db80a98cf1e01755dab40",
+      "départs": 6,
+      "gestes": 53,
+      "testsAuteur": 4
+    }
+  ],
+  "moteur": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "ligne67": {
+    "occurrencesZIPP": 8,
+    "préfixe": [
+      1,
+      1,
+      6
+    ],
+    "aprèsRetrait": [
+      1,
+      5
+    ],
+    "scoreT8": 1
+  },
+  "ligne71": {
+    "occurrencesZIPP": 1,
+    "pixelsT14": 0,
+    "projection": null,
+    "contourAltéré": "no_admissible_prefix",
+    "décisionT15": "acquire_control_for_target"
+  }
+}
