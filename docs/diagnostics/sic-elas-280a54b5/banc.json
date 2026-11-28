@@ -1,0 +1,102 @@
+{
+  "equalScenarios": 2,
+  "firstSelections": [
+    {
+      "kind": "ticket",
+      "turn": 1,
+      "level": 1,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:1",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:56f3647e10bd9638",
+      "owner": "metric_composition",
+      "action": "ACTION6",
+      "point": {
+        "x": 28,
+        "y": 25
+      },
+      "scale": [
+        2,
+        1
+      ],
+      "anchor": [
+        14,
+        10
+      ],
+      "target": "55c1f80d486bea58d5490b54cd5462e8351d685469ab0fb37af7340539e56f70",
+      "grid": "dd515aad9e866d30660b9543db87d921c85d2c9740d96d907bfc7f4bc18c4362",
+      "control": false,
+      "receiver": "visible:24",
+      "destination": null,
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:56f3647e10bd9638"
+      ],
+      "guard": "metric_target_selection_and_visible_support_bound",
+      "guards": [
+        {
+          "index": 0,
+          "selected": null,
+          "admitted": true,
+          "reason": "metric_target_selection_and_visible_support_bound"
+        }
+      ]
+    },
+    {
+      "kind": "ticket",
+      "turn": 3,
+      "level": 2,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:3",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:3:frame:1eff9bccdfe26892",
+      "owner": "metric_composition",
+      "action": "ACTION6",
+      "point": {
+        "x": 19,
+        "y": 28
+      },
+      "scale": [
+        3,
+        1
+      ],
+      "anchor": [
+        8,
+        6
+      ],
+      "target": "70b2047411e1ab5bd78fc8bc30194548631db894c4ac78c2b9af5b97db7d52f1",
+      "grid": "f000c415327e2ead9f55c499001ed577cd2e236aa71847e4c74e3270dcaa2d04",
+      "control": false,
+      "receiver": "visible:30",
+      "destination": null,
+      "refs": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:3:frame:1eff9bccdfe26892",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:1afffd958a743318"
+      ],
+      "guard": "metric_target_selection_and_visible_support_bound",
+      "guards": []
+    }
+  ],
+  "T5Physical": {
+    "kind": "metric_control_response",
+    "after": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:6:frame:6aea4a621403d35e",
+    "projected": true,
+    "unknown": false
+  },
+  "T5Sealed": true,
+  "T5target": "07a40505004cb2b52e8e6db17977c1d6890fe6720d9e6331c55710d63ebcd73a",
+  "sameActionAlternateReceiver": [
+    {
+      "index": 1,
+      "selected": 24,
+      "admitted": true,
+      "reason": "metric_target_selection_and_visible_support_bound"
+    },
+    {
+      "index": 1,
+      "selected": 8,
+      "admitted": false,
+      "reason": "metric_premise_changed"
+    }
+  ],
+  "officialTurns": [
+    2,
+    11
+  ],
+  "archiveSHA256": "be2e4d213214aaee81ad4e9f10124c17b52b4d0e1a7cad8d5a9966ee8858e13c"
+}
