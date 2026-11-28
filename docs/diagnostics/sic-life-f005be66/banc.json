@@ -1,0 +1,396 @@
+{
+  "archiveSHA256": "0cfb3e0c5c82374f9e3c82b78cd5cce86acc033304036dde8d2df37109252f45",
+  "revisions": [
+    {
+      "source": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+      "passed": 6
+    },
+    {
+      "source": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+      "passed": 6
+    },
+    {
+      "source": "f005be662b0e4b556a0cea3d246381cd98eec7ae",
+      "passed": 10
+    }
+  ],
+  "occurrences": {
+    "2": [
+      1,
+      16
+    ],
+    "68": [
+      2,
+      3,
+      4,
+      9,
+      10,
+      11
+    ],
+    "69": [
+      5,
+      6,
+      7,
+      8,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  "substitutions": {
+    "2": [
+      {
+        "kind": "ticket",
+        "turn": 2,
+        "level": 1,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:9cf0321c97cd4ec7",
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:2",
+        "owner": "public_occurrence_recall",
+        "entry": "typed_material_flow",
+        "offer": "typed_carrier_experiment",
+        "action": "ACTION6",
+        "point": {
+          "x": 23,
+          "y": 48
+        },
+        "guard": true,
+        "evidence": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:9cf0321c97cd4ec7"
+        ],
+        "subjects": [
+          [
+            6,
+            48
+          ],
+          [
+            23,
+            48
+          ],
+          [
+            41,
+            48
+          ],
+          [
+            58,
+            48
+          ]
+        ]
+      },
+      {
+        "kind": "return",
+        "turn": 2,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:adf09e322c5b57e5",
+        "owner": "public_occurrence_recall",
+        "matched": null,
+        "reason": "uncharacterized_carrier_response",
+        "acquired": [
+          {
+            "kind": "typed_carrier_response",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:9cf0321c97cd4ec7",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:adf09e322c5b57e5"
+            ],
+            "changed": 29,
+            "context": "local_marking"
+          },
+          {
+            "kind": "typed_pose_scope",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:9cf0321c97cd4ec7"
+            ]
+          }
+        ],
+        "frames": 2
+      },
+      {
+        "kind": "ticket",
+        "turn": 3,
+        "level": 1,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:adf09e322c5b57e5",
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:3",
+        "owner": "public_occurrence_recall",
+        "entry": "typed_material_flow",
+        "offer": "typed_carrier_experiment",
+        "action": "ACTION6",
+        "point": {
+          "x": 58,
+          "y": 48
+        },
+        "guard": true,
+        "evidence": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:adf09e322c5b57e5",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:9cf0321c97cd4ec7",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:adf09e322c5b57e5"
+        ],
+        "subjects": [
+          [
+            6,
+            48
+          ],
+          [
+            23,
+            48
+          ],
+          [
+            41,
+            48
+          ],
+          [
+            58,
+            48
+          ]
+        ],
+        "selected": [
+          23,
+          48
+        ]
+      },
+      {
+        "kind": "return",
+        "turn": 3,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:b128f741455fb91e",
+        "owner": "public_occurrence_recall",
+        "matched": null,
+        "reason": "uncharacterized_carrier_response",
+        "acquired": [
+          {
+            "kind": "typed_carrier_response",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:adf09e322c5b57e5",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:b128f741455fb91e"
+            ],
+            "changed": 232,
+            "context": "produced_support"
+          }
+        ],
+        "frames": 7
+      },
+      {
+        "kind": "ticket",
+        "turn": 4,
+        "level": 1,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:b128f741455fb91e",
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:4",
+        "owner": "public_occurrence_recall",
+        "entry": "typed_material_flow",
+        "offer": "typed_carrier_experiment",
+        "action": "ACTION6",
+        "point": {
+          "x": 48,
+          "y": 34
+        },
+        "guard": true,
+        "evidence": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:b128f741455fb91e",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:adf09e322c5b57e5",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:b128f741455fb91e"
+        ],
+        "subjects": [
+          [
+            6,
+            48
+          ],
+          [
+            41,
+            48
+          ]
+        ],
+        "selected": [
+          48,
+          34
+        ]
+      }
+    ],
+    "5": [
+      {
+        "kind": "ticket",
+        "turn": 5,
+        "level": 1,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:688f1dc8e8401919",
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:5",
+        "owner": "public_occurrence_recall",
+        "entry": "typed_material_flow",
+        "offer": "typed_material_flow",
+        "action": "ACTION6",
+        "point": {
+          "x": 19,
+          "y": 21
+        },
+        "guard": true,
+        "evidence": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:688f1dc8e8401919",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:688f1dc8e8401919"
+        ],
+        "child": "0d3279fcc3641fcb483ab676b860ae6279f1cf2e0decf7b18f92ab868fa38cee",
+        "childSource": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:688f1dc8e8401919",
+        "target": [
+          53,
+          3,
+          61,
+          11
+        ],
+        "mode": "select"
+      },
+      {
+        "kind": "return",
+        "turn": 5,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:07435b43433effa1",
+        "owner": "public_occurrence_recall",
+        "matched": null,
+        "reason": "material_flow_response_requires_reconciliation",
+        "acquired": [
+          {
+            "kind": "typed_material_flow",
+            "effect": "local_child_marking",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:688f1dc8e8401919",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:07435b43433effa1"
+            ]
+          }
+        ],
+        "frames": 2
+      },
+      {
+        "kind": "ticket",
+        "turn": 6,
+        "level": 1,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:07435b43433effa1",
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:6",
+        "owner": "public_occurrence_recall",
+        "entry": "typed_material_flow",
+        "offer": "typed_material_flow",
+        "action": "ACTION6",
+        "point": {
+          "x": 56,
+          "y": 7
+        },
+        "guard": true,
+        "evidence": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:07435b43433effa1",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:688f1dc8e8401919"
+        ],
+        "child": "0d3279fcc3641fcb483ab676b860ae6279f1cf2e0decf7b18f92ab868fa38cee",
+        "childSource": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:688f1dc8e8401919",
+        "target": [
+          53,
+          3,
+          61,
+          11
+        ],
+        "mode": "deliver"
+      },
+      {
+        "kind": "return",
+        "turn": 6,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:809c215a87e2c6bf",
+        "owner": "public_occurrence_recall",
+        "matched": null,
+        "reason": "material_flow_response_requires_reconciliation",
+        "acquired": [
+          {
+            "kind": "typed_material_flow",
+            "effect": "material_consumed_and_request_changed",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:07435b43433effa1",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:809c215a87e2c6bf"
+            ],
+            "model": {
+              "core_signature": "20403372c5db7ef02d9c76f8d94b8d3c786fb96a3d4009a920521fcfd71f203f",
+              "descriptor": {
+                "palette": 12,
+                "width": 3,
+                "height": 3,
+                "mask": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    0,
+                    2
+                  ],
+                  [
+                    1,
+                    0
+                  ],
+                  [
+                    1,
+                    2
+                  ],
+                  [
+                    2,
+                    0
+                  ],
+                  [
+                    2,
+                    1
+                  ],
+                  [
+                    2,
+                    2
+                  ]
+                ]
+              },
+              "acquired_epoch": 1,
+              "validated_epoch": 1,
+              "evidence": [
+                "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:07435b43433effa1",
+                "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:809c215a87e2c6bf"
+              ],
+              "source_ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:07435b43433effa1",
+              "last_validation_ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:07435b43433effa1",
+              "status": "conditional_material_to_request_association"
+            }
+          },
+          {
+            "kind": "typed_pose_model",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:07435b43433effa1",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:809c215a87e2c6bf"
+            ]
+          }
+        ],
+        "frames": 4
+      },
+      {
+        "kind": "ticket",
+        "turn": 7,
+        "level": 1,
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:809c215a87e2c6bf",
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:7",
+        "owner": "public_occurrence_recall",
+        "entry": "typed_material_flow",
+        "offer": "typed_material_flow",
+        "action": "ACTION6",
+        "point": {
+          "x": 12,
+          "y": 21
+        },
+        "guard": true,
+        "evidence": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:809c215a87e2c6bf",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:688f1dc8e8401919"
+        ],
+        "child": "668e7bafc159495223431a5496e8960da055559f6bcc4bafe11be71627359aa8",
+        "childSource": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:688f1dc8e8401919",
+        "target": [
+          20,
+          3,
+          28,
+          11
+        ],
+        "mode": "select"
+      }
+    ]
+  },
+  "start": "2026-11-28T00:32:29.682027+00:00",
+  "lastCapture": "2026-11-28T00:35:28.407374+00:00",
+  "verdictUTC": "2026-11-28T00:36:29.480021+00:00",
+  "elapsedToVerdictSeconds": 240,
+  "comparison": "Six scénarios communs identiques. Quatre contrôles propres à la branche."
+}
