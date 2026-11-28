@@ -66,7 +66,17 @@ export class FixedOrigin implements NativeFamily<any>{
   }return{status:'fixed_origin_observed',events:this.events};
  }
  async propose(obs:R,rows:NativeRows,inputs:readonly any[],remaining:number):Promise<any>{
-  if(!this.policy.enabled||remaining<=0)return null;if(this.executions.length){const access=await this.originOffer(obs,rows,inputs,remaining);if(access)return access;}if(!this.pending)return null;const p=this.pending;if(p.ref!==obs.observation_ref||p.frame!==obs.frame_hash)return null;const actions=inputs.filter(a=>!truth(a.data)&&this.inert.has(a.action_ref));if(actions.length!==1)return null;const command=actions[0],question=digest([obs.level_epoch,'program_response_after_placement',{layout:p.layout,node:p.node},command]);if(this.questions.attempted.has(question))return null;
+  if(!this.policy.enabled||remaining<=0)return null;
+  if(this.executions.length){const access=await this.originOffer(obs,rows,inputs,remaining);if(access)return access;}
+  return this.dependencyOffer(obs,inputs);
+ }
+ dependencyOffer(obs:R,inputs:readonly any[]):R|null {
+  const p=this.pending;
+  if(!p||p.ref!==obs.observation_ref||p.frame!==obs.frame_hash)return null;
+  const actions=inputs.filter(a=>!truth(a.data)&&this.inert.has(a.action_ref));
+  if(actions.length!==1)return null;
+  const command=actions[0],question=digest([obs.level_epoch,'program_response_after_placement',{layout:p.layout,node:p.node},command]);
+  if(this.questions.attempted.has(question))return null;
   const plan={fixed_origin:true,question_key:question,layout:p.layout,frame_hash:obs.frame_hash,actor_color:this.actor_color,placement:p.placement},ref='C_fixed_origin_'+question.slice(0,16),why='A point intervention changed one repeated node while preserving the displayed word. Re-test the previously inert non-point input once in this current context; its response is unknown.',facts={current_placement_observed:true,word_geometry_unchanged:true,input_previously_inert:true,control_after_placement_unknown:true},evidence=p.evidence;
   return this.package(obs,'fixed_origin_dependency',plan,[command],[{action:command,expected_before:{frame_hash:obs.frame_hash},expected_after:{status:'unknown'}}],facts,ref,why,evidence,{parent_method:'fixed program origin applicability'});
  }
