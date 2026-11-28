@@ -148,9 +148,29 @@ function motif(pixels: number[], mask: number[], markedFloor?: number) {
   return {ink, floor, marker:accent<0?null:mask[accent]!};
 }
 
+function gatePigments(rows: NativeRows, pitch: number, phase: Point, floor: number) {
+  const gates: { frame: number; accent: number }[] = [];
+  for (let y = phase[1]; y + pitch <= rows.length; y += pitch) for (let x = phase[0]; x + pitch <= rows[0]!.length; x += pitch) {
+    const pixels = readTile(rows, x, y, pitch), gate = gateMark(pixels, pitch, floor);
+    if (gate && !gates.some(mark => mark.frame === pixels[0] && mark.accent === gate.accent))
+      gates.push({ frame: pixels[0]!, accent: gate.accent });
+  }
+  return gates;
+}
+
+function occupiedControl(pixels: number[], mask: number[], pitch: number, floor: number,
+  gates: readonly { frame: number; accent: number }[]) {
+  const corners = [0, pitch - 1, pixels.length - pitch, pixels.length - 1];
+  if (corners.some(index => mask.includes(index))
+    || pixels.some((ink, index) => !mask.includes(index) && !corners.includes(index) && ink !== floor)) return;
+  const pigments = corners.map(index => pixels[index]);
+  return gates.find(({ frame, accent }) => pigments.filter(ink => ink === frame).length === 3 && pigments.includes(accent));
+}
+
 function spotPair(o: NativeObservation, rows: NativeRows): Shape | undefined {
   if (!o.available_action_refs.includes('ACTION6') || o.available_action_refs.length<5) return;
   const proposals = new Map<string, Shape>();
+  const layered = new Map<string, Shape>();
   for (const part of o.entities) {
     const [x,y,right,bottom] = part.bbox, pitch = right-x+1;
     if (part.rectangular || pitch<3 || pitch>7 || pitch%2===0 || pitch!==bottom-y+1 || part.area<pitch+1) continue;
@@ -159,7 +179,24 @@ function spotPair(o: NativeObservation, rows: NativeRows): Shape | undefined {
     if (mask.length!==part.area || mask.length>=pixels.length-2
       || mask.some(index => !mask.includes(pixels.length-1-index))) continue;
     const anchor = motif(pixels,mask);
-    if (!anchor || anchor.marker!==null) continue;
+    if (!anchor) {
+      const phase: Point = [x % pitch, y % pitch];
+      const peerCandidates: NonNullable<ReturnType<typeof motif>>[] = [];
+      for (let v = phase[1]; v + pitch <= rows.length; v += pitch) for (let u = phase[0]; u + pitch <= rows[0]!.length; u += pitch) {
+        const peer = motif(readTile(rows, u, v, pitch), mask);
+        if (!peer || peer.marker === null || peer.ink === part.palette_value) continue;
+        const middle = (pitch - 1) / 2;
+        if ((peer.marker % pitch === middle) !== (Math.floor(peer.marker / pitch) === middle)) peerCandidates.push(peer);
+      }
+      if (peerCandidates.length !== 1) continue;
+      const peer = peerCandidates[0]!;
+      const body = motif(pixels, mask, peer.floor);
+      if (!body || body.marker !== null || !occupiedControl(pixels, mask, pitch, peer.floor, gatePigments(rows, pitch, phase, peer.floor))) continue;
+      const inks = [body.ink, peer.ink].sort((a, b) => a - b);
+      layered.set(JSON.stringify([pitch, phase, mask, inks]), { pitch, phase, mask, inks, floor: peer.floor, backing: backingColor(rows) });
+      continue;
+    }
+    if (anchor.marker!==null) continue;
     const phase: Point = [x%pitch,y%pitch], peers: number[] = [];
     let anchors = 0;
     for(let v=phase[1];v+pitch<=rows.length;v+=pitch) for(let u=phase[0];u+pitch<=rows[0]!.length;u+=pitch) {
@@ -176,6 +213,7 @@ function spotPair(o: NativeObservation, rows: NativeRows): Shape | undefined {
     const backing = backingColor(rows);
     proposals.set(JSON.stringify([pitch,phase,mask,inks]),{pitch,phase,mask,inks,floor:anchor.floor,backing});
   }
+  if (layered.size) return layered.size === 1 ? layered.values().next().value : undefined;
   return proposals.size===1 ? proposals.values().next().value : undefined;
 }
 
@@ -236,10 +274,15 @@ function decode(rows: NativeRows, shape: Shape, history: History): Scene | null 
   const solidColors = new Map<number,Cell[]>();
   const mid = Math.floor(pitch*pitch/2);
   const pressureCorners=[0,pitch-1,pitch*(pitch-1),pitch*pitch-1];
+  let pigments: ReturnType<typeof gatePigments> | undefined;
   for(let y=phase[1];y+pitch<=rows.length;y+=pitch) for(let x=phase[0];x+pitch<=rows[0]!.length;x+=pitch){
     const cell = key([(x-phase[0])/pitch,(y-phase[1])/pitch]), pixels=readTile(rows,x,y,pitch);
     const marked=history.plates.includes(cell)||history.supports[cell]||history.platformField?.bindings[encode(cell)]||history.hydraulic?.bindings[encode(cell)];
-    const body=motif(pixels,mask,marked?floor:undefined);
+    const ordinaryBody=motif(pixels,mask,marked?floor:undefined);
+    const candidate = !ordinaryBody ? motif(pixels, mask, floor) : null;
+    const control = candidate && inks.includes(candidate.ink)
+      ? occupiedControl(pixels, mask, pitch, floor, pigments ??= gatePigments(rows, pitch, phase, floor)) : undefined;
+    const body = ordinaryBody ?? (control ? candidate : null);
     const uniform=pixels.every(value=>value===pixels[0]);
     if(body && inks.includes(body.ink)) actors.push({ink:body.ink,cell,marker:body.marker});
     const edge = pixels.filter((_,i)=>i%pitch===0 || i%pitch===pitch-1 || i<pitch || i>=pitch*(pitch-1));
@@ -260,7 +303,8 @@ function decode(rows: NativeRows, shape: Shape, history: History): Scene | null 
     const preview=overlay||gateProjection||!!(body && !inks.includes(body.ink) && body.marker===null && (body.floor===floor||history.goals.includes(cell)));
     const gate=gateMark(pixels,pitch,floor);
     tiles.set(cell,{pixels,uniform,
-      passable:gate?gate.open:onBoard>=Math.ceil(pixels.length/2)||preview||plate,object,plate,mirror,preview,gate,plateAccent:plate?pixels[mid]!:null});
+      passable:gate?gate.open:onBoard>=Math.ceil(pixels.length/2)||preview||plate||!!control,object,plate,mirror,preview,gate,
+      plateAccent:control?.accent??(plate?pixels[mid]!:null)});
     const outline = edge.every(value => value===edge[0]) && edge[0]!==floor && pixels[mid]===floor;
     if ((uniform||outline) && pixels[0]!==floor && pixels[0]!==shape.backing) {
       const list = solidColors.get(pixels[0]!) ?? [];

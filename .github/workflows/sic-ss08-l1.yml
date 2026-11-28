@@ -1,0 +1,73 @@
+name: SIC SS08 L1 covered-control comparison
+
+on:
+  push:
+    branches: [experiment/sic-ss08-l1-grounded-relay]
+    paths: [.github/workflows/sic-ss08-l1.yml, src/sic/observed-actor-composition.ts]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  replay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        arm: [frozen, candidate]
+    env:
+      ARM: ${{ matrix.arm }}
+      REVISION: ${{ matrix.arm == 'frozen' && '552e1c62aca9ec620365ac73449ededc33ae582b' || github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.REVISION }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Replay exactly SS08 L1 in strict SIC mode
+        shell: bash
+        run: |
+          test "$(git rev-parse HEAD)" = "$REVISION"
+          mkdir replay
+          node scripts/check-sic-chronological.mjs SS08 1 replay/receipt.jsonl 1 sic
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import { readFileSync, writeFileSync } from 'node:fs';
+          const receipt = JSON.parse(readFileSync('replay/receipt.jsonl', 'utf8').trim());
+          const { code, target, mode, parallelWorkers, levels, actions, authority, effects } = receipt;
+          assert.deepEqual([code, target, mode, parallelWorkers], ['SS08', 1, 'sic', 1]);
+          assert.equal(authority, actions);
+          assert.equal(effects.length, actions);
+          assert.equal(Math.max(...effects.map(effect => effect[5])), levels);
+          const { budget, prefixHash } = receipt.levelStats[0];
+          assert.equal(budget.actions, 80);
+          assert.equal(budget.activeTimeMs, 90_000);
+          assert.equal(levels, Number(process.env.ARM === 'candidate'));
+          const selections = effects.flatMap((effect, index) => effect[0] === 6 ? [index + 1] : []);
+          if (process.env.ARM === 'candidate') assert.ok(selections.length >= 2);
+          const result = { arm: process.env.ARM, revision: process.env.REVISION, levels, actions, authority,
+            budget, prefixHash, selections };
+          writeFileSync('replay/summary.json', JSON.stringify(result, null, 2) + '\n');
+          console.log(result);
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sic-ss08-l1-${{ matrix.arm }}
+          path: replay/
+
+  contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node --test tests/sic-observed-actor-composition.test.ts

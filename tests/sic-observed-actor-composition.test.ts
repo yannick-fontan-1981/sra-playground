@@ -3,6 +3,9 @@ import test from 'node:test';
 import { measureNativeObservation, publicFrameHash, v6Canonical } from '../src/logos-engine/v6-native-observer.ts';
 import { createSs06Backend } from '../src/games/sinking-star-ss06.ts';
 import { createSs07Backend } from '../src/games/sinking-star-ss07.ts';
+import { createSs08Backend } from '../src/games/sinking-star-ss08.ts';
+import { cellToPixel, compileLevel } from '../experiments/sinking-star-ss08/src/core.ts';
+import { SS08_LEVELS } from '../experiments/sinking-star-ss08/src/levels.ts';
 import { createObservedActorComposition } from '../src/sic/observed-actor-composition.ts';
 import { relayGateClosed } from '../src/sic/observed-relay-plan.ts';
 import { sicObservedMotionCycle, sicObservedUnplannedMaterialLoss } from '../src/logos-engine/v6-native-types.ts';
@@ -10,6 +13,35 @@ import { sicObservedMotionCycle, sicObservedUnplannedMaterialLoss } from '../src
 type Point = readonly [number, number];
 const same = (a: Point,b: Point) => a[0]===b[0] && a[1]===b[1];
 const add = (a: Point,b: Point): Point => [a[0]+b[0],a[1]+b[1]];
+
+test('a covered control keeps the real companion distinct from reflection previews', async () => {
+  const board = createSs08Backend().dispatch({ type: 'load', code: 'SS08', level: 1 });
+  const gate = cellToPixel(compileLevel(SS08_LEVELS[0]!).gates[0]!.at);
+  for (const offset of [0, 5, 11]) {
+    const palette = (ink: number) => (ink + offset) % 16;
+    const run = async (rows: number[][]) => {
+      const family = createObservedActorComposition();
+      const observation = await measureNativeObservation({ frame_rows: rows, frame_hash: await publicFrameHash(rows),
+        level: 1, levels_completed: 0, state: 'NOT_FINISHED',
+        available_action_refs: board.availableActionIds.map(id => 'ACTION' + id) }, 0, 'covered-control');
+      await family.propose(observation, rows, [], 80);
+      return family.state();
+    };
+    const rows = board.frame.map(row => row.map(palette));
+    const recognized = await run(rows);
+    assert.deepEqual(recognized.shape?.inks, [palette(12), palette(15)].sort((a, b) => a - b));
+    assert.equal(recognized.plates.length, 1);
+
+    // Remove only the matching tint on the gate, leaving the two bodies intact.
+    const altered = rows.map(row => [...row]);
+    for (let y = gate.y; y < gate.y + 3; y++) for (let x = gate.x; x < gate.x + 3; x++) {
+      if (altered[y]![x] === palette(0)) altered[y]![x] = palette(6);
+    }
+    assert.notDeepEqual(altered, rows);
+    const unbound = await run(altered);
+    assert.ok(!unbound.shape?.inks.includes(palette(15)));
+  }
+});
 
 function habitat(pitch: number, inks: readonly number[], commands: readonly [string,Point][],
   secondary: 'withdrawal' | 'activation', options: { rejectSelection?: boolean; duplicatePeer?: boolean; level?: number; offset?: Point; hideGoals?: boolean; pressure?: Point; loadPositions?: readonly Point[]; idleSolo?:boolean; destinationGroups?:readonly (readonly Point[])[];
