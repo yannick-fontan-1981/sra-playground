@@ -1,0 +1,15 @@
+{
+  "freeze": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "proof": "a2bd031cff2fb2ce7c919b2213f0ba5a8b75a36a",
+  "criteria": "df2f4813",
+  "testsPerSHA": 3,
+  "nominalTickets": 8,
+  "firstContrastAt": 2,
+  "visibleLandingPixelsMasked": 8,
+  "retained": {
+    "x": 30,
+    "y": 19
+  },
+  "withdrawn": "ACTION1",
+  "archiveSHA256": "0bd9d496be41193d32507f31927a3b2df9f92c64f7cc502437caa22596c029d6"
+}
