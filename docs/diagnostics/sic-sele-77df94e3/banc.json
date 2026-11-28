@@ -1,0 +1,33 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "77df94e33aa8bae8ecc7f81c8b57e062943dffa6",
+    "attendus": "421e12dcf22b40ed3b8b6f1b5ab704abe16931a8"
+  },
+  "prefixes": 7,
+  "nominalTickets": 16,
+  "firstAcquiredFront": [
+    8,
+    13
+  ],
+  "secondContext": {
+    "turn": 18,
+    "orderedFronts": [
+      [
+        5,
+        9
+      ],
+      [
+        12,
+        15
+      ]
+    ],
+    "levelsWithFinalFrameOnly": 2
+  },
+  "tests": 59,
+  "author": "22f992a1",
+  "operator": "12f289c1",
+  "rawSHA256": "ea39fe0d6b934e089cd6402ebe409a1d5b55b7f04161ada7031e14834ed9f175",
+  "archiveSHA256": "4ac1a7a5c7339f7f5cd7fe51691a647268f6e27edfac2d5969d0df9c14872fab"
+}
