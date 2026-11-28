@@ -21,6 +21,10 @@ L’observation des bornes crée un voisinage visuel absent de l’animation com
 
 Les 84 gestes de la reprise reproduisent intégralement les premiers reçus sur leurs champs communs. Après le clic de repli au T4, le service examine 28 placements au T5 et retrouve l’origine 10. Le plateau nominal du T4 en admettait 29 à examiner. Le vérificateur contrôle les deux dénominateurs. Le délai de la présélection au verdict vérifié est de 10 min 46 s, attente du candidat et qualification LIFE comprises.
 
+### Rattachement du vérificateur de l’auteur
+
+Le moteur candidat éprouvé dans ce bilan reste `48aae7fc05ed8d8409b1aa3a05efa4fa9c65c06d`. La révision `787fee9746815121a133704e2c1554f096e09834` déplace l’initialisation de deux comparateurs avant le lancement du vérificateur agrégé de l’auteur. Le diff Git porte uniquement sur ce vérificateur. L’arbre `src` est identique (`07d3a71b`), comme le fichier de l’opérateur (`ea0debe6`). Le vérificateur indépendant de ce dossier a été relancé sur les reçus conservés et reproduit exactement le JSON publié pour les neuf départs et 42 gestes par SHA. L’agrégat des 21 préfixes de l’auteur relève du vérificateur corrigé. [Diff de correction](https://github.com/yannick-fontan-1981/sra-playground/compare/48aae7fc...787fee97)
+
 ### Rejeu
 
 Depuis ce dossier, sous Node 24, utiliser un dossier de reçus neuf. `$pyodide` est le chemin absolu vers `public/vendor/pyodide` du Banc. `$candidat` est le checkout propre de `48aae7fc05ed8d8409b1aa3a05efa4fa9c65c06d`. Le fichier de sélection est conservé chez l’opérateur.
