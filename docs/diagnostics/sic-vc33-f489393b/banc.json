@@ -1,0 +1,295 @@
+{
+  "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+  "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "candidat": "f489393bb15a1ce775a3904ee97a216d40db026f",
+  "sessionOrder": [
+    "nominal",
+    "alternate",
+    "withdrawn",
+    "invalid_index",
+    "stationary",
+    "marker_removed"
+  ],
+  "commonIndices": [
+    0,
+    4,
+    5
+  ],
+  "commonTracesEqual": true,
+  "steps": 16,
+  "levelsObserved": [
+    1,
+    2,
+    3
+  ],
+  "globalBudget": 16,
+  "capPerLevel": 600,
+  "nominal": [
+    {
+      "kind": "ticket",
+      "turn": 1,
+      "level": 1,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:1",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:fdde551e3fd269f6",
+      "family": "band_transfer",
+      "offer": "aligned_band_transfers",
+      "action": "ACTION6",
+      "data": {
+        "x": 61,
+        "y": 25
+      },
+      "index": 0,
+      "expected": null,
+      "quantities": [
+        32,
+        12
+      ],
+      "signed": null,
+      "target": [
+        [
+          1,
+          24
+        ]
+      ],
+      "axis": 0,
+      "quantum": 4,
+      "evidence": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:fdde551e3fd269f6"
+      ],
+      "admitted": true,
+      "guard": "bind_current_band_lengths_and_local_actuator"
+    },
+    {
+      "kind": "return",
+      "turn": 1,
+      "reason": "compare_measured_band_vector",
+      "matched": null,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:24cea280160201f2",
+      "frames": 1,
+      "acquired": [
+        {
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:24cea280160201f2",
+          "before": [
+            32,
+            12
+          ],
+          "after": [
+            36,
+            8
+          ],
+          "control": 0,
+          "signed": "into_clicked",
+          "status": "observed_band_response"
+        }
+      ]
+    },
+    {
+      "kind": "ticket",
+      "turn": 2,
+      "level": 1,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:2",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:24cea280160201f2",
+      "family": "band_transfer",
+      "offer": "aligned_band_transfers",
+      "action": "ACTION6",
+      "data": {
+        "x": 61,
+        "y": 33
+      },
+      "index": 0,
+      "expected": [
+        32,
+        12
+      ],
+      "quantities": [
+        36,
+        8
+      ],
+      "signed": "into_clicked",
+      "target": [
+        [
+          1,
+          24
+        ]
+      ],
+      "axis": 0,
+      "quantum": 4,
+      "evidence": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:24cea280160201f2",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:fdde551e3fd269f6"
+      ],
+      "admitted": true,
+      "guard": "bind_current_band_lengths_and_local_actuator"
+    },
+    {
+      "kind": "return",
+      "turn": 2,
+      "reason": "compare_measured_band_vector",
+      "matched": true,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:45006ef4831b0d08",
+      "frames": 1,
+      "acquired": [
+        {
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:45006ef4831b0d08",
+          "before": [
+            36,
+            8
+          ],
+          "after": [
+            32,
+            12
+          ],
+          "control": 1,
+          "signed": "into_clicked",
+          "status": "observed_band_response"
+        }
+      ]
+    }
+  ],
+  "alternative": [
+    {
+      "kind": "ticket",
+      "turn": 1,
+      "level": 1,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:1",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:fdde551e3fd269f6",
+      "family": "band_transfer",
+      "offer": "aligned_band_transfers",
+      "action": "ACTION6",
+      "data": {
+        "x": 61,
+        "y": 33
+      },
+      "index": 0,
+      "expected": null,
+      "quantities": [
+        32,
+        12
+      ],
+      "signed": null,
+      "target": [
+        [
+          1,
+          24
+        ]
+      ],
+      "axis": 0,
+      "quantum": 4,
+      "evidence": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:fdde551e3fd269f6"
+      ],
+      "admitted": true,
+      "guard": "bind_current_band_lengths_and_local_actuator"
+    },
+    {
+      "kind": "return",
+      "turn": 1,
+      "reason": "compare_measured_band_vector",
+      "matched": null,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:dbb8f7089d7208ff",
+      "frames": 1,
+      "acquired": [
+        {
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:dbb8f7089d7208ff",
+          "before": [
+            32,
+            12
+          ],
+          "after": [
+            28,
+            16
+          ],
+          "control": 1,
+          "signed": "into_clicked",
+          "status": "observed_band_response"
+        }
+      ]
+    },
+    {
+      "kind": "ticket",
+      "turn": 2,
+      "level": 1,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:2",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:dbb8f7089d7208ff",
+      "family": "band_transfer",
+      "offer": "aligned_band_transfers",
+      "action": "ACTION6",
+      "data": {
+        "x": 61,
+        "y": 33
+      },
+      "index": 0,
+      "expected": [
+        24,
+        20
+      ],
+      "quantities": [
+        28,
+        16
+      ],
+      "signed": "into_clicked",
+      "target": [
+        [
+          1,
+          24
+        ]
+      ],
+      "axis": 0,
+      "quantum": 4,
+      "evidence": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:dbb8f7089d7208ff",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:fdde551e3fd269f6"
+      ],
+      "admitted": true,
+      "guard": "bind_current_band_lengths_and_local_actuator"
+    },
+    {
+      "kind": "return",
+      "turn": 2,
+      "reason": "compare_measured_band_vector",
+      "matched": true,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:b8792b7f050a96b4",
+      "frames": 1,
+      "acquired": []
+    },
+    {
+      "kind": "ticket",
+      "turn": 3,
+      "level": 1,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:3",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:b8792b7f050a96b4",
+      "family": "band_transfer",
+      "offer": "aligned_band_transfers",
+      "action": "ACTION6",
+      "data": {
+        "x": 61,
+        "y": 33
+      },
+      "index": 1,
+      "expected": [
+        20,
+        24
+      ],
+      "quantities": [
+        24,
+        20
+      ],
+      "signed": "into_clicked",
+      "target": [
+        [
+          1,
+          24
+        ]
+      ],
+      "axis": 0,
+      "quantum": 4,
+      "evidence": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:dbb8f7089d7208ff",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:fdde551e3fd269f6"
+      ],
+      "admitted": true,
+      "guard": "bind_current_band_lengths_and_local_actuator"
+    }
+  ],
+  "archiveSHA256": "b1e6e8f9948bf984e7d0b8416b3eaecb16f7d02b1b822ea5ac77b045741c41b0"
+}
