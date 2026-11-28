@@ -1,0 +1,61 @@
+{
+  "stats": {
+    "versions": 2,
+    "départsParVersion": 8,
+    "gestesServiceParVersion": 45,
+    "gestesAuxiliairesParVersion": 2,
+    "catalogue": 16,
+    "niveauxTerminés": 1
+  },
+  "formats": [
+    {
+      "commandePhysique": "ACTION3",
+      "serviAuTicket": "ACTION1",
+      "configuration": [
+        2,
+        [
+          8,
+          11,
+          8
+        ]
+      ],
+      "statutAcquis": "translate"
+    },
+    {
+      "commandePhysique": "ACTION2",
+      "serviAuTicket": "ACTION1",
+      "configuration": [
+        3,
+        [
+          14,
+          8,
+          14
+        ]
+      ],
+      "statutAcquis": "receive"
+    }
+  ],
+  "receptions": [
+    {
+      "tour": 3,
+      "ordinauxRetirés": [
+        1
+      ],
+      "réception": "received_then_automatic_or_return_unknown",
+      "sansTrame": "unexplained_or_boundary",
+      "statutContrôleSansTrame": null,
+      "commandeSuivanteSansTrame": "ACTION2"
+    },
+    {
+      "tour": 16,
+      "ordinauxRetirés": [
+        1,
+        2
+      ],
+      "réception": "received_then_automatic_or_return_unknown",
+      "sansTrame": "unexplained_or_boundary",
+      "statutContrôleSansTrame": "portable_hypothesis_pending_revalidation",
+      "commandeSuivanteSansTrame": null
+    }
+  ]
+}
