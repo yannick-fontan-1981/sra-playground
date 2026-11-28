@@ -63,6 +63,7 @@ parser.add_argument("--baseline-only", action="store_true", help="Run the LIFE c
 parser.add_argument("--wrong-receiver", action="store_true", help="Run the KLOT receipt attribution control")
 parser.add_argument("--corrected-receiver", action="store_true", help="Require KLOT's corrected receipt role")
 parser.add_argument("--duplicate-completion", action="store_true", help="Run the SERI duplicate witness control")
+parser.add_argument("--corrected-duplicates", action="store_true", help="Require distinct published SERI witnesses")
 parser.add_argument("--game-root", required=True, type=Path)
 parser.add_argument("--node", default="node")
 args = parser.parse_args()
@@ -120,7 +121,10 @@ if args.duplicate_completion:
     source = engine / test
     control = (bench / "scripts/sic-seri-duplicate-completion-control.ts").read_text(encoding="utf8")
     source.write_text(source.read_text(encoding="utf8") + "\n" + control, encoding="utf8", newline="\n")
+    env["SIC_SERI_CORRECTED_DUPLICATES"] = "1" if args.corrected_duplicates else "0"
     options = ["--test-name-pattern=^93 counts distinct questions"]
+elif args.corrected_duplicates:
+    parser.error("--corrected-duplicates requires --duplicate-completion")
 if args.game == "ISOS" and env.get("SIC_ISOS_STALE_BOUNDARY") == "1":
     options = ["--test-name-pattern=^10 distinguishes"]
 if args.game == "LIFE" and (args.baseline_only or revision in {

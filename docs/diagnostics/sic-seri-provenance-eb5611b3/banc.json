@@ -1,0 +1,37 @@
+{
+  "proof": "eb5611b3ff76409fbd67680ac29a5f6a17586422",
+  "criteria": "fdc703aa",
+  "firstDifference": {
+    "level": 2,
+    "turn": 5
+  },
+  "before": [
+    [
+      3,
+      4,
+      5
+    ],
+    [
+      3,
+      3,
+      5
+    ],
+    []
+  ],
+  "after": [
+    [
+      3,
+      4,
+      5
+    ],
+    [
+      2,
+      3,
+      5
+    ],
+    []
+  ],
+  "samePhysicalClickAndReturn": true,
+  "nominalReplaysEqual": true,
+  "archiveSHA256": "32cc5e7d02f41b528dd461e2ebd09c67eb1bb6b30dff532061f79e367f9404c0"
+}

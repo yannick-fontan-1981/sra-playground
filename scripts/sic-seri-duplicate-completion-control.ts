@@ -1,5 +1,5 @@
 // Appended to the pinned SERI service test by the catalogue runner.
-test('93 counts distinct questions but can cite one completion twice', async t => {
+test('93 counts distinct questions and exposes the witnesses', async t => {
   const original = VisualSequences.prototype.proposeContinuation;
   let condition = 'nominal';
   const inputs: Array<{ distinct: number; refs: number[] }> = [];
@@ -41,7 +41,8 @@ test('93 counts distinct questions but can cite one completion twice', async t =
       recalled: p.facts.visual_answer_method_recalled === true });
   }
   assert.deepEqual(inputs, [{ distinct: 3, refs: [2,3,4] }, { distinct: 2, refs: [2,3,3] }, { distinct: 1, refs: [3,3] }]);
-  assert.deepEqual(arms.map(arm => arm.shown), [[3,4,5], [3,3,5], []]);
+  const duplicateWitnesses = process.env.SIC_SERI_CORRECTED_DUPLICATES === '1' ? [2,3,5] : [3,3,5];
+  assert.deepEqual(arms.map(arm => arm.shown), [[3,4,5], duplicateWitnesses, []]);
   assert.deepEqual(arms.map(arm => arm.recalled), [true, true, false]);
   for (const arm of arms.slice(1)) {
     assert.deepEqual(arm.before, arms[0].before);
