@@ -1,4 +1,4 @@
-name: SIC source recovery and priority for witnessed continuation
+name: SIC source recovery and priority under recurrent returns
 
 on:
   push:

@@ -86,6 +86,7 @@ async function run(code,requestedTarget,parallelWorkers) {
   const evidence = process.env.SIC_SOURCE_COMPOSER_EVIDENCE === '1' ? new Map() : null;
   const seenEvidence = new Set();
   const recoveryEvidence = new Map();
+  const sourceDecisions = new Map();
   function retainSourceEvidence(response) {
     for (const event of response.snapshot?.trace ?? []) {
       if (event.kind === 'sic_transport_undo_available' || event.kind === 'action_undo') {
@@ -122,6 +123,12 @@ async function run(code,requestedTarget,parallelWorkers) {
       const issued=performance.now(); if(effects.length%25===0)console.log(JSON.stringify({progress:effects.length,level:board.level})); const plan=agent.snapshot.trace.findLast(e=>e.kind==='sic_native_plan'); if(plan){const kind=action.id===6?"click":action.id>=1&&action.id<=4?"move":"other"; const types=pathKinds.get(plan.id)??new Set();types.add(kind);pathKinds.set(plan.id,types);series.set(plan.id,(series.get(plan.id)??0)+1);if(priorDispatch){(priorDispatch.plan===plan.id?continuedGaps:boundaryGaps).push(issued-priorDispatch.at);}priorDispatch={plan:plan.id,at:issued};}
       first??=issued-start;
       const previous=board; board=await game({type:'action',actionId:action.id,...(action.id===6?{data:action.data}:{})});
+      const card = evidence && agent.snapshot.proposal?.sicSituationCard;
+      if (card && ['test_composition', 'selectMarkedCursor', 'verifyMarkedCursor'].includes(card.strategy)) {
+        const key = JSON.stringify([previous.level, card.strategy, card.trigger ?? null, card.situation ?? null]);
+        if (!sourceDecisions.has(key)) sourceDecisions.set(key, { level: previous.level, strategy: card.strategy,
+          trigger: card.trigger ?? null, firstTurn: effects.length + 1, action: action.id });
+      }
       if (captureRivals) recordRivals(previous, action, board, effects.length + 1);
       const executionMs=performance.now()-issued; let changed=0, left=64, right=-1, top=64, bottom=-1; for(let y=0;y<64;y++) for(let x=0;x<64;x++) if(previous.frame[y][x]!==board.frame[y][x]){changed++; left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);} effects.push([action.id,action.data??null,changed,changed?[left,top,right,bottom]:null,board.frames.length,board.levelsCompleted,agent.snapshot.proposal?.sicSituationCard?.strategy,agent.snapshot.trace.findLast(e=>e.kind==="sic_native_plan")?.family,agent.snapshot.proposal?.sicSituationCard?.situation,agent.snapshot.proposal?.sicSituationCard?.evidence?.length]);
       process.send({ kind:'command-applied', sicAuthorized:plan!==undefined && mode==='sic', levelsCompleted:board.levelsCompleted,
@@ -158,7 +165,8 @@ async function run(code,requestedTarget,parallelWorkers) {
     return {code,target,mode,parallelWorkers,...(sourceArm ? { sourceArm } : {}),recoveries,resumes,gaps:{continued:metric(continuedGaps),boundary:metric(boundaryGaps)},series:[...series.values()].filter(n=>n>1),pathKinds:[...series].filter(([,n])=>n>1).map(([id,n])=>({length:n,type:[...pathKinds.get(id)].sort().join("+")})),effects,decisions:Object.fromEntries(decisions),usage:Object.fromEntries(usage),actions:snapshot.actionCount,levels:board.levelsCompleted,reason:snapshot.reason,status:snapshot.status,
       ...(snapshot.status==='error'?{message:snapshot.message}:{}),authority:snapshot.sicActionCoverage?.sicOnly??0,solverFamilies:snapshot.coverage?.registeredFamilies.length,
       levelStats,
-      ...(evidence ? { sourceComposerEvidence: [...evidence.values()], sourceRecoveryEvidence: [...recoveryEvidence.values()] } : {}),
+      ...(evidence ? { sourceComposerEvidence: [...evidence.values()], sourceRecoveryEvidence: [...recoveryEvidence.values()],
+        sourceDecisions: [...sourceDecisions.values()] } : {}),
       ...(captureRivals ? { sourceReturnRivals: [...observedReturns.values()].filter(row => row.targets.size > 1)
         .map(({ level, command, targets }) => {
           const hypotheses = [...targets.values()];

@@ -10,7 +10,7 @@ import { initialMemory } from '../src/sic/preparation-experiments.ts';
 import { planningGroupsWithExperiments } from '../src/sic/experiment-selection-groups.ts';
 import { standalonePlanningGroups } from '../src/sic/standalone-families.ts';
 import { publicInputExplorationId } from '../src/sic/public-input-exploration.ts';
-import { compositionFamily, composeAtReturnGroup } from '../src/sic/test-observed-compositions.ts';
+import { compositionFamily, composeAtReturnGroup, cycleGroup } from '../src/sic/test-observed-compositions.ts';
 import { preparedEffectsId } from '../src/sic/test-prepared-effects.ts';
 import { continueMarkedField, learnMarkedLatticeId, verifyMarkedLatticeId } from '../src/sic/marked-lattice.ts';
 import { catalogueComparisonId, continueCatalogueViewsGroup } from '../src/sic/catalogue-comparison.ts';
@@ -97,9 +97,9 @@ test('a witnessed composition is offered before a new control contrast at the sa
   const before = original[frontier]!;
   const after = candidate[frontier]!;
   const index = before.entryPoints!.indexOf(recurrentExperimentGroup);
-  assert.deepEqual(before.entryPoints!.slice(index, index + 2), [recurrentExperimentGroup, composeAtReturnGroup]);
-  assert.deepEqual(after.entryPoints!.slice(index, index + 2), [composeAtReturnGroup, recurrentExperimentGroup]);
-  assert.deepEqual(after.families.slice(index, index + 2), [compositionFamily, preparedEffectsId]);
+  assert.deepEqual(before.entryPoints!.slice(index, index + 3), [recurrentExperimentGroup, composeAtReturnGroup, cycleGroup]);
+  assert.deepEqual(after.entryPoints!.slice(index, index + 3), [composeAtReturnGroup, cycleGroup, recurrentExperimentGroup]);
+  assert.deepEqual(after.families.slice(index, index + 3), [compositionFamily, compositionFamily, preparedEffectsId]);
   assert.deepEqual(candidate.filter((_, i) => i !== frontier), original.filter((_, i) => i !== frontier));
 });
 
