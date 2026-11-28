@@ -1,16 +1,17 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { NativeV6Runtime } from '../src/logos-engine/v6-native-runtime.ts';
+import { NativeV6Runtime, type NativeV6RuntimeConfiguration } from '../src/logos-engine/v6-native-runtime.ts';
 import { V6AgentService } from '../src/runtime/v6-agent-service.ts';
 import { toV6PublicObservation, type V6Ticket } from '../src/runtime/v6-agent-protocol.ts';
 import { createSicPairedPassage, pairedPassageId } from '../src/sic/paired-passage.ts';
+import type { ControlTrialComparison } from '../src/sic/control-effect-next.ts';
 import { pairedPassageRoom, type PassageChange } from './helpers/sic-paired-passage-room.ts';
 import { nativeAfterPublicBoundaries } from './helpers/sic-native-public-boundaries.ts';
 
-async function start(variant = false) {
+async function start(variant = false, evaluation?: Pick<NativeV6RuntimeConfiguration, 'observeControlTrialShadow' | 'controlTrialAgenda'>) {
   const room = pairedPassageRoom(variant), family = createSicPairedPassage();
   const service = new V6AgentService(() => new NativeV6Runtime({ families: [family], sourceDigest: 'paired-passage-transfer',
-    maxPointOccurrences: 250, groups: [{ id: 'follow_visible_passages', families: [pairedPassageId] }] }));
+    maxPointOccurrences: 250, groups: [{ id: 'follow_visible_passages', families: [pairedPassageId] }], ...evaluation }));
   const sessionId = 'passage-' + variant;
   let sequence = 0, reply = await service.handle({ type: 'init', sessionId, sequence,
     observation: toV6PublicObservation(room.packet()), budgets: { targetLevels: 3, levelActionCaps: [30, 30, 30] } });
@@ -82,4 +83,32 @@ test('the patterned walk is not admitted without the earlier passage and outlet 
     'follow_visible_passages');
   assert.ok(!isolated.reply.ticket);
   assert.equal(isolatedFamily.state().previous, null);
+});
+
+for (const variant of [false, true]) test('the local P05 budget controls the switch contact after a retained approach, variant ' + variant, async () => {
+  const reference = await start(variant);
+  const accepted: ControlTrialComparison[] = [], refused: ControlTrialComparison[] = [];
+  const active = await start(variant, { controlTrialAgenda: { mode: 'active', actionBudget: 1 },
+    observeControlTrialShadow: comparison => { accepted.push(comparison); } });
+  const withheld = await start(variant, { controlTrialAgenda: { mode: 'active', actionBudget: 0 },
+    observeControlTrialShadow: comparison => { refused.push(comparison); } });
+  for (const passage of [reference, active, withheld]) {
+    assert.equal(passage.reply.snapshot.proposal?.sicSituationCard?.strategy, 'P07');
+    await passage.next();
+    assert.equal(passage.reply.ticket?.actionIndex, 1);
+    await passage.next();
+    assert.equal(passage.room.rewired, false);
+  }
+  assert.equal(accepted.length, 1);
+  assert.equal(refused.length, 1);
+  assert.equal(accepted[0]?.firstDifference, null);
+  assert.equal(refused[0]?.firstDifference, 'selected');
+  assert.equal(withheld.reply.ticket, null);
+  assert.equal(active.reply.ticket?.actionRef, reference.reply.ticket?.actionRef);
+  assert.equal(active.reply.snapshot.proposal?.sicSituationCard?.strategy, 'P05');
+  await Promise.all([reference.next(), active.next()]);
+  assert.deepEqual(active.room.packet(), reference.room.packet());
+  assert.ok(active.reply.snapshot.trace.some(event => event.kind === 'actual_outcome'
+    && event.reason === 'passage_connections_rewritten_at_landing'));
+  assert.equal(withheld.room.rewired, false);
 });
