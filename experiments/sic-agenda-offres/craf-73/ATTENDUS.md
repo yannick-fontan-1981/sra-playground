@@ -1,0 +1,5 @@
+# CRAF · ligne 73
+
+Depuis L1, pack natif et plafond global 16, avec 600 gestes par niveau, comparer le catalogue 8ce7ee35 et le gel d0e7527c. Retrouver le ticket N1/T1 ACTION6 public_symbol_transaction / observed_symbol_transaction. Sceller le candidat lié au cadre et distinguer le test de sélection, les transferts d'opérandes, la conversion et la demande. Rapprocher les quantités et signatures du diagramme public du vrai retour seulement au geste de transformation. Relever les portes qui permettent la reprise.
+
+Ouvrir un seul pixel du cadre-guide initial en préservant son centre. Vérifier la conséquence sur l'offre de conversion, y compris si un autre propriétaire produit la même commande. Présenter le retour stationnaire du premier clic et un vrai retour de conversion où un produit visible est substitué alors que les entrées disparaissent comme dans le nominal. Les paquets exécutés restent disponibles à part. Si le seul compteur de transition ne vérifie pas la conversion, garder séparément les preuves de l'interface et le rôle acquis. Chercher la réutilisation de la méthode après retrait du guide au changement de niveau.
