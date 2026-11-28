@@ -81,9 +81,11 @@ async function run(code,requestedTarget,parallelWorkers) {
   const game=request=>games.dispatch(request);
   const preferTransportUndo = process.env.SIC_SOURCE_TRANSPORT_UNDO === '1';
   const preferShorterCoverage = process.env.SIC_SOURCE_SHORTEST_COVERAGE === '1';
+  const sealedCoverageQualified = process.env.SIC_SEALED_COVERAGE_QUALIFIED === '1';
   if (preferTransportUndo && sourceArm !== 'active') throw new Error('Transport undo requires the active comparison arm.');
-  if (preferShorterCoverage && (sourceArm !== 'active' || /^SS(?:0[89]|1\d|2[0-5])$/.test(code))) {
-    throw new Error('The experimental coverage cost comparison requires an authorized source.');
+  if (preferShorterCoverage && (sourceArm !== 'active'
+    || (/^SS(?:0[89]|1\d|2[0-5])$/.test(code) && !sealedCoverageQualified))) {
+    throw new Error('The coverage cost comparison requires the active arm and the sealed source qualification.');
   }
   let solver;const service=new V6AgentService(async recovery=>(solver=await createNativeV6Runtime({common,strategy},{recovery,
     ...(preferShorterCoverage ? { preferShorterCoverage: true } : {}),
