@@ -1,0 +1,85 @@
+{
+  "sha": "09b9a509e5e07894b9fccf170f22ae26cbeffbda",
+  "départs": 6,
+  "gestes": 96,
+  "contreReçu": {
+    "name": "V6AgentError",
+    "code": "stale",
+    "message": "The native outcome does not bind the one pending authorization."
+  },
+  "sansOptionEtUnIdentiques": true,
+  "sélection": {
+    "un": {
+      "ticket": {
+        "id": "operateur-p05-G50T:native:1",
+        "action": "ACTION1",
+        "data": {},
+        "ref": "operateur-p05-G50T:epoch:1:revision:1:frame:f79ab0e9d856fdf8",
+        "index": 0
+      },
+      "plan": "sic-plan:operateur-p05-G50T:epoch:1:revision:1:frame:f79ab0e9d856fdf8",
+      "propriétaire": "sic_verify_remote_replay",
+      "besoin": "use_repeated_remote_effect_to_gain_access",
+      "garde": "current_replay_and_carrier_bound",
+      "reçu": {
+        "propriétaire": "sic_verify_remote_replay",
+        "motif": "compare_replayed_motion_and_remote_return",
+        "plan": "sic-plan:operateur-p05-G50T:epoch:1:revision:1:frame:f79ab0e9d856fdf8",
+        "ref": "operateur-p05-G50T:epoch:1:revision:2:frame:f79ab0e9d856fdf8",
+        "matched": null
+      },
+      "paquet": "393d6ff8a7171f4a11734aed0f64ec7fa2b47f6db1b3568c87847075aed7c35c"
+    },
+    "zéro": {
+      "ticket": {
+        "id": "operateur-p05-G50T:native:1",
+        "action": "ACTION1",
+        "data": {},
+        "ref": "operateur-p05-G50T:epoch:1:revision:1:frame:f79ab0e9d856fdf8",
+        "index": 0
+      },
+      "plan": "sic-plan:operateur-p05-G50T:epoch:1:revision:1:frame:f79ab0e9d856fdf8",
+      "propriétaire": "sic_public_input_exploration",
+      "besoin": "learn_public_command_effect",
+      "garde": "current_public_input_bound",
+      "reçu": {
+        "propriétaire": "sic_public_input_exploration",
+        "motif": "observed_public_input_return",
+        "plan": "sic-plan:operateur-p05-G50T:epoch:1:revision:1:frame:f79ab0e9d856fdf8",
+        "ref": "operateur-p05-G50T:epoch:1:revision:2:frame:f79ab0e9d856fdf8",
+        "matched": null
+      },
+      "paquet": "393d6ff8a7171f4a11734aed0f64ec7fa2b47f6db1b3568c87847075aed7c35c"
+    }
+  },
+  "comparaisons": [
+    {
+      "code": "G50T",
+      "premierTicketDifférent": null,
+      "premierPropriétaireDifférent": 1,
+      "premierPaquetDifférent": null,
+      "niveaux": [
+        0,
+        0
+      ],
+      "comparaisons": [
+        6,
+        17
+      ]
+    },
+    {
+      "code": "AS66",
+      "premierTicketDifférent": 6,
+      "premierPropriétaireDifférent": 6,
+      "premierPaquetDifférent": 6,
+      "niveaux": [
+        2,
+        1
+      ],
+      "comparaisons": [
+        2,
+        11
+      ]
+    }
+  ]
+}
