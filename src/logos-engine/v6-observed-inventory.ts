@@ -105,6 +105,7 @@ export class ObservedInventory implements NativeFamily<any> {
   private revision = 0;
   private callerContext: InventoryCallerContext | null = null;
   private goalModels: (() => readonly R[]) | null = null;
+  private readAcquiredAccessReturn: ((beforeRef: string) => unknown) | undefined;
 
   private constructor(policy: InventoryPolicy) {
     this.policy = policy; this.config = policy.config;
@@ -118,9 +119,11 @@ export class ObservedInventory implements NativeFamily<any> {
     family.program = await NativeSrcProgram.create(INVENTORY_WORKFLOW, family.callbacks); return family;
   }
   async attachPrograms(registry: NativeProgramRegistry): Promise<void> { this.program = await registry.registerProgram(INVENTORY_WORKFLOW, this.callbacks); }
-  enableCallerContext(goalModels: () => readonly R[]): void {
+  enableCallerContext(goalModels: () => readonly R[], readAcquiredAccessReturn?: (beforeRef: string) => unknown): void {
     // A retained owner may be reattached to a new Kernel caller during restore.
-    this.goalModels = goalModels; this.callerContext ??= new InventoryCallerContext();
+    this.goalModels = goalModels;
+    this.readAcquiredAccessReturn = readAcquiredAccessReturn;
+    this.callerContext ??= new InventoryCallerContext();
   }
   callerContextState(): R | null { return this.callerContext?.state() ?? null; }
   /** Read the already acquired common meter. Planning does not observe a frame. */
@@ -322,7 +325,9 @@ export class ObservedInventory implements NativeFamily<any> {
           }
         }
       }
-      const returned = [...this.access_returns].reverse().find(z => z.level_epoch === obs.level_epoch && truth(z.active)) ?? null;
+      const returned = [...this.access_returns].reverse().find(receipt => receipt.level_epoch === obs.level_epoch && truth(receipt.active)
+        && (!this.readAcquiredAccessReturn || typeof receipt.before === 'string'
+          && same(this.readAcquiredAccessReturn(receipt.before), receipt))) ?? null;
       targets.push(...capacity_targets(scene, obs, forecast, returned));
       const endpoints = endpoint_measurements(scene, probe_input, obs, rows, forecast, returned, this.tracker.underlays, this.config.interface_prior.directions);
       for (const [, , item] of endpoints) {

@@ -239,8 +239,9 @@ const NATIVE_CALLER_EXTENSIONS = ['current_epoch_axial_packet_attribution', 'nat
   'atomic_selected_rigid_event_validation',
   'single_owner_preview_packing_selected_acquisition', 'conditional_preview_packing_checkpoint_restoration',
   'bounded_preview_packing_calculus_with_current_deadline',
-  'native_crossed_prefix_assignment_bounds', 'native_atomic_crossed_prefix_event_validation',
+  'native_crossed_prefix_assignment_bounds', 'native_atomic_crossed_prefix_event_validation', 'native_crossed_prefix_pair_provenance',
   'exact_crossed_prefix_zero_recolor_optimum', 'atomic_kernel_checkpoint_batching',
+  'native_product_panel_scoped_counterexamples',
   'immutable_frontier_branches_with_delta_checkpoints',
   'blocking_current_proposal_refusal_preserves_selection_order',
   'bounded_linked_temporal_paths_with_current_deadline', 'single_owner_linked_temporal_passive_acquisition',
@@ -523,6 +524,18 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.acquisitionFamilies?.inventory?.enableCallerContext(() => {
       if (!this.caller) throw new Error('Inventory context requires the initialized common caller');
       return this.caller.goal.memory.models;
+    }, beforeRef => {
+      const memory = this.authority?.memory;
+      const revision = Number(/:revision:([1-9]\d*):frame:[0-9a-f]+$/.exec(beforeRef)?.[1]);
+      if (!memory || !Number.isSafeInteger(revision)) return null;
+      try {
+        const event = memory.nativeGet(EPISODE, `observed_inventory_event:${revision}`);
+        const access = event.value?.dependency_return;
+        return access?.before === beforeRef && event.evidence === access.after ? access : null;
+      } catch (error) {
+        if (error instanceof RangeError) return null;
+        throw error;
+      }
     });
     this.acquisitionFamilies?.morphology?.enableCallerContext({
       goal: () => { if (!this.caller) throw new Error('Morphology requires the initialized common caller'); return this.caller.goal.memory; },
@@ -3010,7 +3023,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     configuration.coupled_support_composition, configuration.alternating_graph_composition,
     (configuration.window_constraints as R).cell_patch_composition,
     { currentProgramAccess: true, programControlDiscovery: true, programRelationLearning: true, extendedRootedMarkSupport: true,
-      composedLabeledPredicates: true, distinguishTraceCellSupport: true },
+      composedLabeledPredicates: true, distinguishTraceCellSupport: true, attestCrossedPairs: true, honorProductCounterexamples: true },
     (configuration.window_constraints as R).radial_port_composition, (configuration.window_constraints as R).rooted_quota_composition,
     (configuration.window_constraints as R).product_panel_composition, (configuration.window_constraints as R).labeled_sequence_composition,
     (configuration.window_constraints as R).trace_field_composition, (configuration.window_constraints as R).linked_packet_composition,

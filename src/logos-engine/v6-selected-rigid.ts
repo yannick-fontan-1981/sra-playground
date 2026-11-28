@@ -372,7 +372,12 @@ export class NativeSelectedRigid {
       const index = state.active, firstPoses = selectedRigidPoses(first), secondPoses = selectedRigidPoses(second);
       models = models.filter(model => equal(selectedRigidMoved(first, firstPoses, index, modelDirection(model, command.action_ref)), secondPoses));
       state.tried.push([identity(firstPoses), index, command.action_ref]); detail.moved = !equal(firstPoses, secondPoses);
-      detail.role_status = detail.moved ? 'observed_exclusive_receiver' : 'blocked_or_unselected_remains_conditional';
+      const selectedMovedAlone = detail.moved && first.bodies.length === second.bodies.length && first.bodies.every((body, i) => {
+        const observed = second.bodies[i]!;
+        const stationary = equal(body.position, observed.position);
+        return body.key === observed.key && equal(body.mask, observed.mask) && (i === index ? !stationary : stationary);
+      });
+      detail.role_status = selectedMovedAlone ? 'observed_exclusive_receiver' : 'blocked_or_unselected_remains_conditional';
     }
     state.scene = second; state.evidence.push(before.observation_ref, after.observation_ref); detail.compatible_model_count = models.length;
     const event: SelectedRigidEvent = plain({ kind: 'observed_selected_rigid', state, models, detail });
