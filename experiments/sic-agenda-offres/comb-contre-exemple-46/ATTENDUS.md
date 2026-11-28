@@ -1,0 +1,7 @@
+# COMB/46, portée du contre-exemple
+
+Partir de `d0e7527c`. Les reçus `a6496536` et `dc7487f5` fixent deux coupures. Au T3, sous la même époque, le même panneau, les mêmes arêtes et la même vue, le contre-exemple T1 retire l'indépendance et doit retirer le plan vers [4,8]. Au geste global 9, le contre-exemple T5 du même panneau retire le plan en deux gestes. L'arête du facteur 1 observée depuis [9,4,4] ne devient pas une observation depuis [4,4,11].
+
+Garder une réexécution locale si la preuve contient le tuple complet avant/après pour ce contrôle exact, et si cette commande dans ce tuple n'a pas de contre-exemple applicable. À T9, proposer une fixture de mémoire avec un retour exact [4,4,11] → [4,8,11] acquis dans un témoin séparé avant la décision testée. Elle doit conserver le clic (31,20), le comparer et le sceller après un seul pas, sans compiler le produit. Le même retour multifactoriel pour ce tuple et ce contrôle rendrait l'arête contestée. Une ancienne entrée de contre-exemple sans tuple reste utilisable pour écarter l'indépendance, sans fabriquer une localisation exacte du conflit.
+
+Figer également le nominal, le cas sans arête et l'autre niveau. Ne pas retirer des mesures légitimes ni fermer une autre portée. Le comptage de gestes, le budget natif, l'obtention du score et le repli restent régis par le service. Préserver la parité de la couche source et les anciens journaux.
