@@ -1,0 +1,11 @@
+# TICT · preuve de placement pour la ligne 41
+
+Comparer le moteur gelé `d0e7527c` et la révision de preuve `e8df1757` sur le vrai jeu TICT. Le témoin catalogue suit 16 gestes depuis N1. Relever pour chaque ticket la famille, la sous-question, la trace d’admission et le retour. Caler les images du parcours nominal sur l’archive publique du gel.
+
+Au tour 1, mesurer les cellules qui changent dans chaque image en comparant les pixels des rectangles du champ depuis l’observation d’avant le clic. Déduire les instants où le motif local seul, puis les deux motifs, deviennent stables. Comparer ce résultat aux instants où le moteur acquiert ses deux rôles. Au tour 2, vérifier que le ticket réutilise les références des deux observations ayant établi le modèle, prédit le motif correct et reçoit une confirmation.
+
+Jouer le même premier ticket et servir quatre paquets différents sur quatre départs au total, nominal compris. Dans le deuxième, montrer uniquement les deux pixels de la ligne d’état changés comme sur SP80. Dans le troisième, montrer seulement l’image finale de TICT. Dans le quatrième, conserver la même image finale et le même nombre d’images que le vrai retour, mais rendre d’abord visible la modification distante seule. Construire cette image avec les pixels du vrai motif distant dans les bornes mesurées de sa cellule. Sur ces trois variantes, vérifier l’absence de preuve datée local puis distant. Comparer le motif prédit, l’usage d’une recherche et les références de T2, même si le point choisi est identique.
+
+Sur un cinquième départ, laisser passer le vrai retour de T1, puis servir seulement la modification de la ligne d’état au retour de T2. Vérifier la réfutation du modèle et le ticket suivant. Les variantes portent sur l’observation retournée au service. Le jeu exécute les tickets réels. Les variantes de T1 s’arrêtent après lecture du ticket T2. Le contrôle de réfutation s’arrête après lecture du ticket T3.
+
+Rattacher à ces preuves le rejeu indépendant SP80 sur `bb4a99b5`. Vérifier l’identité de l’arbre moteur avec `e8df1757`. Compter les 16 occurrences nominales TICT et les cinq déjà jouées sur SP80 une seule fois pour la ligne 41 du catalogue. Les variantes et les gestes après les modifications d’observation ont leurs propres dénominateurs.
