@@ -1,0 +1,40 @@
+{
+  "stats": {
+    "versions": 2,
+    "départsServiceParVersion": 6,
+    "gestesParVersion": 26,
+    "contrôlesArchivesParVersion": 1,
+    "catalogue": 16,
+    "niveauxTerminés": 4
+  },
+  "projection": [
+    [
+      1
+    ],
+    [
+      2
+    ],
+    [
+      1
+    ]
+  ],
+  "archive": {
+    "local": [
+      2,
+      3,
+      4,
+      3,
+      2
+    ],
+    "totauxNominaux": [
+      14,
+      14
+    ],
+    "totauxAltérés": [
+      15,
+      14
+    ],
+    "cause": "EMPTY_DOMAIN_CONTRADICTION",
+    "offre": null
+  }
+}

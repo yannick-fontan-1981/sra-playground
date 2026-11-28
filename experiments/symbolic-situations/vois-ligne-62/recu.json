@@ -1,0 +1,68 @@
+{
+  "stats": {
+    "versions": 2,
+    "départsParVersion": 6,
+    "gestesParVersion": 27,
+    "catalogue": 16,
+    "niveauxTerminés": 1
+  },
+  "appariement": [
+    [
+      [
+        5,
+        3
+      ],
+      [
+        [
+          5,
+          6
+        ]
+      ]
+    ],
+    [
+      [
+        5,
+        10
+      ],
+      [
+        [
+          5,
+          7
+        ]
+      ]
+    ]
+  ],
+  "carréDéplacé": {
+    "from": [
+      55,
+      55
+    ],
+    "to": [
+      55,
+      59
+    ],
+    "color": 8
+  },
+  "pionRetiré": {
+    "body": [
+      5,
+      10
+    ],
+    "from": [
+      42,
+      22
+    ],
+    "color": 13,
+    "target": [
+      [
+        5,
+        6
+      ],
+      [
+        5,
+        7
+      ]
+    ]
+  },
+  "limite": "current_reference_population_revalidation_missing"
+}

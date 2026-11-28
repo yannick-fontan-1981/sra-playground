@@ -1,0 +1,67 @@
+{
+  "stats": {
+    "versions": 2,
+    "départsParVersion": 4,
+    "gestesParVersion": 37,
+    "testsParVersion": 1,
+    "franchissementsParVersion": 1,
+    "niveauxTerminés": 0
+  },
+  "preuve": {
+    "receiver": [
+      25,
+      3,
+      29,
+      8
+    ],
+    "receiver_digest": "b26e571474d8e7b63b532782fd8681dc4950d688990df0f99a897bedcc516c71",
+    "color": 13,
+    "sampled_trajectory": [
+      [
+        0,
+        [
+          21,
+          9
+        ]
+      ],
+      [
+        1,
+        [
+          25,
+          9
+        ]
+      ]
+    ],
+    "direction": [
+      1,
+      0
+    ],
+    "linked_blockers": [
+      [
+        7,
+        4,
+        8,
+        4
+      ]
+    ],
+    "card": [
+      0,
+      3
+    ],
+    "evidence": "sc25-transfer-indep:epoch:1:revision:6:frame:0320ca63cea82851",
+    "aimed": false
+  },
+  "choixAvec": [
+    0,
+    3
+  ],
+  "choixSans": [
+    1,
+    2
+  ],
+  "entrée": [
+    9,
+    5
+  ],
+  "retour": "sc25-transfer-indep:epoch:1:revision:11:frame:f35c254abcc42f01"
+}
