@@ -1,0 +1,212 @@
+name: SIC P05 development acquisition
+
+on:
+  push:
+    branches:
+      - 'feat/sic-p05-acquisition-dev-*'
+    paths:
+      - 'src/sic/p05-*'
+      - 'scripts/sic-p05-*'
+      - 'tests/sic-p05-*'
+      - '.github/workflows/sic-p05-development.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sic-p05-development-${{ github.sha }}
+  cancel-in-progress: false
+
+env:
+  P05_EXPECTED_SHA: ${{ github.sha }}
+  P05_DEVELOPMENT_SEED: '26112805'
+
+jobs:
+  pilot:
+    name: P05 pilot / 80 development situations
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /AGENTS.md
+            /package.json
+            /package-lock.json
+            /src/
+            /scripts/
+            /tests/sic-p05-acquisition.test.ts
+            /tests/sic-p05-comparison.test.mjs
+            /tests/sic-p05-contrasts.test.mjs
+            /tests/sic-p05-oracle.test.mjs
+            /tests/sic-p05-p09-bridge.test.mjs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Freeze source and start pilot receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$P05_EXPECTED_SHA"
+          mkdir -p artifacts/p05-pilot
+          git rev-parse HEAD > artifacts/p05-pilot/source.sha
+          date -u +%Y-%m-%dT%H:%M:%SZ > artifacts/p05-pilot/checks-started-at.txt
+      - name: P05 observation laboratory tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          p05_tests=(tests/sic-p05-acquisition.test.ts tests/sic-p05-comparison.test.mjs tests/sic-p05-contrasts.test.mjs tests/sic-p05-oracle.test.mjs tests/sic-p05-p09-bridge.test.mjs)
+          node --test "${p05_tests[@]}" | tee artifacts/p05-pilot/tests.log
+      - name: Typecheck the two public acquisition boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm ci --ignore-scripts --no-audit --no-fund
+          node_modules/.bin/tsc --noEmit --target ES2022 --lib ES2022,DOM,DOM.Iterable --module ESNext --moduleResolution Bundler --allowImportingTsExtensions --verbatimModuleSyntax --isolatedModules --strict --noUncheckedIndexedAccess --noFallthroughCasesInSwitch --skipLibCheck src/sic/p05-acquisition.ts src/sic/p05-frozen-adapter.ts
+      - name: Certify and compare the balanced pilot
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/sic-p05-campaign.mjs --per-family 10 --seed "$P05_DEVELOPMENT_SEED" --out artifacts/p05-pilot
+      - name: Close pilot timing receipt
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p artifacts/p05-pilot
+          date -u +%Y-%m-%dT%H:%M:%SZ > artifacts/p05-pilot/checks-finished-at.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: p05-pilot
+          path: artifacts/p05-pilot
+          if-no-files-found: error
+          retention-days: 30
+
+  development:
+    name: P05 development / family ${{ matrix.family }}
+    needs: pilot
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        family: [1, 2, 3, 4, 5, 6, 7, 8]
+    env:
+      P05_FAMILY: ${{ matrix.family }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /package.json
+            /src/
+            /scripts/
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Freeze source and start family receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$P05_EXPECTED_SHA"
+          mkdir -p "artifacts/p05-family-$P05_FAMILY"
+          git rev-parse HEAD > "artifacts/p05-family-$P05_FAMILY/source.sha"
+          date -u +%Y-%m-%dT%H:%M:%SZ > "artifacts/p05-family-$P05_FAMILY/checks-started-at.txt"
+      - name: Certify and compare 1000 development situations
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/sic-p05-campaign.mjs --per-family 1000 --families "$P05_FAMILY" --seed "$P05_DEVELOPMENT_SEED" --out "artifacts/p05-family-$P05_FAMILY"
+      - name: Close family timing receipt
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p "artifacts/p05-family-$P05_FAMILY"
+          date -u +%Y-%m-%dT%H:%M:%SZ > "artifacts/p05-family-$P05_FAMILY/checks-finished-at.txt"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: p05-family-${{ matrix.family }}
+          path: artifacts/p05-family-${{ matrix.family }}
+          if-no-files-found: error
+          retention-days: 30
+
+  aggregate:
+    name: P05 verify all 8000 development situations
+    needs: [pilot, development]
+    if: ${{ always() && needs.pilot.result == 'success' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /package.json
+            /src/
+            /scripts/
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Verify the aggregate source
+        shell: bash
+        run: test "$(git rev-parse HEAD)" = "$P05_EXPECTED_SHA"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: p05-family-*
+          path: artifacts/shards
+          merge-multiple: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: p05-pilot
+          path: artifacts/pilot
+      - name: Verify coverage, quotas, provenance and aggregate the eight families
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/sic-p05-campaign.mjs --aggregate artifacts/shards --out artifacts/p05-development
+      - name: Record wall time through the last control
+        if: always()
+        shell: bash
+        env:
+          P05_RUN_ID: ${{ github.run_id }}
+          P05_RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          mkdir -p artifacts/p05-development
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          const endedAt = new Date().toISOString();
+          let startedAt = null;
+          try { startedAt = readFileSync('artifacts/pilot/checks-started-at.txt', 'utf8').trim(); } catch {}
+          const receipt = {
+            sourceSha: process.env.P05_EXPECTED_SHA,
+            runId: process.env.P05_RUN_ID,
+            runAttempt: process.env.P05_RUN_ATTEMPT,
+            startedAt,
+            lastControlEndedAt: endedAt,
+            wallSecondsThroughLastControl: startedAt ? (Date.parse(endedAt) - Date.parse(startedAt)) / 1000 : null,
+            configuredFamilyParallelism: 8,
+            observedPeakFamilyJobs: null,
+            observedPeakStatus: 'Collect completed GitHub Jobs started_at/completed_at intervals after this run; the cap is not an observed peak.',
+            nativeGamesTestedByDevelopmentCampaign: 0,
+            sealedOperatorCasesGenerated: 0,
+            sealedNativeGamesTested: 0,
+          };
+          writeFileSync('artifacts/p05-development/ci-timing.json', JSON.stringify(receipt, null, 2) + '\n');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: p05-development-8000
+          path: artifacts/p05-development
+          if-no-files-found: error
+          retention-days: 30
