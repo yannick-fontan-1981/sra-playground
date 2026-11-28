@@ -1,0 +1,8 @@
+# FT09 · présélection indépendante de la ligne 94
+
+Comparer le moteur gelé `d0e7527ca8033bd805a6d7a8bb021eff62e87021` avec le même harnais scellé `d0348ec1f1646259b9c95f0fa4a44dd0bb966025`. Départ N1 en ouverture native, budget communiqué de 16 gestes et 600 par niveau. Le reçu HPDL/75 vérifié porte sur une famille séparée. [Critères auteur](https://github.com/yannick-fontan-1981/sra-playground/blob/ae88904c/experiments/sic-agenda-offres/ft09-94/ATTENDUS.md)
+
+- Identifier les fenêtres sources, la liaison aux cellules cibles et les violations mesurées avant T1. Distinguer l’hypothèse de réparation, le ticket effectivement joué, la mesure acquise et la prédiction au T3. Vérifier les références des contraintes et le verdict du vrai retour.
+- Retenir à tour de rôle chaque fenêtre source seule au même raster. Si la règle requiert une comparaison, les deux réductions doivent l’écarter, indépendamment du choix de fenêtre restante. Retirer seulement le premier point candidat à observation égale et vérifier la commande réellement libérée, le propriétaire et la réponse du plateau.
+- Présenter un retour stationnaire construit après le vrai premier clic. Garder le paquet physique en témoin. Identifier ce qui manque pour confirmer un effet et le choix suivant. Si le harnais permet un second retour stationnaire sans modifier le reste, répéter la contre-épreuve au premier ticket doté d’une prédiction.
+- Comparer à HPDL la provenance de l’entrée et le rôle causal des mesures. Distinguer une mesure commune d’enveloppe d’une règle de calcul spécifique. Compter les départs et les gestes par moteur, dater le premier écart et le verdict.
