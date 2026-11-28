@@ -24,6 +24,8 @@ cases = {
              ["docs/migration/native-campaigns-v46/tict-public-trace.json.gz"]),
     "KATA": ("d22d706c8c148da1b6bde090d3c6c53d20c69d50", "kata-line-32", "sic-observe-kata-preview",
              ["docs/migration/lot6a-evidence/integrated-final-02/kata-public-trace.json.gz", "tests/fixtures/sic-kata-alternate-returns.json.gz"]),
+    "LS20": ("a0af03d0f7c1ebe722b3b7b8bc4db4ba05364025", "ls20-line-20", "sic-observe-ls20-morphology",
+             ["docs/migration/lot2c-evidence/final/ls20-method-continuation/ls20-public-trace.json.gz"]),
     "MIND": ("860835b1b77ae9cde489230be5c1f83c05237302", "mind-line-12", "sic-observe-mind-feedback",
              ["docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-public-trace.json.gz", "tests/fixtures/sic-mind-alternate-returns.json.gz"]),
     "RE86": ("8e820aa64f321153bb858040d462d7f766178947", "re86-line-7", "sic-observe-re86-ownership",

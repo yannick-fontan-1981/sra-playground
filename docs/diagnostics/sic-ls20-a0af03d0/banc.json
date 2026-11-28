@@ -1,0 +1,252 @@
+{
+  "equalScenarios": 3,
+  "catalogue": [
+    16,
+    10
+  ],
+  "modifier": {
+    "kind": "ticket",
+    "turn": 7,
+    "level": 1,
+    "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:7",
+    "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:2fe09b67a0203019",
+    "owner": "morphology",
+    "action": "ACTION3",
+    "point": {},
+    "route": "modifier",
+    "from": [
+      24,
+      45
+    ],
+    "to": [
+      19,
+      45
+    ],
+    "pair": "91427da0d458452625b8e6ccec255d72c01a3bcdb23b0c8bafb5dc1291c53599",
+    "orientation": "different",
+    "alternatives": [
+      3
+    ],
+    "contactChange": false,
+    "guard": "current_geometry_bound",
+    "assessments": [
+      {
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:2fe09b67a0203019",
+        "route": "modifier",
+        "reason": "change_one_pattern_to_test_alignment",
+        "authority": false,
+        "bindings": {
+          "capacity_access_probe": "missing",
+          "capacity_probe": "missing",
+          "entry_probe": "missing",
+          "entry_rebind": "missing",
+          "feature_probe": "missing",
+          "managed_access": "missing",
+          "modifier": "bound",
+          "peer": "missing",
+          "peer_access_probe": "missing"
+        }
+      }
+    ]
+  },
+  "selectiveReturn": {
+    "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:11:frame:3b2b2d00a79c9299",
+    "pair": "179d07e8cc1cd6937009e050aa6d0ebc7429bb10c7758d826334cdbd78c72436",
+    "unchanged": [
+      33,
+      9,
+      39,
+      15
+    ]
+  },
+  "peerAccess": {
+    "kind": "ticket",
+    "turn": 11,
+    "level": 1,
+    "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:11",
+    "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:11:frame:3b2b2d00a79c9299",
+    "owner": "morphology",
+    "action": "ACTION1",
+    "point": {},
+    "route": "peer_access_probe",
+    "from": [
+      19,
+      30
+    ],
+    "to": [
+      19,
+      25
+    ],
+    "pair": "91427da0d458452625b8e6ccec255d72c01a3bcdb23b0c8bafb5dc1291c53599",
+    "orientation": "aligned",
+    "alternatives": [
+      0
+    ],
+    "contactChange": true,
+    "contactRef": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:11:frame:3b2b2d00a79c9299",
+    "guard": "current_geometry_bound",
+    "assessments": [
+      {
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:11:frame:3b2b2d00a79c9299",
+        "route": "peer_access_probe",
+        "reason": "discriminate_missing_control_for_peer_access",
+        "authority": false,
+        "bindings": {
+          "capacity_access_probe": "missing",
+          "capacity_probe": "missing",
+          "entry_probe": "missing",
+          "entry_rebind": "missing",
+          "feature_probe": "missing",
+          "managed_access": "missing",
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "bound"
+        }
+      }
+    ]
+  },
+  "peerChoice": {
+    "kind": "ticket",
+    "turn": 14,
+    "level": 1,
+    "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:14",
+    "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:14:frame:f797a87c66de3b5f",
+    "owner": "morphology",
+    "action": "ACTION4",
+    "point": {},
+    "route": "peer",
+    "from": [
+      29,
+      25
+    ],
+    "to": [
+      34,
+      25
+    ],
+    "pair": "91427da0d458452625b8e6ccec255d72c01a3bcdb23b0c8bafb5dc1291c53599",
+    "orientation": "aligned",
+    "alternatives": [
+      0
+    ],
+    "contactChange": true,
+    "contactRef": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:11:frame:3b2b2d00a79c9299",
+    "guard": "current_geometry_bound",
+    "assessments": [
+      {
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:14:frame:f797a87c66de3b5f",
+        "route": "peer",
+        "reason": "test_peer_contact_after_measured_selective_alignment",
+        "authority": false,
+        "bindings": {
+          "capacity_access_probe": "missing",
+          "capacity_probe": "missing",
+          "entry_probe": "missing",
+          "entry_rebind": "missing",
+          "feature_probe": "missing",
+          "managed_access": "missing",
+          "modifier": "bound",
+          "peer": "bound",
+          "peer_access_probe": "missing"
+        }
+      }
+    ]
+  },
+  "changes": [
+    {
+      "kind": "ticket",
+      "turn": 7,
+      "level": 1,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:7",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:2fe09b67a0203019",
+      "owner": "view",
+      "action": "ACTION2",
+      "point": {},
+      "guard": "bound_view_step",
+      "assessments": [
+        {
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:2fe09b67a0203019",
+          "route": "modifier",
+          "reason": "change_one_pattern_to_test_alignment",
+          "authority": false,
+          "bindings": {
+            "capacity_access_probe": "missing",
+            "capacity_probe": "missing",
+            "entry_probe": "missing",
+            "entry_rebind": "missing",
+            "feature_probe": "missing",
+            "managed_access": "missing",
+            "modifier": "bound",
+            "peer": "missing",
+            "peer_access_probe": "missing"
+          }
+        },
+        {
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:2fe09b67a0203019",
+          "route": null,
+          "reason": "pose_not_discriminated",
+          "authority": false,
+          "bindings": {
+            "capacity_access_probe": "missing",
+            "capacity_probe": "missing",
+            "entry_probe": "missing",
+            "entry_rebind": "missing",
+            "feature_probe": "missing",
+            "managed_access": "missing",
+            "modifier": "bound",
+            "peer": "missing",
+            "peer_access_probe": "missing"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "ticket",
+      "turn": 7,
+      "level": 1,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:7",
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:2fe09b67a0203019",
+      "owner": "view",
+      "action": "ACTION2",
+      "point": {},
+      "guard": "bound_view_step",
+      "assessments": [
+        {
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:2fe09b67a0203019",
+          "route": "modifier",
+          "reason": "change_one_pattern_to_test_alignment",
+          "authority": false,
+          "bindings": {
+            "capacity_access_probe": "missing",
+            "capacity_probe": "missing",
+            "entry_probe": "missing",
+            "entry_rebind": "missing",
+            "feature_probe": "missing",
+            "managed_access": "missing",
+            "modifier": "bound",
+            "peer": "missing",
+            "peer_access_probe": "missing"
+          }
+        },
+        {
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:2fe09b67a0203019",
+          "route": null,
+          "reason": "modifier_access_unbound",
+          "authority": false,
+          "bindings": {
+            "capacity_access_probe": "missing",
+            "capacity_probe": "missing",
+            "entry_probe": "missing",
+            "entry_rebind": "missing",
+            "feature_probe": "missing",
+            "managed_access": "missing",
+            "modifier": "stale_scope",
+            "peer": "missing",
+            "peer_access_probe": "missing"
+          }
+        }
+      ]
+    }
+  ],
+  "firstBoundary": 17,
+  "archiveSHA256": "160da06a8446bfb232e238bc6babf3fb4100b3b750fd0db595490912cbb67bf3"
+}

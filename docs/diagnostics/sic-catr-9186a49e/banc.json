@@ -1,0 +1,61 @@
+{
+  "versions": {
+    "historique": "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "gel": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "qualification": "9186a49ea207caff1fee6a1386b506739b22d4a3",
+    "attendus": "44fa72aad11279ebf927541c08075dc59b819d21"
+  },
+  "prefixes": 5,
+  "firstEdit": {
+    "id": "relation:9:12",
+    "old": "12",
+    "new": "10",
+    "edge": "[5,\"12\",\"10\"]",
+    "known": false,
+    "trial": "f56102e9cebeef3cc4d29a05e9c66873b795c16eb732275413771adbd5e899d1",
+    "point": [
+      31,
+      47
+    ]
+  },
+  "acquisition": {
+    "evidence": [
+      "catr-42:epoch:1:revision:1:frame:8c49c0659af32834",
+      "catr-42:epoch:1:revision:2:frame:addd7a326e497971"
+    ],
+    "status": "observed_edit_under_current_binding"
+  },
+  "sameCommand": [
+    "ACTION6",
+    {
+      "x": 27,
+      "y": 51
+    }
+  ],
+  "roles": [
+    "conditional_relation_contribution",
+    "relation_experiment"
+  ],
+  "fallback": [
+    "ACTION6",
+    {
+      "x": 31,
+      "y": 51
+    }
+  ],
+  "conflict": {
+    "axis": "room:0:0:0",
+    "context": "single_toward",
+    "key": "[\"12\"]",
+    "observed": "-1",
+    "value": "0",
+    "evidence": "qualification:contradictory-relation",
+    "observation": "catr-42:epoch:1:revision:1:frame:8c49c0659af32834"
+  },
+  "foreignReference": {
+    "admitted": false,
+    "reason": "relation_binding_changed"
+  },
+  "firstOfficialLevel": 1,
+  "archiveSHA256": "066ca1050af1c233819d14e6df783fb3e8b435d76dc2899c005ee02561cd346b"
+}
