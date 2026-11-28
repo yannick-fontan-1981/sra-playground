@@ -2,10 +2,30 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createTemporalEvidence, inferDelayedResponse } from '../src/sic/temporal-evidence.ts';
 import { inferWitnessedSuffixCycle } from '../src/sic/witnessed-cycle.ts';
-import { FAMILIES, generateCase, shiftOrigin } from '../scripts/sic-p14/generator.mjs';
+import { FAMILIES, generateCase, shiftOrigin, signature } from '../scripts/sic-p14/generator.mjs';
 import { createSubject } from '../scripts/sic-p14/subject.mjs';
 import { createEnvironment } from '../scripts/sic-p14/environment.mjs';
-import { runEpisode, compareCase } from '../scripts/sic-p14/compare.mjs';
+import { runEpisode, compareCase, digest } from '../scripts/sic-p14/compare.mjs';
+
+test('replays all six published early-extrapolation regressions under their original budgets', () => {
+  const cases = [
+    ['transient_then_period', 83, '930964aa2efb8bbfac16571587ce77dad5b00e2e292a0498b988a1e6660c5025'],
+    ['ambiguous_periods', 143, '8e90b36a4137f11168fc25b3432e9794aeb6201920a41d3e2df5a2c5f9ae5797'],
+    ['independent_clocks', 189, 'cee5774534c56b10e36d780e903bbec7dd6e92899b4d47429e5647df135710ce'],
+    ['ambiguous_periods', 191, '280ec2a8a7bd58ec4b17a8c69491e13f2ae871825ae2119cbd086367316d09f7'],
+    ['independent_clocks', 440, '70b0b388bf53a0bd564cbf0548d26cb36f419408d77adf4b45c17f1f6a9411ef'],
+    ['ambiguous_periods', 732, '62f5d72a6ed5e8579b35f36b7e947d5862f827df6854e86b85e94b23bcff7b69'],
+  ];
+  for (const [family, index, expected] of cases) {
+    const spec = generateCase(family, index, 26112814);
+    assert.equal(digest(signature(spec)), expected);
+    for (const world of spec.worlds.keys()) for (const variant of ['frozen', 'candidate']) {
+      const episode = runEpisode(spec, world, variant);
+      assert.equal(episode.success, true, `${family}/${index}/${world}/${variant}`);
+      assert.equal(episode.metrics.mistimed, 0);
+    }
+  }
+});
 
 test('dated inference learns after a long transient without collapsing missing ticks', () => {
   const learner = createTemporalEvidence();

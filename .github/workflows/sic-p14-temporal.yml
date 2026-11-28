@@ -2,7 +2,7 @@ name: SIC P14 observed temporal development
 
 on:
   push:
-    branches: [feat/sic-p14-temporal-dev-20261128]
+    branches: [feat/sic-p14-temporal-dev-20261128, experiment/sic-p05-p14-p07-p09-integration]
     paths: [.github/workflows/sic-p14-temporal.yml]
   workflow_dispatch:
 

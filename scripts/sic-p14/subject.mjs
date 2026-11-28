@@ -2,8 +2,9 @@ import { inferWitnessedSuffixCycle } from '../../src/sic/witnessed-cycle.ts';
 import { composePlan } from '../../src/sic/effect-composer.ts';
 import { createTemporalEvidence, inferDelayedResponse } from '../../src/sic/temporal-evidence.ts';
 
-export const INFERENCE_LIMITS = Object.freeze({ maximumPeriod: 24, witnessesPerPhase: 3 });
+export const INFERENCE_LIMITS = Object.freeze({ maximumPeriod: 24, witnessesPerPhase: 4 });
 const unique = values => [...new Set(values)];
+const createClock = () => createTemporalEvidence({ witnesses: INFERENCE_LIMITS.witnessesPerPhase });
 
 /**
  * Both subjects receive exactly this adapter. Only the inference implementation
@@ -22,7 +23,7 @@ export function createSubject(publicTask, budget, variant = 'candidate') {
   const waitActions = actions.filter(action => action.kind === 'wait').sort((a, b) => a.duration - b.duration);
   const inspectActions = actions.filter(action => action.kind === 'inspect').sort((a, b) => b.duration - a.duration);
   const memory = new Map(task.channels.map(channel => [channel, {
-    epoch: 0, samples: [], learner: createTemporalEvidence(), model: undefined, dirty: true,
+    epoch: 0, samples: [], learner: createClock(), model: undefined, dirty: true,
     pulseStart: null, pulseSamples: [], pulse: undefined, latest: undefined,
   }]));
   let processed = 0, predictions = [], cached = null;
@@ -32,7 +33,7 @@ export function createSubject(publicTask, budget, variant = 'candidate') {
   function resetCycle(entry, tick) {
     entry.epoch = tick;
     entry.samples = [];
-    entry.learner = createTemporalEvidence();
+    entry.learner = createClock();
     entry.model = undefined;
     entry.dirty = true;
   }
