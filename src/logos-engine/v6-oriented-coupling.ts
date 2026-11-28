@@ -134,10 +134,16 @@ export class OrientedCoupling implements NativeFamily<any>{
     }
     choices.sort((a,b)=>supportCompare(a.slice(0,4),b.slice(0,4)));return choices[0]?.[4]??null;
   }
+  frontalContactTrial(scene: R): string | null {
+    const ahead = [scene.pose[0] + scene.face[0], scene.pose[1] + scene.face[1]];
+    if (!supportSame(ahead, this.invitation)) return null;
+    const key = v6Canonical([scene.pose, scene.face, ahead, scene.boxes[supportKey(ahead)] ?? null]);
+    return this.tried.has(key) ? null : key;
+  }
   async propose(obs:R,rows:NativeRows,_inputs:readonly R[],remaining:number,execution?:NativeExecution):Promise<any|null>{
     if(!this.ready||!this.h||obs.level_epoch!==this.epoch)return null;const s=orientedCouplingScene(rows,this.h,this.actor_color!);if(!s)return null;
-    const[state,model]=this.models(obs,rows,s),ahead=[s.pose[0]+s.face[0],s.pose[1]+s.face[1]];let path:Array<[string,R|null]>,why:string;
-    if(!this.coupled&&this.held===null){const key=v6Canonical([s.pose,s.face,ahead,s.boxes[supportKey(ahead)]??null]);if(!supportSame(ahead,this.invitation)||this.tried.has(key))return null;
+    const[state,model]=this.models(obs,rows,s);let path:Array<[string,R|null]>,why:string;
+    if(!this.coupled&&this.held===null){const key=this.frontalContactTrial(s);if(key===null)return null;
       this.tried.add(key);path=[[this.policy.interaction_candidate,null]];why='Test the current frontal contour invitation; availability is distinct from attachment';
     }else{const route=await this.route(state,model,execution);if(!route?.length)return null;path=route;why='Deliver a current compatible part into the retained homologous region, then test release; preserve other parts and the rigid offset';}
     const actions:R[]=[],steps:R[]=[];let cur=state;

@@ -84,6 +84,10 @@ export class CellPlacementMemory {
     return this.emitProjection(detail, this.models, this.geometries, this.refused, this.paths, this.returns);
   }
 
+  selectProbeCell(eligible: readonly (readonly number[])[]): number | null {
+    return eligible.length ? 0 : null;
+  }
+
   /**
    * `base` is the already evaluated inherited result. The native cell-only DRM
    * entry enables no unported ancestor proposal; its original base abstains.
@@ -128,8 +132,11 @@ export class CellPlacementMemory {
       } else {
         const ranked = vacant.map(candidate => ({ point: candidate,
           count: windows.filter(window => window.some(point => pointOrder(point, candidate) === 0)).length }));
-        point = ranked.reduce((best, candidate) => candidate.count > best.count
-          || candidate.count === best.count && pointOrder(candidate.point, best.point) < 0 ? candidate : best).point;
+        ranked.sort((a, b) => b.count - a.count || pointOrder(a.point, b.point));
+        const ties = ranked.filter(candidate => candidate.count === ranked[0]!.count);
+        const choice = this.selectProbeCell(ties.map(candidate => [...candidate.point]));
+        if (choice === null || !Number.isInteger(choice) || !ties[choice]) continue;
+        point = ties[choice]!.point;
       }
       options.push({ unmodeled: model === null, field, point, model, trial, predicted, reason, search, length });
     }

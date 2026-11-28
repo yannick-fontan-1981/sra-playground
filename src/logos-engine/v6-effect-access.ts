@@ -44,6 +44,10 @@ export class EffectAccess {
     return this.changes.get(cache)!;
   }
 
+  selectInitialContact(eligible: readonly { site: NativePoint; action_ref: string }[]): number | null {
+    return eligible.length ? 0 : null;
+  }
+
   async propose(episode: readonly CompositionTransition[], observation: CompositionObservation, rows: NativeRows,
     inputs: readonly CompositionCommand[], maxPrefix: number, config: R): Promise<R> {
     if (episode.length < 3) return { status: 'abstained', reason: 'no_measured_contact_effect' };
@@ -142,7 +146,10 @@ export class EffectAccess {
           }
         }
         if (!experiments.length) continue;
-        const chosen = experiments[0]!, { destination, trial } = chosen; let position = chosen.origin;
+        const alternatives = initial ? experiments.map(experiment => ({ site: [...experiment.destination] as NativePoint, action_ref: experiment.action })) : [];
+        const choice = initial ? this.selectInitialContact(structuredClone(alternatives)) : 0;
+        if (choice === null || !Number.isInteger(choice) || !experiments[choice]) continue;
+        const chosen = experiments[choice]!, { destination, trial } = chosen; let position = chosen.origin;
         const path: R[] = [{ action_ref: chosen.action, from: [...position], to: [...destination], effect: 'unknown_then_observe', premise_ref: chosen.premise, input_status: chosen.action === hypothesis ? 'inverse_hypothesis' : 'measured' }];
         while (parent.get(key(position)) !== null) {
           const previous = parent.get(key(position))!;
@@ -163,7 +170,7 @@ export class EffectAccess {
           inverse_candidate: hypothesis === null ? null : { action_ref: hypothesis, vector: [...moves[hypothesis]!], status: 'unconfirmed input association; experimental step only' },
           initial_contact_acquisition: initial, observed_nonlocal_contact_count: contacts.length, contact_evidence: contacts.map(contact => contact.source),
           remote_effect_families: [...new Set<string>(contacts.flatMap(contact => contact.families))].sort(compareUnicode), remote_change_evidence: changed.get(key(destination)) ?? null,
-          control_surface_evidence: controlEvidence, reachable_contact_alternatives: initial ? experiments.map(experiment => ({ site: [...experiment.destination], action_ref: experiment.action })) : [],
+          control_surface_evidence: controlEvidence, reachable_contact_alternatives: alternatives,
           reachable_positions: parent.size, candidate_sites: targetsNow.size,
           scope: initial ? 'current measured motion and visible contact question; outcome and terminal role unknown' : 'current-episode measured joint change; role, utility and terminal action remain hypotheses' });
         break;
