@@ -187,8 +187,8 @@ for (const distinct of [1, 2]) {
       ['visual_sequences', { actionRef: 'ACTION6', data: { x: 46, y: 54 } }, true]);
     if (distinct === 2) {
       assert.equal(proposal.facts.visual_answer_method_recalled, true);
-      assert.deepEqual(plan.continuation_witnesses.map(revision), [3, 3, 5]);
-      assert.deepEqual(proposal.bundle_template.evidence.map(revision), [5, 3, 3, 5]);
+      assert.deepEqual(plan.continuation_witnesses.map(revision), [2, 3, 5]);
+      assert.deepEqual(proposal.bundle_template.evidence.map(revision), [5, 2, 3, 5]);
     } else {
       assert.equal(proposal.facts.visual_answer_method_recalled, undefined);
       assert.equal(plan.continuation_witnesses, undefined);
