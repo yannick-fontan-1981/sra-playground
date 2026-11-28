@@ -1,8 +1,8 @@
-name: SIC frozen source candidate on SS08 to SS25
+name: SIC qualified coverage candidate on SS08 to SS25
 
 on:
   push:
-    branches: [audit/sic-sealed-cohort-8025e9cb]
+    branches: [audit/sic-sealed-cohort-coverage-cost]
     paths: [.github/workflows/sic-sealed-cohort.yml]
 
 permissions:
@@ -10,9 +10,13 @@ permissions:
   actions: read
 
 env:
-  VERIFIED_SOURCE: 8025e9cb02a1ba446bc5d3f02cdd0dd56df20f46
-  VERIFIED_ENGINE: b7c31326212b478a939cb53ef56d6e8b65e510f6
+  VERIFIED_SOURCE: 0c782562f7a94058d38d3a4dee0893222a65974e
+  VERIFIED_ENGINE: f31747a4aabd9372f24ed4e73a9cdf1891890c31
+  NATIVE_SOURCE: 8025e9cb02a1ba446bc5d3f02cdd0dd56df20f46
+  NATIVE_ENGINE: b7c31326212b478a939cb53ef56d6e8b65e510f6
   SOURCE_RUN: '46140352121'
+  COVERAGE_SOURCE: af0fdaf8ea4e7624333889098d7f9b8edcd99813
+  COVERAGE_RUN: '46140846955'
 
 jobs:
   qualification:
@@ -25,13 +29,15 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Wait for the exact source run and check its receipts
+      - name: Check native source returns and the command-cost source receipts
         shell: bash
         run: |
-          test "$(gh run view "$SOURCE_RUN" --json headSha --jq .headSha)" = "$VERIFIED_SOURCE"
-          gh run watch "$SOURCE_RUN" --exit-status --interval 15
+          test "$(gh run view "$SOURCE_RUN" --json headSha,conclusion --jq '.headSha + " " + .conclusion')" = "$NATIVE_SOURCE success"
+          test "$(gh run view "$COVERAGE_RUN" --json headSha,conclusion --jq '.headSha + " " + .conclusion')" = "$COVERAGE_SOURCE success"
           gh run download "$SOURCE_RUN" --dir source-receipts --pattern 'sic-witnessed-recovery-*'
-          python3 scripts/verify-sic-sealed-source-gate.py source-receipts | tee -a "$GITHUB_STEP_SUMMARY"
+          VERIFIED_SOURCE="$NATIVE_SOURCE" VERIFIED_ENGINE="$NATIVE_ENGINE" python3 scripts/verify-sic-sealed-source-gate.py source-receipts | tee -a "$GITHUB_STEP_SUMMARY"
+          gh run download "$COVERAGE_RUN" --dir coverage-receipts --pattern 'sic-coverage-cost-*'
+          python3 scripts/verify-sic-sealed-coverage-source-gate.py coverage-receipts | tee -a "$GITHUB_STEP_SUMMARY"
   replay:
     name: Sealed A/B ${{ matrix.game }}
     needs: qualification
@@ -66,7 +72,7 @@ jobs:
           printf '%s\n' "$GAME" "$GITHUB_RUN_ID" "$GITHUB_SHA" >> replay/identity
           date -u +%s%3N > replay/start-ms
           SIC_SOURCE_COMPOSER_ARM=fixed node scripts/check-sic-chronological.mjs "$GAME" auto replay/fixed.jsonl 1 sic > replay/fixed.log 2>&1
-          SIC_SOURCE_COMPOSER_ARM=active SIC_SOURCE_TRANSPORT_UNDO=1 node scripts/check-sic-chronological.mjs "$GAME" auto replay/active.jsonl 1 sic > replay/active.log 2>&1
+          SIC_SOURCE_COMPOSER_ARM=active SIC_SOURCE_TRANSPORT_UNDO=1 SIC_SOURCE_SHORTEST_COVERAGE=1 SIC_SEALED_COVERAGE_QUALIFIED=1 SIC_SOURCE_COMPOSER_EVIDENCE=1 node scripts/check-sic-chronological.mjs "$GAME" auto replay/active.jsonl 1 sic > replay/active.log 2>&1
           date -u +%s%3N > replay/end-ms
           git diff --exit-code
           cd replay
