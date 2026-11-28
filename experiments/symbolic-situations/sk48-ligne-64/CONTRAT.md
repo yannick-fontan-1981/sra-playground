@@ -1,0 +1,10 @@
+# SK48 · présélection indépendante de la ligne 64
+
+Comparer le moteur gelé `d0e7527ca8033bd805a6d7a8bb021eff62e87021` et le correctif amont `4946cf0297734b9464fc52256af6fb27846f3bad` par le même harnais annoncé `1cf241c7625a1e76e4aa4828a50e0ec7ee2d099f`. [Critères de référence](https://github.com/yannick-fontan-1981/sra-playground/blob/40774688/experiments/sic-agenda-offres/sk48-64/ATTENDUS.md). Départ N1 et budget de 16 communiqué au service, avec les réglages du catalogue.
+
+- Témoins nominaux. Relever les quatre commandes d’acquisition T1–T4, le contrôle encore inconnu, la pose et l’effet daté. À T5, vérifier la première offre sous `public_occurrence_recall / observed_composition_services / rooted_line`, les preuves consultées et le premier geste conditionnel effectivement observé.
+- Au même T1, réordonner seulement les commandes admissibles pour obtenir un autre contrôle. Le vrai retour doit mesurer l’effet de cette commande et modifier ce qu’il reste à mesurer. Au même ticket nominal, présenter aussi un retour stationnaire construit et distinguer l’essai de l’acquisition.
+- Au même T5 nominal, retirer l’effet d’ACTION1 en conservant la trace de l’essai et tous les autres effets. Vérifier l’absence d’offre fondée sur la preuve complète et relever le ticket éventuellement libéré, sans prétendre à l’échec officiel du niveau.
+- Transfert sous 9↔14. Jouer le même préfixe à pixels renommés bijectivement et relever le premier arrêt, le budget d’expansion, l’état de l’ordre des stations et le premier retour lorsque le service peut émettre. Ajouter le témoin public 8↔13 déjà mesuré sur le correctif amont, en rejouant uniquement les décisions nécessaires jusqu’au T5. Ce témoin de comparaison n’est pas une réserve inédite. Conserver les départs qui s’arrêtent avant T5 dans le dénominateur initial.
+
+Le premier accès 64 a son propre verdict. La contradiction qui déclenche la ligne 96 et sa reprise ne font pas partie de ce test. Les deux SHA et les deux palettes gardent leurs propres dénominateurs. Relever la première différence de calibration, de projection ou d’émission et le délai jusqu’au verdict.
