@@ -12,4 +12,3 @@ Le témoin de la ligne 84 est le cinquième geste du catalogue depuis L1, au niv
 **Sources des entrées.** Départ réel du jeu au niveau 1 et paquets publics rendus après chaque ticket. Les références, la portée des arrêts, les vecteurs connus, les échantillons de phase et l’horizon sont relevés avant la production locale. Le type de proposition, l’indice, la commande et la comparaison au retour se lisent ensuite. Un retour modifié et un retrait expérimental sont désignés comme tels. Les contre-épreuves locales sont rejouées sur des copies de l’état natif déjà acquis.
 
 Début du lot après remise de GLOB : 2026-11-28 00:47:58 UTC. Le Banc a reproduit les réglages du parcours public à `47ae8531`.
-

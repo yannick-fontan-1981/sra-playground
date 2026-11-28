@@ -16,4 +16,3 @@ try {
   await copyFile(join(root,'package.json'),join(dir,'package.json'));
   execFileSync(process.execPath,['--test',join(dir,'tests','sic-cavity-direction-as66.test.ts')],{stdio:'inherit'});
 } finally {await rm(dir,{recursive:true,force:true});}
-
