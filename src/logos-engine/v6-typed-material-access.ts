@@ -124,6 +124,18 @@ export class TypedMaterialMemory {
     return this.baseCarrierQuestion(obs, rows, cfg);
   }
 
+  /** Only unbound subjects enter this choice. A retained partner or delivery stays scoped by its caller. */
+  selectUnboundSubject(ordered: readonly R[]): number | null {
+    return ordered.length ? 0 : null;
+  }
+
+  private unboundSubject(eligible: readonly R[], signature: 'signature' | 'core_signature'): R | undefined {
+    const ordered = [...eligible].sort((a, b) => a.center[1] - b.center[1] || a.center[0] - b.center[0]
+      || compareText(a[signature], b[signature]));
+    const index = this.selectUnboundSubject(ordered);
+    return index === null ? undefined : ordered[index];
+  }
+
   private baseCarrierQuestion(obs: R, rows: NativeRows, inputConfig: R, context: R | null = this.carrierContext,
     previousEvents: readonly R[] = this.carrierEvents): R | null {
     const cfg: R = { ...inputConfig, observed_body_shapes: [...this.carrierCalibration] };
@@ -142,7 +154,11 @@ export class TypedMaterialMemory {
         selected = matches[0]!; reason = 'test_shared_outer_material_profile_after_local_marking';
       }
     } else if (previousEvents.length) return null;
-    else selected = [...scene.carriers as R[]].sort((a, b) => a.center[1] - b.center[1] || a.center[0] - b.center[0] || compareText(a.signature, b.signature))[0]!;
+    else {
+      const offered = this.unboundSubject(scene.carriers, 'signature');
+      if (!offered) return null;
+      selected = offered;
+    }
     const action = pointAction(selected.point), plan = { epoch: obs.level_epoch, score: obs.levels_completed, observation_ref: obs.observation_ref,
       frame_digest: identity(rows), scene, selected, action, question: cfg.question, configuration: cfg, contact_context: context, reason,
       expected: 'Unknown: local marking may represent selection. A shared outer pattern is a compatibility hypothesis, not a proven production law.' };
@@ -171,8 +187,8 @@ export class TypedMaterialMemory {
     };
     const ready = available.filter(c => matching(c).length === 1);
     if (!this.flowContext && !ready.length) return null;
-    const child = this.flowContext?.child ?? ready.sort((a, b) => a.center[1] - b.center[1] || a.center[0] - b.center[0] || compareText(a.core_signature, b.core_signature))[0]!;
-    if (!available.some(c => c.id === child.id)) return null;
+    const child = this.flowContext?.child ?? this.unboundSubject(ready, 'core_signature');
+    if (!child || !available.some(c => c.id === child.id)) return null;
     const model = this.flowModels[child.core_signature] ?? null, matches = matching(child);
     if (matches.length !== 1) return null;
     const target = matches[0]!, mode = this.flowContext ? 'deliver' : 'select', selected = mode === 'deliver' ? target : child;
