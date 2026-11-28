@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import {writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {mock} from 'node:test';
@@ -7,8 +8,11 @@ import {digest,rejouerService} from '../rejouer-service.mjs';
 import {withEngine} from '../moteur-reference.mjs';
 
 const variants=['nominal','permute','stationnaire','sans-controles-retenus','sans-reutilisation'];
+const contentDigest=value=>createHash('sha256').update(JSON.stringify(value,(_key,item)=>
+  item&&typeof item==='object'&&!Array.isArray(item)?Object.fromEntries(Object.keys(item).sort().map(k=>[k,item[k]])):item)).digest('hex');
 const cacheView=c=>c&&{epoch:c.epoch,context:c.context_ref,refs:c.training_features.values.model_feature_rows.map(row=>row.model_ref),
-  hash:digest(c.training_features),featuresHash:digest(c.training_features.values.model_feature_rows),controls:c.controls};
+  hash:contentDigest(c.training_features),featuresHash:digest(c.training_features.values.model_feature_rows.map(row=>
+    [row.model_ref,row.features.map(f=>[f.feature_ref,f.value])])),controls:c.controls};
 const sceneView=s=>s&&{context:s.context_ref,palette:s.palette,examples:s.panels.map(p=>({label:p.label,scale:p.scale,box:p.bbox,
   words:p.words.map(w=>w.values)})),query:s.query.words[0],queryScale:s.query.scale,buttons:s.buttons};
 const inferenceView=i=>{
