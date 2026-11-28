@@ -1,0 +1,245 @@
+{
+  "equalScenarios": 2,
+  "firstSubmission": {
+    "status": "observed_submission_feedback",
+    "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:5c7fc6d05dd7864d",
+    "before": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:73cdb7a6b5595c70",
+    "values": [
+      8,
+      14,
+      9
+    ],
+    "marks": [
+      "style:fd76db5c8ad0929a",
+      "style:cc4da5498be93ad2",
+      "style:cc4da5498be93ad2"
+    ],
+    "history": [
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:5c7fc6d05dd7864d"
+    ]
+  },
+  "firstChangeOfDecision": [
+    {
+      "kind": "ticket",
+      "turn": 5,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:5c7fc6d05dd7864d",
+      "level": 1,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:5",
+      "owner": "feedback_sequences",
+      "action": "ACTION6",
+      "point": {
+        "x": 4,
+        "y": 54
+      },
+      "step": "ADD",
+      "symbol": 8,
+      "prefix": [],
+      "expected": {
+        "prefix": [
+          8
+        ],
+        "palette_values": [
+          14,
+          9
+        ]
+      },
+      "trial": [
+        8,
+        9,
+        14
+      ],
+      "candidates": 2,
+      "laws": 4,
+      "evidence": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:5c7fc6d05dd7864d",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:38a98b347eb0eff5",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:4a70b75fcfecc53f",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:6df5671e666d6365",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:73cdb7a6b5595c70",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:5c7fc6d05dd7864d"
+      ],
+      "guard": "ordered_prefix_and_loci_bound"
+    },
+    {
+      "kind": "ticket",
+      "turn": 5,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:5c7fc6d05dd7864d",
+      "level": 1,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:5",
+      "owner": "feedback_sequences",
+      "action": "ACTION6",
+      "point": {
+        "x": 4,
+        "y": 54
+      },
+      "step": "ADD",
+      "symbol": 8,
+      "prefix": [],
+      "expected": {
+        "prefix": [
+          8
+        ],
+        "palette_values": [
+          14,
+          9
+        ]
+      },
+      "trial": [
+        8,
+        14,
+        9
+      ],
+      "candidates": 9,
+      "laws": 1,
+      "evidence": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:5c7fc6d05dd7864d",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:38a98b347eb0eff5",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:4a70b75fcfecc53f",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:6df5671e666d6365",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:73cdb7a6b5595c70"
+      ],
+      "guard": "ordered_prefix_and_loci_bound"
+    }
+  ],
+  "firstChangeOfCommand": [
+    {
+      "kind": "ticket",
+      "turn": 6,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:6effb6a22bf9d346",
+      "level": 1,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:6",
+      "owner": "feedback_sequences",
+      "action": "ACTION6",
+      "point": {
+        "x": 10,
+        "y": 54
+      },
+      "step": "ADD",
+      "symbol": 9,
+      "prefix": [
+        8
+      ],
+      "expected": {
+        "prefix": [
+          8,
+          9
+        ],
+        "palette_values": [
+          14
+        ]
+      },
+      "trial": [
+        8,
+        9,
+        14
+      ],
+      "candidates": 2,
+      "laws": 4,
+      "evidence": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:5c7fc6d05dd7864d",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:38a98b347eb0eff5",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:4a70b75fcfecc53f",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:6df5671e666d6365",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:73cdb7a6b5595c70",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:5c7fc6d05dd7864d"
+      ],
+      "guard": "ordered_prefix_and_loci_bound"
+    },
+    {
+      "kind": "ticket",
+      "turn": 6,
+      "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:6effb6a22bf9d346",
+      "level": 1,
+      "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:6",
+      "owner": "feedback_sequences",
+      "action": "ACTION6",
+      "point": {
+        "x": 4,
+        "y": 54
+      },
+      "step": "ADD",
+      "symbol": 14,
+      "prefix": [
+        8
+      ],
+      "expected": {
+        "prefix": [
+          8,
+          14
+        ],
+        "palette_values": [
+          9
+        ]
+      },
+      "trial": [
+        8,
+        14,
+        9
+      ],
+      "candidates": 9,
+      "laws": 1,
+      "evidence": [
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:5c7fc6d05dd7864d",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:38a98b347eb0eff5",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:4a70b75fcfecc53f",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:6df5671e666d6365",
+        "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:73cdb7a6b5595c70"
+      ],
+      "guard": "ordered_prefix_and_loci_bound"
+    }
+  ],
+  "ambiguousReturn": {
+    "status": "feedback_ambiguous",
+    "evidence": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:ec472422e1a66e75",
+    "matches": 2,
+    "history": [
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:5c7fc6d05dd7864d"
+    ]
+  },
+  "level1OfficialTurns": [
+    8,
+    12
+  ],
+  "nextLevelSelection": {
+    "kind": "ticket",
+    "turn": 13,
+    "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:13:frame:aa2ee9fedc4437d0",
+    "level": 2,
+    "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:13",
+    "owner": "feedback_sequences",
+    "action": "ACTION6",
+    "point": {
+      "x": 10,
+      "y": 54
+    },
+    "step": "ADD",
+    "symbol": 14,
+    "prefix": [],
+    "expected": {
+      "prefix": [
+        14
+      ],
+      "palette_values": [
+        8,
+        9,
+        6
+      ]
+    },
+    "trial": [
+      14,
+      6,
+      8
+    ],
+    "candidates": 4,
+    "laws": 12,
+    "evidence": [
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:13:frame:aa2ee9fedc4437d0",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:9:frame:7d3ab73ccf443c9f",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:10:frame:a4487ba3ffef9704",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:11:frame:29425db4728f78c6",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:7b180d232614cf27",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:13:frame:aa2ee9fedc4437d0"
+    ],
+    "guard": "ordered_prefix_and_loci_bound"
+  }
+}

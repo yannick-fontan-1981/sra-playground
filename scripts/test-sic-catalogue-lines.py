@@ -22,6 +22,8 @@ cases = {
              ["docs/migration/native-campaigns-v54/baseline-wa30/wa30-public-trace.json.gz", "tests/fixtures/sic-wa30-alternate-returns.json.gz"]),
     "TICT": ("e8df1757272cae3da1669b3e7ddb2e7bf65e8e02", "cell-placement-positive-41", "sic-observe-tict-placement",
              ["docs/migration/native-campaigns-v46/tict-public-trace.json.gz"]),
+    "MIND": ("860835b1b77ae9cde489230be5c1f83c05237302", "mind-line-12", "sic-observe-mind-feedback",
+             ["docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-public-trace.json.gz", "tests/fixtures/sic-mind-alternate-returns.json.gz"]),
     "RE86": ("8e820aa64f321153bb858040d462d7f766178947", "re86-line-7", "sic-observe-re86-ownership",
              ["docs/migration/native-campaigns-v54/baseline-re86/re86-public-trace.json.gz", "tests/fixtures/sic-re86-alternate-returns.json.gz"]),
     "HANO": ("f768bac6c4c9c34d230b63fe6cec39663164b6ae", "hano-line-25", "sic-observe-hano-support",
