@@ -1,0 +1,5 @@
+# THER · ligne 65
+
+Sur le catalogue 8ce7ee35 puis le gel d0e7527c, ouvrir L1 au pack natif, 600 gestes par niveau, 16 au global. Relier le ticket N1/T1 au choix d'une chaîne et d'un rang avant appel, puis mesurer le retour public au point d'appui. Distinguer compte visible des marques, longueur occupée depuis la racine et hypothèse conditionnelle qui associe les deux. Le premier essai reste une discrimination sans prédiction vérifiée.
+
+Préenregistrer un contrôle stationnaire, un retour où une chaîne sœur change aussi et un contrôle du support des marques. Le stationnaire ne confirme pas l'ajout. Modifier la sœur réfute l'attribution à la chaîne visée seule. Une unité de marque valide en plus peut laisser la mesure bien définie et rendre les contraintes conjointes impossibles, sans révéler d'effet de la commande. Utiliser comme témoin distinct une scène publique déjà archivée après apprentissage de l'ajout et de la coupe, puis comparer les domaines et la préparation conditionnelle. Distinguer la victoire officielle du résultat de propagation.
