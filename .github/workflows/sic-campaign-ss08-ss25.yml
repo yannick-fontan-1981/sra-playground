@@ -1,0 +1,168 @@
+name: SIC autonomous replay SS08 to SS25
+
+on:
+  push:
+    branches: [audit/sic-ss08-ss25-fb8d6913]
+    paths: [.github/workflows/sic-campaign-ss08-ss25.yml]
+
+permissions:
+  contents: read
+
+env:
+  SIC_SOURCE: fb8d6913addd23f5dd1cc375f96f9a69b2410b21
+  SIC_TREE: c3dd6835915061f7126efa6590a662c2fb4bd74b
+  SIC_SRC: c6be00220e0691619413e9244101f9c6a302c144
+
+jobs:
+  replay:
+    name: Replay ${{ matrix.game }} from level 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        game: [SS08, SS09, SS10, SS11, SS12, SS13, SS14, SS15, SS16, SS17, SS18, SS19, SS20, SS21, SS22, SS23, SS24, SS25]
+    env:
+      SIC_GAME: ${{ matrix.game }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.SIC_SOURCE }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Verify the engine and freeze the level budgets
+        run: |
+          test "$(git rev-parse HEAD)" = "$SIC_SOURCE"
+          test "$(git rev-parse 'HEAD^{tree}')" = "$SIC_TREE"
+          test "$(git rev-parse HEAD:src)" = "$SIC_SRC"
+          mkdir replay
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFileSync, writeFileSync } from 'node:fs';
+          import { historicalReplayReferences, replayCampaignBudgets } from './scripts/sic-replay-budgets.mjs';
+          const env = process.env;
+          const game = env.SIC_GAME;
+          const historical = JSON.parse(readFileSync('docs/architecture/sic-v8-level6-campaign-7bb9f152.json'));
+          const budgets = replayCampaignBudgets(game, 8, historicalReplayReferences(historical));
+          assert.deepEqual(budgets, Array.from({ length: 8 }, () =>
+            ({ actions: 80, activeTimeMs: 90_000, source: 'no_level_reference' })));
+          writeFileSync('replay/manifest.json', JSON.stringify({
+            game, source: env.SIC_SOURCE, tree: env.SIC_TREE, src: env.SIC_SRC,
+            workflowSha: env.GITHUB_SHA, runId: env.GITHUB_RUN_ID, runAttempt: env.GITHUB_RUN_ATTEMPT,
+            nodeVersion: process.version, fromLevel: 1, target: 8, mode: 'sic', workers: 1, budgets,
+            argv: ['node', 'scripts/check-sic-chronological.mjs', game, 'auto', 'replay/results.jsonl', '1', 'sic'],
+          }, null, 2) + '\n');
+          NODE
+      - run: npm ci
+      - run: node scripts/prepare-python.mjs
+      - name: Run the autonomous replay
+        run: |
+          date -u +%s%3N > replay/start-ms
+          node scripts/check-sic-chronological.mjs "$SIC_GAME" auto replay/results.jsonl 1 sic > replay/runner.log 2>&1
+          date -u +%s%3N > replay/end-ms
+          git diff --exit-code
+          cd replay
+          sha256sum manifest.json results.jsonl results.jsonl.levels runner.log start-ms end-ms > sha256sums
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sic-ss08-ss25-game-${{ matrix.game }}
+          path: replay/
+          if-no-files-found: error
+          retention-days: 14
+
+  aggregate:
+    name: Verify the 18 receipts and count official level wins
+    needs: replay
+    if: always()
+    runs-on: ubuntu-24.04
+    env:
+      REPLAYS: ${{ needs.replay.result }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: sic-ss08-ss25-game-*
+          path: downloads
+      - name: Reconcile receipts
+        run: |
+          mkdir aggregate
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          env = os.environ
+          root = Path("downloads")
+          expected = [f"SS{i:02d}" for i in range(8, 26)]
+          assert env["REPLAYS"] == "success"
+          assert sorted(p.name for p in root.iterdir()) == [f"sic-ss08-ss25-game-{code}" for code in expected]
+          results = []
+          intervals = []
+          for code in expected:
+              receipt = root / f"sic-ss08-ss25-game-{code}"
+              for line in (receipt / "sha256sums").read_text().splitlines():
+                  digest, name = line.split()
+                  assert hashlib.sha256((receipt / name).read_bytes()).hexdigest() == digest, (code, name)
+              manifest = json.loads((receipt / "manifest.json").read_text())
+              assert (manifest["game"], manifest["source"], manifest["tree"], manifest["src"]) == (
+                  code, env["SIC_SOURCE"], env["SIC_TREE"], env["SIC_SRC"])
+              assert (manifest["runId"], manifest["workflowSha"]) == (env["GITHUB_RUN_ID"], env["GITHUB_SHA"])
+              assert (manifest["fromLevel"], manifest["target"], manifest["mode"], manifest["workers"]) == (1, 8, "sic", 1)
+              row = json.loads((receipt / "results.jsonl").read_text())
+              assert (row["code"], row["target"]) == (code, 8)
+              assert row["status"] in ("stopped", "paused"), (code, row["status"], row.get("reason"))
+              if "mode" in row:
+                  assert (row["mode"], row["parallelWorkers"]) == ("sic", 1)
+              levels = row["levelStats"]
+              won = row["levels"]
+              assert 0 <= won <= len(levels) <= 8 and levels
+              assert [level["level"] for level in levels] == list(range(1, len(levels) + 1))
+              assert [level["won"] for level in levels] == [True] * won + [False] * (len(levels) - won)
+              assert all(level["budget"] == budget and 0 <= level["actions"] <= budget["actions"]
+                         for level, budget in zip(levels, manifest["budgets"]))
+              level_rows = [json.loads(line) for line in (receipt / "results.jsonl.levels").read_text().splitlines()]
+              assert level_rows == [{"code": code, "level": level} for level in levels]
+              start = int((receipt / "start-ms").read_text())
+              end = int((receipt / "end-ms").read_text())
+              assert end >= start
+              intervals.append((start, end))
+              results.append({
+                  "game": code, "won": won, "attempted": len(levels), "target": 8, "percent": won * 12.5,
+                  "actions": row["actions"], "authority": row["authority"], "status": row["status"],
+                  "reason": row.get("reason"), "elapsedMs": end - start,
+                  "receiptSha256": hashlib.sha256((receipt / "results.jsonl").read_bytes()).hexdigest(),
+              })
+
+          active = peak = 0
+          events = [(start, 1) for start, _ in intervals] + [(end, -1) for _, end in intervals]
+          for _, delta in sorted(events):
+              active += delta
+              peak = max(peak, active)
+          won = sum(row["won"] for row in results)
+          summary = {
+              "source": env["SIC_SOURCE"], "src": env["SIC_SRC"], "runId": env["GITHUB_RUN_ID"],
+              "won": won, "target": 144, "percent": 100 * won / 144,
+              "attempted": sum(row["attempted"] for row in results),
+              "gamesCompleted": sum(row["won"] == 8 for row in results),
+              "totalActions": sum(row["actions"] for row in results), "peakReplayJobs": peak,
+              "replayWallMs": max(end for _, end in intervals) - min(start for start, _ in intervals),
+              "cumulativeReplayMs": sum(row["elapsedMs"] for row in results), "games": results,
+          }
+          Path("aggregate/summary.json").write_text(json.dumps(summary, indent=2) + "\n")
+          lines = [f'# SS08–SS25 · {won}/144 ({summary["percent"]:.2f}%)', "",
+                   "| Game | Won | Started | Actions | Stop |", "| --- | ---: | ---: | ---: | --- |"]
+          for row in results:
+              lines.append(f'| {row["game"]} | {row["won"]}/8 | {row["attempted"]} | {row["actions"]} | {row["reason"] or row["status"]} |')
+          with Path(env["GITHUB_STEP_SUMMARY"]).open("a") as output:
+              output.write("\n".join(lines) + "\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sic-ss08-ss25-summary
+          path: aggregate/summary.json
+          if-no-files-found: error
+          retention-days: 14
